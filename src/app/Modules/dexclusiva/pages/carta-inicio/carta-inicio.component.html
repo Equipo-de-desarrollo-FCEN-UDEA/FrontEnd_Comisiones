@@ -1,1 +1,25 @@
-<p>carta-inicio works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ladoizquierdo">
+            <h3>
+                Carta de iniciación
+            </h3>
+
+            <form [formGroup]="FormCarta" (submit)="OnSubmit()">
+                <div class="form-group">
+                    <quill-editor #disciplineQE id="discipline-qe" [placeholder]="'Ingrese aquí el cuerpo de la carta'"
+                        formControlName="Cuerpo"></quill-editor>
+
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="visual">
+                <h5>Previsualización</h5>
+                <div class="carta">
+                </div>
+            </div>
+        </div> 
+    </div>
+    <button class="btn btn-success btn-lg" (submit)="true">Crear carta</button>
+</div>

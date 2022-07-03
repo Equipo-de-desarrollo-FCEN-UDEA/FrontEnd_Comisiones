@@ -1,0 +1,50 @@
+
+
+button{
+    margin-top: 5px;
+}
+
+h3, h5{
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+.container{
+    margin:auto;
+    max-width: 1440px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.row{
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 25px;
+}
+ 
+:host #discipline-qe /deep/ .ql-container{
+    height: 250px;
+  }
+  
+
+.carta{
+    margin: auto;
+    padding: 1em 0.5em;
+
+    background-color: gray;
+    width: 100%;
+    aspect-ratio: 420/594;
+    
+}
+.form-group{
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;    
+}
+
+.ladoizquierdo{
+    margin: auto;
+}

@@ -12,6 +12,9 @@
       ],
       "@services/*": [
         "src/app/core/services/*"
+      ],
+      "@guards/*":[
+        "src/app/core/guards/*"
       ]
     },
     "outDir": "./dist/out-tsc",

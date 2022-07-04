@@ -2,3 +2,52 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+// Estilos formularios
+.formfloatig{
+    position: relative;
+    padding-bottom: .4em;
+    height: 100%;
+    width: 100%;
+}
+
+.form-control:focus + .formLabel,
+.form-control:not(:placeholder-shown) + .formLabel{
+    transform: translateY(0) scale(.5);
+    transform-origin: left top;
+    color: rgba(74, 132, 248, 0.8);
+}
+
+.formLabel{
+    color: gray;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    transform: translateY(7px);
+    transition: transform .5s, color .3s
+}
+
+.selectLabel{
+    color: gray;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    transform: translateY(7px);
+    transition: transform .5s, color .3s
+}
+
+.form-select:focus + .selectLabel{
+    transform: translateY(0) scale(.5);
+    transform-origin: left top;
+    color: rgba(74, 132, 248, 0.8);
+}
+.form-select{
+    margin: 0;
+}
+
+.isFill{
+    transform: translateY(0) scale(.5);
+    transform-origin: left top;
+    color: rgba(74, 132, 248, 0.8);
+}

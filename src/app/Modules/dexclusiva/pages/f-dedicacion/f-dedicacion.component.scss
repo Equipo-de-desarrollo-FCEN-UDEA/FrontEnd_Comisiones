@@ -21,45 +21,6 @@ h4 , h3 , h5{
     padding-bottom: 0.5em;
 }
 
-.formfloatig{
-    position: relative;
-    padding-bottom: .4em;
-    height: 100%;
-}
-
-.form-control:focus + .formLabel,
-.form-control:not(:placeholder-shown) + .formLabel{
-    transform: translateY(0) scale(.5);
-    transform-origin: left top;
-    color: rgba(74, 132, 248, 0.8);
-}
-
-.formLabel{
-    color: gray;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: 15px;
-    transform: translateY(7px);
-    transition: transform .5s, color .3s
-}
-
-.selectLabel{
-    color: gray;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: 15px;
-    transform: translateY(7px);
-    transition: transform .5s, color .3s
-}
-
-.form-select:focus + .selectLabel{
-    transform: translateY(0) scale(.5);
-    transform-origin: left top;
-    color: rgba(74, 132, 248, 0.8);
-}
-
 
 .arrayLike .form-control-array{
     width: 90%;

@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center align-items-center mt-5">
+
+
+    <div class="card">
+        <ul class="nav nav-pills " id="pills-tab" role="tablist">
+            <li class="nav-item text-center">
+                <a type="button" class="nav-link btl" [ngClass]="{'active':isCollapsed}" (click)="click()" aria-controls="Login" role="tab">
+                    Ingresar
+                </a>
+            </li>
+            <li class="nav-item text-center">
+                <a type="button" class="nav-link btr" [ngClass]="{'active':!isCollapsed}" (click)="click()" aria-controls="Signup" role="tab">
+                    Registrarse
+                </a>
+            </li>
+        </ul>
+
+        <div [ngbCollapse]="!isCollapsed" id="Login">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form px-4 pt-5">
+                        
+                        <div class="formfloatig">
+                            <input id="Correo-input" type="text" class="form-control" placeholder=" ">
+                        <label for="Correo-input" class="formLabel">Correo institucional </label>
+
+                        </div>
+                        
+                        <div class="formfloatig">
+                            <input id="Contraseña" type="password"  class="form-control" placeholder=" ">
+                            <label for="Contraseña" class="formLabel">Contraseña</label>    
+                        </div>
+
+                        <button class="btn btn-dark btn-block">Ingresar</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div [ngbCollapse]="isCollapsed" id="Signup">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form px-4">
+                        <div class="formfloatig">
+                            <input id="Nombre" type="text" class="form-control" placeholder=" ">
+                            <label for="Nombre" class="formLabel">Nombre</label>
+                        </div>
+                        <div class="formfloatig">
+                            <input id="Apellido" type="text" class="form-control" placeholder=" ">
+                            <label for="Apellido" class="formLabel">Apellido</label>
+                        </div>
+                        <div class="formfloatig">
+                            <input id="Correo-signup" type="text" class="form-control" placeholder=" ">
+                            <label for="Correo-signup" class="formLabel">Correo institucional</label>
+                        </div>
+                            <div class="formfloatig">
+                                <select class="form-select form-select-lg " id="floatingcampo_modalidad" formControlName="campo_modalidad" required
+                                    placeholder=" ">
+                                    <option [value]="tipo" *ngFor="let tipo of tiposId">{{ tipo | uppercase }}</option> 
+                                </select>
+                                <label for="floatingcampo_modalidad" class="selectLabel" [ngClass]="{'isFill': true}">Tipo de Identificación</label>
+                            </div>
+                            <div class="formfloatig">
+                                <input id="Identificacion"type="text" class="form-control" placeholder=" ">
+                                <label for="Identificacion" class="formLabel"> Número de Identificacion </label>
+                            </div>
+                            <div class="formfloatig">
+                                <select class="form-select form-select-lg " id="roles" formControlName="roles_id" required
+                                    placeholder=" ">
+                                    <option [value]="rol.id" *ngFor="let rol of roles">{{ rol.nombre| uppercase }}</option> 
+                                </select>
+                                <label for="roles" class="selectLabel" [ngClass]="{'isFill': true}">Cargo</label>
+                            </div>
+                            <div class="formfloatig">
+                                <select class="form-select form-select-lg " id="departamentos_id" formControlName="departamentos_id" required
+                                    placeholder=" ">
+                                    <option [value]="departamento.id" *ngFor="let departamento of deparmentos">{{ departamento.nombre| uppercase }}</option> 
+                                </select>
+                                <label for="departamentos_id" class="selectLabel" [ngClass]="{'isFill': true}">Departamento</label>
+                            </div>
+
+                        <div class="formfloatig">
+                            <input id="Contrasena" type="password" class="form-control" placeholder=" ">
+                            <label for="Contrasena" class="formLabel">Contraseña</label>
+                        </div>
+                        <div class="formfloatig">
+                            <input id="Confirmar" type="password" class="form-control" placeholder=" ">
+                            <label for="Confirmar" class="formLabel">Confirmar contraseña</label>
+                        </div>
+
+                        <button class="btn btn-dark btn-block">Registrarse</button>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

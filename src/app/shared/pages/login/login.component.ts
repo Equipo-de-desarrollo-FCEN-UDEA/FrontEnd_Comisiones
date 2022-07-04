@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioAuth } from '@interfaces/usuario';
 import { AuthService } from '@services/auth.service';
 
 @Component({
@@ -54,8 +55,7 @@ export class LoginComponent implements OnInit {
       nombre: 'Extensión'
     }
   ]
- 
-
+  private isEmailValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -63,11 +63,40 @@ export class LoginComponent implements OnInit {
     
   ) { }
 
+  formLogin = this.fb.group({
+    emailLogin : ['', [Validators.required, Validators.pattern(this.isEmailValid)]],
+    passwordLogin : ['', Validators.required]
+  });
+  formSignup = this.fb.group({
+    emailSignup : ['', [Validators.required, Validators.pattern(this.isEmailValid)]],
+    passwordSignup : ['', Validators.required],
+    nombreSignup : ['', Validators.required],
+    apellidoSignup : ['', Validators.required],
+    tipoIdSignup : ['', Validators.required],
+    identificacionSignup : ['', Validators.required],
+    departamentoSignup : ['', Validators.required],
+    rolSignup : ['', Validators.required]
+  });
+
   ngOnInit(): void {
   }
   click(){
     this.isCollapsed = !this.isCollapsed;
     console.log(this.isCollapsed)
+  }
+
+  onSubmitLogin(){
+    const user : UsuarioAuth ={
+      email: this.formLogin.value.emailLogin || '',
+      contrasena: this.formLogin.value.passwordLogin || ''
+    };
+    this.authService.login(user).subscribe(
+      (data) => {
+        if (data){
+          this.router.navigate(['/']);
+        }
+      }
+    )
   }
 
 }

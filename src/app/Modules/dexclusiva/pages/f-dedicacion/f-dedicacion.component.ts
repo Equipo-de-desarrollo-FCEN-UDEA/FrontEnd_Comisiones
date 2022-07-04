@@ -115,7 +115,6 @@ export class FDedicacionComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.cookie.set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoxMiwidGlwb19pZGVudGlmaWNhY2lvbiI6IkNDIiwiaWRlbnRpZmljYWNpb24iOjExMSwibm9tYnJlIjoiYW5sbHkiLCJhcGVsbGlkbyI6InZlbGV6IiwiZW1haWwiOiJhbmxseUBnbWFpbC5jb20iLCJlc3RhZG8iOjEsImNvbnRyYXNlbmEiOiIkMmEkMTIkby52NFhGVnhMRHdYZEZEcUlqbk50dUFLNWlDRmo0UXVKRDJKY2JuLjVuNXlrd0RBalNYRk8iLCJkaWFfZGlzcG9uaWJsZSI6MywiY3JlYXRlZEF0IjoiMjAyMi0wNy0wMVQxNjoxMTozMC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0wNy0wMVQxNjoxMTozMC4wMDBaIiwiZGVwYXJ0YW1lbnRvc19pZCI6MSwicm9sZXNfaWQiOjZ9LCJpYXQiOjE2NTY4NjE2OTUsImV4cCI6MTY1Njk0ODA5NX0.fY0V1owLUyiuu1GUI5TLq9L2GPx8WHx1rrHm1bazUiM')
     this.fBasicInfo.patchValue(this.Usuario);
     this.fBasicInfo.controls['nombre'].disable();
     this.fBasicInfo.controls['apellido'].disable();

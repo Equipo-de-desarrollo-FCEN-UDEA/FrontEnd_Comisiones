@@ -14,6 +14,7 @@ import { LoginComponent } from './shared/pages/login/login.component';
 import { PreventDefaultDirective } from './shared/directivas/prevent-default.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({

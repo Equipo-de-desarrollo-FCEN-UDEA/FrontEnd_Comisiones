@@ -1,0 +1,72 @@
+
+<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded">
+    <form>
+    
+    
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Solicitud</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Departamento</th>
+              <th scope="col">Facultad</th>
+              <th scope="col">Acciones</th>
+    
+    
+              <!-- <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha Creación</th>-->
+            </tr>
+          </thead>
+          <tbody>
+    
+            <!-- <tr *ngFor="let permiso of permisos" class="click-table">
+                <th scope="row">{{ permiso.id }}</th>
+                <td>{{ permiso.solicitud }}</td>
+                <td>{{ permiso.estado }}</td>
+                <td>{{ permiso.facultad}}</td>
+                <td>{{ permiso.departamento }}</td>
+            </tr> -->
+    
+    
+             <tr *ngFor="let comision of comisiones" class="click-table">
+    
+              <th scope="row">{{ comision.id }}</th>
+              <td>{{ comision.tipos_comision.nombre }}</td>
+              <td>{{ comision.nombreEstadoActual }}</td>
+              <td>{{ comision.createdAt}}</td>
+              <td>{{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}</td>
+              <td>{{ comision.usuarios.departamentos.nombre}}</td>
+              <td>{{ comision.usuarios.departamentos.facultades.nombre}}</td>
+             </tr>
+          </tbody>
+        </table>
+      </div>
+    
+      <div class="d-flex justify-content-between p-2">
+        ngb-pagination
+    
+        <select
+          class="custom-select"
+          style="width: auto"
+          name="pageSize"
+    
+        >
+    
+        </select>
+      </div>
+    </form>
+    
+    <div
+    
+    class="container shadow-sm pt-4 pl-4 pr-4 pb-3 mb-5 bg-white rounded"
+    >
+    <p>
+      ngb-alert
+    </p>
+    </div>
+    
+    </div>
+    

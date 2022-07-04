@@ -4,13 +4,15 @@ import { CartaInicioComponent } from './pages/carta-inicio/carta-inicio.componen
 import { FDedicacionComponent } from './pages/f-dedicacion/f-dedicacion.component';
 
 const routes: Routes = [
-  {path:'formulario-dedicacion',
-  component: FDedicacionComponent
-},
-{
-  path: 'carta-inicio',
-  component: CartaInicioComponent
-}
+  {
+    path:'formulario-dedicacion',
+    component: FDedicacionComponent
+  },
+
+  {
+    path: 'carta-inicio',
+    component: CartaInicioComponent
+  }
 ];
 
 @NgModule({

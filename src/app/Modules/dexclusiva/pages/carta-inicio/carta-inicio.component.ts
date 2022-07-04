@@ -7,6 +7,7 @@ import {  FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./carta-inicio.component.css']
 })
 export class CartaInicioComponent implements OnInit {
+  fecha = new Date()
 
   constructor(
     private fb: FormBuilder,

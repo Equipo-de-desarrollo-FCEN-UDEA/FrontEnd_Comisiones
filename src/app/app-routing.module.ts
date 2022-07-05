@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@guards/auth.guard';
 import { LoginComponent } from '@shared/pages/login/login.component';
+import { NotFoundComponent } from '@shared/pages/not-found/not-found.component';
+import { NotFoundError } from 'rxjs';
 
 const routes: Routes = [
   {
@@ -17,7 +19,7 @@ const routes: Routes = [
       .then(m => m.ComisionesModule)
   },
   {
-    path: 'home',
+    path: 'home' || '',
     canActivate: [AuthGuard],
     loadChildren: () => import('./Modules/home/home.module')
       .then(m => m.HomeModule)
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path:'login',
     component: LoginComponent
+  },
+  {
+    path:'404',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: '404'
   }
 ];
 

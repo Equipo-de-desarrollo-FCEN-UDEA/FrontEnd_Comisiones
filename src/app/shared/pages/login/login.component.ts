@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(user).subscribe(
       (data) => {
         if (data){
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }
       }
     )

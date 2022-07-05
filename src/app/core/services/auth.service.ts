@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuarioAuth, UsuarioResponse } from '@interfaces/usuario';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
@@ -14,7 +15,8 @@ export class AuthService {
 
   constructor(
     private cookieService : CookieService,
-    private http : HttpClient
+    private http : HttpClient,
+    private router : Router
   ) { 
     
   }
@@ -32,8 +34,8 @@ export class AuthService {
     map(
       (response: UsuarioResponse) => {
         if (response.token) {
-          this.cookieService.set('token', response.token, 0.000694444);
-          this.cookieService.set('usuario', JSON.stringify(response.usuario), 0.000694444);
+          this.cookieService.set('token', response.token, 1);
+          this.cookieService.set('usuario', JSON.stringify(response.usuario), 1);
           return true;
         } else {
           return false;
@@ -45,6 +47,7 @@ export class AuthService {
   logout() {
     this.cookieService.delete('token');
     this.cookieService.delete('usuario');
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {

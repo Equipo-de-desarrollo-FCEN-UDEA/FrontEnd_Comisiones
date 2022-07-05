@@ -15,6 +15,7 @@ import { PreventDefaultDirective } from './shared/directivas/prevent-default.dir
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -24,7 +25,8 @@ registerLocaleData(localeEs, 'es');
     FooterComponent,
     SideBarComponent,
     LoginComponent,
-    PreventDefaultDirective
+    PreventDefaultDirective,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

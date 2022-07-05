@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'FrontEnd_Comisiones';
   sidebarExpanded = true;
+
+  constructor(
+    private router : Router
+  ) { 
+
+  }
+  currentUrl()
+  {
+    return this.router.url;
+  }
 }

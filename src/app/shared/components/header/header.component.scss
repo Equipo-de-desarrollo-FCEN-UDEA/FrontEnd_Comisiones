@@ -1,0 +1,34 @@
+ul {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .navbar{
+        justify-content: space-between;
+        .collapse{
+            order: 2;
+        }
+        .profile{
+            order: 3;
+            margin: 0;
+        }
+
+        .logo{
+            order: 1;
+            margin: 0 20px;
+        }
+    }
+}
+    
+.navbar{
+    justify-content: space-between;
+    .logo{
+        margin: 0 20px;
+    }
+    .profile{
+        margin: 0;
+    }
+}
+

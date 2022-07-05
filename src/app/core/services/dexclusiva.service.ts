@@ -25,7 +25,6 @@ export class DexclusivaService {
   postDexclusiva(dexclusiva: any) {
     const headers = new HttpHeaders(
       {
-        'Authorization': 'Bearer ' + this.cookie.get('token'),
         'Content-Type': 'application/x-www-form-urlencoded',
         'Response-Type': 'blob'
       }
@@ -44,9 +43,6 @@ export class DexclusivaService {
     &indicador=${JSON.stringify(dexclusiva.indicador.map((x: any) => x.indicador))}
     &productos=${JSON.stringify(dexclusiva.productos.map((x: any) => x.producto))}
     `;
-    console.log(body);
-    console.log(
-      dexclusiva.tema_estrategico.map((x: any) => x.tema));
     return this.http.post(`${this.prefix}`, body, {
       observe: 'response',
       responseType: 'blob',

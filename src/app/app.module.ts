@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SideBarComponent } from './shared/components/side-bar/side-bar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import {LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -37,7 +38,10 @@ registerLocaleData(localeEs, 'es');
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ { provide: LOCALE_ID, useValue: 'es' } ],
+  providers: [ 
+    { provide: LOCALE_ID, useValue: 'es' },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,6 +17,7 @@ export interface UsuarioBase extends UsuarioEmail {
 }
 
 export interface UsResInside extends UsuarioBase{
+    id: number;
     departamentos: DepResInside;
 }
 

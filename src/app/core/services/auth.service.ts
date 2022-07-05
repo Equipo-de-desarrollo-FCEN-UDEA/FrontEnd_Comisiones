@@ -28,7 +28,6 @@ export class AuthService {
       }
       );
     const body = `email=${user.email}&contrasena=${user.contrasena}`;
-    console.log(body);
     return this.http.post<UsuarioAuthResponse>(`${this.prefix}`, body, {headers:headers} )
     .pipe(
     map(

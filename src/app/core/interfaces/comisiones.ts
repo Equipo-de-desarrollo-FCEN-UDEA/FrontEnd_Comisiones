@@ -65,13 +65,6 @@ export interface Comision {
   
     }
   
-  // interface IntermediateComisiones {
-  //   nombre: string
-  // }
-  
-  
-  // intermediate_estados:    IntermediateEstados;
-  
   
   export interface TiposComision {
     nombre: string;

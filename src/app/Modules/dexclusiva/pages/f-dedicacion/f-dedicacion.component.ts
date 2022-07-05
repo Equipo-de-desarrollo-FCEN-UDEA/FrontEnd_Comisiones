@@ -6,6 +6,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { UsuarioService } from '@services/usuario.service';
+import { Usuario, UsuarioAuthResponse } from '@interfaces/usuario';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 
@@ -25,7 +27,7 @@ export class FDedicacionComponent implements OnInit {
     // private : UserSvc Falta entregar información del usuario
     private fb : FormBuilder,
     private dexclusivaSvc: DexclusivaService,
-    private cookie: CookieService
+    private usuarioSvc: UsuarioService
   ) { }
   
   public unidades = [
@@ -39,44 +41,7 @@ export class FDedicacionComponent implements OnInit {
     'Administración'
   ]
 
-  public Usuario = {
-    "id": 13,
-    "tipo_identificacion": "CC",
-    // "identificacion": 1017198111,
-    "nombre": "mariana",
-    "apellido": "castrillon",
-    "email": "mariana.castrillonr@udea.edu.co",
-    "estado": 1,
-    "contrasena": "$2b$10$LjqmmR2oeX3IfIbfxr9ne.PSepkeCwhs2PDk7jbGyKPner86UL1Ba",
-    "dia_disponible": 3,
-    "createdAt": "2022-06-28T19:36:36.000Z",
-    "updatedAt": "2022-06-28T19:36:36.000Z",
-    "departamentos_id": 1,
-    "roles_id": 5,
-    "roles": {
-    "nombre": "USUARIO"
-    },
-    "departamentos": {
-    "nombre": "VICEDECANATURAFCEN",
-    "facultades": {
-    "nombre": "FCEN"
-    }
-    },
-    "comisiones": [
-    {
-    "id": 2,
-    "fecha_inicio": "2022-02-20T00:00:00.000Z",
-    "fecha_fin": "2022-02-21T00:00:00.000Z",
-    "fecha_resolucion": "2022-02-20T00:00:00.000Z",
-    "resolucion": "1111",
-    "justificacion": "blabla",
-    "idioma": "blabla",
-    "lugar": "blabla",
-    "tipos_comision_id": 1,
-    "usuarios_id": 13
-    }
-    ]
-    }
+  public Usuario = this.usuarioSvc.getActualUsuario();
 
   private isEmailValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
   private fExclusiva : Dexclusiva = {
@@ -115,6 +80,7 @@ export class FDedicacionComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    console.log(this.Usuario);
     this.fBasicInfo.patchValue(this.Usuario);
     this.fBasicInfo.controls['nombre'].disable();
     this.fBasicInfo.controls['apellido'].disable();

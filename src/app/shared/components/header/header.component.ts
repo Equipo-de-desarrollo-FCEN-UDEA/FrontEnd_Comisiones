@@ -19,7 +19,9 @@ export class HeaderComponent implements OnInit {
       filter(res => res instanceof NavigationEnd)
       )
     .subscribe(
-      () => {this.currentURL = this.router.url;}
+      () => {
+        this.currentURL = this.router.url;
+      }
       );  
       console.log('ruta'+this.currentURL);
   }

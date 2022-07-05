@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioAuth, UsuarioResponse } from '@interfaces/usuario';
+import { UsuarioAuth, UsuarioAuthResponse } from '@interfaces/usuario';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
@@ -29,10 +29,10 @@ export class AuthService {
       );
     const body = `email=${user.email}&contrasena=${user.contrasena}`;
     console.log(body);
-    return this.http.post<UsuarioResponse>(`${this.prefix}`, body, {headers:headers} )
+    return this.http.post<UsuarioAuthResponse>(`${this.prefix}`, body, {headers:headers} )
     .pipe(
     map(
-      (response: UsuarioResponse) => {
+      (response: UsuarioAuthResponse) => {
         if (response.token) {
           this.cookieService.set('token', response.token, 1);
           this.cookieService.set('usuario', JSON.stringify(response.usuario), 1);
@@ -45,13 +45,14 @@ export class AuthService {
     ;
   }
   logout() {
+
     this.cookieService.delete('token');
     this.cookieService.delete('usuario');
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    return this.cookieService.check('token');
+    return this.cookieService.check('token') && this.cookieService.check('usuario');
   }
 
   getRole(): string {
@@ -59,3 +60,4 @@ export class AuthService {
   }
 
 }
+

@@ -8,27 +8,33 @@ import { NotFoundError } from 'rxjs';
 const routes: Routes = [
   {
     path: 'dexclusiva',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./Modules/dexclusiva/dexclusiva.module')
       .then(m => m.DexclusivaModule)
   },
   {
     path: 'comisiones',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./Modules/comisiones/comisiones.module')
       .then(m => m.ComisionesModule)
   },
   {
     path: 'home' || '',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./Modules/home/home.module')
       .then(m => m.HomeModule)
   },
   {
     path: 'permisos',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./Modules/permisos/permisos.module')
       .then(m => m.PermisosModule)
+  },
+  {
+    path: 'admin',
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('./Modules/control-administrativo/control-administrativo.module')
+      .then(m => m.ControlAdministrativoModule)
   },
   {
     path:'login',
@@ -38,6 +44,8 @@ const routes: Routes = [
     path:'404',
     component: NotFoundComponent
   },
+  { path: 'admin', loadChildren: () => import('./Modules/control-administrativo/control-administrativo.module').then(m => m.ControlAdministrativoModule) },
+  { path: 'admin', loadChildren: () => import('./Modules/control-administrativo/control-administrativo.module').then(m => m.ControlAdministrativoModule) },
   {
     path: '**',
     redirectTo: '404'

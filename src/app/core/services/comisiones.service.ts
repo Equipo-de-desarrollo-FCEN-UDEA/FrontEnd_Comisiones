@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ComisionesService {
-  private urlEndPoint:string = 'http://localhost:5200/api/comisiones';
+  private urlEndPoint: string = 'https://6c65-179-15-9-198.ngrok.io/api/comisiones';
 
 
   constructor( private http: HttpClient) { }

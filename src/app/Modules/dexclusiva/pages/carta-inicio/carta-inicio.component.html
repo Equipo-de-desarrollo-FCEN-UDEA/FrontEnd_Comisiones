@@ -17,22 +17,71 @@
             <div class="visual">
                 <h5>Previsualización</h5>
                 <div class="carta">
-                <div class="cabecera">
-                    <div class="logo">
+                    <div class="cabecera">
+                        <div class="logo">
+
+                        </div>
+                        <div class="fecha">
+                            <p style="margin:0;">
+                                {{fecha | date: 'longDate' }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cuerpo">
+                        <p> Señores:</p>
+                        <p> <b> CONSEJO DE {{usuario.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
+                                usuario.departamentos.nombre | uppercase) : usuario.departamentos.nombre | uppercase}}
+                            </b></p>
+                        <p>{{
+                            usuario.departamentos.facultades.descripcion | titlecase}}</p>
+                        <p>Universidad de Antioquia</p>
+                        <br>
+                        <p>Respetados miembros del consejo:</p>
+                        <br>
+                        <div class="cuerpo-texto" id="cuerpo" [innerHTML]="FormCarta.value.Cuerpo">
+                            <style scoped>
+                                #cuerpo p {
+                                    margin: 0 !important;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="informacion-usuario">
+                            <div class="nombre-usuario">
+                                <p style="margin:0;">
+                                    {{usuario.nombre + ' ' + usuario.apellido | titlecase }}
+                                </p>
+                            </div>
+                            <div class="cargo-usuario">
+                                <p style="margin:0;">
+                                    {{usuario.roles.nombre | titlecase }}
+                                </p>
+                            </div>
+                            <div class="departamento">
+                                <p style="margin:0;">
+                                    {{usuario.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
+                                    usuario.departamentos.nombre | titlecase) : usuario.departamentos.nombre |
+                                    titlecase}}
+                                </p>
+                            </div>
+                            <div class="facultad">
+                                <p style="margin:0;">
+                                    {{
+                                    usuario.departamentos.facultades.descripcion | titlecase}}
+                                </p>
+                            </div>
+                            <div class="mail">
+                                <a href="mailto:{{usuario.email}}" style="margin:0;">
+                                    {{usuario.email}}
+                                </a>
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="fecha">
-                        <p style="margin:0;">
-                            {{fecha | date: 'longDate' }}
-                        </p>
-                    </div>
-                </div>
-                <div class="footer">
-
-                </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
     <button class="btn btn-success btn-lg" (submit)="true">Crear carta</button>
 </div>

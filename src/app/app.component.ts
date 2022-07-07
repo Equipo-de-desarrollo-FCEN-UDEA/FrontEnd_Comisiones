@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ export class AppComponent {
   sidebarExpanded = true;
 
   constructor(
-    private router : Router
+    private router : Router,
+    public authSvc: AuthService
   ) { 
 
   }

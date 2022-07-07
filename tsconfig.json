@@ -15,6 +15,9 @@
       ],
       "@guards/*":[
         "src/app/core/guards/*"
+      ],
+      "@data/*":[
+        "src/app/shared/data/*"
       ]
     },
     "outDir": "./dist/out-tsc",

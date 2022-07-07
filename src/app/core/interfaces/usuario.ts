@@ -12,6 +12,7 @@ export interface UsuarioAuth extends UsuarioEmail {
 export interface UsuarioBase extends UsuarioEmail {
     nombre: string;
     apellido: string;
+    email: string;
     identificacion: number;
     estado?: string;
 }
@@ -28,7 +29,7 @@ export interface UsuarioInDB extends UsuarioAuth, UsuarioBase {
     created_At: Date;
     updated_At: Date;
     departamentos_id: number;
-    roles_id: number;
+    roles: [];
 }
 
 export interface Usuario extends UsResInside {

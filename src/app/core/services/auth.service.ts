@@ -4,14 +4,15 @@ import { Router } from '@angular/router';
 import { UsuarioAuth, UsuarioAuthResponse } from '@interfaces/usuario';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { prefix } from '@shared/data/ruta-api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  prefix = 'http://localhost:3000/api/signin';
+  prefix = prefix + 'signin';
 
   constructor(
     private cookieService : CookieService,

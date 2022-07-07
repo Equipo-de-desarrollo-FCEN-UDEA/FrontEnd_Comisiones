@@ -114,5 +114,14 @@ h4 , h3 , h5{
 .isFill{
     transform: translateY(0) scale(.5);
     transform-origin: left top;
+
     color: rgba(74, 132, 248, 0.8);
+}
+
+a{
+    text-decoration: none !important;
+    color: #000;
+}
+a:hover{
+    cursor: pointer;
 }

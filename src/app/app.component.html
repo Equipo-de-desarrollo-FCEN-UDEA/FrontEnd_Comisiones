@@ -1,4 +1,4 @@
-<app-header *ngIf="currentUrl() !== '/login' && currentUrl() !=='/404' "></app-header>
+<app-header *ngIf="authSvc.isLoggedIn()"></app-header>
 <!-- <app-side-bar [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></app-side-bar> -->
 <router-outlet style="margin-top: 10px;"></router-outlet>
-<app-footer *ngIf="currentUrl() !== '/login' && currentUrl() !=='/404' "></app-footer>
+<app-footer *ngIf="authSvc.isLoggedIn()"></app-footer>

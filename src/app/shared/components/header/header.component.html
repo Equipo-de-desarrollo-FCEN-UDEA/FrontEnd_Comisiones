@@ -5,7 +5,10 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="logo">
-    <img src="https://www.udea.edu.co/wps/wcm/connect/udea/99fc43e7-7a64-45bd-97fc-96639b70813d/logosimbolo-vertical.png?MOD=AJPERES&CVID=ljeLvHr" alt="Logo udea" width="40px">
+    <a routerLink="home">
+      <img src="https://www.udea.edu.co/wps/wcm/connect/udea/99fc43e7-7a64-45bd-97fc-96639b70813d/logosimbolo-vertical.png?MOD=AJPERES&CVID=ljeLvHr" alt="Logo udea" width="40px">
+    </a>
+  
   </div>
   <div class="profile navbar-brand">
     <ul>
@@ -24,10 +27,43 @@
   </div>
 
   <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
-    <ul>
-      <li>Some link</li>
-    </ul>
+    <div class="navbar-brand">
+      <ul>
+        <li ngbDropdown>
+         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Comisiones</a> 
+        
+        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
+          <a class="dropdown-item" routerLink="comisiones/crear-comision">Crear</a>
+        </div>
+      </li>
+      </ul>
+    </div>
+    <div class="navbar-brand">
+      <ul>
+        <li ngbDropdown>
+         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Permisos</a> 
+        
+        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
+          <a class="dropdown-item" routerLink="permisos/crear-permiso">Crear</a>
+        </div>
+      </li>
+      </ul>
+    </div>
+    <div class="navbar-brand">
+      <ul>
+        <li ngbDropdown>
+         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Dedidaciones</a> 
+        
+        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
+          <a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Crear dedicación exclusiva</a>
+        </div>
+      </li>
+      </ul>
+    </div>
+    
   </div>
+
+  
   
 
 </nav>

@@ -1,1 +1,1 @@
-export var prefix: string = 'http://localhost:3000/api/';
+export var prefix: string = 'https://33a6-179-15-9-198.ngrok.io/api/';

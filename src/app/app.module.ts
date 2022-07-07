@@ -27,7 +27,7 @@ registerLocaleData(localeEs, 'es');
     SideBarComponent,
     LoginComponent,
     PreventDefaultDirective,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

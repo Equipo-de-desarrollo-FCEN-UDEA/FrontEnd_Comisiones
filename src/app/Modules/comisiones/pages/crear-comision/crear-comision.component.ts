@@ -1,0 +1,111 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { Countries, countries } from '@data/country-data-store';
+
+@Component({
+  selector: 'app-crear-comision',
+  templateUrl: './crear-comision.component.html',
+  styleUrls: ['./crear-comision.component.scss']
+})
+export class CrearComisionComponent implements OnInit {
+  hoveredDate: NgbDate | null = null;
+  public countries: Countries[] = countries
+  fromDate: NgbDate | null;
+  toDate: NgbDate | null = null;
+  model: NgbDateStruct | null = null;
+  today = this.calendar.getToday();
+  files : any[]=[];
+  archivos = [1];
+  clicked = 0
+  public tiposcomision = [
+    {id: 1, nombre: 'Comisión de servicios'},
+    {id: 2, nombre: 'Comisión de estudio'},
+  ]
+
+  constructor(
+    private fb: FormBuilder,
+    private calendar : NgbCalendar,
+    public formatter: NgbDateParserFormatter,
+   
+    
+  ) { 
+    this.fromDate = null;
+    this.toDate = null;
+  }
+
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+    this.formComision.patchValue({
+      fecha_inicio : this.formatter.format(this.fromDate) + 'T00:00:00.000Z',
+      fecha_fin : this.formatter.format(this.toDate) + 'T00:00:00.000Z'
+    });
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
+        date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) { return this.toDate && date.after(this.fromDate) && date.before(this.toDate); }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
+        this.isHovered(date);
+  }
+
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
+
+  formComision = this.fb.group({
+    fecha_inicio : ['', [Validators.required]],
+    fecha_fin : ['',[Validators.required]],
+    justificacion : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
+    idioma : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+    lugar : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
+    tipos_comision_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tiposcomision.length)]]});
+
+  ngOnInit(): void {
+  }
+  onUpload(event:Event, index: number) {
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0);
+    if (file) {
+      this.files.splice(index, 1, file);
+    }
+    console.log(this.files)
+
+  }
+
+  removeFile(index: number) {
+    if (this.archivos.length > 1) {
+    this.archivos.splice(index, 1);};
+    this.files.splice(index, 1);
+  }
+
+  validSize() {
+    const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
+    return size < 2 * 1024 * 1024;
+  }
+
+  isInvalidForm(controlName: string) {
+    return this.formComision.get(controlName)?.invalid && this.formComision.get(controlName)?.touched;
+  }
+
+  onSubmit() {
+    console.log({
+      ...this.formComision.value,
+      archivos: this.files
+    })
+  }
+  
+}

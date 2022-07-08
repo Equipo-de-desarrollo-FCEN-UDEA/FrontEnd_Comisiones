@@ -30,5 +30,45 @@ ul {
     .profile{
         margin: 0;
     }
+    background-color: var(--7650c);
 }
 
+@media screen and (max-width: 280px) {
+    img {
+        width: 100px;
+    }
+    
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 16vh;
+        left: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 75%;
+        height: 100%;
+        z-index: 1000;
+    }
+
+    .navbar-collapse.collapsing {
+        left: -75%;
+        transition: height 0s ease;
+    }
+
+    .navbar-collapse.show {
+        background-color: rgba(0,0,0,0.5);
+        left: 0;
+        transition: left 300ms ease-in-out;
+    }
+
+    .navbar-toggler.collapsed ~ .navbar-collapse  {
+        transition: left 500ms ease-in-out;
+    }
+}
+
+a::after{
+    display: none;
+}

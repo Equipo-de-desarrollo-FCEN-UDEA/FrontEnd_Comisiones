@@ -1,12 +1,12 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+<nav class="navbar navbar-expand-md" >
   
-  <button class="navbar-toggler hidden-sm-up" style= "margin: 5px;"type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+  <button class="navbar-toggler hidden-sm-up" style= "color:var(--7718c);margin: 5px;"type="button" data-toggle="collapse" (click)="isNavbarCollapsed = !isNavbarCollapsed"
     data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <i class="fa fa-bars" style="color:#fff;"></i>
   </button>
   <div class="logo">
     <a routerLink="home">
-      <img src="https://www.udea.edu.co/wps/wcm/connect/udea/99fc43e7-7a64-45bd-97fc-96639b70813d/logosimbolo-vertical.png?MOD=AJPERES&CVID=ljeLvHr" alt="Logo udea" width="40px">
+      <img src="../../../../assets/Logosímbolo-Universidad-de-Antioquia-horizontal-®-03.png" alt="Logo udea" width="180px">
     </a>
   
   </div>
@@ -15,7 +15,7 @@
       <li ngbDropdown>
         <a id="id01" ngbDropdownToggle>
           <span class="fa-stack fa-1x">
-            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fas fa-circle fa-stack-2x" style="color:var(--7718c);"></i>
             <i class="fas fa-user fa-stack-1x fa-inverse"></i>
           </span>
         </a>

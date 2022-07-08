@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 import { UsuarioService } from '@services/usuario.service';
 
@@ -10,17 +11,17 @@ import { UsuarioService } from '@services/usuario.service';
 })
 export class CartaInicioComponent implements OnInit {
   fecha = new Date();
-  usuario :any;
+  usuario : any;
   
 
   constructor(
     private fb: FormBuilder,
-    private usuarioSvc: UsuarioService
+    private usuarioSvc: UsuarioService,
+    private router : Router
   ) {
     
     this.usuarioSvc.getUsuario().subscribe(
       (usuario:any) => {
-        console.log(usuario);
         this.usuario = usuario;
       }
     )
@@ -41,6 +42,7 @@ export class CartaInicioComponent implements OnInit {
   
   OnSubmit() {
     console.log(this.FormCarta.value);
+    this.router.navigate(['/dexclusiva/formulario-dedicacion']);
   }
 
 }

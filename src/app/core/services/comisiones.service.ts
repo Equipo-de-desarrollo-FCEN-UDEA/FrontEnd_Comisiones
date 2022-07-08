@@ -2,7 +2,8 @@ import { Comision } from '../interfaces/comisiones';
 
 import { Injectable } from '@angular/core';
 import { Observable, of, map } from "rxjs";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { prefix } from '@shared/data/ruta-api';
 
 
 
@@ -10,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ComisionesService {
-  private urlEndPoint:string = 'http://localhost:5200/api/comisiones';
+  private urlEndPoint:string = prefix+'comisiones';
 
 
   constructor( private http: HttpClient) { }
@@ -50,6 +51,31 @@ export class ComisionesService {
         
       )
    }
+
+   crearComision(comision:any) {
+    const headers = new HttpHeaders(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    )
+    
+    const body = `
+    archivo=${comision.archivos[0]}
+    &fecha_inicio=${comision.fecha_inicio}
+    &fecha_fin=${comision.fecha_fin}
+    &justificacion=${comision.justificacion}
+    &lugar=${comision.lugar}
+    &tipos_comision_id=${comision.tipos_comision_id}
+    &usuarios_id=${comision.usuarios_id}
+    `
+
+    return this.http.post(this.urlEndPoint, body, {headers: headers}).pipe(
+      map((res)=> {
+        return res;
+      })
+    );
+  }
+
 
 
 }

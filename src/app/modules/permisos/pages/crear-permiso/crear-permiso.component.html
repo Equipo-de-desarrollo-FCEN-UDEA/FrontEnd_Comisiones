@@ -1,0 +1,135 @@
+
+<div class="container">
+  <h4>
+      Formulario de creación de permiso
+  </h4>
+  <form class="need-validation card" need-validation novalidate [formGroup]="formPermiso" >
+
+      <ng-template #footerTemplate>
+          <hr class="my-0">
+          <p *ngIf="fromDate && !toDate" style="text-align: center; margin: 0; color: green;"> Elige la segunda fecha
+          </p>
+          <p *ngIf="!fromDate" style="text-align: center; margin: 0; color: green;"> Elige la primera fecha </p>
+          <button class="btn btn-primary btn-sm m-2 float-start"
+              (click)="model = today; datepicker.close()">Hoy</button>
+          <button class="btn btn-secondary btn-sm m-2 float-end" (click)="datepicker.close()">Cerrar</button>
+      </ng-template>
+
+      <div class="dp-hidden position-absolute">
+          <div class="input-group">
+              <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                  [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
+                  outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [footerTemplate]="footerTemplate"
+                  placement="left" [positionTarget]="buttonEl">
+              <ng-template #t let-date let-focused="focused">
+                  <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                      [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                      (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                  </span>
+              </ng-template>
+          </div>
+      </div>
+          <div class="row">
+
+              <div class="formfloatig">
+                  <select class="form-select form-select-lg mb-3" id="floatingtipos_permiso_id"
+                      formControlName="tipos_permiso_id" required
+                      [ngClass]="{'is-invalid': isInvalidForm('tipos_permiso_id')}" placeholder=" ">
+                      <option [value]="tipos_permiso_id.id" *ngFor="let tipos_permiso_id of tipospermiso">
+                          {{tipos_permiso_id.nombre}}</option>
+                  </select>
+                  <label for="floatingtipos_permiso_id" class="selectLabel"
+                      [ngClass]="{'isFill': formPermiso.controls['tipos_permiso_id'].valid}">Tipo de
+                      permiso</label>
+              </div>
+
+              <!-- <div class="formfloatig">
+                  <select class="form-select form-select-lg mb-3" id="floatinglugar" formControlName="lugar" required
+                      [ngClass]="{'is-invalid': isInvalidForm('lugar')}" placeholder=" ">
+                      <option [value]="country.name" *ngFor="let country of countries">{{country.name}}</option>
+                  </select>
+                  <label for="floatinglugar" class="selectLabel"
+                      [ngClass]="{'isFill': formComision.controls['lugar'].valid}">Lugar de la comision</label>
+              </div> -->
+              <h5>
+                  <span class="text-muted">Rango de fechas de la permiso</span>
+              </h5>
+              <div class=" col-sm-12 col-xs-12 col-md-12" style="margin-bottom: 5px;">
+                  <div class="input-group">
+                      <input #dpFromDate class="form-control" type='text'
+                          (click)="datepicker.toggle() ; clicked=clicked+1" placeholder="aaaa-mm-dd - aaaa-mm-dd"
+                          name="dpFromDate" formControlName="fecha_inicio"
+                          (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+                          [value]="formatter.format(fromDate)? formatter.format(fromDate) + ' - ' + formatter.format(toDate) : null "
+                          [ngClass]="{'is-invalid': (!fromDate || !toDate) && clicked !== 0}">
+                      <button #buttonEl class="btn btn-outline-secondary"
+                          (click)="datepicker.toggle() ; clicked=clicked+1"><i class="fa fa-calendar"> </i></button>
+                  </div>
+              </div>
+
+              <div class=" col-sm-6 col-xs-6 col-md-6" hidden>
+                  <div class="input-group" (click)="datepicker.toggle()">
+                      <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                          formControlName="fecha_fin" [value]="formatter.format(toDate)"
+                          (input)="toDate = validateInput(toDate, dpToDate.value)">
+                  </div>
+              </div>
+
+              <!-- <div class="formfloatig">
+                  <input id="floatingidioma" formControlName="idioma" class="form-control" type="idioma"
+                      placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('idioma')}" required>
+                  <label for="floatingidioma" class="formLabel"> Idioma
+                  </label>
+              </div> -->
+              <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
+                  Recuerda que la justificación debe tener al menos 30 caracteres y máximo 500 caracteres.
+              </div>
+              <div class="formfloatig">
+
+                  <textarea id="floatingjustificacion" formControlName="justificacion" class="form-control"
+                      type="justificacion" placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('justificacion')}"
+                      required rows="5"></textarea>
+                  <label for="floatingjustificacion" class="formLabel"> Justificación
+                  </label>
+              </div>
+              <h5>
+                  <span class="text-muted">Archivos adjuntos del permiso</span>
+              </h5>
+              <div class="alert-danger" *ngIf="files.length>0 && !validSize()">
+                  <p>
+                      Los archivos no deben pesar más de 2 MB.
+                  </p>
+              </div>
+              <div class="formfloatig" style="display: flex; flex-direction: column;">
+                  <div *ngFor="let producto of archivos; last as isLast; let i=index"
+                      class="arrayLike formfloatig">
+                      <div class="archivos" style="width:auto; margin-left: 10px;">
+                          <label class="btn-btn-default">
+                              <div class="fa fa-upload fa-2x "></div>
+                              <input [id]="i" class="file-upload" type="file" (change)='onUpload($event,i)'/>
+                              <label [for]="i"  style="margin-left: 10px;">{{files[i] ? files[i].name : 'Subir archivo' }}</label>
+                          </label>
+
+                      </div>
+                      <div class="buttons" style="width:fit-content; margin: 0;">
+                          <button class="btn btn-circle btn-danger btn-sm" type="button" (click)="removeFile(i)"
+                              >
+
+                              <i class="fa fa-minus"></i>
+
+                          </button>
+                          <button class="btn btn-circle btn-primary btn-sm" type="button"
+                              (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
+                              <i class="fa fa-plus"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+      <button class="btn btn-success" (submit)="true" [disabled]="formPermiso.invalid || !validSize()">Enviar</button>
+
+  </form>
+
+</div>

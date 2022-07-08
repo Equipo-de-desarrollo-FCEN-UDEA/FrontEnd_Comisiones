@@ -1,4 +1,4 @@
-<div class="container shadow-sm pt-4 pl-4 pr-4 mb-5 bg-white rounded">
+<div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded" style="align-items: unset;">
   <div class="row header-row">
     <div class="col">
       <span class="text-secondary">PERMISO</span>
@@ -13,17 +13,17 @@
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
-    <div class="col-sm-6">permiso.createdAt </div>
+    <div class="col-sm-6">permiso.createdAt | date: "fullDate </div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
-    <div class="col-sm-6">permiso.fecha_inicio | date: "fullDate"</div>
+    <div class="col-sm-6">permiso.fecha_inicio | date: "fullDate</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
-    <div class="col-sm-6">permiso.fecha_fin | date: "fullDate"</div>
+    <div class="col-sm-6">permiso.fecha_fin | date: "fullDate</div>
   </div>
 
   <div class="row regular-row">
@@ -34,9 +34,13 @@
 
   <div class="row regular-row">
     <div class="col-6 label">Estado Actual del Permiso</div>
-    <div class="col-6">
-    </div>
+      <div class="col-4">
+        <span
+          class="badge badge-pill pill">
+        </span>
+      </div>
   </div>
+
   
   <div class="row regular-row">
     <div class="col-6 label">Anexos</div>
@@ -77,7 +81,7 @@
   <hr />
 
   <div class="footer-row d-md-flex justify-content-md-end">
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"
         class="btn btn-danger"
@@ -89,10 +93,10 @@
         Eliminar
       </button>
     </div>
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"
-        class="btn btn-warning"
+        class="btn btn-warning "
       >
         Editar
       </button>

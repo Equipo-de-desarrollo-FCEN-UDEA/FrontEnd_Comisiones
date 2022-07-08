@@ -42,8 +42,8 @@ export class VerPermisoComponent implements OnInit {
       text: 'No podrás revertir esta acción',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3AB795',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3AB795',
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {

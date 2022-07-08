@@ -13,3 +13,4 @@ import { PermisosRoutingModule } from './permisos-routing.module';
   ]
 })
 export class PermisosModule { }
+

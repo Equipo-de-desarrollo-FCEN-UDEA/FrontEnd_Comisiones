@@ -1,35 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --349c: #026937;
+    --7740c: #35944b;
+    --361c: #43b649;
+    --375c: #8dc63d;
+    --7465c: #3ebdac;
+    --334c: #069a7e;
+    --7718c: #0e7774;
+    --7650c: #70205b;
+    --633c: #137598;
+    --032c: #ef434d;
+    --137c: #f9a12c;
+}
+
+$primary: #0e7774;
+$secondary: #8f5325;
+$success: #3e8d63;
+$info: #7854e4;
+$warning: #b8c924;
+$danger: #d62518;
+$light: #f8f9fa;
+$dark: #343a40;
+
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap.scss';
 // Estilos formularios
 
 
-.container{
+html {
+    position: relative;
+    min-height: 100vh;
+}
+
+body {
+  margin-bottom: 60px;
+  min-height: 100vh;
+}
+
+
+.container {
     min-height: 100vh;
     max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1em;
+    margin-bottom: 60px;
 }
 
-.card{
+.card {
     margin: auto;
     padding: 1em 0.5em;
 }
 
-h4 , h3 , h5{
-    text-align: center ;
+h4,
+h3,
+h5 {
+    text-align: center;
     padding-bottom: 0.5em;
 }
 
 
-.arrayLike .form-control-array{
+.arrayLike .form-control-array {
     width: 90%;
 }
 
-.buttons{
+.buttons {
     width: 10%;
     display: flex;
     flex-direction: row;
@@ -38,15 +75,15 @@ h4 , h3 , h5{
     margin: auto;
 }
 
-@media screen and (max-width: 768px){
-    .buttons{
+@media screen and (max-width: 768px) {
+    .buttons {
         flex-direction: column;
     }
 }
-    
 
 
-.arrayLike{
+
+.arrayLike {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -55,28 +92,28 @@ h4 , h3 , h5{
     width: 100%;
 }
 
-.isFill{
+.isFill {
     transform: translateY(0) scale(.5);
     transform-origin: left top;
     color: rgba(74, 132, 248, 0.8);
 }
 
 
-.formfloatig{
+.formfloatig {
     position: relative;
     padding-bottom: .4em;
     height: 100%;
     width: 100%;
 }
 
-.form-control:focus + .formLabel,
-.form-control:not(:placeholder-shown) + .formLabel{
+.form-control:focus+.formLabel,
+.form-control:not(:placeholder-shown)+.formLabel {
     transform: translateY(0) scale(.5);
     transform-origin: left top;
     color: rgba(74, 132, 248, 0.8);
 }
 
-.formLabel{
+.formLabel {
     color: gray;
     cursor: pointer;
     position: absolute;
@@ -86,7 +123,7 @@ h4 , h3 , h5{
     transition: transform .5s, color .3s
 }
 
-.selectLabel{
+.selectLabel {
     color: gray;
     cursor: pointer;
     position: absolute;
@@ -96,32 +133,34 @@ h4 , h3 , h5{
     transition: transform .5s, color .3s
 }
 
-.form-select:focus + .selectLabel{
+.form-select:focus+.selectLabel {
     transform: translateY(0) scale(.5);
     transform-origin: left top;
     color: rgba(74, 132, 248, 0.8);
 }
-.form-select{
+
+.form-select {
     margin: 0;
 }
 
-.isFill{
+.isFill {
     transform: translateY(0) scale(.5);
     transform-origin: left top;
     color: rgba(74, 132, 248, 0.8);
 }
 
-.isFill{
+.isFill {
     transform: translateY(0) scale(.5);
     transform-origin: left top;
 
     color: rgba(74, 132, 248, 0.8);
 }
 
-a{
+a {
     text-decoration: none !important;
     color: #000;
 }
-a:hover{
+
+a:hover {
     cursor: pointer;
 }

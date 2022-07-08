@@ -19,16 +19,16 @@
                 <div class="carta">
                     <div class="cabecera">
                         <div class="logo">
-
+                            <img src="../../../../../assets/Logosímbolo+Universidad+de+Antioquia+horizontal+®-01.jpg" width="280px">
                         </div>
                         <div class="fecha">
                             <p style="margin:0;">
-                                {{fecha | date: 'longDate' }}
+                                Medellín, {{fecha | date: 'longDate' }}
                             </p>
                         </div>
                     </div>
                     <div class="cuerpo">
-                        <p> Señores:</p>
+                        <p> Señores</p>
                         <p> <b> CONSEJO DE {{usuario.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
                                 usuario.departamentos.nombre | uppercase) : usuario.departamentos.nombre | uppercase}}
                             </b></p>
@@ -38,12 +38,7 @@
                         <br>
                         <p>Respetados miembros del consejo:</p>
                         <br>
-                        <div class="cuerpo-texto" id="cuerpo" [innerHTML]="FormCarta.value.Cuerpo">
-                            <style scoped>
-                                #cuerpo p {
-                                    margin: 0 !important;
-                                }
-                            </style>
+                        <div class="cuerpo-texto ql-editor" id="cuerpo" [innerHTML]="FormCarta.value.Cuerpo">
                         </div>
                     </div>
                     <div class="footer">
@@ -83,5 +78,5 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-success btn-lg" (submit)="true">Crear carta</button>
+    <button class="btn btn-success btn-lg" (click)="OnSubmit()" (submit)="true" >Crear carta</button>
 </div>

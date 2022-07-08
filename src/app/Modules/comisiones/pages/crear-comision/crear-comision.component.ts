@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { Countries, countries } from '@data/country-data-store';
+import { ComisionesService } from '@services/comisiones.service';
 
 @Component({
   selector: 'app-crear-comision',
@@ -27,6 +28,7 @@ export class CrearComisionComponent implements OnInit {
     private fb: FormBuilder,
     private calendar : NgbCalendar,
     public formatter: NgbDateParserFormatter,
+    private comisionesSvc: ComisionesService
    
     
   ) { 
@@ -44,8 +46,8 @@ export class CrearComisionComponent implements OnInit {
       this.fromDate = date;
     }
     this.formComision.patchValue({
-      fecha_inicio : this.formatter.format(this.fromDate) + 'T00:00:00.000Z',
-      fecha_fin : this.formatter.format(this.toDate) + 'T00:00:00.000Z'
+      fecha_inicio : this.formatter.format(this.fromDate),
+      fecha_fin : this.formatter.format(this.toDate)
     });
   }
 
@@ -102,10 +104,19 @@ export class CrearComisionComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log({
+    const response ={
       ...this.formComision.value,
-      archivos: this.files
-    })
+      archivos: this.files,
+      usuarios_id: 12
+    }
+    console.log(response)
+    this.comisionesSvc.crearComision(response).subscribe(
+      (data:any) => {
+        window.alert(data.msg)
+      }
+    )
   }
+
+
   
 }

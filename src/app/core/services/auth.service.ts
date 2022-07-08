@@ -49,6 +49,9 @@ export class AuthService {
     this.cookieService.delete('token');
     this.cookieService.delete('usuario');
     this.router.navigate(['/login']);
+    if (this.isLoggedIn()) {
+      this.logout();
+    }
   }
 
   isLoggedIn(): boolean {

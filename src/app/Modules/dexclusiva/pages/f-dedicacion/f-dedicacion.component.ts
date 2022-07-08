@@ -80,7 +80,6 @@ export class FDedicacionComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    console.log(this.Usuario);
     this.fBasicInfo.patchValue(this.Usuario);
     this.fBasicInfo.controls['nombre'].disable();
     this.fBasicInfo.controls['apellido'].disable();

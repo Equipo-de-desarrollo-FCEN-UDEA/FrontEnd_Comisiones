@@ -11,6 +11,7 @@ h3, h5{
 
 .container{
     margin:auto;
+    margin-bottom: 60px;
     max-width: 1440px;
     padding: 30px;
     display: flex;
@@ -33,13 +34,14 @@ h3, h5{
     display: flex;
     flex-direction: column;
     margin: auto;
-    /* padding: 1em 0.5em; */
+    padding: 0.5em 1em;
     justify-content: space-between;
     border: 2px solid #ccc;
 
     background-color: #fff;
     width: 100%;
     aspect-ratio: 420/594;
+    font-size: 1em;
     
 }
 .form-group{
@@ -61,16 +63,21 @@ h3, h5{
 }
 
 .logo{
-    width : 300px;
-    height: 100px;
-    background-color: green;
+    width : 15em;
+    height: 6em;
     margin: .5em;
+    display: flex;
+}
+
+.logo img{
+    width: 100%;
+    margin: auto;
 }
 
 .fecha{
     margin: auto;
     margin-bottom: 0;
-    margin-right: 15px;
+    margin-right: 1em;
 }
 
 .informacion-usuario{
@@ -78,9 +85,9 @@ h3, h5{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-right: 15px;
-    margin-bottom: 50px;
-    margin-top: 50px;
+    margin-right: 1em;
+    margin-bottom: 3em;
+    margin-top: 3em;
 }
 
 .nombre-usuario{
@@ -99,13 +106,9 @@ h3, h5{
 }
 .cuerpo{
     margin-bottom: auto;
-    margin: 15px;
+    margin: 1em;
 }
 
 .cuerpo p {
-    margin-bottom: -5px;
-}
-
-body.cuerpo-text .p{
     margin-bottom: -5px;
 }

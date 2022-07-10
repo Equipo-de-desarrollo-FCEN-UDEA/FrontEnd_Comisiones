@@ -277,7 +277,10 @@
         </div>
     </div>
 
-        <button class="btn btn-success" (submit)="true" [disabled]="fBasicInfo.invalid">Enviar</button>
+        <button class="btn btn-success" id="Enviar" (submit)="true" [disabled]="fBasicInfo.invalid || (isLoading|async)">
+            <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true"></span>
+            Enviar
+            </button>
 
     </form>
 </div>

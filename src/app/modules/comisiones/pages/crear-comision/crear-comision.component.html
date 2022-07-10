@@ -127,7 +127,9 @@
                 </div>
 
             </div>
-        <button class="btn btn-success" (submit)="true" [disabled]="formComision.invalid || !validSize()">Enviar</button>
+        <button class="btn btn-success" (submit)="true" [disabled]="formComision.invalid || !validSize() || (isLoading | async)">
+            <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+            Enviar</button>
 
     </form>
 

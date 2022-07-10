@@ -37,13 +37,25 @@ h3, h5{
     padding: 0.5em 1em;
     justify-content: space-between;
     border: 2px solid #ccc;
-
     background-color: #fff;
     width: 100%;
     aspect-ratio: 420/594;
-    font-size: 1em;
+    font-size: 0.9em;
+}
+
+@media screen and (max-width: 768px){
+    .carta{
+        font-size: 0.9em;
+    }
     
 }
+@media screen and (max-width: 425px){
+    .carta{
+        font-size: 0.4em;
+    }
+}
+    
+
 .form-group{
     margin-bottom: 1em;
     display: flex;
@@ -95,10 +107,12 @@ h3, h5{
     color: #628860;
     font-weight: bold;
     margin-bottom: 0;
+    width: 100%;
+    text-align: end;
 }
 
 .informacion-usuario div {
-    margin-bottom: -8px;
+    margin-bottom: -0.2em;
 }
 
 .footer{
@@ -110,5 +124,5 @@ h3, h5{
 }
 
 .cuerpo p {
-    margin-bottom: -5px;
+    margin-bottom: -0.1em;
 }

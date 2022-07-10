@@ -33,7 +33,10 @@
                                 <label for="Contraseña" class="formLabel">Contraseña</label>
                             </div>
 
-                            <button (submit)="true" [disabled]="!formLogin.valid" class="btn btn-dark btn-block">Ingresar</button>
+                            <button id="btn-sub"  (submit)="true" [disabled]="!formLogin.valid || (isLoading|async)" class="btn btn-dark btn-block">
+                                <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+                               Entrar
+                            </button>
 
                         </div>
 
@@ -96,7 +99,13 @@
                                 <label for="Confirmar" class="formLabel">Confirmar contraseña</label>
                             </div>
     
-                            <button class="btn btn-dark btn-block">Registrarse</button>
+                            <button class="btn btn-dark btn-block" >
+                                <span class="spinner" id="spinner" style="display: none;">
+                                    <span class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+                                   Cargando...
+                               </span>
+                               <span id="btn-text">Registrarse</span>
+                                </button>
     
     
                         </div>

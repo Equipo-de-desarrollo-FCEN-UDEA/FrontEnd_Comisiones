@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { Countries, countries } from '@data/country-data-store';
 import { ComisionesService } from '@services/comisiones.service';
+import { LoaderService } from '@services/loader.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-crear-comision',
@@ -23,12 +25,14 @@ export class CrearComisionComponent implements OnInit {
     {id: 1, nombre: 'Comisión de servicios'},
     {id: 2, nombre: 'Comisión de estudio'},
   ]
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
     private calendar : NgbCalendar,
     public formatter: NgbDateParserFormatter,
-    private comisionesSvc: ComisionesService
+    private comisionesSvc: ComisionesService,
+    private loaderService: LoaderService
    
     
   ) { 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Comision } from 'src/app/core/interfaces/comisiones';
+import { Comisiones } from 'src/app/core/interfaces/comisiones';
 // import { ComisionEstados } from 'src/app/core/interfaces/comisionesxestado';
 import { ComisionesService } from 'src/app/core/services/comisiones.service';
 import { ComisionxestadoService } from 'src/app/core/services/comisionesxestado.service';
@@ -11,7 +11,7 @@ import { ComisionxestadoService } from 'src/app/core/services/comisionesxestado.
 })
 export class TablaSolicitudesComponent implements OnInit {
 
-  comisiones!: Comision[];
+  comisiones!: Comisiones[];
   // permisos!: Permiso[];
   // comisionxestado!: ComisionEstados[];
 
@@ -23,6 +23,9 @@ export class TablaSolicitudesComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.comisionesService.getComisiones()
+    .subscribe(comisiones => comisiones = comisiones
+    )
     // this.comisionesService.getComisiones().subscribe(
     //   comisiones => this.comisiones = comisiones
     // );

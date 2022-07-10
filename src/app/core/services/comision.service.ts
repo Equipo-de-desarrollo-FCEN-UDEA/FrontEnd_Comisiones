@@ -1,4 +1,4 @@
-import { Comision } from '../interfaces/comisiones';
+import { Comisiones } from '../interfaces/comisiones';
 
 import { Injectable } from '@angular/core';
 import { Observable, of, map } from "rxjs";
@@ -10,13 +10,21 @@ import { prefix } from '@shared/data/ruta-api';
 @Injectable({
   providedIn: 'root'
 })
-export class ComisionesService {
+export class ComisionService {
   private urlEndPoint:string = prefix+'comisiones';
 
 
   constructor( private http: HttpClient) { }
 
-  getComisiones() {
+  getComisiones(){
+    return this.http.get<Comisiones[]>(this.urlEndPoint).pipe(
+      map((res)=>{
+        const comision = res as Comisiones[];
+        return comision.map((newComision) => {
+          console.log(newComision)
+        })
+      })
+    )
     // return this.http.get<Comision[]>(this.urlEndPoint).pipe(
     //   map((res) => {
     //     const comision = res as Comision[];

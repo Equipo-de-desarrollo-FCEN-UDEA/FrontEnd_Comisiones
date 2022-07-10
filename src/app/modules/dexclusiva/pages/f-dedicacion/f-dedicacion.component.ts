@@ -7,7 +7,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { UsuarioService } from '@services/usuario.service';
-import { Usuario, UsuarioAuthResponse } from '@interfaces/usuario';
+import { Usuario } from '@interfaces/usuario';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 

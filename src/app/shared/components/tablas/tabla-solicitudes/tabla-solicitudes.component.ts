@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Comision } from 'src/app/core/interfaces/comisiones';
-import { ComisionEstados } from 'src/app/core/interfaces/comisionesxestado';
+// import { ComisionEstados } from 'src/app/core/interfaces/comisionesxestado';
 import { ComisionesService } from 'src/app/core/services/comisiones.service';
 import { ComisionxestadoService } from 'src/app/core/services/comisionesxestado.service';
 
@@ -13,7 +13,7 @@ export class TablaSolicitudesComponent implements OnInit {
 
   comisiones!: Comision[];
   // permisos!: Permiso[];
-  comisionxestado!: ComisionEstados[];
+  // comisionxestado!: ComisionEstados[];
 
   constructor(
 
@@ -23,16 +23,16 @@ export class TablaSolicitudesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.comisionesService.getComisiones().subscribe(
-      comisiones => this.comisiones = comisiones
-    );
+    // this.comisionesService.getComisiones().subscribe(
+    //   comisiones => this.comisiones = comisiones
+    // );
 
-    // this.permisos = this.permisosService.getPermisos();
+    // // this.permisos = this.permisosService.getPermisos();
 
-    this.comisionxEstdoService.getComisionxEstado().subscribe(
-      comisionesxEstado => this.comisionxestado = comisionesxEstado
-    )
-    console.log(this.comisiones);
+    // this.comisionxEstdoService.getComisionxEstado().subscribe(
+    //   comisionesxEstado => this.comisionxestado = comisionesxEstado
+    // )
+    // console.log(this.comisiones);
   }
 
 }

@@ -8,6 +8,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { UsuarioService } from '@services/usuario.service';
 import { Usuario } from '@interfaces/usuario';
+import { LoaderService } from '@services/loader.service';
+import { Subject } from 'rxjs';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 
@@ -22,12 +24,13 @@ export class FDedicacionComponent implements OnInit {
   faPlus = faPlus;
 
 
-
+  isLoading: Subject<boolean> = this.loadingSvc.isLoading;
   constructor(
     // private : UserSvc Falta entregar información del usuario
     private fb : FormBuilder,
     private dexclusivaSvc: DexclusivaService,
-    private usuarioSvc: UsuarioService
+    private usuarioSvc: UsuarioService,
+    private loadingSvc : LoaderService
   ) { }
   
   public unidades = [
@@ -90,8 +93,7 @@ export class FDedicacionComponent implements OnInit {
   onSubmit(){
     let {nombre, apellido, identificacion, email, ...others} = this.fBasicInfo.value;
     this.fExclusiva = others;
-    console.log(this.fExclusiva);
-    this.dexclusivaSvc.postDexclusiva(this.fExclusiva).subscribe(); 
+    this.dexclusivaSvc.postDexclusiva(this.fExclusiva).subscribe();
   }
 
   // Temas

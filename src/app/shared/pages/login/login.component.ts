@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioAuth } from '@interfaces/usuario';
 import { AuthService } from '@services/auth.service';
+import { LoaderService } from '@services/loader.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -56,13 +58,14 @@ export class LoginComponent implements OnInit {
     }
   ]
   private isEmailValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
+  isLoading: Subject<boolean> = this.loadingService.isLoading;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
-    
+    private router: Router,
+    private loadingService: LoaderService
   ) { }
-
+    
   formLogin = this.fb.group({
     emailLogin : ['', [Validators.required, Validators.pattern(this.isEmailValid)]],
     passwordLogin : ['', Validators.required]

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-export interface Permisos {
-    id: number;
-=======
 import { DocumentosInside } from "./documentos";
 import { PermisosxestadoInside } from "./permisosxestado";
 import { TiposPermisoInside } from "./tipos_permiso";
@@ -12,7 +8,6 @@ export interface PermisosInside {
     fecha_inicio: Date;
     fecha_fin: Date;
     justificacion: string;
->>>>>>> main
 }
 
 export interface PermisosDTO extends Omit<PermisosInside, 'id'> {

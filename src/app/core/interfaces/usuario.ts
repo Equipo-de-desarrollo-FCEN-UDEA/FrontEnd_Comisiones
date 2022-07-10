@@ -14,12 +14,6 @@ export interface UsuarioBase {
     id: number;
     nombre: string;
     apellido: string;
-<<<<<<< HEAD
-    email: string;
-    identificacion: number;
-    estado?: string;
-=======
->>>>>>> main
 }
 
 export interface UsuarioInside extends UsuarioBase {

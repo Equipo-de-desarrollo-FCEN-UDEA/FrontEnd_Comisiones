@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioAuth, UsuarioAuthResponse } from '@interfaces/usuario';
+import { UsuarioAuth} from '@interfaces/usuario';
 import { CookieService } from 'ngx-cookie-service';
+import { Auth } from '@interfaces/auth';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { prefix } from '@shared/data/ruta-api';
@@ -29,10 +30,10 @@ export class AuthService {
       }
       );
     const body = `email=${user.email}&contrasena=${user.contrasena}`;
-    return this.http.post<UsuarioAuthResponse>(`${this.prefix}`, body, {headers:headers} )
+    return this.http.post<Auth>(`${this.prefix}`, body, {headers:headers} )
     .pipe(
     map(
-      (response: UsuarioAuthResponse) => {
+      (response: Auth) => {
         if (response.token) {
           this.cookieService.set('token', response.token, 1);
           this.cookieService.set('usuario', JSON.stringify(response.usuario), 1);

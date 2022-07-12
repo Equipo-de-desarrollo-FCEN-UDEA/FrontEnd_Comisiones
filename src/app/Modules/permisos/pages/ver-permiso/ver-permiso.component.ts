@@ -28,8 +28,8 @@ export class VerPermisoComponent implements OnInit {
     this.activateRoute.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
-        this.permisoService.getPermiso(id).subscribe((resPermisos) => {
-          this.permiso = resPermisos;
+        this.permisoService.getPermiso(id).subscribe((resPermiso) => {
+          this.permiso = resPermiso;
           console.log(this.permiso);
         });
       }

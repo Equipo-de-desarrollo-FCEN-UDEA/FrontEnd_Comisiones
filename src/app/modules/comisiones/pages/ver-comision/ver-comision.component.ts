@@ -25,6 +25,15 @@ export class VerComisionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.activateRoute.params.subscribe((params) => {
+      const id = params['id'];
+      if (id) {
+        this.comisionesService.getComision(id).subscribe((resComision) => {
+          this.comision = resComision;
+          console.log(this.comision);
+        });
+      }
+    });
   }
   delete(id: any): void {
     Swal.fire({

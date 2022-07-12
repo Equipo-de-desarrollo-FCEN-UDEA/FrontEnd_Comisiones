@@ -9,7 +9,7 @@ export interface ComResInside {
     fecha_inicio: Date;
     fecha_fin: Date;
     justificacion: string;
-} 
+}
 
 export interface ComisionDTO extends Omit<ComResInside, 'id'>{
     archivo : File[];

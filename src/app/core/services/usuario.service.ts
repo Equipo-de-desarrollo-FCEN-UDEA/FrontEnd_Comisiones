@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioInDB, UsuarioResponse } from '@interfaces/usuario';
 import { prefix } from '@shared/data/ruta-api';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class UsuarioService {
 
   getUsuario() {
     const basicUsuario = JSON.parse(this.cookie.get('usuario'));
-    return this.http.get(`${this.prefix}/${basicUsuario.id}`);
+    return this.http.get<UsuarioResponse>(`${this.prefix}/${basicUsuario.id}`);
   }
 
   getActualUsuario() {
@@ -31,5 +31,9 @@ export class UsuarioService {
       this.route.navigate(['/login']);
       return false;
     }
+  }
+
+  getUsuariobyId(id:Number){
+    return this.http.get<UsuarioResponse>(`${this.prefix}/${id}`);
   }
 }

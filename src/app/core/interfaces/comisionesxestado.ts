@@ -7,7 +7,7 @@ export interface ComisionesXEstadoBase {
 }
 
 export interface ComisionesXEstadoInside extends ComisionesXEstadoBase {
-  intermediate_estados: EstadoInside[];
+  intermediate_estados: EstadoInside;
 }
 
 export interface ComisionesXEstadoInDB extends ComisionesXEstadoInside {

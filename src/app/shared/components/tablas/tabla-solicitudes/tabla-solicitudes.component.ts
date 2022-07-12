@@ -28,37 +28,20 @@ export class TablaSolicitudesComponent implements OnInit {
   ngOnInit(): void {
 
     this.comisionesService.getComisiones().subscribe(
-      comisiones => this.comisiones = comisiones
+      comisiones => {this.comisiones = comisiones
+      
+      
+      }
     );
 
-    // this.comisionesService.getComisiones()
-    //   .subscribe(resp =>{
-    //     console.log(resp.);
-      
-    //   })
-
     
-
-    // this.comisionesService.getComisiones()
-    //   .subscribe((resp: ComisionesinDB)=> {
-    //     console.log( resp);
-        
-    //   }
-        
-        
-      
-    // );
-
-    // this.comisionesService.getComisiones().subscribe(
-    //   comisiones => this.comisiones! = comisiones
-    // );
-
-    // // this.permisos = this.permisosService.getPermisos();
-
-    // this.comisionxEstdoService.getComisionxEstado().subscribe(
-    //   comisionesxEstado => this.comisionxestado = comisionesxEstado
-    // )
-    // console.log(this.comisiones);
   }
+  
+  
+  ultimoElement(res:any[]):any{
+    return res[res.length-1] 
 
+  }
+  
 }
+

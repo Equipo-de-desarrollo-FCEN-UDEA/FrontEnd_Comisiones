@@ -35,11 +35,11 @@
     
               <th scope="row">{{ comision.id }}</th>
               <td>{{ comision.tipos_comision.nombre }}</td>
-              <!-- <td>{{ comision.intermediate_esatdos}}</td> -->
-              <!-- <td>{{ comision.createdAt}}</td> -->
-              <!-- <td>{{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}</td> -->
-              <!-- <td>{{ comision.usuarios.departamentos.nombre}}</td> -->
-              <!-- <td>{{ comision.usuarios.departamentos.facultades.nombre}}</td> --> 
+              <td>{{ ultimoElement(comision.intermediate_comisiones)?.intermediate_estados?.nombre || "No encontrado" }}</td>
+              <td>{{ comision.fecha_inicio | date}}</td>
+              <td>{{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}</td>
+              <td>{{ comision.usuarios.departamentos.nombre}}</td>
+              <td>{{ comision.usuarios.departamentos.facultades.nombre}}</td> 
              <!-- </tr> -->
           </tbody>
         </table>

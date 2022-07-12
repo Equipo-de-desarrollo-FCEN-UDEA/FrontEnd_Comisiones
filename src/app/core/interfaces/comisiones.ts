@@ -30,7 +30,7 @@ export interface Comision extends ComisionesinDB{
     tipos_comision: TipoComisionInside
     documentos: DocumentosInside[];
     cumplidos: CumplidoInside[];
-    usuarios: UsuarioInside[];
+    usuarios: UsuarioInside;
     intermediate_comisiones: ComisionesXEstadoInside[];
 }
 

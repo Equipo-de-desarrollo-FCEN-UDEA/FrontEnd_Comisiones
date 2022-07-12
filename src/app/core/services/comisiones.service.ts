@@ -1,4 +1,4 @@
-import { Comision } from '../interfaces/comisiones';
+import { Comision, ComisionDTO } from '../interfaces/comisiones';
 
 import { Injectable } from '@angular/core';
 import { Observable, of, map } from "rxjs";
@@ -51,6 +51,10 @@ export class ComisionesService {
         
       // )
    }
+
+   delete(id: any): Observable<any> {
+    return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
+  }
 
    crearComision(comision:any) {
     const headers = new HttpHeaders(

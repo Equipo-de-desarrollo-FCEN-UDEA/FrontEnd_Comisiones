@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Permisos } from '@interfaces/permisos';
+import { PermisosInside } from '@interfaces/permisos';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class PermisoService {
   private urlEndPoint = 'http://localhost:3000/api/permisos';
 
   getPermiso(id: string): Observable<any> {
-    return this.http.get<Permisos>(`${this.urlEndPoint}/${id}`).pipe(
+    return this.http.get<PermisosInside>(`${this.urlEndPoint}/${id}`).pipe(
       map((res) => {
         return res;
       })
@@ -23,6 +23,6 @@ export class PermisoService {
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete<Permisos>(`${this.urlEndPoint}/${id}`);
+    return this.http.delete<PermisosInside>(`${this.urlEndPoint}/${id}`);
   }
 }

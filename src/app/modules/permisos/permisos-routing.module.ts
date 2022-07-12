@@ -5,7 +5,7 @@ import { VerPermisoComponent } from './pages/ver-permiso/ver-permiso.component';
 
 const routes: Routes = [
   {
-    path: 'ver-permisos',
+    path: 'ver-permisos/:id',
     component: VerPermisoComponent
   }
 ];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Permisos } from '@interfaces/permisos';
+import { PermisosInside } from '@interfaces/permisos';
 import { PermisoService } from '@services/permiso.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -14,8 +14,8 @@ export class VerPermisoComponent implements OnInit {
 
   loading:boolean = false;
   error:string = '';
-  permiso: Permisos | undefined;
-  permiso$: Observable<Permisos> | undefined;
+  permiso: PermisosInside | undefined;
+  permiso$: Observable<PermisosInside> | undefined;
   permisos: any = [];
 
   constructor(

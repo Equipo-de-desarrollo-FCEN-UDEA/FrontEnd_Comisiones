@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './modules/home/home.module';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -36,7 +38,9 @@ registerLocaleData(localeEs, 'es');
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
+    HomeModule
   ],
   providers: [ 
     { provide: LOCALE_ID, useValue: 'es' },

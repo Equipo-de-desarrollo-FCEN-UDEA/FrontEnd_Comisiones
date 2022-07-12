@@ -21,23 +21,23 @@ ul {
         }
     }
 }
-    
+
 .navbar{
     justify-content: space-between;
     .logo{
-        margin: 0 20px;
+        margin:0 20px;
     }
     .profile{
         margin: 0;
     }
-    background-color: var(--7650c);
+    background-color: var(--349c);  //Color back header
 }
 
 @media screen and (max-width: 280px) {
     img {
         width: 100px;
     }
-    
+
 }
 
 @media (max-width: 767px) {

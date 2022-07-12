@@ -56,7 +56,6 @@ export interface Comision {
   
   };
   
-  
   export interface intermediate_comisiones {
     createdAt: Date;
     fecha_actualizacion: Date;

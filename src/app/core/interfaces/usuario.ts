@@ -22,10 +22,10 @@ export interface UsuarioInside extends UsuarioBase {
 
 export interface Usuario extends UsuarioBase{
     tipo_identificacion?: string;
-    identificacion?: Number;
+    identificacion?: number;
     email: string;
     estado?: string;
-    dia_disponible?: Number;
+    dia_disponible?: number;
     created_at: Date;
     updated_at: Date;
     departamentos_id: number;

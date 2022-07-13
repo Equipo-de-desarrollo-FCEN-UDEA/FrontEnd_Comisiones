@@ -11,11 +11,9 @@
             <div class="botones">
                 <button class="btn btn-primary">
                     <i class="fas fa-edit"></i>
-                    Editar
                 </button>
                 <button class="btn btn-danger">
                     <i class="fas fa-trash"></i>
-                    Eliminar
                 </button>
             </div>
             
@@ -24,27 +22,27 @@
             <div class="informacion">
                 <h1>
                     <span>
-                        {{usuario.nombre | titlecase}}
+                        {{usuario?.nombre | titlecase}}
                     </span>
                 </h1>
                 <h5>
                     <span>
-                        {{usuario.apellido | titlecase}}
+                        {{usuario?.apellido | titlecase}}
                     </span>
                 </h5>
                 <span class="text-muted">
-                    {{ usuario.email }}
+                    {{ usuario?.email }}
                 </span>
     
                 <span>
-                   {{usuario.tipo_identificacion | uppercase}} : {{usuario.identificacion}}
+                   {{ usuario?.tipo_identificacion | uppercase}} : {{usuario?.identificacion}}
                 </span>
                 
                 <span>
-                    {{usuario.departamentos.facultades.descripcion | titlecase}}
+                    {{usuario?.departamentos?.facultades?.descripcion | titlecase}}
                 </span>
                 <span>
-                    Departamento de  {{ usuario.departamentos.nombre | titlecase }}
+                    Departamento de  {{ usuario?.departamentos?.nombre | titlecase }}
                 </span>
             </div>
         </div>

@@ -12,8 +12,8 @@ import { take } from 'rxjs';
 
 
 export class VerUsuarioComponent implements OnInit {
-  usuario : any;
-  id : any = 0;
+  public usuario : UsuarioResponse | undefined;
+  public id : Number | string = 0;
   constructor(
     private usuarioSvc: UsuarioService,
     private router: ActivatedRoute
@@ -30,7 +30,7 @@ export class VerUsuarioComponent implements OnInit {
         }
       );
     } else {
-    this.usuarioSvc.getUsuariobyId(this.id).subscribe(res => {
+    this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe(res => {
       this.usuario = res;
     }
     );

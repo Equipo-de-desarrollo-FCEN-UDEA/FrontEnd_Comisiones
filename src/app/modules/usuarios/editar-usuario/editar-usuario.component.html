@@ -1,1 +1,38 @@
-<p>editar-usuario works!</p>
+<form need-validation novalidate [formGroup]="formUpdate" (ngSubmit)="submitUpdate()">
+        <div class="card">
+            <div class="card-body">
+                <div class="form px-4 pt-5">
+
+                    <div class="formfloatig">
+                        <input id="nombre" type="text" class="form-control" placeholder=" " formControlName="nombre">
+                        <label for="nombre" class="formLabel">Nombres completos </label>
+
+                    </div>
+
+                    <div class="formfloatig">
+                        <input id="apellido" type="text" class="form-control" placeholder=" " formControlName="apellido">
+                        <label for="apellido" class="formLabel">Apellidos</label>
+                    </div>
+                    <div class="formfloatig">
+                        <select class="form-select form-select-lg " id="floatingcampo_modalidad"
+                            formControlName="tipo_identificacion" required placeholder=" ">
+                            <option [value]="tipo" *ngFor="let tipo of tiposId">{{ tipo | uppercase }}</option>
+                        </select>
+                        <label for="floatingcampo_modalidad" class="selectLabel" [ngClass]="{'isFill': true}">Tipo
+                            de Identificación</label>
+                    </div>
+                    <div class="formfloatig">
+                        <input id="Identificacion" type="text" class="form-control" placeholder=" " formControlName="identificacion">
+                        <label for="Identificacion" class="formLabel"> Número de Identificacion </label>
+                    </div>
+
+                    <button id="btn-sub"  (submit)="true" [disabled]="!formUpdate.valid || (isLoading|async)" class="btn btn-dark btn-block">
+                        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+                       Entrar
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+</form>

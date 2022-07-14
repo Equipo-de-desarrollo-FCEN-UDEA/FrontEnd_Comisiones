@@ -72,3 +72,15 @@ ul {
 a::after{
     display: none;
 }
+
+.list-group-item-action{
+  //color: #212529;
+  background-color: var(--349c);
+  //border-color: var(--349c)
+}
+
+.list-group-item-action:hover{
+  //color: #212529;
+  background-color: #03b860;
+  //border-color: #030303
+}

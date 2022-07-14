@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
+import { BuscarComisionesService } from '@services/buscar-comisiones.service';
+import { NgbdSortableHeader, SortEvent } from '@shared/directivas/sortable.directive';
 // import { ConsoleReporter } from 'jasmine';
 // import { ConsoleReporter } from 'jasmine';
 import { Observable } from 'rxjs';
@@ -13,35 +16,61 @@ import { ComisionesService } from 'src/app/core/services/comisiones.service';
   styleUrls: ['./tabla-solicitudes.component.scss']
 })
 export class TablaSolicitudesComponent implements OnInit {
+  comisiones$: Observable<Comision[]> | undefined;
+  total$: Observable<number> | undefined;
+  Solicitudes: any = [];
+  listSolicitudes = false;
+  error = '';
 
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader> | undefined;
 
-  comisiones!: Comision[];
-  // permisos!: Permiso[];
-  // comisionxestado!: ComisionEstados[];
+  
 
   constructor(
 
-    private comisionesService: ComisionesService,
+    public comisionesService: ComisionesService,
+    public buscarComisionesServices: BuscarComisionesService,
+    public router: Router
     // private comisionxEstdoService: ComisionxestadoService,
   ) { }
 
   ngOnInit(): void {
 
-    this.comisionesService.getComisiones().subscribe(
-      comisiones => {this.comisiones = comisiones
-      
-      
-      }
-    );
+    this.comisiones$ = this.buscarComisionesServices.comisiones$;
 
+    this.buscarComisionesServices.comisiones$.subscribe({
+      next: (data) => {
+        if (this.comisiones$) {
+          this.listSolicitudes = true;
+        }
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+      },
+    });
+
+    this.total$ = this.buscarComisionesServices.total$;
     
   }
-  
-  
-  ultimoElement(res:any[]):any{
-    return res[res.length-1] 
 
+  onSort({ column, direction }: SortEvent) {
+    // resetting other headers
+    this.headers.forEach((header) => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    this.buscarComisionesServices.sortColumn = column;
+    this.buscarComisionesServices.sortDirection = direction;
   }
+  
+  
+
+
+  
   
 }
 

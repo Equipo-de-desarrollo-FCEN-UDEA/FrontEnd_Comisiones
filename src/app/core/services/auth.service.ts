@@ -29,7 +29,7 @@ export class AuthService {
         'Content-Type': 'application/x-www-form-urlencoded',
       }
       );
-    const body = `email=${user.email}&contrasena=${user.contrasena}`;
+    const body = `correo=${user.correo}&contrasena=${user.contrasena}`;
     return this.http.post<Auth>(`${this.prefix}`, body, {headers:headers} )
     .pipe(
     map(
@@ -66,4 +66,3 @@ export class AuthService {
   }
 
 }
-

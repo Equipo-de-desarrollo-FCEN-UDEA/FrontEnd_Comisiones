@@ -1,21 +1,21 @@
-<nav class="navbar navbar-expand-md" >
-  
-  <button class="navbar-toggler hidden-sm-up" style= "color:var(--7718c);margin: 5px;"type="button" data-toggle="collapse" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+<nav class="navbar navbar-expand-md navbar-light  " >
+
+  <button class="navbar-toggler hidden-sm-up" style= "color:var(--7465c);margin: 5px;"type="button" data-toggle="collapse" (click)="isNavbarCollapsed = !isNavbarCollapsed"
     data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fa fa-bars" style="color:#fff;"></i>
+    <i class="fa fa-bars" style="color:rgb(255, 255, 255);"></i>
   </button>
   <div class="logo">
     <a routerLink="home">
-      <img src="../../../../assets/Logosímbolo-Universidad-de-Antioquia-horizontal-®-03.png" alt="Logo udea" width="180px">
+      <img src="../../../../assets/LogosimboloHorizontalBlancoRecortado.png" alt="Logo udea" width="180px" >
     </a>
-  
+
   </div>
   <div class="profile navbar-brand">
     <ul>
       <li ngbDropdown >
         <a id="id01" ngbDropdownToggle >
           <span class="fa-stack fa-1x">
-            <i class="fas fa-circle fa-stack-2x" style="color:var(--7718c);"></i>
+            <i class="fas fa-circle fa-stack-2x" style="color:#03b860;"></i>
             <i class="fas fa-user fa-stack-1x fa-inverse"></i>
           </span>
         </a>
@@ -29,43 +29,70 @@
   </div>
 
   <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+
+    <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link list-group-item-action" aria-current="page" href="#">Inicio</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link list-group-item-action" style="color:rgb(248, 248, 248);" href="#">Enlace</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Acción</a></li>
+          <li><a class="dropdown-item" href="#">Otra acción</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Algo más aquí</a></li>
+        </ul>
+      </li>
+
+    </ul> -->
+
+
+    <div class="navbar-brand" >
+      <ul>
+        <li ngbDropdown>
+         <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:rgb(248, 248, 248);">Comisiones</a>
+
+        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
+          <a class="dropdown-item" routerLink="comisiones/crear-comision">Crear comisión</a>
+        </div>
+        </li>
+      </ul>
+    </div>
+
+
     <div class="navbar-brand">
       <ul>
         <li ngbDropdown>
-         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Comisiones</a> 
-        
+         <a class="nav-link list-group-item-action"  id="comisiones" ngbDropdownToggle style="color:#fff;">Permisos</a>
+
         <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-          <a class="dropdown-item" routerLink="comisiones/crear-comision">Crear</a>
+          <a class="dropdown-item" routerLink="permisos/crear-permiso">Crear permiso</a>
         </div>
       </li>
       </ul>
     </div>
+
+
     <div class="navbar-brand">
       <ul>
         <li ngbDropdown>
-         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Permisos</a> 
-        
-        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-          <a class="dropdown-item" routerLink="permisos/crear-permiso">Crear</a>
-        </div>
-      </li>
-      </ul>
-    </div>
-    <div class="navbar-brand">
-      <ul>
-        <li ngbDropdown>
-         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Dedidaciones</a> 
-        
+         <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:#fff;">Dedidaciones</a>
+
         <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
           <a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Crear dedicación exclusiva</a>
         </div>
       </li>
       </ul>
     </div>
-    
+
   </div>
 
-  
-  
+
+
 
 </nav>

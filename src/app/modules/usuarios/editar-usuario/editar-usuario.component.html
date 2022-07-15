@@ -25,6 +25,18 @@
                         <input id="Identificacion" type="text" class="form-control" placeholder=" " formControlName="identificacion">
                         <label for="Identificacion" class="formLabel"> Número de Identificacion </label>
                     </div>
+                    <div class="formfloatig">
+                        <input id="contrasena" type="password" class="form-control" placeholder=" " formControlName="contrasena">
+                        <label for="contrasena" class="formLabel"> Contraseña </label>
+                    </div>
+                    <div class="formfloatig">
+                        <input id="validarcontrasena" type="password" class="form-control" placeholder=" " formControlName="validarcontrasena">
+                        <label for="validarcontrasena" class="formLabel"> Confirmar contraseña </label>
+                    </div>
+
+
+
+
 
                     <button id="btn-sub"  (submit)="true" [disabled]="!formUpdate.valid || (isLoading|async)" class="btn btn-dark btn-block">
                         <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>

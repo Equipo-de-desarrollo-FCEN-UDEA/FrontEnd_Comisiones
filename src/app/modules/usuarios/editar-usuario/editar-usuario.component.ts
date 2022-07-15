@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsuarioResponse } from '@interfaces/usuario';
 import { LoaderService } from '@services/loader.service';
 import { UsuarioService } from '@services/usuario.service';
+import { ConfirmedValidator } from '@shared/clases/confirmed-validator';
 import { tiposId } from '@shared/data/tipos-id';
 import { take } from 'rxjs';
 
@@ -32,7 +33,9 @@ export class EditarUsuarioComponent implements OnInit {
     apellido: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     tipo_identificacion: ['', [Validators.maxLength(250)]],
     identificacion: [0, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
-   });
+    contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
+    validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
+   }, {validator: ConfirmedValidator('contrasena', 'validarcontrasena')});
 
   ngOnInit(): void {
 
@@ -40,6 +43,7 @@ export class EditarUsuarioComponent implements OnInit {
       this.usuarioSvc.getUsuario().subscribe(
         (data: UsuarioResponse) => {
           this.usuario = data;
+          this.id = data.id
           this.formUpdate.patchValue(this.usuario);
         }
       );
@@ -56,7 +60,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   submitUpdate() {
     const usuario = this.formUpdate.value;
-    this.usuarioSvc.updateUsuario(usuario).subscribe(res => {
+    this.usuarioSvc.updateUsuario({id:this.id ,...usuario}).subscribe(res => {
       console.log(res);
     }
     );

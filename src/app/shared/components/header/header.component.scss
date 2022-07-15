@@ -72,3 +72,8 @@ ul {
 a::after{
     display: none;
 }
+
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}

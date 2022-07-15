@@ -3,3 +3,7 @@ export interface Rol {
     nombre: string;
     descripcion: string;
 }
+
+export interface RolResponse{
+    nombre:string;
+}

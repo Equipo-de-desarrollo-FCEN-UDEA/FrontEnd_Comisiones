@@ -51,9 +51,9 @@
                     <label for="floatinglugar" class="selectLabel"
                         [ngClass]="{'isFill': formComision.controls['lugar'].valid}">Lugar de la comision</label>
                 </div>
-                <h5>
+                <h6>
                     <span class="text-muted">Rango de fechas de la comision</span>
-                </h5>
+                </h6>
                 <div class=" col-sm-12 col-xs-12 col-md-12" style="margin-bottom: 5px;">
                     <div class="input-group">
                         <input #dpFromDate class="form-control" type='text'
@@ -92,9 +92,9 @@
                     <label for="floatingjustificacion" class="formLabel"> Justificación
                     </label>
                 </div>
-                <h5>
+                <h6>
                     <span class="text-muted">Archivos adjuntos a la solicitud</span>
-                </h5>
+                </h6>
                 <div class="alert-danger" *ngIf="files.length>0 && !validSize()">
                     <p>
                         Los archivos no deben pesar más de 2 MB.

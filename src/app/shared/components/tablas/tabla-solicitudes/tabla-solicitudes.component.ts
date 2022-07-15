@@ -55,17 +55,17 @@ export class TablaSolicitudesComponent implements OnInit {
     
   }
 
-  onSort({ column, direction }: SortEvent) {
-    // resetting other headers
-    this.headers.forEach((header) => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
+  // onSort({ column, direction }: SortEvent) {
+  //   // resetting other headers
+  //   this.headers.forEach((header) => {
+  //     if (header.sortable !== column) {
+  //       header.direction = '';
+  //     }
+  //   });
 
-    this.buscarComisionesServices.sortColumn = column;
-    this.buscarComisionesServices.sortDirection = direction;
-  }
+  //   this.buscarComisionesServices.sortColumn = column;
+  //   this.buscarComisionesServices.sortDirection = direction;
+  // }
   
   
 

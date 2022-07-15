@@ -23,18 +23,18 @@ interface State {
   sortDirection: SortDirection;
 }
 
-let compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+// let compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
-  if (direction === '' || column === '') {
-    return comisiones;
-  } else {
-    return [...comisiones].sort((a, b) => {
-      let res = compare(a[column], b[column]);
-      return direction === 'asc' ? res : -res;
-    });
-  }
-}
+// function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
+//   if (direction === '' || column === '') {
+//     return comisiones;
+//   } else {
+//     return [...comisiones].sort((a, b) => {
+//       let res = compare(a[column], b[column]);
+//       return direction === 'asc' ? res : -res;
+//     });
+//   }
+// }
 
 
 function matches(comisiones: Comision, term: string, pipe: PipeTransform, datepipe:DatePipe ) {
@@ -53,6 +53,7 @@ function matches(comisiones: Comision, term: string, pipe: PipeTransform, datepi
 
 
 @Injectable({providedIn: 'root'})
+
 export class BuscarComisionesService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
@@ -72,6 +73,7 @@ export class BuscarComisionesService {
     private comisionesService: ComisionesService,
     private datepipe: DatePipe
   ) {
+    
     this._search$
       .pipe(
         tap(() => this._loading$.next(true)),
@@ -134,20 +136,45 @@ export class BuscarComisionesService {
 
   
   private _search(): Observable<BuscarResult> {
-    const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
-    // 1. sort
-    let comisiones = sort(this._comisiones$, sortColumn, sortDirection);
+    return this.comisionesService.getComisiones().pipe(
+        
+    );
+    // ALL THE CODE GOES INSIDE THE server call
+    // return this.comisionesService.getComisiones().pipe(
+    //   map((data) => {
+    //     const { sortColumn, sortDirection, pageSize, page, searchTerm } =
+    //       this._state;
 
-    // 2. filter
-    countries = countries.filter(country => matches(country, searchTerm, this.pipe));
-    const total = countries.length;
+    //     let comisionesList: Comision[] = [];
 
-    // 3. paginate
-    countries = countries.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({countries, total});
+    //     if (data) {
+    //       comisionesList = data;
+
+    //       // 2. filter
+
+    //       let comisiones = comisionesList.filter((comisiones) =>
+    //         matches(comisiones, searchTerm, this.pipe, this.datepipe)
+    //       );
+
+    //       const total = comisiones.length;
+    //       comisiones = comisiones.slice(
+    //         (page - 1) * pageSize,
+    //         (page - 1) * pageSize + pageSize
+    //       );
+
+    //       console.log('comisiones', comisiones);
+    //       // map() operator will automatically convert the returned value into an observable for me
+    //       // return {
+    //       //   comisiones,
+    //       //   total,
+    //       // };
+    //     } else {
+    //       // In case data is null
+    //       return null;
+    //     }
+    //   })
+    // );
   }
-
-
   
 }

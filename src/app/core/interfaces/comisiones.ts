@@ -35,6 +35,7 @@ export interface Comision extends ComisionesinDB{
     intermediate_estados: {
         nombre:string
     };
+    nombreEstadoActual: string;
 }
 
 

@@ -1,68 +1,128 @@
-<nav class="navbar navbar-expand-md" >
-  
-  <button class="navbar-toggler hidden-sm-up" style= "color:var(--7718c);margin: 5px;"type="button" data-toggle="collapse" (click)="isNavbarCollapsed = !isNavbarCollapsed"
-    data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fa fa-bars" style="color:#fff;"></i>
-  </button>
-  <div class="logo">
-    <a routerLink="home">
-      <img src="../../../../assets/Logosímbolo-Universidad-de-Antioquia-horizontal-®-03.png" alt="Logo udea" width="180px">
-    </a>
-  </div>
-  <div class="profile navbar-brand">
-    <ul>
-      <li ngbDropdown>
-        <a id="id01" ngbDropdownToggle>
-          <span class="fa-stack fa-1x">
-            <i class="fas fa-circle fa-stack-2x" style="color:var(--7718c);"></i>
-            <i class="fas fa-user fa-stack-1x fa-inverse"></i>
-          </span>
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid justify-content-start">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="me-auto my-2 my-lg-0 ms-5" style="--bs-scroll-height: 100px; list-style: none;">
+      <li class="nav-item dropdown">
+        <a class="dropdown-toggle"  style="color: #000;" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Crear Solicitud
         </a>
-        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-          <a class="dropdown-item" (click)="logout()">Salir</a>
-        </div>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+          <li><a class="dropdown-item" routerLink="permisos/crear-permiso">Permiso</a></li>
+          <li><a class="dropdown-item" routerLink="comisiones/crear-comision">Comisión</a></li>
+          <li><a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Dedicación Exclusiva</a></li>
+        </ul>
       </li>
     </ul>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+        <button type="button" class="btn-close text-reset" style="margin-right: 1em;"  data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" style="margin-top: -3.5em;">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <div class="ng-sidebar">
+            <div>
+              <div>
+                <div class="sidebar-header">
+                  <span class="user-pic">
+                    <i class="fas fa-user-circle"></i>
+                  </span>
+                  <!-- <img src="./icon.png" alt=""> -->
+                </div>
+                <div class="user-info">
+                  <span class="user-name">
+                     Name 
+                    <br />
+                    LastName 
+                  </span>
+                  <br />
+                  <span class="user-role">
+                    <span class="user-status">
+                      <i class="fa fa-circle"></i>
+                    </span>
+                    Role 
+                  </span>
+                </div>
+                <!-- sidebar-header  -->
+                <hr color="#f5f5f5" />
+                <div class="create-request">
+                  <button type="button" class="btn-request dropdown-toggle" id="navbarScrollingDropdown" data-bs-toggle="dropdown">
+                    <span style="color: #ffff; margin: 0">
+                      <i class="fas fa-plus-circle"></i>
+                    </span>
+                    Crear Solicitud
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                    <li><a class="dropdown-item" routerLink="permisos/crear-permiso">Permiso</a></li>
+                    <li><a class="dropdown-item" routerLink="comisiones/crear-comision">Comisión</a></li>
+                    <li><a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Dedicación Exclusiva</a></li>
+                  </ul>
+                </div>
+                <!-- sidebar-search  -->
+                <hr color="#f5f5f5" />
+                <div class="sidebar-menu">
+                  <div class="header-menu">
+                    <span>GENERAL</span>
+                  </div>
+                  <ul>
+                    <li>
+                      <a routerLink="">
+                        <span>
+                          <i class="far fa-user"></i>
+                          Mi Perfil
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span>
+                          <i class="fas fa-home"></i>
+                          Solicitudes
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="header-menu">
+                    <span> ESPECÍFICO </span>
+                  </div>
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <span>
+                          <i class="far fa-building"></i>
+                          Departamentos
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span>
+                          <i class="fas fa-university"></i>
+                          Facultades
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- sidebar-menu  -->
+                <!-- sidebar-content  -->
+                <div class="sidebar-footer">
+                  <hr />
+                  <a (click)="logout()">
+                    <span>
+                      <i class="fas fa-power-off"></i>
+                      Cerrar Sesi&oacute;n
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
   </div>
-
-  <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
-    <div class="navbar-brand">
-      <ul>
-        <li ngbDropdown>
-         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Comisiones</a> 
-        
-        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-          <a class="dropdown-item" routerLink="comisiones/crear-comision">Crear</a>
-        </div>
-      </li>
-      </ul>
-    </div>
-    <div class="navbar-brand">
-      <ul>
-        <li ngbDropdown>
-         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Permisos</a> 
-        
-        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-          <a class="dropdown-item" routerLink="permisos/crear-permiso">Crear</a>
-        </div>
-      </li>
-      </ul>
-    </div>
-    <div class="navbar-brand">
-      <ul>
-        <li ngbDropdown>
-         <a id="comisiones" ngbDropdownToggle style="color:#fff;">Dedidaciones</a> 
-        
-        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-          <a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Crear dedicación exclusiva</a>
-        </div>
-      </li>
-      </ul>
-    </div>
-    
-  </div>
-
-  
-  
-
 </nav>

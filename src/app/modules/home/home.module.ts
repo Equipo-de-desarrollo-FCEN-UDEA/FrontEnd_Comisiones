@@ -4,16 +4,20 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { SharedModule } from '@shared/shared.module';
+import { TablaSolicitudesComponent } from '@shared/components/tablas/tabla-solicitudes/tabla-solicitudes.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SharedModule
+    
+   
   ],
   exports:[
     HomeComponent

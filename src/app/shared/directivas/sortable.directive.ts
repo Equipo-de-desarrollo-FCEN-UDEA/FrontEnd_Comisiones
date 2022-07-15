@@ -1,9 +1,9 @@
 import { TypeofExpr } from '@angular/compiler';
 import {Directive, EventEmitter, Input, Output} from '@angular/core';
 import { Observable } from 'rxjs';
-import {Comision} from '../../core/interfaces/comisiones';
+import { Country } from "../components/tablas/tabla-solicitudes/country";
 
-export type SortColumn = keyof Comision | '';
+export type SortColumn = keyof Country | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 

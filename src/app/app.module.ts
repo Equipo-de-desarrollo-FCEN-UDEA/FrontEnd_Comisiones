@@ -40,8 +40,6 @@ registerLocaleData(localeEs, 'es');
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
-    HomeModule
   ],
   providers: [ 
     { provide: LOCALE_ID, useValue: 'es' },

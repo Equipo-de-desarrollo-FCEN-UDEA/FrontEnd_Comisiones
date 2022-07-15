@@ -5,6 +5,7 @@ import { TablaComisionesComponent } from './components/tablas/tabla-comisiones/t
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './directivas/sortable.directive';
+import { HomeModule } from '../modules/home/home.module';
 
 
 

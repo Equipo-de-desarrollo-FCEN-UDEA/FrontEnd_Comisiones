@@ -7,7 +7,7 @@ import { NotFoundComponent } from '@shared/pages/not-found/not-found.component';
 const routes: Routes = [
   {
     path: 'dexclusiva',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./modules/dexclusiva/dexclusiva.module')
       .then(m => m.DexclusivaModule)
   },

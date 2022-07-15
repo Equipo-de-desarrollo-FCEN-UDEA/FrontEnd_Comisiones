@@ -44,17 +44,9 @@
                       permiso</label>
               </div>
 
-              <!-- <div class="formfloatig">
-                  <select class="form-select form-select-lg mb-3" id="floatinglugar" formControlName="lugar" required
-                      [ngClass]="{'is-invalid': isInvalidForm('lugar')}" placeholder=" ">
-                      <option [value]="country.name" *ngFor="let country of countries">{{country.name}}</option>
-                  </select>
-                  <label for="floatinglugar" class="selectLabel"
-                      [ngClass]="{'isFill': formComision.controls['lugar'].valid}">Lugar de la comision</label>
-              </div> -->
-              <h5>
-                  <span class="text-muted">Rango de fechas de la permiso</span>
-              </h5>
+              <h6>
+                  <span class="text-muted"  style="color: green" > Rango de fechas del permiso </span>
+              </h6>
               <div class=" col-sm-12 col-xs-12 col-md-12" style="margin-bottom: 5px;">
                   <div class="input-group">
                       <input #dpFromDate class="form-control" type='text'
@@ -76,12 +68,7 @@
                   </div>
               </div>
 
-              <!-- <div class="formfloatig">
-                  <input id="floatingidioma" formControlName="idioma" class="form-control" type="idioma"
-                      placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('idioma')}" required>
-                  <label for="floatingidioma" class="formLabel"> Idioma
-                  </label>
-              </div> -->
+
               <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
                   Recuerda que la justificación debe tener al menos 30 caracteres y máximo 500 caracteres.
               </div>
@@ -93,9 +80,9 @@
                   <label for="floatingjustificacion" class="formLabel"> Justificación
                   </label>
               </div>
-              <h5>
+              <h6>
                   <span class="text-muted">Archivos adjuntos del permiso</span>
-              </h5>
+              </h6>
               <div class="alert-danger" *ngIf="files.length>0 && !validSize()">
                   <p>
                       Los archivos no deben pesar más de 2 MB.

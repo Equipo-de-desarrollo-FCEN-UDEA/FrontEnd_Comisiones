@@ -109,16 +109,16 @@
                                 <input [id]="i" class="file-upload" type="file" (change)='onUpload($event,i)'/>
                                 <label [for]="i"  style="margin-left: 10px;">{{files[i] ? files[i].name : 'Subir archivo' }}</label>
                             </label>
-                            
+
                         </div>
                         <div class="buttons" style="width:fit-content; margin: 0;">
-                            <button class="btn btn-circle btn-danger btn-sm" type="button" (click)="removeFile(i)"
+                            <button class="btn btn-circle btn-remove" type="button" (click)="removeFile(i)"
                                 >
 
                                 <i class="fa fa-minus"></i>
 
                             </button>
-                            <button class="btn btn-circle btn-primary btn-sm" type="button"
+                            <button class="btn btn-circle btn-add" type="button"
                                 (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
                                 <i class="fa fa-plus"></i>
                             </button>

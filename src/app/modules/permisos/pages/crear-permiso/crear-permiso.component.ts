@@ -22,9 +22,13 @@ export class CrearPermisoComponent implements OnInit {
 
   public tipospermiso = [
     {id: 1, nombre: 'Permiso por matrimonio'},
-    {id: 2, nombre: 'Permiso de medio dia de la jornada por cumpleaños'},
-    {id: 1, nombre: 'Licencia de maternidad'},
-    {id: 2, nombre: 'Licencia de luto'}
+    {id: 2, nombre: 'Permiso corto'},
+    {id: 3, nombre: 'Permiso de medio dia de la jornada por cumpleaños'},
+    {id: 4, nombre: 'Licencia de maternidad'},
+    {id: 5, nombre: 'Licencia de patermidad'},
+    {id: 6, nombre: 'Licencia de calamiad domestica'},
+    {id: 7, nombre: 'Licencia no remunerada'},
+    {id: 8, nombre: 'Licencia de luto'}
   ]
 
   constructor(

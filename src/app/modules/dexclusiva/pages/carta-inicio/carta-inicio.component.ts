@@ -26,7 +26,6 @@ export class CartaInicioComponent implements OnInit {
     this.usuarioSvc.getUsuario().subscribe(
       (usuario:any) => {
         this.usuario = usuario;
-        console.log(usuario)
       }
     )
    }

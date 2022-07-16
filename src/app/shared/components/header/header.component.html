@@ -1,20 +1,32 @@
-<nav class="navbar navbar-light bg-light fixed-top">
-  <div class="container-fluid justify-content-start">
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <ul class="me-auto my-2 my-lg-0 ms-5" style="--bs-scroll-height: 100px; list-style: none;">
-      <li class="nav-item dropdown">
-        <a class="dropdown-toggle"  style="color: #000;" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Crear Solicitud
+
+<nav class="navbar navbar-expand-md navbar-light  " >
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+    <i class="fa fa-bars" style="color:rgb(255, 255, 255);"></i>
+  </button>
+  <div class="logo">
+    <a routerLink="home">
+      <img src="../../../../assets/LogosimboloHorizontalBlancoRecortado.png" alt="Logo udea" width="180px" >
+    </a>
+
+  </div>
+  <div class="profile navbar-brand">
+    <ul>
+      <li ngbDropdown >
+        <a id="id01" ngbDropdownToggle >
+          <span class="fa-stack fa-1x">
+            <i class="fas fa-circle fa-stack-2x" style="color:#03b860;"></i>
+            <i class="fas fa-user fa-stack-1x fa-inverse"></i>
+          </span>
         </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-          <li><a class="dropdown-item" routerLink="permisos/crear-permiso">Permiso</a></li>
-          <li><a class="dropdown-item" routerLink="comisiones/crear-comision">Comisión</a></li>
-          <li><a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Dedicación Exclusiva</a></li>
-        </ul>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" routerLink="usuarios/ver-usuario/me">Ver perfil</a>
+          <a class="dropdown-item" (click)="logout()">Salir</a>
+          
+        </div>
       </li>
     </ul>
+
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
@@ -125,4 +137,6 @@
       </div>
     </div>
   </div>
+</nav>
+
 </nav>

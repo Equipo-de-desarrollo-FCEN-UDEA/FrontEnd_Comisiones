@@ -29,7 +29,7 @@ export class AuthService {
         'Content-Type': 'application/x-www-form-urlencoded',
       }
       );
-    const body = `email=${user.email}&contrasena=${user.contrasena}`;
+    const body = `correo=${user.correo}&contrasena=${user.contrasena}`;
     return this.http.post<Auth>(`${this.prefix}`, body, {headers:headers} )
     .pipe(
     map(
@@ -49,21 +49,21 @@ export class AuthService {
 
     this.cookieService.delete('token');
     this.cookieService.delete('usuario');
-    this.router.navigate(['/login']);
+    
     if (this.isLoggedIn()) {
       this.logout();
     }
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    return true;
-    // this.cookieService.check('token') && this.cookieService.check('usuario');
+
+    return this.cookieService.check('token') && this.cookieService.check('usuario');
   }
 
   getRole(): string {
     return this.cookieService.get('usuario') ? JSON.parse(this.cookieService.get('usuario')).roles_id : '';
   }
-
   forgotPassword(email: string) {
     return this.http.post(``, {
       email,
@@ -72,3 +72,4 @@ export class AuthService {
 
 }
 
+}

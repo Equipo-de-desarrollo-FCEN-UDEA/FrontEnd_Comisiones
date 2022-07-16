@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { PermisosRoutingModule } from './permisos-routing.module';
 import { VerPermisoComponent } from './pages/ver-permiso/ver-permiso.component';
 import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -14,7 +17,11 @@ import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.compo
   ],
   imports: [
     CommonModule,
-    PermisosRoutingModule
+    PermisosRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule
   ]
 })
 export class PermisosModule { }
+

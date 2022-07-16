@@ -45,8 +45,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/home/home.module')
       .then(m => m.HomeModule) 
-    },
-
+  },
+  { path: 'usuarios',
+    canActivate: [AuthGuard], 
+   loadChildren: () => import('./modules/usuarios/usuarios.module')
+   .then(m => m.UsuariosModule) },
   {
     path: '**',
     redirectTo: '404'

@@ -1,12 +1,12 @@
-import { ComisionesinDB, ComResInside } from "./comisiones";
+// import { ComisionesinDB, ComResInside } from "./comisiones";
 import { DepResInside } from "./departamentos";
 import { PermisosInside } from "./permisos";
 
-export interface UsuarioEmail{
-    email: string;
+export interface UsuarioCorreo{
+    correo: string;
 }
 
-export interface UsuarioAuth extends UsuarioEmail {
+export interface UsuarioAuth extends UsuarioCorreo {
     contrasena: string;
 }
 
@@ -22,10 +22,9 @@ export interface UsuarioInside extends UsuarioBase {
 
 export interface Usuario extends UsuarioBase{
     tipo_identificacion?: string;
-    identificacion?: Number;
-    email: string;
+    identificacion?: number;
+    correo: string;
     estado?: string;
-    dia_disponible?: Number;
     created_at: Date;
     updated_at: Date;
     departamentos_id: number;
@@ -38,6 +37,6 @@ export interface UsuarioInDB extends Usuario {
 
 export interface UsuarioResponse extends Usuario {
     departamentos: DepResInside;
-    comisiones: ComResInside[];
+    // comisiones: ComResInside[];
     permisos: PermisosInside[];
 }

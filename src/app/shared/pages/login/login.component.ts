@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
       nombre: 'Extensión'
     }
   ]
-  private isEmailValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
+  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
   isLoading: Subject<boolean> = this.loadingService.isLoading;
   submitted = false;
   constructor(
@@ -68,11 +68,11 @@ export class LoginComponent implements OnInit {
   ) { }
     
   formLogin = this.fb.group({
-    emailLogin : ['', [Validators.required, Validators.pattern(this.isEmailValid)]],
+    correoLogin : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
     passwordLogin : ['', Validators.required]
   });
   formSignup = this.fb.group({
-    emailSignup : ['', [Validators.required, Validators.pattern(this.isEmailValid)]],
+    correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
     passwordSignup : ['', Validators.required],
     nombreSignup : ['', Validators.required],
     apellidoSignup : ['', Validators.required],
@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitLogin(){
     const user : UsuarioAuth ={
-      email: this.formLogin.value.emailLogin || '',
+      correo: this.formLogin.value.correoLogin || '',
       contrasena: this.formLogin.value.passwordLogin || ''
     };
     this.submitted = true;

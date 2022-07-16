@@ -7,11 +7,13 @@ import { CartaInicioComponent } from './pages/carta-inicio/carta-inicio.componen
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
+import { PlanTrabajoComponent } from './pages/plan-trabajo/plan-trabajo.component';
 
 @NgModule({
   declarations: [
     FDedicacionComponent,
-    CartaInicioComponent
+    CartaInicioComponent,
+    PlanTrabajoComponent
   ],
   imports: [
     CommonModule,

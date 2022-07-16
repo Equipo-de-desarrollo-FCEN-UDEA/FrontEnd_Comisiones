@@ -46,7 +46,7 @@ export class FDedicacionComponent implements OnInit {
 
   public Usuario = this.usuarioSvc.getActualUsuario();
 
-  private isEmailValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
+  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
   private fExclusiva : Dexclusiva = {
     titulo: '',
     tiempo_solicitado: 0,
@@ -68,7 +68,7 @@ export class FDedicacionComponent implements OnInit {
     identificacion: [Number, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
     extension_oficina: ['', [Validators.minLength(3), Validators.maxLength(255)]],
     celular: [Number, [Validators.min(1000000000), Validators.max(9999999999)]],
-    email: ['',[Validators.required, Validators.pattern(this.isEmailValid)]],
+    correo: ['',[Validators.required, Validators.pattern(this.isCorreoValid)]],
     titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
     tiempo_solicitado: [Number, [Validators.required, Validators.min(1), Validators.max(11)]],
     campo_modalidad: ['', [Validators.required , Validators.minLength(3), Validators.maxLength(50000)]],
@@ -87,11 +87,11 @@ export class FDedicacionComponent implements OnInit {
     this.fBasicInfo.controls['nombre'].disable();
     this.fBasicInfo.controls['apellido'].disable();
     this.fBasicInfo.controls['identificacion'].disable();
-    this.fBasicInfo.controls['email'].disable();
+    this.fBasicInfo.controls['correo'].disable();
   }
 
   onSubmit(){
-    let {nombre, apellido, identificacion, email, ...others} = this.fBasicInfo.value;
+    let {nombre, apellido, identificacion, correo, ...others} = this.fBasicInfo.value;
     this.fExclusiva = others;
     this.dexclusivaSvc.postDexclusiva(this.fExclusiva).subscribe();
   }

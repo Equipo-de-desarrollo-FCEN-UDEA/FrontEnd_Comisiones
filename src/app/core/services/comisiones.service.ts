@@ -1,9 +1,12 @@
+
 import { Comision, ComisionDTO } from '../interfaces/comisiones';
+
 
 import { Injectable } from '@angular/core';
 import { Observable, of, map } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { prefix } from '@shared/data/ruta-api';
+import { Comision } from '@interfaces/comisiones';
 
 
 
@@ -16,25 +19,40 @@ export class ComisionesService {
 
   constructor( private http: HttpClient) { }
 
-  getComisiones() {
-    // return this.http.get<Comision[]>(this.urlEndPoint).pipe(
-    //   map((res) => {
-    //     const comision = res as Comision[];
-    //     return comision.map((newComision) => {
-    //       console.log(newComision);
+  getComisiones(): Observable<any> {
 
-    //       const lenEstados = newComision.intermediate_comisiones.length;
+    // return this.http.get<Comision[]>(this.urlEndPoint)
 
-    //       console.log(lenEstados);
+    return this.http.get<Comision[]>(this.urlEndPoint).pipe(
+      map((res) => {
+        const comision = res as Comision[];
+        return comision.map((newComision) => {
+          console.log(newComision);
 
-    //       const final_estado = newComision.intermediate_comisiones[lenEstados - 1]
-    //       ['intermediate_estados']['nombre'];
+          const lenEstados = newComision.intermediate_comisiones.length;
 
-    //       newComision.nombreEstadoActual = final_estado;
-    //       return newComision
-    //     });
+          console.log(lenEstados);
+
+          const final_estado = newComision.intermediate_comisiones[lenEstados - 1]
+          ['intermediate_estados']['nombre'];
+
+          newComision.nombreEstadoActual = final_estado;
+          return newComision
+        });
+      })
+    )
+    
+    // .pipe(
+    //    map((resp)=>{
+    //      const comision = resp as Comision[];
+    //      return comision.map((newComision) => {
+    //        console.log(newComision);
+    //      })
     //   })
-    // )
+    // );
+
+
+    
    }
 
    getComision(id:string) {

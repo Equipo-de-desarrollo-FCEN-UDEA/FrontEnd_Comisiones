@@ -17,6 +17,7 @@
       display: inline-block;
       color: #43B649;
     }
+
       .user-status {
         font-size: 15px;
         color: rgb(255, 255, 0);
@@ -85,6 +86,37 @@
       text-decoration: none;
       cursor: pointer;
       color: #000;
+}
+
+.navbar{
+    justify-content: space-between;
+    .logo{
+        margin:0 20px;
+    }
+    .profile{
+        margin: 0;
+    }
+    background-color: var(--349c);  //Color back header
+}
+
+@media screen and (max-width: 280px) {
+    img {
+        width: 100px;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 16vh;
+        left: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        width: 75%;
+        height: 100%;
+        z-index: 1000;
     }
       .sidebar-footer a:hover, .sidebar-small-footer a span:hover {
         color: rgb(114, 114, 114);
@@ -164,3 +196,20 @@
     .sidebar-footer i:hover{
       color: rgb(56, 56, 56);
     }
+}
+
+a::after{
+    display: none;
+}
+
+.list-group-item-action{
+  //color: #212529;
+  background-color: var(--349c);
+  //border-color: var(--349c)
+}
+
+.list-group-item-action:hover{
+  //color: #212529;
+  background-color: #03b860;
+  //border-color: #030303
+}

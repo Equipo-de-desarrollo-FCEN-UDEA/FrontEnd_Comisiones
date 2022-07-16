@@ -57,12 +57,19 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    // return true
+
     return this.cookieService.check('token') && this.cookieService.check('usuario');
   }
 
   getRole(): string {
     return this.cookieService.get('usuario') ? JSON.parse(this.cookieService.get('usuario')).roles_id : '';
   }
+  forgotPassword(email: string) {
+    return this.http.post(``, {
+      email,
+    });
+  }
+
+}
 
 }

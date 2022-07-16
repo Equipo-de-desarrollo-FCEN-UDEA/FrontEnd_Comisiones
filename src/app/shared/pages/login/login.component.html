@@ -33,23 +33,23 @@
                   type="text"
                   class="form-control"
                   placeholder=" "
-                  formControlName="emailLogin"
-									[ngClass]="{ 'is-invalid': submitted && f.emailLogin.errors }"
+                  formControlName="correoLogin"
+									[ngClass]="{ 'is-invalid': submitted && f.correoLogin.errors }"
                 />
                 <label for="Correo-input" class="formLabel"
                   >Correo institucional
                 </label>
               </div>
               <div
-                *ngIf="submitted && f.emailLogin.errors"
+                *ngIf="submitted && f.correoLogin.errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="submitted && f.emailLogin.errors?.['required']">
-                  El email es requerido
+                <div *ngIf="submitted && f.correoLogin.errors?.['required']">
+                  El correo es requerido
 
                 </div>
-                <div *ngIf="submitted && f.emailLogin.errors?.['pattern']">
-                  Ingresa tu email institucional
+                <div *ngIf="submitted && f.correoLogin.errors?.['pattern']">
+                  Ingresa tu correo institucional
                 </div>
               </div>
               <div class="formfloatig m-2">

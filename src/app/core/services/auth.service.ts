@@ -64,12 +64,11 @@ export class AuthService {
   getRole(): string {
     return this.cookieService.get('usuario') ? JSON.parse(this.cookieService.get('usuario')).roles_id : '';
   }
-  forgotPassword(email: string) {
+  forgotPassword(correo: string) {
     return this.http.post(``, {
-      email,
+      correo,
     });
   }
 
 }
 
-}

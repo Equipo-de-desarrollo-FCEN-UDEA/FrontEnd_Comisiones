@@ -99,14 +99,24 @@
     background-color: var(--349c);  //Color back header
 }
 
-@media screen and (max-width: 280px) {
+@media screen and (max-width: 346px) {
     img {
         width: 100px;
     }
 
 }
 
+@media screen and (min-width: 767px) {
+
+  #offcanvasNavbar {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
+  #offcanvasNavbar{
+    max-width: 90vw;
+  }
     .navbar-collapse {
         position: fixed;
         top: 16vh;
@@ -213,3 +223,4 @@ a::after{
   background-color: #03b860;
   //border-color: #030303
 }
+

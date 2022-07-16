@@ -7,7 +7,7 @@ import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recup
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './directivas/sortable.directive';
-import { HomeModule } from '../modules/home/home.module';
+
 
 
 
@@ -15,7 +15,8 @@ import { HomeModule } from '../modules/home/home.module';
   declarations: [
     TablaSolicitudesComponent,
     TablaComisionesComponent,
-    RecuperarContrasenaComponent
+    RecuperarContrasenaComponent,
+    NgbdSortableHeader
   ],
   imports: [
     CommonModule,
@@ -23,11 +24,6 @@ import { HomeModule } from '../modules/home/home.module';
     ReactiveFormsModule,
     NgbModule
     
-  ],
-  declarations: [
-    TablaSolicitudesComponent,
-    TablaComisionesComponent,
-    NgbdSortableHeader
   ],
   exports: [
     TablaSolicitudesComponent,

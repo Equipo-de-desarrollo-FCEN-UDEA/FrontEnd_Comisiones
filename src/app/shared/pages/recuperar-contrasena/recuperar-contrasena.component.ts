@@ -19,7 +19,7 @@ export class RecuperarContrasenaComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      correo: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -36,7 +36,7 @@ export class RecuperarContrasenaComponent implements OnInit {
     this.loading = true;
 
     this.authService
-    .forgotPassword(this.f['email'].value)
+    .forgotPassword(this.f['correo'].value)
     
   }
 

@@ -2,22 +2,25 @@ import {DecimalPipe} from '@angular/common';
 import {Component, QueryList, ViewChildren} from '@angular/core';
 import {Observable} from 'rxjs';
 
+import { Comision } from "../../../../core/interfaces/comisiones";
+
 import {Country} from './country';
-import {CountryService} from './country.service';
+// import {CountryService} from './country.service';
 import {NgbdSortableHeader, SortEvent} from '@shared/directivas/sortable.directive';
+import { BuscarComisionesService } from '@services/buscar-comisiones.service';
 
 
 @Component(
-    {selector: 'app-tabla-solicitudes', templateUrl: './tabla-solicitudes.component.html', providers: [CountryService, DecimalPipe]})
+    {selector: 'app-tabla-solicitudes', templateUrl: './tabla-solicitudes.component.html', providers: [BuscarComisionesService, DecimalPipe]})
 export class TablaSolicitudesComponent {
-  countries$: Observable<Country[]>;
+  comisiones$: Observable<Comision[]>;
   total$: Observable<number>;
 
   @ViewChildren(NgbdSortableHeader)
   headers!: QueryList<NgbdSortableHeader>;
 
-  constructor(public service: CountryService) {
-    this.countries$ = service.countries$;
+  constructor(public service: BuscarComisionesService) {
+    this.comisiones$ = service.comisiones$;
     this.total$ = service.total$;
   }
 

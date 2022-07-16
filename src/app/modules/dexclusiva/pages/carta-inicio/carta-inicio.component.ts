@@ -1,17 +1,9 @@
-<<<<<<< HEAD
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {  FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '@services/usuario.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-=======
-import { Component, OnInit } from '@angular/core';
-import {  FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '@services/auth.service';
-import { UsuarioService } from '@services/usuario.service';
->>>>>>> anlly
 
 @Component({
   selector: 'app-carta-inicio',
@@ -21,11 +13,8 @@ import { UsuarioService } from '@services/usuario.service';
 export class CartaInicioComponent implements OnInit {
   fecha = new Date();
   usuario : any;
-<<<<<<< HEAD
   @ViewChild('carta', {static:false}) el!: ElementRef;
   title = 'Carta de Inicio';
-=======
->>>>>>> anlly
   
 
   constructor(
@@ -37,10 +26,6 @@ export class CartaInicioComponent implements OnInit {
     this.usuarioSvc.getUsuario().subscribe(
       (usuario:any) => {
         this.usuario = usuario;
-<<<<<<< HEAD
-        console.log(usuario)
-=======
->>>>>>> anlly
       }
     )
    }
@@ -57,7 +42,6 @@ export class CartaInicioComponent implements OnInit {
     
   }
 
-<<<<<<< HEAD
   makePdf() {
     let DATA: any = document.getElementById('carta');
     const boton = document.getElementById('Generador-carta') as HTMLButtonElement;
@@ -80,8 +64,6 @@ export class CartaInicioComponent implements OnInit {
       btntext.style.display = 'block';
     });
   }
-=======
->>>>>>> anlly
   
   OnSubmit() {
     console.log(this.FormCarta.value);

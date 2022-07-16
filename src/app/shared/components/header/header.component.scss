@@ -1,4 +1,26 @@
+@media screen and (min-width: 768px) {
+  .navbar{
+      justify-content: space-between;
+      .collapse{
+          order: 2;
+      }
+      .profile{
+          order: 3;
+          margin: 0;
+      }
 
+      .logo{
+          order: 1;
+          margin: 0 20px;
+      }
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+}
 
 .sidebar-header{
     font-size: 80px;
@@ -224,3 +246,8 @@ a::after{
   //border-color: #030303
 }
 
+
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}

@@ -26,115 +26,158 @@
         </div>
       </li>
     </ul>
+  </div>
 
+  <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
-        <button type="button" class="btn-close text-reset" style="margin-right: 1em;"  data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  
+
+  <div class="navbar-brand" >
+    <ul>
+      <li ngbDropdown>
+       <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:rgb(248, 248, 248);">Comisiones</a>
+
+      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
+        <a class="dropdown-item" routerLink="comisiones/crear-comision">Crear comisión</a>
       </div>
-      <div class="offcanvas-body" style="margin-top: -3.5em;">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <div class="ng-sidebar">
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="navbar-brand">
+    <ul>
+      <li ngbDropdown>
+       <a class="nav-link list-group-item-action"  id="comisiones" ngbDropdownToggle style="color:#fff;">Permisos</a>
+
+      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
+        <a class="dropdown-item" routerLink="permisos/crear-permiso">Crear permiso</a>
+      </div>
+    </li>
+    </ul>
+  </div>
+
+
+  <div class="navbar-brand">
+    <ul>
+      <li ngbDropdown>
+       <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:#fff;">Dedidaciones</a>
+
+      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
+        <a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Crear dedicación exclusiva</a>
+      </div>
+    </li>
+    </ul>
+  </div>
+</div>
+  
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+      <button type="button" class="btn-close text-reset" style="margin-right: 1em;"  data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" style="margin-top: -3.5em;">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <div class="ng-sidebar">
+          <div>
             <div>
-              <div>
-                <div class="sidebar-header">
-                  <span class="user-pic">
-                    <i class="fas fa-user-circle"></i>
-                  </span>
-                  <!-- <img src="./icon.png" alt=""> -->
-                </div>
-                <div class="user-info">
-                  <span class="user-name">
-                     Name 
-                    <br />
-                    LastName 
-                  </span>
+              <div class="sidebar-header">
+                <span class="user-pic">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <!-- <img src="./icon.png" alt=""> -->
+              </div>
+              <div class="user-info">
+                <span class="user-name">
+                   Name 
                   <br />
-                  <span class="user-role">
-                    <span class="user-status">
-                      <i class="fa fa-circle"></i>
-                    </span>
-                    Role 
+                  LastName 
+                </span>
+                <br />
+                <span class="user-role">
+                  <span class="user-status">
+                    <i class="fa fa-circle"></i>
                   </span>
+                  Role 
+                </span>
+              </div>
+              <!-- sidebar-header  -->
+              <hr color="#f5f5f5" />
+              <div class="create-request">
+                <button type="button" class="btn-request dropdown-toggle" id="navbarScrollingDropdown" data-bs-toggle="dropdown">
+                  <span style="color: #ffff; margin: 0">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  Crear Solicitud
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                  <li><a class="dropdown-item" routerLink="permisos/crear-permiso">Permiso</a></li>
+                  <li><a class="dropdown-item" routerLink="comisiones/crear-comision">Comisión</a></li>
+                  <li><a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Dedicación Exclusiva</a></li>
+                </ul>
+              </div>
+              <!-- sidebar-search  -->
+              <hr color="#f5f5f5" />
+              <div class="sidebar-menu">
+                <div class="header-menu">
+                  <span>GENERAL</span>
                 </div>
-                <!-- sidebar-header  -->
-                <hr color="#f5f5f5" />
-                <div class="create-request">
-                  <button type="button" class="btn-request dropdown-toggle" id="navbarScrollingDropdown" data-bs-toggle="dropdown">
-                    <span style="color: #ffff; margin: 0">
-                      <i class="fas fa-plus-circle"></i>
-                    </span>
-                    Crear Solicitud
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                    <li><a class="dropdown-item" routerLink="permisos/crear-permiso">Permiso</a></li>
-                    <li><a class="dropdown-item" routerLink="comisiones/crear-comision">Comisión</a></li>
-                    <li><a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Dedicación Exclusiva</a></li>
-                  </ul>
+                <ul>
+                  <li>
+                    <a routerLink="">
+                      <span>
+                        <i class="far fa-user"></i>
+                        Mi Perfil
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span>
+                        <i class="fas fa-home"></i>
+                        Solicitudes
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                <div class="header-menu">
+                  <span> ESPECÍFICO </span>
                 </div>
-                <!-- sidebar-search  -->
-                <hr color="#f5f5f5" />
-                <div class="sidebar-menu">
-                  <div class="header-menu">
-                    <span>GENERAL</span>
-                  </div>
-                  <ul>
-                    <li>
-                      <a routerLink="">
-                        <span>
-                          <i class="far fa-user"></i>
-                          Mi Perfil
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span>
-                          <i class="fas fa-home"></i>
-                          Solicitudes
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                  <div class="header-menu">
-                    <span> ESPECÍFICO </span>
-                  </div>
-                  <ul>
-                    <li>
-                      <a href="#">
-                        <span>
-                          <i class="far fa-building"></i>
-                          Departamentos
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span>
-                          <i class="fas fa-university"></i>
-                          Facultades
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- sidebar-menu  -->
-                <!-- sidebar-content  -->
-                <div class="sidebar-footer">
-                  <hr />
-                  <a (click)="logout()">
-                    <span>
-                      <i class="fas fa-power-off"></i>
-                      Cerrar Sesi&oacute;n
-                    </span>
-                  </a>
-                </div>
+                <ul>
+                  <li>
+                    <a href="#">
+                      <span>
+                        <i class="far fa-building"></i>
+                        Departamentos
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span>
+                        <i class="fas fa-university"></i>
+                        Facultades
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- sidebar-menu  -->
+              <!-- sidebar-content  -->
+              <div class="sidebar-footer">
+                <hr />
+                <a (click)="logout()">
+                  <span>
+                    <i class="fas fa-power-off"></i>
+                    Cerrar Sesi&oacute;n
+                  </span>
+                </a>
               </div>
             </div>
           </div>
-        </ul>
-      </div>
+        </div>
+      </ul>
     </div>
   </div>
 </nav>
+

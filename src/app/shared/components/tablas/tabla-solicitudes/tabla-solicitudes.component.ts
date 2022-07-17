@@ -11,7 +11,8 @@ import { BuscarComisionesService } from '@services/buscar-comisiones.service';
 
 
 @Component(
-    {selector: 'app-tabla-solicitudes', templateUrl: './tabla-solicitudes.component.html', providers: [BuscarComisionesService, DecimalPipe]})
+{selector: 'app-tabla-solicitudes', templateUrl: './tabla-solicitudes.component.html', 
+providers: [BuscarComisionesService, DecimalPipe]})
 export class TablaSolicitudesComponent {
   comisiones$: Observable<Comision[]>;
   total$: Observable<number>;

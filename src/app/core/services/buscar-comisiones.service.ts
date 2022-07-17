@@ -22,7 +22,7 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: any, v2: any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
   if (direction === '' || column === '') {
@@ -39,7 +39,6 @@ function matches(comisiones: Comision, term: string, pipe: PipeTransform, datepi
   return (
     datepipe.transform(comisiones.id)?.includes(term) ||
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())||
-    comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase()) ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLowerCase)||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.created_at.toLowerCase().includes(term.toLowerCase)||
     comisiones.usuarios.nombre.toLowerCase().includes(term) ||
@@ -99,18 +98,18 @@ export class BuscarComisionesService {
   }
 
   private _search(): Observable<SearchResult> {
-    const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
+    const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
     // 1. sort
-    // let comisiones = sort(Comision[], sortColumn, sortDirection);
+    let comisiones = sort(Comision, sortColumn, sortDirection);
 
     // 2. filter
-    // countries = countries.filter(country => matches(country, searchTerm, this.pipe));
-    // const total = countries.length;
+    // comisiones = comisiones.filter(country => matches(country, searchTerm, this.pipe));
+    const total = comisiones.length;
 
     // 3. paginate
-    // countries = countries.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    // return of({countries, total});
+    comisiones = comisiones.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    return of({comisiones, total});
   }
 
 

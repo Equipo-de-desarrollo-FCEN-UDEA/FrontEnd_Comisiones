@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { Countries, countries } from '@data/country-data-store';
+import {  Countries, countries } from '@data/country-data-store';
 import { ComisionesService } from '@services/comisiones.service';
+import { LoaderService } from '@services/loader.service';
+import { Subject } from 'rxjs';
+import { DiasHabiles } from '@shared/clases/dias-habiles';
+import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 
 @Component({
   selector: 'app-crear-comision',
@@ -15,6 +19,7 @@ export class CrearComisionComponent implements OnInit {
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
+  public dias_permiso = 15;
   today = this.calendar.getToday();
   files : any[]=[];
   archivos = [1];
@@ -23,17 +28,30 @@ export class CrearComisionComponent implements OnInit {
     {id: 1, nombre: 'Comisión de servicios'},
     {id: 2, nombre: 'Comisión de estudio'},
   ]
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
     private calendar : NgbCalendar,
     public formatter: NgbDateParserFormatter,
-    private comisionesSvc: ComisionesService
+    private comisionesSvc: ComisionesService,
+    private loaderService: LoaderService,
+    private paisesCiudadesSvc: PaisesCiudadesService
    
     
   ) { 
     this.fromDate = null;
     this.toDate = null;
+    console.log(paisesCiudadesSvc.getPaises().subscribe(data => data))
+  }
+
+  inRange(fecha_1 : any, fecha_2 : any){
+    fecha_1 = new Date(this.formatter.format(fecha_1));
+    fecha_2 = new Date(this.formatter.format(fecha_2));
+    console.log('paso')
+    console.log(fecha_1)
+    console.log(DiasHabiles(fecha_1, fecha_2), fecha_1, fecha_2)
+    return DiasHabiles(fecha_1, fecha_2) > this.dias_permiso;
   }
 
   onDateSelection(date: NgbDate) {

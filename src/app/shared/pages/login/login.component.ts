@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioAuth } from '@interfaces/usuario';
 import { AuthService } from '@services/auth.service';
+import { LoaderService } from '@services/loader.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -55,20 +57,22 @@ export class LoginComponent implements OnInit {
       nombre: 'Extensión'
     }
   ]
-  private isEmailValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
+  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
+  isLoading: Subject<boolean> = this.loadingService.isLoading;
+  submitted = false;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
-    
+    private router: Router,
+    private loadingService: LoaderService
   ) { }
-
+    
   formLogin = this.fb.group({
-    emailLogin : ['', [Validators.required, Validators.pattern(this.isEmailValid)]],
+    correoLogin : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
     passwordLogin : ['', Validators.required]
   });
   formSignup = this.fb.group({
-    emailSignup : ['', [Validators.required, Validators.pattern(this.isEmailValid)]],
+    correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
     passwordSignup : ['', Validators.required],
     nombreSignup : ['', Validators.required],
     apellidoSignup : ['', Validators.required],
@@ -88,11 +92,16 @@ export class LoginComponent implements OnInit {
     console.log(this.isCollapsed)
   }
 
+  get f() {
+    return this.formLogin.controls;
+  }
+
   onSubmitLogin(){
     const user : UsuarioAuth ={
-      email: this.formLogin.value.emailLogin || '',
+      correo: this.formLogin.value.correoLogin || '',
       contrasena: this.formLogin.value.passwordLogin || ''
     };
+    this.submitted = true;
     this.authService.login(user).subscribe(
       (data) => {
         if (data){

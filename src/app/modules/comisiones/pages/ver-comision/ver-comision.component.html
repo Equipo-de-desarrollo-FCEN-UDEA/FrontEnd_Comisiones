@@ -1,1 +1,115 @@
-<p>ver-comision works!</p>
+<div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded" style="align-items: unset;">
+  <div class="row header-row">
+    <div class="col">
+      <span class="text-secondary">Comisión</span>
+    </div>
+  </div>
+
+  <hr />
+  <div class="row regular-row">
+    <div class="col-6 label">Tipo de Comisión</div>
+    <div class="col-sm-6">comision.tipos_comision</div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-6 label">Fecha de Creación</div>
+    <div class="col-sm-6">comision.createdAt | date: "fullDate" </div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-6 label">Día que Inicia</div>
+    <div class="col-sm-6">comision.fecha_inicio | date: "fullDate"</div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-6 label">Día que Termina</div>
+    <div class="col-sm-6">comision.fecha_fin | date: "fullDate"</div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-6 label">Idioma</div>
+    <div class="col-sm-6">comision.idioma</div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-6 label">Lugar</div>
+    <div class="col-sm-6">comision.lugar</div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-6 label">Justificación</div>
+    <div class="col-sm-6">comision.justificacion</div>
+  </div>
+
+
+  <div class="row regular-row">
+    <div class="col-6 label">Estado Actual de la Comisión</div>
+      <div class="col-4">
+        <span
+          class="badge badge-pill pill">
+        </span>
+      </div>
+  </div>
+
+  
+  <div class="row regular-row">
+    <div class="col-6 label">Anexos</div>
+    <div class="col-sm-6"><i class="fas fa-circle"></i> Anexo 1</div>
+  </div>
+
+
+  <div class="row regular-row">
+    <div class="col-6 label">Resolución</div>
+    <div class="col-6"></div>
+  </div>
+
+  <!-- <div class="d-md-flex justify-content-md-end">
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
+      <button 
+      type="button" 
+      class="btn btn-success" 
+      >
+        Agregar Estado
+      </button>
+    </div>
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
+      <button
+        type="button"
+        class="btn btn-success"
+      >
+        Subir cumplido
+      </button>
+    </div> -->
+    <!-- <div  class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+      <app-ver-estados-comision></app-ver-estados-comision>
+    </div> -->
+  <!-- </div> -->
+  <div class="alert alert-danger mt-3 mb-0">
+    error
+  </div>
+
+  <hr />
+
+  <div class="footer-row d-md-flex justify-content-md-end">
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="delete(comisiones.id)"
+      >
+        <span
+          class="spinner-border spinner-border-sm mr-1"
+        ></span>
+        Eliminar
+      </button>
+    </div>
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+        type="button"
+        class="btn btn-warning "
+      >
+        Editar
+      </button>
+    </div>
+  </div>
+</div>

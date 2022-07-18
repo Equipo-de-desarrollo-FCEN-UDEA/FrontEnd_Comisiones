@@ -1,47 +1,42 @@
-import { ComisionesinDB } from "./comisiones";
-import { DepResInside } from "./departamento";
+// import { ComisionesinDB, ComResInside } from "./comisiones";
+import { DepResInside } from "./departamentos";
+import { PermisosInside } from "./permisos";
 
-export interface UsuarioEmail{
-    email: string;
+export interface UsuarioCorreo{
+    correo: string;
 }
 
-export interface UsuarioAuth extends UsuarioEmail {
+export interface UsuarioAuth extends UsuarioCorreo {
     contrasena: string;
 }
 
-export interface UsuarioBase extends UsuarioEmail {
+export interface UsuarioBase {
+    id: number;
     nombre: string;
     apellido: string;
-    identificacion: number;
-    estado?: string;
 }
 
-export interface UsResInside extends UsuarioBase{
-    id: number;
+export interface UsuarioInside extends UsuarioBase {
     departamentos: DepResInside;
 }
 
-export interface UsuarioInDB extends UsuarioAuth, UsuarioBase {
-    id: number;
-    tipo_identificacion: string;
-    dia_disponible?: number;
-    created_At: Date;
-    updated_At: Date;
+export interface Usuario extends UsuarioBase{
+    tipo_identificacion?: string;
+    identificacion?: number;
+    correo: string;
+    estado?: string;
+    created_at: Date;
+    updated_at: Date;
     departamentos_id: number;
     roles_id: number;
 }
 
-export interface Usuario extends UsResInside {
-    departamentos: DepResInside
-    comisiones: ComisionesinDB[];
-  }
-
-export interface UsuarioSignup extends Omit<UsuarioInDB,  | "dia_disponible" | "estado" | "updated_At" | "created_At" > {
-//  Por discutir con el backend
+export interface UsuarioInDB extends Usuario {
+    contrasena: string;
 }
 
-export interface UsuarioAuthResponse {
-    usuario: Usuario;
-    token: string;
-    expiresIn: string;
+export interface UsuarioResponse extends Usuario {
+    departamentos: DepResInside;
+    // comisiones: ComResInside[];
+    permisos: PermisosInside[];
 }

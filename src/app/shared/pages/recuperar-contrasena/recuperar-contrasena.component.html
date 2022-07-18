@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-center align-items-center mt-5">
+  <div class="card shadow p-3 pr-5" style="width: 35%;">
+    <div class="card-body">
+      <h4 class="text-center">Recuperar Contraseña</h4>
+      <form  (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Correo Institucional</label>
+          <input
+            type="text"
+            formControlName="correo"
+            class="form-control"
+            placeholder="ejemplo@udea.edu.co" 
+          />
+        </div>
+        <div class="d-grid gap-2 col-12 mt-4">
+          <button
+            id="btn-sub"
+            (submit)="(true)"
+            [disabled]="loading"
+            class="btn btn-dark"
+          >
+            <span
+              class="spinner-border spinner-border-sm"
+              *ngIf="loading"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Ingresar
+          </button>
+          <a routerLink="../login" class="btn btn-link">Cancelar</a>
+        </div>
+      </form>  
+    </div>
+  </div>
+</div>

@@ -22,6 +22,7 @@
       "@assets/*":[
         "src/app/assets/*"
       ],
+      
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

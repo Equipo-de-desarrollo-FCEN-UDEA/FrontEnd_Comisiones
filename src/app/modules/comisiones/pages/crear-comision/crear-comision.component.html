@@ -11,7 +11,9 @@
             <p *ngIf="!fromDate" style="text-align: center; margin: 0; color: green;"> Elige la primera fecha </p>
             <button class="btn btn-primary btn-sm m-2 float-start"
                 (click)="model = today; datepicker.close()">Hoy</button>
+            
             <button class="btn btn-secondary btn-sm m-2 float-end" (click)="datepicker.close()">Cerrar</button>
+            <p *ngIf="fromDate && toDate && true" style="text-align: center; margin: 0; color: red;">Recuerda que la fecha máxima para este tipo de permiso es de {{dias_permiso}} días hábiles</p>
         </ng-template>
 
         <div class="dp-hidden position-absolute">
@@ -127,7 +129,9 @@
                 </div>
 
             </div>
-        <button class="btn btn-success" (submit)="true" [disabled]="formComision.invalid || !validSize()">Enviar</button>
+        <button class="btn btn-success" (submit)="true" [disabled]="formComision.invalid || !validSize() || (isLoading | async)">
+            <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+            Enviar</button>
 
     </form>
 

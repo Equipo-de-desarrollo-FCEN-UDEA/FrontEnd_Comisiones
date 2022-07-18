@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row" style="width: 100%; max-width: 768px;">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 justify-content-center" style="text-align: center;">
+            
+            <span>
+                <span class="fa-stack fa-5x">
+                    <i class="fas fa-circle fa-stack-2x" style="color:var(--7718c);"></i>
+                    <i class="fas fa-user fa-stack-1x fa-inverse"></i>
+                </span>
+            </span>
+            <div class="botones">
+                <button class="btn btn-primary">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-danger">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 d-flex" style="text-align:center ;">
+            <div class="informacion">
+                <h1>
+                    <span>
+                        {{usuario?.nombre | titlecase}}
+                    </span>
+                </h1>
+                <h5>
+                    <span>
+                        {{usuario?.apellido | titlecase}}
+                    </span>
+                </h5>
+                <span class="text-muted">
+                    {{ usuario?.correo }}
+                </span>
+    
+                <span>
+                   {{ usuario?.tipo_identificacion | uppercase}} : {{usuario?.identificacion}}
+                </span>
+                
+                <span>
+                    {{usuario?.departamentos?.facultades?.descripcion | titlecase}}
+                </span>
+                <span>
+                    Departamento de  {{ usuario?.departamentos?.nombre | titlecase }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

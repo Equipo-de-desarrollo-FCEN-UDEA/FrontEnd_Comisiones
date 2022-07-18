@@ -16,7 +16,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
             <div class="visual">
                 <h5>Previsualización</h5>
-                <div class="carta">
+                <div class="carta" id="carta" #carta>
                     <div class="cabecera">
                         <div class="logo">
                             <img src="../../../../../assets/Logosímbolo+Universidad+de+Antioquia+horizontal+®-01.jpg" width="280px">
@@ -50,7 +50,7 @@
                             </div>
                             <div class="cargo-usuario">
                                 <p style="margin:0;">
-                                    {{usuario.roles.nombre | titlecase }}
+                                    <!-- {{usuario.roles.nombre | titlecase }} -->
                                 </p>
                             </div>
                             <div class="departamento">
@@ -67,8 +67,8 @@
                                 </p>
                             </div>
                             <div class="mail">
-                                <a href="mailto:{{usuario.email}}" style="margin:0;">
-                                    {{usuario.email}}
+                                <a href="mailto:{{usuario.correo}}" style="margin:0;">
+                                    {{usuario.correo}}
                                 </a>
                             </div>
                         </div>
@@ -78,5 +78,15 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-success btn-lg" (click)="OnSubmit()" (submit)="true" >Crear carta</button>
+    <div class="botones">
+        <button id="Generador-carta" class="btn btn-primary btn-lg" (click)="makePdf()" (submit)="false" >
+            <span class="spinner" id="spinner" style="display: none;">
+                <span class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+               Cargando...
+           </span>
+           <span id="btn-text">Generar carta</span>
+            </button>
+        <button class="btn btn-success btn-lg" (click)="OnSubmit()" (submit)="true">Siguiete paso</button>
+    </div>
+   
 </div>

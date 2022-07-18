@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@guards/auth.guard';
 import { LoginComponent } from '@shared/pages/login/login.component';
 import { NotFoundComponent } from '@shared/pages/not-found/not-found.component';
+import { RecuperarContrasenaComponent } from '@shared/pages/recuperar-contrasena/recuperar-contrasena.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
     component: NotFoundComponent
   },
   {
+    path: 'recuperar-contrasena',
+    component: RecuperarContrasenaComponent
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -40,8 +45,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/home/home.module')
       .then(m => m.HomeModule) 
-    },
-
+  },
+  { path: 'usuarios',
+    canActivate: [AuthGuard], 
+   loadChildren: () => import('./modules/usuarios/usuarios.module')
+   .then(m => m.UsuariosModule) },
   {
     path: '**',
     redirectTo: '404'

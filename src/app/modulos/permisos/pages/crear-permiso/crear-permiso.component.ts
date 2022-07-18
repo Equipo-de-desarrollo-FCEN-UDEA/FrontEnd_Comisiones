@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { NgbDate, NgbDateStruct, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { Countries, countries } from '@shared/data/country-data-store';
 
 @Component({
   selector: 'app-crear-permiso',
@@ -79,9 +82,32 @@ export class CrearPermisoComponent implements OnInit {
     tipos_permiso_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tipospermiso.length)]]});
 
 
-  constructor() { }
-
   ngOnInit(): void {
+  }
+
+  onUpload(event:Event, index: number) {
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0);
+    if (file) {
+      this.files.splice(index, 1, file);
+    }
+    console.log(this.files)
+
+  }
+
+  removeFile(index: number) {
+    if (this.archivos.length > 1) {
+    this.archivos.splice(index, 1);};
+    this.files.splice(index, 1);
+  }
+
+  validSize() {
+    const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
+    return size < 2 * 1024 * 1024;
+  }
+
+  isInvalidForm(controlName: string) {
+    return this.formPermiso.get(controlName)?.invalid && this.formPermiso.get(controlName)?.touched;
   }
 
 }

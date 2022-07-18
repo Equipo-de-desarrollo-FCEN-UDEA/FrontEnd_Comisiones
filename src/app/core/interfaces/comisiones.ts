@@ -32,10 +32,15 @@ export interface Comision extends ComisionesinDB{
     cumplidos: CumplidoInside[];
     usuarios: UsuarioInside;
     intermediate_comisiones: ComisionesXEstadoInside[];
-    intermediate_estados: {
-        nombre:string
-    };
     nombreEstadoActual: string;
+    
+}
+
+export interface ComisionesXEstadoInDB{
+    comisiones_id: number;
+    estados_id: number;
+    created_at: Date;
+
 }
 
 

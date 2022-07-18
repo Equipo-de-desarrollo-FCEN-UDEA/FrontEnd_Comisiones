@@ -3,7 +3,7 @@ import { Comision, ComisionDTO } from '../interfaces/comisiones';
 
 
 import { Injectable } from '@angular/core';
-import { Observable, of, map } from "rxjs";
+import { Observable, of, map, pipe } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { prefix } from '@shared/data/ruta-api';
 
@@ -20,39 +20,31 @@ export class ComisionesService {
 
   getComisiones(): Observable<Comision[]> {
 
-    return this.http.get<Comision[]>(this.urlEndPoint)
+    return this.http.get<Comision[]>(this.urlEndPoint).pipe
+    (map((res) => {
+      const comision = res as Comision[];
+      return comision.map((newComision) => {
+        console.log(newComision);
 
-    // return this.http.get<Comision[]>(this.urlEndPoint).pipe(
-    //   map((res) => {
-    //     const comision = res as Comision[];
-    //     return comision.map((newComision) => {
-    //       console.log(newComision);
+        const lenEstados = newComision.intermediate_comisiones.length;
 
-    //       const lenEstados = newComision.intermediate_comisiones.length;
+        console.log(lenEstados + "oe");
 
-    //       console.log(lenEstados);
+        const final_estado = newComision.intermediate_comisiones[lenEstados - 1]
+        ['intermediate_estados']['nombre'];
 
-    //       const final_estado = newComision.intermediate_comisiones[lenEstados - 1]
-    //       ['intermediate_estados']['nombre'];
+        let fechas = [];
+        for (let item of newComision.intermediate_comisiones){
+          fechas.push(item.created_at)
+        }
 
-    //       newComision.nombreEstadoActual = final_estado;
-    //       return newComision
-    //     });
-    //   })
-    // )
-    
-    // .pipe(
-    //    map((resp)=>{
-    //      const comision = resp as Comision[];
-    //      return comision.map((newComision) => {
-    //        console.log(newComision);
-    //      })
-    //   })
-    // );
+        console.log(fechas);
 
-
-    
-   }
+        newComision.nombreEstadoActual = final_estado;
+        return newComision
+      });
+    }))
+  }
 
    getComision(id:string) {
       return this.http.get<Comision>(`${this.urlEndPoint}/${id}`).pipe(

@@ -3,11 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@guards/auth.guard';
 import { LoginComponent } from '@shared/pages/login/login.component';
 import { NotFoundComponent } from '@shared/pages/not-found/not-found.component';
-<<<<<<< HEAD
-// import { RecuperarContrasenaComponent } from '@shared/pages/recuperar-contrasena/recuperar-contrasena.component';
-=======
 import { RecuperarContrasenaComponent } from '@shared/pages/recuperar-contrasena/recuperar-contrasena.component';
->>>>>>> main
 
 const routes: Routes = [
   {

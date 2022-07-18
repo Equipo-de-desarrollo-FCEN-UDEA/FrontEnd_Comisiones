@@ -13,18 +13,56 @@
     <thead>
     <tr>
     
-      <th scope="col" sortable="id" (sort)="onSort($event)">#</th>
+      <th scope="col">#</th>
       <th scope="col" sortable="tipos_comision" (sort)="onSort($event)">Solicitud</th>
       <th scope="col" sortable="intermediate_comisiones" (sort)="onSort($event)">Estado</th>
+      <th scope="col" sortable="intermediate_comisiones" (sort)="onSort($event)">Fecha</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let comision of comisiones$ | async">
+    
+      <tr *ngFor="let comision of comisiones$ | async">
+
       <th scope="row">{{ comision.id }}</th>
+
       <td>
-        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + comision.nombreEstadoActual" class="me-2" style="width: 20px">
-        <!-- <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight> -->
+        <ngb-highlight [result]="comision.tipos_comision.nombre" [term]="service.searchTerm"></ngb-highlight>
       </td>
+
+      
+      <!-- <td>
+        <ngb-highlight [result]="comision.nombreEstadoActual" [term]="service.searchTerm"></ngb-highlight>
+        
+      </td> -->
+
+      <td>
+        <ngb-highlight
+          [result]="comision.nombreEstadoActual"
+          [term]="service.searchTerm"
+          class="badge badge-pill pill"
+          [ngClass]="{
+            'bg-solicitada':
+              comision.nombreEstadoActual === 'SOLICITADA',
+            'bg-aprobada': comision.nombreEstadoActual === 'APROBADA',
+            'bg-visto-bueno':
+              comision.nombreEstadoActual === 'VISTO BUENO',
+            'bg-finalizada':
+              comision.nombreEstadoActual === 'FINALIZADA',
+            'bg-rechazada-decanato':
+              comision.nombreEstadoActual === 'RECHAZADA DECANATO',
+            'bg-rechazada-coordinacion':
+              comision.nombreEstadoActual === 'RECHAZADA COORDINACIÓN'
+          }"
+        ></ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight [result]="" [term]="service.searchTerm"></ngb-highlight>
+      </td>
+
+
+
+        <!-- <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight> -->
       <!-- <td><ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight></td> -->
       <!-- <td><ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight></td> -->
     </tr>
@@ -34,9 +72,9 @@
   <div class="d-flex justify-content-between p-2">
     <ngb-pagination
       [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
-    </ngb-pagination>
+    </ngb-pagination> -->
 
-    <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+    <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize"> 
       <option [ngValue]="2">2 items per page</option>
       <option [ngValue]="4">4 items per page</option>
       <option [ngValue]="6">6 items per page</option>

@@ -13,7 +13,7 @@
                 (click)="model = today; datepicker.close()">Hoy</button>
             
             <button class="btn btn-secondary btn-sm m-2 float-end" (click)="datepicker.close()">Cerrar</button>
-            <p *ngIf="fromDate && toDate && true" style="text-align: center; margin: 0; color: red;">Recuerda que la fecha máxima para este tipo de permiso es de {{dias_permiso}} días hábiles</p>
+            <!-- <p *ngIf="fromDate && toDate && true" style="text-align: center; margin: 0; color: red;">Recuerda que la fecha máxima para este tipo de permiso es de {{dias_permiso}} días hábiles</p> -->
         </ng-template>
 
         <div class="dp-hidden position-absolute">

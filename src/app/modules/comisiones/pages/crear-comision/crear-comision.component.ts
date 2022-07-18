@@ -125,12 +125,13 @@ export class CrearComisionComponent implements OnInit {
     const response ={
       ...this.formComision.value,
       archivos: this.files,
+      fecha_resolucion: new Date(this.formatter.format(this.today)),
       usuarios_id: 12
     }
     console.log(response)
     this.comisionesSvc.crearComision(response).subscribe(
       (data:any) => {
-        window.alert(data.msg)
+        window.alert(data.message)
       }
     )
   }

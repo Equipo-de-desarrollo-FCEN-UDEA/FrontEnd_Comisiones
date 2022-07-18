@@ -29,14 +29,14 @@
                     </div>
                     <div class="cuerpo">
                         <p> Señores</p>
-                        <p> <b> CONSEJO DE {{usuario.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
+                        <p> <b> CONCEJO DE {{usuario.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
                                 usuario.departamentos.nombre | uppercase) : usuario.departamentos.nombre | uppercase}}
                             </b></p>
                         <p>{{
                             usuario.departamentos.facultades.descripcion | titlecase}}</p>
                         <p>Universidad de Antioquia</p>
                         <br>
-                        <p>Respetados miembros del consejo:</p>
+                        <p>Respetados miembros del concejo:</p>
                         <br>
                         <div class="cuerpo-texto ql-editor" id="cuerpo" [innerHTML]="FormCarta.value.Cuerpo">
                         </div>
@@ -79,14 +79,14 @@
         </div>
     </div>
     <div class="botones">
-        <button id="Generador-carta" class="btn btn-primary btn-lg" (click)="makePdf()" (submit)="false" >
+        <button id="Generador-carta" class="btn btn-primary btn-lg" [disabled]="FormCarta.controls['Cuerpo'].invalid" (click)="makePdf()" (submit)="false" >
             <span class="spinner" id="spinner" style="display: none;">
                 <span class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
                Cargando...
            </span>
            <span id="btn-text">Generar carta</span>
             </button>
-        <button class="btn btn-success btn-lg" (click)="OnSubmit()" (submit)="true">Siguiete paso</button>
+        <button class="btn btn-success btn-lg" (click)="OnSubmit()"  (submit)="true">Siguiete paso</button>
     </div>
    
 </div>

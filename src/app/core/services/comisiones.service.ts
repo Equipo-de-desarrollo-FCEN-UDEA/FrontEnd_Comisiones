@@ -17,7 +17,7 @@ export class ComisionesService {
 
   constructor( private http: HttpClient) { }
 
-  getComisiones(): Observable<any> {
+  getComisiones(): Observable<Comision[]> {
 
     return this.http.get<Comision[]>(this.urlEndPoint)
 

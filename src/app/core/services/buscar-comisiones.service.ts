@@ -35,9 +35,9 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
   }
 }
 
-function matches(comisiones: Comision, term: string, pipe: PipeTransform, datepipe:DatePipe ) {
+function matches(comisiones: Comision, term: string, pipe: PipeTransform ) {
   return (
-    datepipe.transform(comisiones.id)?.includes(term) ||
+    // datepipe.transform(comisiones.id)?.includes(term) ||
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLowerCase)||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.created_at.toLowerCase().includes(term.toLowerCase)||
@@ -64,7 +64,12 @@ export class BuscarComisionesService {
     sortDirection: ''
   };
 
-  constructor(private pipe: DecimalPipe) {
+  COMISIONES : Comision[] = [];
+
+  constructor(
+    private pipe: DecimalPipe,
+    private comisionesSvc: ComisionesService
+    ) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -77,6 +82,12 @@ export class BuscarComisionesService {
     });
 
     this._search$.next();
+    this.comisionesSvc.getComisiones()
+    .subscribe(
+      (comisiones: Comision[]) => {
+        this.COMISIONES = comisiones;
+      }
+    )
   }
 
   get comisiones$() { return this._comisiones$.asObservable(); }
@@ -101,10 +112,10 @@ export class BuscarComisionesService {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
     // 1. sort
-    let comisiones = sort(Comision, sortColumn, sortDirection);
+    let comisiones = sort(this.COMISIONES, sortColumn, sortDirection);
 
     // 2. filter
-    // comisiones = comisiones.filter(country => matches(country, searchTerm, this.pipe));
+    comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.pipe));
     const total = comisiones.length;
 
     // 3. paginate

@@ -40,6 +40,10 @@
   }
 }
   
+.btn-dark {
+  background-color: #43B649;
+  border-color: #43B649;
+} 
 
 
 .formLabel{
@@ -52,4 +56,29 @@
 
 .file-upload{
   display: none;
+}
+
+
+.btn-remove {
+  color: #212529;
+  background-color: #ef434d;
+  border-color: #020202
+}
+
+.btn-remove:hover {
+  color: #212529;
+  background-color: #d45f57;
+  border-color: #000000
+}
+
+.btn-add {
+  color: #212529;
+  background-color: #43b649;
+  border-color: #030303
+}
+
+.btn-add:hover {
+  color: #212529;
+  background-color: #79b97c;
+  border-color: #000000
 }

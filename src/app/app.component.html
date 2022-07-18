@@ -1,5 +1,5 @@
 <app-header *ngIf="authSvc.isLoggedIn()"></app-header>
 
-<router-outlet style="margin-top: 10px; z-index: -100;"></router-outlet>
+<router-outlet style="margin-top: 10px; z-index: -100;" style="color:#c4c4c4"></router-outlet>
 <!-- <app-side-bar [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></app-side-bar> -->
 <app-footer *ngIf="authSvc.isLoggedIn()"></app-footer>

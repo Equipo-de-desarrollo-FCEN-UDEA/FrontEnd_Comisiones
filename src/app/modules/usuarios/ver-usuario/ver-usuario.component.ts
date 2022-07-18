@@ -30,11 +30,12 @@ export class VerUsuarioComponent implements OnInit {
         }
       );
     } else {
-    this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe(res => {
+    this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe((res:UsuarioResponse) => {
       this.usuario = res;
     }
     );
   }
+  console.log(this.usuario);
 }
 
 }

@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PermisoServiceComponent } from './services/permiso-service/permiso-service.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PermisoServiceComponent
+  ],
   imports: [
     CommonModule
   ]

@@ -1,10 +1,11 @@
-// import { Comision } from '../interfaces/comisiones';
+
+import { Comision, ComisionDTO } from '../interfaces/comisiones';
+
 
 import { Injectable } from '@angular/core';
 import { Observable, of, map } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { prefix } from '@shared/data/ruta-api';
-import { Comision } from '@interfaces/comisiones';
 
 
 
@@ -54,19 +55,21 @@ export class ComisionesService {
    }
 
    getComision(id:string) {
-      // return this.http.get<Comision>(`${this.urlEndPoint}/${id}`).pipe(
-      //   map((res)=> {
-      //     const lenEstados = res.intermediate_comisiones.length;
-      //     console.log(lenEstados)
-      //     const finalEstado = res.intermediate_comisiones[lenEstados-1];
-      //     res.estadoActual = finalEstado;
-      //     console.log(res.estadoActual);
-      //     return res;
-          
-      //   })
-        
-      // )
+      return this.http.get<Comision>(`${this.urlEndPoint}/${id}`).pipe(
+        map((res)=> {
+          const lenEstados = res.intermediate_comisiones.length;
+          console.log(lenEstados)
+          const finalEstado = res.intermediate_comisiones[lenEstados-1];
+          // res.estadoActual = finalEstado;
+          // console.log(res.estadoActual);
+          return res;  
+        })
+      )
    }
+
+   delete(id: any): Observable<any> {
+    return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
+  }
 
    crearComision(comision:any) {
     const headers = new HttpHeaders(

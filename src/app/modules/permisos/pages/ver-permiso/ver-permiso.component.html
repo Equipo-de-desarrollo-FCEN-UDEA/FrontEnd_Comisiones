@@ -1,49 +1,39 @@
 <div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded" style="align-items: unset;">
   <div class="row header-row">
     <div class="col">
-      <span class="text-secondary">Comisión</span>
+      <span class="text-secondary">PERMISO</span>
     </div>
   </div>
 
   <hr />
   <div class="row regular-row">
-    <div class="col-6 label">Tipo de Comisión</div>
-    <div class="col-sm-6">comision.tipos_comision</div>
+    <div class="col-6 label">Tipo de Permiso</div>
+    <div class="col-sm-6">permiso.tipos_permisos</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
-    <div class="col-sm-6">comision.createdAt | date: "fullDate" </div>
+    <div class="col-sm-6">permiso.createdAt | date: "fullDate" </div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
-    <div class="col-sm-6">comision.fecha_inicio | date: "fullDate"</div>
+    <div class="col-sm-6">permiso.fecha_inicio | date: "fullDate"</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
-    <div class="col-sm-6">comision.fecha_fin | date: "fullDate"</div>
-  </div>
-
-  <div class="row regular-row">
-    <div class="col-6 label">Idioma</div>
-    <div class="col-sm-6">comision.idioma</div>
-  </div>
-
-  <div class="row regular-row">
-    <div class="col-6 label">Lugar</div>
-    <div class="col-sm-6">comision.lugar</div>
+    <div class="col-sm-6">permiso.fecha_fin | date: "fullDate"</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Justificación</div>
-    <div class="col-sm-6">comision.justificacion</div>
+    <div class="col-sm-6">permiso.justificacion</div>
   </div>
 
 
   <div class="row regular-row">
-    <div class="col-6 label">Estado Actual de la Comisión</div>
+    <div class="col-6 label">Estado Actual del Permiso</div>
       <div class="col-4">
         <span
           class="badge badge-pill pill">
@@ -95,7 +85,7 @@
       <button
         type="button"
         class="btn btn-danger"
-        (click)="delete(comisiones.id)"
+        (click)="delete(permisos.id)"
       >
         <span
           class="spinner-border spinner-border-sm mr-1"

@@ -1,8 +1,9 @@
-<div class="d-flex justify-content-center align-items-center mt-5">
+<div class="d-flex justify-content-center align-items-center mt-5 p-0">
+  <div class="card shadow">
+    <h4 class="card-header mt-0">Sistema de Comisiones </h4>
 
-
-    <div class="card">
-        <ul class="nav nav-pills " id="pills-tab" role="tablist">
+		
+    <!-- <ul class="nav nav-pills " id="pills-tab" role="tablist">
             <li class="nav-item text-center">
                 <a type="button" class="nav-link btl" [ngClass]="{'active':isCollapsed}" (click)="click()"
                     aria-controls="Login" role="tab">
@@ -15,106 +16,218 @@
                     Registrarse
                 </a>
             </li>
-        </ul>
-        <form need-validation novalidate [formGroup]="formLogin" (ngSubmit)="onSubmitLogin()">
-            <div [ngbCollapse]="!isCollapsed" id="Login">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form px-4 pt-5">
+        </ul> -->
+		<div class="card-body">
+			<h5 style="color:rgba(50, 50, 50, 0.874)">Inicio de Sesión</h5>
+    <form
+      need-validation
+      novalidate
+      [formGroup]="formLogin"
+      (ngSubmit)="onSubmitLogin()"
+    >
+      <div [ngbCollapse]="!isCollapsed" id="Login">
+            <div class="form px-4 pt-5 m-2">
+              <div class="formfloatig m-2">
+                <input
+                  id="Correo-input"
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                  formControlName="correoLogin"
+									[ngClass]="{ 'is-invalid': submitted && f.correoLogin.errors }"
+                />
+                <label for="Correo-input" class="formLabel"
+                  >Correo institucional
+                </label>
+              </div>
+              <div
+                *ngIf="submitted && f.correoLogin.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="submitted && f.correoLogin.errors?.['required']">
+                  El correo es requerido
 
-                            <div class="formfloatig">
-                                <input id="Correo-input" type="text" class="form-control" placeholder=" " formControlName="correoLogin">
-                                <label for="Correo-input" class="formLabel">Correo institucional </label>
-
-                            </div>
-
-                            <div class="formfloatig">
-                                <input id="Contraseña" type="password" class="form-control" placeholder=" " formControlName="passwordLogin">
-                                <label for="Contraseña" class="formLabel">Contraseña</label>
-                            </div>
-
-                            <button id="btn-sub"  (submit)="true" [disabled]="!formLogin.valid || (isLoading|async)" class="btn btn-dark btn-block">
-                                <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-                               Entrar
-                            </button>
-
-                        </div>
-
-                    </div>
                 </div>
-            </div>
-        </form>
-        <form [formGroup]="formSignup">
-            <div [ngbCollapse]="isCollapsed" id="Signup">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form px-4">
-                            <div class="formfloatig">
-                                <input id="Nombre" type="text" class="form-control" placeholder=" ">
-                                <label for="Nombre" class="formLabel">Nombre</label>
-                            </div>
-                            <div class="formfloatig">
-                                <input id="Apellido" type="text" class="form-control" placeholder=" ">
-                                <label for="Apellido" class="formLabel">Apellido</label>
-                            </div>
-                            <div class="formfloatig">
-                                <input id="Correo-signup" type="text" class="form-control" placeholder=" ">
-                                <label for="Correo-signup" class="formLabel">Correo institucional</label>
-                            </div>
-                            <div class="formfloatig">
-                                <select class="form-select form-select-lg " id="floatingcampo_modalidad"
-                                    formControlName="campo_modalidad" required placeholder=" ">
-                                    <option [value]="tipo" *ngFor="let tipo of tiposId">{{ tipo | uppercase }}</option>
-                                </select>
-                                <label for="floatingcampo_modalidad" class="selectLabel" [ngClass]="{'isFill': true}">Tipo
-                                    de Identificación</label>
-                            </div>
-                            <div class="formfloatig">
-                                <input id="Identificacion" type="text" class="form-control" placeholder=" ">
-                                <label for="Identificacion" class="formLabel"> Número de Identificacion </label>
-                            </div>
-                            <div class="formfloatig">
-                                <select class="form-select form-select-lg " id="roles" formControlName="roles_id" required
-                                    placeholder=" ">
-                                    <option [value]="rol.id" *ngFor="let rol of roles">{{ rol.nombre| uppercase }}</option>
-                                </select>
-                                <label for="roles" class="selectLabel" [ngClass]="{'isFill': true}">Cargo</label>
-                            </div>
-                            <div class="formfloatig">
-                                <select class="form-select form-select-lg " id="departamentos_id"
-                                    formControlName="departamentos_id" required placeholder=" ">
-                                    <option [value]="departamento.id" *ngFor="let departamento of deparmentos">{{
-                                        departamento.nombre| uppercase }}</option>
-                                </select>
-                                <label for="departamentos_id" class="selectLabel"
-                                    [ngClass]="{'isFill': true}">Departamento</label>
-                            </div>
-    
-                            <div class="formfloatig">
-                                <input id="Contrasena" type="password" class="form-control" placeholder=" ">
-                                <label for="Contrasena" class="formLabel">Contraseña</label>
-                            </div>
-                            <div class="formfloatig">
-                                <input id="Confirmar" type="password" class="form-control" placeholder=" ">
-                                <label for="Confirmar" class="formLabel">Confirmar contraseña</label>
-                            </div>
-    
-                            <button class="btn btn-dark btn-block" >
-                                <span class="spinner" id="spinner" style="display: none;">
-                                    <span class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-                                   Cargando...
-                               </span>
-                               <span id="btn-text">Registrarse</span>
-                                </button>
-    
-    
-                        </div>
-    
-                    </div>
+                <div *ngIf="submitted && f.correoLogin.errors?.['pattern']">
+                  Ingresa tu correo institucional
                 </div>
+              </div>
+              <div class="formfloatig m-2">
+                <input
+                  id="Contraseña"
+                  type="password"
+                  class="form-control"
+                  placeholder=" "
+                  formControlName="passwordLogin"
+									[ngClass]="{ 'is-invalid': submitted && f.passwordLogin.errors }"
+                />
+                <label for="Contraseña" class="formLabel">Contraseña</label>
+              </div>
+							<div class="d-flex justify-content-start">
+								<a routerLink="../recuperar-contrasena" class="btn btn-link pr-0"
+								>¿Olvidaste tu contraseña?</a>
+							</div>
+							<div class="d-grid gap-2 col-12">
+								<button
+									id="btn-sub"
+									(submit)="(true)"
+									class="btn btn-dark"
+								>
+									<span
+										*ngIf="isLoading | async"
+										class="spinner-border spinner-border-sm"
+										role="status"
+										aria-hidden="true"
+									></span>
+									Ingresar
+								</button>
+							</div>
             </div>
-        </form>
-        
+          </div>
+    	</form>
+		</div>
+    <form [formGroup]="formSignup">
+      <div [ngbCollapse]="isCollapsed" id="Signup">
+        <div class="card">
+          <div class="card-body">
+            <div class="form px-4">
+              <div class="formfloatig">
+                <input
+                  id="Nombre"
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="Nombre" class="formLabel">Nombre</label>
+              </div>
+              <div class="formfloatig">
+                <input
+                  id="Apellido"
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="Apellido" class="formLabel">Apellido</label>
+              </div>
+              <div class="formfloatig">
+                <input
+                  id="Correo-signup"
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="Correo-signup" class="formLabel"
+                  >Correo institucional</label
+                >
+              </div>
+              <div class="formfloatig">
+                <select
+                  class="form-select form-select-lg"
+                  id="floatingcampo_modalidad"
+                  formControlName="campo_modalidad"
+                  required
+                  placeholder=" "
+                >
+                  <option [value]="tipo" *ngFor="let tipo of tiposId">
+                    {{ tipo | uppercase }}
+                  </option>
+                </select>
+                <label
+                  for="floatingcampo_modalidad"
+                  class="selectLabel"
+                  [ngClass]="{ isFill: true }"
+                  >Tipo de Identificación</label
+                >
+              </div>
+              <div class="formfloatig">
+                <input
+                  id="Identificacion"
+                  type="text"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="Identificacion" class="formLabel">
+                  Número de Identificacion
+                </label>
+              </div>
+              <div class="formfloatig">
+                <select
+                  class="form-select form-select-lg"
+                  id="roles"
+                  formControlName="roles_id"
+                  required
+                  placeholder=" "
+                >
+                  <option [value]="rol.id" *ngFor="let rol of roles">
+                    {{ rol.nombre | uppercase }}
+                  </option>
+                </select>
+                <label
+                  for="roles"
+                  class="selectLabel"
+                  [ngClass]="{ isFill: true }"
+                  >Cargo</label
+                >
+              </div>
+              <div class="formfloatig">
+                <select
+                  class="form-select form-select-lg"
+                  id="departamentos_id"
+                  formControlName="departamentos_id"
+                  required
+                  placeholder=" "
+                >
+                  <option
+                    [value]="departamento.id"
+                    *ngFor="let departamento of deparmentos"
+                  >
+                    {{ departamento.nombre | uppercase }}
+                  </option>
+                </select>
+                <label
+                  for="departamentos_id"
+                  class="selectLabel"
+                  [ngClass]="{ isFill: true }"
+                  >Departamento</label
+                >
+              </div>
 
-    </div>
+              <div class="formfloatig">
+                <input
+                  id="Contrasena"
+                  type="password"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="Contrasena" class="formLabel">Contraseña</label>
+              </div>
+              <div class="formfloatig">
+                <input
+                  id="Confirmar"
+                  type="password"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="Confirmar" class="formLabel"
+                  >Confirmar contraseña</label
+                >
+              </div>
+
+              <button class="btn btn-dark btn-block">
+                <span class="spinner" id="spinner" style="display: none">
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Cargando...
+                </span>
+                <span id="btn-text">Registrarse</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

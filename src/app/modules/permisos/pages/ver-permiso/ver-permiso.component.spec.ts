@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PermisosComponent } from './permisos.component';
+import { VerPermisoComponent } from './ver-permiso.component';
 
-describe('PermisosComponent', () => {
-  let component: PermisosComponent;
-  let fixture: ComponentFixture<PermisosComponent>;
+describe('VerPermisoComponent', () => {
+  let component: VerPermisoComponent;
+  let fixture: ComponentFixture<VerPermisoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PermisosComponent ]
+      declarations: [ VerPermisoComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PermisosComponent);
+    fixture = TestBed.createComponent(VerPermisoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

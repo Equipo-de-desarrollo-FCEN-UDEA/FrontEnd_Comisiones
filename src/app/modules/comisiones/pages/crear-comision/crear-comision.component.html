@@ -46,13 +46,37 @@
                 </div>
 
                 <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatinglugar" formControlName="lugar" required
-                        [ngClass]="{'is-invalid': isInvalidForm('lugar')}" placeholder=" ">
-                        <option [value]="country.name" *ngFor="let country of countries">{{country.name}}</option>
+                    <select class="form-select form-select-lg mb-3" id="floatingpais" formControlName="pais" required
+                        [ngClass]="{'is-invalid': isInvalidForm('pais')}" (change)="onChangePais($event)" placeholder=" ">
+                        <option [value]="i" *ngFor="let country of paises;let i=index">{{country.name}}</option>
                     </select>
-                    <label for="floatinglugar" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['lugar'].valid}">Lugar de la comision</label>
+                    <label for="floatingpais" class="selectLabel"
+                        [ngClass]="{'isFill': formComision.controls['pais'].valid}">País de la comision</label>
                 </div>
+
+                <div class="formfloatig">
+                    <select class="form-select form-select-lg mb-3" id="floatingestado" formControlName="estado" required
+                        [ngClass]="{'is-invalid': isInvalidForm('estado')}" (change)="onChangeEstado($event)" placeholder=" ">
+                        <option [value]="i" *ngFor="let estado of estados;let i=index">{{estado.name}}</option>
+                    </select>
+                    <label for="floatingestado" class="selectLabel"
+                        [ngClass]="{'isFill': formComision.controls['estado'].valid}">
+                        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+                        Estado de la comision</label>
+                </div>
+
+                <div class="formfloatig">
+                    <select class="form-select form-select-lg mb-3" id="floatingciudad" formControlName="ciudad" required
+                        [ngClass]="{'is-invalid': isInvalidForm('ciudad')}" [disabled]="!formComision.controls['pais'].valid" placeholder=" ">
+                        <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">{{ciudad.name}}</option>
+                    </select>
+                    <label for="floatingpais" class="selectLabel"
+                        [ngClass]="{'isFill': formComision.controls['ciudad'].valid}">
+                        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+                        Ciudad de la comision
+                    </label>
+                </div>
+
                 <h6>
                     <span class="text-muted">Rango de fechas de la comision</span>
                 </h6>

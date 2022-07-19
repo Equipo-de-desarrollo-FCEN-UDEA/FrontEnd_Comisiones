@@ -85,7 +85,7 @@ export class ComisionesService {
     &fecha_resolucion=${comision.fecha_resolucion}
     &justificacion=${comision.justificacion}
     &idioma=${comision.idioma}
-    &lugar=${comision.lugar}
+    &lugar=${comision.pais+', '+comision.estado+', '+comision.ciudad}
     &tipos_comision_id=${comision.tipos_comision_id}
     &usuarios_id=${comision.usuarios_id}
     `

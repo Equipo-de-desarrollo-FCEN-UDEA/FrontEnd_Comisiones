@@ -19,47 +19,14 @@ export class ComisionesService {
   constructor( private http: HttpClient) { }
 
   getComisiones(): Observable<Comision[]> {
-
-    return this.http.get<Comision[]>(this.urlEndPoint).pipe
-    (map((res) => {
-      const comision = res as Comision[];
-      return comision.map((newComision) => {
-        console.log(newComision);
-
-        const lenEstados = newComision.intermediate_comisiones.length;
-
-        console.log(lenEstados + "oe");
-
-        const final_estado = newComision.intermediate_comisiones[lenEstados - 1]
-        ['intermediate_estados']['nombre'];
-
-        let fechas = [];
-        for (let item of newComision.intermediate_comisiones){
-          fechas.push(item.created_at)
-        }
-
-        console.log(fechas);
-
-        newComision.nombreEstadoActual = final_estado;
-        return newComision
-      });
-    }))
+    return this.http.get<Comision[]>(this.urlEndPoint)
   }
-
-   getComision(id:string) {
-      return this.http.get<Comision>(`${this.urlEndPoint}/${id}`).pipe(
-        map((res)=> {
-          const lenEstados = res.intermediate_comisiones.length;
-          console.log(lenEstados)
-          const finalEstado = res.intermediate_comisiones[lenEstados-1];
-          // res.estadoActual = finalEstado;
-          // console.log(res.estadoActual);
-          return res;  
-        })
-      )
-   }
-
-   delete(id: any): Observable<any> {
+  
+  getComision(id:string) {
+    return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)
+  }
+  
+  delete(id: any): Observable<any> {
     return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
   }
 

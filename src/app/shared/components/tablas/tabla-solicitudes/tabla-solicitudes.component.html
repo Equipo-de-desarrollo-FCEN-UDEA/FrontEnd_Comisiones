@@ -37,27 +37,27 @@
 
       <td>
         <ngb-highlight
-          [result]="comision.nombreEstadoActual"
+          [result]="ultimoEstado(comision)"
           [term]="service.searchTerm"
           class="badge badge-pill pill"
           [ngClass]="{
             'bg-solicitada':
-              comision.nombreEstadoActual === 'SOLICITADA',
-            'bg-aprobada': comision.nombreEstadoActual === 'APROBADA',
+              ultimoEstado(comision) === 'SOLICITADA',
+            'bg-aprobada': ultimoEstado(comision) === 'APROBADA',
             'bg-visto-bueno':
-              comision.nombreEstadoActual === 'VISTO BUENO',
+              ultimoEstado(comision) === 'VISTO BUENO',
             'bg-finalizada':
-              comision.nombreEstadoActual === 'FINALIZADA',
+              ultimoEstado(comision) === 'FINALIZADA',
             'bg-rechazada-decanato':
-              comision.nombreEstadoActual === 'RECHAZADA DECANATO',
+              ultimoEstado(comision) === 'RECHAZADA DECANATO',
             'bg-rechazada-coordinacion':
-              comision.nombreEstadoActual === 'RECHAZADA COORDINACIÓN'
+              ultimoEstado(comision) === 'RECHAZADA COORDINACIÓN'
           }"
         ></ngb-highlight>
       </td>
 
       <td>
-        <ngb-highlight [result]="" [term]="service.searchTerm"></ngb-highlight>
+        <ngb-highlight [result]="ultimaFecha(comision) | date" [term]="service.searchTerm"></ngb-highlight>
       </td>
 
 

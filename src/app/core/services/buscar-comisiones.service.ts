@@ -7,7 +7,7 @@ import {ComisionesService} from '../services/comisiones.service';
 import {DatePipe, DecimalPipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortColumn, SortDirection} from '@shared/directivas/sortable.directive';
-import { ultimoElement } from '@shared/clases/ultimo-estado';
+import { TablaSolicitudesComponent } from "@shared/components/tablas/tabla-solicitudes/tabla-solicitudes.component";
 
 interface SearchResult {
   comisiones: Comision[];
@@ -22,7 +22,7 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: Comision[] | any, v2: Comision[]|any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: any, v2: any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
   if (direction === '' || column === '') {
@@ -35,12 +35,14 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
   }
 }
 
-function matches(comisiones: Comision, term: string, pipe: PipeTransform ) {
+
+
+function matches(comisiones: Comision, term: string, pipe: PipeTransform): any {
   return (
     // datepipe.transform(comisiones.id)?.includes(term) ||
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())||
-    comisiones.nombreEstadoActual.toLowerCase().includes(term.toLowerCase())||
-    ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.created_at.toLowerCase().includes(term.toLowerCase)||
+    // ultimoEstado(comisiones.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(term.toLowerCase())||
+    // ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.created_at.toLowerCase().includes(term.toLowerCase)||
     comisiones.usuarios.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
@@ -134,6 +136,10 @@ export class BuscarComisionesService {
 
 
 
+
+function ultimoEstado(intermediate_comisiones: import("../interfaces/comisionesxestado").ComisionesXEstadoInside[]) {
+  throw new Error('Function not implemented.');
+}
 // let compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 // function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {

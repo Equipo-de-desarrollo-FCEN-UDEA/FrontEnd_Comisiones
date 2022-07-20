@@ -8,6 +8,7 @@ import {DatePipe, DecimalPipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortColumn, SortDirection} from '@shared/directivas/sortable.directive';
 import { TablaSolicitudesComponent } from "@shared/components/tablas/tabla-solicitudes/tabla-solicitudes.component";
+import { ultimoElement } from "@shared/clases/ultimo-estado";
 
 interface SearchResult {
   comisiones: Comision[];
@@ -37,12 +38,13 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 
 
 
-function matches(comisiones: Comision, term: string, pipe: PipeTransform): any {
+
+function matches(comisiones: Comision, term: string, pipe: PipeTransform ): any {
   return (
     // datepipe.transform(comisiones.id)?.includes(term) ||
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())||
-    // ultimoEstado(comisiones.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(term.toLowerCase())||
-    // ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.created_at.toLowerCase().includes(term.toLowerCase)||
+    ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase)||
+    ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.created_at.toLowerCase().includes(term.toLowerCase)||
     comisiones.usuarios.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||

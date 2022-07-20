@@ -17,6 +17,11 @@
       <th scope="col" sortable="tipos_comision" (sort)="onSort($event)">Solicitud</th>
       <th scope="col" sortable="intermediate_comisiones" (sort)="onSort($event)">Estado</th>
       <th scope="col" sortable="intermediate_comisiones" (sort)="onSort($event)">Fecha</th>
+      <th scope="col" sortable="usuarios" (sort)="onSort($event)">Nombre</th>
+      <th scope="col" sortable="usuarios_id" (sort)="onSort($event)">Apellido</th>
+      <th scope="col" sortable="usuarios_id" (sort)="onSort($event)">Departamento</th>
+      <th scope="col" sortable="usuarios_id" (sort)="onSort($event)">Facultad</th>
+
     </tr>
     </thead>
     <tbody>
@@ -30,34 +35,55 @@
       </td>
 
       
-      <!-- <td>
-        <ngb-highlight [result]="comision.nombreEstadoActual" [term]="service.searchTerm"></ngb-highlight>
-        
-      </td> -->
-
       <td>
         <ngb-highlight
-          [result]="ultimoEstado(comision)"
+          [result]="ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre"
           [term]="service.searchTerm"
           class="badge badge-pill pill"
           [ngClass]="{
             'bg-solicitada':
-              ultimoEstado(comision) === 'SOLICITADA',
-            'bg-aprobada': ultimoEstado(comision) === 'APROBADA',
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'SOLICITADA',
+            'bg-aprobada': ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA',
             'bg-visto-bueno':
-              ultimoEstado(comision) === 'VISTO BUENO',
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'VISTO BUENO',
             'bg-finalizada':
-              ultimoEstado(comision) === 'FINALIZADA',
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'FINALIZADA',
             'bg-rechazada-decanato':
-              ultimoEstado(comision) === 'RECHAZADA DECANATO',
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA DECANATO',
             'bg-rechazada-coordinacion':
-              ultimoEstado(comision) === 'RECHAZADA COORDINACIÓN'
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
           }"
         ></ngb-highlight>
       </td>
 
       <td>
-        <ngb-highlight [result]="ultimaFecha(comision) | date" [term]="service.searchTerm"></ngb-highlight>
+        <ngb-highlight 
+        [result]="ultimoElemento(comision.intermediate_comisiones).created_at | date" [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.nombre" [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.apellido" [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.departamentos.nombre" [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
+        </ngb-highlight>
       </td>
 
 
@@ -72,7 +98,7 @@
   <div class="d-flex justify-content-between p-2">
     <ngb-pagination
       [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
-    </ngb-pagination> -->
+    </ngb-pagination> 
 
     <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize"> 
       <option [ngValue]="2">2 items per page</option>

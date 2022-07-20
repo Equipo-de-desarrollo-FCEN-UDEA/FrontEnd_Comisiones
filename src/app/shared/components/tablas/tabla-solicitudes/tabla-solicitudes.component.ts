@@ -10,7 +10,7 @@ import {NgbdSortableHeader, SortEvent} from '@shared/directivas/sortable.directi
 import { BuscarComisionesService } from '@services/buscar-comisiones.service';
 import { ComisionesService } from '@services/comisiones.service';
 import { Router } from '@angular/router';
-import { ultimoEstado, ultimaFecha } from '@shared/clases/ultimo-estado';
+import { ultimoElement } from '@shared/clases/ultimo-estado';
 
 
 @Component({
@@ -24,8 +24,9 @@ export class TablaSolicitudesComponent {
   total$: Observable<number>;
   ListComisiones = false;
   error= '';
-  ultimoEstado = ultimoEstado;
-  ultimaFecha = ultimaFecha;
+  ultimoElemento = ultimoElement
+  // ultimoEstado = ultimoEstado;
+  // ultimaFecha = ultimaFecha;
 
 
 
@@ -39,8 +40,9 @@ export class TablaSolicitudesComponent {
     ) {
       this.comisiones$ = service.comisiones$;
       this.total$ = service.total$;
-      this.ultimoEstado = ultimoEstado;
-      this.ultimaFecha = ultimaFecha;
+      this.ultimoElemento = ultimoElement
+      // this.ultimoEstado = ultimoEstado;
+      // this.ultimaFecha = ultimaFecha;
 
     }
 

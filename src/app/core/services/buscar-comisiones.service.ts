@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 
 import {Comision} from '../interfaces/comisiones';
 import {ComisionesService} from '../services/comisiones.service';
-import {DatePipe, DecimalPipe} from '@angular/common';
+import {DatePipe, DecimalPipe, JsonPipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortColumn, SortDirection} from '@shared/directivas/sortable.directive';
 import { TablaSolicitudesComponent } from "@shared/components/tablas/tabla-solicitudes/tabla-solicitudes.component";
@@ -23,7 +23,7 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: any, v2: any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: any | string, v2: any | string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
   if (direction === '' || column === '') {
@@ -39,16 +39,18 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 
 
 
-function matches(comisiones: Comision, term: string, pipe: PipeTransform ): any {
+function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
+
   return (
     // datepipe.transform(comisiones.id)?.includes(term) ||
-    comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())||
-    pipe.transform(ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre).includes(term.toLocaleLowerCase())||
-    ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.created_at.toLowerCase().includes(term.toLowerCase)||
+    comisiones.tipos_comision.nombre.toLowerCase().includes(term)||
+    ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre.toUpperCase().includes(term)||
+    ultimoElement(comisiones.intermediate_comisiones).created_at.includes(term)||
     comisiones.usuarios.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
-    comisiones.usuarios.departamentos.facultades.nombre.toLowerCase().includes(term) 
+    comisiones.usuarios.departamentos.facultades.nombre.toUpperCase().includes(term) 
+    //|| datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).created_at, 'd MMM y')
   );
 }
 
@@ -71,8 +73,8 @@ export class BuscarComisionesService {
   COMISIONES : Comision[] = [];
 
   constructor(
-    private pipe: DatePipe,
-    private comisionesSvc: ComisionesService
+    private comisionesSvc: ComisionesService,
+    private datepipe: DatePipe
     ) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
@@ -93,6 +95,7 @@ export class BuscarComisionesService {
       }
     )
   }
+  
 
   get comisiones$() { return this._comisiones$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
@@ -101,16 +104,19 @@ export class BuscarComisionesService {
   get pageSize() { return this._state.pageSize; }
   get searchTerm() { return this._state.searchTerm; }
 
+
   set page(page: number) { this._set({page}); }
   set pageSize(pageSize: number) { this._set({pageSize}); }
   set searchTerm(searchTerm: string) { this._set({searchTerm}); }
   set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
   set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
 
+
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
     this._search$.next();
   }
+
 
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
@@ -119,15 +125,14 @@ export class BuscarComisionesService {
     let comisiones = sort(this.COMISIONES, sortColumn, sortDirection);
 
     // 2. filter
-    comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.pipe));
+    comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.datepipe));
     const total = comisiones.length;
+
 
     // 3. paginate
     comisiones = comisiones.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({comisiones, total});
   }
-
-
 }
 
 
@@ -136,12 +141,6 @@ export class BuscarComisionesService {
 
 
 
-
-
-
-function ultimoEstado(intermediate_comisiones: import("../interfaces/comisionesxestado").ComisionesXEstadoInside[]) {
-  throw new Error('Function not implemented.');
-}
 // let compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 // function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {

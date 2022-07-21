@@ -7,7 +7,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SideBarComponent } from './shared/components/side-bar/side-bar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import {LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { LoginComponent } from './shared/pages/login/login.component';
@@ -44,7 +44,8 @@ registerLocaleData(localeEs, 'es');
   providers: [ 
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    DatePipe
  ],
   bootstrap: [AppComponent]
 })

@@ -58,7 +58,8 @@
 
       <td>
         <ngb-highlight 
-        [result]="ultimoElemento(comision.intermediate_comisiones).created_at | date" [term]="service.searchTerm">
+        [result]="ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-MM-dd'" 
+        [term]="service.searchTerm">
         </ngb-highlight>
       </td>
 

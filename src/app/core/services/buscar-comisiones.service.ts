@@ -43,7 +43,7 @@ function matches(comisiones: Comision, term: string, pipe: PipeTransform ): any 
   return (
     // datepipe.transform(comisiones.id)?.includes(term) ||
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())||
-    ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase)||
+    pipe.transform(ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre).includes(term.toLocaleLowerCase())||
     ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.created_at.toLowerCase().includes(term.toLowerCase)||
     comisiones.usuarios.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
@@ -71,7 +71,7 @@ export class BuscarComisionesService {
   COMISIONES : Comision[] = [];
 
   constructor(
-    private pipe: DecimalPipe,
+    private pipe: DatePipe,
     private comisionesSvc: ComisionesService
     ) {
     this._search$.pipe(

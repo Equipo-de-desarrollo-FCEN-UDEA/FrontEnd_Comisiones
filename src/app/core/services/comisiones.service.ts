@@ -41,8 +41,10 @@ export class ComisionesService {
     archivo=${comision.archivos[0]}
     &fecha_inicio=${comision.fecha_inicio}
     &fecha_fin=${comision.fecha_fin}
+    &fecha_resolucion=${comision.fecha_resolucion}
     &justificacion=${comision.justificacion}
-    &lugar=${comision.lugar}
+    &idioma=${comision.idioma}
+    &lugar=${comision.pais+', '+comision.estado+', '+comision.ciudad}
     &tipos_comision_id=${comision.tipos_comision_id}
     &usuarios_id=${comision.usuarios_id}
     `

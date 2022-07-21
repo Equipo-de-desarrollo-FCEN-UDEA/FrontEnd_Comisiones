@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import {  Countries, countries } from '@data/country-data-store';
 import { ComisionesService } from '@services/comisiones.service';
 import { LoaderService } from '@services/loader.service';
 import { Subject } from 'rxjs';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
+import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
 
 @Component({
   selector: 'app-crear-comision',
@@ -15,7 +15,6 @@ import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 })
 export class CrearComisionComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
-  public countries: Countries[] = countries
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
@@ -23,7 +22,21 @@ export class CrearComisionComponent implements OnInit {
   today = this.calendar.getToday();
   files : any[]=[];
   archivos = [1];
+  private pais : Pais={
+    id: 0,
+    name: '',
+    iso2: ''
+  };
+  private estado : Estado = {
+    id: 0,
+    name: '',
+    iso2: '',
+  }
   clicked = 0
+  @ViewChild('floatingpais') floatingpais: ElementRef | null = null;
+  public paises: Pais[]=[];
+  public ciudades: Ciudad[]=[];
+  public estados: Estado[]=[];
   public tiposcomision = [
     {id: 1, nombre: 'Comisión de servicios'},
     {id: 2, nombre: 'Comisión de estudio'},
@@ -42,7 +55,7 @@ export class CrearComisionComponent implements OnInit {
   ) { 
     this.fromDate = null;
     this.toDate = null;
-    console.log(paisesCiudadesSvc.getPaises().subscribe(data => data))
+    
   }
 
   inRange(fecha_1 : any, fecha_2 : any){
@@ -91,10 +104,17 @@ export class CrearComisionComponent implements OnInit {
     fecha_fin : ['',[Validators.required]],
     justificacion : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
     idioma : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    lugar : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
+    pais : ['',[Validators.required]],
+    estado: ['',[Validators.required]],
+    ciudad : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
     tipos_comision_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tiposcomision.length)]]});
 
   ngOnInit(): void {
+     this.paisesCiudadesSvc.getPaises().subscribe(
+      (data:Pais[]) => {
+        this.paises = data;
+      }
+     )
   }
   onUpload(event:Event, index: number) {
     const element = event.target as HTMLInputElement;
@@ -104,6 +124,26 @@ export class CrearComisionComponent implements OnInit {
     }
     console.log(this.files)
 
+  }
+
+  onChangePais(event:any) {
+    const paisId = event.target.value;
+    this.pais = this.paises[paisId];
+    this.paisesCiudadesSvc.getEstados(this.pais).subscribe(
+      (data:Estado[]) => {
+        this.estados = data;
+      }
+    )
+  }
+
+  onChangeEstado(event:any) {
+    const estadoId = event.target.value;
+    this.estado = this.estados[estadoId];
+    this.paisesCiudadesSvc.getCiudades(this.pais, this.estado).subscribe(
+      (data:Ciudad[]) => {
+        this.ciudades = data;
+      }
+    );
   }
 
   removeFile(index: number) {
@@ -125,12 +165,15 @@ export class CrearComisionComponent implements OnInit {
     const response ={
       ...this.formComision.value,
       archivos: this.files,
-      usuarios_id: 12
+      fecha_resolucion: new Date(this.formatter.format(this.today)),
+      usuarios_id: 12,
+      pais: this.pais.name,
+      estado: this.estado.name,
     }
     console.log(response)
     this.comisionesSvc.crearComision(response).subscribe(
       (data:any) => {
-        window.alert(data.msg)
+        window.alert(data.message)
       }
     )
   }

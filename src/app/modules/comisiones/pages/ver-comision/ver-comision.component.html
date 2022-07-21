@@ -8,37 +8,37 @@
   <hr />
   <div class="row regular-row">
     <div class="col-6 label">Tipo de Comisión</div>
-    <div class="col-sm-6">comision.tipos_comision</div>
+    <div class="col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
-    <div class="col-sm-6">comision.createdAt | date: "fullDate" </div>
+    <div class="col-sm-6">{{comision?.fecha_resolucion | date: "fullDate"}} </div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
-    <div class="col-sm-6">comision.fecha_inicio | date: "fullDate"</div>
+    <div class="col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
-    <div class="col-sm-6">comision.fecha_fin | date: "fullDate"</div>
+    <div class="col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Idioma</div>
-    <div class="col-sm-6">comision.idioma</div>
+    <div class="col-sm-6">{{comision?.idioma}}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Lugar</div>
-    <div class="col-sm-6">comision.lugar</div>
+    <div class="col-sm-6">{{comision?.lugar}}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Justificación</div>
-    <div class="col-sm-6">comision.justificacion</div>
+    <div class="col-sm-6">{{comision?.justificacion}}</div>
   </div>
 
 

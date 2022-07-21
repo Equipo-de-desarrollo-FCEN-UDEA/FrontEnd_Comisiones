@@ -34,7 +34,7 @@ export class CartaInicioComponent implements OnInit {
    
    
    FormCarta = this.fb.group({
-    Cuerpo: ['', Validators.required],
+    Cuerpo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1300)]],
    }
    );
 

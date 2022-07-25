@@ -1,10 +1,11 @@
 <div class="container">
-  <h4>Formulario de creación de permiso</h4>
+  <h4>Formulario de creación de comisión</h4>
   <form
-    class="need-validation card p-4"
+    class="need-validation card"
     need-validation
     novalidate
-    [formGroup]="formPermiso"
+    [formGroup]="formComision"
+    (ngSubmit)="onSubmit()"
   >
     <ng-template #footerTemplate>
       <hr class="my-0" />
@@ -23,12 +24,20 @@
       >
         Hoy
       </button>
+
       <button
         class="btn btn-secondary btn-sm m-2 float-end"
         (click)="datepicker.close()"
       >
         Cerrar
       </button>
+      <p
+        *ngIf="fromDate && toDate && true"
+        style="text-align: center; margin: 0; color: red"
+      >
+        Recuerda que la fecha máxima para este tipo de permiso es de
+        {{ dias_permiso }} días hábiles
+      </p>
     </ng-template>
 
     <div class="dp-hidden position-absolute">
@@ -67,33 +76,52 @@
       <div class="formfloatig">
         <select
           class="form-select form-select-lg mb-3"
-          id="floatingtipos_permiso_id"
-          formControlName="tipos_permiso_id"
+          id="floatingtipos_comision_id"
+          formControlName="tipos_comision_id"
           required
-          [ngClass]="{ 'is-invalid': isInvalidForm('tipos_permiso_id') }"
+          [ngClass]="{ 'is-invalid': isInvalidForm('tipos_comision_id') }"
           placeholder=" "
         >
           <option
-            [value]="tipos_permiso_id.id"
-            *ngFor="let tipos_permiso_id of tipospermiso"
+            [value]="tipos_comision_id.id"
+            *ngFor="let tipos_comision_id of tiposcomision"
           >
-            {{ tipos_permiso_id.nombre }}
+            {{ tipos_comision_id.nombre }}
           </option>
         </select>
         <label
-          for="floatingtipos_permiso_id"
+          for="floatingtipos_comision_id"
           class="selectLabel"
-          [ngClass]="{ isFill: formPermiso.controls['tipos_permiso_id'].valid }"
-          >Tipo de permiso</label
+          [ngClass]="{
+            isFill: formComision.controls['tipos_comision_id'].valid
+          }"
+          >Tipo de comision</label
         >
       </div>
 
-      <h6>
-        <span class="text-muted" style="color: green">
-          Rango de fechas del permiso
-        </span>
-      </h6>
-
+      <div class="formfloatig">
+        <select
+          class="form-select form-select-lg mb-3"
+          id="floatinglugar"
+          formControlName="lugar"
+          required
+          [ngClass]="{ 'is-invalid': isInvalidForm('lugar') }"
+          placeholder=" "
+        >
+          <option [value]="country.name" *ngFor="let country of countries">
+            {{ country.name }}
+          </option>
+        </select>
+        <label
+          for="floatinglugar"
+          class="selectLabel"
+          [ngClass]="{ isFill: formComision.controls['lugar'].valid }"
+          >Lugar de la comision</label
+        >
+      </div>
+      <h5>
+        <span class="text-muted">Rango de fechas de la comision</span>
+      </h5>
       <div class="col-sm-12 col-xs-12 col-md-12" style="margin-bottom: 5px">
         <div class="input-group">
           <input
@@ -138,6 +166,18 @@
         </div>
       </div>
 
+      <div class="formfloatig">
+        <input
+          id="floatingidioma"
+          formControlName="idioma"
+          class="form-control"
+          type="idioma"
+          placeholder=" "
+          [ngClass]="{ 'is-invalid': isInvalidForm('idioma') }"
+          required
+        />
+        <label for="floatingidioma" class="formLabel"> Idioma </label>
+      </div>
       <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
         Recuerda que la justificación debe tener al menos 30 caracteres y máximo
         500 caracteres.
@@ -157,9 +197,9 @@
           Justificación
         </label>
       </div>
-      <h6>
-        <span class="text-muted">Archivos adjuntos del permiso</span>
-      </h6>
+      <h5>
+        <span class="text-muted">Archivos adjuntos a la solicitud</span>
+      </h5>
       <div class="alert-danger" *ngIf="files.length > 0 && !validSize()">
         <p>Los archivos no deben pesar más de 2 MB.</p>
       </div>
@@ -184,14 +224,14 @@
           </div>
           <div class="buttons" style="width: fit-content; margin: 0">
             <button
-              class="btn btn-circle btn-remove btn-sm"
+              class="btn btn-circle btn-danger btn-sm"
               type="button"
               (click)="removeFile(i)"
             >
               <i class="fa fa-minus"></i>
             </button>
             <button
-              class="btn btn-circle btn-add btn-sm"
+              class="btn btn-circle btn-primary btn-sm"
               type="button"
               (click)="archivos.push(1)"
               *ngIf="isLast && archivos.length < 3"
@@ -202,11 +242,23 @@
         </div>
       </div>
     </div>
+
+    <button
+      class="btn btn-secondary"
+      routerLink="../ver-comision">
+      Cancelar
+    </button>
     <button
       class="btn btn-success"
       (submit)="(true)"
-      [disabled]="formPermiso.invalid || !validSize()"
+      [disabled]="formComision.invalid || !validSize() || (isLoading | async)"
     >
+      <span
+        *ngIf="isLoading | async"
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
       Enviar
     </button>
   </form>

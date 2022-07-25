@@ -6,13 +6,15 @@ import { VerPermisoComponent } from './pages/ver-permiso/ver-permiso.component';
 import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.component';
 
 
 @NgModule({
   declarations: [
   
     VerPermisoComponent,
-       CrearPermisoComponent
+       CrearPermisoComponent,
+       EditarPermisoComponent
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,11 @@
 <div class="container">
-  <h4>Formulario de creación de permiso</h4>
+  <h4>Editar permiso</h4>
   <form
-    class="need-validation card p-4"
+    class="need-validation card p-5 shadow"
     need-validation
     novalidate
     [formGroup]="formPermiso"
+    (ngSubmit)="onUpload(permiso)"
   >
     <ng-template #footerTemplate>
       <hr class="my-0" />
@@ -138,7 +139,7 @@
         </div>
       </div>
 
-      <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
+      <div class="alert alert-danger" *ngIf="isInvalidForm('justificacion')">
         Recuerda que la justificación debe tener al menos 30 caracteres y máximo
         500 caracteres.
       </div>
@@ -160,7 +161,7 @@
       <h6>
         <span class="text-muted">Archivos adjuntos del permiso</span>
       </h6>
-      <div class="alert-danger" *ngIf="files.length > 0 && !validSize()">
+      <div class="alert alert-danger" *ngIf="files.length > 0 && !validSize()">
         <p>Los archivos no deben pesar más de 2 MB.</p>
       </div>
       <div class="formfloatig" style="display: flex; flex-direction: column">
@@ -175,7 +176,7 @@
                 [id]="i"
                 class="file-upload"
                 type="file"
-                (change)="onUpload($event, i)"
+                (change)="onUpload(permiso)"
               />
               <label [for]="i" style="margin-left: 10px">{{
                 files[i] ? files[i].name : "Subir archivo"
@@ -184,14 +185,14 @@
           </div>
           <div class="buttons" style="width: fit-content; margin: 0">
             <button
-              class="btn btn-circle btn-remove btn-sm"
+              class="btn btn-circle btn-remove btn-sm m-1"
               type="button"
               (click)="removeFile(i)"
             >
               <i class="fa fa-minus"></i>
             </button>
             <button
-              class="btn btn-circle btn-add btn-sm"
+              class="btn btn-circle btn-add btn-sm m-1"
               type="button"
               (click)="archivos.push(1)"
               *ngIf="isLast && archivos.length < 3"
@@ -202,6 +203,13 @@
         </div>
       </div>
     </div>
+
+    <button 
+      class="btn btn-secondary"
+			routerLink="../ver-permisos">
+        Cancelar
+    </button>
+
     <button
       class="btn btn-success"
       (submit)="(true)"

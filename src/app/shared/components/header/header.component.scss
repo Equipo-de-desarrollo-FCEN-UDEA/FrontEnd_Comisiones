@@ -16,7 +16,7 @@
   }
 }
 
-ul {
+ul, li{
   list-style: none;
   padding: 5px;
   margin: 0;
@@ -51,8 +51,8 @@ ul {
     .btn-request {
       color: #fff;
       background-color:#43B649;
-      height: 2.3em;
-      width: 10em;
+      height: 2.5em;
+      width: 15em;
       border: 1px solid #43B649;
       border-radius: 10px;
       font-size: 17px;

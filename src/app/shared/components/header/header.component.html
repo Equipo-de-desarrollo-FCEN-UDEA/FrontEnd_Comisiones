@@ -21,6 +21,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="id01" ngbDropdownMenu>
           <a class="dropdown-item" routerLink="usuarios/ver-usuario/me">Ver perfil</a>
+          <li><hr class="dropdown-divider"></li>
           <a class="dropdown-item" (click)="logout()">Salir</a>
           
         </div>
@@ -29,47 +30,23 @@
   </div>
 
   <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
-
-  
-
-  <div class="navbar-brand" >
-    <ul>
-      <li ngbDropdown>
-       <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:rgb(248, 248, 248);">Comisiones</a>
-
-      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-        <a class="dropdown-item" routerLink="comisiones/crear-comision">Crear comisión</a>
-      </div>
+    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+      <li class="nav-item dropdown">
+        <a style="color:#fff" class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+          Crear Solicitud
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+          <li><a class="dropdown-item" routerLink="permisos/crear-permiso">Permiso</a></li>
+          <li><a class="dropdown-item" routerLink="comisiones/crear-comision">Comisión</a></li>
+          <li><a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Dedicación Exclusiva</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Solicitudes</a>
       </li>
     </ul>
+
   </div>
-
-
-  <div class="navbar-brand">
-    <ul>
-      <li ngbDropdown>
-       <a class="nav-link list-group-item-action"  id="comisiones" ngbDropdownToggle style="color:#fff;">Permisos</a>
-
-      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-        <a class="dropdown-item" routerLink="permisos/crear-permiso">Crear permiso</a>
-      </div>
-    </li>
-    </ul>
-  </div>
-
-
-  <div class="navbar-brand">
-    <ul>
-      <li ngbDropdown>
-       <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:#fff;">Dedidaciones</a>
-
-      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-        <a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Crear dedicación exclusiva</a>
-      </div>
-    </li>
-    </ul>
-  </div>
-</div>
   
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
@@ -124,7 +101,7 @@
                 </div>
                 <ul>
                   <li>
-                    <a routerLink="">
+                    <a routerLink="usuarios/ver-usuario/me">
                       <span>
                         <i class="far fa-user"></i>
                         Mi Perfil
@@ -132,7 +109,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a routerLink="../home">
                       <span>
                         <i class="fas fa-home"></i>
                         Solicitudes
@@ -163,7 +140,6 @@
                 </ul>
               </div>
               <!-- sidebar-menu  -->
-              <!-- sidebar-content  -->
               <div class="sidebar-footer">
                 <hr />
                 <a (click)="logout()">

@@ -50,7 +50,7 @@ export class VerPermisoComponent implements OnInit {
         this.permisoService.delete(id).subscribe({
           next: (response) => {
             console.log(response);
-            this.router.navigate(['/home/permisos']);
+            this.router.navigate(['../home']);
             Swal.fire({
               title: 'Eliminada!',
               text: '¡El permiso ha sido eliminada!',

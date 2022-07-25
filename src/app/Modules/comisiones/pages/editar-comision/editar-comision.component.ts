@@ -13,12 +13,14 @@ import { Subject } from 'rxjs';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 
+
 @Component({
-  selector: 'app-crear-comision',
-  templateUrl: './crear-comision.component.html',
-  styleUrls: ['./crear-comision.component.scss'],
+  selector: 'app-editar-comision',
+  templateUrl: './editar-comision.component.html',
+  styleUrls: ['./editar-comision.component.scss']
 })
-export class CrearComisionComponent implements OnInit {
+export class EditarComisionComponent implements OnInit {
+
   hoveredDate: NgbDate | null = null;
   public countries: Countries[] = countries;
   fromDate: NgbDate | null;
@@ -176,4 +178,5 @@ export class CrearComisionComponent implements OnInit {
       window.alert(data.msg);
     });
   }
+
 }

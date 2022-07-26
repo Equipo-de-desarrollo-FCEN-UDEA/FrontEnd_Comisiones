@@ -19,7 +19,6 @@ export class EditarPermisoComponent implements OnInit {
   getId: any;
   loading = false;
   submitted = false;
-  disponible = true;
   error = '';
   files :any[] = [];
   archivos = [1];
@@ -44,7 +43,7 @@ export class EditarPermisoComponent implements OnInit {
     {id: 8, nombre: 'Licencia de luto'}
   ]
 
-  constructor(
+   constructor(
     private permisoService:PermisoService,
     private activateRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -53,35 +52,35 @@ export class EditarPermisoComponent implements OnInit {
     private calendar : NgbCalendar,
     private fb: FormBuilder,
     public formatter: NgbDateParserFormatter,
-  ) {
+   ) {
     
-   this.getId = this.activateRoute.snapshot.paramMap.get('id');
-   this.permisoService.getPermiso(this.getId).subscribe({
-    next: (res) => {
-      this.updatePermiso.setValue({
-        tipos_permisos: res.tipos_permisos.nombre,
-        justificacion: res.justificacion,
-      });
-    },
-    error: (err) => {
-      if (err.status === 404 || err.status === 401) {
-        this.error = err.error.msg; // mensaje desde el back
-        this.loading = false;
-      }
-    },
-  });
+    this.getId = this.activateRoute.snapshot.paramMap.get('id');
+  //  this.permisoService.getPermiso(this.getId).subscribe({
+  //   next: (res) => {
+  //     this.updatePermiso.setValue({
+  //       tipos_permisos: res.tipos_permisos.nombre,
+  //       justificacion: res.justificacion,
+  //     });
+  //   },
+  //   error: (err) => {
+  //     if (err.status === 404 || err.status === 401) {
+  //       this.error = err.error.msg; // mensaje desde el back
+  //       this.loading = false;
+  //     }
+  //   },
+  // });
 
-  this.updatePermiso = this.formBuilder.group({
-    tipos_permisos: [''],
-    justificacion: ['', Validators.required],
+    this.updatePermiso = this.formBuilder.group({
+      tipos_permisos: [''],
+      justificacion: ['', Validators.required],
 
-  });
-   }
+    });
+    }
 
-   ngOnInit(): void {
+    ngOnInit(): void {
     this.fromDate = null;
     this.toDate = null;
-   }
+    }
 
    onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -173,6 +172,5 @@ export class EditarPermisoComponent implements OnInit {
   isInvalidForm(controlName: string) {
     return this.formPermiso.get(controlName)?.invalid && this.formPermiso.get(controlName)?.touched;
   }
-
 
 }

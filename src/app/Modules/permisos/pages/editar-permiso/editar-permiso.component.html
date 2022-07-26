@@ -143,7 +143,7 @@
         Recuerda que la justificación debe tener al menos 30 caracteres y máximo
         500 caracteres.
       </div>
-      <div class="formfloatig">
+      <div class="formfloatig mt-3">
         <textarea
           id="floatingjustificacion"
           formControlName="justificacion"
@@ -203,19 +203,19 @@
         </div>
       </div>
     </div>
-
-    <button 
-      class="btn btn-secondary"
-			routerLink="../ver-permisos">
-        Cancelar
-    </button>
-
-    <button
-      class="btn btn-success"
-      (submit)="(true)"
-      [disabled]="formPermiso.invalid || !validSize()"
-    >
-      Enviar
-    </button>
+    <div class="row d-flex footer-row justify-content-end">
+        <button 
+          class="btn btn-secondary col-md-3 m-2 col-sm-12 col-xs-12"
+          routerLink="../ver-permisos">
+            Cancelar
+        </button>
+        <button
+          class="btn btn-success col-md-3 m-2 col-sm-12 col-xs-12" 
+          (submit)="(true)"
+          [disabled]="formPermiso.invalid || !validSize()"
+        >
+          Enviar
+        </button>
+     </div>
   </form>
 </div>

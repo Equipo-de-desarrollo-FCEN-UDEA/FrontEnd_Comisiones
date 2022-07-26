@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Comision } from '@interfaces/comisiones';
+import { Comision, ComisionDTO, ComResInside } from '@interfaces/comisiones';
 import { ComisionesService } from '@services/comisiones.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -14,8 +14,10 @@ export class VerComisionComponent implements OnInit {
 
   loading:boolean = false;
   error:string = '';
-  comision: Comision | undefined;
-  comision$: Observable<Comision> | undefined
+  comisionInside!: ComResInside;
+  comisionDTO!: ComisionDTO;
+  comision!: Comision;
+  comision$!: Observable<Comision>;
   comisiones:any = []
 
   constructor(
@@ -29,8 +31,7 @@ export class VerComisionComponent implements OnInit {
       const id = params['id'];
       if (id) {
         this.comisionesService.getComision(id).subscribe((resComision) => {
-          this.comision = resComision;
-          console.log(this.comision);
+          this.comisionInside = resComision;
         });
       }
     });

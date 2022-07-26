@@ -242,24 +242,25 @@
         </div>
       </div>
     </div>
-
+    <div class="row d-flex footer-row justify-content-end">
     <button
       class="btn btn-secondary"
       routerLink="../ver-comision">
       Cancelar
     </button>
     <button
-      class="btn btn-success"
+      class="btn btn-success col-md-3 m-2 col-sm-12 col-xs-12"
       (submit)="(true)"
       [disabled]="formComision.invalid || !validSize() || (isLoading | async)"
     >
       <span
         *ngIf="isLoading | async"
-        class="spinner-border spinner-border-sm"
+        class="spinner-border spinner-border-sm col-md-3 m-2 col-sm-12 col-xs-12"
         role="status"
         aria-hidden="true"
       ></span>
       Enviar
     </button>
+    </div>
   </form>
 </div>

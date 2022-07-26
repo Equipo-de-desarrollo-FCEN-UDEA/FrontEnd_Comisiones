@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PermisosInside } from '@interfaces/permisos';
+import { PermisosInside, PermisosResponse } from '@interfaces/permisos';
 import { PermisoService } from '@services/permiso.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -14,15 +14,17 @@ export class VerPermisoComponent implements OnInit {
 
   loading:boolean = false;
   error:string = '';
-  permiso: PermisosInside | undefined;
+  permiso!: PermisosInside;
+  permisoResponse!: PermisosResponse;
   permiso$: Observable<PermisosInside> | undefined;
   permisos: any = [];
 
   constructor(
     private permisoService: PermisoService,
     private activateRoute: ActivatedRoute,
-    private router: Router
-  ) { } 
+    private router: Router,
+  ) {
+   } 
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe((params) => {

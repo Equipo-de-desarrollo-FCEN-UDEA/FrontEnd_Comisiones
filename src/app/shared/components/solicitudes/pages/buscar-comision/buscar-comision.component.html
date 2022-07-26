@@ -1,1 +1,54 @@
-<p>buscar-comision works!</p>
+<h3>Por comision</h3>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off">
+            <input type="text"
+                    name="termino"
+                    class="form-control"
+                    
+                    placeholder="Buscar Comision...">
+        </form>
+    </div>
+</div>
+
+<hr>
+
+<div class="alert alert-danger">
+    No se encontraron Comisiones
+</div>
+
+<div class="row">
+    <div class="col">
+        <table class="table table-hover">
+
+            <thead>
+              <tr>
+                <th> # </th>
+                <th> Estado </th>
+                <th> Fecha </th>
+                <th> Empleado </th>
+                <th> Rol </th>
+                <th>Departamento</th>
+                <th>Facultad</th>
+                
+            </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let comision of comisiones">
+                <td>{{ comision.id }}</td>
+                <td>data</td>
+                <td>data</td>
+                <td>data</td>
+                <td>
+                  <a data
+                    data>
+                  Ver...</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+    </div>
+</div>

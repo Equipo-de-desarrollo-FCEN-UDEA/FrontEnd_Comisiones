@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@guards/auth.guard';
+import { TablaSolicitudesComponent } from '@shared/components/solicitudes/tabla-solicitudes/tabla-solicitudes.component';
 import { LoginComponent } from '@shared/pages/login/login.component';
 import { NotFoundComponent } from '@shared/pages/not-found/not-found.component';
 import { RecuperarContrasenaComponent } from '@shared/pages/recuperar-contrasena/recuperar-contrasena.component';
@@ -43,12 +44,13 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
+    
     pathMatch: 'full'
   },
   { path: 'home',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/home/home.module')
-      .then(m => m.HomeModule) 
+    loadChildren: () => import('./shared/components/solicitudes/solicitudes.module')
+      .then(m => m.SolicitudesModule) 
   },
   { path: 'usuarios',
     canActivate: [AuthGuard], 

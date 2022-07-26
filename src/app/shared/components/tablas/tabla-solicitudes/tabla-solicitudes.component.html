@@ -1,17 +1,17 @@
 
-<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded">
-<form>
-  <div class="mb-3 row">
-    <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar Solicitud:</label>
-    <div class="col-xs-3 col-sm-auto">
-      <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
-    </div>
-    <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-    <tr>
+<!-- <div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded"> -->
+<!-- <form> -->
+  <!-- <div class="mb-3 row"> -->
+    <!-- <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar Solicitud:</label> -->
+    <!-- <div class="col-xs-3 col-sm-auto"> -->
+      <!-- <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm"> -->
+    <!-- </div> -->
+    <!-- <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span> -->
+  <!-- </div> -->
+<!--  -->
+  <!-- <table class="table table-striped"> -->
+    <!-- <thead> -->
+    <!-- <tr>
     
       <th scope="col">#</th>
       <th scope="col" sortable="tipos_comision" (sort)="onSort($event)">Solicitud</th>
@@ -22,8 +22,8 @@
       <th scope="col" sortable="usuarios_id" (sort)="onSort($event)">Departamento</th>
       <th scope="col" sortable="usuarios_id" (sort)="onSort($event)">Facultad</th>
 
-    </tr>
-    </thead>
+    </tr> -->
+    <!-- </thead>
     <tbody>
     
       <tr *ngFor="let comision of comisiones$ | async">
@@ -58,7 +58,7 @@
 
       <td>
         <ngb-highlight 
-        [result]="ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-MM-dd'" 
+        [result]="ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-mm-dd'" 
         [term]="service.searchTerm">
         </ngb-highlight>
       </td>
@@ -85,14 +85,14 @@
         <ngb-highlight
         [result]="comision.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
         </ngb-highlight>
-      </td>
+      </td> -->
 
 
 
         <!-- <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight> -->
       <!-- <td><ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight></td> -->
       <!-- <td><ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight></td> -->
-    </tr>
+    <!-- </tr>
     </tbody>
   </table>
 
@@ -109,4 +109,4 @@
   </div>
 
 </form>
-</div>
+</div> -->

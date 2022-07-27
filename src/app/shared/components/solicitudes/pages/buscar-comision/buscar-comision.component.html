@@ -1,24 +1,19 @@
-<div class="">
+<div >
 
-    <input type="text" class="form-control mb-2" placeholder="Buscar"
-        #txtSearch (keyup)="onSearchComision( txtSearch.value )"/>
+    <div class="navbar navbar-expand-lg p-2 m-5 d-flex justify-content-end" 
+        style="background-color:#215e24">
 
+        
 
+        <div class="form-inline my-2 my-lg-0 me-5">
+            <input type="text" class="form-control" placeholder="Buscar"
+            #txtSearch (keyup)="onSearchComision( txtSearch.value )"/>
+        </div>
+    </div>
 
-<button class="btn btn-primary"
-        (click)="prevPage()">
-    Anteriores
-</button>
-&nbsp;
-<button class="btn btn-primary"
-        (click)="nextPage()">
-    Siguiente
-</button>
+    
 
-
-
-   
-        <table class="table table-striped">
+<table class="table table-striped">
 
             <thead>
               <tr>
@@ -52,6 +47,18 @@
               </tr>
             </tbody>
           </table>
+
+          <div class="row d-flex justify-content-end w-100">
+            <button class="btn btn-primary col-2 col-md-2 col-xs-2 "
+                (click)="prevPage()">
+                <i class="fa-solid fa-arrow-left" style="color:#fff;"></i>
+            </button>
+            &nbsp;
+            <button class="btn btn-primary"
+                (click)="nextPage()">
+                <i class="fa-solid fa-arrow-right" style="color:#fff;"></i>
+            </button>
+        </div>
 
 
 </div>

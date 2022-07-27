@@ -12,7 +12,12 @@ export class FiltroPipe implements PipeTransform {
     if(search.length ===0)
     return comisiones.slice(page, page + 5);
 
-    const filteredComisiones = comisiones.filter( comision => ultimoElement(comision.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(search));
+    const filteredComisiones = comisiones
+    .filter (comision => ultimoElement(
+      comision.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(search) ||
+      comision.usuarios.nombre.toLowerCase().includes(search)||
+      comision.usuarios.departamentos.nombre.toLowerCase().includes(search)
+      );
     return filteredComisiones;
   }
 

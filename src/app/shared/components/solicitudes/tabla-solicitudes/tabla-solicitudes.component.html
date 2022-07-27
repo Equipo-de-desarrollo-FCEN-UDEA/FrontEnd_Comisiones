@@ -1,21 +1,42 @@
-
-<div class="row mt-4">
-
-    <div class="col-2">
-      <h2>Busquedas</h2>
-      <hr>
-
-      <ul class="list-group container">
-        <li class="list-group-item" routerLink="permiso" routerLinkActive="active">Buscar Permisos</li>
-        <li routerLink="comision" routerLinkActive="active" class="list-group-item">Buscar Comisiones</li>
-        <li routerLink="dexclusiva" routerLinkActive="active" class="list-group-item">Buscar Dexclusivas</li>
-      </ul>
-    </div>
-
-    <div class="col-2">
-       <router-outlet></router-outlet>
+<!-- 
+    <div class="d-flex">
+      <div class="me-5">
+        <ul >
+          <h2>Busquedas</h2>
+        <hr>
+          <li class="list-group-item" routerLink="permiso" routerLinkActive="active">Buscar Permisos</li>
+          <li routerLink="comision" routerLinkActive="active" class="list-group-item">Buscar Comisiones</li>
+          <li routerLink="dexclusiva" routerLinkActive="active" class="list-group-item">Buscar Dexclusivas</li>
+        </ul>
+      </div>
   
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+      
+    </div>
+     -->
+
+
+
+     <div class="container">
+      
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem>Action - 1</button>
+            <button ngbDropdownItem>Another Action</button>
+            <button ngbDropdownItem>Something else is here</button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <router-outlet></router-outlet>
     </div>
     
-  </div>
     
+  
+  

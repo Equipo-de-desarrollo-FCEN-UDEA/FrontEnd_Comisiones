@@ -8,6 +8,7 @@ import { BuscarComisionComponent } from './pages/buscar-comision/buscar-comision
 import { BuscarPermisoComponent } from './pages/buscar-permiso/buscar-permiso.component';
 import { BuscarDexclusivaComponent } from './pages/buscar-dexclusiva/buscar-dexclusiva.component';
 import { HomeRoutingModule } from './solicitudes-routing.module';
+import { FiltroPipe } from './pipes/filtro.pipe';
 
 
 
@@ -16,7 +17,8 @@ import { HomeRoutingModule } from './solicitudes-routing.module';
     TablaSolicitudesComponent,
     BuscarComisionComponent,
     BuscarPermisoComponent,
-    BuscarDexclusivaComponent
+    BuscarDexclusivaComponent,
+    FiltroPipe
   ],
   imports: [
     CommonModule,

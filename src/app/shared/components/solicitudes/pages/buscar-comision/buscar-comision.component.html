@@ -1,26 +1,24 @@
-<h3>Por comision</h3>
+<div class="">
 
-<div class="row">
-    <div class="col">
-        <form autocomplete="off">
-            <input type="text"
-                    name="termino"
-                    class="form-control"
-                    
-                    placeholder="Buscar Comision...">
-        </form>
-    </div>
-</div>
+    <input type="text" class="form-control mb-2" placeholder="Buscar"
+        #txtSearch (keyup)="onSearchComision( txtSearch.value )"/>
 
-<hr>
 
-<div class="alert alert-danger">
-    No se encontraron Comisiones
-</div>
 
-<div class="row">
-    <div class="col">
-        <table class="table table-hover">
+<button class="btn btn-primary"
+        (click)="prevPage()">
+    Anteriores
+</button>
+&nbsp;
+<button class="btn btn-primary"
+        (click)="nextPage()">
+    Siguiente
+</button>
+
+
+
+   
+        <table class="table table-striped">
 
             <thead>
               <tr>
@@ -28,7 +26,7 @@
                 <th> Estado </th>
                 <th> Fecha </th>
                 <th> Empleado </th>
-                <th> Rol </th>
+                
                 <th>Departamento</th>
                 <th>Facultad</th>
                 
@@ -36,11 +34,16 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let comision of comisiones">
+              <tr *ngFor="let comision of comisiones | filtro:page:search">
                 <td>{{ comision.id }}</td>
-                <td>data</td>
-                <td>data</td>
-                <td>data</td>
+                <td>{{ ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre }}</td>
+                <td>{{ ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-mm-dd'}}</td>
+                <td>{{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}</td>
+                <td>{{ comision.usuarios.departamentos.nombre }}</td>
+                <td>{{ comision.usuarios.departamentos.facultades.nombre }}</td>
+                
+
+                
                 <td>
                   <a data
                     data>
@@ -50,5 +53,9 @@
             </tbody>
           </table>
 
-    </div>
+
 </div>
+
+
+
+

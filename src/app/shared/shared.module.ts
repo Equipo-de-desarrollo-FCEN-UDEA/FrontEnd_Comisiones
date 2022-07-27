@@ -10,7 +10,7 @@ import { NgbdSortableHeader } from './directivas/sortable.directive';
   declarations: [
     // TablaSolicitudesComponent,
     RecuperarContrasenaComponent,
-    NgbdSortableHeader,
+    NgbdSortableHeader
   ],
   imports: [
     CommonModule,

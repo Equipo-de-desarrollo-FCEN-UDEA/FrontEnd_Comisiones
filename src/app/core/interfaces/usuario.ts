@@ -1,6 +1,7 @@
 // import { ComisionesinDB, ComResInside } from "./comisiones";
 import { DepResInside } from "./departamentos";
 import { PermisosInside } from "./permisos";
+import { Rol, RolResponse } from "./roles";
 
 export interface UsuarioCorreo{
     correo: string;
@@ -18,6 +19,7 @@ export interface UsuarioBase {
 
 export interface UsuarioInside extends UsuarioBase {
     departamentos: DepResInside;
+    roles: RolResponse;
 }
 
 export interface Usuario extends UsuarioBase{

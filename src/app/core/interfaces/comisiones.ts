@@ -27,6 +27,7 @@ export interface ComisionesinDB extends Omit<ComisionDTO,'archivo'>, ComResInsid
 }
 
 export interface Comision extends ComisionesinDB{
+    nombre: any;
     tipos_comision: TipoComisionInside
     documentos: DocumentosInside[];
     cumplidos: CumplidoInside[];

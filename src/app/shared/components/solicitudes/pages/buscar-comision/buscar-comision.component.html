@@ -1,15 +1,19 @@
 <div >
 
-    <div class="navbar navbar-expand-lg p-2 m-5 d-flex justify-content-end" 
-        style="background-color:#215e24">
+    <div class="navbar navbar-expand-lg d-flex justify-content-end" 
+    >
 
-        
+       
 
-        <div class="form-inline my-2 my-lg-0 me-5">
+        <div class="form-inline col-3 " >
+
             <input type="text" class="form-control" placeholder="Buscar"
             #txtSearch (keyup)="onSearchComision( txtSearch.value )"/>
+           
         </div>
     </div>
+
+   <hr style="margin: 0;">
 
     
 
@@ -32,7 +36,7 @@
               <tr *ngFor="let comision of comisiones | filtro:page:search">
                 <td>{{ comision.id }}</td>
                 <td>{{ ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre }}</td>
-                <td>{{ ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-mm-dd'}}</td>
+                <td>{{ ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-MM-dd'}}</td>
                 <td>{{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}</td>
                 <td>{{ comision.usuarios.departamentos.nombre }}</td>
                 <td>{{ comision.usuarios.departamentos.facultades.nombre }}</td>
@@ -48,17 +52,22 @@
             </tbody>
           </table>
 
-          <div class="row d-flex justify-content-end w-100">
-            <button class="btn btn-primary col-2 col-md-2 col-xs-2 "
+          <div class="btn-toolbar d-flex justify-content-end" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2" role="group" aria-label="First group">
+                <button class="btn btn-primary col-2 col-md-2 col-xs-2 "
                 (click)="prevPage()">
                 <i class="fa-solid fa-arrow-left" style="color:#fff;"></i>
             </button>
-            &nbsp;
-            <button class="btn btn-primary"
+            </div>
+            <div class="btn-group me-2" role="group" aria-label="Second group">
+                <button class="btn btn-primary"
                 (click)="nextPage()">
                 <i class="fa-solid fa-arrow-right" style="color:#fff;"></i>
             </button>
-        </div>
+            </div>
+          </div>
+
+    
 
 
 </div>

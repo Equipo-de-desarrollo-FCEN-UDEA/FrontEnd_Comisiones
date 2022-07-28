@@ -9,6 +9,9 @@ import { BuscarPermisoComponent } from './pages/buscar-permiso/buscar-permiso.co
 import { BuscarDexclusivaComponent } from './pages/buscar-dexclusiva/buscar-dexclusiva.component';
 import { HomeRoutingModule } from './solicitudes-routing.module';
 import { FiltroPipe } from './pipes/filtro.pipe';
+import { FiltroComisionPipe } from './pipes/filtro-comision.pipe';
+import { FiltroPermisoPipe } from './pipes/filtro-permiso.pipe';
+import { FiltroDexclusivaPipe } from './pipes/filtro-dexclusiva.pipe';
 
 
 
@@ -18,7 +21,10 @@ import { FiltroPipe } from './pipes/filtro.pipe';
     BuscarComisionComponent,
     BuscarPermisoComponent,
     BuscarDexclusivaComponent,
-    FiltroPipe
+    FiltroPipe,
+    FiltroComisionPipe,
+    FiltroPermisoPipe,
+    FiltroDexclusivaPipe
   ],
   imports: [
     CommonModule,

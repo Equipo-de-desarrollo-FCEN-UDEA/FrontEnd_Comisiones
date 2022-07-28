@@ -4,17 +4,14 @@
     height: 4em;
 }
 
-.btn-primary{
-    background-color: #43b649;
-    border-color: #43b649;
-    margin: 1em;
-    width: 2em;
-    height: 1em;
-    border-radius: 100%;
-}
 
 .navbar{
     border-radius: 2em;
 }
-
+.btn{
+    background-color: #43B649;
+    border-color: #43B649;
+}.btn:hover {
+    background-color: #43b649d2;
+}
 

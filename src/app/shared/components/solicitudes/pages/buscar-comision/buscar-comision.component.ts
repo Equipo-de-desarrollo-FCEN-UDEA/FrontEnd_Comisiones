@@ -45,8 +45,8 @@ export class BuscarComisionComponent implements OnInit{
   }
 
   onSearchComision(search: string){
-    this.search =  search;
-    
+    this.search=  search;
+    console.log(search)
   }
 
  

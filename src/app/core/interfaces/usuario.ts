@@ -1,4 +1,4 @@
-// import { ComisionesinDB, ComResInside } from "./comisiones";
+import { ComisionesinDB, ComResInside } from "./comisiones";
 import { DepResInside } from "./departamentos";
 import { PermisosInside } from "./permisos";
 import { Rol, RolResponse } from "./roles";
@@ -39,6 +39,6 @@ export interface UsuarioInDB extends Usuario {
 
 export interface UsuarioResponse extends Usuario {
     departamentos: DepResInside;
-    // comisiones: ComResInside[];
+    comisiones: ComResInside[];
     permisos: PermisosInside[];
 }

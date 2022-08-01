@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
-import {Permiso} from '../interfaces/permisos';
+import {Permiso} from '../../core/interfaces/permisos';
 import {ComisionesService} from '../services/comisiones.service';
 import {DatePipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
-import {SortColumn, SortDirection} from '@shared/directivas/sortable.directive';
+import {SortColumnP, SortDirectionP} from "@shared/directivas/sortable-permiso.directive";
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { PermisoService } from './permiso.service';
 
@@ -17,13 +17,13 @@ interface State {
   page: number;
   pageSize: number;
   searchTerm: string;
-  sortColumn: SortColumn;
-  sortDirection: SortDirection;
+  sortColumn: SortColumnP;
+  sortDirection: SortDirectionP;
 }
 
-const compare = (v1: any | string, v2: any | string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: any | string, v2: string|any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-function sort(permisos: Permiso[], column: SortColumn, direction: string | any): Permiso[] {
+function sort(permisos: Permiso[], column: SortColumnP, direction: string | any): Permiso[] {
   if (direction === '' || column === '') {
     return permisos;
   } else {
@@ -66,6 +66,7 @@ export class BuscarPermisosService {
   };
 
   PERMISOS : Permiso[] = [];
+  
 
   constructor(
     private permisosSvc: PermisoService,
@@ -91,7 +92,7 @@ export class BuscarPermisosService {
     )
    }
 
-   get comisiones$() { return this._permisos$.asObservable(); }
+   get permisos$() { return this._permisos$.asObservable(); }
    get total$() { return this._total$.asObservable(); }
    get loading$() { return this._loading$.asObservable(); }
    get page() { return this._state.page; }
@@ -102,8 +103,8 @@ export class BuscarPermisosService {
    set page(page: number) { this._set({page}); }
    set pageSize(pageSize: number) { this._set({pageSize}); }
    set searchTerm(searchTerm: string) { this._set({searchTerm}); }
-   set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
-   set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
+   set sortColumn(sortColumn: SortColumnP) { this._set({sortColumn}); }
+   set sortDirection(sortDirection: SortDirectionP) { this._set({sortDirection}); }
 
 
   private _set(patch: Partial<State>) {

@@ -19,7 +19,6 @@ import { NotFoundComponent } from './shared/pages/not-found/not-found.component'
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
-import { SolicitudesModule } from '@shared/components/solicitudes/solicitudes.module';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -40,7 +39,7 @@ registerLocaleData(localeEs, 'es');
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    SolicitudesModule
+  
   ],
   providers: [ 
     { provide: LOCALE_ID, useValue: 'es' },

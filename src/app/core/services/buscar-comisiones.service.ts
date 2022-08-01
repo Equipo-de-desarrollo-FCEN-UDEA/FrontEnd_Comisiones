@@ -1,13 +1,12 @@
 import {Injectable, PipeTransform} from '@angular/core';
 
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, of, pipe, Subject} from 'rxjs';
 
 import {Comision} from '../interfaces/comisiones';
 import {ComisionesService} from '../services/comisiones.service';
 import {DatePipe, DecimalPipe, JsonPipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortColumn, SortDirection} from '@shared/directivas/sortable.directive';
-import { TablaSolicitudesComponent } from "@shared/components/tablas/tabla-solicitudes/tabla-solicitudes.component";
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 
 interface SearchResult {
@@ -23,7 +22,7 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: any | string, v2: any | string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
   if (direction === '' || column === '') {
@@ -43,9 +42,9 @@ function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
 
   return (
     // datepipe.transform(comisiones.id)?.includes(term) ||
-    comisiones.tipos_comision.nombre.toLowerCase().includes(term)||
-    ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre.toUpperCase().includes(term)||
-    ultimoElement(comisiones.intermediate_comisiones).created_at.includes(term)||
+    ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
+    // ultimoElement(comisiones.intermediate_comisiones).createdAt(term)||
+    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
     comisiones.usuarios.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||

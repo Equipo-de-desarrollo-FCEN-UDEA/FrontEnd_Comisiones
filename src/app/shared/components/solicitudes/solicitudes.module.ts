@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { TablaSolicitudesComponent } from './tabla-solicitudes/tabla-solicitudes.component';
@@ -8,10 +8,9 @@ import { BuscarComisionComponent } from './pages/buscar-comision/buscar-comision
 import { BuscarPermisoComponent } from './pages/buscar-permiso/buscar-permiso.component';
 import { BuscarDexclusivaComponent } from './pages/buscar-dexclusiva/buscar-dexclusiva.component';
 import { HomeRoutingModule } from './solicitudes-routing.module';
-import { FiltroPipe } from './pipes/filtro.pipe';
-import { FiltroComisionPipe } from './pipes/filtro-comision.pipe';
-import { FiltroPermisoPipe } from './pipes/filtro-permiso.pipe';
-import { FiltroDexclusivaPipe } from './pipes/filtro-dexclusiva.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdSortableHeader } from '@shared/directivas/sortable.directive';
+import { NgbdSortablePermiso } from '@shared/directivas/sortable-permiso.directive';
 
 
 
@@ -21,15 +20,16 @@ import { FiltroDexclusivaPipe } from './pipes/filtro-dexclusiva.pipe';
     BuscarComisionComponent,
     BuscarPermisoComponent,
     BuscarDexclusivaComponent,
-    FiltroPipe,
-    FiltroComisionPipe,
-    FiltroPermisoPipe,
-    FiltroDexclusivaPipe
+    NgbdSortableHeader,
+
+   
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule
   ]
 })
 export class SolicitudesModule { }

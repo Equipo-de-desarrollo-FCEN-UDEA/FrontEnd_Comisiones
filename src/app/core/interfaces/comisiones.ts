@@ -3,6 +3,7 @@ import { CumplidoInside } from "./cumplidos";
 import { DocumentosInside } from "./documentos";
 import { TipoComisionInside } from "./tipos_comision";
 import { UsuarioInside } from "./usuario";
+import {  } from "./permisos";
 
 export interface ComResInside {
     id: number;
@@ -27,6 +28,7 @@ export interface ComisionesinDB extends Omit<ComisionDTO,'archivo'>, ComResInsid
 }
 
 export interface Comision extends ComisionesinDB{
+    results: any;
     nombre: any;
     tipos_comision: TipoComisionInside
     documentos: DocumentosInside[];
@@ -43,6 +45,8 @@ export interface ComisionesXEstadoInDB{
     created_at: Date;
 
 }
+
+
 
 
 

@@ -38,6 +38,10 @@ export class VerPermisoComponent implements OnInit {
     });
   }
 
+  editarPermiso() {
+    //this.router.navigate(['../editar-permiso', this.permiso.id])
+  }
+
   delete(id: any): void {
     Swal.fire({
       title: '¿Seguro que quieres eliminar este permiso?',

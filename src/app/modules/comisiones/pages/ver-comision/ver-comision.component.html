@@ -1,4 +1,4 @@
-<div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded">
+<div class="container card shadow mt-5 bg-white rounded p-4 w-75">
   <div class="row header-row">
     <div class="col">
       <span class="text-secondary">Comisión</span>
@@ -90,7 +90,7 @@
 
   <hr />
 
-  <div class="footer-row d-md-flex justify-content-md-end">
+  <div class="footer-row d-md-flex justify-content-md-end mb-3">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"
@@ -98,6 +98,7 @@
         (click)="delete(comisiones.id)"
       >
         <span
+          *ngIf="loading"
           class="spinner-border spinner-border-sm mr-1"
         ></span>
         Eliminar

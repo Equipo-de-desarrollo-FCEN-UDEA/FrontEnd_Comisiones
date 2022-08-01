@@ -1,5 +1,6 @@
-<div class="container">
-  <h4>Formulario de creación de comisión</h4>
+
+ <div class="container">
+  <h4>Editar Comisión</h4>
   <form
     class="need-validation card"
     need-validation
@@ -111,7 +112,7 @@
           <option [value]="country.name" *ngFor="let country of countries">
             {{ country.name }}
           </option>
-        </select>
+         </select>
         <label
           for="floatinglugar"
           class="selectLabel"
@@ -178,7 +179,7 @@
         />
         <label for="floatingidioma" class="formLabel"> Idioma </label>
       </div>
-      <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
+      <div class="alert alert-danger m-3" *ngIf="isInvalidForm('justificacion')">
         Recuerda que la justificación debe tener al menos 30 caracteres y máximo
         500 caracteres.
       </div>
@@ -197,10 +198,11 @@
           Justificación
         </label>
       </div>
+    </div>
       <h5>
         <span class="text-muted">Archivos adjuntos a la solicitud</span>
       </h5>
-      <div class="alert-danger" *ngIf="files.length > 0 && !validSize()">
+      <div class="alert alert-danger mt-4" *ngIf="files.length > 0 && !validSize()">
         <p>Los archivos no deben pesar más de 2 MB.</p>
       </div>
       <div class="formfloatig" style="display: flex; flex-direction: column">
@@ -241,26 +243,19 @@
           </div>
         </div>
       </div>
-    </div>
     <div class="row d-flex footer-row justify-content-end">
-    <button
-      class="btn btn-secondary"
-      routerLink="../ver-comision">
-      Cancelar
-    </button>
-    <button
-      class="btn btn-success col-md-3 m-2 col-sm-12 col-xs-12"
-      (submit)="(true)"
-      [disabled]="formComision.invalid || !validSize() || (isLoading | async)"
-    >
-      <span
-        *ngIf="isLoading | async"
-        class="spinner-border spinner-border-sm col-md-3 m-2 col-sm-12 col-xs-12"
-        role="status"
-        aria-hidden="true"
-      ></span>
-      Enviar
-    </button>
-    </div>
+      <button 
+        class="btn btn-secondary col-md-3 m-2 col-sm-12 col-xs-12"
+        routerLink="../ver-comision">
+          Cancelar
+      </button>
+      <button
+        class="btn btn-success col-md-3 m-2 col-sm-12 col-xs-12" 
+        (submit)="(true)"
+        [disabled]="formComision.invalid || !validSize()"
+      >
+        Enviar
+      </button>
+   </div>
   </form>
-</div>
+</div>  

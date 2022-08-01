@@ -13,8 +13,12 @@ import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.co
   declarations: [
   
     VerPermisoComponent,
+<<<<<<< HEAD
        CrearPermisoComponent,
        EditarPermisoComponent
+=======
+    CrearPermisoComponent
+>>>>>>> origin
   ],
   imports: [
     CommonModule,

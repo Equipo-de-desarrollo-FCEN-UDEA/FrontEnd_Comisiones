@@ -7,7 +7,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SideBarComponent } from './shared/components/side-bar/side-bar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import {LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { LoginComponent } from './shared/pages/login/login.component';
@@ -18,7 +18,6 @@ import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { SharedModule } from './shared/shared.module';
-import { HomeModule } from './modules/home/home.module';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 registerLocaleData(localeEs, 'es');
 
@@ -40,11 +39,13 @@ registerLocaleData(localeEs, 'es');
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+  
   ],
   providers: [ 
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    DatePipe
  ],
   bootstrap: [AppComponent]
 })

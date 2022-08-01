@@ -43,15 +43,16 @@ function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
   return (
     // datepipe.transform(comisiones.id)?.includes(term) ||
     ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
-    // ultimoElement(comisiones.intermediate_comisiones).createdAt(term)||
-    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
+    ultimoElement(comisiones.intermediate_comisiones).created_at.includes(term)||
+    // datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
     comisiones.usuarios.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.facultades.nombre.toUpperCase().includes(term) 
     //|| datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).created_at, 'd MMM y')
   );
-}
+} 
+
 
 @Injectable({providedIn: 'root'})
 

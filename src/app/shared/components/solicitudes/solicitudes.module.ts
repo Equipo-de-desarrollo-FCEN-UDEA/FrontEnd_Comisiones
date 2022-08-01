@@ -21,6 +21,7 @@ import { NgbdSortablePermiso } from '@shared/directivas/sortable-permiso.directi
     BuscarPermisoComponent,
     BuscarDexclusivaComponent,
     NgbdSortableHeader,
+    // NgbdSortablePermiso
 
    
   ],

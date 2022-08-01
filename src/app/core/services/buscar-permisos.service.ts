@@ -38,9 +38,9 @@ function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
 
   return (
     // datepipe.transform(comisiones.id)?.includes(term) ||
-    permisos.tipos_permiso.nombre.toLowerCase().includes(term)||
+    // permisos.tipos_permiso.nombre.toLowerCase().includes(term)||
     ultimoElement(permisos.intermediate_permisos).intermediate_estados.nombre.toLowerCase().includes(term)||
-    ultimoElement(permisos.intermediate_permisos).createdAt.includes(term)||
+    // ultimoElement(permisos.intermediate_permisos).created_at.includes(term)||
     permisos.usuarios.nombre.toLowerCase().includes(term) ||
     permisos.usuarios.apellido.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
@@ -112,11 +112,14 @@ export class BuscarPermisosService {
     this._search$.next();
   }
 
+  
+
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
     // 1. sort
     let permisos = sort(this.PERMISOS, sortColumn, sortDirection);
+    console.log(permisos)
 
     // 2. filter
     permisos = permisos.filter(permisos => matches(permisos, searchTerm, this.datepipe));
@@ -126,6 +129,8 @@ export class BuscarPermisosService {
     // 3. paginate
     permisos = permisos.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({permisos, total});
+
+    
   }
 
 

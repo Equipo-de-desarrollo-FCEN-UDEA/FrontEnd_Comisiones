@@ -10,7 +10,7 @@ export class FiltroPipe implements PipeTransform {
   transform(comisiones: Comision[], page: number = 0, search:string = '' ): Comision[] {
 
     if(search.length ===0)
-    return comisiones.slice(page, page + 1);
+    return comisiones.slice(page, page +3);
 
     const filteredComisiones = comisiones
     .filter (comision => ultimoElement(

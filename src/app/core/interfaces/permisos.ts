@@ -1,3 +1,4 @@
+import { Comision } from "./comisiones";
 import { DocumentosInside } from "./documentos";
 import { PermisosxestadoInside } from "./permisosxestado";
 import { TiposPermisoInside } from "./tipos_permiso";
@@ -20,9 +21,11 @@ export interface PermisosInDB extends Omit<PermisosDTO, 'archivo'>, PermisosInsi
 
 }
 
-export interface PermisosResponse extends PermisosInDB {
+export interface Permiso extends PermisosInDB {
     tipos_permiso: TiposPermisoInside;
     documentos: DocumentosInside[];
     usuarios: UsuarioInside;
     intermediate_permisos: PermisosxestadoInside[];
+    Comision: Comision[]
 }
+

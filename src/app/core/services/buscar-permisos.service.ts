@@ -40,7 +40,7 @@ function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
     // datepipe.transform(comisiones.id)?.includes(term) ||
     // permisos.tipos_permiso.nombre.toLowerCase().includes(term)||
     ultimoElement(permisos.intermediate_permisos).intermediate_estados.nombre.toLowerCase().includes(term)||
-    // ultimoElement(permisos.intermediate_permisos).created_at.includes(term)||
+    ultimoElement(permisos.intermediate_permisos).created.includes(term)||
     permisos.usuarios.nombre.toLowerCase().includes(term) ||
     permisos.usuarios.apellido.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.nombre.toLowerCase().includes(term) ||

@@ -13,7 +13,7 @@
         <tr>
         
           <th scope="col">#</th>
-          <th scope="col" >Estado</th>
+          <th scope="col" sortable="intermediate_comisiones">Estado</th>
           <th scope="col" >Fecha</th>
           <th scope="col" sortable="usuarios" >Nombre</th>
           <th scope="col" sortable="usuarios_id" >Apellido</th>
@@ -49,13 +49,13 @@
             ></ngb-highlight>
           </td>
     
-          <!-- <td>
+          <td>
             <ngb-highlight 
-            [result]="ultimoElemento(permiso.intermediate_permisos).created_at | date:'yyyy-MM-dd'" 
+            [result]="ultimoElemento(permiso.intermediate_permisos).createdAt | date:'yyyy-MM-dd'" 
             [term]="service.searchTerm">
             </ngb-highlight>
           </td>
-     -->
+    
           <td>
             <ngb-highlight
             [result]="permiso.usuarios.nombre" [term]="service.searchTerm">

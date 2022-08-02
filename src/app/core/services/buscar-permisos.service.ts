@@ -4,7 +4,7 @@ import {Permiso} from '../../core/interfaces/permisos';
 import {ComisionesService} from '../services/comisiones.service';
 import {DatePipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
-import {SortColumnP, SortDirectionP} from "@shared/directivas/sortable-permiso.directive";
+import {SortColumnP, SortDirection} from "@shared/directivas/sortable.directive";
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { PermisoService } from './permiso.service';
 
@@ -17,8 +17,8 @@ interface State {
   page: number;
   pageSize: number;
   searchTerm: string;
-  sortColumn: SortColumnP;
-  sortDirection: SortDirectionP;
+  sortColumnP: SortColumnP;
+  sortDirection: SortDirection;
 }
 
 const compare = (v1: any | string, v2: string|any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
@@ -61,7 +61,7 @@ export class BuscarPermisosService {
     page: 1,
     pageSize: 4,
     searchTerm: '',
-    sortColumn: '',
+    sortColumnP: '',
     sortDirection: ''
   };
 
@@ -86,8 +86,8 @@ export class BuscarPermisosService {
     this._search$.next();
     this.permisosSvc.getPermisos()
     .subscribe(
-      (comisiones: Permiso[]) => {
-        this.PERMISOS = comisiones;
+      (permisos: Permiso[]) => {
+        this.PERMISOS = permisos;
       }
     )
    }
@@ -103,8 +103,8 @@ export class BuscarPermisosService {
    set page(page: number) { this._set({page}); }
    set pageSize(pageSize: number) { this._set({pageSize}); }
    set searchTerm(searchTerm: string) { this._set({searchTerm}); }
-   set sortColumn(sortColumn: SortColumnP) { this._set({sortColumn}); }
-   set sortDirection(sortDirection: SortDirectionP) { this._set({sortDirection}); }
+   set sortColumnP(sortColumnP: SortColumnP) { this._set({sortColumnP}); }
+   set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
 
 
   private _set(patch: Partial<State>) {
@@ -115,10 +115,10 @@ export class BuscarPermisosService {
   
 
   private _search(): Observable<SearchResult> {
-    const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
+    const { sortColumnP, sortDirection, pageSize, page, searchTerm} = this._state;
 
     // 1. sort
-    let permisos = sort(this.PERMISOS, sortColumn, sortDirection);
+    let permisos = sort(this.PERMISOS, sortColumnP, sortDirection);
     console.log(permisos)
 
     // 2. filter

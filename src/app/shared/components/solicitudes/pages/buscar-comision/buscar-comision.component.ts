@@ -28,11 +28,9 @@ export class BuscarComisionComponent {
       this.comisiones$ = service.comisiones$;
       this.total$ = service.total$;
       this.ultimoElemento = ultimoElement
-      
-
     }
 
-    onSort({column, direction}: SortEvent) {
+    onSort({column, columnP, direction}: SortEvent) {
       // resetting other headers
       this.headers.forEach(header => {
         if (header.sortable !== column) {

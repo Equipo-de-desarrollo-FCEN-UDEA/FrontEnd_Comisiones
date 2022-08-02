@@ -7,13 +7,18 @@ import { Permiso } from '@interfaces/permisos';
 
 
 
+
+
 export type SortColumn = keyof Comision | "";
+export type SortColumnP = keyof Permiso | "";
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 
 export interface SortEvent {
-  column: SortColumn;
+  column: SortColumn ;
+  columnP: SortColumnP;
   direction: SortDirection;
+
 }
 
 @Directive({
@@ -27,12 +32,13 @@ export interface SortEvent {
 export class NgbdSortableHeader {
 
   @Input() sortable: SortColumn = '' ;
+  @Input() sortableP: SortColumnP = '' ;
 
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
 
   rotate() {
     this.direction = rotate[this.direction];
-    this.sort.emit({column: this.sortable, direction: this.direction});
+    this.sort.emit({column: this.sortable, columnP: this.sortableP, direction: this.direction});
   }
 }

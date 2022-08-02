@@ -13,9 +13,9 @@
         <tr>
         
           <th scope="col">#</th>
-          <th scope="col" sortable="intermediate_comisiones">Estado</th>
+          <th scope="col" sortable="nombre" >Estado</th>
           <th scope="col" >Fecha</th>
-          <th scope="col" sortable="usuarios" >Nombre</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Nombre</th>
           <th scope="col" sortable="usuarios_id" >Apellido</th>
           <th scope="col" sortable="usuarios_id" >Departamento</th>
           <th scope="col" sortable="usuarios_id" >Facultad</th>

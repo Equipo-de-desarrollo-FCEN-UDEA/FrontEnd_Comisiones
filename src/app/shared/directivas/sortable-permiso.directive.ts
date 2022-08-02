@@ -3,14 +3,14 @@ import { Permiso } from '@interfaces/permisos';
 
 
 
-export type SortColumnP = keyof  Permiso | "";
+export type SortColumn = keyof  Permiso | "";
 
-export type SortDirectionP = 'asc' | 'desc' | '';
-const rotate: {[key: string]: SortDirectionP} = { 'asc': 'desc', 'desc': '', '': 'asc' };
+export type SortDirection = 'asc' | 'desc' | '';
+const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 
 export interface SortEvent {
-  column: SortColumnP;
-  direction: SortDirectionP;
+  columnP: SortColumn;
+  directionP: SortDirection;
 }
 
 @Directive({
@@ -23,13 +23,13 @@ export interface SortEvent {
 })
 export class NgbdSortablePermiso {
 
-  @Input() sortable: SortColumnP = '' ;
-  @Input() direction: SortDirectionP = '';
+  @Input() sortableP: SortColumn = '' ;
+  @Input() directionP: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
 
   rotate() {
-    this.direction = rotate[this.direction];
-    this.sort.emit({column: this.sortable, direction: this.direction});
+    this.directionP = rotate[this.directionP];
+    this.sort.emit({columnP: this.sortableP, directionP: this.directionP});
   }
 }
 

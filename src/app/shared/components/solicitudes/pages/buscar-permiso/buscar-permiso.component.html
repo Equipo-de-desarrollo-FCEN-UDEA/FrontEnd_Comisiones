@@ -13,12 +13,12 @@
         <tr>
         
           <th scope="col">#</th>
-          <th scope="col" sortable="nombre" >Estado</th>
-          <th scope="col" >Fecha</th>
+          <th scope="col" sortable="intermediate_estados.nombre"(sort)="onSort($event)">Estado</th>
+          <th scope="col" sortable="createdAt"(sort)="onSort($event)">Fecha</th>
           <th scope="col" sortable="nombre" (sort)="onSort($event)" >Nombre</th>
-          <th scope="col" sortable="usuarios_id" >Apellido</th>
-          <th scope="col" sortable="usuarios_id" >Departamento</th>
-          <th scope="col" sortable="usuarios_id" >Facultad</th>
+          <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamento</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
     
         </tr>
         </thead>

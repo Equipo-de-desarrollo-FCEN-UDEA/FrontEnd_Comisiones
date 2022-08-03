@@ -30,7 +30,7 @@ export class BuscarComisionComponent {
       this.ultimoElemento = ultimoElement
     }
 
-    onSort({column, columnP, direction}: SortEvent) {
+    onSort({column, direction}: SortEvent) {
       // resetting other headers
       this.headers.forEach(header => {
         if (header.sortable !== column) {
@@ -38,7 +38,7 @@ export class BuscarComisionComponent {
         }
       });
   
-      this.service.sortColumn = column;
+      this.service.sortColumn = "";
       this.service.sortDirection = direction;
     }
 

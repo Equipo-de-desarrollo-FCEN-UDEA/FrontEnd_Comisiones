@@ -10,6 +10,7 @@ import { BuscarDexclusivaComponent } from './pages/buscar-dexclusiva/buscar-dexc
 import { HomeRoutingModule } from './solicitudes-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from '@shared/directivas/sortable.directive';
+import { SharedModule } from '@shared/shared.module';
 // import { NgbdSortablePermiso } from '@shared/directivas/sortable-permiso.directive';
 
 
@@ -20,17 +21,20 @@ import { NgbdSortableHeader } from '@shared/directivas/sortable.directive';
     BuscarComisionComponent,
     BuscarPermisoComponent,
     BuscarDexclusivaComponent,
-    NgbdSortableHeader,
+    
     // NgbdSortablePermiso
 
    
   ],
   imports: [
-    CommonModule,
     HomeRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
+    SharedModule,
     NgbModule
+    
+  ],
+  providers:[
+    NgbdSortableHeader
   ]
+
 })
 export class SolicitudesModule { }

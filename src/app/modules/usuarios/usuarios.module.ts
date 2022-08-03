@@ -6,6 +6,9 @@ import { VerUsuarioComponent } from './ver-usuario/ver-usuario.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbdSortableHeader } from '@shared/directivas/sortable.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -13,13 +16,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   
     VerUsuarioComponent,
        ListaUsuariosComponent,
-       EditarUsuarioComponent
+       EditarUsuarioComponent,
+      // NgbdSortableHeader
   ],
   imports: [
-    CommonModule,
     UsuariosRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
+    NgbModule,
+    SharedModule
+  ],
+  providers:[
+    NgbdSortableHeader
   ]
 })
 export class UsuariosModule { }

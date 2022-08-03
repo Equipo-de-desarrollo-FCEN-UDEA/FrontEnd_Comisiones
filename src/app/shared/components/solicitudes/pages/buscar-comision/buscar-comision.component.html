@@ -13,12 +13,12 @@
     <tr>
     
       <th scope="col">#</th>
-      <th scope="col" sortable="intermediate_comisiones" (sort)="onSort($event)">Estado</th>
-      <th scope="col" sortable="intermediate_comisiones" (sort)="onSort($event)">Fecha</th>
-      <th scope="col" sortable="usuarios" >Nombre</th>
-      <th scope="col" sortable="usuarios_id" >Apellido</th>
-      <th scope="col" sortable="usuarios_id" >Departamento</th>
-      <th scope="col" sortable="usuarios_id" >Facultad</th>
+      <th scope="col" sortable="nombre" (sort)="onSort($event)">Estado</th>
+      <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
+      <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
+      <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
+      <th scope="col" sortable="nombre" (sort)="onSort($event)" >Departamento</th>
+      <th scope="col" sortable="nombre" (sort)="onSort($event)" >Facultad</th>
 
     </tr>
     </thead>
@@ -108,82 +108,6 @@
 
 
 
-
-
-
-<!-- <div >
-
-    <div class="navbar navbar-expand-lg d-flex justify-content-end" 
-    >
-
-       
-
-        <div class="form-inline col-3 " >
-
-            <input type="text" class="form-control" placeholder="Buscar"
-            #txtSearch (keyup)="onSearchComision( txtSearch.value )"/>
-           
-        </div>
-    </div>
-
-   <hr style="margin: 0;">
-
-    
-
-<table class="table table-striped">
-
-            <thead>
-              <tr>
-                <th> # </th>
-                <th> Estado </th>
-                <th> Fecha </th>
-                <th> Empleado </th>
-                
-                <th>Departamento</th>
-                <th>Facultad</th>
-                
-            </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let comision of comisiones | filtro:page:search">
-                <td>{{ comision.id }}</td>
-                <td>{{ ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre }}</td>
-                <td>{{ ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-MM-dd'}}</td>
-                <td>{{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}</td>
-                <td>{{ comision.usuarios.departamentos.nombre }}</td>
-                <td>{{ comision.usuarios.departamentos.facultades.nombre }}</td>
-                
-
-                
-                <td>
-                  <a data
-                    data>
-                  Ver...</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="btn-toolbar d-flex justify-content-end" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group me-2" role="group" aria-label="First group">
-                <button class="btn btn-primary col-2 col-md-2 col-xs-2 "
-                (click)="prevPage()">
-                <i class="fa-solid fa-arrow-left" style="color:#fff;"></i>
-            </button>
-            </div>
-            <div class="btn-group me-2" role="group" aria-label="Second group">
-                <button class="btn btn-primary"
-                (click)="nextPage()">
-                <i class="fa-solid fa-arrow-right" style="color:#fff;"></i>
-            </button>
-            </div>
-          </div>
-
-    
-
-
-</div> -->
 
 
 

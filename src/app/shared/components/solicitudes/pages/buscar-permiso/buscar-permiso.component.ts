@@ -1,7 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Permiso } from '@interfaces/permisos';
-import { BuscarPermisosService } from '@services/buscar-permisos.service';
+import { BuscarPermisosService, SortColumn } from '@services/buscar-permisos.service';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
 import { NgbdSortableHeader, SortEvent } from '@shared/directivas/sortable.directive';
 import { Observable } from 'rxjs';
@@ -18,26 +18,32 @@ export class BuscarPermisoComponent{
   ListPermisos = false;
   error='';
   ultimoElemento = ultimoElement;
+  
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
-    public service: BuscarPermisosService, 
+    public service: BuscarPermisosService
     ) {
       this.permisos$ = service.permisos$;
       this.total$ = service.total$;
       this.ultimoElemento = ultimoElement;
+      
+    
     }
 
-    onSort({columnP, direction}: SortEvent) {
+    
+
+    onSort({ column, direction}: SortEvent) {
       // resetting other headers
+
       this.headers.forEach(header => {
-        if (header.sortableP !== columnP) {
+        if (header.sortable !== column) {
           header.direction = '';
         }
       });
   
-      this.service.sortColumnP = columnP;
+      this.service.sortColumn = "";
       this.service.sortDirection = direction;
     }
 

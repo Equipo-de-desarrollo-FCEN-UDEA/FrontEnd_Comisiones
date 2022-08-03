@@ -6,8 +6,10 @@ import {Comision} from '../interfaces/comisiones';
 import {ComisionesService} from '../services/comisiones.service';
 import {DatePipe, DecimalPipe, JsonPipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
-import {SortColumn, SortDirection} from '@shared/directivas/sortable.directive';
+import {SortDirection} from '@shared/directivas/sortable.directive';
 import { ultimoElement } from "@shared/clases/ultimo-estado";
+
+export type SortColumn = keyof Comision | "";
 
 interface SearchResult {
   comisiones: Comision[];
@@ -22,7 +24,7 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: string | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
   if (direction === '' || column === '') {
@@ -38,17 +40,17 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 
 
 
-function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
+function matches(comisiones: Comision, term: string) {
 
   return (
     // datepipe.transform(comisiones.id)?.includes(term) ||
-    ultimoElement(comisiones.intermediate_comisiones).intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
-    ultimoElement(comisiones.intermediate_comisiones).createdAt.includes(term)||
+    ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
+    ultimoElement(comisiones.intermediate_comisiones)?.createdAt.includes(term)||
     // datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
     comisiones.usuarios.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
-    comisiones.usuarios.departamentos.facultades.nombre.toUpperCase().includes(term) 
+    comisiones.usuarios.departamentos.facultades.nombre.toLowerCase().includes(term) 
     //|| datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).created_at, 'd MMM y')
   );
 } 
@@ -125,7 +127,7 @@ export class BuscarComisionesService {
     let comisiones = sort(this.COMISIONES, sortColumn, sortDirection);
 
     // 2. filter
-    comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.datepipe));
+    comisiones = comisiones.filter(comision => matches(comision, searchTerm));
     const total = comisiones.length;
 
 

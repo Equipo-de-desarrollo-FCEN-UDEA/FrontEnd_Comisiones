@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PermisosInside, PermisosResponse } from '@interfaces/permisos';
+import { PermisosInside, Permiso } from '@interfaces/permisos';
 import { PermisoService } from '@services/permiso.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -15,7 +15,7 @@ export class VerPermisoComponent implements OnInit {
   loading:boolean = false;
   error:string = '';
   permiso!: PermisosInside;
-  permisoResponse!: PermisosResponse;
+  permisoResponse!: Permiso;
   permiso$: Observable<PermisosInside> | undefined;
   permisos: any = [];
 
@@ -36,6 +36,10 @@ export class VerPermisoComponent implements OnInit {
         });
       }
     });
+  }
+
+  editarPermiso() {
+    //this.router.navigate(['../editar-permiso', this.permiso.id])
   }
 
   delete(id: any): void {

@@ -1,4 +1,4 @@
-<div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded">
+<div class="container card shadow mt-5 bg-white rounded p-4 w-75">
   <div class="row header-row">
     <div class="col">
       <span class="text-secondary">Comisión</span>
@@ -8,37 +8,65 @@
   <hr />
   <div class="row regular-row">
     <div class="col-6 label">Tipo de Comisión</div>
+<<<<<<< HEAD
     <div class="col-sm-6">{{comision.tipos_comision}}</div>
+=======
+    <div class="col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
+>>>>>>> origin
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
+<<<<<<< HEAD
     <div class="col-sm-6">{{comisionInside.createdAt | date: "fullDate"}} </div>
+=======
+    <div class="col-sm-6">{{comision?.fecha_resolucion | date: "fullDate"}} </div>
+>>>>>>> origin
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
+<<<<<<< HEAD
     <div class="col-sm-6">{{comisionInside.fecha_inicio | date: "fullDate"}}</div>
+=======
+    <div class="col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
+>>>>>>> origin
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
+<<<<<<< HEAD
     <div class="col-sm-6">{{comisionInside.fecha_fin | date: "fullDate"}}</div>
+=======
+    <div class="col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
+>>>>>>> origin
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Idioma</div>
+<<<<<<< HEAD
     <div class="col-sm-6">{{comisionDTO.idioma}}</div>
+=======
+    <div class="col-sm-6">{{comision?.idioma}}</div>
+>>>>>>> origin
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Lugar</div>
+<<<<<<< HEAD
     <div class="col-sm-6">{{comisionDTO.lugar}}</div>
+=======
+    <div class="col-sm-6">{{comision?.lugar}}</div>
+>>>>>>> origin
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Justificación</div>
+<<<<<<< HEAD
     <div class="col-sm-6">{{comisionInside.justificacion}}</div>
+=======
+    <div class="col-sm-6">{{comision?.justificacion}}</div>
+>>>>>>> origin
   </div>
 
 
@@ -90,7 +118,7 @@
 
   <hr />
 
-  <div class="footer-row d-md-flex justify-content-md-end">
+  <div class="footer-row d-md-flex justify-content-md-end mb-3">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"
@@ -98,6 +126,7 @@
         (click)="delete(comisiones.id)"
       >
         <span
+          *ngIf="loading"
           class="spinner-border spinner-border-sm mr-1"
         ></span>
         Eliminar

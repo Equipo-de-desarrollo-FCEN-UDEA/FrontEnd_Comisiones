@@ -1,0 +1,190 @@
+<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded">
+<form>
+  <div class="mb-3 row">
+    <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar Solicitud:</label>
+    <div class="col-xs-3 col-sm-auto">
+      <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
+    </div>
+    <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+    
+      <th scope="col">#</th>
+      <th scope="col" sortable="intermediate_comisiones" (sort)="onSort($event)">Estado</th>
+      <th scope="col" sortable="intermediate_comisiones" (sort)="onSort($event)">Fecha</th>
+      <th scope="col" sortable="usuarios" >Nombre</th>
+      <th scope="col" sortable="usuarios_id" >Apellido</th>
+      <th scope="col" sortable="usuarios_id" >Departamento</th>
+      <th scope="col" sortable="usuarios_id" >Facultad</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    
+      <tr *ngFor="let comision of comisiones$ | async">
+
+      <th scope="row">{{ comision.id }}</th>
+      
+      <td>
+        <ngb-highlight
+          [result]="ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre"
+          [term]="service.searchTerm"
+          class="badge badge-pill pill"
+          [ngClass]="{
+            'bg-solicitada':
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'SOLICITADA',
+            'bg-aprobada': ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA',
+            'bg-visto-bueno':
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'VISTO BUENO',
+            'bg-finalizada':
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'FINALIZADA',
+            'bg-rechazada-decanato':
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA DECANATO',
+            'bg-rechazada-coordinacion':
+            ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
+          }"
+        ></ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight 
+        [result]="ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-MM-dd'" 
+        [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.nombre" [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.apellido" [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.departamentos.nombre" [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
+        </ngb-highlight>
+     
+      </td>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+    </ngb-pagination> 
+
+    <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize"> 
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>
+
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div >
+
+    <div class="navbar navbar-expand-lg d-flex justify-content-end" 
+    >
+
+       
+
+        <div class="form-inline col-3 " >
+
+            <input type="text" class="form-control" placeholder="Buscar"
+            #txtSearch (keyup)="onSearchComision( txtSearch.value )"/>
+           
+        </div>
+    </div>
+
+   <hr style="margin: 0;">
+
+    
+
+<table class="table table-striped">
+
+            <thead>
+              <tr>
+                <th> # </th>
+                <th> Estado </th>
+                <th> Fecha </th>
+                <th> Empleado </th>
+                
+                <th>Departamento</th>
+                <th>Facultad</th>
+                
+            </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let comision of comisiones | filtro:page:search">
+                <td>{{ comision.id }}</td>
+                <td>{{ ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre }}</td>
+                <td>{{ ultimoElemento(comision.intermediate_comisiones).created_at | date:'yyyy-MM-dd'}}</td>
+                <td>{{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}</td>
+                <td>{{ comision.usuarios.departamentos.nombre }}</td>
+                <td>{{ comision.usuarios.departamentos.facultades.nombre }}</td>
+                
+
+                
+                <td>
+                  <a data
+                    data>
+                  Ver...</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="btn-toolbar d-flex justify-content-end" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2" role="group" aria-label="First group">
+                <button class="btn btn-primary col-2 col-md-2 col-xs-2 "
+                (click)="prevPage()">
+                <i class="fa-solid fa-arrow-left" style="color:#fff;"></i>
+            </button>
+            </div>
+            <div class="btn-group me-2" role="group" aria-label="Second group">
+                <button class="btn btn-primary"
+                (click)="nextPage()">
+                <i class="fa-solid fa-arrow-right" style="color:#fff;"></i>
+            </button>
+            </div>
+          </div>
+
+    
+
+
+</div> -->
+
+
+
+

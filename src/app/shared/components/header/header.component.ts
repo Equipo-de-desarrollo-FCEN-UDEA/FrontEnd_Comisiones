@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { NavigationEnd, Router } from '@angular/router';
+import { RolResponse } from '@interfaces/roles';
+import { UsuarioBase } from '@interfaces/usuario';
 import { AuthService } from '@services/auth.service';
 import { filter } from 'rxjs';
 
@@ -11,9 +14,12 @@ import { filter } from 'rxjs';
 export class HeaderComponent implements OnInit {
   isNavbarCollapsed=true;
   currentURL: any;
+  usuario!: UsuarioBase;
+  rol!: RolResponse
   constructor(
     private authService : AuthService,
-    private router : Router
+    private router : Router,
+    
   ) { 
     this.router.events.pipe(
       filter(res => res instanceof NavigationEnd)

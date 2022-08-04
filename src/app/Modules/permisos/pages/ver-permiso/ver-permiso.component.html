@@ -1,4 +1,4 @@
-<div class="container card shadow mt-5 bg-white rounded p-4">
+<div class="container card shadow mt-5 bg-white rounded p-4 w-75">
   <div class="row header-row">
     <div class="col">
       <span class="text-secondary">PERMISO</span>
@@ -108,7 +108,7 @@
         class="btn btn-danger"
         (click)="delete(permisos.id)"
       >
-        <span
+        <span *ngIf="loading"
           class="spinner-border spinner-border-sm mr-1"
         ></span>
         Eliminar
@@ -117,7 +117,7 @@
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"
-        class="btn btn-warning "
+        class="btn btn-warning"
         routerLink="../editar-permiso"
       >
         Editar

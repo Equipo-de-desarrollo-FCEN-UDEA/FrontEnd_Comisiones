@@ -22,20 +22,20 @@ import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 export class EditarComisionComponent implements OnInit {
 
   hoveredDate: NgbDate | null = null;
-  public countries: Countries[] = countries;
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
-  public dias_permiso = 15;
   today = this.calendar.getToday();
   files: any[] = [];
-  archivos = [1];
-  clicked = 0;
+  public archivos = [1];
+  public countries: Countries[] = countries;
+  public clicked = 0;
+  public dias_permiso = 15;
   public tiposcomision = [
     { id: 1, nombre: 'Comisión de servicios' },
     { id: 2, nombre: 'Comisión de estudio' },
   ];
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
@@ -138,7 +138,8 @@ export class EditarComisionComponent implements OnInit {
     ],
   });
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
+  
   onUpload(event: Event, index: number) {
     const element = event.target as HTMLInputElement;
     const file = element.files?.item(0);
@@ -167,7 +168,7 @@ export class EditarComisionComponent implements OnInit {
     );
   }
 
-  onSubmit() {
+   onSubmit() {
     const response = {
       ...this.formComision.value,
       archivos: this.files,
@@ -178,5 +179,4 @@ export class EditarComisionComponent implements OnInit {
       window.alert(data.msg);
     });
   }
-
 }

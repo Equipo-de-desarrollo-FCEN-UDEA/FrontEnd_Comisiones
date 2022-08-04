@@ -6,12 +6,14 @@ import { VerComisionComponent } from './pages/ver-comision/ver-comision.componen
 import { CrearComisionComponent } from './pages/crear-comision/crear-comision.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
 
 
 @NgModule({
   declarations: [
     VerComisionComponent,
-    CrearComisionComponent
+    CrearComisionComponent,
+    EditarComisionComponent
   ],
   imports: [
     CommonModule,

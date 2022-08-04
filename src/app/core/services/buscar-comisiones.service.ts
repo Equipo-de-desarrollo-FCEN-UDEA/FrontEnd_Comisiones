@@ -123,6 +123,7 @@ export class BuscarComisionesService {
 
     // 1. sort
     let comisiones = sort(this.COMISIONES, sortColumn, sortDirection);
+    console.log(comisiones);
 
     // 2. filter
     comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.datepipe));

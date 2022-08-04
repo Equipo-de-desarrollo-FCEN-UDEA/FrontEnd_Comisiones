@@ -35,6 +35,7 @@ export class VerComisionComponent implements OnInit {
       }
     });
   }
+  
   delete(id: any): void {
     Swal.fire({
       title: '¿Seguro que quieres eliminar esta comisión?',

@@ -27,7 +27,7 @@ export class BuscarComisionComponent {
     ) {
       this.comisiones$ = service.comisiones$;
       this.total$ = service.total$;
-      this.ultimoElemento = ultimoElement
+      this.ultimoElemento = ultimoElement;
       
 
     }

@@ -47,7 +47,7 @@ function matches(comisiones: Comision, term: string) {
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
     ultimoElement(comisiones.intermediate_comisiones)?.createdAt.includes(term)||
     // datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
-    comisiones.usuarios.nombre.toLowerCase().includes(term) ||
+    comisiones.usuarios?.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.facultades.nombre.toLowerCase().includes(term) 
@@ -125,7 +125,7 @@ export class BuscarComisionesService {
 
     // 1. sort
     let comisiones = sort(this.COMISIONES, sortColumn, sortDirection);
-
+    console.log(comisiones)
     // 2. filter
     comisiones = comisiones.filter(comision => matches(comision, searchTerm));
     const total = comisiones.length;

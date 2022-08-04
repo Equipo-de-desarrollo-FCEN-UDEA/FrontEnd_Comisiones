@@ -30,7 +30,7 @@ export interface Usuario extends UsuarioBase{
     created_at: Date;
     updated_at: Date;
     departamentos_id: number;
-    roles_id: number;
+    roles_id: RolResponse;
 }
 
 export interface UsuarioInDB extends Usuario {
@@ -40,5 +40,6 @@ export interface UsuarioInDB extends Usuario {
 export interface UsuarioResponse extends Usuario {
     departamentos: DepResInside;
     comisiones: ComResInside[];
+    roles: RolResponse[];
     permisos: PermisosInside[];
 }

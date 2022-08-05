@@ -30,7 +30,7 @@ export class ComisionesService {
     return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
   }
 
-   crearComision(comision:any) {
+  crearComision(comision:any) {
     const headers = new HttpHeaders(
       {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -46,14 +46,35 @@ export class ComisionesService {
     &idioma=${comision.idioma}
     &lugar=${comision.pais+', '+comision.estado+', '+comision.ciudad}
     &tipos_comision_id=${comision.tipos_comision_id}
-    &usuarios_id=${comision.usuarios_id}
-    `
+    &usuarios_id=${comision.usuarios_id} 
+    `  //usuario?????, se maneja desde el back 
 
     return this.http.post(this.urlEndPoint, body, {headers: headers}).pipe(
       map((res)=> {
         return res;
       })
     );
+  }
+
+
+
+  updateComision(id: string, comision:any): Observable<any> {
+
+    const headers = new HttpHeaders(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    )
+
+    const body = `
+    &fecha_inicio=${comision.fecha_inicio}
+    &fecha_fin=${comision.fecha_fin}
+    &justificacion=${comision.justificacion}
+    &idioma=${comision.idioma}
+    &lugar=${comision.lugar}
+    &tipos_comision_id=${comision.tipos_comision_id}`;
+
+    return this.http.patch(`${this.urlEndPoint}/${id}`, body, {headers: headers});
   }
 
 

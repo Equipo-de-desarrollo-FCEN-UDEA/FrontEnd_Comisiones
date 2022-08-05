@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UsuarioResponse } from '@interfaces/usuario';
+import { Usuario, UsuarioResponse } from '@interfaces/usuario';
 import { UsuarioService } from '@services/usuario.service';
 import { take } from 'rxjs';
 
@@ -12,7 +12,8 @@ import { take } from 'rxjs';
 
 
 export class VerUsuarioComponent implements OnInit {
-  public usuario : UsuarioResponse | undefined;
+  public usuario!: Usuario;
+  public usuarioResponse!: UsuarioResponse;
   public id : Number | string = 0;
   constructor(
     private usuarioSvc: UsuarioService,
@@ -23,7 +24,7 @@ export class VerUsuarioComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if (this.id == 'me'){
+    if (this.id == 'id'){
       this.usuarioSvc.getUsuario().subscribe(
         (data: UsuarioResponse) => {
           this.usuario = data;

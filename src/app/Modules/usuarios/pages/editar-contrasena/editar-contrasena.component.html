@@ -1,1 +1,95 @@
-<p>editar-contrasena works!</p>
+<div class="container card shadow mt-5 bg-white rounded p-4 ">
+  <div class="row header-row">
+    <div class="col">
+      <span class="text-secondary">MODIFICAR CONTRASEÑA</span>
+    </div>
+  </div>
+  <hr />
+
+  <form>
+
+    <div class="row regular-row">
+      <div class="col-sm-12">
+        <input
+          type="password"
+          placeholder="Actual Contraseña"
+          formControlName="contrasena"
+          class="form-control"
+        />
+        <div >
+          <div>
+            La contraseña es requerida
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row regular-row">
+      <div class="col-sm-12">
+        <input
+          type="password"
+          placeholder="Nueva Contraseña"
+          formControlName="contrasena"
+          class="form-control"
+        />
+        <div >
+          <div>
+            La contraseña es requerida
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row regular-row">
+      <div class="col-sm-12">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Confirmar Contraseña"
+          formControlName="confirmContrasena"
+         
+        />
+        <div
+         
+          class="invalid-feedback alert alert-danger"
+        >
+          <div>
+            Las contraseñas no coinciden
+          </div>
+          <div >
+            Confirmar la contraseña es requerido
+          </div>
+        </div>
+      </div>
+    </div>
+    <div  class="alert alert-danger mt-3 mb-0">
+      error }}
+    </div>
+
+    <hr />
+
+    <div class="footer-row d-md-flex justify-content-md-end mb-3">
+      <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-2 p-2">
+        <button
+          type="button"
+          class="btn btn-secondary btn-block"
+          [routerLink]="['/usuarios/ver-perfil']"
+        >
+          Cancelar
+        </button>
+      </div>
+      <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-2 p-2">
+        <button
+         
+          class="btn btn-green btn-success btn-block"
+        >
+          <span
+          
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          Enviar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

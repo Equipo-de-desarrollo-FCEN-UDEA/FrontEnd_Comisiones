@@ -5,12 +5,12 @@ import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recup
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './directivas/sortable.directive';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
-    // TablaSolicitudesComponent,
     RecuperarContrasenaComponent,
-    NgbdSortableHeader
+    NgbdSortableHeader,
    
   ],
   imports: [
@@ -25,7 +25,11 @@ import { NgbdSortableHeader } from './directivas/sortable.directive';
     FormsModule,
     ReactiveFormsModule,
     NgbdSortableHeader
+  
   ],
+  providers:[
+    // NgbdSortableHeader
+  ]
   
 })
 export class SharedModule { }

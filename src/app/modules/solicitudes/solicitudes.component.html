@@ -1,0 +1,25 @@
+<div class="col-4">
+    <app-menu-lateral (paramsEmiter)="changeParams($event)"></app-menu-lateral>
+</div>
+
+
+
+<div class="col-8" *ngIf="params[0]">
+<app-buscar-permiso ></app-buscar-permiso>
+</div>
+
+<div class="tabla" *ngIf="params[1]" >
+    <app-buscar-comision ></app-buscar-comision>
+
+</div>
+
+<div class="tabla" *ngIf="params[2]">
+    <app-buscar-dexclusiva ></app-buscar-dexclusiva>
+
+</div>
+
+<!-- <div class="shadow p-3 m-4 w-75 col-xs-12 col-md-12" style="height: 75%;">
+      
+    <app-buscar-comision></app-buscar-comision>
+    <router-outlet></router-outlet>
+</div>  -->

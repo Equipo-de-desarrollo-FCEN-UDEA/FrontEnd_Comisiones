@@ -24,6 +24,11 @@ export class ComisionesService {
   
   getComision(id: string | number) {
     return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)
+    // .pipe(
+    //   map((res) => {
+        
+    //   })
+    // )
   }
   
   delete(id: string | number): Observable<ComisionDTO> {
@@ -46,14 +51,19 @@ export class ComisionesService {
     &idioma=${comision.idioma}
     &lugar=${comision.pais+', '+comision.estado+', '+comision.ciudad}
     &tipos_comision_id=${comision.tipos_comision_id}
-    &usuarios_id=${comision.usuarios_id}
-    `
+    &usuarios_id=${comision.usuarios_id} 
+    `  //usuario?????, se maneja desde el back 
 
     return this.http.post(this.urlEndPoint, body, {headers: headers}).pipe(
       map((res)=> {
         return res;
       })
     );
+  }
+
+
+  updateComision(id: string, comision:any): Observable<any> {
+    return this.http.patch(`${this.urlEndPoint}/${id}`, comision);
   }
 
 

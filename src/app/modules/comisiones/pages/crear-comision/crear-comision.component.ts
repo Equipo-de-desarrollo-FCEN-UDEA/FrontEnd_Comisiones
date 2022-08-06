@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ComisionesService } from '@services/comisiones.service';
 import { LoaderService } from '@services/loader.service';
 import { Subject } from 'rxjs';
@@ -14,6 +14,7 @@ import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
   styleUrls: ['./crear-comision.component.scss']
 })
 export class CrearComisionComponent implements OnInit {
+
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
@@ -22,6 +23,7 @@ export class CrearComisionComponent implements OnInit {
   today = this.calendar.getToday();
   files : any[]=[];
   archivos = [1];
+
   private pais : Pais={
     id: 0,
     name: '',
@@ -32,7 +34,9 @@ export class CrearComisionComponent implements OnInit {
     name: '',
     iso2: '',
   }
+
   clicked = 0
+
   @ViewChild('floatingpais') floatingpais: ElementRef | null = null;
   public paises: Pais[]=[];
   public ciudades: Ciudad[]=[];
@@ -41,6 +45,7 @@ export class CrearComisionComponent implements OnInit {
     {id: 1, nombre: 'Comisión de servicios'},
     {id: 2, nombre: 'Comisión de estudio'},
   ]
+
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
@@ -55,9 +60,10 @@ export class CrearComisionComponent implements OnInit {
   ) { 
     this.fromDate = null;
     this.toDate = null;
-    
   }
 
+  // ------------- DATEPICKER -------------
+  
   inRange(fecha_1 : any, fecha_2 : any){
     fecha_1 = new Date(this.formatter.format(fecha_1));
     fecha_2 = new Date(this.formatter.format(fecha_2));
@@ -99,6 +105,8 @@ export class CrearComisionComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
+
+  // ------------- FORM CREAR COMISION -------------
   formComision = this.fb.group({
     fecha_inicio : ['', [Validators.required]],
     fecha_fin : ['',[Validators.required]],
@@ -116,6 +124,7 @@ export class CrearComisionComponent implements OnInit {
       }
      )
   }
+
   onUpload(event:Event, index: number) {
     const element = event.target as HTMLInputElement;
     const file = element.files?.item(0);
@@ -162,7 +171,8 @@ export class CrearComisionComponent implements OnInit {
   }
 
   onSubmit() {
-    const response ={
+
+    const response = {
       ...this.formComision.value,
       archivos: this.files,
       fecha_resolucion: new Date(this.formatter.format(this.today)),
@@ -170,7 +180,9 @@ export class CrearComisionComponent implements OnInit {
       pais: this.pais.name,
       estado: this.estado.name,
     }
+
     console.log(response)
+
     this.comisionesSvc.crearComision(response).subscribe(
       (data:any) => {
         window.alert(data.message)

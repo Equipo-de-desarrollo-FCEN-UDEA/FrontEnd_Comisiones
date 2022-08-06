@@ -27,9 +27,9 @@ export interface Usuario extends UsuarioBase{
     identificacion?: number;
     correo: string;
     estado?: string;
-    created_at: Date;
+    createdAt: Date;
     updated_at: Date;
-    departamentos_id: number;
+    departamentos: DepResInside;
     roles: RolResponse;
 }
 

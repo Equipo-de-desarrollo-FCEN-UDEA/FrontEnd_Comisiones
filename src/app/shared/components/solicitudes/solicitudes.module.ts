@@ -11,6 +11,8 @@ import { HomeRoutingModule } from './solicitudes-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from '@shared/directivas/sortable.directive';
 import { SharedModule } from '@shared/shared.module';
+import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
+// import { PagesSolicitudesModule } from './pages/page-solicitudes.module';
 // import { NgbdSortablePermiso } from '@shared/directivas/sortable-permiso.directive';
 
 
@@ -21,6 +23,7 @@ import { SharedModule } from '@shared/shared.module';
     BuscarComisionComponent,
     BuscarPermisoComponent,
     BuscarDexclusivaComponent,
+    MenuLateralComponent,
     
     // NgbdSortablePermiso
 
@@ -29,7 +32,7 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     HomeRoutingModule,
     SharedModule,
-    NgbModule
+    NgbModule,
     
   ],
   providers:[

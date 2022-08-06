@@ -43,8 +43,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home/permiso',
-    
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   { path: 'home',

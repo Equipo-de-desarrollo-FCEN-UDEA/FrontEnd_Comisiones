@@ -18,7 +18,7 @@
           <th scope="col" sortable="nombre" (sort)="onSort($event)">Rol</th>
           <th scope="col" sortable="nombre" (sort)="onSort($event)" >Departamento</th>
           <th scope="col" sortable="nombre" (sort)="onSort($event)" >Facultad</th>
-          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Fecha</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Creado</th>
     
         </tr>
         </thead>
@@ -51,20 +51,19 @@
     
           <td>
             <ngb-highlight
-            [result]="usuario.nombre" [term]="service.searchTerm">
+            [result]="usuario.departamentos.nombre" [term]="service.searchTerm">
             </ngb-highlight>
           </td>
 
           <td>
             <ngb-highlight 
-            [result]="usuario.created_at | date:'yyyy-MM-dd'" 
-            [term]="service.searchTerm">
+            [result]="usuario.departamentos.facultades.nombre"  [term]="service.searchTerm">
             </ngb-highlight>
           </td>
 
           <td>
             <ngb-highlight 
-            [result]="usuario.created_at | date:'yyyy-MM-dd'" 
+            [result]="usuario.createdAt | date:'yyyy-MM-dd'" 
             [term]="service.searchTerm">
             </ngb-highlight>
           </td>

@@ -6,9 +6,19 @@ import { BuscarPermisoComponent } from './pages/buscar-permiso/buscar-permiso.co
 import { TablaSolicitudesComponent } from './tabla-solicitudes/tabla-solicitudes.component';
 
 const routes: Routes = [
+
+  // {
+  //   path:'permiso',
+  //   component: BuscarPermisoComponent
+  // },
+  
+
   { 
-    path: '',
+    
+    path:'',
     component: TablaSolicitudesComponent,
+    
+    
     children:[
       {
         path:'comision',
@@ -25,21 +35,6 @@ const routes: Routes = [
     ]
     
   },
-
-  // {
-  //   path: 'comision',
-  //   component: BuscarComisionComponent
-  // },
-
-  // {
-  //   path: 'permiso',
-  //   component: BuscarPermisoComponent
-  // },
-
-  // {
-  //   path: 'dexclusiva',
-  //   component: BuscarDexclusivaComponent
-  // }
 
 ];
 

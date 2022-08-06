@@ -17,7 +17,7 @@ export class PermisoService {
   }
 
 
-  getPermiso(id: string): Observable<any> {
+  getPermiso(id: string | number): Observable<any> {
     return this.http.get<PermisosInside>(`${this.urlEndPoint}/${id}`).pipe(
       map((res) => {
         return res;
@@ -25,7 +25,7 @@ export class PermisoService {
     ); 
   }
 
-  delete(id: any): Observable<any> {
+  delete(id: string | number): Observable<any> {
     return this.http.delete<PermisosInside>(`${this.urlEndPoint}/${id}`);
   }
 }

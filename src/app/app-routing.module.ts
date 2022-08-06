@@ -33,10 +33,6 @@ const routes: Routes = [
     path: '404',
     component: NotFoundComponent
   },
-  // {
-  //   path: 'recuperar-contrasena',
-  //   component: RecuperarContrasenaComponent
-  // },
   {
     path: 'recuperar-contrasena',
     component: RecuperarContrasenaComponent

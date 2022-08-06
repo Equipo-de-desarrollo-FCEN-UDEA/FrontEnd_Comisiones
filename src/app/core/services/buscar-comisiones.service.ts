@@ -28,7 +28,7 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
   if (direction === '' || column === '') {
     return comisiones;
   } else {
-    return [...comisiones].sort((a, b) => {
+    return [...comisiones].sort((a : any, b : any) => {
       const res = compare(a[column], b[column]);
       return direction === 'asc' ? res : -res;
     });

@@ -21,7 +21,7 @@
                 <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
                     [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
                     outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [footerTemplate]="footerTemplate"
-                    placement="left" [positionTarget]="buttonEl">
+                    placement="left">
                 <ng-template #t let-date let-focused="focused">
                     <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
                         [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
@@ -88,8 +88,11 @@
                             (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
                             [value]="formatter.format(fromDate)? formatter.format(fromDate) + ' - ' + formatter.format(toDate) : null "
                             [ngClass]="{'is-invalid': (!fromDate || !toDate) && clicked !== 0}">
-                        <button #buttonEl class="btn btn-outline-secondary"
-                            (click)="datepicker.toggle() ; clicked=clicked+1"><i class="fa fa-calendar"> </i></button>
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                  <i class="fa fa-calendar"></i>
+                                </span>
+                            </div> 
                     </div>
                 </div>
 

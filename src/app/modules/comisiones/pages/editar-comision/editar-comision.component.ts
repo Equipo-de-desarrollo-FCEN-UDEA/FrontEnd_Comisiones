@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild, PipeTransform } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
 import { ComisionesService } from '@services/comisiones.service';
 import { TipoComision } from '@interfaces/tipos_comision';
 import { TipoComisionService } from '@services/tipo-comision.service';
+import { Comision } from '@interfaces/comisiones';
 
 @Component({
   selector: 'app-editar-comision',
@@ -31,6 +32,7 @@ export class EditarComisionComponent implements OnInit {
   editarComisionForm: FormGroup;
   error = '';
   tiposComision$: Observable<TipoComision[]>;
+  //comision$: Observable<Comision> | undefined
   
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
@@ -51,6 +53,7 @@ export class EditarComisionComponent implements OnInit {
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private datepipe: DatePipe,
+    //private pipeTransform: PipeTransform,
 
     private formBuilder: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -71,13 +74,15 @@ export class EditarComisionComponent implements OnInit {
     this.comisionSvc.getComision(this.getId).subscribe({
       next: (res) => {
         this.editarComisionForm.setValue({
-          tipo_comision_id: res.tipos_comision.nombre,
+          tipo_comision_id: Number(res.tipos_comision.id),//pipeTransform.transform(res.tipos_comision.id),
           justificacion: res.justificacion,
           idioma: res.idioma,
           lugar: res.lugar,
           fecha_inicio: this.datepipe.transform(res.fecha_inicio, 'YYYY-MM-dd'),
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd'),
+          //documentos: res.documentos[0].nombre
         });
+
         console.log(res);
       },
       error: (err) => {
@@ -94,7 +99,8 @@ export class EditarComisionComponent implements OnInit {
       lugar: ['', [Validators.required, Validators.nullValidator]],
       idioma: [''],
       fecha_inicio: ['', Validators.required],
-      fecha_fin: ['', Validators.required]
+      fecha_fin: ['', Validators.required],
+      //documentos: ['']
     });
 
     this.fromDate = null;
@@ -174,7 +180,7 @@ export class EditarComisionComponent implements OnInit {
     if (file) {
       this.files.splice(index, 1, file);
     }
-    console.log(this.files)
+    console.log(this.files);
 
   }
 
@@ -196,7 +202,11 @@ export class EditarComisionComponent implements OnInit {
 
  // ----------- EDITAR COMISION ------------
   onUpdate(): any {
+
+    this.editarComisionForm.value.tipo_comision_id = Number(this.editarComisionForm.value.tipo_comision_id);  // the + operator will change the type to number
     this.submitted = true;
+
+    console.log(this.editarComisionForm.value);
 
     // Se detiene aqui si el formulario es invalido
     if (this.editarComisionForm.invalid) {
@@ -204,22 +214,22 @@ export class EditarComisionComponent implements OnInit {
       return;
     }
 
-    console.log(this.editarComisionForm);
 
-    // this.comisionSvc.updateComision(this.getId, this.editarComisionForm.value)
-    // .subscribe({
-    //   next: (res) => {
-    //     // facilitate change detection
-    //     this.ngZone.run(() =>
-    //       this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
-    //     );
-    //   },
-    //   error: (err) => {
-    //     if (err.status === 404 || err.status === 401) {
-    //       this.error = err.error.msg;
-    //     }
-    //   },
-    // });
+
+    this.comisionSvc.updateComision(this.getId, this.editarComisionForm.value)
+    .subscribe({
+      next: (res) => {
+        //facilitate change detection
+        this.ngZone.run(() =>
+          this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
+        );
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+      },
+    });
 
     
   }

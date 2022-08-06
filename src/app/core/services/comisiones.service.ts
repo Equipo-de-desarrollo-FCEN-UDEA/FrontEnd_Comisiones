@@ -24,6 +24,11 @@ export class ComisionesService {
   
   getComision(id:string) {
     return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)
+    // .pipe(
+    //   map((res) => {
+        
+    //   })
+    // )
   }
   
   delete(id: any): Observable<any> {
@@ -57,24 +62,8 @@ export class ComisionesService {
   }
 
 
-
   updateComision(id: string, comision:any): Observable<any> {
-
-    const headers = new HttpHeaders(
-      {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }
-    )
-
-    const body = `
-    &fecha_inicio=${comision.fecha_inicio}
-    &fecha_fin=${comision.fecha_fin}
-    &justificacion=${comision.justificacion}
-    &idioma=${comision.idioma}
-    &lugar=${comision.lugar}
-    &tipos_comision_id=${comision.tipos_comision_id}`;
-
-    return this.http.patch(`${this.urlEndPoint}/${id}`, body, {headers: headers});
+    return this.http.patch(`${this.urlEndPoint}/${id}`, comision);
   }
 
 

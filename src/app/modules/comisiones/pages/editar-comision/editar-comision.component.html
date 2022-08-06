@@ -9,8 +9,9 @@
     <form [formGroup]="editarComisionForm" (ngSubmit)="onUpdate()">
 
       <!-- DATEPICKER -->
+
       <ng-template #footerTemplate>
-        <hr class="my-0">
+        <hr class="my-0 position-absolute">
         <p *ngIf="fromDate && !toDate" style="text-align: center; margin: 0; color: green;"> Elige la segunda fecha
         </p>
         <p *ngIf="!fromDate" style="text-align: center; margin: 0; color: green;"> Elige la primera fecha </p>
@@ -18,6 +19,7 @@
             (click)="model = today; datepicker.close()">Hoy</button>
         <button class="btn btn-secondary btn-sm m-2 float-end" (click)="datepicker.close()">Cerrar</button>
       </ng-template>
+
       
       <!-- CAMPOS COMISIÓN -->
       <hr />
@@ -84,12 +86,19 @@
                 class="invalid-feedback"
               >
                 <div *ngIf="f['justificacion'].errors['minLength']">
-                  La justificacion es requerida
+                  La justificación es requerida
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- <div class="row regular-row">
+          <div class="col-4 label">Documentos</div>
+          <div class="col-sm-8">
+            <input class="form-control" type="text" formControlName="documentos"/>
+            <p class="form-control"  formControlName="documentos"></p>
+          </div>
+        </div> -->
 
     <!--- FECHAS  -->
     <hr />
@@ -102,7 +111,7 @@
           <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
               [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
               outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [footerTemplate]="footerTemplate"
-              placement="left" [positionTarget]="buttonEl">
+              placement="left" >
           <ng-template #t let-date let-focused="focused">
               <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
                   [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
@@ -123,8 +132,12 @@
                   (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
                   [value]="formatter.format(fromDate)? formatter.format(fromDate): null "
                   [ngClass]="{'is-invalid': (!fromDate) && clicked !== 0}" >
-              <button #buttonEl class="btn btn-outline-secondary"
-                  (click)="datepicker.toggle() ; clicked=clicked+1"><i class="fa fa-calendar"> </i></button>
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                    <i class="fa fa-calendar"></i>
+                    </span>
+                  </div>
+                 
           </div>
       </div>
       <div class="col-sm-6">
@@ -134,8 +147,11 @@
                   (input)="toDate = validateInput(toDate, dpToDate.value)"
                   [value]="formatter.format(toDate)? formatter.format(toDate): null "
                   [ngClass]="{'is-invalid': (!toDate) && clicked !== 0}">
-                  <button #buttonEl class="btn btn-outline-secondary"
-                  (click)="datepicker.toggle() ; clicked=clicked+1"><i class="fa fa-calendar"> </i></button>
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                      <i class="fa fa-calendar"></i>
+                    </span>
+                  </div>              
             </div>
       </div>
     </div>
@@ -198,7 +214,7 @@
             class="spinner-border spinner-border-sm1"  
             role="status" aria-hidden="true"
             ></span>
-            Enviar
+            Enviar  
           </button>
         </div>
       </div>

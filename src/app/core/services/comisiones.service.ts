@@ -22,7 +22,7 @@ export class ComisionesService {
     return this.http.get<Comision[]>(this.urlEndPoint)
   }
   
-  getComision(id:string) {
+  getComision(id: string | number) {
     return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)
     // .pipe(
     //   map((res) => {
@@ -31,7 +31,7 @@ export class ComisionesService {
     // )
   }
   
-  delete(id: any): Observable<any> {
+  delete(id: string | number): Observable<ComisionDTO> {
     return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
   }
 

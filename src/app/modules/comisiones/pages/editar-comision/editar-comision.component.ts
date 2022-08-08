@@ -35,17 +35,24 @@ export class EditarComisionComponent implements OnInit {
   //comision$: Observable<Comision> | undefined
   
 
+
+  // ID de la comsision a editar
+  getId: any;
+
+  submitted = false;
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
-
-  getId: any;
-  submitted = false;
+  // Archivos nuevos
   files : any[]=[];
   archivos = [1];
 
+  // Documentos Actuales
+  docsBorrar:any = [];
+  documentosArray:any = [];
+  isShow = false;
+
 
   clicked = 0;
-
 
 
  // ------------ CONSTRUCTOR ---------------
@@ -79,9 +86,10 @@ export class EditarComisionComponent implements OnInit {
           idioma: res.idioma,
           lugar: res.lugar,
           fecha_inicio: this.datepipe.transform(res.fecha_inicio, 'YYYY-MM-dd'),
-          fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd'),
-          //documentos: res.documentos[0].nombre
+          fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
         });
+
+        res.documentos.forEach(documento => this.documentosArray.push(documento)) 
 
         console.log(res);
       },
@@ -99,11 +107,12 @@ export class EditarComisionComponent implements OnInit {
       lugar: ['', [Validators.required, Validators.nullValidator]],
       idioma: [''],
       fecha_inicio: ['', Validators.required],
-      fecha_fin: ['', Validators.required],
-      //documentos: ['']
+      fecha_fin: ['', Validators.required]
     });
 
+    
     this.fromDate = null;
+
 }
 
 
@@ -186,7 +195,8 @@ export class EditarComisionComponent implements OnInit {
 
   removeFile(index: number) {
     if (this.archivos.length > 1) {
-    this.archivos.splice(index, 1);};
+    this.archivos.splice(index, 1);
+    };
     this.files.splice(index, 1);
   }
 
@@ -199,10 +209,25 @@ export class EditarComisionComponent implements OnInit {
     return this.editarComisionForm.get(controlName)?.invalid && this.editarComisionForm.get(controlName)?.touched;
   }
 
+  
+  borrarDocActual(idDoc: number, index: number){
 
+    // Si elimina documentos que ya están asociados a la comision
+    if (this.documentosArray.length >= 1) {
+      this.documentosArray.splice(index, 1);
+      };
+
+    // array de documentos que se borrarán y serán parámetros en el service
+    this.docsBorrar.push(idDoc);
+  }
+
+
+ // ----------------------------------------
  // ----------- EDITAR COMISION ------------
+ // ----------------------------------------
   onUpdate(): any {
 
+    // Convertir el id del tipo de comision: de string a numero
     this.editarComisionForm.value.tipo_comision_id = Number(this.editarComisionForm.value.tipo_comision_id);  // the + operator will change the type to number
     this.submitted = true;
 
@@ -214,9 +239,8 @@ export class EditarComisionComponent implements OnInit {
       return;
     }
 
-
-
-    this.comisionSvc.updateComision(this.getId, this.editarComisionForm.value)
+    // Edita la comision: ID de la comision, ID de documentos borrados, Form 
+    this.comisionSvc.updateComision(this.getId, "["+this.docsBorrar.toString()+"]" ,this.editarComisionForm.value)
     .subscribe({
       next: (res) => {
         //facilitate change detection

@@ -62,10 +62,14 @@ export class ComisionesService {
   }
 
 
-  updateComision(id: string, comision:any): Observable<any> {
-    return this.http.patch(`${this.urlEndPoint}/${id}`, comision);
-  }
 
+  updateComision(id: string, paramList:any ,comision:any): Observable<any> {
+
+    // back: /api/comisiones/:id?request=[idDoc]
+    
+    const params = new HttpParams().set('require', paramList);
+    return this.http.patch(`${this.urlEndPoint}/${id}`, comision, {params: params});
+  }
 
 
 }

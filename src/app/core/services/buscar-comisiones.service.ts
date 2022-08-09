@@ -1,15 +1,15 @@
-import {Injectable, PipeTransform} from '@angular/core';
+import {Injectable, Pipe, PipeTransform} from '@angular/core';
 
 import {BehaviorSubject, Observable, of, pipe, Subject} from 'rxjs';
 
 import {Comision} from '../interfaces/comisiones';
-import {ComisionesService} from '../services/comisiones.service';
-import {DatePipe, DecimalPipe, JsonPipe} from '@angular/common';
+import {ComisionesService} from './comisiones.service';
+import {DatePipe, DecimalPipe, JsonPipe, LowerCasePipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from '@shared/directivas/sortable.directive';
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 
-export type SortColumn = keyof Comision | "";
+export type SortColumn = keyof Comision | "" ;
 
 interface SearchResult {
   comisiones: Comision[];
@@ -24,26 +24,30 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: string | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: String | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
+  
   if (direction === '' || column === '') {
     return comisiones;
+
   } else {
-    return [...comisiones].sort((a, b) => {
+    return comisiones.sort((a, b) => {
       const res = compare(a[column], b[column]);
       return direction === 'asc' ? res : -res;
     });
   }
+
+  
 }
 
 
 
 
-function matches(comisiones: Comision, term: string) {
+function matches(comisiones: Comision, term: string, pipe:PipeTransform) {
 
   return (
-    // datepipe.transform(comisiones.id)?.includes(term) ||
+    comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())  ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
     ultimoElement(comisiones.intermediate_comisiones)?.createdAt.includes(term)||
     // datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
@@ -58,6 +62,8 @@ function matches(comisiones: Comision, term: string) {
 
 @Injectable({providedIn: 'root'})
 
+
+
 export class BuscarComisionesService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
@@ -69,14 +75,14 @@ export class BuscarComisionesService {
     pageSize: 4,
     searchTerm: '',
     sortColumn: '',
-    sortDirection: ''
+    sortDirection: 'asc'
   };
 
   COMISIONES : Comision[] = [];
 
   constructor(
     private comisionesSvc: ComisionesService,
-    private datepipe: DatePipe
+    private pipe: DatePipe
     ) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
@@ -125,9 +131,10 @@ export class BuscarComisionesService {
 
     // 1. sort
     let comisiones = sort(this.COMISIONES, sortColumn, sortDirection);
-    console.log(comisiones)
+    
+    console.log(comisiones + "oe");
     // 2. filter
-    comisiones = comisiones.filter(comision => matches(comision, searchTerm));
+    comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.pipe));
     const total = comisiones.length;
 
 

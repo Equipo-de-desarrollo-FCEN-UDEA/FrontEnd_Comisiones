@@ -1,7 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Permiso } from '@interfaces/permisos';
-import { BuscarPermisosService, SortColumn } from '@services/buscar-permisos.service';
+import { BuscarPermisosService} from '@services/buscar-permisos.service';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
 import { NgbdSortableHeader, SortEvent } from '@shared/directivas/sortable.directive';
 import { Observable } from 'rxjs';
@@ -13,8 +13,10 @@ import { Observable } from 'rxjs';
   providers: [BuscarPermisosService, DecimalPipe]
 })
 export class BuscarPermisoComponent{
+  
   permisos$: Observable<Permiso[]>;
   total$: Observable<number>;
+  
   ListPermisos = false;
   error='';
   ultimoElemento = ultimoElement;

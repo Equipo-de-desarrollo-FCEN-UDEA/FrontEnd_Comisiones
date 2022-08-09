@@ -13,12 +13,15 @@
         <tr>
         
           <th scope="col">#</th>
-          <th scope="col" sortable="intermediate_estados.nombre"(sort)="onSort($event)">Estado</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
+          <th scope="col" sortable="nombre"(sort)="onSort($event)">Estado</th>
           <th scope="col" sortable="createdAt"(sort)="onSort($event)">Fecha</th>
           <th scope="col" sortable="nombre" (sort)="onSort($event)" >Nombre</th>
           <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
           <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamento</th>
           <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Descargas</th>
+          <th> </th>
     
         </tr>
         </thead>
@@ -27,6 +30,13 @@
           <tr *ngFor="let permiso of permisos$ | async">
     
           <th scope="row">{{ permiso.id }}</th>
+
+          <td>
+            <ngb-highlight 
+            [result]="permiso.tipos_permiso.nombre" 
+            [term]="service.searchTerm">
+            </ngb-highlight>
+          </td>
           
           <td>
             <ngb-highlight
@@ -79,6 +89,20 @@
             [result]="permiso.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
             </ngb-highlight>
          
+          </td>
+
+          <td>
+            <ngb-highlight
+            [result]="permiso.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
+            </ngb-highlight>
+         
+          </td>
+
+          
+          <td>
+            <a [routerLink]="[]"
+              routerLinkActive="router-link-active">
+            Ver...</a>
           </td>
         </tbody>
       </table>

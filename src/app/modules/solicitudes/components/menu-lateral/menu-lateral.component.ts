@@ -17,19 +17,19 @@ export class MenuLateralComponent implements OnInit {
   togglePermiso(){
     this.params = [true, false, false]
     this.paramsEmiter.emit(this.params)
-    console.log('permiso')
+    
   }
 
   toggleComision(){
     this.params = [false, true, false]
     this.paramsEmiter.emit(this.params) 
-    console.log('permiso')
+    
   }
 
   toggleDexclusiva(){
     this.params = [false, false, true]
     this.paramsEmiter.emit(this.params)
-    console.log('permiso') 
+   
   }
 
   ngOnInit(): void {

@@ -24,7 +24,7 @@ import { BrowserModule } from '@angular/platform-browser';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbdSortableHeader
+    NgbdSortableHeader,
   
   ],
   providers:[

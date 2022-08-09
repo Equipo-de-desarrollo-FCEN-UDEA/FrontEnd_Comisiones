@@ -1,6 +1,4 @@
-<h3>tabla comision</h3>
-
-<!-- <div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded">
+<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded">
 <form>
   <div class="mb-3 row">
     <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar</label>
@@ -15,12 +13,15 @@
     <tr>
     
       <th scope="col">#</th>
+      <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
       <th scope="col" sortable="nombre" (sort)="onSort($event)">Estado</th>
       <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
       <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
       <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
-      <th scope="col" sortable="nombre" (sort)="onSort($event)" >Departamento</th>
+      <th scope="col" sortable="nombre" (sort)="onSort($event)" >Departamentos</th>
       <th scope="col" sortable="nombre" (sort)="onSort($event)" >Facultad</th>
+      <th scope="col" sortable="nombre" (sort)="onSort($event)" >Descargas</th>
+      <th> </th>
 
     </tr>
     </thead>
@@ -29,6 +30,13 @@
       <tr *ngFor="let comision of comisiones$ | async">
 
       <th scope="row">{{ comision.id }}</th>
+
+      <td>
+        <ngb-highlight 
+        [result]="comision.tipos_comision.nombre" 
+        [term]="service.searchTerm">
+        </ngb-highlight>
+      </td>
       
       <td>
         <ngb-highlight
@@ -82,6 +90,20 @@
         </ngb-highlight>
      
       </td>
+
+      <td>
+        <ngb-highlight
+        [result]="comision.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
+        </ngb-highlight>
+     
+      </td>
+
+      <td>
+        <a [routerLink]="[]"
+          routerLinkActive="router-link-active">
+        Ver...</a>
+      </td>
+
     </tbody>
   </table>
 
@@ -113,4 +135,4 @@
 
 
 
- -->
+

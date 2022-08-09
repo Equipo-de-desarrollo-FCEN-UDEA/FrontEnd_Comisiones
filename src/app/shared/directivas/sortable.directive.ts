@@ -22,8 +22,6 @@ export interface SortEvent {
 }
 
 @Directive({
-    
-  
   selector: 'th[sortable]',
   host: {
     '[class.asc]': 'direction === "asc"',
@@ -32,14 +30,6 @@ export interface SortEvent {
   }
 })
 
-// @Directive({
-//   selector: 'th[sortableP]',
-//   host: {
-//     '[class.asc]': 'direction === "asc"',
-//     '[class.desc]': 'direction === "desc"',
-//     '(click)': 'rotate()'
-//   }
-// })
 
 
 

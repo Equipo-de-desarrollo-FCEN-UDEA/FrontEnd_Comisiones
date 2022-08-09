@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {Permiso} from '../../core/interfaces/permisos';
-import {ComisionesService} from '../services/comisiones.service';
 import {DatePipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from "@shared/directivas/sortable.directive";
@@ -39,8 +38,7 @@ function sort(permisos: Permiso[], column: SortColumn, direction: string ): Perm
 function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
 
   return (
-    // datepipe.transform(comisiones.id)?.includes(term) ||
-    permisos.tipos_permiso.nombre.toLowerCase().includes(term)||
+    permisos.tipos_permiso.nombre.toLowerCase().includes(term.toLowerCase()) ||
     ultimoElement(permisos.intermediate_permisos)?.intermediate_estados.nombre.toLowerCase().includes(term)||
     ultimoElement(permisos.intermediate_permisos)?.createdAt.includes(term)||
     permisos.usuarios.nombre.toLowerCase().includes(term) ||

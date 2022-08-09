@@ -38,8 +38,6 @@ export interface Comision extends ComisionesinDB{
     intermediate_comisiones: ComisionesXEstadoInside[];
     tipos_comision_id: number;
     
-    // nombreEstadoActual: string;
-    
 }
 
 export interface ComisionesXEstadoInDB{

@@ -108,9 +108,9 @@ export class CrearComisionComponent implements OnInit {
 
   // ------------- FORM CREAR COMISION -------------
   formComision = this.fb.group({
-    fecha_inicio : ['', [Validators.required]],
-    fecha_fin : ['',[Validators.required]],
-    justificacion : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
+    fecha_inicio! : ['', [Validators.required]],
+    fecha_fin! : ['',[Validators.required]],
+    justificacion! : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
     idioma : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
     pais : ['',[Validators.required]],
     estado: ['',[Validators.required]],
@@ -174,7 +174,7 @@ export class CrearComisionComponent implements OnInit {
 
     const lugar = this.formComision.value.ciudad || '' + this.formComision.value.estado + this.formComision.value.pais;
 
-    let {ciudad, estado, pais, ...others} = this.formComision.value;
+    let {ciudad, estado, pais, fecha_inicio, fecha_fin, ...others} = this.formComision.value;
 
     const response  = {
       ...others,

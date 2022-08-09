@@ -16,11 +16,15 @@
   }
 }
 
+.offcanvas-body{
+  margin-top: -1.5em;
+}
+
 .btn-close {
   border-color: #03b860;
 }
 
-ul {
+ul, li{
   list-style: none;
   padding: 5px;
   margin: 0;

@@ -13,8 +13,9 @@ import { filter, Observable } from 'rxjs';
 export class HeaderComponent implements OnInit {
   isNavbarCollapsed=true;
   currentURL: any;
-  public usuario$: Usuario | undefined; 
-  public usuarioBase: Observable<UsuarioBase[]> | undefined;
+  public usuario!: UsuarioBase; 
+  public usuarioInside!: UsuarioInside;
+  public usuario$!: Observable<UsuarioBase[]> | undefined;
  // public usuarioInside: UsuarioInside = {};
   constructor(
     private authService : AuthService,
@@ -35,10 +36,11 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit() {
+    this.activateRoute.params.subscribe((params) => {
       this.usuarioService.getUsuario().subscribe((resUsuario) => {
-        this.usuario$ = resUsuario;
-        console.log(this.usuario$ + "medellin");
+        this.usuario = resUsuario;
       }); 
+    });
   }
 
 

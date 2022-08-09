@@ -1,8 +1,8 @@
 <div class="container">
-    <h4>
-        Formulario de creación de comisión
-    </h4>
-    <form class="need-validation card" need-validation novalidate [formGroup]="formComision" (ngSubmit)="onSubmit()" >
+  <h4>
+    Formulario de creación de comisión
+  </h4>
+  <form class="need-validation card" need-validation novalidate [formGroup]="formComision">
 
         <ng-template #footerTemplate>
             <hr class="my-0">
@@ -13,7 +13,7 @@
                 (click)="model = today; datepicker.close()">Hoy</button>
             
             <button class="btn btn-secondary btn-sm m-2 float-end" (click)="datepicker.close()">Cerrar</button>
-            <!-- <p *ngIf="fromDate && toDate && true" style="text-align: center; margin: 0; color: red;">Recuerda que la fecha máxima para este tipo de permiso es de {{dias_permiso}} días hábiles</p> -->
+            <p *ngIf="fromDate && toDate && true" style="text-align: center; margin: 0; color: red;">Recuerda que la fecha máxima para este tipo de permiso es de {{dias_permiso}} días hábiles</p>
         </ng-template>
 
         <div class="dp-hidden position-absolute">
@@ -33,73 +33,72 @@
         </div>
             <div class="row">
 
-                <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingtipos_comision_id"
-                        formControlName="tipos_comision_id" required
-                        [ngClass]="{'is-invalid': isInvalidForm('tipos_comision_id')}" placeholder=" ">
-                        <option [value]="tipos_comision_id.id" *ngFor="let tipos_comision_id of tiposcomision">
-                            {{tipos_comision_id.nombre}}</option>
-                    </select>
-                    <label for="floatingtipos_comision_id" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['tipos_comision_id'].valid}">Tipo de
-                        comision</label>
-                </div>
+      <div class="formfloatig">
+        <select class="form-select form-select-lg mb-3" id="floatingtipos_comision_id"
+          formControlName="tipos_comision_id" required [ngClass]="{'is-invalid': isInvalidForm('tipos_comision_id')}"
+          placeholder=" ">
+          <option [value]="tipos_comision_id.id" *ngFor="let tipos_comision_id of tiposcomision">
+            {{tipos_comision_id.nombre}}</option>
+        </select>
+        <label for="floatingtipos_comision_id" class="selectLabel"
+          [ngClass]="{'isFill': formComision.controls['tipos_comision_id'].valid}">Tipo de
+          comision</label>
+      </div>
 
-                <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingpais" formControlName="pais" required
-                        [ngClass]="{'is-invalid': isInvalidForm('pais')}" (change)="onChangePais($event)" placeholder=" ">
-                        <option [value]="i" *ngFor="let country of paises;let i=index">{{country.name}}</option>
-                    </select>
-                    <label for="floatingpais" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['pais'].valid}">País de la comision</label>
-                </div>
+      <div class="formfloatig">
+        <select class="form-select form-select-lg mb-3" id="floatingpais" formControlName="pais" required
+          [ngClass]="{'is-invalid': isInvalidForm('pais')}" (change)="onChangePais($event)" placeholder=" ">
+          <option [value]="i" *ngFor="let country of paises;let i=index">{{country.name}}</option>
+        </select>
+        <!-- <label for="floatingpais" class="selectLabel" [ngClass]="{'isFill': formComision.controls['pais'].valid}">País
+          de la comision</label> -->
+      </div>
 
-                <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingestado" formControlName="estado" required
-                        [ngClass]="{'is-invalid': isInvalidForm('estado')}" (change)="onChangeEstado($event)" placeholder=" ">
-                        <option [value]="i" *ngFor="let estado of estados;let i=index">{{estado.name}}</option>
-                    </select>
-                    <label for="floatingestado" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['estado'].valid}">
-                        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-                        Estado de la comision</label>
-                </div>
+      <div class="formfloatig">
+        <select class="form-select form-select-lg mb-3" id="floatingestado" formControlName="estado" required
+          [ngClass]="{'is-invalid': isInvalidForm('estado')}" (change)="onChangeEstado($event)" placeholder=" ">
+          <option [value]="i" *ngFor="let estado of estados;let i=index">{{estado.name}}</option>
+        </select>
+        <!-- <label for="floatingestado" class="selectLabel" [ngClass]="{'isFill': formComision.controls['estado'].valid}">
+          <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
+            aria-hidden="true"></span>
+          Estado de la comision</label> -->
+      </div>
 
-                <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingciudad" formControlName="ciudad" required
-                        [ngClass]="{'is-invalid': isInvalidForm('ciudad')}" [disabled]="!formComision.controls['pais'].valid" placeholder=" ">
-                        <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">{{ciudad.name}}</option>
-                    </select>
-                    <label for="floatingpais" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['ciudad'].valid}">
-                        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-                        Ciudad de la comision
-                    </label>
-                </div>
+      <div class="formfloatig">
+        <!-- <select class="form-select form-select-lg mb-3" id="floatingciudad" formControlName="ciudad" required
+          [ngClass]="{'is-invalid': isInvalidForm('ciudad')}" [disabled]="!formComision.controls['pais'].valid"
+          placeholder=" ">
+          <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">{{ciudad.name}}</option>
+        </select> -->
+        <!-- <label for="floatingpais" class="selectLabel" [ngClass]="{'isFill': formComision.controls['ciudad'].valid}">
+          <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
+            aria-hidden="true"></span>
+          Ciudad de la comision
+        </label> -->
+      </div>
 
-                <h6>
-                    <span class="text-muted">Rango de fechas de la comision</span>
-                </h6>
-                <div class=" col-sm-12 col-xs-12 col-md-12" style="margin-bottom: 5px;">
-                    <div class="input-group">
-                        <input #dpFromDate class="form-control" type='text'
-                            (click)="datepicker.toggle() ; clicked=clicked+1" placeholder="aaaa-mm-dd - aaaa-mm-dd"
-                            name="dpFromDate" formControlName="fecha_inicio"
-                            (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
-                            [value]="formatter.format(fromDate)? formatter.format(fromDate) + ' - ' + formatter.format(toDate) : null "
-                            [ngClass]="{'is-invalid': (!fromDate || !toDate) && clicked !== 0}">
-                        <button #buttonEl class="btn btn-outline-secondary"
-                            (click)="datepicker.toggle() ; clicked=clicked+1"><i class="fa fa-calendar"> </i></button>
-                    </div>
-                </div>
+      <h6>
+        <span class="text-muted">Rango de fechas de la comision</span>
+      </h6>
+      <div class=" col-sm-12 col-xs-12 col-md-12" style="margin-bottom: 5px;">
+        <div class="input-group">
+          <input #dpFromDate class="form-control" type='text' (click)="datepicker.toggle() ; clicked=clicked+1"
+            placeholder="aaaa-mm-dd - aaaa-mm-dd" name="dpFromDate" formControlName="fecha_inicio"
+            (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+            [value]="formatter.format(fromDate)? formatter.format(fromDate) + ' - ' + formatter.format(toDate) : null "
+            [ngClass]="{'is-invalid': (!fromDate || !toDate) && clicked !== 0}">
+          <button #buttonEl class="btn btn-outline-secondary" (click)="datepicker.toggle() ; clicked=clicked+1"><i
+              class="fa fa-calendar"> </i></button>
+        </div>
+      </div>
 
-                <div class=" col-sm-6 col-xs-6 col-md-6" hidden>
-                    <div class="input-group" (click)="datepicker.toggle()">
-                        <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
-                            formControlName="fecha_fin" [value]="formatter.format(toDate)"
-                            (input)="toDate = validateInput(toDate, dpToDate.value)">
-                    </div>
-                </div>
+      <div class=" col-sm-6 col-xs-6 col-md-6" hidden>
+        <div class="input-group" (click)="datepicker.toggle()">
+          <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate" formControlName="fecha_fin"
+            [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)">
+        </div>
+      </div>
 
                 <div class="formfloatig">
                     <input id="floatingidioma" formControlName="idioma" class="form-control" type="idioma"
@@ -118,9 +117,9 @@
                     <label for="floatingjustificacion" class="formLabel"> Justificación
                     </label>
                 </div>
-                <h6>
+                <h5>
                     <span class="text-muted">Archivos adjuntos a la solicitud</span>
-                </h6>
+                </h5>
                 <div class="alert-danger" *ngIf="files.length>0 && !validSize()">
                     <p>
                         Los archivos no deben pesar más de 2 MB.
@@ -135,22 +134,22 @@
                                 <input [id]="i" class="file-upload" type="file" (change)='onUpload($event,i)'/>
                                 <label [for]="i"  style="margin-left: 10px;">{{files[i] ? files[i].name : 'Subir archivo' }}</label>
                             </label>
-
+                            
                         </div>
                         <div class="buttons" style="width:fit-content; margin: 0;">
-                            <button class="btn btn-circle btn-remove" type="button" (click)="removeFile(i)"
+                            <button class="btn btn-circle btn-danger btn-sm" type="button" (click)="removeFile(i)"
                                 >
 
                                 <i class="fa fa-minus"></i>
 
-                            </button>
-                            <button class="btn btn-circle btn-add" type="button"
-                                (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            </button>
+            <button class="btn btn-circle btn-add" type="button" (click)="archivos.push(1)"
+              *ngIf="isLast && archivos.length<3">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
             </div>
         <button class="btn btn-success" (submit)="true" [disabled]="formComision.invalid || !validSize() || (isLoading | async)">
@@ -159,4 +158,5 @@
 
     </form>
 
+>>>>>>> 04bc7eee2e921094132f6316615dc77e67746b7c
 </div>

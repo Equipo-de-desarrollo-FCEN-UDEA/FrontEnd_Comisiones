@@ -28,4 +28,8 @@ export class PermisoService {
   delete(id: any): Observable<any> {
     return this.http.delete<PermisosInside>(`${this.urlEndPoint}/${id}`);
   }
+
+  updateSolicitud(id: string, data: PermisosInside): Observable<any> {
+    return this.http.patch<PermisosInside>(`${this.urlEndPoint}/${id}`, data);
+  }
 }

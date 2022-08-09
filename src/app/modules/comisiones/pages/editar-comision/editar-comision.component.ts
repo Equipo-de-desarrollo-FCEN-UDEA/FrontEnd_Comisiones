@@ -1,50 +1,41 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import {
+  NgbDate,
+  NgbCalendar,
+  NgbDateParserFormatter,
+  NgbDateStruct,
+} from '@ng-bootstrap/ng-bootstrap';
 import { Countries, countries } from '@data/country-data-store';
-import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { ComisionesService } from '@services/comisiones.service';
 import { LoaderService } from '@services/loader.service';
 import { Subject } from 'rxjs';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
-import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
+
 
 @Component({
-  selector: 'app-crear-comision',
-  templateUrl: './crear-comision.component.html',
-  styleUrls: ['./crear-comision.component.scss'],
+  selector: 'app-editar-comision',
+  templateUrl: './editar-comision.component.html',
+  styleUrls: ['./editar-comision.component.scss']
 })
-export class CrearComisionComponent implements OnInit {
-  hoveredDate: NgbDate | null = null;
-  public countries: Countries[] = countries;
+export class EditarComisionComponent implements OnInit {
 
+  hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
-  public dias_permiso = 15;
   today = this.calendar.getToday();
   files: any[] = [];
-  archivos = [1];
-  clicked = 0;
-  private pais : Pais={
-    id: 0,
-    name: '',
-    iso2: ''
-  };
-  private estado : Estado = {
-    id: 0,
-    name: '',
-    iso2: '',
-  }
-  @ViewChild('floatingpais') floatingpais: ElementRef | null = null;
-  public paises: Pais[]=[];
-  public ciudades: Ciudad[]=[];
-  public estados: Estado[]=[];
+  public archivos = [1];
+  public countries: Countries[] = countries;
+  public clicked = 0;
+  public dias_permiso = 15;
   public tiposcomision = [
     { id: 1, nombre: 'Comisión de servicios' },
     { id: 2, nombre: 'Comisión de estudio' },
   ];
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     private fb: FormBuilder,
@@ -56,7 +47,7 @@ export class CrearComisionComponent implements OnInit {
   ) {
     this.fromDate = null;
     this.toDate = null;
-
+    console.log(paisesCiudadesSvc.getPaises().subscribe((data) => data));
   }
 
   inRange(fecha_1: any, fecha_2: any) {
@@ -147,51 +138,15 @@ export class CrearComisionComponent implements OnInit {
     ],
   });
 
-  // ngOnInit(): void {}
-  // onUpload(event: Event, index: number) {
-  //   fecha_inicio : ['', [Validators.required]],
-  //   fecha_fin : ['',[Validators.required]],
-  //   justificacion : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
-  //   idioma : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-  //   pais : ['',[Validators.required]],
-  //   estado: ['',[Validators.required]],
-  //   ciudad : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
-  //   tipos_comision_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tiposcomision.length)]]});
-
-  ngOnInit(): void {
-     this.paisesCiudadesSvc.getPaises().subscribe(
-      (data:Pais[]) => {
-        this.paises = data;
-      }
-     )
-  }
-  onUpload(event:Event, index: number) {
+    ngOnInit(): void {}
+  
+  onUpload(event: Event, index: number) {
     const element = event.target as HTMLInputElement;
     const file = element.files?.item(0);
     if (file) {
       this.files.splice(index, 1, file);
     }
     console.log(this.files);
-  }
-
-  onChangePais(event:any) {
-    const paisId = event.target.value;
-    this.pais = this.paises[paisId];
-    this.paisesCiudadesSvc.getEstados(this.pais).subscribe(
-      (data:Estado[]) => {
-        this.estados = data;
-      }
-    )
-  }
-
-  onChangeEstado(event:any) {
-    const estadoId = event.target.value;
-    this.estado = this.estados[estadoId];
-    this.paisesCiudadesSvc.getCiudades(this.pais, this.estado).subscribe(
-      (data:Ciudad[]) => {
-        this.ciudades = data;
-      }
-    );
   }
 
   removeFile(index: number) {
@@ -213,50 +168,15 @@ export class CrearComisionComponent implements OnInit {
     );
   }
 
-  // onSubmit() {
-  //   const response = {
-  //     ...this.formComision.value,
-  //     archivos: this.files,
-  //     usuarios_id: 12,
-  //   };
-  //   console.log(response);
-  //   this.comisionesSvc.crearComision(response).subscribe((data: any) => {
-  //     window.alert(data.msg);
-  //   });
-
-  //     fecha_resolucion: new Date(this.formatter.format(this.today)),
-  //     usuarios_id: 12,
-  //     pais: this.pais.name,
-  //     estado: this.estado.name,
-  //   }
-  //   console.log(response)
-  //   this.comisionesSvc.crearComision(response).subscribe(
-  //     (data:any) => {
-  //       window.alert(data.message)
-  //     }
-  //   )
-
-  // onSubmit() {
-  //   const response = {
-  //     ...this.formComision.value,
-  //     archivos: this.files,
-  //     usuarios_id: 12,
-  //   };
-  //   console.log(response);
-  //   this.comisionesSvc.crearComision(response).subscribe((data: any) => {
-  //     window.alert(data.msg);
-  //   });
-  //     fecha_resolucion: new Date(this.formatter.format(this.today)),
-  //     usuarios_id: 12,
-  //     pais: this.pais.name,
-  //     estado: this.estado.name,
-  //   }
-  //   console.log(response)
-  //   this.comisionesSvc.crearComision(response).subscribe(
-  //     (data:any) => {
-  //       window.alert(data.message)
-  //     }
-  //   )
+   onSubmit() {
+    const response = {
+      ...this.formComision.value,
+      archivos: this.files,
+      usuarios_id: 12,
+    };
+    console.log(response);
+    this.comisionesSvc.crearComision(response).subscribe((data: any) => {
+      window.alert(data.msg);
+    });
   }
-
-
+}

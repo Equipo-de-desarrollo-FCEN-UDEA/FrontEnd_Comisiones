@@ -66,23 +66,23 @@
           <div>
             <div>
               <div class="sidebar-header">
-                <span class="user-pic">usuario
+                <span class="user-pic">
                   <i class="fas fa-user-circle"></i>
                 </span>
                 <!-- <img src="./icon.png" alt=""> -->
               </div>
               <div class="user-info">
                 <span class="user-name">
-                   usuarioBase.nombre}} 
+                   {{usuario.nombre}} 
                   <br />
-                   <!-- {{usuarioBase.apellido}} -->
+                   {{usuario.apellido}}
                 </span>
                 <br />
                 <span class="user-role">
                   <span class="user-status">
                     <i class="fa fa-circle"></i>
                   </span>
-                  usuarioBase.nombre}} 
+                  {{usuario.id}} 
                 </span>
               </div>
               <!-- sidebar-header  -->
@@ -110,7 +110,7 @@
                   <li  routerLink="usuarios/ver-usuario/me">
                     <a routerLink="">
                       <span>
-                        <i class="far fa-user"></i>
+                        <i class="fa-solid fa-user-astronaut"></i>
                         Mi Perfil
                       </span>
                     </a>
@@ -149,6 +149,14 @@
                       <span>
                         <i class="fas fa-university"></i>
                         Facultades
+                      </span>
+                    </a>
+                  </li>
+                  <li routerLink="../home">
+                    <a>
+                      <span>
+                        <i class="fa-solid fa-user-group"></i>
+                        Registrar Usuarios
                       </span>
                     </a>
                   </li>

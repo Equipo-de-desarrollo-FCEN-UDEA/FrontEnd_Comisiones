@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-md navbar-light  " >
+<nav class="navbar navbar-expand-xl navbar-light" >
 
   <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
     <i class="fa fa-bars" style="color:rgb(255, 255, 255);"></i>
@@ -10,7 +10,7 @@
     </a>
 
   </div>
-  <div class="profile navbar-brand">
+  <div class="profile .d-none .d-lg-block .d-xl-none navbar-brand">
     <ul>
       <li ngbDropdown >
         <a id="id01" ngbDropdownToggle >
@@ -28,10 +28,11 @@
     </ul>
   </div>
 
-  <!-- <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+
+  <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
     <div class="navbar-brand d-flex">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a style="color:#fff" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Crear Solicitud 
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
@@ -47,13 +48,10 @@
         <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Usuarios</a>
       </li>
       <li class="nav-item">
-        <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Departamentos</a>
-      </li>
-      <li class="nav-item">
-        <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Facultades</a>
+        <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Registrar Usuarios</a>
       </li>
     </div>
-  </div> -->
+  </div>
   
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
@@ -82,7 +80,7 @@
                   <span class="user-status">
                     <i class="fa fa-circle"></i>
                   </span>
-                  {{usuario.id}} 
+                  {{usuarioInside.roles.nombre}} 
                 </span>
               </div>
               <!-- sidebar-header  -->
@@ -115,14 +113,6 @@
                       </span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <span>
-                        <i class="fa-solid fa-users"></i>
-                        Usuarios
-                      </span>
-                    </a>
-                  </li>
                   <li routerLink="../home">
                     <a>
                       <span>
@@ -136,7 +126,7 @@
                   <span> ESPECÍFICO </span>
                 </div>
                 <ul>
-                  <li>
+                  <!-- <li>
                     <a href="#">
                       <span>
                         <i class="far fa-building"></i>
@@ -149,6 +139,14 @@
                       <span>
                         <i class="fas fa-university"></i>
                         Facultades
+                      </span>
+                    </a>
+                  </li> -->
+                  <li routerLink="../home">
+                    <a href="#">
+                      <span>
+                        <i class="fa-solid fa-users"></i>
+                        Usuarios
                       </span>
                     </a>
                   </li>

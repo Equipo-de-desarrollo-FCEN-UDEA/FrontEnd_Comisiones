@@ -22,7 +22,7 @@ const routes: Routes = [
     component: EditarUsuarioComponent
   },
  {
-  path: 'editar-contrasena',
+  path: 'editar-contrasena/:id',
   component: EditarContrasenaComponent
  }
 ];

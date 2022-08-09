@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Usuario, UsuarioBase, UsuarioInside } from '@interfaces/usuario';
+import { UsuarioBase, UsuarioInside } from '@interfaces/usuario';
 import { AuthService } from '@services/auth.service';
 import { UsuarioService } from '@services/usuario.service';
-import { filter, Observable } from 'rxjs';
+import { filter} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +11,10 @@ import { filter, Observable } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isNavbarCollapsed=true;
-  currentURL: any;
+  public isNavbarCollapsed=true;
+  public currentURL: any;
   public usuario!: UsuarioBase; 
   public usuarioInside!: UsuarioInside;
-  public usuario$!: Observable<UsuarioBase[]> | undefined;
- // public usuarioInside: UsuarioInside = {};
   constructor(
     private authService : AuthService,
     private usuarioService : UsuarioService,

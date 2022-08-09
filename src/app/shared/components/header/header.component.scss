@@ -1,4 +1,4 @@
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 930px) {
   .navbar{
       justify-content: space-between;
       .collapse{
@@ -136,14 +136,14 @@ ul, li{
 
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 1200px) {
 
   #offcanvasNavbar {
     display: none;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 930px) {
   #offcanvasNavbar{
     max-width: 90vw;
   }

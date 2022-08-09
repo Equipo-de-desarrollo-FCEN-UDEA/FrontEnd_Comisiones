@@ -62,55 +62,69 @@ export class ComisionesService {
     console.log("body:", comision);
 
     const reqBody: FormData = new FormData();
-    reqBody.append('files', archivos)
-    reqBody.append('body', new Blob([JSON.stringify(comision)], {
+    reqBody.append('tipos_comision_id', comision.tipos_comision_id);
+    reqBody.append('fecha_inicio', comision.fecha_inicio);
+    reqBody.append('fecha_fin', comision.fecha_fin);
+    reqBody.append('justificacion', comision.justificacion);
+    reqBody.append('idioma', comision.idioma);
+    reqBody.append('lugar', comision.lugar);
+    reqBody.append('archivo', new Blob([JSON.stringify(archivos)], {
       type: 'application/json'
-    }), );
+    }));
 
     return this.http.post<ComisionDTO>(this.urlEndPoint, reqBody);
   }
 
 
   /**
-   * body: { files: '[object File]' },
+   * 
+   * body: {
+    tipos_comision_id: '2',
+    fecha_inicio: '2022-09-10',
+    fecha_fin: '2022-09-17',
+    justificacion: 'alpaca alpaca alpaca alpaca alpaca alpaca ',
+    idioma: 'alpacuno',
+    lugar: 'Albania, '
+  },
   files: [Object: null prototype] {
-    body: {
+    archivo: {
       name: 'blob',
-      data: <Buffer 7b 22 66 65 63 68 61 5f 69 6e 69 63 69 6f 22 3a 22 32 30 32 32 2d 30 39 2d 31 31 22 2c 22 66 65 63 68 61 5f 66 69 6e 22 3a 22 32 30 32 32 2d 30 39 2d ... 230 more bytes>,
-      size: 280,
+      data: <Buffer 5b 7b 7d 5d>,
+      size: 4,
       encoding: '7bit',
       tempFilePath: '',
       truncated: false,
       mimetype: 'application/json',
-      md5: '73c37103d92264ac7acb9338b4cc2ad2',
+      md5: 'a21cafb4c405e6997671a02e578b9b1e',
       mv: [Function: mv]
     }
-  }, 
+  },
   
   
   ------
 
-  body: {
-    fecha_inicio: '2022-08-07T05:00:00.000Z',
-    fecha_fin: '2022-08-07T05:00:00.000Z',
-    justificacion: 'no se pa que',
-    idioma: 'esperanto',
-    lugar: 'aqui',
-    id: 20
+body: {
+    fecha_inicio: '2022-02-20',
+    fecha_fin: '2022-02-21',
+    fecha_resolucion: '2022-02-20',
+    resolucion: '1111',
+    justificacion: 'sdlkfjasñdlkfjsañdlkfjasñdlkfjñaslkdjfñlkdsajfñlksadjfñlaksdjfñlksadjfñlkssalkdjfañslkdjfñalskdjfñaslkdjfñaslkdjfñalskjfdsaldkfjlskdjfslk',
+    idioma: 'blabla',
+    lugar: 'blabla',
+    tipos_comision_id: '1'
   },
   files: [Object: null prototype] {
     archivo: {
-      name: '847521381-MIT.pdf',
-      data: <Buffer 25 50 44 46 2d 31 2e 35 0d 25 e2 e3 cf d3 0d 0a 33 35 30 30 20 30 20 6f 62 6a 0d 3c 3c 2f 4c 69 6e 65 61 72 69 7a 65 64 20 31 2f 4c 20 39 38 39 39 39 ... 9899917 more bytes>,
-      size: 9899967,
+      name: 'Spectrum Tutorial — Pyrat Bay 1.0.2 documentation.pdf',
+      data: <Buffer 25 50 44 46 2d 31 2e 34 0a 25 d3 eb e9 e1 0a 31 20 30 20 6f 62 6a 0a 3c 3c 2f 43 72 65 61 74 6f 72 20 28 4d 6f 7a 69 6c 6c 61 2f 35 2e 30 20 5c 28 4d ... 1152800 more bytes>,
+      size: 1152850,
       encoding: '7bit',
       tempFilePath: '',
       truncated: false,
       mimetype: 'application/json',
-      md5: '37d673e798e33747fea91575422602eb',
+      md5: '1c723a940ee40373c35c98dd3c75da38',
       mv: [Function: mv]
     }
-  },
   
   */
 

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {Permiso} from '../../core/interfaces/permisos';
-import {ComisionesService} from '../services/comisiones.service';
 import {DatePipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
-import {SortColumnP, SortDirectionP} from "@shared/directivas/sortable-permiso.directive";
+import {SortDirection} from "@shared/directivas/sortable.directive";
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { PermisoService } from './permiso.service';
+
+export type SortColumn = keyof Permiso | "";
 
 interface SearchResult {
   permisos: Permiso[];
@@ -17,13 +18,13 @@ interface State {
   page: number;
   pageSize: number;
   searchTerm: string;
-  sortColumn: SortColumnP;
-  sortDirection: SortDirectionP;
+  sortColumn: SortColumn;
+  sortDirection: SortDirection;
 }
 
 const compare = (v1: any | string, v2: string|any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-function sort(permisos: Permiso[], column: SortColumnP, direction: string | any): Permiso[] {
+function sort(permisos: Permiso[], column: SortColumn, direction: string ): Permiso[] {
   if (direction === '' || column === '') {
     return permisos;
   } else {
@@ -37,10 +38,9 @@ function sort(permisos: Permiso[], column: SortColumnP, direction: string | any)
 function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
 
   return (
-    // datepipe.transform(comisiones.id)?.includes(term) ||
-    // permisos.tipos_permiso.nombre.toLowerCase().includes(term)||
-    ultimoElement(permisos.intermediate_permisos).intermediate_estados.nombre.toLowerCase().includes(term)||
-    // ultimoElement(permisos.intermediate_permisos).created_at.includes(term)||
+    permisos.tipos_permiso.nombre.toLowerCase().includes(term.toLowerCase()) ||
+    ultimoElement(permisos.intermediate_permisos)?.intermediate_estados.nombre.toLowerCase().includes(term)||
+    ultimoElement(permisos.intermediate_permisos)?.createdAt.includes(term)||
     permisos.usuarios.nombre.toLowerCase().includes(term) ||
     permisos.usuarios.apellido.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
@@ -86,8 +86,8 @@ export class BuscarPermisosService {
     this._search$.next();
     this.permisosSvc.getPermisos()
     .subscribe(
-      (comisiones: Permiso[]) => {
-        this.PERMISOS = comisiones;
+      (permisos: Permiso[]) => {
+        this.PERMISOS = permisos;
       }
     )
    }
@@ -103,8 +103,8 @@ export class BuscarPermisosService {
    set page(page: number) { this._set({page}); }
    set pageSize(pageSize: number) { this._set({pageSize}); }
    set searchTerm(searchTerm: string) { this._set({searchTerm}); }
-   set sortColumn(sortColumn: SortColumnP) { this._set({sortColumn}); }
-   set sortDirection(sortDirection: SortDirectionP) { this._set({sortDirection}); }
+   set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
+   set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
 
 
   private _set(patch: Partial<State>) {
@@ -119,7 +119,7 @@ export class BuscarPermisosService {
 
     // 1. sort
     let permisos = sort(this.PERMISOS, sortColumn, sortDirection);
-    console.log(permisos)
+    
 
     // 2. filter
     permisos = permisos.filter(permisos => matches(permisos, searchTerm, this.datepipe));

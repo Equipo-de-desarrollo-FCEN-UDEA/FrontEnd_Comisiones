@@ -204,16 +204,16 @@ export class CrearComisionComponent implements OnInit {
 
     this.comisionesSvc.crearComision(body, this.files).subscribe({
       next: (res) => { 
-        //facilitate change detection
-        this.ngZone.run(() =>
-          this.router.navigateByUrl(`/home`)
-        );
         Swal.fire({
           title: 'Creada',
           text: '¡La solicitud se creó con éxito!',
           icon: 'success',
           confirmButtonColor: '#3AB795',
         });
+        //facilitate change detection
+        this.ngZone.run(() =>
+          this.router.navigateByUrl(`/home`)
+        );
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {

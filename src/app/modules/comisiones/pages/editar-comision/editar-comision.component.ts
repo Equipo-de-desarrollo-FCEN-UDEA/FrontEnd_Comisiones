@@ -7,14 +7,15 @@ import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { DatePipe } from '@angular/common';
-import { PaisesCiudadesService } from '@services/paises-ciudades.service';
-import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
+import Swal from 'sweetalert2';
 
 // ----------- SERVICIOS ------------
 import { ComisionesService } from '@services/comisiones.service';
 import { TipoComision } from '@interfaces/tipos_comision';
 import { TipoComisionService } from '@services/tipo-comision.service';
 import { Comision } from '@interfaces/comisiones';
+import { PaisesCiudadesService } from '@services/paises-ciudades.service';
+import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
 
 @Component({
   selector: 'app-editar-comision',
@@ -49,7 +50,6 @@ export class EditarComisionComponent implements OnInit {
   // Documentos Actuales
   docsBorrar:any = [];
   documentosArray:any = [];
-  isShow = false;
 
 
   clicked = 0;
@@ -110,7 +110,6 @@ export class EditarComisionComponent implements OnInit {
       fecha_fin: ['', Validators.required]
     });
 
-    
     this.fromDate = null;
 
 }
@@ -231,28 +230,38 @@ export class EditarComisionComponent implements OnInit {
     this.editarComisionForm.value.tipo_comision_id = Number(this.editarComisionForm.value.tipo_comision_id);  // the + operator will change the type to number
     this.submitted = true;
 
-    console.log(this.editarComisionForm.value);
-
     // Se detiene aqui si el formulario es invalido
     if (this.editarComisionForm.invalid) {
       console.log('invalid form')
       return;
     }
 
+
+    console.log("archivo", this.archivos);
+    console.log("file", this.files);
+    console.log(this.editarComisionForm.value);
+
     // Edita la comision: ID de la comision, ID de documentos borrados, Form 
-    this.comisionSvc.updateComision(this.getId, "["+this.docsBorrar.toString()+"]" ,this.editarComisionForm.value)
-    .subscribe({
-      next: (res) => {
-        //facilitate change detection
-        this.ngZone.run(() =>
-          this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
-        );
-      },
-      error: (err) => {
-        if (err.status === 404 || err.status === 401) {
-          this.error = err.error.msg;
-        }
-      },
+    this.comisionSvc.updateComision(this.getId, "["+this.docsBorrar.toString()+"]", 
+      this.files, this.editarComisionForm.value).subscribe({
+        next: (res) => { 
+          
+          //facilitate change detection
+          this.ngZone.run(() =>
+            this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
+          );
+          Swal.fire({
+            title: 'Actulizada',
+            text: '¡La solicitud se actualizó con éxito!',
+            icon: 'success',
+            confirmButtonColor: '#3AB795',
+          });
+        },
+        error: (err) => {
+          if (err.status === 404 || err.status === 401) {
+            this.error = err.error.msg;
+          }
+        },
     });
 
     

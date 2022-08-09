@@ -1,9 +1,13 @@
-<div class="container">
-    <h4>
-        Formulario de creación de comisión
-    </h4>
-    <form class="need-validation card" need-validation novalidate [formGroup]="formComision" (ngSubmit)="onSubmit()" >
+<div class="container shadow-sm pt-4 pl-4 pr-4 mb-5 bg-white rounded">
+    <div class="row">
+      <div class="col">
+        <p class="text-secondary">CREAR COMISION</p>
+      </div>
+    </div>
 
+    
+    <form class="need-validation" need-validation novalidate [formGroup]="creaComisionForm" (ngSubmit)="onSubmit()" >
+    <hr />
         <ng-template #footerTemplate>
             <hr class="my-0">
             <p *ngIf="fromDate && !toDate" style="text-align: center; margin: 0; color: green;"> Elige la segunda fecha
@@ -31,54 +35,54 @@
                 </ng-template>
             </div>
         </div>
-            <div class="row">
 
-                <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingtipos_comision_id"
-                        formControlName="tipos_comision_id" required
-                        [ngClass]="{'is-invalid': isInvalidForm('tipos_comision_id')}" placeholder=" ">
-                        <option [value]="tipos_comision_id.id" *ngFor="let tipos_comision_id of tiposcomision">
-                            {{tipos_comision_id.nombre}}</option>
-                    </select>
-                    <label for="floatingtipos_comision_id" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['tipos_comision_id'].valid}">Tipo de
-                        comision</label>
-                </div>
+        <div class="row">
+            <div class="formfloatig">
+                <select class="form-select form-select-lg mb-3" id="floatingtipos_comision_id"
+                    formControlName="tipos_comision_id"
+                    [ngClass]="{'is-invalid': isInvalidForm('tipos_comision_id')}" placeholder=" ">
+                    <option [value]="tipos_comision_id.id" *ngFor="let tipos_comision_id of tiposcomision">
+                        {{tipos_comision_id.nombre}}</option>
+                </select>
+                <label for="floatingtipos_comision_id" class="selectLabel"
+                    [ngClass]="{'isFill': creaComisionForm.controls['tipos_comision_id'].valid}">Tipo de
+                    comision</label>
+            </div>
 
-                <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingpais" formControlName="pais" required
+            <div class="formfloatig">
+                    <select class="form-select form-select-lg mb-3" id="floatingpais" formControlName="pais"
                         [ngClass]="{'is-invalid': isInvalidForm('pais')}" (change)="onChangePais($event)" placeholder=" ">
                         <option [value]="i" *ngFor="let country of paises;let i=index">{{country.name}}</option>
                     </select>
                     <label for="floatingpais" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['pais'].valid}">País de la comision</label>
-                </div>
+                        [ngClass]="{'isFill': creaComisionForm.controls['pais'].valid}">País de la comision</label>
+            </div>
 
-                <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingestado" formControlName="estado" required
+                <!-- <div class="formfloatig">
+                    <select class="form-select form-select-lg mb-3" id="floatingestado" formControlName="estado"
                         [ngClass]="{'is-invalid': isInvalidForm('estado')}" (change)="onChangeEstado($event)" placeholder=" ">
                         <option [value]="i" *ngFor="let estado of estados;let i=index">{{estado.name}}</option>
                     </select>
                     <label for="floatingestado" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['estado'].valid}">
+                        [ngClass]="{'isFill': creaComisionForm.controls['estado'].valid}">
                         <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
                         Estado de la comision</label>
-                </div>
+                </div> -->
 
-                <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingciudad" formControlName="ciudad" required
-                        [ngClass]="{'is-invalid': isInvalidForm('ciudad')}" [disabled]="!formComision.controls['pais'].valid" placeholder=" ">
+                <!-- <div class="formfloatig">
+                    <select class="form-select form-select-lg mb-3" id="floatingciudad" formControlName="ciudad"
+                        [ngClass]="{'is-invalid': isInvalidForm('ciudad')}" [disabled]="!creaComisionForm.controls['pais'].valid" placeholder=" ">
                         <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">{{ciudad.name}}</option>
                     </select>
                     <label for="floatingpais" class="selectLabel"
-                        [ngClass]="{'isFill': formComision.controls['ciudad'].valid}">
+                        [ngClass]="{'isFill': creaComisionForm.controls['ciudad'].valid}">
                         <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
                         Ciudad de la comision
                     </label>
-                </div>
-
+                </div> -->
+                
                 <h6>
-                    <span class="text-muted">Rango de fechas de la comision</span>
+                    <span class="text-secondary">Rango de fechas de la comision</span>
                 </h6>
                 <div class=" col-sm-12 col-xs-12 col-md-12" style="margin-bottom: 5px;">
                     <div class="input-group">
@@ -106,7 +110,7 @@
 
                 <div class="formfloatig">
                     <input id="floatingidioma" formControlName="idioma" class="form-control" type="idioma"
-                        placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('idioma')}" required>
+                        placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('idioma')}">
                     <label for="floatingidioma" class="formLabel"> Idioma
                     </label>
                 </div>
@@ -117,7 +121,7 @@
 
                     <textarea id="floatingjustificacion" formControlName="justificacion" class="form-control"
                         type="justificacion" placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('justificacion')}"
-                        required rows="5"></textarea>
+                     rows="5"></textarea>
                     <label for="floatingjustificacion" class="formLabel"> Justificación
                     </label>
                 </div>
@@ -142,10 +146,7 @@
                         </div>
                         <div class="buttons" style="width:fit-content; margin: 0;">
                             <button class="btn btn-circle btn-remove" type="button" (click)="removeFile(i)"
-                                >
-
-                                <i class="fa fa-minus"></i>
-
+                                ><i class="fa fa-minus"></i>
                             </button>
                             <button class="btn btn-circle btn-add" type="button"
                                 (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
@@ -154,11 +155,12 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
-        <button class="btn btn-success" (submit)="true" [disabled]="formComision.invalid || !validSize() || (isLoading | async)">
+        </div>
+        <hr />
+        <button class="btn btn-success" (submit)="true" [disabled]="creaComisionForm.invalid || !validSize() || (isLoading | async)">
             <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-            Enviar</button>
+            Enviar
+        </button>
 
     </form>
 

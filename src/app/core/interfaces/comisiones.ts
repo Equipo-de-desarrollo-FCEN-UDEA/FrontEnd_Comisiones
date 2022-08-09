@@ -37,9 +37,6 @@ export interface Comision extends ComisionesinDB{
     usuarios: UsuarioInside;
     intermediate_comisiones: ComisionesXEstadoInside[];
     tipos_comision_id: number;
-    
-    // nombreEstadoActual: string;
-    
 }
 
 export interface ComisionesXEstadoInDB{

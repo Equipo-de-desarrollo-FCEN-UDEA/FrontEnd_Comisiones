@@ -100,18 +100,6 @@
             <ul *ngFor="let doc of documentosArray; let i=index " class="list-group">
               <li [id]="i" class="list-group-item"> 
                 <span>{{doc.nombre}}</span>
-
-                <!-- <div class="buttons" style="width:fit-content; margin: 0;">
-                  <button class="btn btn-circle btn-remove" type="button" (click)="borrarDocActual(doc.id)"
-                      ><i class="fa fa-times-circle"></i>
-                  </button>
-                  <button class="btn btn-circle btn-add" type="button"
-                      (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
-                      <i class="fa fa-plus"></i>
-                  </button>
-                </div> -->
-
-
                 <span class="input-group-text" style="width:fit-content; margin: 0;">
                   <button class="btn btn-circle" type="button" (click)="borrarDocActual(doc.id, i)">
                     <i class="fa fa-times-circle"></i>
@@ -185,7 +173,7 @@
           <span class="text-muted">Adjuntar archivos</span>
       </h6>
       <div class="formfloatig" style="display: flex; flex-direction: column;">
-          <div *ngFor="let producto of archivos; last as isLast; let i=index"
+          <div *ngFor="let archivo of archivos; last as isLast; let i=index"
               class="arrayLike formfloatig">
               <div class="archivos" style="width:auto; margin-left: 10px;">
                   <label class="btn-btn-default">

@@ -1,7 +1,7 @@
-<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded">
+<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded ">
     <form>
       <div class="mb-3 row">
-        <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar Solicitud:</label>
+        <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar Usuarios:</label>
         <div class="col-xs-3 col-sm-auto">
           <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
         </div>
@@ -19,7 +19,7 @@
           <th scope="col" sortable="nombre" (sort)="onSort($event)" >Departamento</th>
           <th scope="col" sortable="nombre" (sort)="onSort($event)" >Facultad</th>
           <th scope="col" sortable="nombre" (sort)="onSort($event)" >Creado</th>
-    
+          <th> </th>
         </tr>
         </thead>
         <tbody>
@@ -45,9 +45,52 @@
     
           <td>
             <ngb-highlight
-            [result]="usuario.roles.nombre" [term]="service.searchTerm">
+            [result]="usuario.roles.nombre" 
+            class="badge badge-pill pill"
+            [term]="service.searchTerm"
+            [ngClass]="{
+              'bg-solicitada':
+              usuario.roles.nombre === 'ADMIN',
+              'bg-aprobada':
+              usuario.roles.nombre === 'VICERRECTORIA',
+              'bg-visto-bueno':
+              usuario.roles.nombre === 'DECANATURA',
+              'bg-finalizada':
+              usuario.roles.nombre === 'COORDINACION',
+              'bg-empleado':
+              usuario.roles.nombre === 'EMPLEADO',
+              'bg-profesor':
+              usuario.roles.nombre === 'PROFESOR'
+            }"
+            
+              
+              
+             
+            >
+            
             </ngb-highlight>
           </td>
+
+          <!-- <td>
+            <ngb-highlight
+              [result]="ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre"
+              [term]="service.searchTerm"
+              class="badge badge-pill pill"
+              [ngClass]="{
+                'bg-solicitada':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'SOLICITADA',
+                'bg-aprobada': ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'APROBADA',
+                'bg-visto-bueno':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'VISTO BUENO',
+                'bg-finalizada':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'FINALIZADA',
+                'bg-rechazada-decanato':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA DECANATO',
+                'bg-rechazada-coordinacion':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
+              }"
+            ></ngb-highlight>
+          </td> -->
     
           <td>
             <ngb-highlight
@@ -68,6 +111,12 @@
             </ngb-highlight>
           </td>
 
+          <td>
+            <a [routerLink]="[]"
+              routerLinkActive="router-link-active">
+            Ver...</a>
+          </td>
+
         </tbody>
       </table>
     
@@ -77,9 +126,9 @@
         </ngb-pagination> 
     
         <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize"> 
-          <option [ngValue]="2">2 items per page</option>
-          <option [ngValue]="4">4 items per page</option>
-          <option [ngValue]="6">6 items per page</option>
+          <option [ngValue]="2">2 items por pag.</option>
+          <option [ngValue]="4">4 items por pag.</option>
+          <option [ngValue]="6">6 items por pag.</option>
         </select>
       </div>
     

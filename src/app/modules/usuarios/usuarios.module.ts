@@ -20,12 +20,13 @@ import { SharedModule } from '@shared/shared.module';
       // NgbdSortableHeader
   ],
   imports: [
+    CommonModule,
     UsuariosRoutingModule,
     NgbModule,
     SharedModule
   ],
   providers:[
-    NgbdSortableHeader
+    // NgbdSortableHeader
   ]
 })
 export class UsuariosModule { }

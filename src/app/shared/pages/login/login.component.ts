@@ -62,8 +62,8 @@ export class LoginComponent implements OnInit {
   ]
 
 
-  //private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; --> EL QUE SE USARÁ
-  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@gmail.com$/; 
+  // private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; --> EL QUE SE USARÁ
+  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@gmail.com$/ ; 
   isLoading: Subject<boolean> = this.loadingService.isLoading;
   submitted = false;
   error = '';

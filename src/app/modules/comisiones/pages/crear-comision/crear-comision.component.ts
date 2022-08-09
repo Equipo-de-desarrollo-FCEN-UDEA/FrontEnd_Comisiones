@@ -21,7 +21,7 @@ export class CrearComisionComponent implements OnInit {
   model: NgbDateStruct | null = null;
   public dias_permiso = 15;
   today = this.calendar.getToday();
-  files : any[]=[];
+  files : File[]=[];
   archivos = [1];
 
   private pais : Pais={
@@ -172,13 +172,16 @@ export class CrearComisionComponent implements OnInit {
 
   onSubmit() {
 
-    const response = {
-      ...this.formComision.value,
+    const lugar = this.formComision.value.ciudad || '' + this.formComision.value.estado + this.formComision.value.pais;
+
+    let {ciudad, estado, pais, ...others} = this.formComision.value;
+
+    const response  = {
+      ...others,
       archivos: this.files,
       fecha_resolucion: new Date(this.formatter.format(this.today)),
       usuarios_id: 12,
-      pais: this.pais.name,
-      estado: this.estado.name,
+      lugar: lugar
     }
 
     console.log(response)

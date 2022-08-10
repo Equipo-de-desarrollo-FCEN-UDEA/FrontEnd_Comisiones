@@ -26,16 +26,16 @@
       <div class="row regular-row">
         <div class="col-4 label">Tipo de Comisión *</div>
         <div class="col-sm-8">
-          <select formControlName="tipo_comision_id" class="form-control" 
+          <select formControlName="tipos_comision_id" class="form-control" 
           (change)="onChangeSolicitud($event)"
-          [ngClass]="{ 'is-invalid': submitted && f['tipo_comision_id'].errors }">
+          [ngClass]="{ 'is-invalid': submitted && f['tipos_comision_id'].errors }">
             <option value="" disabled selected>Elige tipo el tipo de comisión</option>
             <option [value]="tipo.id | number" *ngFor="let tipo of tiposComision$ | async">
               {{ tipo.nombre }}
             </option>
           </select>
-          <div *ngIf="submitted && f['tipo_comision_id'].errors" class="invalid-feedback">
-            <div *ngIf="f['tipo_comision_id'].errors['required']">
+          <div *ngIf="submitted && f['tipos_comision_id'].errors" class="invalid-feedback">
+            <div *ngIf="f['tipos_comision_id'].errors['required']">
               Elige un tipo de Solicitud
             </div>
           </div>
@@ -166,35 +166,35 @@
       </div>
     </div>
 
-    <!--- ANEXOS -->
     <hr />
-    <div class="row regular-row">
-      <h6>
-          <span class="text-muted">Adjuntar archivos</span>
-      </h6>
-      <div class="formfloatig" style="display: flex; flex-direction: column;">
-          <div *ngFor="let archivo of archivos; last as isLast; let i=index"
-              class="arrayLike formfloatig">
-              <div class="archivos" style="width:auto; margin-left: 10px;">
-                  <label class="btn-btn-default">
-                      <div class="fa fa-upload fa-2x "></div>
-                      <input [id]="i" class="file-upload" type="file" (change)='onUpload($event,i)'/> 
-                      <label [for]="i"  style="margin-left: 10px;">{{files[i] ? files[i].name : 'Subir archivo' }}</label>
-                  </label>
+    <!-- ARCHIVOS ANEXOS -->
+    <h6>
+      <span class="text-muted">Archivos adjuntos a la solicitud</span>
+    </h6>
+    <div class="alert-danger" *ngIf="files.length>0 && !validSize()">
+      <p>
+          Los archivos no deben pesar más de 2 MB.
+      </p>
+    </div>
+    <div class="formfloatig" style="display: flex; flex-direction: column;">
+      <div *ngFor="let producto of archivos; last as isLast; let i=index"
+          class="arrayLike formfloatig">
+          <div class="archivos" style="width:auto; margin-left: 10px;">
+              <label class="btn-btn-default">
+                  <div class="fa fa-upload fa-2x "></div>
+                  <input [id]="i" class="file-upload" type="file" (change)='onUpload($event,i)'/>
+                  <label [for]="i"  style="margin-left: 10px;">{{files[i] ? files[i].name : 'Subir archivo' }}</label>
+              </label>
 
-              </div>
-              <div class="buttons" style="width:fit-content; margin: 0;">
-                  <button class="btn btn-circle btn-remove" type="button" (click)="removeFile(i)"
-                      ><i class="fa fa-minus"></i>
-                  </button>
-                  <button class="btn btn-circle btn-add" type="button"
-                      (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
-                      <i class="fa fa-plus"></i>
-                  </button>
-              </div>
           </div>
-          <div class="alert alert-danger" role="alert" *ngIf="files.length>0 && !validSize()">
-                Los archivos no deben pesar más de 2 MB.
+          <div class="buttons" style="width:fit-content; margin: 0;">
+              <button class="btn btn-circle btn-remove" type="button" (click)="removeFile(i)"
+                  ><i class="fa fa-minus"></i>
+              </button>
+              <button class="btn btn-circle btn-add" type="button"
+                  (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
+                  <i class="fa fa-plus"></i>
+              </button>
           </div>
       </div>
     </div>

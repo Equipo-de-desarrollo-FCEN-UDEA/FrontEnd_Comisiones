@@ -141,8 +141,6 @@ export class CrearComisionComponent implements OnInit {
     if (file) {
       this.files.splice(index, 1, file);
     }
-    console.log(this.files.values)
-
   }
 
   onChangePais(event:any) {
@@ -182,14 +180,12 @@ export class CrearComisionComponent implements OnInit {
 
   onSubmit() {
     
-    const response = {
-      ...this.creaComisionForm.value,
-      archivos: this.files,
-      fecha_resolucion: new Date(this.formatter.format(this.today)),
-      pais: this.pais.name,
-      //estado: this.estado.name
+    // Se detiene aqui si el formulario es invalido
+    if (this.creaComisionForm.invalid) {
+      console.log('invalid form')
+      return;
     }
-
+    
     const body = {
       fecha_inicio: this.creaComisionForm.value.fecha_inicio,
       fecha_fin: this.creaComisionForm.value.fecha_fin,
@@ -197,12 +193,23 @@ export class CrearComisionComponent implements OnInit {
       justificacion: this.creaComisionForm.value.justificacion,
       idioma: this.creaComisionForm.value.idioma,
       lugar:this.pais.name+', '+this.estado.name,
-      tipos_comision_id: Number(this.creaComisionForm.value.tipos_comision_id)
+      tipos_comision_id: this.creaComisionForm.value.tipos_comision_id
     }
 
-    console.log("response: ", body)
 
-    this.comisionesSvc.crearComision(body, this.files).subscribe({
+    const reqBody: FormData = new FormData();
+    reqBody.append('tipos_comision_id', body.tipos_comision_id);
+    reqBody.append('fecha_inicio', body.fecha_inicio);
+    reqBody.append('fecha_fin', body.fecha_fin);
+    reqBody.append('justificacion', body.justificacion);
+    reqBody.append('idioma', body.idioma);
+    reqBody.append('lugar', body.lugar);
+
+    for (const file of this.files) {
+      reqBody.append('archivo', file, file.name) 
+    }
+    
+    this.comisionesSvc.crearComision(reqBody).subscribe({
       next: (res) => { 
         Swal.fire({
           title: 'Creada',
@@ -210,7 +217,7 @@ export class CrearComisionComponent implements OnInit {
           icon: 'success',
           confirmButtonColor: '#3AB795',
         });
-        //facilitate change detection
+        //ngZone: facilitate change detection
         this.ngZone.run(() =>
           this.router.navigateByUrl(`/home`)
         );

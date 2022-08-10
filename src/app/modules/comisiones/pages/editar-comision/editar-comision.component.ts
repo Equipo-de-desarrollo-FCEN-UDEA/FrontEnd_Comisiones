@@ -81,7 +81,7 @@ export class EditarComisionComponent implements OnInit {
     this.comisionSvc.getComision(this.getId).subscribe({
       next: (res) => {
         this.editarComisionForm.setValue({
-          tipo_comision_id: Number(res.tipos_comision.id),//pipeTransform.transform(res.tipos_comision.id),
+          tipos_comision_id: Number(res.tipos_comision.id),//pipeTransform.transform(res.tipos_comision.id),
           justificacion: res.justificacion,
           idioma: res.idioma,
           lugar: res.lugar,
@@ -102,7 +102,7 @@ export class EditarComisionComponent implements OnInit {
     });
 
     this.editarComisionForm = this.formBuilder.group({
-      tipo_comision_id: ['', [Validators.required, Validators.nullValidator]],
+      tipos_comision_id: ['', [Validators.required, Validators.nullValidator]],
       justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
       lugar: ['', [Validators.required, Validators.nullValidator]],
       idioma: [''],
@@ -236,14 +236,35 @@ export class EditarComisionComponent implements OnInit {
       return;
     }
 
+    const body = {
+      fecha_inicio: this.editarComisionForm.value.fecha_inicio,
+      fecha_fin: this.editarComisionForm.value.fecha_fin,
+      fecha_resolucion: new Date(this.formatter.format(this.today)),
+      justificacion: this.editarComisionForm.value.justificacion,
+      idioma: this.editarComisionForm.value.idioma,
+      lugar:this.editarComisionForm.value.lugar,
+      tipos_comision_id: this.editarComisionForm.value.tipos_comision_id
+    }
 
-    console.log("archivo", this.archivos);
-    console.log("file", this.files);
-    console.log(this.editarComisionForm.value);
+
+    console.log(body)
+
+    const reqBody: FormData = new FormData();
+    reqBody.append('tipos_comision_id', body.tipos_comision_id);
+    reqBody.append('fecha_inicio', body.fecha_inicio);
+    reqBody.append('fecha_fin', body.fecha_fin);
+    reqBody.append('justificacion', body.justificacion);
+    reqBody.append('idioma', body.idioma);
+    reqBody.append('lugar', body.lugar);
+
+    for (const file of this.files) {
+      reqBody.append('archivo', file, file.name) 
+    }
+    
 
     // Edita la comision: ID de la comision, ID de documentos borrados, Form 
     this.comisionSvc.updateComision(this.getId, "["+this.docsBorrar.toString()+"]", 
-      this.files, this.editarComisionForm.value).subscribe({
+      this.files, reqBody).subscribe({
         next: (res) => { 
           
           //facilitate change detection

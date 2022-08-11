@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { tap, map } from 'rxjs/operators';
 import { saveAs } from 'file-saver';
+import { prefix } from '@shared/data/ruta-api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DexclusivaService {
 
-  prefix = 'http://localhost:3000/api/dedicaciones';
+ private prefix : string = prefix + 'dedicaciones';
 
   constructor(
     private http: HttpClient,
@@ -18,9 +19,9 @@ export class DexclusivaService {
 
   }
 
-  getDexclusiva() {
-    return this.http.get('http://localhost:3000/dexclusiva');
-  }
+  // getDexclusiva() {
+  //   return this.http.get('http://localhost:3000/dexclusiva');
+  // }
 
   postDexclusiva(dexclusiva: any) {
     const headers = new HttpHeaders(

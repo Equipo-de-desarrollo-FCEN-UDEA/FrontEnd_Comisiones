@@ -32,6 +32,7 @@ export class PlanTrabajoComponent implements OnInit {
     registro: [Number,[Validators.required]],
     tipo_vinculacion: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
     tiempo_parcial: [Number,[Validators.required]],
+    escalafon: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
     actividades_docencia: this.fb.array([this.actividadesDocenciaGroup()],[Validators.required]),
     actividades_investigacion: this.fb.array([this.actividadesInvestigacionGroup()],[Validators.required]),
     actividades_extension: this.fb.array([this.actividadesExtensionGroup()],[Validators.required]),

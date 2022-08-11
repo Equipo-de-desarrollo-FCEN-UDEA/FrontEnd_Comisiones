@@ -14,7 +14,7 @@ export interface ComResInside {
 }
 
 export interface ComisionDTO extends Omit<ComResInside, 'id'>{
-    archivo : File[];
+    archivos : File[];
     fecha_resolucion?: Date;
     resolucion?: string;
     justificacion: string;

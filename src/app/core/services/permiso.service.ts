@@ -1,4 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Permiso, PermisosDTO, PermisosInside } from '@interfaces/permisos';
 import { prefix } from '@shared/data/ruta-api';
@@ -23,6 +25,50 @@ export class PermisoService {
         return res;
       })
     ); 
+  }
+
+  postPermiso(permiso:any) {
+    const headers = new HttpHeaders(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    )
+    const body = `
+    archivo=${permiso.archivos?[0] : null}
+    &fecha_inicio=${permiso.fecha_inicio}
+    &fecha_fin=${permiso.fecha_fin}
+    &fecha_resolucion=${permiso.fecha_resolucion}
+    &justificacion=${permiso.justificacion}
+    &tipos_permiso_id=${permiso.tipos_permiso_id}
+    &usuarios_id=${permiso.usuarios_id} 
+    ` 
+    return this.http.post(this.urlEndPoint, body, {headers: headers}).pipe(
+      map((res)=> {
+        return res;
+      })
+    );
+  }
+
+  patchPermiso(id: string | number, permiso:any): void {
+    const headers = new HttpHeaders(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    )
+    const body = `
+    archivo=${permiso.archivos?[0] : null}
+    &fecha_inicio=${permiso.fecha_inicio}
+    &fecha_fin=${permiso.fecha_fin}
+    &fecha_resolucion=${permiso.fecha_resolucion}
+    &justificacion=${permiso.justificacion}
+    &tipos_permiso_id=${permiso.tipos_permiso_id}
+    &usuarios_id=${permiso.usuarios_id} 
+    `
+    this.http.patch(`${this.urlEndPoint}/${id}`, body, {headers: headers}).subscribe(
+      (res) => {
+        console.log(res);
+      }
+    );
   }
 
   delete(id: string | number): Observable<any> {

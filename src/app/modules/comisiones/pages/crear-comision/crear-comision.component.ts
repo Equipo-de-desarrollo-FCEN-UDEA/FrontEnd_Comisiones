@@ -33,6 +33,7 @@ export class CrearComisionComponent implements OnInit {
 
   // Archivos 
   files : any[]=[];
+
   archivos = [1];
 
   // Lugar
@@ -155,11 +156,14 @@ export class CrearComisionComponent implements OnInit {
   }
 
 
+
   // ----------- TIPO DE SOLICITUD ------------
 
   onChangeSolicitud(e: any): void {
     this.cd.detectChanges();
   }
+
+
 
   // ----------- MANEJO DE ERRORES EN EL FORM ------------
   get f() {
@@ -240,6 +244,16 @@ export class CrearComisionComponent implements OnInit {
       idioma: this.creaComisionForm.value.idioma,
       lugar:this.pais.name+', '+this.estado.name,
       tipos_comision_id: this.creaComisionForm.value.tipos_comision_id
+    //const lugar = this.formComision.value.ciudad || '' + this.formComision.value.estado + this.formComision.value.pais;
+
+    //let {ciudad, estado, pais, fecha_inicio, fecha_fin, ...others} = this.formComision.value;
+
+    //const response  = {
+      //...others,
+      //archivos: this.files,
+      //fecha_resolucion: new Date(this.formatter.format(this.today)),
+      //usuarios_id: 12,
+     // lugar: lugar
     }
 
 

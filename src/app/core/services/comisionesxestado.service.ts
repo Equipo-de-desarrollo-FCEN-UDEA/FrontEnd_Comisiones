@@ -12,6 +12,7 @@ export class ComisionxestadoService {
 
   private urlEndPoint:string = prefix+'comisiones-estados';
 
+
   constructor( private http : HttpClient) { }
 
   getComisionxEstado() {

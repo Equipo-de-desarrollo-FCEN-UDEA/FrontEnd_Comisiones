@@ -1,6 +1,5 @@
+import { environment } from "./environment";
 
 
-//export var prefix: string = 'http://fcen-udea.co/develop/api/';
 
-
-export var prefix: string = 'http://localhost:3000/api/';
+export var prefix: string = environment.apiUrl;

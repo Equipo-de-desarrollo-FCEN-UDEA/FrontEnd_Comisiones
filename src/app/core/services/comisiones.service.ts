@@ -24,7 +24,6 @@ export class ComisionesService {
   
   getComision(id: string | number) {
     return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)
-
   }
   
   delete(id: string | number): Observable<ComisionDTO> {
@@ -35,6 +34,32 @@ export class ComisionesService {
   crearComision(comision:any) {
 
     return this.http.post<ComisionDTO>(this.urlEndPoint, comision);
+
+  //crearComision(comision:Partial<ComisionDTO> | any) {
+    //const headers = new HttpHeaders(
+      //{
+      //  'Content-Type': 'application/x-www-form-urlencoded',
+     // }
+    //)
+    
+    //const body = `
+    //archivo=${comision.archivos?[0] : null}
+    //&fecha_inicio=${comision.fecha_inicio}
+    //&fecha_fin=${comision.fecha_fin}
+    //&fecha_resolucion=${comision.fecha_resolucion}
+    //&justificacion=${comision.justificacion}
+    //&idioma=${comision.idioma}
+    //&lugar=${comision.lugar}
+    //&tipos_comision_id=${comision.tipos_comision_id}
+    //&usuarios_id=${comision.usuarios_id} 
+    //`  //usuario?????, se maneja desde el back 
+
+    //return this.http.post(this.urlEndPoint, body, {headers: headers}).pipe(
+     // map((res)=> {
+       // return res;
+      //})
+    //);
+
   }
 
 

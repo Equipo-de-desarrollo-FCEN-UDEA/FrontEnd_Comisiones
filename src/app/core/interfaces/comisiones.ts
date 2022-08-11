@@ -29,15 +29,12 @@ export interface ComisionesinDB extends Omit<ComisionDTO,'archivo'>, ComResInsid
 }
 
 export interface Comision extends ComisionesinDB{
-    results: any;
-    nombre: any;
     tipos_comision: TipoComisionInside
     documentos: DocumentosInside[];
     cumplidos: CumplidoInside[];
     usuarios: UsuarioInside;
     intermediate_comisiones: ComisionesXEstadoInside[];
     tipos_comision_id: number;
-    
 }
 
 export interface ComisionesXEstadoInDB{

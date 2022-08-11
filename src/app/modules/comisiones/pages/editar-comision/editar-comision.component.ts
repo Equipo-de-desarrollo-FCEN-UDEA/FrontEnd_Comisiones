@@ -7,14 +7,15 @@ import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { DatePipe } from '@angular/common';
-import { PaisesCiudadesService } from '@services/paises-ciudades.service';
-import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
+import Swal from 'sweetalert2';
 
 // ----------- SERVICIOS ------------
 import { ComisionesService } from '@services/comisiones.service';
 import { TipoComision } from '@interfaces/tipos_comision';
 import { TipoComisionService } from '@services/tipo-comision.service';
 import { Comision } from '@interfaces/comisiones';
+import { PaisesCiudadesService } from '@services/paises-ciudades.service';
+import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
 
 @Component({
   selector: 'app-editar-comision',
@@ -35,17 +36,23 @@ export class EditarComisionComponent implements OnInit {
   //comision$: Observable<Comision> | undefined
   
 
+
+  // ID de la comsision a editar
+  getId: any;
+
+  submitted = false;
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
-
-  getId: any;
-  submitted = false;
+  // Archivos nuevos
   files : any[]=[];
   archivos = [1];
 
+  // Documentos Actuales
+  docsBorrar:any = [];
+  documentosArray:any = [];
+
 
   clicked = 0;
-
 
 
  // ------------ CONSTRUCTOR ---------------
@@ -74,14 +81,15 @@ export class EditarComisionComponent implements OnInit {
     this.comisionSvc.getComision(this.getId).subscribe({
       next: (res) => {
         this.editarComisionForm.setValue({
-          tipo_comision_id: Number(res.tipos_comision.id),//pipeTransform.transform(res.tipos_comision.id),
+          tipos_comision_id: Number(res.tipos_comision.id),//pipeTransform.transform(res.tipos_comision.id),
           justificacion: res.justificacion,
           idioma: res.idioma,
           lugar: res.lugar,
           fecha_inicio: this.datepipe.transform(res.fecha_inicio, 'YYYY-MM-dd'),
-          fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd'),
-          //documentos: res.documentos[0].nombre
+          fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
         });
+
+        res.documentos.forEach(documento => this.documentosArray.push(documento)) 
 
         console.log(res);
       },
@@ -94,16 +102,16 @@ export class EditarComisionComponent implements OnInit {
     });
 
     this.editarComisionForm = this.formBuilder.group({
-      tipo_comision_id: ['', [Validators.required, Validators.nullValidator]],
+      tipos_comision_id: ['', [Validators.required, Validators.nullValidator]],
       justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
       lugar: ['', [Validators.required, Validators.nullValidator]],
       idioma: [''],
       fecha_inicio: ['', Validators.required],
-      fecha_fin: ['', Validators.required],
-      //documentos: ['']
+      fecha_fin: ['', Validators.required]
     });
 
     this.fromDate = null;
+
 }
 
 
@@ -186,7 +194,8 @@ export class EditarComisionComponent implements OnInit {
 
   removeFile(index: number) {
     if (this.archivos.length > 1) {
-    this.archivos.splice(index, 1);};
+    this.archivos.splice(index, 1);
+    };
     this.files.splice(index, 1);
   }
 
@@ -199,14 +208,27 @@ export class EditarComisionComponent implements OnInit {
     return this.editarComisionForm.get(controlName)?.invalid && this.editarComisionForm.get(controlName)?.touched;
   }
 
+  
+  borrarDocActual(idDoc: number, index: number){
 
+    // Si elimina documentos que ya están asociados a la comision
+    if (this.documentosArray.length >= 1) {
+      this.documentosArray.splice(index, 1);
+      };
+
+    // array de documentos que se borrarán y serán parámetros en el service
+    this.docsBorrar.push(idDoc);
+  }
+
+
+ // ----------------------------------------
  // ----------- EDITAR COMISION ------------
+ // ----------------------------------------
   onUpdate(): any {
 
+    // Convertir el id del tipo de comision: de string a numero
     this.editarComisionForm.value.tipo_comision_id = Number(this.editarComisionForm.value.tipo_comision_id);  // the + operator will change the type to number
     this.submitted = true;
-
-    console.log(this.editarComisionForm.value);
 
     // Se detiene aqui si el formulario es invalido
     if (this.editarComisionForm.invalid) {
@@ -214,21 +236,53 @@ export class EditarComisionComponent implements OnInit {
       return;
     }
 
+    const body = {
+      fecha_inicio: this.editarComisionForm.value.fecha_inicio,
+      fecha_fin: this.editarComisionForm.value.fecha_fin,
+      fecha_resolucion: new Date(this.formatter.format(this.today)),
+      justificacion: this.editarComisionForm.value.justificacion,
+      idioma: this.editarComisionForm.value.idioma,
+      lugar:this.editarComisionForm.value.lugar,
+      tipos_comision_id: this.editarComisionForm.value.tipos_comision_id
+    }
 
 
-    this.comisionSvc.updateComision(this.getId, this.editarComisionForm.value)
-    .subscribe({
-      next: (res) => {
-        //facilitate change detection
-        this.ngZone.run(() =>
-          this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
-        );
-      },
-      error: (err) => {
-        if (err.status === 404 || err.status === 401) {
-          this.error = err.error.msg;
-        }
-      },
+    console.log(body)
+
+    const reqBody: FormData = new FormData();
+    reqBody.append('tipos_comision_id', body.tipos_comision_id);
+    reqBody.append('fecha_inicio', body.fecha_inicio);
+    reqBody.append('fecha_fin', body.fecha_fin);
+    reqBody.append('justificacion', body.justificacion);
+    reqBody.append('idioma', body.idioma);
+    reqBody.append('lugar', body.lugar);
+
+    for (const file of this.files) {
+      reqBody.append('archivo', file, file.name) 
+    }
+    
+
+    // Edita la comision: ID de la comision, ID de documentos borrados, Form 
+    this.comisionSvc.updateComision(this.getId, "["+this.docsBorrar.toString()+"]", 
+      this.files, reqBody).subscribe({
+        next: (res) => { 
+          
+          //facilitate change detection
+          this.ngZone.run(() =>
+            this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
+          );
+          Swal.fire({
+            title: 'Actulizada',
+            text: '¡La solicitud se actualizó con éxito!',
+            icon: 'success',
+            confirmButtonColor: '#3AB795',
+          });
+        },
+        error: (err) => {
+          if (err.status === 404 || err.status === 401) {
+            this.error = err.error.msg;
+          }
+        },
     });
 
     

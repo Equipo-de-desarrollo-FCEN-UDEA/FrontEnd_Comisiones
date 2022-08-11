@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Comision } from '@interfaces/comisiones';
-import { ComisionesService } from '@services/comisiones.service';
+import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
+import { ultimoElement } from "@shared/clases/ultimo-estado";
 import Swal from 'sweetalert2';
+
+
+import { Comision } from '@interfaces/comisiones';
+import { LoaderService } from '@services/loader.service';
+import { ComisionesService } from '@services/comisiones.service';
 
 @Component({
   selector: 'app-ver-comision',
@@ -14,26 +19,50 @@ export class VerComisionComponent implements OnInit {
 
   loading:boolean = false;
   error:string = '';
-  comision: Comision | undefined;
-  comision$: Observable<Comision> | undefined
-  comisiones:any = []
+  comision: Comision| undefined;
+
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
+
+  documentosArray:any = [];
+  fechaCreacion:any = '';
+
+  ultimoElemento = ultimoElement
+  estadoActual:any = '';
+
 
   constructor(
     private comisionesService: ComisionesService,
     private activateRoute: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private loaderService: LoaderService
+  ) { 
+
+    this.activateRoute.params.subscribe({
+        next: (paramId) => {
+           const id = paramId['id'];
+            if (id) {
+              this.comisionesService.getComision(id).subscribe((res) => {
+                this.comision = res;
+                this.comision.documentos.forEach(documento => this.documentosArray.push(documento));
+                this.fechaCreacion = this.comision.intermediate_comisiones[0].createdAt;
+                this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados?.nombre;
+                console.log(this.comision); 
+              });
+            }
+
+        },
+        error: (err) => {
+          if (err.status === 404 || err.status === 401) {
+            this.error = err.error.msg; // mensaje desde el back
+            //this.loading = false;
+          }
+        },
+      });
+}
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe((params) => {
-      const id = params['id'];
-      if (id) {
-        this.comisionesService.getComision(id).subscribe((resComision) => {
-          this.comision = resComision;
-          console.log(this.comision);
-        });
-      }
-    });
+
   }
   
   delete(id: any): void {

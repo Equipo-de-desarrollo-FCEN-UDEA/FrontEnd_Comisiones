@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { prefix } from '@shared/data/ruta-api';
 
 // import { ComisionEstados } from "../interfaces/comisionesxestado";
 
@@ -9,7 +10,7 @@ import { Observable, map } from 'rxjs';
 })
 export class ComisionxestadoService {
 
-  private urlEndPoint:string = 'http://localhost:5200/api/comisiones-estados';
+  private urlEndPoint:string = prefix+'comisiones-estados';
 
   constructor( private http : HttpClient) { }
 

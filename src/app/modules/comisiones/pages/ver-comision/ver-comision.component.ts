@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { Comision } from '@interfaces/comisiones';
 import { LoaderService } from '@services/loader.service';
 import { ComisionesService } from '@services/comisiones.service';
+import { DescargarDocumentosService } from '@services/descargar-documentos.service';
 
 @Component({
   selector: 'app-ver-comision',
@@ -21,7 +22,7 @@ export class VerComisionComponent implements OnInit {
   error:string = '';
   comision: Comision| undefined;
 
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
 
   documentosArray:any = [];
@@ -32,17 +33,19 @@ export class VerComisionComponent implements OnInit {
 
 
   constructor(
-    private comisionesService: ComisionesService,
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private loaderService: LoaderService
+    private loaderSvc: LoaderService,
+
+    private comisionesSvc: ComisionesService,
+    private descargarDocumentoSvc: DescargarDocumentosService
   ) { 
 
     this.activateRoute.params.subscribe({
         next: (paramId) => {
            const id = paramId['id'];
             if (id) {
-              this.comisionesService.getComision(id).subscribe((res) => {
+              this.comisionesSvc.getComision(id).subscribe((res) => {
                 this.comision = res;
                 this.comision.documentos.forEach(documento => this.documentosArray.push(documento));
                 this.fechaCreacion = this.comision.intermediate_comisiones[0].createdAt;
@@ -64,6 +67,10 @@ export class VerComisionComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  abrirDocumento(id:number){
+    this.descargarDocumentoSvc.descargarDocumento(id);
+  }
   
   delete(id: any): void {
     Swal.fire({
@@ -76,7 +83,7 @@ export class VerComisionComponent implements OnInit {
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.comisionesService.delete(id).subscribe({
+        this.comisionesSvc.delete(id).subscribe({
           next: (response) => {
             console.log(response);
             this.router.navigate(['/home/comisiones']);

@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Permiso, PermisosInside } from '@interfaces/permisos';
+import { Permiso, PermisosDTO, PermisosInside } from '@interfaces/permisos';
 import { prefix } from '@shared/data/ruta-api';
 import { map, Observable } from 'rxjs';
 
@@ -27,5 +27,22 @@ export class PermisoService {
 
   delete(id: string | number): Observable<any> {
     return this.http.delete<PermisosInside>(`${this.urlEndPoint}/${id}`);
+  }
+
+
+  crearPermiso(permiso:any) {
+
+    return this.http.post<PermisosDTO>(this.urlEndPoint, permiso);
+  }
+
+
+  updatePermiso(id: string, paramList:any, files: File[], permiso:any): Observable<any> {
+
+    // En el back: /api/permisoes/:id?request=[idDoc]
+    
+    const params = new HttpParams().set('require', paramList);
+    permiso.archivo = files;
+
+    return this.http.patch<PermisosDTO>(`${this.urlEndPoint}/${id}`, permiso, {params: params});
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild, PipeTransform } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -32,10 +32,10 @@ export class EditarComisionComponent implements OnInit {
 
   editarComisionForm: FormGroup;
   error = '';
-  tiposComision$: Observable<TipoComision[]>;
-  //comision$: Observable<Comision> | undefined
-  
 
+  // Tipos de comision desde back
+  tiposComision$: Observable<TipoComision[]>;
+  
 
   // ID de la comsision a editar
   getId: any;
@@ -60,7 +60,6 @@ export class EditarComisionComponent implements OnInit {
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private datepipe: DatePipe,
-    //private pipeTransform: PipeTransform,
 
     private formBuilder: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -81,7 +80,7 @@ export class EditarComisionComponent implements OnInit {
     this.comisionSvc.getComision(this.getId).subscribe({
       next: (res) => {
         this.editarComisionForm.setValue({
-          tipos_comision_id: Number(res.tipos_comision.id),//pipeTransform.transform(res.tipos_comision.id),
+          tipos_comision_id: Number(res.tipos_comision.id),
           justificacion: res.justificacion,
           idioma: res.idioma,
           lugar: res.lugar,
@@ -273,7 +272,7 @@ export class EditarComisionComponent implements OnInit {
           );
           Swal.fire({
             title: 'Actulizada',
-            text: '¡La solicitud se actualizó con éxito!',
+            text: '¡La comisión se actualizó con éxito!',
             icon: 'success',
             confirmButtonColor: '#3AB795',
           });
@@ -287,8 +286,5 @@ export class EditarComisionComponent implements OnInit {
 
     
   }
-
-
-  
 
 }

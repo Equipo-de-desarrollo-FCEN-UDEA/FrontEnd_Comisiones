@@ -80,8 +80,10 @@
     <div class="col-4 label">Documentos</div>
     <div class="col-sm-8">
       <ul *ngFor="let doc of documentosArray; let i=index " class="list-group">
-        <li [id]="i" class="list-group-item"> 
-          <span>{{doc.nombre}}</span>
+        <li [id]="i" class="list-group-item" > 
+          <button class="btn btn-circle" type="button" (click)="abrirDocumento(doc.id)">
+            {{doc.nombre}}
+          </button>
         </li>
       </ul>
     </div>

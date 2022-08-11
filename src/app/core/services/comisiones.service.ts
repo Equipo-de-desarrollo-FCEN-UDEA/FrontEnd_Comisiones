@@ -27,11 +27,6 @@ export class ComisionesService {
 
   }
   
-  delete(id: string | number): Observable<ComisionDTO> {
-    return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
-  }
-
-  
   crearComision(comision:any) {
 
     return this.http.post<ComisionDTO>(this.urlEndPoint, comision);
@@ -47,6 +42,12 @@ export class ComisionesService {
 
     return this.http.patch<ComisionDTO>(`${this.urlEndPoint}/${id}`, comision, {params: params});
   }
+
+    
+  delete(id: string | number): Observable<ComisionDTO> {
+    return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
+  }
+
 
 
 }

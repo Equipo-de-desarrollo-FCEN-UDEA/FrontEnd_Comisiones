@@ -1,12 +1,14 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ComisionesService } from '@services/comisiones.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { Subject, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
 // ---- SERVICIOS ----
+import { ComisionesService } from '@services/comisiones.service';
+import { TipoComisionService } from '@services/tipo-comision.service';
+import { TipoComision } from '@interfaces/tipos_comision';
 import { LoaderService } from '@services/loader.service';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
@@ -21,14 +23,19 @@ export class CrearComisionComponent implements OnInit {
 
   creaComisionForm: FormGroup;
 
+  // Fechas
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
   public dias_permiso = 15;
   today = this.calendar.getToday();
+
+  // Archivos 
   files : any[]=[];
   archivos = [1];
+
+  // Lugar
 
   private pais : Pais={
     id: 0,
@@ -36,25 +43,28 @@ export class CrearComisionComponent implements OnInit {
     iso2: ''
   };
   private estado : Estado = {
-    id: 0,
-    name: '',
-    iso2: '',
+      id: 0,
+      name: '',
+      iso2: '',
   }
-
-  clicked = 0;
-
-  error = '';
 
   @ViewChild('floatingpais') floatingpais: ElementRef | null = null;
   public paises: Pais[]=[];
   public ciudades: Ciudad[]=[];
   public estados: Estado[]=[];
-  public tiposcomision = [
-    {id: 1, nombre: 'Comisión de servicios'},
-    {id: 2, nombre: 'Comisión de estudio'},
-  ]
 
+
+  // Tipos de comision desde back
+  tiposComision$: Observable<TipoComision[]>;
+
+  // Loader
   isLoading: Subject<boolean> = this.loaderService.isLoading;
+
+
+  // verificaciones
+  clicked = 0;
+  error = '';
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,12 +72,20 @@ export class CrearComisionComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
     private ngZone: NgZone,
     private router: Router,
+    private cd: ChangeDetectorRef,
+
+    private tipoComisionSvc: TipoComisionService,
     private comisionesSvc: ComisionesService,
     private loaderService: LoaderService,
     private paisesCiudadesSvc: PaisesCiudadesService
   ) { 
-  // ------------- FORM CREAR COMISION -------------
+  
+    // ------------- FORM CREAR COMISION -------------
+
+  this.tiposComision$ = this.tipoComisionSvc.getTipoSolicitud();
+
   this.creaComisionForm = this.formBuilder.group({
+    tipos_comision_id: ['', [Validators.required, Validators.nullValidator]],
     fecha_inicio : ['', [Validators.required]],
     fecha_fin : ['',[Validators.required]],
     justificacion : ['', [Validators.required, Validators.minLength(30),Validators.maxLength(350)]],
@@ -75,14 +93,24 @@ export class CrearComisionComponent implements OnInit {
     pais : ['', [Validators.required]],
     estado: [''],//[Validators.required]],
     ciudad : [''],//[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
-    tipos_comision_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tiposcomision.length)]]
   });
 
     this.fromDate = null;
     this.toDate = null;
   }
 
+  ngOnInit(): void {
+     this.paisesCiudadesSvc.getPaises().subscribe(
+      (data:Pais[]) => {
+        this.paises = data;
+      }
+     )
+  }
+
+
+  // --------------------------------------
   // ------------- DATEPICKER -------------
+  // --------------------------------------
   
   inRange(fecha_1 : any, fecha_2 : any){
     fecha_1 = new Date(this.formatter.format(fecha_1));
@@ -127,13 +155,22 @@ export class CrearComisionComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-     this.paisesCiudadesSvc.getPaises().subscribe(
-      (data:Pais[]) => {
-        this.paises = data;
-      }
-     )
+  // ----------- TIPO DE SOLICITUD ------------
+
+  onChangeSolicitud(e: any): void {
+    this.cd.detectChanges();
   }
+
+  // ----------- MANEJO DE ERRORES EN EL FORM ------------
+  get f() {
+  
+    return this.creaComisionForm.controls;
+  }
+
+
+  // --------------------------------------
+  // -------- ARCHIVOS - ANEXOS -----------
+  // --------------------------------------
 
   onUpload(event:Event, index: number) {
     const element = event.target as HTMLInputElement;
@@ -142,6 +179,25 @@ export class CrearComisionComponent implements OnInit {
       this.files.splice(index, 1, file);
     }
   }
+
+  removeFile(index: number) {
+    if (this.archivos.length > 1) {
+    this.archivos.splice(index, 1);};
+    this.files.splice(index, 1);
+  }
+
+  validSize() {
+    const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
+    return size < 2 * 1024 * 1024;
+  }
+
+  isInvalidForm(controlName: string) {
+    return this.creaComisionForm.get(controlName)?.invalid && this.creaComisionForm.get(controlName)?.touched;
+  }
+
+  // --------------------------------------
+  // -------- LUGAR - PAISES - CIUDAD -----
+  // --------------------------------------
 
   onChangePais(event:any) {
     const paisId = event.target.value;
@@ -163,22 +219,12 @@ export class CrearComisionComponent implements OnInit {
     );
   }
 
-  removeFile(index: number) {
-    if (this.archivos.length > 1) {
-    this.archivos.splice(index, 1);};
-    this.files.splice(index, 1);
-  }
-
-  validSize() {
-    const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
-    return size < 2 * 1024 * 1024;
-  }
-
-  isInvalidForm(controlName: string) {
-    return this.creaComisionForm.get(controlName)?.invalid && this.creaComisionForm.get(controlName)?.touched;
-  }
-
+ // ----------------------------------------
+ // ----------- CREAR COMISION ------------
+ // ----------------------------------------
   onSubmit() {
+
+    this.submitted = true;
     
     // Se detiene aqui si el formulario es invalido
     if (this.creaComisionForm.invalid) {
@@ -213,7 +259,7 @@ export class CrearComisionComponent implements OnInit {
       next: (res) => { 
         Swal.fire({
           title: 'Creada',
-          text: '¡La solicitud se creó con éxito!',
+          text: '¡La comisión se creó con éxito!',
           icon: 'success',
           confirmButtonColor: '#3AB795',
         });
@@ -229,7 +275,5 @@ export class CrearComisionComponent implements OnInit {
       }
     });
   }
-
-
   
 }

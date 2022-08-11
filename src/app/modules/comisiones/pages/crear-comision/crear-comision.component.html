@@ -4,10 +4,12 @@
         <p class="text-secondary">CREAR COMISION</p>
       </div>
     </div>
+    <hr />
 
     
     <form class="need-validation" need-validation novalidate [formGroup]="creaComisionForm" (ngSubmit)="onSubmit()" >
-    <hr />
+        
+        <!-- DATEPICKER -->
         <ng-template #footerTemplate>
             <hr class="my-0">
             <p *ngIf="fromDate && !toDate" style="text-align: center; margin: 0; color: green;"> Elige la segunda fecha
@@ -15,9 +17,7 @@
             <p *ngIf="!fromDate" style="text-align: center; margin: 0; color: green;"> Elige la primera fecha </p>
             <button class="btn btn-primary btn-sm m-2 float-start"
                 (click)="model = today; datepicker.close()">Hoy</button>
-            
             <button class="btn btn-secondary btn-sm m-2 float-end" (click)="datepicker.close()">Cerrar</button>
-            <!-- <p *ngIf="fromDate && toDate && true" style="text-align: center; margin: 0; color: red;">Recuerda que la fecha máxima para este tipo de permiso es de {{dias_permiso}} días hábiles</p> -->
         </ng-template>
 
         <div class="dp-hidden position-absolute">
@@ -25,7 +25,7 @@
                 <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
                     [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
                     outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [footerTemplate]="footerTemplate"
-                    placement="left">
+                    placement="left" [positionTarget]="buttonEl">
                 <ng-template #t let-date let-focused="focused">
                     <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
                         [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
@@ -37,16 +37,26 @@
         </div>
 
         <div class="row">
-            <div class="formfloatig">
-                <select class="form-select form-select-lg mb-3" id="floatingtipos_comision_id"
-                    formControlName="tipos_comision_id"
-                    [ngClass]="{'is-invalid': isInvalidForm('tipos_comision_id')}" placeholder=" ">
-                    <option [value]="tipos_comision_id.id" *ngFor="let tipos_comision_id of tiposcomision">
-                        {{tipos_comision_id.nombre}}</option>
+            <hr />
+            <div class="row">
+
+                <div class="formfloatig">
+                    <select formControlName="tipos_comision_id" class="form-control" 
+                    (change)="onChangeSolicitud($event)"
+                    [ngClass]="{ 'is-invalid': submitted && f['tipos_comision_id'].errors }">
+                    <option value="" disabled selected>Elige tipo el tipo de comisión</option>
+                    <option [value]="tipo.id | number" *ngFor="let tipo of tiposComision$ | async">
+                    {{ tipo.nombre }}
+                    </option>
                 </select>
-                <label for="floatingtipos_comision_id" class="selectLabel"
-                    [ngClass]="{'isFill': creaComisionForm.controls['tipos_comision_id'].valid}">Tipo de
-                    comision</label>
+                <label for="floatingidioma" class="formLabel"> Elige tipo el tipo de comisión</label>
+                <div *ngIf="submitted && f['tipos_comision_id'].errors" class="invalid-feedback">
+                    <div *ngIf="f['tipos_comision_id'].errors['required']">
+                    Elige un tipo de Solicitud
+                </div>
+                </div>
+                </div>
+
             </div>
 
             <div class="formfloatig">
@@ -92,14 +102,11 @@
                             (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
                             [value]="formatter.format(fromDate)? formatter.format(fromDate) + ' - ' + formatter.format(toDate) : null "
                             [ngClass]="{'is-invalid': (!fromDate || !toDate) && clicked !== 0}">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                  <i class="fa fa-calendar"></i>
-                                </span>
-                            </div> 
+                        <button #buttonEl class="btn btn-outline-secondary" disabled
+                            (click)="datepicker.toggle() ; clicked=clicked+1"><i class="fa fa-calendar"> </i></button>
                     </div>
                 </div>
-
+  
                 <div class=" col-sm-6 col-xs-6 col-md-6" hidden>
                     <div class="input-group" (click)="datepicker.toggle()">
                         <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
@@ -114,6 +121,7 @@
                     <label for="floatingidioma" class="formLabel"> Idioma
                     </label>
                 </div>
+                
                 <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
                     Recuerda que la justificación debe tener al menos 30 caracteres y máximo 500 caracteres.
                 </div>

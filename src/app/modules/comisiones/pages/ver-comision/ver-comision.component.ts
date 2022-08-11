@@ -69,7 +69,19 @@ export class VerComisionComponent implements OnInit {
   }
 
   abrirDocumento(id:number){
-    this.descargarDocumentoSvc.descargarDocumento(id);
+    this.descargarDocumentoSvc.descargarDocumento(id).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+          this.loading = false;
+        }
+      },
+    }
+      
+    );
   }
   
   delete(id: any): void {

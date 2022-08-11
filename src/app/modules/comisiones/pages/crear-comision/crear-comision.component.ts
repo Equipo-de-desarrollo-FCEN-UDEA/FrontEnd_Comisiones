@@ -129,7 +129,7 @@ export class CrearComisionComponent implements OnInit {
 
 
   // ------------- FORM CREAR COMISION -------------
-  formComision = this.fb.group({
+  formComision = this.formBuilder.group({
     fecha_inicio! : ['', [Validators.required]],
     fecha_fin! : ['',[Validators.required]],
     justificacion! : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],

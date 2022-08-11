@@ -156,8 +156,8 @@ export class CrearComisionComponent implements OnInit {
   }
 
 
-
   // ----------- TIPO DE SOLICITUD ------------
+
 
   onChangeSolicitud(e: any): void {
     this.cd.detectChanges();

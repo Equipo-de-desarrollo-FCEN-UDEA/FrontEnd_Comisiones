@@ -1,4 +1,4 @@
-import { environment } from "./environment";
+import { environment } from "../../../../environment";
 
 
 export var prefix: string = environment.apiUrl;

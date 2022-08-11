@@ -28,9 +28,8 @@ export class BuscarComisionComponent {
       this.comisiones$ = service.comisiones$;
       this.total$ = service.total$;
       this.ultimoElemento = ultimoElement;
-      
-
     }
+
 
     onSort({column, direction}: SortEvent) {
       // resetting other headers
@@ -40,7 +39,7 @@ export class BuscarComisionComponent {
         }
       });
   
-      this.service.sortColumn = column;
+      this.service.sortColumn = "";
       this.service.sortDirection = direction;
     }
 

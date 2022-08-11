@@ -30,37 +30,48 @@ export class ComisionesService {
     return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
   }
 
-  crearComision(comision:Partial<ComisionDTO> | any) {
-    const headers = new HttpHeaders(
-      {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }
-    )
+  
+  crearComision(comision:any) {
+
+    return this.http.post<ComisionDTO>(this.urlEndPoint, comision);
+
+  //crearComision(comision:Partial<ComisionDTO> | any) {
+    //const headers = new HttpHeaders(
+      //{
+      //  'Content-Type': 'application/x-www-form-urlencoded',
+     // }
+    //)
     
-    const body = `
-    archivo=${comision.archivos?[0] : null}
-    &fecha_inicio=${comision.fecha_inicio}
-    &fecha_fin=${comision.fecha_fin}
-    &fecha_resolucion=${comision.fecha_resolucion}
-    &justificacion=${comision.justificacion}
-    &idioma=${comision.idioma}
-    &lugar=${comision.lugar}
-    &tipos_comision_id=${comision.tipos_comision_id}
-    &usuarios_id=${comision.usuarios_id} 
-    `  //usuario?????, se maneja desde el back 
+    //const body = `
+    //archivo=${comision.archivos?[0] : null}
+    //&fecha_inicio=${comision.fecha_inicio}
+    //&fecha_fin=${comision.fecha_fin}
+    //&fecha_resolucion=${comision.fecha_resolucion}
+    //&justificacion=${comision.justificacion}
+    //&idioma=${comision.idioma}
+    //&lugar=${comision.lugar}
+    //&tipos_comision_id=${comision.tipos_comision_id}
+    //&usuarios_id=${comision.usuarios_id} 
+    //`  //usuario?????, se maneja desde el back 
 
-    return this.http.post(this.urlEndPoint, body, {headers: headers}).pipe(
-      map((res)=> {
-        return res;
-      })
-    );
+    //return this.http.post(this.urlEndPoint, body, {headers: headers}).pipe(
+     // map((res)=> {
+       // return res;
+      //})
+    //);
+
   }
 
 
-  updateComision(id: string, comision:any): Observable<any> {
-    return this.http.patch(`${this.urlEndPoint}/${id}`, comision);
-  }
+  updateComision(id: string, paramList:any, files: File[], comision:any): Observable<any> {
 
+    // En el back: /api/comisiones/:id?request=[idDoc]
+    
+    const params = new HttpParams().set('require', paramList);
+    comision.archivo = files;
+
+    return this.http.patch<ComisionDTO>(`${this.urlEndPoint}/${id}`, comision, {params: params});
+  }
 
 
 }

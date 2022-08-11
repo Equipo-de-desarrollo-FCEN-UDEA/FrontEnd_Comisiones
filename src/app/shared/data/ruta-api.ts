@@ -1,1 +1,5 @@
-export var prefix: string = 'http://localhost:3000/api/';
+
+import { environment } from "environment.example";
+
+
+export var prefix: string = environment.apiUrl;

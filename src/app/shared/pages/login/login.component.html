@@ -19,14 +19,18 @@
         </ul> -->
 		<div class="card-body">
 			<h5 style="color:rgba(50, 50, 50, 0.874)">Inicio de Sesión</h5>
-    <form
-      need-validation
-      novalidate
-      [formGroup]="formLogin"
-      (ngSubmit)="onSubmitLogin()"
-    >
-      <div [ngbCollapse]="!isCollapsed" id="Login">
+      <form
+        need-validation
+        novalidate
+        [formGroup]="formLogin"
+        (ngSubmit)="onSubmitLogin()"
+      >
+      
+      <!-- <div [ngbCollapse]="!isCollapsed" id="Login"> -->
+          <div>
             <div class="form px-4 pt-5 m-2">
+
+              <!-- CORREO -->
               <div class="formfloatig m-2">
                 <input
                   id="Correo-input"
@@ -35,34 +39,48 @@
                   placeholder=" "
                   formControlName="correoLogin"
 									[ngClass]="{ 'is-invalid': submitted && f.correoLogin.errors }"
+                  autofocus
                 />
                 <label for="Correo-input" class="formLabel"
                   >Correo institucional
                 </label>
               </div>
-              <div
-                *ngIf="submitted && f.correoLogin.errors"
+              <div *ngIf="submitted && f.correoLogin.errors" class="invalid-feedback">
+                  <div *ngIf="submitted && f.correoLogin.errors?.['required']">
+                    El correo es requerido
+                  </div>
+                  <div *ngIf="submitted && f.correoLogin.errors?.['pattern']">
+                    Ingresa tu correo institucional
+                  </div>
+              </div>
+
+              <!-- CONTRASENA -->
+              <div class="formfloatig m-2">
+                  <input
+                    id="Contraseña"
+                    type="password"
+                    class="form-control"
+                    placeholder=" "
+                    formControlName="passwordLogin"
+                    [ngClass]="{ 'is-invalid': submitted && f.passwordLogin.errors }"
+                  />
+                  <label for="Contraseña" class="formLabel">Contraseña</label>
+              </div>
+              <div *ngIf="submitted && f.passwordLogin.errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="submitted && f.correoLogin.errors?.['required']">
-                  El correo es requerido
+                <div *ngIf="submitted && f.passwordLogin.errors?.['required']">
+                  La contraseña es requerida
+                </div>
+              </div>
 
-                </div>
-                <div *ngIf="submitted && f.correoLogin.errors?.['pattern']">
-                  Ingresa tu correo institucional
-                </div>
+
+              <!-- OLVIDO CONTRASENA -->
+              <div class="d-flex justify-content-start">
+                <a routerLink="../recuperar-contrasena" class="btn btn-link pr-0"
+                >¿Olvidaste tu contraseña?</a>
               </div>
-              <div class="formfloatig m-2">
-                <input
-                  id="Contraseña"
-                  type="password"
-                  class="form-control"
-                  placeholder=" "
-                  formControlName="passwordLogin"
-									[ngClass]="{ 'is-invalid': submitted && f.passwordLogin.errors }"
-                />
-                <label for="Contraseña" class="formLabel">Contraseña</label>
-              </div>
+
 							<div class="d-flex justify-content-start">
 								<a routerLink="../recuperar-contrasena" class="btn btn-link pr-0"
 								>¿Olvidaste tu contraseña?</a>
@@ -83,10 +101,35 @@
 									Ingresar
 								</button>
 							</div>
+
+
+                <!-- ENVIAR -->
+                <!-- <div class="d-grid gap-2 col-12">
+                  <button
+                    id="btn-sub"
+                    (submit)="(true)"
+                    class="btn btn-dark"
+                  >
+                    <span *ngIf="isLoading | async" 
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                    ></span>
+                    Ingresar
+                  </button>
+                </div>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+                  {{ error }}
+                </div> -->
+
+
             </div>
           </div>
     	</form>
 		</div>
+
+
+
     <!-- <form [formGroup]="formSignup">
       <div [ngbCollapse]="isCollapsed" id="Signup">
         <div class="card">
@@ -229,6 +272,11 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
     </form>
   </div> -->
-</div>
+
+    <!-- </form> -->
+  </div>
+
+<!-- </div> -->

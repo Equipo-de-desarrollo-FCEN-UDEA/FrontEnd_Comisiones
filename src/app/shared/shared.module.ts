@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recuperar-contrasena.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdSortableHeader } from './directivas/sortable.directive';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
-    // TablaSolicitudesComponent,
     RecuperarContrasenaComponent,
+    NgbdSortableHeader,
    
   ],
   imports: [
@@ -19,8 +21,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     
   ],
   exports: [
-    // TablaSolicitudesComponent,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbdSortableHeader,
+  
   ],
+  providers:[
+    // NgbdSortableHeader
+  ]
   
 })
 export class SharedModule { }

@@ -19,7 +19,7 @@ export class UsuarioService {
   prefix = prefix + 'usuarios';
 
   getUsuario() {
-    const basicUsuario = JSON.parse(this.cookie.get('usuario'));
+    const basicUsuario = JSON.parse(this.cookie.get('usuarios'));
     return this.http.get<UsuarioResponse>(`${this.prefix}/${basicUsuario.id}`);
   }
 

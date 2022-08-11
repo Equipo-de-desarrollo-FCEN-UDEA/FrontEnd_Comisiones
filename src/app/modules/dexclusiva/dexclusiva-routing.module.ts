@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CartaInicioComponent } from './pages/carta-inicio/carta-inicio.component';
-import { FDedicacionComponent } from './pages/f-dedicacion/f-dedicacion.component';
-import { PlanTrabajoComponent } from './pages/plan-trabajo/plan-trabajo.component';
+import { CrearDedicacionComponent } from './pages/crear-dedicacion/crear-dedicacion.component';
 
 const routes: Routes = [
-  {
-    path:'formulario-dedicacion',
-    component: FDedicacionComponent
-  },
 
   {
-    path: 'carta-inicio',
-    component: CartaInicioComponent
+    path: 'crear-dedicacion',
+    component: CrearDedicacionComponent
   },
   {
-    path: 'plan-trabajo',
-    component: PlanTrabajoComponent
+    path: 'editar-dedicacion/:id',
+    component: CrearDedicacionComponent
+  },
+  {
+    path: 'ver-dedicacion/:id',
+    component: CrearDedicacionComponent
   }
 ];
 

@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { NgbDate, NgbDateStruct, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { Countries, countries } from '@shared/data/country-data-store';
+import { Component, ElementRef, NgZone, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { Subject, Observable } from 'rxjs';
+import Swal from 'sweetalert2';
+
+import { LoaderService } from '@services/loader.service';
+import { PermisoService } from '@services/permiso.service';
 
 @Component({
   selector: 'app-crear-permiso',
@@ -9,15 +14,26 @@ import { Countries, countries } from '@shared/data/country-data-store';
   styleUrls: ['./crear-permiso.component.scss']
 })
 export class CrearPermisoComponent implements OnInit {
+
+
+  formPermiso: FormGroup;
+
   hoveredDate: NgbDate | null = null;
-  public countries: Countries[] = countries
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
+
+
   today = this.calendar.getToday();
   files : any[]=[];
   archivos = [1];
-  clicked = 0
+  clicked = 0;
+  error = '';
+  submitted = false;
+
+  // Loader
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
 
   public tipospermiso = [
     {id: 1, nombre: 'Permiso por matrimonio'},
@@ -31,15 +47,38 @@ export class CrearPermisoComponent implements OnInit {
   ]
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private calendar : NgbCalendar,
     public formatter: NgbDateParserFormatter,
-    // private comisionesSvc: ComisionesService
+    private ngZone: NgZone,
+    private router: Router,
+
+    private loaderService: LoaderService,
+    private permisosSvc: PermisoService
 
   ) {
+
+    this.formPermiso = this.formBuilder.group({
+      fecha_inicio : ['', [Validators.required]],
+      fecha_fin : ['',[Validators.required]],
+      justificacion : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
+      tipos_permiso_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tipospermiso.length)]]
+    });
+    
     this.fromDate = null;
     this.toDate = null;
   }
+
+
+  ngOnInit(): void {
+  }
+
+
+
+  // --------------------------------------
+  // ------------- DATEPICKER -------------
+  // --------------------------------------
+
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -55,6 +94,7 @@ export class CrearPermisoComponent implements OnInit {
       fecha_fin : this.formatter.format(this.toDate)
     });
   }
+
 
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
@@ -73,17 +113,17 @@ export class CrearPermisoComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
-  formPermiso = this.fb.group({
-    fecha_inicio : ['', [Validators.required]],
-    fecha_fin : ['',[Validators.required]],
-    justificacion : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
-    // idioma : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    // lugar : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
-    tipos_permiso_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tipospermiso.length)]]});
 
 
-  ngOnInit(): void {
+  // ----------- MANEJO DE ERRORES EN EL FORM ------------
+  get f() {
+  
+    return this.formPermiso.controls;
   }
+
+  // --------------------------------------
+  // -------- ARCHIVOS - ANEXOS -----------
+  // --------------------------------------
 
   onUpload(event:Event, index: number) {
     const element = event.target as HTMLInputElement;
@@ -109,5 +149,59 @@ export class CrearPermisoComponent implements OnInit {
   isInvalidForm(controlName: string) {
     return this.formPermiso.get(controlName)?.invalid && this.formPermiso.get(controlName)?.touched;
   }
+
+
+ // ----------------------------------------
+ // ----------- CREAR PERMISO ------------
+ // ----------------------------------------
+ onSubmit() {
+
+  this.submitted = true;
+  
+  // Se detiene aqui si el formulario es invalido
+  if (this.formPermiso.invalid) {
+    console.log('invalid form')
+    return;
+  }
+  
+  const body = {
+    fecha_inicio: this.formPermiso.value.fecha_inicio,
+    fecha_fin: this.formPermiso.value.fecha_fin,
+    fecha_resolucion: new Date(this.formatter.format(this.today)),
+    justificacion: this.formPermiso.value.justificacion,
+    tipos_permiso_id: this.formPermiso.value.tipos_permiso_id
+  }
+
+
+  const reqBody: FormData = new FormData();
+  reqBody.append('tipos_permiso_id', body.tipos_permiso_id);
+  reqBody.append('fecha_inicio', body.fecha_inicio);
+  reqBody.append('fecha_fin', body.fecha_fin);
+  reqBody.append('justificacion', body.justificacion);
+
+  for (const file of this.files) {
+    reqBody.append('archivo', file, file.name) 
+  }
+  
+  this.permisosSvc.crearPermiso(reqBody).subscribe({
+    next: (res) => { 
+      Swal.fire({
+        title: 'Creada',
+        text: '¡El permiso se creó con éxito!',
+        icon: 'success',
+        confirmButtonColor: '#3AB795',
+      });
+      //ngZone: facilitate change detection
+      this.ngZone.run(() =>
+        this.router.navigateByUrl(`/home`)
+      );
+    },
+    error: (err) => {
+      if (err.status === 404 || err.status === 401) {
+        this.error = err.error.msg;
+      }
+    }
+  });
+}
 
 }

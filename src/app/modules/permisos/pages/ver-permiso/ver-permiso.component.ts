@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PermisosInside } from '@interfaces/permisos';
+import { Permiso, PermisosInside } from '@interfaces/permisos';
+import { DescargarDocumentosService } from '@services/descargar-documentos.service';
+import { LoaderService } from '@services/loader.service';
 import { PermisoService } from '@services/permiso.service';
-import { Observable } from 'rxjs';
+import { ultimoElement } from '@shared/clases/ultimo-estado';
+import { Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,28 +17,68 @@ export class VerPermisoComponent implements OnInit {
 
   loading:boolean = false;
   error:string = '';
-  permiso: PermisosInside | undefined;
-  permiso$: Observable<PermisosInside> | undefined;
-  permisos: any = [];
+  permiso: Permiso| undefined;
+
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+
+
+  documentosArray:any = [];
+  fechaCreacion:any = '';
+
+  ultimoElemento = ultimoElement
+  estadoActual:any = '';
+
 
   constructor(
-    private permisoService: PermisoService,
     private activateRoute: ActivatedRoute,
-    private router: Router
-  ) { } 
+    private router: Router,
+    private loaderSvc: LoaderService,
+
+    private permisosSvc: PermisoService,
+    private descargarDocumentoSvc: DescargarDocumentosService
+  ) { 
+    this.activateRoute.params.subscribe({
+      next: (paramId) => {
+         const id = paramId['id'];
+          if (id) {
+            this.permisosSvc.getPermiso(id).subscribe((res) => {
+              this.permiso = res;
+              this.permiso?.documentos.forEach(documento => this.documentosArray.push(documento));
+              //this.fechaCreacion = this.permiso?.intermediate_permisos[0].created_at;
+              this.estadoActual = this.ultimoElemento(res.intermediate_permisos).intermediate_estados?.nombre;
+              console.log(this.permiso); 
+            });
+          }
+
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg; // mensaje desde el back
+          //this.loading = false;
+        }
+      },
+    });
+  } 
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe((params) => {
-      const id = params['id'];
-      if (id) {
-        this.permisoService.getPermiso(id).subscribe((resPermiso) => {
-          this.permiso = resPermiso;
-          console.log(this.permiso);
-        });
-      }
-    });
   }
 
+  abrirDocumento(id:number){
+    this.descargarDocumentoSvc.descargarDocumento(id).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+          this.loading = false;
+        }
+      },
+    }
+      
+    );
+  }
+  
   delete(id: any): void {
     Swal.fire({
       title: '¿Seguro que quieres eliminar este permiso?',
@@ -47,13 +90,13 @@ export class VerPermisoComponent implements OnInit {
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.permisoService.delete(id).subscribe({
+        this.permisosSvc.delete(id).subscribe({
           next: (response) => {
             console.log(response);
             this.router.navigate(['/home/permisos']);
             Swal.fire({
               title: 'Eliminada!',
-              text: '¡El permiso ha sido eliminada!',
+              text: '¡El permiso ha sido eliminado!',
               icon: 'success',
               confirmButtonColor: '#3AB795',
             });

@@ -6,7 +6,7 @@
     </div>
 
     
-  <form class="need-validation" need-validation novalidate [formGroup]="formPermiso" >
+  <form class="need-validation" need-validation novalidate [formGroup]="formPermiso" (ngSubmit)="onSubmit()">
 
     <!-- DATEPICKER -->
       <ng-template #footerTemplate>

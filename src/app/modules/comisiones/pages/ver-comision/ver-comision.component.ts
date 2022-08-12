@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { Observable } from 'rxjs';
-import { ultimoElement } from "@shared/clases/ultimo-estado";
+//import { saveAs } from ‘file-saver’;
 import Swal from 'sweetalert2';
 
 
+// --------- SERVICIOS ---------
+import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { Comision } from '@interfaces/comisiones';
 import { LoaderService } from '@services/loader.service';
 import { ComisionesService } from '@services/comisiones.service';
@@ -32,6 +33,7 @@ export class VerComisionComponent implements OnInit {
   estadoActual:any = '';
 
 
+
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
@@ -45,11 +47,11 @@ export class VerComisionComponent implements OnInit {
         next: (paramId) => {
            const id = paramId['id'];
             if (id) {
-              this.comisionesSvc.getComision(id).subscribe((res) => {
+              this.comisionesSvc.getComision(id).subscribe((res: Comision | undefined) => {
                 this.comision = res;
-                this.comision.documentos.forEach(documento => this.documentosArray.push(documento));
-                this.fechaCreacion = this.comision.intermediate_comisiones[0].createdAt;
-                this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados?.nombre;
+                this.comision?.documentos.forEach(documento => this.documentosArray.push(documento));
+                this.fechaCreacion = this.comision?.intermediate_comisiones[0].createdAt;
+                //this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados?.nombre;
                 console.log(this.comision); 
               });
             }
@@ -68,10 +70,15 @@ export class VerComisionComponent implements OnInit {
 
   }
 
+
   abrirDocumento(id:number){
+    const reader = new FileReader();
     this.descargarDocumentoSvc.descargarDocumento(id).subscribe({
       next: (response) => {
         console.log(response);
+        reader.readAsDataURL(file);
+        //let downloadURL = window.URL.createObjectURL(response);
+        //saveAs(downloadURL);
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {

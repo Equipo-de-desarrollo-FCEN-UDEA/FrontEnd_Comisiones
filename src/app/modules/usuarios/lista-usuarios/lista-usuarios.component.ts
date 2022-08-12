@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Usuario } from '@interfaces/usuario';
-import { BuscarUsuariosService } from '@services/buscar-usuarios.service';
+import { BuscarUsuariosService } from '@services/busquedas/buscar-usuarios.service';
 import { NgbdSortableHeader, SortEvent } from '@shared/directivas/sortable.directive';
 import { Observable } from 'rxjs';
 

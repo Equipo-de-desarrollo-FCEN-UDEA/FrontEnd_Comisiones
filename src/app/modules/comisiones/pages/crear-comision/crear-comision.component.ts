@@ -1,12 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { ComisionesService } from '@services/comisiones.service';
-import { LoaderService } from '@services/loader.service';
-import { Subject } from 'rxjs';
+import { Component, ElementRef, NgZone, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ComisionesService } from '@services/comisiones/comisiones.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import Swal from 'sweetalert2';
+
+// ---- SERVICIOS ----
+import { LoaderService } from '@services/interceptors/loader.service';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
+import { TipoComisionService } from '@services/comisiones/tipo-comision.service';
+import { TipoComision } from '@interfaces/tipos_comision';
 
 @Component({
   selector: 'app-crear-comision',
@@ -14,50 +20,99 @@ import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
   styleUrls: ['./crear-comision.component.scss']
 })
 export class CrearComisionComponent implements OnInit {
+
+  creaComisionForm: FormGroup;
+
+  // Fechas
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
   public dias_permiso = 15;
   today = this.calendar.getToday();
+
+  // Archivos 
   files : any[]=[];
+
   archivos = [1];
+
+  // Lugar
+
   private pais : Pais={
     id: 0,
     name: '',
     iso2: ''
   };
   private estado : Estado = {
-    id: 0,
-    name: '',
-    iso2: '',
+      id: 0,
+      name: '',
+      iso2: '',
   }
-  clicked = 0
+
   @ViewChild('floatingpais') floatingpais: ElementRef | null = null;
   public paises: Pais[]=[];
   public ciudades: Ciudad[]=[];
   public estados: Estado[]=[];
-  public tiposcomision = [
-    {id: 1, nombre: 'Comisión de servicios'},
-    {id: 2, nombre: 'Comisión de estudio'},
-  ]
+
+
+  // Tipos de comision desde back
+  tiposComision$: Observable<TipoComision[]>;
+
+  // Loader
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
+
+  // verificaciones
+  clicked = 0;
+  error = '';
+  submitted = false;
+
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private calendar : NgbCalendar,
     public formatter: NgbDateParserFormatter,
+    private ngZone: NgZone,
+    private router: Router,
+    private cd: ChangeDetectorRef,
+
+    private tipoComisionSvc: TipoComisionService,
     private comisionesSvc: ComisionesService,
     private loaderService: LoaderService,
     private paisesCiudadesSvc: PaisesCiudadesService
-   
-    
   ) { 
+  
+    // ------------- FORM CREAR COMISION -------------
+
+  this.tiposComision$ = this.tipoComisionSvc.getTipoSolicitud();
+
+  this.creaComisionForm = this.formBuilder.group({
+    tipos_comision_id: ['', [Validators.required, Validators.nullValidator]],
+    fecha_inicio : ['', [Validators.required]],
+    fecha_fin : ['',[Validators.required]],
+    justificacion : ['', [Validators.required, Validators.minLength(30),Validators.maxLength(350)]],
+    idioma : [''],// [Validators.minLength(3), Validators.maxLength(255)]],
+    pais : ['', [Validators.required]],
+    estado: [''],//[Validators.required]],
+    ciudad : [''],//[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
+  });
+
     this.fromDate = null;
     this.toDate = null;
-    
   }
 
+  ngOnInit(): void {
+     this.paisesCiudadesSvc.getPaises().subscribe(
+      (data:Pais[]) => {
+        this.paises = data;
+      }
+     )
+  }
+
+
+  // --------------------------------------
+  // ------------- DATEPICKER -------------
+  // --------------------------------------
+  
   inRange(fecha_1 : any, fecha_2 : any){
     fecha_1 = new Date(this.formatter.format(fecha_1));
     fecha_2 = new Date(this.formatter.format(fecha_2));
@@ -76,7 +131,8 @@ export class CrearComisionComponent implements OnInit {
       this.toDate = null;
       this.fromDate = date;
     }
-    this.formComision.patchValue({
+
+    this.creaComisionForm.patchValue({
       fecha_inicio : this.formatter.format(this.fromDate),
       fecha_fin : this.formatter.format(this.toDate)
     });
@@ -99,32 +155,53 @@ export class CrearComisionComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
-  formComision = this.fb.group({
-    fecha_inicio : ['', [Validators.required]],
-    fecha_fin : ['',[Validators.required]],
-    justificacion : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
-    idioma : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    pais : ['',[Validators.required]],
-    estado: ['',[Validators.required]],
-    ciudad : ['',[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
-    tipos_comision_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tiposcomision.length)]]});
 
-  ngOnInit(): void {
-     this.paisesCiudadesSvc.getPaises().subscribe(
-      (data:Pais[]) => {
-        this.paises = data;
-      }
-     )
+  // ----------- TIPO DE SOLICITUD ------------
+
+
+  onChangeSolicitud(e: any): void {
+    this.cd.detectChanges();
   }
+
+
+
+  // ----------- MANEJO DE ERRORES EN EL FORM ------------
+  get f() {
+  
+    return this.creaComisionForm.controls;
+  }
+
+
+  // --------------------------------------
+  // -------- ARCHIVOS - ANEXOS -----------
+  // --------------------------------------
+
   onUpload(event:Event, index: number) {
     const element = event.target as HTMLInputElement;
     const file = element.files?.item(0);
     if (file) {
       this.files.splice(index, 1, file);
     }
-    console.log(this.files)
-
   }
+
+  removeFile(index: number) {
+    if (this.archivos.length > 1) {
+    this.archivos.splice(index, 1);};
+    this.files.splice(index, 1);
+  }
+
+  validSize() {
+    const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
+    return size < 2 * 1024 * 1024;
+  }
+
+  isInvalidForm(controlName: string) {
+    return this.creaComisionForm.get(controlName)?.invalid && this.creaComisionForm.get(controlName)?.touched;
+  }
+
+  // --------------------------------------
+  // -------- LUGAR - PAISES - CIUDAD -----
+  // --------------------------------------
 
   onChangePais(event:any) {
     const paisId = event.target.value;
@@ -146,38 +223,71 @@ export class CrearComisionComponent implements OnInit {
     );
   }
 
-  removeFile(index: number) {
-    if (this.archivos.length > 1) {
-    this.archivos.splice(index, 1);};
-    this.files.splice(index, 1);
-  }
-
-  validSize() {
-    const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
-    return size < 2 * 1024 * 1024;
-  }
-
-  isInvalidForm(controlName: string) {
-    return this.formComision.get(controlName)?.invalid && this.formComision.get(controlName)?.touched;
-  }
-
+ // ----------------------------------------
+ // ----------- CREAR COMISION ------------
+ // ----------------------------------------
   onSubmit() {
-    const response ={
-      ...this.formComision.value,
-      archivos: this.files,
-      fecha_resolucion: new Date(this.formatter.format(this.today)),
-      usuarios_id: 12,
-      pais: this.pais.name,
-      estado: this.estado.name,
+
+    this.submitted = true;
+    
+    // Se detiene aqui si el formulario es invalido
+    if (this.creaComisionForm.invalid) {
+      console.log('invalid form')
+      return;
     }
-    console.log(response)
-    this.comisionesSvc.crearComision(response).subscribe(
-      (data:any) => {
-        window.alert(data.message)
+    
+    const body = {
+      fecha_inicio: this.creaComisionForm.value.fecha_inicio,
+      fecha_fin: this.creaComisionForm.value.fecha_fin,
+      fecha_resolucion: new Date(this.formatter.format(this.today)),
+      justificacion: this.creaComisionForm.value.justificacion,
+      idioma: this.creaComisionForm.value.idioma,
+      lugar:this.pais.name+', '+this.estado.name,
+      tipos_comision_id: this.creaComisionForm.value.tipos_comision_id
+    //const lugar = this.formComision.value.ciudad || '' + this.formComision.value.estado + this.formComision.value.pais;
+
+    //let {ciudad, estado, pais, fecha_inicio, fecha_fin, ...others} = this.formComision.value;
+
+    //const response  = {
+      //...others,
+      //archivos: this.files,
+      //fecha_resolucion: new Date(this.formatter.format(this.today)),
+      //usuarios_id: 12,
+     // lugar: lugar
+    }
+
+
+    const reqBody: FormData = new FormData();
+    reqBody.append('tipos_comision_id', body.tipos_comision_id);
+    reqBody.append('fecha_inicio', body.fecha_inicio);
+    reqBody.append('fecha_fin', body.fecha_fin);
+    reqBody.append('justificacion', body.justificacion);
+    reqBody.append('idioma', body.idioma);
+    reqBody.append('lugar', body.lugar);
+
+    for (const file of this.files) {
+      reqBody.append('archivo', file, file.name) 
+    }
+    
+    this.comisionesSvc.crearComision(reqBody).subscribe({
+      next: (res) => { 
+        Swal.fire({
+          title: 'Creada',
+          text: '¡La comisión se creó con éxito!',
+          icon: 'success',
+          confirmButtonColor: '#3AB795',
+        });
+        //ngZone: facilitate change detection
+        this.ngZone.run(() =>
+          this.router.navigateByUrl(`/home`)
+        );
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
       }
-    )
+    });
   }
-
-
   
 }

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { SideBarComponent } from './shared/components/side-bar/side-bar.component';
+import { HeaderComponent } from '@shared/components/header/header.component';
+import { FooterComponent } from '@shared/components/footer/footer.component';
+import { SideBarComponent } from '@shared/components/side-bar/side-bar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import {LOCALE_ID } from '@angular/core';
@@ -17,7 +18,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
-import { SharedModule } from './shared/shared.module';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
 registerLocaleData(localeEs, 'es');
 
@@ -38,7 +38,7 @@ registerLocaleData(localeEs, 'es');
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   
   ],
   providers: [ 

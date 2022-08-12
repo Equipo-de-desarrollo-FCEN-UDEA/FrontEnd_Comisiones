@@ -1,7 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Permiso } from '@interfaces/permisos';
-import { BuscarPermisosService} from '@services/buscar-permisos.service';
+import { BuscarPermisosService} from '@services/busquedas/buscar-permisos.service';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
 import { NgbdSortableHeader, SortEvent } from '@shared/directivas/sortable.directive';
 import { Observable } from 'rxjs';

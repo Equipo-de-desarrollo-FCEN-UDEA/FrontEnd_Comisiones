@@ -2,8 +2,8 @@ import {Injectable, Pipe, PipeTransform} from '@angular/core';
 
 import {BehaviorSubject, Observable, of, pipe, Subject} from 'rxjs';
 
-import {Comision} from '../interfaces/comisiones';
-import {ComisionesService} from './comisiones.service';
+import {Comision} from '../../interfaces/comisiones';
+import {ComisionesService} from '../comisiones/comisiones.service';
 import {DatePipe, DecimalPipe, JsonPipe, LowerCasePipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from '@shared/directivas/sortable.directive';

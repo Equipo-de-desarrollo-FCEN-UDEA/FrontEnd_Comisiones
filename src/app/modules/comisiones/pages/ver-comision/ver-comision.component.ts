@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 // --------- SERVICIOS ---------
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { Comision } from '@interfaces/comisiones';
-import { LoaderService } from '@services/loader.service';
-import { ComisionesService } from '@services/comisiones.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { ComisionesService } from '@services/comisiones/comisiones.service';
 import { DescargarDocumentosService } from '@services/descargar-documentos.service';
 
 @Component({
@@ -76,7 +76,7 @@ export class VerComisionComponent implements OnInit {
     this.descargarDocumentoSvc.descargarDocumento(id).subscribe({
       next: (response) => {
         console.log(response);
-        reader.readAsDataURL(file);
+        //reader.readAsDataURL(file);
         //let downloadURL = window.URL.createObjectURL(response);
         //saveAs(downloadURL);
       },

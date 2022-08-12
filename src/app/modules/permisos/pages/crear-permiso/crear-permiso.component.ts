@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
-import { LoaderService } from '@services/loader.service';
-import { PermisoService } from '@services/permiso.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { PermisoService } from '@services/permisos/permiso.service';
 
 @Component({
   selector: 'app-crear-permiso',

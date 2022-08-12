@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Permiso, PermisosInside } from '@interfaces/permisos';
-import { DescargarDocumentosService } from '@services/descargar-documentos.service';
-import { LoaderService } from '@services/loader.service';
-import { PermisoService } from '@services/permiso.service';
-import { ultimoElement } from '@shared/clases/ultimo-estado';
 import { Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
+
+import { Permiso, PermisosInside } from '@interfaces/permisos';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { ultimoElement } from '@shared/clases/ultimo-estado';
+import { DescargarDocumentosService } from '@services/descargar-documentos.service';
+import { PermisoService } from '@services/permisos/permiso.service';
+
+
 
 @Component({
   selector: 'app-ver-permiso',

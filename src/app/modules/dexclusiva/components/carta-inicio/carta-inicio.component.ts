@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {  FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioService } from '@services/usuario.service';
+import { UsuarioService } from '@services/usuarios/usuario.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -15,6 +15,8 @@ export class CartaInicioComponent implements OnInit {
   usuario : any;
   @ViewChild('carta', {static:false}) el!: ElementRef;
   title = 'Carta de Inicio';
+
+  @Input() Body = '';
   
 
   constructor(
@@ -39,6 +41,9 @@ export class CartaInicioComponent implements OnInit {
    );
 
   ngOnInit(): void {
+    if (this.Body){
+      this.FormCarta.controls.Cuerpo.setValue(this.Body);
+    }
     
   }
 

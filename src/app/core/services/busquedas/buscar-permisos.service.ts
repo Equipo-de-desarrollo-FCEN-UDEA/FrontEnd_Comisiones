@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
-import {Permiso} from '../../core/interfaces/permisos';
+import {Permiso} from '@interfaces/permisos';
 import {DatePipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from "@shared/directivas/sortable.directive";
 import { ultimoElement } from "@shared/clases/ultimo-estado";
-import { PermisoService } from './permiso.service';
+import { PermisoService } from '../permisos/permiso.service';
 
 export type SortColumn = keyof Permiso | "";
 

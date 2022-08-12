@@ -57,24 +57,30 @@
         class="badge badge-pill pill"
         [ngClass]="{
           'bg-solicitada':
-          estadoActual === 'SOLICITADA',
+          estadoActual.nombre === 'SOLICITADA',
           'bg-aprobada':
-            estadoActual === 'APROBADA',
+            estadoActual.nombre === 'APROBADA',
           'bg-visto-bueno':
-            estadoActual === 'VISTO BUENO',
+            estadoActual.nombre === 'VISTO BUENO',
           'bg-finalizada':
-            estadoActual === 'FINALIZADA',
+            estadoActual.nombre === 'FINALIZADA',
           'bg-rechazada-decanato':
-            estadoActual === 'RECHAZADA DECANATO',
+            estadoActual.nombre === 'RECHAZADA DECANATO',
           'bg-rechazada-coordinacion':
-            estadoActual === 'RECHAZADA COORDINACIÓN'
+            estadoActual.nombre === 'RECHAZADA COORDINACIÓN'
         }"> 
-          {{estadoActual}}
+          {{estadoActual.nombre}}
         </span>
       </div>
   </div>
 
 
+<!-- <div class="row regular-row">
+    <div class="col-6 label">Estado Actual de la Comisión</div>
+      <div class="col-4">
+        {{estadoActual.observacion}}
+      </div>
+  </div> -->
 
 
   
@@ -95,6 +101,20 @@
     <div class="col-6 label">Resolución</div>
     <div class="col-6"></div>
   </div>
+
+  <!--Button-->
+  <button
+  type="button"
+  class="btn btn-success btn-green btn-block"
+  (click)="open()"
+  >
+  Ver Historial de estados
+  </button>
+
+  <div class="row regular-row">
+    <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
+  </div>
+
 
   <!-- <div class="d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">

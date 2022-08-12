@@ -7,20 +7,23 @@ import { CrearComisionComponent } from './pages/crear-comision/crear-comision.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
+import { HistorialEstadosComponent } from './pages/ver-comision/modal/historial-estados/historial-estados.component';
 
 
 @NgModule({
   declarations: [
     VerComisionComponent,
     CrearComisionComponent,
-    EditarComisionComponent
+    EditarComisionComponent,
+    HistorialEstadosComponent
+    
   ],
   imports: [
     CommonModule,
     ComisionesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
 
   ]
 })

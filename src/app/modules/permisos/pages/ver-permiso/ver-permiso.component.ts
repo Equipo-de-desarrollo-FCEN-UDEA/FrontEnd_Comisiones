@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PermisosInside } from '@interfaces/permisos';
-import { PermisoService } from '@services/permiso.service';
+import { PermisoService } from '@services/permisos/permiso.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 

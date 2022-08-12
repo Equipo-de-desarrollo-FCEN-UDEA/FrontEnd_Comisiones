@@ -1,4 +1,26 @@
-<app-carta-inicio></app-carta-inicio>
-<app-carta-inicio></app-carta-inicio>
-<app-plan-trabajo></app-plan-trabajo>
-<app-f-dedicacion></app-f-dedicacion>
+<app-stepper #cdkStepper [linear]="isLinear">
+    <cdk-step label="Carta de iniciación" [editable]="isEditable" [optional]="false">
+        <ng-template cdkStepLabel>
+            <span class="icon is-medium">
+                <i class="fas fa-duotone fa-envelopes-bulk"></i>
+            </span>
+        </ng-template>
+        <app-carta-inicio></app-carta-inicio>
+    </cdk-step>
+    <cdk-step label="Formulario" [editable]="isEditable" [optional]="false">
+        <ng-template cdkStepLabel>
+            <span class="icon is-medium">
+                <i class="fas fa-duotone fa-rectangle-list"></i>
+            </span>
+    </ng-template>
+        <app-f-dedicacion (dedicacion_id)="id$"></app-f-dedicacion>
+    </cdk-step>
+    <cdk-step label="Personal Details" [editable]="isEditable" [optional]="false">
+        <ng-template cdkStepLabel>
+            <span class="icon is-medium">
+                <i class="fas fa-user"></i>
+            </span>
+    </ng-template>
+        <app-plan-trabajo></app-plan-trabajo>
+    </cdk-step>
+</app-stepper>

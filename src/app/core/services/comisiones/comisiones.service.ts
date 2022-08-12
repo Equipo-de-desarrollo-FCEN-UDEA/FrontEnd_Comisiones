@@ -1,5 +1,5 @@
 
-import { Comision, ComisionDTO } from '../interfaces/comisiones';
+import { Comision, ComisionDTO } from '@interfaces/comisiones';
 
 
 import { Injectable } from '@angular/core';

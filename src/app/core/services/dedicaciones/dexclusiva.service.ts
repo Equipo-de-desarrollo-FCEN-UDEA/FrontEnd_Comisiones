@@ -23,7 +23,7 @@ export class DexclusivaService {
   //   return this.http.get('http://localhost:3000/dexclusiva');
   // }
 
-  postDexclusiva(dexclusiva: any) {
+  postFormulario(dexclusiva: any , id: Number | string) {
     const headers = new HttpHeaders(
       {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -43,8 +43,10 @@ export class DexclusivaService {
     &objetivo_estrategico_institucional=${JSON.stringify(dexclusiva.objetivo_estrategico_institucional.map((x: any) => x.objetivo))}
     &indicador=${JSON.stringify(dexclusiva.indicador.map((x: any) => x.indicador))}
     &productos=${JSON.stringify(dexclusiva.productos.map((x: any) => x.producto))}
+    &dedicaciones_id=${id}
     `;
-    return this.http.post(`${this.prefix}`, body, {
+    console.log(body);
+    return this.http.post(`${prefix}`+'formatovice', body, {
       observe: 'response',
       responseType: 'blob',
       headers: headers
@@ -62,4 +64,7 @@ export class DexclusivaService {
     );
   }
 
+  postDexclusiva(description: string) {
+    return this.http.post(`${this.prefix}`, { descripcion:description })
+  }
 }

@@ -7,8 +7,8 @@ import Swal from 'sweetalert2';
 
 
 import { Comision } from '@interfaces/comisiones';
-import { LoaderService } from '@services/loader.service';
-import { ComisionesService } from '@services/comisiones.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { ComisionesService } from '@services/comisiones/comisiones.service';
 
 @Component({
   selector: 'app-ver-comision',
@@ -44,8 +44,8 @@ export class VerComisionComponent implements OnInit {
             if (id) {
               this.comisionesService.getComision(id).subscribe((res) => {
                 this.comision = res;
-                this.comision.documentos.forEach(documento => this.documentosArray.push(documento));
-                this.fechaCreacion = this.comision.intermediate_comisiones[0].createdAt;
+                this.comision?.documentos.forEach(documento => this.documentosArray.push(documento));
+                this.fechaCreacion = this.comision?.intermediate_comisiones[0].createdAt;
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados?.nombre;
                 console.log(this.comision); 
               });

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Dexclusiva } from '@interfaces/dexclusiva';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { DexclusivaService } from '@services/dexclusiva.service';
+import { DexclusivaService } from '@services/dedicaciones/dexclusiva.service';
 import { CookieService } from 'ngx-cookie-service';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { UsuarioService } from '@services/usuario.service';
+import { UsuarioService } from '@services/usuarios/usuario.service';
 import { Usuario } from '@interfaces/usuario';
-import { LoaderService } from '@services/loader.service';
-import { Subject } from 'rxjs';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 
@@ -19,18 +19,18 @@ library.add(fas);
   styleUrls: ['./f-dedicacion.component.scss']
 })
 export class FDedicacionComponent implements OnInit {
-// Icons
 
-  faPlus = faPlus;
+  @Input() Edit : boolean = false;
+  @Input() Dedicacion : Dexclusiva | null = null;
 
 
   isLoading: Subject<boolean> = this.loadingSvc.isLoading;
   constructor(
-    // private : UserSvc Falta entregar información del usuario
     private fb : FormBuilder,
     private dexclusivaSvc: DexclusivaService,
     private usuarioSvc: UsuarioService,
-    private loadingSvc : LoaderService
+    private loadingSvc : LoaderService,
+    private comunicationSvc : CrearComisionComponentsService
   ) { }
   
   public unidades = [
@@ -88,15 +88,22 @@ export class FDedicacionComponent implements OnInit {
     this.fBasicInfo.controls['apellido'].disable();
     this.fBasicInfo.controls['identificacion'].disable();
     this.fBasicInfo.controls['correo'].disable();
+
+    if (this.Dedicacion) {
+      this.fBasicInfo.patchValue(this.Dedicacion);
+    }
   }
 
   onSubmit(){
     let {nombre, apellido, identificacion, correo, ...others} = this.fBasicInfo.value;
     this.fExclusiva = others;
-    this.dexclusivaSvc.postDexclusiva(this.fExclusiva).subscribe();
+    let dedicacion_id : Number | string = 0;
+    this.comunicationSvc.id$.subscribe(id => {
+      dedicacion_id = id;
+    }).unsubscribe();
+    console.log(dedicacion_id);
+    this.dexclusivaSvc.postFormulario(this.fExclusiva, dedicacion_id).subscribe();
   }
-
-  // Temas
 
   temasgroup() {
     return this.fb.group({

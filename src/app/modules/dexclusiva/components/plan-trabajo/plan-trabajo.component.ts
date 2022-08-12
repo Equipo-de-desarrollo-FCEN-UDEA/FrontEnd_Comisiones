@@ -2,9 +2,9 @@ import { formatDate } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { LoaderService } from '@services/loader.service';
-import { PlanTrabajoService } from '@services/plan-trabajo.service';
-import { UsuarioService } from '@services/usuario.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { PlanTrabajoService } from '@services/dedicaciones/plan-trabajo.service';
+import { UsuarioService } from '@services/usuarios/usuario.service';
 import { Subject } from 'rxjs';
 
 @Component({

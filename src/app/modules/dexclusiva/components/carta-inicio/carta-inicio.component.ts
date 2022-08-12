@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {  FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioService } from '@services/usuario.service';
+import { UsuarioService } from '@services/usuarios/usuario.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 

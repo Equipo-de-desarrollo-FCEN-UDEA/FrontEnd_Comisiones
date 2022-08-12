@@ -74,11 +74,8 @@ export class VerComisionComponent implements OnInit {
   abrirDocumento(id:number){
     const reader = new FileReader();
     this.descargarDocumentoSvc.descargarDocumento(id).subscribe({
-      next: (response) => {
-        console.log(response);
-        //reader.readAsDataURL(file);
-        //let downloadURL = window.URL.createObjectURL(response);
-        //saveAs(downloadURL);
+      next: (res) => {
+        window.open(window.URL.createObjectURL(res))
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
@@ -86,12 +83,10 @@ export class VerComisionComponent implements OnInit {
           this.loading = false;
         }
       },
-    }
-      
-    );
+    });
   }
   
-  delete(id: any): void {
+  eliminar(id: any): void {
     Swal.fire({
       title: '¿Seguro que quieres eliminar esta comisión?',
       text: 'No podrás revertir esta acción',
@@ -102,10 +97,10 @@ export class VerComisionComponent implements OnInit {
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.comisionesSvc.delete(id).subscribe({
+        this.comisionesSvc.eliminar(id).subscribe({
           next: (response) => {
             console.log(response);
-            this.router.navigate(['/home/comisiones']);
+            this.router.navigate(['/home']);
             Swal.fire({
               title: 'Eliminada!',
               text: '¡la comisión ha sido eliminada!',

@@ -67,13 +67,11 @@
   
   <!-- DOCUMENTOS -->
   <div class="row regular-row">
-    <div class="col-4 label">Documentos</div>
-    <div class="col-sm-8">
-      <ul *ngFor="let doc of documentosArray; let i=index " class="list-group">
-        <li [id]="i" class="list-group-item" > 
-          <button class="btn btn-circle" type="button" (click)="abrirDocumento(doc.id)">
-            {{doc.nombre}}
-          </button>
+    <div class="col-6 label">Documentos</div>
+    <div class="col-sm-6">
+      <ul>
+        <li *ngFor="let doc of documentosArray" >
+          <span (click)="abrirDocumento(doc.id)">{{doc.nombre}}&nbsp;&nbsp;</span>&nbsp;
         </li>
       </ul>
     </div>
@@ -114,11 +112,11 @@
   <hr />
   <div class="footer-row d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-      <!-- <button class="btn btn-danger" 
+      <button class="btn btn-danger" 
       (click)="delete(permiso?.id)">
         <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" ></span>
         Eliminar
-      </button> -->
+      </button>
     </div>
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button

@@ -67,9 +67,10 @@ export class VerPermisoComponent implements OnInit {
   }
 
   abrirDocumento(id:number){
+    const reader = new FileReader();
     this.descargarDocumentoSvc.descargarDocumento(id).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: (res) => {
+        window.open(window.URL.createObjectURL(res))
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
@@ -77,9 +78,7 @@ export class VerPermisoComponent implements OnInit {
           this.loading = false;
         }
       },
-    }
-      
-    );
+    });
   }
   
   delete(id: any): void {
@@ -96,7 +95,7 @@ export class VerPermisoComponent implements OnInit {
         this.permisosSvc.delete(id).subscribe({
           next: (response) => {
             console.log(response);
-            this.router.navigate(['/home/permisos']);
+            this.router.navigate(['/home']);
             Swal.fire({
               title: 'Eliminada!',
               text: '¡El permiso ha sido eliminado!',

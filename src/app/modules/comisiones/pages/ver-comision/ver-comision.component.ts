@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { Comision } from '@interfaces/comisiones';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { ComisionesService } from '@services/comisiones/comisiones.service';
+import { DescargarDocumentosService } from '@services/descargar-documentos.service';
 
 @Component({
   selector: 'app-ver-comision',

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 // ----------- SERVICIOS ------------
 import { ComisionesService } from '@services/comisiones/comisiones.service';
 import { TipoComision } from '@interfaces/tipos_comision';
-import { TipoComisionService } from '@services/tipo-comision.service';
+import { TipoComisionService } from '@services/comisiones/tipo-comision.service';
 import { Comision } from '@interfaces/comisiones';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';

@@ -13,6 +13,7 @@ import { PlanTrabajoComponent } from './components/plan-trabajo/plan-trabajo.com
 import { CrearDedicacionComponent } from './pages/crear-dedicacion/crear-dedicacion.component';
 import { EditarDedicacionComponent } from './pages/editar-dedicacion/editar-dedicacion.component';
 import { VerDedicacionComponent } from './pages/ver-dedicacion/ver-dedicacion.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { VerDedicacionComponent } from './pages/ver-dedicacion/ver-dedicacion.co
     FormsModule,
     AmazingTimePickerModule,
     ReactiveFormsModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    SharedModule
   ]
 })
 export class DexclusivaModule { }

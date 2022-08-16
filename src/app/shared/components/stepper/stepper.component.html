@@ -1,6 +1,6 @@
 <section class="container">
     <!-- The navbar for the wizard -->
-    <header id="header1" class="header" [ngClass]="{'sticky-top':showContainer}">
+    <header id="header1" class="header" [ngClass]="{'sticky-md-top':showContainer}">
       <ol>
         <ng-container *ngFor="let step of steps; let i = index;">
           <li [ngClass]="(selectedIndex === i) ? activeClass : ''">
@@ -15,7 +15,7 @@
         </ng-container>
       </ol>
     </header>
-
+<!-- 
     <div class="side-tab">
 
       <header #header2 id="header2" class="header header2" [ngClass]="{'sticky-top':showContainer}">
@@ -39,7 +39,7 @@
     <div id="main">
       <button class="openbtn" (click)="openNav()">☰ Open Sidebar</button>  
     </div>
-    
+     -->
   
     <div class="body">
       <ng-container [ngTemplateOutlet]="selected.content"></ng-container>

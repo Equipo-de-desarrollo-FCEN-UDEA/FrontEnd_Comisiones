@@ -97,10 +97,13 @@ export class FDedicacionComponent implements OnInit {
   onSubmit(){
     let {nombre, apellido, identificacion, correo, ...others} = this.fBasicInfo.value;
     this.fExclusiva = others;
-    let dedicacion_id : Number | string = 0;
-    this.comunicationSvc.id$.subscribe(id => {
-      dedicacion_id = id;
-    }).unsubscribe();
+    let dedicacion_id : number | string = 0;
+
+    this.comunicationSvc.id$.subscribe(
+      (      id: string | number) => {
+        dedicacion_id = id;
+      }
+    )
     console.log(dedicacion_id);
     this.dexclusivaSvc.postFormulario(this.fExclusiva, dedicacion_id).subscribe(
       (res : any) => {

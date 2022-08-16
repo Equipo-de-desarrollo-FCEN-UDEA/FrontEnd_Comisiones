@@ -23,7 +23,7 @@ export class DexclusivaService {
   //   return this.http.get('http://localhost:3000/dexclusiva');
   // }
 
-  postFormulario(dexclusiva: any , id: Number | string) {
+  postFormulario(dexclusiva: any , id: number | string) {
     const headers = new HttpHeaders(
       {
         'Content-Type': 'application/x-www-form-urlencoded',

@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { CartaInicioService } from '@services/dedicaciones/carta-inicio.service';
+import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
+import { Carta } from '@interfaces/carta';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carta-inicio',
@@ -16,13 +20,20 @@ export class CartaInicioComponent implements OnInit {
   @ViewChild('carta', {static:false}) el!: ElementRef;
   title = 'Carta de Inicio';
 
+  carta : Carta = {
+    body: '',
+    dedicaciones_id: 0,
+  }
+
   @Input() Body = '';
   
 
   constructor(
     private fb: FormBuilder,
     private usuarioSvc: UsuarioService,
-    private router : Router
+    private router : Router,
+    private cartaSvc : CartaInicioService,
+    private comunicationSvc : CrearComisionComponentsService
   ) {
     
     this.usuarioSvc.getUsuario().subscribe(
@@ -77,16 +88,18 @@ export class CartaInicioComponent implements OnInit {
     let dedicacion_id : number | string = 0;
 
     this.comunicationSvc.id$.subscribe(
-      id => {
+      (      id: string | number) => {
         dedicacion_id = id;
       }
-    )
+    ).unsubscribe();
+
+    console.log(dedicacion_id);
 
     this.carta = {
       body: this.FormCarta.value.Cuerpo || '',
       dedicaciones_id: dedicacion_id,
     }
-    this.cartaSvc.postCartaInicio(this.carta).subscribe(
+    this.cartaSvc.postCarta(this.carta).subscribe(
       (data:any) => {
           Swal.fire({
             // title: 'Carta de Inicio',
@@ -96,5 +109,6 @@ export class CartaInicioComponent implements OnInit {
           });
       });
   }
+
 
 }

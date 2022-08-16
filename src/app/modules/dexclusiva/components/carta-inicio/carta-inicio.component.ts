@@ -4,10 +4,6 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { CartaInicioService } from '@services/dedicaciones/carta-inicio.service';
-import { Carta } from '@interfaces/carta';
-import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carta-inicio',
@@ -21,19 +17,12 @@ export class CartaInicioComponent implements OnInit {
   title = 'Carta de Inicio';
 
   @Input() Body = '';
-
-  private carta : Carta = {
-    body: '',
-    dedicaciones_id: 0,
-  }
   
 
   constructor(
     private fb: FormBuilder,
     private usuarioSvc: UsuarioService,
-    private router : Router,
-    private cartaSvc: CartaInicioService,
-    private comunicationSvc: CrearComisionComponentsService
+    private router : Router
   ) {
     
     this.usuarioSvc.getUsuario().subscribe(
@@ -79,29 +68,6 @@ export class CartaInicioComponent implements OnInit {
       boton.disabled = false;
       btntext.style.display = 'block';
     });
-
-    let dedicacion_id : number | string = 0;
-
-    this.comunicationSvc.id$.subscribe(
-      id => {
-        dedicacion_id = id;
-      }
-    )
-
-    this.carta = {
-      body: this.FormCarta.value.Cuerpo || '',
-      dedicaciones_id: dedicacion_id,
-    }
-    this.cartaSvc.postCartaInicio(this.carta).subscribe(
-      (data:any) => {
-          Swal.fire({
-            // title: 'Carta de Inicio',
-            text: data.message,
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-      });
-
   }
   
   OnSubmit() {

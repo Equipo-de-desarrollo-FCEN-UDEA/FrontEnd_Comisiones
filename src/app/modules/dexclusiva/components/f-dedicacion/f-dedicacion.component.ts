@@ -97,7 +97,7 @@ export class FDedicacionComponent implements OnInit {
   onSubmit(){
     let {nombre, apellido, identificacion, correo, ...others} = this.fBasicInfo.value;
     this.fExclusiva = others;
-    let dedicacion_id : number | string = 0;
+    let dedicacion_id : Number | string = 0;
     this.comunicationSvc.id$.subscribe(id => {
       dedicacion_id = id;
     }).unsubscribe();

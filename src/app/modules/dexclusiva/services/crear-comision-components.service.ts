@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 })
 export class CrearComisionComponentsService {
 
-  id$ : Observable<Number | string> = new Observable();
+  id$ : Observable<number | string> = new Observable();
   constructor() { }
 
-  setId(id: Number | string) {
+  setId(id: number | string) {
     this.id$ = new Observable(observer => {
       observer.next(id);
     });

@@ -26,7 +26,7 @@ export class CrearDedicacionComponent implements OnInit {
 
   ngOnInit(): void {
     Swal.fire({
-      allowOutsideClick: false,
+      // allowOutsideClick: false,
       title: '¡Bienvenido!',
       text: 'Para crear una nueva dedicación escribe una corta descripción solo como referencia para la aplicación.',
       input: 'text',

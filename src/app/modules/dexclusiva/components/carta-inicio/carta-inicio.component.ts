@@ -68,11 +68,33 @@ export class CartaInicioComponent implements OnInit {
       boton.disabled = false;
       btntext.style.display = 'block';
     });
+
+    
   }
   
   OnSubmit() {
-    console.log(this.FormCarta.value);
-    this.router.navigate(['/dexclusiva/formulario-dedicacion']);
+    this.makePdf();
+    let dedicacion_id : number | string = 0;
+
+    this.comunicationSvc.id$.subscribe(
+      id => {
+        dedicacion_id = id;
+      }
+    )
+
+    this.carta = {
+      body: this.FormCarta.value.Cuerpo || '',
+      dedicaciones_id: dedicacion_id,
+    }
+    this.cartaSvc.postCartaInicio(this.carta).subscribe(
+      (data:any) => {
+          Swal.fire({
+            // title: 'Carta de Inicio',
+            text: data.message,
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+      });
   }
 
 }

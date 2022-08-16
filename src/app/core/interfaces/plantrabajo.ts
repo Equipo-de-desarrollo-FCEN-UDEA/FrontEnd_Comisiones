@@ -3,6 +3,7 @@ export interface PlanTrabajo {
     registro:                  string;
     tipo_vinculacion:          string;
     tiempo_parcial:            number;
+    escalafon:                 string;
     actividades_docencia:      ActividadesDocencia[];
     actividades_investigacion: ActividadesInvestigacion[];
     actividades_extension:     ActividadesExtension[];

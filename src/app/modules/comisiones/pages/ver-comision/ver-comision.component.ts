@@ -24,6 +24,7 @@ export class VerComisionComponent implements OnInit {
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
+  private id_prueba = 0;
 
   documentosArray:any = [];
   fechaCreacion:any = '';
@@ -41,7 +42,13 @@ export class VerComisionComponent implements OnInit {
     private descargarDocumentoSvc: DescargarDocumentosService
   ) { 
 
+    
+  }
+
+  ngOnInit(): void {
+
     this.activateRoute.params.subscribe({
+<<<<<<< Updated upstream
         next: (paramId) => {
            const id = paramId['id'];
             if (id) {
@@ -63,6 +70,33 @@ export class VerComisionComponent implements OnInit {
         },
       });
 }
+=======
+      next: (paramId) => {
+         const id = paramId['id'];
+         this.id_prueba = id
+         console.log(id);
+          if (id) {
+            this.comisionesSvc.getComision(id).subscribe((res: Comision) => {
+              this.comision = res;
+              this.comision?.documentos.forEach(documento => this.documentosArray.push(documento));
+              this.fechaCreacion = this.comision?.intermediate_comisiones[0].createdAt;
+              this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
+              this.estados = this.comision.intermediate_comisiones;
+              console.log(this.estados); 
+            });
+          }
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg; // mensaje desde el back
+          this.loading = false;
+        }
+      },
+    });
+    console.log(this.comision);
+    
+  }
+>>>>>>> Stashed changes
 
   ngOnInit(): void {
 

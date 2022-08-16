@@ -24,6 +24,7 @@ export class VerComisionComponent implements OnInit {
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
+  private id_prueba = 0;
 
   documentosArray:any = [];
   fechaCreacion:any = '';
@@ -40,6 +41,11 @@ export class VerComisionComponent implements OnInit {
     private comisionesSvc: ComisionesService,
     private descargarDocumentoSvc: DescargarDocumentosService
   ) { 
+
+    
+  }
+
+  ngOnInit(): void {
 
     this.activateRoute.params.subscribe({
         next: (paramId) => {
@@ -64,9 +70,6 @@ export class VerComisionComponent implements OnInit {
       });
 }
 
-  ngOnInit(): void {
-
-  }
 
   abrirDocumento(id:number){
     this.descargarDocumentoSvc.descargarDocumento(id).subscribe({

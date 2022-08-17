@@ -59,7 +59,7 @@ export class BuscarPermisosService {
 
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 7,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''

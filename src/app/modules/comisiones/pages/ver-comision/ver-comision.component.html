@@ -145,6 +145,15 @@
   <hr />
   <div class="footer-row d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+      type="button"
+      class="btn btn-warning "
+        [routerLink]="['/comisiones/asociar-estado', comision?.id]"
+      >
+        Asociar nuevo Estado
+      </button>
+    </div>
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button class="btn btn-danger" (click)="eliminar(comision?.id)">
         <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" 
         ></span>

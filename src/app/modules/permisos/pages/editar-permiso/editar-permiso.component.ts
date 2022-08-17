@@ -257,9 +257,9 @@ export class EditarPermisoComponent implements OnInit {
       next: (res) => { 
         
         //facilitate change detection
-        // this.ngZone.run(() =>
-        //   this.router.navigateByUrl(`/permisos/ver-permiso/${this.getId}`)
-        // );
+        this.ngZone.run(() =>
+          this.router.navigateByUrl(`/permisos/ver-permiso/${this.getId}`)
+        );
         Swal.fire({
           title: 'Actulizada',
           text: '¡El permiso se actualizó con éxito!',

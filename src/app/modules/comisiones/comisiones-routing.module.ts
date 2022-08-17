@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CrearComisionComponent } from './pages/crear-comision/crear-comision.component';
 import { VerComisionComponent } from './pages/ver-comision/ver-comision.component';
 import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
+import { EstadosComisionComponent } from './pages/ver-comision/estados/estados/estados-comision.component';
 
 
 const routes: Routes = [
@@ -14,12 +15,18 @@ const routes: Routes = [
 
 {
     path: 'ver-comision/:id',
-    component: VerComisionComponent
+    component: VerComisionComponent,
+
 },
 
 {
     path: 'editar-comision/:id',
     component: EditarComisionComponent
+},
+
+{
+  path: 'asociar-estado/:id',
+  component: EstadosComisionComponent
 }
 
 ];

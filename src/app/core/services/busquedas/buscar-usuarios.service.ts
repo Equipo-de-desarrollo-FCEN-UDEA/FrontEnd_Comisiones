@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Usuario } from "../interfaces/usuario";
-import { UsuarioService } from "../services/usuario.service";
+import { Usuario } from "@interfaces/usuario";
+import { UsuarioService } from "@services/usuarios/usuario.service";
 import {SortDirection} from '@shared/directivas/sortable.directive';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import { DatePipe } from '@angular/common';

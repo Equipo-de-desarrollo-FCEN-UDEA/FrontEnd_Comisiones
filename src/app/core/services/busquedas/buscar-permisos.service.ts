@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
-import {Permiso} from '../../core/interfaces/permisos';
+import {Permiso} from '@interfaces/permisos';
 import {DatePipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from "@shared/directivas/sortable.directive";
 import { ultimoElement } from "@shared/clases/ultimo-estado";
-import { PermisoService } from './permiso.service';
+import { PermisoService } from '../permisos/permiso.service';
 
 export type SortColumn = keyof Permiso | "";
 
@@ -40,7 +40,7 @@ function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
   return (
     permisos.tipos_permiso.nombre.toLowerCase().includes(term.toLowerCase()) ||
     ultimoElement(permisos.intermediate_permisos)?.intermediate_estados.nombre.toLowerCase().includes(term)||
-    ultimoElement(permisos.intermediate_permisos)?.createdAt.includes(term)||
+    datepipe.transform(ultimoElement(permisos.intermediate_permisos)?.createdAt)?.includes(term)  ||
     permisos.usuarios.nombre.toLowerCase().includes(term) ||
     permisos.usuarios.apellido.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.nombre.toLowerCase().includes(term) ||

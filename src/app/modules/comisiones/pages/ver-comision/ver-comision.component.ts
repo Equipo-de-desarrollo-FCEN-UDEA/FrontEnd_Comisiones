@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 
 
 import { Comision } from '@interfaces/comisiones';
-import { LoaderService } from '@services/loader.service';
-import { ComisionesService } from '@services/comisiones.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { ComisionesService } from '@services/comisiones/comisiones.service';
 import { DescargarDocumentosService } from '@services/descargar-documentos.service';
 
 @Component({
@@ -26,6 +26,7 @@ export class VerComisionComponent implements OnInit {
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
+  private id_prueba = 0;
 
   documentosArray:any = [];
   fechaCreacion:any = '';
@@ -43,14 +44,19 @@ export class VerComisionComponent implements OnInit {
     private descargarDocumentoSvc: DescargarDocumentosService
   ) { 
 
+    
+  }
+
+  ngOnInit(): void {
+
     this.activateRoute.params.subscribe({
         next: (paramId) => {
            const id = paramId['id'];
             if (id) {
               this.comisionesSvc.getComision(id).subscribe((res) => {
                 this.comision = res;
-                this.comision.documentos.forEach(documento => this.documentosArray.push(documento));
-                this.fechaCreacion = this.comision.intermediate_comisiones[0].createdAt;
+                this.comision?.documentos.forEach(documento => this.documentosArray.push(documento));
+                this.fechaCreacion = this.comision?.intermediate_comisiones[0].createdAt;
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados?.nombre;
                 console.log(this.comision); 
               });
@@ -66,10 +72,7 @@ export class VerComisionComponent implements OnInit {
       });
 }
 
-  ngOnInit(): void {
 
-
-  }
 
   abrirDocumento(id:number){
     this.descargarDocumentoSvc.descargarDocumento(id).subscribe({

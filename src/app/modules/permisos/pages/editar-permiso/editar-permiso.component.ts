@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } f
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoaderService } from '@services/loader.service';
+import { LoaderService } from '@services/interceptors/loader.service';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 
 // ----------- SERVICIOS ------------
 import { TiposPermiso, TiposPermisoInside } from '@interfaces/tipos_permiso';
-import { PermisoService } from '@services/permiso.service';
+import { PermisoService } from '@services/permisos/permiso.service';
 
 
 @Component({

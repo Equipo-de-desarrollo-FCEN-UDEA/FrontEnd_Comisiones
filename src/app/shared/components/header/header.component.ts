@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UsuarioBase, UsuarioInside } from '@interfaces/usuario';
-import { AuthService } from '@services/auth.service';
-import { UsuarioService } from '@services/usuario.service';
+import { AuthService } from '@services/auth/auth.service';
+import { UsuarioService } from '@services/usuarios/usuario.service';
 import { filter} from 'rxjs';
+
 
 @Component({
   selector: 'app-header',

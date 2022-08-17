@@ -3,7 +3,7 @@ import { Comision } from '@interfaces/comisiones';
 import { Observable } from 'rxjs';
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { NgbdSortableHeader, SortEvent } from '@shared/directivas/sortable.directive';
-import { BuscarComisionesService } from '@services/buscar-comisiones.service';
+import { BuscarComisionesService } from '@services/busquedas/buscar-comisiones.service';
 import { DecimalPipe } from '@angular/common';
 
 @Component({

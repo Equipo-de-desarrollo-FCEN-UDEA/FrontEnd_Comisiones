@@ -79,14 +79,14 @@
         </div>
     </div>
     <div class="botones">
-        <button id="Generador-carta" class="btn btn-primary btn-lg" [disabled]="FormCarta.controls['Cuerpo'].invalid" (click)="makePdf()" (submit)="false" >
+        <button id="Generador-carta" class="btn btn-primary btn-lg" [disabled]="FormCarta.controls['Cuerpo'].invalid" (click)="OnSubmit()" (submit)="true" >
             <span class="spinner" id="spinner" style="display: none;">
                 <span class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
                Cargando...
            </span>
-           <span id="btn-text">Generar carta</span>
+           <span id="btn-text">Guardar <span><i class="fas fa-save"></i></span> </span>
             </button>
-        <button class="btn btn-success btn-lg" (click)="OnSubmit()"  (submit)="true">Siguiete paso</button>
+        <!-- <button class="btn btn-success btn-lg" (click)="OnSubmit()"  (submit)="true">Continuar <span><i class="fas fa-angle-right"></i></span></button> -->
     </div>
    
 </div>

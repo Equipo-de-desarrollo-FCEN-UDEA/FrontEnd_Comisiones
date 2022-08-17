@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Usuario, UsuarioBase, UsuarioResponse } from '@interfaces/usuario';
-import { UsuarioService } from '@services/usuario.service';
+import { Usuario, UsuarioResponse } from '@interfaces/usuario';
+import { UsuarioService } from '@services/usuarios/usuario.service';
 import { take } from 'rxjs';
 
 @Component({

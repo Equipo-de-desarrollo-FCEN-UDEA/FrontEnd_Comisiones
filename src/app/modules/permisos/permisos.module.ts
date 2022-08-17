@@ -15,6 +15,9 @@ import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.co
     VerPermisoComponent,
     CrearPermisoComponent,
     EditarPermisoComponent
+
+
+    
   ],
   imports: [
     CommonModule,

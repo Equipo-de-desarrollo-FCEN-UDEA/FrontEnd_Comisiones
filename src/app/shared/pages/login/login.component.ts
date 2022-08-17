@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioAuth } from '@interfaces/usuario';
-import { AuthService } from '@services/auth.service';
-import { LoaderService } from '@services/loader.service';
+import { AuthService } from '@services/auth/auth.service';
+import { LoaderService } from '@services/interceptors/loader.service';
 import { Subject } from 'rxjs';
 
 @Component({

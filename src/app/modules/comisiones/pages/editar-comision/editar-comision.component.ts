@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } f
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoaderService } from '@services/loader.service';
+import { LoaderService } from '@services/interceptors/loader.service';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
 import { DiasHabiles } from '@shared/clases/dias-habiles';
@@ -11,9 +11,9 @@ import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 
 // ----------- SERVICIOS ------------
-import { ComisionesService } from '@services/comisiones.service';
+import { ComisionesService } from '@services/comisiones/comisiones.service';
 import { TipoComision } from '@interfaces/tipos_comision';
-import { TipoComisionService } from '@services/tipo-comision.service';
+import { TipoComisionService } from '@services/comisiones/tipo-comision.service';
 import { Comision } from '@interfaces/comisiones';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
@@ -90,7 +90,7 @@ export class EditarComisionComponent implements OnInit {
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
         });
 
-        res.documentos.forEach(documento => this.documentosArray.push(documento)) 
+        res.documentos.forEach((documento:any) => this.documentosArray.push(documento)) 
 
         console.log(res);
       },

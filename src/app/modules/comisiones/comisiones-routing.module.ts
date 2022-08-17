@@ -13,7 +13,7 @@ const routes: Routes = [
 },
 
 {
-    path: 'ver-comision',
+    path: 'ver-comision/:id',
     component: VerComisionComponent
 },
 

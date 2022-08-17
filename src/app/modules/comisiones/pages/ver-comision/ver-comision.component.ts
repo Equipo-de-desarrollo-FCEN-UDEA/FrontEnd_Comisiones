@@ -26,6 +26,7 @@ export class VerComisionComponent {
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
+  private id_prueba = 0;
 
   documentosArray:any = [];
   fechaCreacion:any = '';
@@ -43,6 +44,11 @@ export class VerComisionComponent {
     private comisionesSvc: ComisionesService,
     private descargarDocumentoSvc: DescargarDocumentosService
   ) { 
+
+    
+  }
+
+  ngOnInit(): void {
 
     this.activateRoute.params.subscribe({
         next: (paramId) => {
@@ -65,11 +71,13 @@ export class VerComisionComponent {
           }
         },
       });
+
   }
 
   open(){ 
     this.mostrarEstados = !this.mostrarEstados ;
   }
+
 
 
   abrirDocumento(id:number){

@@ -10,6 +10,7 @@ import { Usuario } from '@interfaces/usuario';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
+import Swal from 'sweetalert2';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 
@@ -20,7 +21,6 @@ library.add(fas);
 })
 export class FDedicacionComponent implements OnInit {
 
-  @Input() Edit : boolean = false;
   @Input() Dedicacion : Dexclusiva | null = null;
 
 
@@ -97,12 +97,26 @@ export class FDedicacionComponent implements OnInit {
   onSubmit(){
     let {nombre, apellido, identificacion, correo, ...others} = this.fBasicInfo.value;
     this.fExclusiva = others;
-    let dedicacion_id : Number | string = 0;
-    this.comunicationSvc.id$.subscribe(id => {
-      dedicacion_id = id;
-    }).unsubscribe();
+    let dedicacion_id : number | string = 0;
+
+    this.comunicationSvc.id$.subscribe(
+      (      id: string | number) => {
+        dedicacion_id = id;
+      }
+    )
     console.log(dedicacion_id);
-    this.dexclusivaSvc.postFormulario(this.fExclusiva, dedicacion_id).subscribe();
+    this.dexclusivaSvc.postFormulario(this.fExclusiva, dedicacion_id).subscribe(
+      (res : any) => {
+        if (res){
+          Swal.fire({
+            text: 'Formato generado con éxito',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          }
+          )
+        }
+      }
+    );
   }
 
   temasgroup() {

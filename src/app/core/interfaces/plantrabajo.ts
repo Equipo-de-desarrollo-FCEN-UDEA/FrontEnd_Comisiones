@@ -1,4 +1,5 @@
 export interface PlanTrabajo {
+
     semestre:                  string;
     registro:                  string;
     tipo_vinculacion:          string;
@@ -12,6 +13,7 @@ export interface PlanTrabajo {
     seguimiento_actividades:   SeguimientoActividade[];
     jornada_trabajo:           JornadaTrabajo[];
     observaciones_generales:   string;
+    dedicaciones_id? :         number | string;
 }
 
 export interface ActividadesDocencia {
@@ -23,9 +25,9 @@ export interface ActividadesDocencia {
 }
 
 export interface HorasSemana {
-    T:  string;
-    TP: string;
-    P:  string;
+    T:  number;
+    TP: number;
+    P:  number;
 }
 
 export interface IdentificacionActividad {

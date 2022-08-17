@@ -4,6 +4,7 @@ import { CrearComisionComponent } from './pages/crear-comision/crear-comision.co
 import { VerComisionComponent } from './pages/ver-comision/ver-comision.component';
 import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
 import { EstadosComisionComponent } from './pages/ver-comision/estados/estados/estados-comision.component';
+import { CumplidoComponent } from './pages/ver-comision/cumplido/cumplido.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,11 @@ const routes: Routes = [
 {
   path: 'asociar-estado/:id',
   component: EstadosComisionComponent
+},
+
+{
+  path: 'subir-cumplido/:id',
+  component: CumplidoComponent
 }
 
 ];

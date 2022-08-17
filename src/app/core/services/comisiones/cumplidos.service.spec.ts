@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CumplidoService } from './cumplido.service';
+import { CumplidosService } from './cumplidos.service';
 
-describe('CumplidoService', () => {
-  let service: CumplidoService;
+describe('CumplidosService', () => {
+  let service: CumplidosService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CumplidoService);
+    service = TestBed.inject(CumplidosService);
   });
 
   it('should be created', () => {

@@ -74,13 +74,11 @@
       </div>
   </div>
 
+  <div class="row regular-row">
+    <div class="col-6 label">Resolución</div>
+    <div class="col-6">{{comision?.resolucion}}</div>
+  </div>
 
-<!-- <div class="row regular-row">
-    <div class="col-6 label">Estado Actual de la Comisión</div>
-      <div class="col-4">
-        {{estadoActual.observacion}}
-      </div>
-  </div> -->
 
 
   
@@ -96,11 +94,6 @@
     </div>
   </div>
 
-
-  <div class="row regular-row">
-    <div class="col-6 label">Resolución</div>
-    <div class="col-6"></div>
-  </div>
 
   <!--Button-->
   <button
@@ -148,9 +141,18 @@
       <button
       type="button"
       class="btn btn-warning "
-        [routerLink]="['/comisiones/asociar-estado', comision?.id]"
+      [routerLink]="['/comisiones/asociar-estado', comision?.id]"
       >
         Asociar nuevo Estado
+      </button>
+    </div>
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+      type="button"
+      class="btn btn-warning"
+      [routerLink]="['/comisiones/subir-cumplido', comision?.id]"
+      >
+        Subir Cumplido
       </button>
     </div>
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">

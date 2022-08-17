@@ -25,8 +25,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-  min-height: 80vh;
+    margin-bottom: 60px;
+    min-height: 80vh;
 }
 
 app-root {
@@ -216,6 +216,13 @@ a:hover {
 
 .bg-rechazada-coordinacion {
     background-color: #FF6666;
+}
+
+.bg-empleado {
+    background-color: #919928;
+}
+.bg-profesor {
+    background-color: #2fcc37;
 }
 
 .click-table:hover {

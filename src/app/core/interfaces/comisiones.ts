@@ -11,16 +11,17 @@ export interface ComResInside {
     fecha_fin: Date;
     createdAt: Date;
     justificacion: string;
+    tipos_comision_id: number;
 }
 
 export interface ComisionDTO extends Omit<ComResInside, 'id'>{
-    archivo : File[];
+    archivos : File[];
     fecha_resolucion?: Date;
     resolucion?: string;
     justificacion: string;
     idioma?: string;
     lugar?: string;
-    tipo_comision_id: number;
+    tipos_comision_id: number;
     usuarios_id: number;
 }
 
@@ -29,15 +30,12 @@ export interface ComisionesinDB extends Omit<ComisionDTO,'archivo'>, ComResInsid
 }
 
 export interface Comision extends ComisionesinDB{
-    results: any;
-    nombre: any;
     tipos_comision: TipoComisionInside
     documentos: DocumentosInside[];
     cumplidos: CumplidoInside[];
     usuarios: UsuarioInside;
     intermediate_comisiones: ComisionesXEstadoInside[];
-    // nombreEstadoActual: string;
-    
+    tipos_comision_id: number;
 }
 
 export interface ComisionesXEstadoInDB{

@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-xl navbar-light" >
+<!-- <nav class="navbar navbar-expand-xl navbar-light" >
 
   <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
     <i class="fa fa-bars" style="color:rgb(255, 255, 255);"></i>
@@ -52,6 +52,21 @@
       </li>
     </div>
   </div>
+
+
+  <div class="navbar-brand">
+    <ul>
+      <li ngbDropdown>
+       <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:#fff;">Usuarios</a>
+
+      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
+        <a class="dropdown-item" routerLink="usuarios/lista-usuarios">Listar Usuarios</a>
+      </div>
+    </li>
+    </ul>
+  </div> -->
+  
+<!-- </div> -->
   
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
@@ -66,8 +81,8 @@
               <div class="sidebar-header">
                 <span class="user-pic">
                   <i class="fas fa-user-circle"></i>
-                </span>
-                <!-- <img src="./icon.png" alt=""> -->
+                </span> 
+                <img src="./icon.png" alt="">
               </div>
               <div class="user-info">
                 <span class="user-name">
@@ -125,8 +140,8 @@
                 <div class="header-menu">
                   <span> ESPECÍFICO </span>
                 </div>
-                <ul>
-                  <!-- <li>
+                <ul> 
+                  <li>
                     <a href="#">
                       <span>
                         <i class="far fa-building"></i>
@@ -141,9 +156,11 @@
                         Facultades
                       </span>
                     </a>
-                  </li> -->
+                  </li>
                   <li routerLink="../usuarios/lista-usuarios">
-                    <a>
+                    <a> 
+                  <li routerLink="../home">
+                    <a href="#">
                       <span>
                         <i class="fa-solid fa-users"></i>
                         Usuarios
@@ -159,7 +176,7 @@
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> -->
               <!-- sidebar-menu  -->
               <!-- sidebar-content  -->
               <div class="sidebar-footer">

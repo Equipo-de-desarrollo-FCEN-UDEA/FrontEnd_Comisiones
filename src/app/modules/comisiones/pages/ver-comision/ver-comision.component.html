@@ -1,88 +1,103 @@
 <div class="container card shadow mt-5 bg-white rounded p-4 w-75">
   <div class="row header-row">
     <div class="col">
-      <span class="text-secondary">Comisión</span>
+      <span class="text-secondary">COMISIÓN</span>
+    </div>
+  </div>
+
+  <hr />
+  <div class="row regular-row">
+    <div class="col-6 label">Solicitante</div>
+    <div class="col-sm-6">
+      {{ comision?.usuarios?.nombre }} {{ comision?.usuarios?.apellido }}
     </div>
   </div>
 
   <hr />
   <div class="row regular-row">
     <div class="col-6 label">Tipo de Comisión</div>
-<<<<<<< HEAD
-    <div class="col-sm-6">{{comision.tipos_comision}}</div>
-=======
+
     <div class="col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
->>>>>>> origin
+
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
-<<<<<<< HEAD
-    <div class="col-sm-6">{{comisionInside.createdAt | date: "fullDate"}} </div>
-=======
+
     <div class="col-sm-6">{{comision?.fecha_resolucion | date: "fullDate"}} </div>
->>>>>>> origin
+
+    <div class="col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
+
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
-<<<<<<< HEAD
-    <div class="col-sm-6">{{comisionInside.fecha_inicio | date: "fullDate"}}</div>
-=======
+
     <div class="col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
->>>>>>> origin
+
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
-<<<<<<< HEAD
-    <div class="col-sm-6">{{comisionInside.fecha_fin | date: "fullDate"}}</div>
-=======
+
     <div class="col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
->>>>>>> origin
+
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Idioma</div>
-<<<<<<< HEAD
-    <div class="col-sm-6">{{comisionDTO.idioma}}</div>
-=======
     <div class="col-sm-6">{{comision?.idioma}}</div>
->>>>>>> origin
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Lugar</div>
-<<<<<<< HEAD
-    <div class="col-sm-6">{{comisionDTO.lugar}}</div>
-=======
     <div class="col-sm-6">{{comision?.lugar}}</div>
->>>>>>> origin
+
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Justificación</div>
-<<<<<<< HEAD
-    <div class="col-sm-6">{{comisionInside.justificacion}}</div>
-=======
     <div class="col-sm-6">{{comision?.justificacion}}</div>
->>>>>>> origin
   </div>
 
 
   <div class="row regular-row">
     <div class="col-6 label">Estado Actual de la Comisión</div>
       <div class="col-4">
-        <span
-          class="badge badge-pill pill">
+        <span 
+        class="badge badge-pill pill"
+        [ngClass]="{
+          'bg-solicitada':
+          estadoActual === 'SOLICITADA',
+          'bg-aprobada':
+            estadoActual === 'APROBADA',
+          'bg-visto-bueno':
+            estadoActual === 'VISTO BUENO',
+          'bg-finalizada':
+            estadoActual === 'FINALIZADA',
+          'bg-rechazada-decanato':
+            estadoActual === 'RECHAZADA DECANATO',
+          'bg-rechazada-coordinacion':
+            estadoActual === 'RECHAZADA COORDINACIÓN'
+        }"> 
+          {{estadoActual}}
         </span>
       </div>
   </div>
 
   
+  <!-- DOCUMENTOS -->
   <div class="row regular-row">
-    <div class="col-6 label">Anexos</div>
-    <div class="col-sm-6"><i class="fas fa-circle"></i> Anexo 1</div>
+    <div class="col-4 label">Documentos</div>
+    <div class="col-sm-8">
+      <ul *ngFor="let doc of documentosArray; let i=index " class="list-group">
+        <li [id]="i" class="list-group-item" > 
+          <button class="btn btn-circle" type="button" (click)="abrirDocumento(doc.id)">
+            {{doc.nombre}}
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 
 
@@ -113,30 +128,24 @@
     </div> -->
   <!-- </div> -->
   <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
-    {{error}}
+    {{ error }}
   </div>
 
+  <!-- ELIMINAR O EDITAR -->
   <hr />
-
-  <div class="footer-row d-md-flex justify-content-md-end mb-3">
+  <div class="footer-row d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-      <button
-        type="button"
-        class="btn btn-danger"
-        (click)="delete(comisiones.id)"
-      >
-        <span
-          *ngIf="loading"
-          class="spinner-border spinner-border-sm mr-1"
-        ></span>
+      <!-- <button class="btn btn-danger" 
+      (click)="delete(comision?.id)">
+        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" ></span>
         Eliminar
-      </button>
+      </button> -->
     </div>
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"
         class="btn btn-warning "
-        routerLink="../editar-comision"
+        [routerLink]="['/comisiones/editar-comision', comision?.id]"
       >
         Editar
       </button>

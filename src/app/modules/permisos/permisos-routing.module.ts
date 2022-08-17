@@ -5,16 +5,22 @@ import { VerPermisoComponent } from './pages/ver-permiso/ver-permiso.component';
   
 
 import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.component';
+import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.component';
 
 const routes: Routes = [
   {
-    path: 'ver-permisos/:id',
+    path: 'ver-permiso/:id',
     component: VerPermisoComponent
   },
 
   {
     path: 'crear-permiso',
     component: CrearPermisoComponent
+  },
+
+  {
+    path: 'editar-permiso/:id',
+    component: EditarPermisoComponent
   }
 
 ];

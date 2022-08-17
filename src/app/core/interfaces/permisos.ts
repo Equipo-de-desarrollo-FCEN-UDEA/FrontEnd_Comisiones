@@ -27,5 +27,6 @@ export interface Permiso extends PermisosInDB {
     usuarios: UsuarioInside;
     intermediate_permisos: PermisosxestadoInside[];
     Comision: Comision[]
+    tipos_permiso_id: number;
 }
 

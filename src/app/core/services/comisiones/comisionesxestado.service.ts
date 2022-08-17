@@ -19,5 +19,12 @@ export class ComisionxestadoService {
     // return this.http.get(this.urlEndPoint).pipe(
     //   map((response) => response as ComisionEstados[])
     // ) }
-}
+  }
+
+  crearComisionxEstado(id: string | number, estado: any){
+
+    return this.http.post(`${this.urlEndPoint}/${id}`, estado);
+
+  }
+
 }

@@ -8,6 +8,7 @@ export interface ComisionesXEstadoBase {
 
 export interface ComisionesXEstadoInside extends ComisionesXEstadoBase {
 
+  id: number,
   intermediate_estados: EstadoInside;
   createdAt: Date;
 

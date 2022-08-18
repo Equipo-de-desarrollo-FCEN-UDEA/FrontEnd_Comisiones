@@ -8,9 +8,9 @@
         <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
 
        <div class="col-xs-3 col-sm-auto">
-        <select class="form-select" style="width: auto"> 
-          <option >Archivados</option>
-          <option >No archivados</option>
+        <select class="form-select" (change)="select($event)" style="width: auto"> 
+          <option value="1">Archivados</option>
+          <option value="0">No archivados</option>
           
         </select>
        </div>

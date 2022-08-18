@@ -8,113 +8,116 @@
         <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
       </div>
     
-      <table class="table table-striped">
-        <thead>
-        <tr>
-        
-          <th scope="col">#</th>
-          <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
-          <th scope="col" sortable="createdAt" (sort)="onSort($event)">Apellido</th>
-          <th scope="col" sortable="nombre" (sort)="onSort($event)">Rol</th>
-          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Departamento</th>
-          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Facultad</th>
-          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Creado</th>
-          <th> </th>
-        </tr>
-        </thead>
-        <tbody>
-        
-          <tr *ngFor="let usuario of usuarios$ | async">
-    
-          <th scope="row">{{ usuario.id }}</th>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
           
-        
-    
-          <td>
-            <ngb-highlight
-            [result]="usuario.nombre" [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
-
-          <td>
-            <ngb-highlight
-            [result]="usuario.apellido" [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
+            <th scope="col">#</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
+            <th scope="col" sortable="createdAt" (sort)="onSort($event)">Apellido</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Rol</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)" >Departamento</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)" >Facultad</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)" >Creado</th>
+            <th> </th>
+          </tr>
+          </thead>
+          <tbody>
           
-    
-          <td>
-            <ngb-highlight
-            [result]="usuario.roles.nombre" 
-            class="badge badge-pill pill"
-            [term]="service.searchTerm"
-            [ngClass]="{
-              'bg-solicitada':
-              usuario.roles.nombre === 'ADMIN',
-              'bg-aprobada':
-              usuario.roles.nombre === 'VICERRECTORIA',
-              'bg-visto-bueno':
-              usuario.roles.nombre === 'DECANATURA',
-              'bg-finalizada':
-              usuario.roles.nombre === 'COORDINACION',
-              'bg-empleado':
-              usuario.roles.nombre === 'EMPLEADO',
-              'bg-profesor':
-              usuario.roles.nombre === 'PROFESOR'
-            }"
+            <tr *ngFor="let usuario of usuarios$ | async">
+      
+            <th scope="row">{{ usuario.id }}</th>
             
-              
-              
-             
-            >
+          
+      
+            <td>
+              <ngb-highlight
+              [result]="usuario.nombre" [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+  
+            <td>
+              <ngb-highlight
+              [result]="usuario.apellido" [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
             
-            </ngb-highlight>
-          </td>
-
-          <!-- <td>
-            <ngb-highlight
-              [result]="ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre"
-              [term]="service.searchTerm"
+      
+            <td>
+              <ngb-highlight
+              [result]="usuario.roles.nombre" 
               class="badge badge-pill pill"
+              [term]="service.searchTerm"
               [ngClass]="{
                 'bg-solicitada':
-                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'SOLICITADA',
-                'bg-aprobada': ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'APROBADA',
+                usuario.roles.nombre === 'ADMIN',
+                'bg-aprobada':
+                usuario.roles.nombre === 'VICERRECTORIA',
                 'bg-visto-bueno':
-                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'VISTO BUENO',
+                usuario.roles.nombre === 'DECANATURA',
                 'bg-finalizada':
-                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'FINALIZADA',
-                'bg-rechazada-decanato':
-                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA DECANATO',
-                'bg-rechazada-coordinacion':
-                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
+                usuario.roles.nombre === 'COORDINACION',
+                'bg-empleado':
+                usuario.roles.nombre === 'EMPLEADO',
+                'bg-profesor':
+                usuario.roles.nombre === 'PROFESOR'
               }"
-            ></ngb-highlight>
-          </td> -->
-    
-          <td>
-            <ngb-highlight
-            [result]="usuario.departamentos.nombre" [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
-
-          <td>
-            <ngb-highlight 
-            [result]="usuario.departamentos.facultades.nombre"  [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
-
-          <td>
-            <ngb-highlight 
-            [result]="usuario.createdAt | date:'yyyy-MM-dd'" 
-            [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
-
-          
-
-        </tbody>
-      </table>
+              
+                
+                
+               
+              >
+              
+              </ngb-highlight>
+            </td>
+  
+            <!-- <td>
+              <ngb-highlight
+                [result]="ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre"
+                [term]="service.searchTerm"
+                class="badge badge-pill pill"
+                [ngClass]="{
+                  'bg-solicitada':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'SOLICITADA',
+                  'bg-aprobada': ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'APROBADA',
+                  'bg-visto-bueno':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'VISTO BUENO',
+                  'bg-finalizada':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'FINALIZADA',
+                  'bg-rechazada-decanato':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA DECANATO',
+                  'bg-rechazada-coordinacion':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
+                }"
+              ></ngb-highlight>
+            </td> -->
+      
+            <td>
+              <ngb-highlight
+              [result]="usuario.departamentos.nombre" [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+  
+            <td>
+              <ngb-highlight 
+              [result]="usuario.departamentos.facultades.nombre"  [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+  
+            <td>
+              <ngb-highlight 
+              [result]="usuario.createdAt | date:'yyyy-MM-dd'" 
+              [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+  
+            
+  
+          </tbody>
+        </table>
+      </div>
+      
     
       <div class="d-flex justify-content-between p-2">
         <ngb-pagination

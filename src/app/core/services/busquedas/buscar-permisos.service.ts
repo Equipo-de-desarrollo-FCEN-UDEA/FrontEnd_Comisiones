@@ -84,7 +84,7 @@ export class BuscarPermisosService {
     });
 
     this._search$.next();
-    this.permisosSvc.getPermisos()
+    this.permisosSvc.getPermisos(0)
     .subscribe(
       (permisos: Permiso[]) => {
         this.PERMISOS = permisos;
@@ -120,7 +120,7 @@ export class BuscarPermisosService {
     // 1. sort
     let permisos = sort(this.PERMISOS, sortColumn, sortDirection);
     
-
+    console.log(permisos)
     // 2. filter
     permisos = permisos.filter(permisos => matches(permisos, searchTerm, this.datepipe));
     const total = permisos.length;

@@ -14,8 +14,11 @@ export class PermisoService {
 
   constructor( private http: HttpClient) { }
 
-  getPermisos(): Observable<Permiso[]> {
-    return this.http.get<Permiso[]>(this.urlEndPoint)
+  getPermisos(archivado: number): Observable<Permiso[]> {
+    let params = new HttpParams().append("archivado", archivado)
+    return this.http.get<Permiso[]>(this.urlEndPoint, {
+      params:params
+    })
   }
 
 

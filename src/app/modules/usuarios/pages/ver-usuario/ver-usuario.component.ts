@@ -26,10 +26,13 @@ export class VerUsuarioComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe((params) => {
+    this.activateRoute.params.subscribe({
+      next: (params) => {
       this.usuarioService.getUsuario().subscribe((resUsuario) => {
         this.usuario = resUsuario;
-      }); 
+        console.log(this.usuario)
+      });
+    } 
     });
 }
 

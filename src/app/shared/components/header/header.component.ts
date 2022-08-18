@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { UsuarioBase, UsuarioInside } from '@interfaces/usuario';
+import { Rol } from '@interfaces/roles';
+import { Usuario, UsuarioBase, UsuarioInside } from '@interfaces/usuario';
 import { AuthService } from '@services/auth/auth.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { filter} from 'rxjs';
@@ -14,7 +15,8 @@ import { filter} from 'rxjs';
 export class HeaderComponent implements OnInit {
   public isNavbarCollapsed=true;
   public currentURL: any;
-  public usuario!: UsuarioBase; 
+  public usuario!: Usuario; 
+  public rol!: Rol
   public usuarioInside!: UsuarioInside;
   constructor(
     private authService : AuthService,
@@ -34,14 +36,16 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-    this.activateRoute.params.subscribe((params) => {
+  ngOnInit(): void {
+    this.activateRoute.params.subscribe({
+      next: (params) => {
       this.usuarioService.getUsuario().subscribe((resUsuario) => {
         this.usuario = resUsuario;
-      }); 
+        console.log(this.usuario)
+      });
+    } 
     });
-  }
-
+}
 
   
 

@@ -6,7 +6,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { CartaInicioService } from '@services/dedicaciones/carta-inicio.service';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
-import { Carta } from '@interfaces/carta';
+import { Carta } from '@interfaces/dedicaciones/carta';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,7 +25,12 @@ export class CartaInicioComponent implements OnInit {
     dedicaciones_id: 0,
   }
 
-  @Input() Body = '';
+  _Body : string = '';
+
+  @Input() set Body(value : string) {
+    this._Body = value;
+    this.FormCarta.controls.Cuerpo.setValue(this._Body);
+  }
   
 
   constructor(
@@ -52,12 +57,8 @@ export class CartaInicioComponent implements OnInit {
    );
 
   ngOnInit(): void {
-    if (this.Body){
-      this.FormCarta.controls.Cuerpo.setValue(this.Body);
-    }
-    
   }
-
+    
   makePdf() {
     let DATA: any = document.getElementById('carta');
     const boton = document.getElementById('Generador-carta') as HTMLButtonElement;
@@ -93,7 +94,6 @@ export class CartaInicioComponent implements OnInit {
       }
     ).unsubscribe();
 
-    console.log(dedicacion_id);
 
     this.carta = {
       body: this.FormCarta.value.Cuerpo || '',

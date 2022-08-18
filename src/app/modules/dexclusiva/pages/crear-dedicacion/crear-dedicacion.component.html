@@ -1,5 +1,5 @@
 <app-stepper #cdkStepper [linear]="isLinear">
-    <cdk-step label="Carta de iniciación" [editable]="isEditable" [optional]="false">
+    <cdk-step label="Carta de iniciación"  [optional]="false">
         <ng-template cdkStepLabel>
             <span class="icon is-medium">
                 <i class="fas fa-duotone fa-envelopes-bulk"></i>
@@ -7,7 +7,7 @@
         </ng-template>
         <app-carta-inicio></app-carta-inicio>
     </cdk-step>
-    <cdk-step label="Formulario" [editable]="isEditable" [optional]="false">
+    <cdk-step label="Formulario" [optional]="false">
         <ng-template cdkStepLabel>
             <span class="icon is-medium">
                 <i class="fas fa-duotone fa-rectangle-list"></i>
@@ -15,7 +15,7 @@
     </ng-template>
         <app-f-dedicacion (dedicacion_id)="id$"></app-f-dedicacion>
     </cdk-step>
-    <cdk-step label="Personal Details" [editable]="isEditable" [optional]="false">
+    <cdk-step label="Personal Details"  [optional]="false">
         <ng-template cdkStepLabel>
             <span class="icon is-medium">
                 <i class="fas fa-user"></i>

@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { tap, map } from 'rxjs/operators';
 import { saveAs } from 'file-saver';
 import { prefix } from '@shared/data/ruta-api';
+import { FormatoVice } from '@interfaces/dedicaciones/formatovice';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class DexclusivaService {
   //   return this.http.get('http://localhost:3000/dexclusiva');
   // }
 
-  postFormulario(dexclusiva: any , id: number | string) {
+  postFormulario(dexclusiva: FormatoVice , id: number | string) {
     const headers = new HttpHeaders(
       {
         'Content-Type': 'application/x-www-form-urlencoded',

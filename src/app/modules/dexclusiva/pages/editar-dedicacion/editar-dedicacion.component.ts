@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DexclusivaService } from '@services/dedicaciones/dexclusiva.service';
+import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
+import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 
 @Component({
   selector: 'app-editar-dedicacion',
@@ -7,9 +12,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarDedicacionComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  isLinear = false;
+
+  @Input()
+  isEditable = true;
+
+  public text = 'Hello world!';
+
+  id$ : BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
+
+  constructor(
+    private dexclusivaSvc: DexclusivaService,
+    private comunicacionSvc : CrearComisionComponentsService,
+    private activatedRoute : ActivatedRoute
+  ) { 
+
+    let id : number;
+
+    this.activatedRoute.params.subscribe(params => {
+      id = params['id'];
+      this.comunicacionSvc.setId(id);
+    });
+  }
 
   ngOnInit(): void {
+  
   }
 
 }

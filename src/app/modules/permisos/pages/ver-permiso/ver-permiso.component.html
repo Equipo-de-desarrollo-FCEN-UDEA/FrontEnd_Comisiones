@@ -83,27 +83,6 @@
     <div class="col-6"></div>
   </div>
 
-  <!-- <div class="d-md-flex justify-content-md-end">
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
-      <button 
-      type="button" 
-      class="btn btn-success" 
-      >
-        Agregar Estado
-      </button>
-    </div>
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
-      <button
-        type="button"
-        class="btn btn-success"
-      >
-        Subir cumplido
-      </button>
-    </div> -->
-    <!-- <div  class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-      <app-ver-estados-permiso></app-ver-estados-permiso>
-    </div> -->
-  <!-- </div> -->
   <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
     {{ error }}
   </div>
@@ -111,6 +90,15 @@
   <!-- ELIMINAR O EDITAR -->
   <hr />
   <div class="footer-row d-md-flex justify-content-md-end">
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+      type="button"
+      class="btn btn-warning "
+      [routerLink]="['/permisos/asociar-estado', permiso?.id]"
+      >
+        Asociar nuevo Estado
+      </button>
+    </div>
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button class="btn btn-danger" 
       (click)="delete(permiso?.id)">

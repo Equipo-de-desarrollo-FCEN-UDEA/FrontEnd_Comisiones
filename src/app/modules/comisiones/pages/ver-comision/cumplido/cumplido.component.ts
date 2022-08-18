@@ -2,6 +2,8 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CumplidosService } from '@services/comisiones/cumplidos.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,6 +18,9 @@ export class CumplidoComponent implements OnInit {
 
   getId: string | null;
 
+  // Loadder
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+
   // Archivos 
   files : any[]=[];
 
@@ -29,6 +34,7 @@ export class CumplidoComponent implements OnInit {
     private ngZone: NgZone,
     private router: Router,
     private activateRoute: ActivatedRoute,
+    private loaderSvc: LoaderService
   ) { 
 
     this.getId = this.activateRoute.snapshot.paramMap.get('id');

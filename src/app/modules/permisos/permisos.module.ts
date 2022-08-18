@@ -7,6 +7,7 @@ import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.component';
+import { EstadosPermisoComponent } from './pages/ver-permiso/estados-permiso/estados-permiso.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.co
   
     VerPermisoComponent,
     CrearPermisoComponent,
-    EditarPermisoComponent
+    EditarPermisoComponent,
+    EstadosPermisoComponent
 
 
     

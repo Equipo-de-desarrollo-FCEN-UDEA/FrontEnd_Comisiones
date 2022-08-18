@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CrearComisionComponent } from './pages/crear-comision/crear-comision.component';
 import { VerComisionComponent } from './pages/ver-comision/ver-comision.component';
 import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
-import { EstadosComisionComponent } from './pages/ver-comision/estados/estados/estados-comision.component';
+import { EstadosComisionComponent } from './pages/ver-comision/estados/estados-comision/estados-comision.component';
 import { CumplidoComponent } from './pages/ver-comision/cumplido/cumplido.component';
 
 

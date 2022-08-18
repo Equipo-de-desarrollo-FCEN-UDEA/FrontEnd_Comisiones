@@ -21,6 +21,11 @@ const routes: Routes = [
   {
     path: 'editar-permiso/:id',
     component: EditarPermisoComponent
+  },
+
+  {
+    path: 'asociar-estado/:id',
+    component: EditarPermisoComponent
   }
 
 ];

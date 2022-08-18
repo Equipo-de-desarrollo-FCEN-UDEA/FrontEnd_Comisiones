@@ -1,19 +1,20 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Estado } from '@interfaces/estados';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { EstadosService } from '@services/estados.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { PermisosXEstadoService } from '@services/permisos/permisos-xestado.service';
+import { Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
-import { ComisionxestadoService } from '@services/comisiones/comisionesxestado.service';
-import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
-import { LoaderService } from '@services/interceptors/loader.service';
-
 @Component({
-  selector: 'app-estados-comision',
-  templateUrl: './estados-comision.component.html',
-  styleUrls: ['./estados-comision.component.scss']
+  selector: 'app-estados-permiso',
+  templateUrl: './estados-permiso.component.html',
+  styleUrls: ['./estados-permiso.component.scss']
 })
-export class EstadosComisionComponent {
+export class EstadosPermisoComponent implements OnInit {
 
   asociarEstadoForm: FormGroup;
 
@@ -27,30 +28,32 @@ export class EstadosComisionComponent {
   // Loader
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
-  public nuevoEstado = [
-    {id: 2, nombre: 'vistubueo'},
-    {id: 3, nombre: 'rechazado coor'},
-    {id: 4, nombre: 'aprovado'}
-  ]
+  // Estados
+  nuevoEstado$: Observable<Estado[]>;
 
   constructor(
-    private comisionxEstadoSvc: ComisionxestadoService,
-
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder, 
     private activateRoute: ActivatedRoute,
     private router: Router,
     private ngZone: NgZone,
+
+    private permisoEstadoSvc: PermisosXEstadoService,
+    private estadosSvc: EstadosService,
     private loaderService: LoaderService
     ) { 
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
+    this.nuevoEstado$ = this.estadosSvc.getEstados();
 
-    console.log('id en child ',this.getId);
 
     this.asociarEstadoForm = this.formBuilder.group({
       estados_id: ['', [Validators.required, Validators.nullValidator]],
       observacion : ['']
     });
+  }
+
+
+  ngOnInit(): void {
   }
 
 
@@ -75,7 +78,7 @@ export class EstadosComisionComponent {
       return;
     }
 
-    this.comisionxEstadoSvc.crearComisionxEstado(this.getId, this.asociarEstadoForm.value)
+    this.permisoEstadoSvc.crearPermisoxEstado(this.getId, this.asociarEstadoForm.value)
     .subscribe({
           next: (res) => {
             console.log(this.asociarEstadoForm.value)
@@ -98,5 +101,3 @@ export class EstadosComisionComponent {
   }
 
 }
-
-

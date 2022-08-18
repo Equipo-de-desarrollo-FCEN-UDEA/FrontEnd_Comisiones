@@ -70,15 +70,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="row regular-row">
-        <div class="col-4 label">Anexos</div>
-        <div class="col-sm-8">
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" lang="es" />
-            <label class="custom-file-label">Seleccionar Archivo</label>
-          </div>
-        </div>
-      </div> -->
 
       <div class="row regular-row">
         <div class="col-4 label">Información Complementaria</div>
@@ -146,7 +137,7 @@
           <button
             type="button"
             class="btn btn-secondary btn-block"
-            [routerLink]="['/home']"
+            [routerLink]="['/comisiones/ver-comision', this.getId]"
           >
             Cancelar
           </button>
@@ -155,8 +146,9 @@
           <button
             class="btn btn-green btn-success btn-block"
           >
-            <span
-              class="spinner-border spinner-border-sm mr-1"
+            <span *ngIf="isLoading | async" 
+            class="spinner-border spinner-border-sm1"  
+            role="status" aria-hidden="true"
             ></span>
             Enviar
           </button>

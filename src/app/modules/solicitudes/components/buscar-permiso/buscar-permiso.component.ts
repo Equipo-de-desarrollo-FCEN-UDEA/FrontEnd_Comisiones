@@ -34,6 +34,10 @@ export class BuscarPermisoComponent{
     
     }
 
+    changeOption(event:any){
+      console.log(event.target.value);
+    }
+
     
 
     onSort({ column, direction}: SortEvent) {

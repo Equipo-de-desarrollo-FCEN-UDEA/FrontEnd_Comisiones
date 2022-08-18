@@ -27,25 +27,17 @@ export class BuscarPermisoComponent{
 
   constructor(
     public service: BuscarPermisosService,
-    private fb: FormBuilder
     ) {
       this.permisos$ = service.permisos$;
       this.total$ = service.total$;
       this.ultimoElemento = ultimoElement;
     }
 
-    archivadoform = this.fb.group({
-      archivado: [NaN, Validators.required]
-    })
-
-    select(archivado:any){
-      console.log(archivado)
-    }
-
     changeOption(event:any){
       console.log(event.target.value);
+      this.service.archivados(event.target.value);
+      this.service.ngOnchanges();
     }
-
     
 
     onSort({ column, direction}: SortEvent) {

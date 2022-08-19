@@ -7,7 +7,7 @@
         </h3>
 
         <h5>Datos del profesor solicitante</h5>
-        <div class="alert alert-info">
+        <!-- <div class="alert alert-info">
             <p>
                 Por favor cerciorese que los datos a continuación sean correctos.
             </p>
@@ -34,7 +34,7 @@
             <input id="floatingdId" formControlName="identificacion" class="form-control" type="number" placeholder=" "
                 [ngClass]="{'is-invalid': isInvalidForm('identificacion')}" required>
             <label for="floatingdId" class="formLabel">Número de identificación</label>
-        </div>
+        </div> -->
 
         <div class="formfloatig">
             <input id="floatingExt" placeholder=" " formControlName="extension_oficina" class="form-control">
@@ -47,24 +47,19 @@
             <label for="floatingcelular" class="formLabel">Número de teléfono célular</label>
         </div>
 
-        <div class="formfloatig">
+        <!-- <div class="formfloatig">
             <input id="floatingcorreo" formControlName="correo" class="form-control" type="correo" placeholder=" "
                 [ngClass]="{'is-invalid': isInvalidForm('correo')}" required>
             <label for="floatingcorreo" class="formLabel">Correo Institucional
             </label>
-        </div>
+        </div> -->
         <hr>
         <h4>Referencias básicas de la dedicación exclusiva</h4>
-        <div class="alert alert-warning">
-            <p>
-                A continuación los datos son obligatorios.
-            </p>
-        </div>
 
         <div class="formfloatig">
             <input id="floatingTitulo" formControlName="titulo" class="form-control" type="text" placeholder=" "
                 [ngClass]="{'is-invalid': isInvalidForm('titulo')}" required>
-            <label for="floatingTitulo" class="formLabel"> Título de la propuesta o proyecto
+            <label for="floatingTitulo" class="formLabel"> Título de la propuesta o proyecto<span style="color:red">*</span>
             </label>
         </div>
         <div class="row">
@@ -72,7 +67,7 @@
                 <div class="formfloatig">
                     <input id="floatingTiempo" formControlName="tiempo_solicitado" class="form-control" type="number"
                         placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('tiempo_solicitado')}" required>
-                    <label for="floatingTiempo" class="formLabel">Tiempo solicitado
+                    <label for="floatingTiempo" class="formLabel">Tiempo solicitado<span style="color:red">*</span>
                     </label>
                 </div>
             </div>
@@ -89,24 +84,18 @@
         </div>
 
         <h5>Documento comprobante de inscripción en  el Sistema Universitario de Investigación (acta, contrato u otro):</h5>
-        <div class="alert alert-danger">
-            <p>
-                Indicaciones sobre este campo_modalidad importante!
-                Lo puse no requerido por ahora!!!
-            </p>
-        </div>
 
         <div class="formfloatig">
             <textarea id="floatingComprobante" formControlName="descripcion_comprobante" class="form-control"
                 placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('descripcion_comprobante')}" rows="5">
             </textarea>
-            <label for="floatingComprobante" class="formLabel">Comprobante de inscripción
+            <label for="floatingComprobante" class="formLabel">Comprobante de inscripción<span style="color:red">*</span>
             </label>
         </div>
         
         <hr>
         <h5>Apoya al plan de Desarrollo Institucional Vigente en:</h5>
-        <h6>Temas:</h6>
+        <h6>Temas:<span style="color:red">*</span></h6>
         <div style="width: 100%;" formArrayName="tema_estrategico">
 
             <div *ngFor="let tema of temasArr.controls; last as isLast; let i=index" class="arrayLike formfloatig"
@@ -130,7 +119,7 @@
 
         </div>
 
-        <h6>Objetivo(s) estratégico(s) de desarrollo:</h6>
+        <h6>Objetivo(s) estratégico(s) de desarrollo:<span style="color:red">*</span></h6>
         <div style="width: 100%;" formArrayName="objetivo_estrategico_desarrollo">
 
             <div *ngFor="let objEstrategico of objEstrategicosArr.controls; last as isLast; let i=index" class="arrayLike formfloatig"
@@ -155,7 +144,7 @@
         </div>
 
 
-        <h6>Meta(s):</h6>
+        <h6>Meta(s):<span style="color:red">*</span></h6>
         <div style="width: 100%;" formArrayName="metas">
 
             <div *ngFor="let meta of metasArr.controls; last as isLast; let i=index" class="arrayLike formfloatig"
@@ -178,7 +167,7 @@
             
 
         </div>
-        <h6>Accion(es) Estratégica(s):</h6>
+        <h6>Accion(es) Estratégica(s):<span style="color:red">*</span></h6>
         <div style="width: 100%" formArrayName="acciones_estrategicas">
             
             <div *ngFor="let accion of acciones_estrategicasArr.controls; last as isLast; let i=index"
@@ -202,7 +191,7 @@
         </div>
         <hr>
         <h5>Apoya al plan de Acción Institucional Vigente en:</h5>
-        <h6>Objetivo(s) extratégico(s) institucional(es):</h6>
+        <h6>Objetivo(s) extratégico(s) institucional(es):<span style="color:red">*</span></h6>
         <div style="width: 100%" formArrayName="objetivo_estrategico_institucional">
             
             <div *ngFor="let objetivo of objetivo_estrategico_institucionalArr.controls; last as isLast; let i=index"
@@ -224,7 +213,7 @@
             </div>
         
         </div>
-        <h6>Indicador(es):</h6>
+        <h6>Indicador(es):<span style="color:red">*</span></h6>
         <div style="width: 100%" formArrayName="indicador">
             
             <div *ngFor="let indicador of indicadorArr.controls; last as isLast; let i=index"
@@ -248,7 +237,7 @@
         </div>
 
         <hr>
-        <h5>Productos:</h5>
+        <h6>Productos:<span style="color:red">*</span></h6>
         <div class="alert alert-info">
         <p>El profesor debe indicar los productos adquiere y se compromete a entregar una vez culmine su período de Dedicación Exclusiva. Esta información será consignada en la Resolución de Vicerrectoría de Docencia.</p>
     </div>

@@ -81,8 +81,30 @@
                 >¿Olvidaste tu contraseña?</a>
               </div>
 
+							<div class="d-flex justify-content-start">
+								<a routerLink="../recuperar-contrasena" class="btn btn-link pr-0"
+								>¿Olvidaste tu contraseña?</a>
+							</div>
+							<div class="d-grid gap-2 col-12">
+								<button
+									id="btn-sub"
+									(submit)="(true)"
+									class="btn btn-dark"
+								>
+									<span
+										*ngIf="isLoading | async"
+										class="spinner-border spinner-border-sm"
+										role="status"
+										aria-hidden="true"
+                    alt="Smiley"
+									></span>
+									Ingresar
+								</button>
+							</div>
+
+
                 <!-- ENVIAR -->
-                <div class="d-grid gap-2 col-12">
+                <!-- <div class="d-grid gap-2 col-12">
                   <button
                     id="btn-sub"
                     (submit)="(true)"
@@ -98,11 +120,15 @@
                 </div>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
                   {{ error }}
-                </div>
+                </div> -->
+
+
             </div>
           </div>
     	</form>
 		</div>
+
+
 
     <!-- <form [formGroup]="formSignup">
       <div [ngbCollapse]="isCollapsed" id="Signup">
@@ -246,6 +272,11 @@
           </div>
         </div>
       </div>
-    </form> -->
+<<<<<<< HEAD
+    </form>
+  </div> -->
+
+    <!-- </form> -->
   </div>
-</div>
+
+<!-- </div> -->

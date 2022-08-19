@@ -1,4 +1,4 @@
-<div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded" style="align-items: unset;">
+<div class="container card shadow mt-5 bg-white rounded p-4 w-75">
   <div class="row header-row">
     <div class="col">
       <span class="text-secondary">PERMISO</span>
@@ -83,14 +83,33 @@
     <div class="col-6"></div>
   </div>
 
-  <!-- <div class="d-md-flex justify-content-md-end">
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
-      <button 
-      type="button" 
-      class="btn btn-success" 
+  <!-- <div class="row regular-row">
+    <div class="col-4">
+      <span
+        class="badge badge-pill pill"
+        [ngClass]="{
+          'bg-solicitada':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'SOLICITADA',
+          'bg-aprobada':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'APROBADA',
+          'bg-visto-bueno':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'VISTO BUENO',
+          'bg-finalizada':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'FINALIZADA',
+          'bg-rechazada-decanato':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'RECHAZADA DECANATO',
+          'bg-rechazada-coordinacion':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'RECHAZADA COORDINACIÓN'
+        }"
       >
-        Agregar Estado
-      </button>
+        {{ solicitud.estadoActual["intermediate_estados"]["nombre"] }}
+      </span>
     </div>
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
       <button

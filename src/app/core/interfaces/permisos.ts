@@ -6,6 +6,7 @@ import { UsuarioInside } from "./usuario";
 
 export interface PermisosInside {
     id: number;
+    createdAt: Date;
     fecha_inicio: Date;
     fecha_fin: Date;
     justificacion: string;

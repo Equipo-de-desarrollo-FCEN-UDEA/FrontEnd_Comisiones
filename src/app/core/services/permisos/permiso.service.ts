@@ -50,5 +50,6 @@ export class PermisoService {
     permiso.archivo = files;
 
     return this.http.patch<PermisosDTO>(`${this.urlEndPoint}/${id}`, permiso, {params: params});
+
   }
 }

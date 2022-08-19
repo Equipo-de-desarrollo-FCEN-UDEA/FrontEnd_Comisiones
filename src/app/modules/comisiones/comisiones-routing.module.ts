@@ -8,7 +8,7 @@ import { EstadosComisionComponent } from './pages/ver-comision/estados/estados/e
 
 const routes: Routes = [
 
-  {
+{
     path: 'crear-comision',
     component: CrearComisionComponent
 },

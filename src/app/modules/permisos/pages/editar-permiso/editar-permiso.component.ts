@@ -1,3 +1,4 @@
+
 import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -13,12 +14,14 @@ import Swal from 'sweetalert2';
 import { TiposPermiso, TiposPermisoInside } from '@interfaces/tipos_permiso';
 import { PermisoService } from '@services/permisos/permiso.service';
 
+
 @Component({
   selector: 'app-editar-permiso',
   templateUrl: './editar-permiso.component.html',
   styleUrls: ['./editar-permiso.component.scss']
 })
 export class EditarPermisoComponent implements OnInit {
+
 
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
@@ -54,7 +57,6 @@ export class EditarPermisoComponent implements OnInit {
     {id: 7, nombre: 'Licencia no remunerada'},
     {id: 8, nombre: 'Licencia de luto'}
   ]
-
 
   clicked = 0;
 

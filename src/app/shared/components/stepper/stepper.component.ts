@@ -29,7 +29,6 @@ export class StepperComponent extends CdkStepper implements OnInit {
           this.showContainer = false;
         }
       });
-    console.log(this.showContainer);
   }
 
   @Input()

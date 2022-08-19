@@ -1,4 +1,4 @@
-<div class="container shadow-sm pt-4 pl-4 pr-4 mb-5 bg-white rounded">
+<div class="container card shadow mt-5 bg-white rounded p-5 w-75">
     <div class="row">
       <div class="col">
         <p class="text-secondary">CREAR PERMISO</p>
@@ -121,7 +121,10 @@
               </div>
 
           </div>
-      <button class="btn btn-success" (submit)="true" [disabled]="formPermiso.invalid || !validSize()">Enviar</button>
+      <button class="btn btn-success" (submit)="true" [disabled]="formPermiso.invalid || !validSize()">
+      <span class="spinner-border spinner-border-sm1"  
+      role="status" aria-hidden="true" *ngIf="isLoading | async" ></span>Enviar
+      </button>
 
   </form>
 

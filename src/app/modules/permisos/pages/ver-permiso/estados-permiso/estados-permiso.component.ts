@@ -2,7 +2,6 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Estado } from '@interfaces/estados';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EstadosService } from '@services/estados.service';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { PermisosXEstadoService } from '@services/permisos/permisos-xestado.service';
@@ -32,7 +31,6 @@ export class EstadosPermisoComponent implements OnInit {
   nuevoEstado$: Observable<Estado[]>;
 
   constructor(
-    public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder, 
     private activateRoute: ActivatedRoute,
     private router: Router,

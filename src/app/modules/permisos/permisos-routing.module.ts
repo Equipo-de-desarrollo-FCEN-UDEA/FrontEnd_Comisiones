@@ -7,7 +7,7 @@ import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.co
 
 const routes: Routes = [
   {
-    path: 'ver-permisos',
+    path: 'ver-permiso/:id',
     component: VerPermisoComponent
   },
 
@@ -15,8 +15,9 @@ const routes: Routes = [
     path: 'crear-permiso',
     component: CrearPermisoComponent
   },
+
   {
-    path:'editar-permiso',
+    path: 'editar-permiso/:id',
     component: EditarPermisoComponent
   }
 

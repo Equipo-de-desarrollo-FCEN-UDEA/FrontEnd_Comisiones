@@ -27,14 +27,10 @@ interface State {
 const compare = (v1: String | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
-  
   if (direction === '' || column === '') {
     return comisiones;
-
   } else {
-
-    return [...comisiones].sort((a : any, b : any) => {
-
+    return [...comisiones].sort((a, b) => {
       const res = compare(a[column], b[column]);
       return direction === 'asc' ? res : -res;
     });
@@ -46,12 +42,12 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 
 
 
-function matches(comisiones: Comision, term: string, pipe:PipeTransform) {
+function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
 
   return (
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())  ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
-    ultimoElement(comisiones.intermediate_comisiones)?.createdAt.includes(term)||
+    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt)?.includes(term)||
     // datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
     comisiones.usuarios?.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
@@ -84,7 +80,7 @@ export class BuscarComisionesService {
 
   constructor(
     private comisionesSvc: ComisionesService,
-    private pipe: DatePipe
+    private datepipe: DatePipe
     ) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
@@ -136,7 +132,7 @@ export class BuscarComisionesService {
 
     console.log(comisiones + "oe");
     // 2. filter
-    comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.pipe));
+    comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.datepipe));
     const total = comisiones.length;
 
 

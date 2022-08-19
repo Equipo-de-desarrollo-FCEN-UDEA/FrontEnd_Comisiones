@@ -68,33 +68,40 @@
         class="badge badge-pill pill"
         [ngClass]="{
           'bg-solicitada':
-          estadoActual === 'SOLICITADA',
+          estadoActual.nombre === 'SOLICITADA',
           'bg-aprobada':
-            estadoActual === 'APROBADA',
+            estadoActual.nombre === 'APROBADA',
           'bg-visto-bueno':
-            estadoActual === 'VISTO BUENO',
+            estadoActual.nombre === 'VISTO BUENO',
           'bg-finalizada':
-            estadoActual === 'FINALIZADA',
+            estadoActual.nombre === 'FINALIZADA',
           'bg-rechazada-decanato':
-            estadoActual === 'RECHAZADA DECANATO',
+            estadoActual.nombre === 'RECHAZADA DECANATO',
           'bg-rechazada-coordinacion':
-            estadoActual === 'RECHAZADA COORDINACIÓN'
+            estadoActual.nombre === 'RECHAZADA COORDINACIÓN'
         }"> 
-          {{estadoActual}}
+          {{estadoActual.nombre}}
         </span>
       </div>
   </div>
 
+
+<!-- <div class="row regular-row">
+    <div class="col-6 label">Estado Actual de la Comisión</div>
+      <div class="col-4">
+        {{estadoActual.observacion}}
+      </div>
+  </div> -->
+
+
   
   <!-- DOCUMENTOS -->
   <div class="row regular-row">
-    <div class="col-4 label">Documentos</div>
-    <div class="col-sm-8">
-      <ul *ngFor="let doc of documentosArray; let i=index " class="list-group">
-        <li [id]="i" class="list-group-item" > 
-          <button class="btn btn-circle" type="button" (click)="abrirDocumento(doc.id)">
-            {{doc.nombre}}
-          </button>
+    <div class="col-6 label">Documentos</div>
+    <div class="col-sm-6">
+      <ul>
+        <li *ngFor="let doc of documentosArray" >
+          <span (click)="abrirDocumento(doc.id)">{{doc.nombre}}&nbsp;&nbsp;</span>&nbsp;
         </li>
       </ul>
     </div>
@@ -105,6 +112,20 @@
     <div class="col-6 label">Resolución</div>
     <div class="col-6"></div>
   </div>
+
+  <!--Button-->
+  <button
+  type="button"
+  class="btn btn-success btn-green btn-block"
+  (click)="open()"
+  >
+  Ver Historial de estados
+  </button>
+
+  <div class="row regular-row">
+    <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
+  </div>
+
 
   <!-- <div class="d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
@@ -135,12 +156,22 @@
   <hr />
   <div class="footer-row d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-      <!-- <button class="btn btn-danger" 
-      (click)="delete(comision?.id)">
-        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" ></span>
-        Eliminar
-      </button> -->
+      <button
+      type="button"
+      class="btn btn-warning "
+        [routerLink]="['/comisiones/asociar-estado', comision?.id]"
+      >
+        Asociar nuevo Estado
+      </button>
     </div>
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button class="btn btn-danger" (click)="eliminar(comision?.id)">
+        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" 
+        ></span>
+        Eliminar
+      </button>
+    </div>
+
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"

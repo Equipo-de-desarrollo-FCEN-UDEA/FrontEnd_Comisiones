@@ -104,8 +104,6 @@ export class EditarPermisoComponent implements OnInit {
     this.editarPermisoForm = this.formBuilder.group({
       tipos_permiso_id: ['', [Validators.required, Validators.nullValidator]],
       justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
-      lugar: ['', [Validators.required, Validators.nullValidator]],
-      idioma: [''],
       fecha_inicio: ['', Validators.required],
       fecha_fin: ['', Validators.required]
     });
@@ -238,8 +236,6 @@ export class EditarPermisoComponent implements OnInit {
     fecha_fin: this.editarPermisoForm.value.fecha_fin,
     fecha_resolucion: new Date(this.formatter.format(this.today)),
     justificacion: this.editarPermisoForm.value.justificacion,
-    idioma: this.editarPermisoForm.value.idioma,
-    lugar:this.editarPermisoForm.value.lugar,
     tipos_permiso_id: this.editarPermisoForm.value.tipos_permiso_id
   }
 
@@ -251,8 +247,6 @@ export class EditarPermisoComponent implements OnInit {
   reqBody.append('fecha_inicio', body.fecha_inicio);
   reqBody.append('fecha_fin', body.fecha_fin);
   reqBody.append('justificacion', body.justificacion);
-  reqBody.append('idioma', body.idioma);
-  reqBody.append('lugar', body.lugar);
 
   for (const file of this.files) {
     reqBody.append('archivo', file, file.name) 
@@ -260,14 +254,14 @@ export class EditarPermisoComponent implements OnInit {
   
 
   // Edita la permiso: ID de la permiso, ID de documentos borrados, Form 
-  this.permisoSvc.updatePermiso(this.getId, "["+this.docsBorrar.toString()+"]", 
+  this.permisoSvc.editarPermiso(this.getId, "["+this.docsBorrar.toString()+"]", 
     this.files, reqBody).subscribe({
       next: (res) => { 
         
         //facilitate change detection
-        // this.ngZone.run(() =>
-        //   this.router.navigateByUrl(`/permisos/ver-permiso/${this.getId}`)
-        // );
+        this.ngZone.run(() =>
+          this.router.navigateByUrl(`/permisos/ver-permiso/${this.getId}`)
+        );
         Swal.fire({
           title: 'Actulizada',
           text: '¡El permiso se actualizó con éxito!',

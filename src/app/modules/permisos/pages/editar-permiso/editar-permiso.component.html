@@ -260,7 +260,7 @@
       </div>
 
       
-      <!-- CAMPOS COMISIÓN -->
+      <!-- CAMPOS PERMISO -->
       <hr />
       <div class="formfloatig">
         <select class="form-select form-select-lg mb-3" id="floatingtipos_permiso_id"
@@ -275,34 +275,6 @@
     </div>
 
       <div>
-        <div class="row regular-row">
-          <div class="col-4 label">Lugar *</div>
-          <div class="col-sm-8">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control border-right-0"
-                aria-label="from"
-                aria-describedby="from"
-                formControlName="lugar"
-                [ngClass]="{ 'is-invalid': submitted && f['lugar'].errors }"
-              />
-              <div class="input-group-append">
-                <span class="input-group-text"
-                  ><i class="fas fa-map-marker-alt"></i
-                ></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row regular-row">
-          <div class="col-4 label">Idioma</div>
-          <div class="col-sm-8">
-            <input class="form-control" type="text" formControlName="idioma" />
-          </div>
-        </div>
-
         <div class="row regular-row">
           <div class="col-4 label">Justificación *</div>
           <div class="col-sm-8">
@@ -345,7 +317,7 @@
     <!--- FECHAS  -->
     <hr />
     <h6>
-        <span class="text-muted">Rango de fechas de la comision *</span>
+        <span class="text-muted">Rango de fechas del permiso *</span>
     </h6>
 
     
@@ -427,7 +399,7 @@
           <button
             type="button"
             class="btn btn-secondary btn-block"
-            [routerLink]="['/comisiones/ver-comision', getId]"
+            [routerLink]="['/permisos/ver-permiso', getId]"
           >
             Cancelar
           </button>

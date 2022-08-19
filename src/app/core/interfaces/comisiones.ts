@@ -12,6 +12,7 @@ export interface ComResInside {
     createdAt: Date;
     justificacion: string;
     tipos_comision_id: number;
+
 }
 
 export interface ComisionDTO extends Omit<ComResInside, 'id'>{

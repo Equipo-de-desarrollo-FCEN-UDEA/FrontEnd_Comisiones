@@ -1,20 +1,28 @@
 <div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded ">
     <form>
-      <div class="mb-3 row">
-        <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar:</label>
-        <div class="col-xs-3 col-sm-auto">
-          <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
-        </div>
+      <div class="mb-3 d-flex justify-content-between p-2">
+        <div class="d-flex">
+        <label 
+          for="table-complete-search" 
+          class="col-sm-auto col-form-label">Buscar:</label>
+    
+          <input 
+            id="table-complete-search" 
+            type="text" 
+            class="form-control" 
+            name="searchTerm" 
+            [(ngModel)]="service.searchTerm">
+            </div>
         <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
 
-       <div class="col-xs-3 col-sm-auto">
+       
         <select class="form-select" (change)="changeOption($event)" style="width: auto"> 
           <option value="0">No archivados</option>
           <option value="1">Archivados</option>
           <option value="2">Todos</option>
           
         </select>
-       </div>
+       
       </div>
 
     

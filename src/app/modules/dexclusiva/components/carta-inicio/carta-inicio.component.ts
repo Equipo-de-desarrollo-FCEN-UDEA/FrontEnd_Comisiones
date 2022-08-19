@@ -106,8 +106,11 @@ export class CartaInicioComponent implements OnInit {
             text: data.message,
             icon: 'success',
             confirmButtonText: 'Aceptar'
-          });
+          })
+          this.comunicationSvc.setCartaSuccess(true);
       });
+
+    
   }
 
 

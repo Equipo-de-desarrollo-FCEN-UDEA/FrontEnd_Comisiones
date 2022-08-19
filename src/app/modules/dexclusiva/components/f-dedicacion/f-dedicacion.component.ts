@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Dexclusiva, FormatoVice } from '@interfaces/dedicaciones/formatovice';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { DexclusivaService } from '@services/dedicaciones/dexclusiva.service';
+import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { CookieService } from 'ngx-cookie-service';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 import Swal from 'sweetalert2';
 import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
+import { FormatoViceService } from '@services/dedicaciones/formato-vice.service';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 
@@ -28,7 +29,7 @@ export class FDedicacionComponent implements OnInit {
   isLoading: Subject<boolean> = this.loadingSvc.isLoading;
   constructor(
     private fb : FormBuilder,
-    private dexclusivaSvc: DexclusivaService,
+    private formatoSvc: FormatoViceService,
     private usuarioSvc: UsuarioService,
     private loadingSvc : LoaderService,
     private comunicationSvc : CrearComisionComponentsService
@@ -112,7 +113,7 @@ export class FDedicacionComponent implements OnInit {
     );
     
 
-    this.dexclusivaSvc.postFormulario(Dedicacion, dedicacion_id).subscribe(
+    this.formatoSvc.postFormulario(Dedicacion, dedicacion_id).subscribe(
       (res : any) => {
         if (res){
           Swal.fire({
@@ -121,9 +122,12 @@ export class FDedicacionComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           }
           )
+          this.comunicationSvc.setFormatoSuccess(true);
         }
       }
     );
+
+    
   }
 
   temasgroup() {

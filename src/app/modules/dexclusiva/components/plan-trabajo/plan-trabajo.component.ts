@@ -1,5 +1,3 @@
-import { formatDate } from '@angular/common';
-import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { LoaderService } from '@services/interceptors/loader.service';
@@ -86,9 +84,11 @@ export class PlanTrabajoComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             }
           )
+          this.comunicacionSvc.setPlanSuccess(true);
         }
       }
     );
+    
   }
 
 

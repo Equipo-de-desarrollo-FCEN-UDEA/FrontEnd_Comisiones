@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DexclusivaService } from './dexclusiva.service';
+import { DedicacionService } from './dedicacion.service';
 
 describe('DexclusivaService', () => {
-  let service: DexclusivaService;
+  let service: DedicacionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DexclusivaService);
+    service = TestBed.inject(DedicacionService);
   });
 
   it('should be created', () => {

@@ -21,11 +21,11 @@ export interface DexclusivaInDB extends FormatoVice {
     
 }
 
-export interface formatosviceInside {
+export interface FormatosviceInside {
     id:                     number;
     fecha_diligenciamiento: Date;
     titulo:                 string;
-    documentos:             any[];
+    // documentos:             any[];
 }
 
 export interface Dexclusiva{

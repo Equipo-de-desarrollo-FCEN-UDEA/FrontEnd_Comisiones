@@ -7,5 +7,5 @@ export interface Carta {
 export interface CartaInside extends Carta {
     id: number;
     adjunto_nombre: any;
-    documentos: any[];
+    // documentos: any[];
 }

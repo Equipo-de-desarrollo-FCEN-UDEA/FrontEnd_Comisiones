@@ -46,6 +46,7 @@ app-root {
 
 .card {
     margin: auto;
+    padding: 1rem;
 }
 
 h4,
@@ -216,6 +217,10 @@ a:hover {
 
 .bg-rechazada-coordinacion {
     background-color: #FF6666;
+}
+
+.bg-en-creacion {
+    background-color: #000000;
 }
 
 .bg-empleado {

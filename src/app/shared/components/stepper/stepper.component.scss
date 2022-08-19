@@ -20,6 +20,7 @@
         &.active {
           background-color: #43b649;    
           color: white;
+          border: rgba(0,0,0,0.5) solid 1px;
         }
 
         &:before {
@@ -32,6 +33,7 @@
           border-radius: 25%;
           background-color: #43b649;
           opacity: 0.1;
+          border: #000 solid 1px;
           z-index: -1;
         }
 
@@ -39,6 +41,7 @@
           background-color: #43b649;
           opacity: 0.8;
           color: white;
+          transform: scale(1.2);
         }
   
         a {

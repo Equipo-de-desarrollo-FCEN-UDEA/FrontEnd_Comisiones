@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DexclusivaService } from '@services/dedicaciones/dexclusiva.service';
+import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
@@ -18,11 +18,15 @@ export class CrearDedicacionComponent implements OnInit {
   isEditable = true;
 
   id$ : BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
+  cartaSuccess$ = this.comunicacionSvc.cartaSuccess$;
+  formatoSuccess$ = this.comunicacionSvc.formatoSuccess$;
+  planSuccess$ = this.comunicacionSvc.planSuccess$;
 
   constructor(
-    private dexclusivaSvc: DexclusivaService,
+    private dexclusivaSvc: DedicacionService,
     private comunicacionSvc : CrearComisionComponentsService
-  ) { }
+  ) {
+   }
 
   ngOnInit(): void {
     Swal.fire({
@@ -37,7 +41,7 @@ export class CrearDedicacionComponent implements OnInit {
       }
     }).then((result) => {
       if (result.value) {
-        this.dexclusivaSvc.postDexclusiva(result.value).subscribe(
+        this.dexclusivaSvc.postDedicacion(result.value).subscribe(
           (data: any) => {
             this.comunicacionSvc.setId(data.dedicaciones_id);
           })

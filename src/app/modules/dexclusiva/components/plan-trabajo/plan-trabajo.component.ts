@@ -1,12 +1,10 @@
-import { formatDate } from '@angular/common';
-import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { PlanTrabajoService } from '@services/dedicaciones/plan-trabajo.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
-import { Subject } from 'rxjs';
-import { PlanTrabajo } from '@interfaces/plantrabajo';
+import { empty, Subject } from 'rxjs';
+import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 import Swal from 'sweetalert2';
 
@@ -37,7 +35,7 @@ export class PlanTrabajoComponent implements OnInit {
     semestre: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(6)]],
     registro: ['',[Validators.required]],
     tipo_vinculacion: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
-    tiempo_parcial: [0,[Validators.required]],
+    tiempo_parcial: [NaN,[Validators.required]],
     escalafon: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
     actividades_docencia: this.fb.array([this.actividadesDocenciaGroup()],[Validators.required]),
     actividades_investigacion: this.fb.array([this.actividadesInvestigacionGroup()],[Validators.required]),
@@ -86,9 +84,11 @@ export class PlanTrabajoComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             }
           )
+          this.comunicacionSvc.setPlanSuccess(true);
         }
       }
     );
+    
   }
 
 
@@ -100,16 +100,16 @@ export class PlanTrabajoComponent implements OnInit {
         grupo: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(1)]],
         nombre: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(1)]],
       }),
-      numero_estudiantes: [0,[Validators.required]],
+      numero_estudiantes: [NaN,[Validators.required]],
       nivel: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(1)]],
       horas_semana: this.fb.group({
-        T: [0,[Validators.required]],
-        TP : [0,[Validators.required]],
-        P : [0,[Validators.required]],
+        T: [NaN,[Validators.required]],
+        TP : [NaN,[Validators.required]],
+        P : [NaN,[Validators.required]],
       }),
       total_horas: this.fb.group({
-        semanal : [0,[Validators.required]],
-        semestral : [0,[Validators.required]],
+        semanal : [NaN,[Validators.required]],
+        semestral : [NaN,[Validators.required]],
       })
     })
   }
@@ -132,7 +132,7 @@ export class PlanTrabajoComponent implements OnInit {
       responsabilidad: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
       costo_responsable: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
       acta_respaldo: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
-      horas_semestre: [0,[Validators.required]],
+      horas_semestre: [NaN,[Validators.required]],
     });
 
   }
@@ -154,8 +154,8 @@ export class PlanTrabajoComponent implements OnInit {
       identificacion_actividad: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
       responsabilidad: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
       costo_responsable: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
-      horas_semana: [0,[Validators.required]],
-      horas_semestre: [0,[Validators.required]],
+      horas_semana: [NaN,[Validators.required]],
+      horas_semestre: [NaN,[Validators.required]],
     });
   }
 
@@ -171,9 +171,9 @@ export class PlanTrabajoComponent implements OnInit {
   actividadesAdministracionAcademicaGroup (){
     return this.fb.group({
       cargo: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
-      horas_semestre: [0,[Validators.required]],
+      horas_semestre: [NaN,[Validators.required]],
       otras_actividades: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
-      otras_horas_semestre: [0,[Validators.required]],
+      otras_horas_semestre: [NaN,[Validators.required]],
     });
   }
 
@@ -190,7 +190,7 @@ export class PlanTrabajoComponent implements OnInit {
   actividadesOtrasActividadesGroup (){
     return this.fb.group({
       identificacion_actividad: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
-      horas_semestre: [0,[Validators.required]],
+      horas_semestre: [NaN,[Validators.required]],
     });
   }
 

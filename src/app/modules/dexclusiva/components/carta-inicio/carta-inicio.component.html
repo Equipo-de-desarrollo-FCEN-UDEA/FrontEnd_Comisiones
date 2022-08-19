@@ -29,11 +29,11 @@
                     </div>
                     <div class="cuerpo">
                         <p> Señores</p>
-                        <p> <b> CONCEJO DE {{usuario.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
-                                usuario.departamentos.nombre | uppercase) : usuario.departamentos.nombre | uppercase}}
+                        <p> <b> CONCEJO DE {{usuario?.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
+                                usuario?.departamentos.nombre | uppercase) : usuario?.departamentos.nombre | uppercase}}
                             </b></p>
                         <p>{{
-                            usuario.departamentos.facultades.descripcion | titlecase}}</p>
+                            usuario?.departamentos.facultades.descripcion | titlecase}}</p>
                         <p>Universidad de Antioquia</p>
                         <br>
                         <p>Respetados miembros del concejo:</p>
@@ -45,30 +45,30 @@
                         <div class="informacion-usuario">
                             <div class="nombre-usuario">
                                 <p style="margin:0;">
-                                    {{usuario.nombre + ' ' + usuario.apellido | titlecase }}
+                                    {{usuario?.nombre + ' ' + usuario?.apellido | titlecase }}
                                 </p>
                             </div>
                             <div class="cargo-usuario">
                                 <p style="margin:0;">
-                                    <!-- {{usuario.roles.nombre | titlecase }} -->
+                                    <!-- {{usuario?.roles.nombre | titlecase }} -->
                                 </p>
                             </div>
                             <div class="departamento">
                                 <p style="margin:0;">
-                                    {{usuario.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
-                                    usuario.departamentos.nombre | titlecase) : usuario.departamentos.nombre |
+                                    {{usuario?.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
+                                    usuario?.departamentos.nombre | titlecase) : usuario?.departamentos.nombre |
                                     titlecase}}
                                 </p>
                             </div>
                             <div class="facultad">
                                 <p style="margin:0;">
                                     {{
-                                    usuario.departamentos.facultades.descripcion | titlecase}}
+                                    usuario?.departamentos.facultades.descripcion | titlecase}}
                                 </p>
                             </div>
                             <div class="mail">
-                                <a href="mailto:{{usuario.correo}}" style="margin:0;">
-                                    {{usuario.correo}}
+                                <a href="mailto:{{usuario?.correo}}" style="margin:0;">
+                                    {{usuario?.correo}}
                                 </a>
                             </div>
                         </div>

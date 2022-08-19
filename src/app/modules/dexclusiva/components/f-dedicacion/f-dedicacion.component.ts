@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Dexclusiva } from '@interfaces/dexclusiva';
+import { Dexclusiva, FormatoVice } from '@interfaces/dedicaciones/formatovice';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { DexclusivaService } from '@services/dedicaciones/dexclusiva.service';
+import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { CookieService } from 'ngx-cookie-service';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,8 @@ import { LoaderService } from '@services/interceptors/loader.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 import Swal from 'sweetalert2';
+import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
+import { FormatoViceService } from '@services/dedicaciones/formato-vice.service';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 
@@ -27,7 +29,7 @@ export class FDedicacionComponent implements OnInit {
   isLoading: Subject<boolean> = this.loadingSvc.isLoading;
   constructor(
     private fb : FormBuilder,
-    private dexclusivaSvc: DexclusivaService,
+    private formatoSvc: FormatoViceService,
     private usuarioSvc: UsuarioService,
     private loadingSvc : LoaderService,
     private comunicationSvc : CrearComisionComponentsService
@@ -47,7 +49,7 @@ export class FDedicacionComponent implements OnInit {
   public Usuario = this.usuarioSvc.getActualUsuario();
 
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
-  private fExclusiva : Dexclusiva = {
+  private fExclusiva : FormatoVice = {
     titulo: '',
     tiempo_solicitado: 0,
     campo_modalidad: '',
@@ -58,19 +60,24 @@ export class FDedicacionComponent implements OnInit {
     indicador: [],
     acciones_estrategicas: [],
     objetivo_estrategico_institucional: [],
-    productos: []
-
+    productos: [],
+    extension_oficina: '',
+    celular: 0,
+    dedicaciones_id: 0
   };
 
-  fBasicInfo = this.fb.group({
+  fUser = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
     apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    identificacion: [Number, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
-    extension_oficina: ['', [Validators.minLength(3), Validators.maxLength(255)]],
-    celular: [Number, [Validators.min(1000000000), Validators.max(9999999999)]],
+    identificacion: [NaN, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
     correo: ['',[Validators.required, Validators.pattern(this.isCorreoValid)]],
+  });
+
+  fBasicInfo = this.fb.group({
+    extension_oficina: ['', [Validators.minLength(3), Validators.maxLength(255)]],
+    celular: [NaN, [Validators.min(1000000000), Validators.max(9999999999)]],
     titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    tiempo_solicitado: [Number, [Validators.required, Validators.min(1), Validators.max(11)]],
+    tiempo_solicitado: [NaN, [Validators.required, Validators.min(1), Validators.max(11)]],
     campo_modalidad: ['', [Validators.required , Validators.minLength(3), Validators.maxLength(50000)]],
     descripcion_comprobante: ['',[Validators.minLength(3), Validators.maxLength(255)]],
     tema_estrategico: this.fb.array([this.temasgroup()],[Validators.required]),
@@ -83,11 +90,11 @@ export class FDedicacionComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.fBasicInfo.patchValue(this.Usuario);
-    this.fBasicInfo.controls['nombre'].disable();
-    this.fBasicInfo.controls['apellido'].disable();
-    this.fBasicInfo.controls['identificacion'].disable();
-    this.fBasicInfo.controls['correo'].disable();
+    this.fUser.patchValue(this.Usuario);
+    this.fUser.controls['nombre'].disable();
+    this.fUser.controls['apellido'].disable();
+    this.fUser.controls['identificacion'].disable();
+    this.fUser.controls['correo'].disable();
 
     if (this.Dedicacion) {
       this.fBasicInfo.patchValue(this.Dedicacion);
@@ -95,17 +102,18 @@ export class FDedicacionComponent implements OnInit {
   }
 
   onSubmit(){
-    let {nombre, apellido, identificacion, correo, ...others} = this.fBasicInfo.value;
-    this.fExclusiva = others;
+    let Dedicacion = this.fBasicInfo.value as FormatoVice;
+    
     let dedicacion_id : number | string = 0;
 
     this.comunicationSvc.id$.subscribe(
       (      id: string | number) => {
         dedicacion_id = id;
       }
-    )
-    console.log(dedicacion_id);
-    this.dexclusivaSvc.postFormulario(this.fExclusiva, dedicacion_id).subscribe(
+    );
+    
+
+    this.formatoSvc.postFormulario(Dedicacion, dedicacion_id).subscribe(
       (res : any) => {
         if (res){
           Swal.fire({
@@ -114,9 +122,12 @@ export class FDedicacionComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           }
           )
+          this.comunicationSvc.setFormatoSuccess(true);
         }
       }
     );
+
+    
   }
 
   temasgroup() {

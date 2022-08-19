@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Carta } from '@interfaces/carta';
+import { Carta } from '@interfaces/dedicaciones/carta';
 import { prefix } from '@shared/data/ruta-api';
 
 @Injectable({

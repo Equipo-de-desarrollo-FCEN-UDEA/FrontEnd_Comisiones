@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CrearDedicacionComponent } from './pages/crear-dedicacion/crear-dedicacion.component';
+import { EditarDedicacionComponent } from './pages/editar-dedicacion/editar-dedicacion.component';
+import { VerDedicacionComponent } from './pages/ver-dedicacion/ver-dedicacion.component';
 
 const routes: Routes = [
 
@@ -10,11 +12,11 @@ const routes: Routes = [
   },
   {
     path: 'editar-dedicacion/:id',
-    component: CrearDedicacionComponent
+    component: EditarDedicacionComponent
   },
   {
     path: 'ver-dedicacion/:id',
-    component: CrearDedicacionComponent
+    component: VerDedicacionComponent
   }
 ];
 

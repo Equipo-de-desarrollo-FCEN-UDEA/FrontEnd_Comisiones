@@ -78,7 +78,7 @@ export class EstadosPermisoComponent implements OnInit {
       return;
     }
 
-    this.permisoEstadoSvc.crearPermisoxEstado(this.getId, this.asociarEstadoForm.value)
+    this.permisoEstadoSvc.postPermisoxEstado(this.getId, this.asociarEstadoForm.value)
     .subscribe({
           next: (res) => {
             console.log(this.asociarEstadoForm.value)

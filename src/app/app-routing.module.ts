@@ -41,15 +41,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  { path: 'home',
+  { 
+    path: 'home',
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/solicitudes/solicitudes.module')
     .then(m=>m.SolicitudesModule)
   },
-  { path: 'usuarios',
+  { 
+    path: 'usuarios',
     canActivate: [AuthGuard], 
    loadChildren: () => import('./modules/usuarios/usuarios.module')
-   .then(m => m.UsuariosModule) },
+   .then(m => m.UsuariosModule) 
+  },
   {
     path: '**',
     redirectTo: '404'

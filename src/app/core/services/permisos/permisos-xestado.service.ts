@@ -11,7 +11,7 @@ export class PermisosXEstadoService {
   
   constructor( private http : HttpClient) { }
 
-  crearPermisoxEstado(id: string | number, estado: any){
+  postPermisoxEstado(id: string | number, estado: any){
 
     return this.http.post(`${this.urlEndPoint}/${id}`, estado);
 

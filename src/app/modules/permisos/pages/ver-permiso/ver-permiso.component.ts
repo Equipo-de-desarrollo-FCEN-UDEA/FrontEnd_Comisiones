@@ -22,12 +22,14 @@ export class VerPermisoComponent implements OnInit {
   error:string = '';
   permiso: Permiso| undefined;
 
+  // Loader
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
-
+  // Documentos 
   documentosArray:any = [];
   fechaCreacion:any = '';
 
+  // Estados 
   ultimoElemento = ultimoElement
   estadoActual:any = '';
 
@@ -40,6 +42,14 @@ export class VerPermisoComponent implements OnInit {
     private permisosSvc: PermisoService,
     private descargarDocumentoSvc: DescargarDocumentosService
   ) { 
+
+  } 
+
+  
+  // -----------------------------------------
+  // -------------- VER PERMISO -------------
+  // -----------------------------------------
+  ngOnInit(): void {
     this.activateRoute.params.subscribe({
       next: (paramId) => {
          const id = paramId['id'];
@@ -61,14 +71,15 @@ export class VerPermisoComponent implements OnInit {
         }
       },
     });
-  } 
-
-  ngOnInit(): void {
   }
 
+
+  // -----------------------------------------
+  // -------- VER DOCUMENTOS ADJUNTOS --------
+  // -----------------------------------------
   abrirDocumento(id:number){
     const reader = new FileReader();
-    this.descargarDocumentoSvc.descargarDocumento(id).subscribe({
+    this.descargarDocumentoSvc.downloadDocumento(id).subscribe({
       next: (res) => {
         window.open(window.URL.createObjectURL(res))
       },
@@ -80,7 +91,11 @@ export class VerPermisoComponent implements OnInit {
       },
     });
   }
+
   
+  // -----------------------------------------
+  // ------------ ELIMINAR PERMISO ------------
+  // -----------------------------------------
   delete(id: any): void {
     Swal.fire({
       title: '¿Seguro que quieres eliminar este permiso?',
@@ -92,7 +107,7 @@ export class VerPermisoComponent implements OnInit {
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.permisosSvc.delete(id).subscribe({
+        this.permisosSvc.deletePermiso(id).subscribe({
           next: (response) => {
             console.log(response);
             this.router.navigate(['/home']);

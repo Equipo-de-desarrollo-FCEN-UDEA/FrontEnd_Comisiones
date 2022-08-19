@@ -1,18 +1,20 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ComisionesService } from '@services/comisiones/comisiones.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
-// ---- SERVICIOS ----
-import { LoaderService } from '@services/interceptors/loader.service';
+// --------- SERVICIOS E INTERFACES ---------
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
 import { TipoComisionService } from '@services/comisiones/tipo-comision.service';
 import { TipoComision } from '@interfaces/tipos_comision';
+import { ComisionesService } from '@services/comisiones/comisiones.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+
+
 
 @Component({
   selector: 'app-crear-comision',
@@ -59,10 +61,10 @@ export class CrearComisionComponent implements OnInit {
   tiposComision$: Observable<TipoComision[]>;
 
   // Loader
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
 
-  // verificaciones
+  // Verificaciones
   clicked = 0;
   error = '';
   submitted = false;
@@ -77,20 +79,20 @@ export class CrearComisionComponent implements OnInit {
 
     private tipoComisionSvc: TipoComisionService,
     private comisionesSvc: ComisionesService,
-    private loaderService: LoaderService,
+    private loaderSvc: LoaderService,
     private paisesCiudadesSvc: PaisesCiudadesService
   ) { 
-  
-    // ------------- FORM CREAR COMISION -------------
 
+  // -------- OBTENER TIPOS SOLICITUD --------
   this.tiposComision$ = this.tipoComisionSvc.getTipoSolicitud();
 
+  // ------------- FORM CREAR COMISION -------------
   this.creaComisionForm = this.formBuilder.group({
     tipos_comision_id: ['', [Validators.required, Validators.nullValidator]],
     fecha_inicio : ['', [Validators.required]],
     fecha_fin : ['',[Validators.required]],
     justificacion : ['', [Validators.required, Validators.minLength(30),Validators.maxLength(350)]],
-    idioma : [''],// [Validators.minLength(3), Validators.maxLength(255)]],
+    idioma : ['', Validators.maxLength(255)],
     pais : ['', [Validators.required]],
     estado: [''],//[Validators.required]],
     ciudad : [''],//[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
@@ -156,16 +158,18 @@ export class CrearComisionComponent implements OnInit {
   }
 
 
-  // ----------- TIPO DE SOLICITUD ------------
-
-
+  // --------------------------------------
+  // ----------- TIPO DE SOLICITUD ---------
+  // --------------------------------------
   onChangeSolicitud(e: any): void {
     this.cd.detectChanges();
   }
 
 
-
-  // ----------- MANEJO DE ERRORES EN EL FORM ------------
+  
+  // --------------------------------------------------
+  // ----------- MANEJO DE ERRORES EN EL FORM ---------
+  // --------------------------------------------------
   get f() {
   
     return this.creaComisionForm.controls;
@@ -259,7 +263,7 @@ export class CrearComisionComponent implements OnInit {
       reqBody.append('archivo', file, file.name) 
     }
     
-    this.comisionesSvc.crearComision(reqBody).subscribe({
+    this.comisionesSvc.postComision(reqBody).subscribe({
       next: (res) => { 
         Swal.fire({
           title: 'Creada',

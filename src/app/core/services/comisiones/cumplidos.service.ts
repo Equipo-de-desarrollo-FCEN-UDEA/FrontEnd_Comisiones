@@ -12,7 +12,7 @@ export class CumplidosService {
 
   private urlEndPoint:string = prefix+'cumplidos';
 
-  subirCumplido(cumplido:any){
+  postCumplido(cumplido:any){
     return this.http.post<Cumplido>(this.urlEndPoint ,cumplido);
   }
 

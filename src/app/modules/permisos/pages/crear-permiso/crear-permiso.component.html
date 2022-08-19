@@ -35,15 +35,14 @@
           </div>
       </div>
       
-      
       <div class="row">
         
             <div class="formfloatig">
                   <select class="form-select form-select-lg mb-3" id="floatingtipos_permiso_id"
                       formControlName="tipos_permiso_id" required
                       [ngClass]="{'is-invalid': isInvalidForm('tipos_permiso_id')}" placeholder=" ">
-                      <option [value]="tipos_permiso_id.id" *ngFor="let tipos_permiso_id of tipospermiso">
-                          {{tipos_permiso_id.nombre}}</option>
+                      <option [value]="tipo.id" *ngFor="let tipo of tiposPermiso$ | async">
+                          {{tipo.nombre}}</option>
                   </select>
                   <label for="floatingtipos_permiso_id" class="selectLabel"
                       [ngClass]="{'isFill': formPermiso.controls['tipos_permiso_id'].valid}">Tipo de

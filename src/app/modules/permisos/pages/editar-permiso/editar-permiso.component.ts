@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 // ----------- SERVICIOS ------------
 import { TiposPermiso, TiposPermisoInside } from '@interfaces/tipos_permiso';
 import { PermisoService } from '@services/permisos/permiso.service';
+import { TipoPermisoService } from '@services/permisos/tipo-permiso.service';
 
 @Component({
   selector: 'app-editar-permiso',
@@ -20,19 +21,20 @@ import { PermisoService } from '@services/permisos/permiso.service';
 })
 export class EditarPermisoComponent implements OnInit {
 
+  error = '';
+  clicked = 0;
+  submitted = false;
+  
+  // Datepicker
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
   today = this.calendar.getToday();
 
-  editarPermisoForm: FormGroup;
-  error = '';
-
   // ID de la comsision a editar
   getId: any;
 
-  submitted = false;
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   // Archivos nuevos
@@ -43,32 +45,24 @@ export class EditarPermisoComponent implements OnInit {
   docsBorrar:any = [];
   documentosArray:any = [];
 
+  // Tipos Permiso
+  tiposPermiso$: Observable<TiposPermiso[]>;
 
-  public tipospermiso = [
-    {id: 1, nombre: 'Permiso por matrimonio'},
-    {id: 2, nombre: 'Permiso corto'},
-    {id: 3, nombre: 'Permiso de medio dia de la jornada por cumpleaños'},
-    {id: 4, nombre: 'Licencia de maternidad'},
-    {id: 5, nombre: 'Licencia de patermidad'},
-    {id: 6, nombre: 'Licencia de calamiad domestica'},
-    {id: 7, nombre: 'Licencia no remunerada'},
-    {id: 8, nombre: 'Licencia de luto'}
-  ]
+  // Form permiso
+  editarPermisoForm: FormGroup;
 
-
-  clicked = 0;
 
   constructor(
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private datepipe: DatePipe,
-    //private pipeTransform: PipeTransform,
 
     private formBuilder: FormBuilder,
     private cd: ChangeDetectorRef,
     
     private permisoSvc: PermisoService,
     private loaderSvc: LoaderService,
+    private tiposPermisoSvc: TipoPermisoService,
     
     private activateRoute: ActivatedRoute,
     private ngZone: NgZone,
@@ -77,7 +71,21 @@ export class EditarPermisoComponent implements OnInit {
 
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
 
-    // Trae los valores actuales de la comisión
+    // Tipos de permiso
+    this.tiposPermiso$ = this.tiposPermisoSvc.getTiposPermiso();
+
+    // Form permiso
+    this.editarPermisoForm = this.formBuilder.group({
+      tipos_permiso_id: ['', [Validators.required, Validators.nullValidator]],
+      justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
+      fecha_inicio: ['', Validators.required],
+      fecha_fin: ['', Validators.required]
+    });
+
+    this.fromDate = null;
+   }
+
+  ngOnInit(): void {
     this.permisoSvc.getPermiso(this.getId).subscribe({
       next: (res) => {
         this.editarPermisoForm.setValue({
@@ -98,29 +106,15 @@ export class EditarPermisoComponent implements OnInit {
         }
       },
     });
-
-    this.editarPermisoForm = this.formBuilder.group({
-      tipos_permiso_id: ['', [Validators.required, Validators.nullValidator]],
-      justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
-      fecha_inicio: ['', Validators.required],
-      fecha_fin: ['', Validators.required]
-    });
-
-    this.fromDate = null;
-   }
-
-  ngOnInit(): void {
   }
 
 
     // ----------- MANEJO DE ERRORES EN EL FORM ------------
     get f() {
-  
       return this.editarPermisoForm.controls;
     }
   
     // ----------- TIPO DE SOLICITUD ------------
-  
     onChangeSolicitud(e: any): void {
       this.cd.detectChanges();
     }
@@ -252,7 +246,7 @@ export class EditarPermisoComponent implements OnInit {
   
 
   // Edita la permiso: ID de la permiso, ID de documentos borrados, Form 
-  this.permisoSvc.editarPermiso(this.getId, "["+this.docsBorrar.toString()+"]", 
+  this.permisoSvc.updatePermiso(this.getId, "["+this.docsBorrar.toString()+"]", 
     this.files, reqBody).subscribe({
       next: (res) => { 
         

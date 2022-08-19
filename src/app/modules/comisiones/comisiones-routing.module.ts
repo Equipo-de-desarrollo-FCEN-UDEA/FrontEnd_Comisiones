@@ -12,28 +12,28 @@ const routes: Routes = [
   {
     path: 'crear-comision',
     component: CrearComisionComponent
-},
+  },
 
-{
+  {
     path: 'ver-comision/:id',
     component: VerComisionComponent,
 
-},
+  },
 
-{
+  {
     path: 'editar-comision/:id',
     component: EditarComisionComponent
-},
+  },
 
-{
+  {
   path: 'asociar-estado/:id',
   component: EstadosComisionComponent
-},
+  },
 
-{
+  {
   path: 'subir-cumplido/:id',
   component: CumplidoComponent
-}
+  }
 
 ];
 

@@ -1,10 +1,14 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CumplidosService } from '@services/comisiones/cumplidos.service';
-import { LoaderService } from '@services/interceptors/loader.service';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
+
+// --------- SERVICIOS E INTERFACES ---------
+import { CumplidosService } from '@services/comisiones/cumplidos.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+
+
 
 @Component({
   selector: 'app-cumplido',
@@ -30,10 +34,11 @@ export class CumplidoComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private cumplidoSvc: CumplidosService,
     private ngZone: NgZone,
     private router: Router,
     private activateRoute: ActivatedRoute,
+
+    private cumplidoSvc: CumplidosService,
     private loaderSvc: LoaderService
   ) { 
 
@@ -49,6 +54,9 @@ export class CumplidoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // --------------------------------------------------
+  // ----------- MANEJO DE ERRORES EN EL FORM ---------
+  // --------------------------------------------------
   get f(){
     return this.cumplidoForm.controls
   }
@@ -91,7 +99,6 @@ export class CumplidoComponent implements OnInit {
       return;
     }
 
-
     const body = {
       observations: this.cumplidoForm.value.observations,
       emails: this.cumplidoForm.value.emails,
@@ -110,7 +117,8 @@ export class CumplidoComponent implements OnInit {
     console.log(reqBody.get('archivo'));
 
 
-    this.cumplidoSvc.subirCumplido(reqBody).subscribe({
+    // Post cumplido 
+    this.cumplidoSvc.postCumplido(reqBody).subscribe({
       next: (res) => { 
         Swal.fire({
           title: 'Creado',

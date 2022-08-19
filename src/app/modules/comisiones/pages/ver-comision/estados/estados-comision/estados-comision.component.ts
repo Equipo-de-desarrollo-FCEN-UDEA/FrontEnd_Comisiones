@@ -1,10 +1,11 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+// --------- SERVICIOS E INTERFACES ---------
 import { ComisionxestadoService } from '@services/comisiones/comisionesxestado.service';
-import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject } from 'rxjs';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { Estado } from '@interfaces/estados';
@@ -68,17 +69,14 @@ export class EstadosComisionComponent {
 
   asociarEstado(){
 
-    console.log(this.asociarEstadoForm.value)
-
-
     this.submitted = true;
 
-    // stop here if form is invalid
+    // Se detiene si el formulario es inválido
     if (this.asociarEstadoForm.invalid) {
       return;
     }
 
-    this.comisionxEstadoSvc.crearComisionxEstado(this.getId, this.asociarEstadoForm.value)
+    this.comisionxEstadoSvc.postComisionxEstado(this.getId, this.asociarEstadoForm.value)
     .subscribe({
           next: (res) => {
             console.log(this.asociarEstadoForm.value)

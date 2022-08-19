@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DexclusivaRoutingModule } from './dexclusiva-routing.module';
+import { DedicacionesRoutingModule } from './dedicaciones-routing.module';
 import { FDedicacionComponent } from './components/f-dedicacion/f-dedicacion.component';
 import { CartaInicioComponent } from './components/carta-inicio/carta-inicio.component';
 
@@ -26,7 +26,7 @@ import { SharedModule } from '@shared/shared.module';
   ],
   imports: [
     CommonModule,
-    DexclusivaRoutingModule,
+    DedicacionesRoutingModule,
     FormsModule,
     AmazingTimePickerModule,
     ReactiveFormsModule,
@@ -34,4 +34,4 @@ import { SharedModule } from '@shared/shared.module';
     SharedModule
   ]
 })
-export class DexclusivaModule { }
+export class DedicacionesModule { }

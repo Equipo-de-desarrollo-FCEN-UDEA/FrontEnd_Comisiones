@@ -1,3 +1,4 @@
+
 import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -14,12 +15,14 @@ import { TiposPermiso, TiposPermisoInside } from '@interfaces/tipos_permiso';
 import { PermisoService } from '@services/permisos/permiso.service';
 import { TipoPermisoService } from '@services/permisos/tipo-permiso.service';
 
+
 @Component({
   selector: 'app-editar-permiso',
   templateUrl: './editar-permiso.component.html',
   styleUrls: ['./editar-permiso.component.scss']
 })
 export class EditarPermisoComponent implements OnInit {
+
 
   error = '';
   clicked = 0;
@@ -50,7 +53,6 @@ export class EditarPermisoComponent implements OnInit {
 
   // Form permiso
   editarPermisoForm: FormGroup;
-
 
   constructor(
     private calendar: NgbCalendar,

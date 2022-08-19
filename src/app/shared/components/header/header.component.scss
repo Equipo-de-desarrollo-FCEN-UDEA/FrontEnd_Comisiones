@@ -1,4 +1,4 @@
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 930px) {
   .navbar{
       justify-content: space-between;
       .collapse{
@@ -16,7 +16,15 @@
   }
 }
 
-ul {
+.offcanvas-body{
+  margin-top: -1.5em;
+}
+
+.btn-close {
+  border-color: #03b860;
+}
+
+ul, li{
   list-style: none;
   padding: 5px;
   margin: 0;
@@ -51,8 +59,8 @@ ul {
     .btn-request {
       color: #fff;
       background-color:#43B649;
-      height: 2.3em;
-      width: 10em;
+      height: 2.5em;
+      width: 18em;
       border: 1px solid #43B649;
       border-radius: 10px;
       font-size: 17px;
@@ -128,14 +136,14 @@ ul {
 
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 1200px) {
 
   #offcanvasNavbar {
     display: none;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 930px) {
   #offcanvasNavbar{
     max-width: 90vw;
   }

@@ -9,7 +9,7 @@ import { CumplidoComponent } from './pages/ver-comision/cumplido/cumplido.compon
 
 const routes: Routes = [
 
-  {
+{
     path: 'crear-comision',
     component: CrearComisionComponent
   },

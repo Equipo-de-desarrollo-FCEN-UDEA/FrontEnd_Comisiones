@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-md navbar-light  " >
+<nav class="navbar navbar-expand-xl navbar-light" >
 
   <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
     <i class="fa fa-bars" style="color:rgb(255, 255, 255);"></i>
@@ -10,7 +10,7 @@
     </a>
 
   </div>
-  <div class="profile navbar-brand">
+  <div class="profile .d-none .d-lg-block .d-xl-none navbar-brand">
     <ul>
       <li ngbDropdown >
         <a id="id01" ngbDropdownToggle >
@@ -29,47 +29,30 @@
   </div>
 
   <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
-
-
-
-  <div class="navbar-brand" >
-    <ul>
-      <li ngbDropdown>
-       <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:rgb(248, 248, 248);">Comisiones</a>
-
-      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-        <a class="dropdown-item" routerLink="comisiones/crear-comision">Crear comisión</a>
-      </div>
+    <div class="navbar-brand d-flex">
+      <li class="nav-item dropdown">
+        <a style="color:#fff" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Crear Solicitud 
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+          <li><a class="dropdown-item" routerLink="permisos/crear-permiso">Permiso</a></li>
+          <li><a class="dropdown-item" routerLink="comisiones/crear-comision">Comisión</a></li>
+          <li><a class="dropdown-item" routerLink="dedicaciones/crear-dedicacion">Dedicación Exclusiva</a></li>
+        </ul>
       </li>
-    </ul>
+      <li class="nav-item">
+        <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Solicitudes</a>
+      </li>
+      <li class="nav-item">
+        <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Registrar Usuarios</a>
+      </li>
+    </div>
   </div>
 
-
-  <div class="navbar-brand">
-    <ul>
-      <li ngbDropdown>
-       <a class="nav-link list-group-item-action"  id="comisiones" ngbDropdownToggle style="color:#fff;">Permisos</a>
-
-      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-        <a class="dropdown-item" routerLink="permisos/crear-permiso">Crear permiso</a>
-      </div>
-    </li>
-    </ul>
-  </div>
-
-
-  <div class="navbar-brand">
-    <ul>
-      <li ngbDropdown>
-       <a class="nav-link list-group-item-action" id="comisiones" ngbDropdownToggle style="color:#fff;">Dedidaciones</a>
-
-      <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="comisiones">
-        <a class="dropdown-item" routerLink="dexclusiva/crear-dedicacion">Crear dedicación exclusiva</a>
-      </div>
-    </li>
-    </ul>
-  </div>
-
+<!-- 
   <div class="navbar-brand">
     <ul>
       <li ngbDropdown>
@@ -80,16 +63,16 @@
       </div>
     </li>
     </ul>
-  </div>
+  </div>  -->
   
-</div>
+
   
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
       <button type="button" class="btn-close text-reset" style="margin-right: 1em;"  data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body" style="margin-top: -3.5em;">
+    <div class="offcanvas-body">
       <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
         <div class="ng-sidebar">
           <div>
@@ -97,27 +80,27 @@
               <div class="sidebar-header">
                 <span class="user-pic">
                   <i class="fas fa-user-circle"></i>
-                </span>
-                <!-- <img src="./icon.png" alt=""> -->
+                </span> 
+                <img src="./icon.png" alt="">
               </div>
               <div class="user-info">
                 <span class="user-name">
-                   Name 
+                   {{usuario?.nombre}} 
                   <br />
-                  LastName 
+                   {{usuario?.apellido}}
                 </span>
                 <br />
                 <span class="user-role">
                   <span class="user-status">
                     <i class="fa fa-circle"></i>
                   </span>
-                  Role 
+                  {{usuario?.roles?.nombre}} 
                 </span>
               </div>
               <!-- sidebar-header  -->
               <hr color="#f5f5f5" />
               <div class="create-request">
-                <button type="button" class="btn-request dropdown-toggle" id="navbarScrollingDropdown" data-bs-toggle="dropdown">
+                <button type="button" class="btn-request dropdown-toggle w-75" id="navbarScrollingDropdown" data-bs-toggle="dropdown">
                   <span style="color: #ffff; margin: 0">
                     <i class="fas fa-plus-circle"></i>
                   </span>
@@ -126,7 +109,7 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                   <li><a class="dropdown-item" routerLink="permisos/crear-permiso">Permiso</a></li>
                   <li><a class="dropdown-item" routerLink="comisiones/crear-comision">Comisión</a></li>
-                  <li><a class="dropdown-item" routerLink="dexclusiva/carta-inicio">Dedicación Exclusiva</a></li>
+                  <li><a class="dropdown-item" routerLink="dedicaciones/crear-dedicacion">Dedicación Exclusiva</a></li>
                 </ul>
               </div>
               <!-- sidebar-search  -->
@@ -136,16 +119,16 @@
                   <span>GENERAL</span>
                 </div>
                 <ul>
-                  <li>
+                  <li  routerLink="usuarios/ver-usuario/me">
                     <a routerLink="">
                       <span>
-                        <i class="far fa-user"></i>
+                        <i class="fa-solid fa-user-astronaut"></i>
                         Mi Perfil
                       </span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
+                  <li routerLink="../home">
+                    <a>
                       <span>
                         <i class="fas fa-home"></i>
                         Solicitudes
@@ -156,7 +139,7 @@
                 <div class="header-menu">
                   <span> ESPECÍFICO </span>
                 </div>
-                <ul>
+                <ul> 
                   <li>
                     <a href="#">
                       <span>
@@ -172,9 +155,24 @@
                         Facultades
                       </span>
                     </a>
+                  <li routerLink="../usuarios/lista-usuarios">
+                    <a href="#">
+                      <span>
+                        <i class="fa-solid fa-users"></i>
+                        Usuarios
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span>
+                        <i class="fa-solid fa-user-group"></i>
+                        Registrar Usuarios
+                      </span>
+                    </a>
                   </li>
                 </ul>
-              </div>
+              </div> 
               <!-- sidebar-menu  -->
               <!-- sidebar-content  -->
               <div class="sidebar-footer">

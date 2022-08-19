@@ -9,8 +9,10 @@ export interface ComResInside {
     id: number;
     fecha_inicio: Date;
     fecha_fin: Date;
+    createdAt: Date;
     justificacion: string;
     tipos_comision_id: number;
+
 }
 
 export interface ComisionDTO extends Omit<ComResInside, 'id'>{

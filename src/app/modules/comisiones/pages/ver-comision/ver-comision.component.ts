@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -21,6 +22,7 @@ export class VerComisionComponent {
   loading:boolean = false;
   mostrarEstados = false;
   error:string = '';
+
   comision: Comision| undefined;
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
@@ -73,6 +75,7 @@ export class VerComisionComponent {
   open(){ 
     this.mostrarEstados = !this.mostrarEstados ;
   }
+
 
 
 

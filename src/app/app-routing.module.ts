@@ -7,10 +7,10 @@ import { RecuperarContrasenaComponent } from '@shared/pages/recuperar-contrasena
 
 const routes: Routes = [
   {
-    path: 'dexclusiva',
+    path: 'dedicaciones',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/dexclusiva/dexclusiva.module')
-      .then(m => m.DexclusivaModule)
+    loadChildren: () => import('./modules/dedicaciones/dedicaciones.module')
+      .then(m => m.DedicacionesModule)
   },
   {
     path: 'comisiones',

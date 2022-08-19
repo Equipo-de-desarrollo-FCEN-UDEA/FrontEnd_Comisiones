@@ -76,7 +76,11 @@ export class LoginComponent implements OnInit {
   ) { }
     
   formLogin = this.fb.group({
-    correoLogin : ['', [Validators.required]],//, Validators.pattern(this.isCorreoValid)]],
+
+    correoLogin : ['', [Validators.required
+      // , Validators.pattern(this.isCorreoValid)
+    ]],
+
     passwordLogin : ['', Validators.required]
   });
 
@@ -138,5 +142,4 @@ export class LoginComponent implements OnInit {
       // }
     )
   }
-
 }

@@ -26,15 +26,13 @@ export class ComisionesService {
     return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)
   }
   
-  crearComision(comision:any) {
+  postComision(comision:any) {
     return this.http.post<ComisionDTO>(this.urlEndPoint, comision);
-
   }
-
 
   updateComision(id: string, paramList:any, files: File[], comision:any): Observable<any> {
 
-    // En el back: /api/comisiones/:id?request=[idDoc]
+    // En el back esta como: /api/comisiones/:id?request=[idDoc]
     
     const params = new HttpParams().set('require', paramList);
     comision.archivo = files;
@@ -43,7 +41,7 @@ export class ComisionesService {
   }
 
     
-  eliminar(id: string | number): Observable<ComisionDTO> {
+  deleteComision(id: string | number): Observable<ComisionDTO> {
     return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
   }
 

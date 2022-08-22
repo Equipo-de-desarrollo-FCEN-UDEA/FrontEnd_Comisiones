@@ -8,7 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
 import { HistorialEstadosComponent } from './pages/ver-comision/estados/historial-estados/historial-estados.component';
-import { EstadosComisionComponent } from './pages/ver-comision/estados/estados/estados-comision.component';
+import { EstadosComisionComponent } from './pages/ver-comision/estados/estados-comision/estados-comision.component';
+import { CumplidoComponent } from './pages/ver-comision/cumplido/cumplido.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { EstadosComisionComponent } from './pages/ver-comision/estados/estados/e
     CrearComisionComponent,
     EditarComisionComponent,
     HistorialEstadosComponent,
-    EstadosComisionComponent
+    EstadosComisionComponent,
+    CumplidoComponent
     
     
   ],

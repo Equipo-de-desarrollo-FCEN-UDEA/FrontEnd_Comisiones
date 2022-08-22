@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
-registerLocaleData(localeEs, 'es');
+
 
 @NgModule({
   declarations: [

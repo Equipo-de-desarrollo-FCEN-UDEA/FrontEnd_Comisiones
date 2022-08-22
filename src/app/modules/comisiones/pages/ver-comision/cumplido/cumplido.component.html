@@ -1,0 +1,158 @@
+<div class="container card shadow mt-5 bg-white rounded p-5 w-75">
+    <div class="row header-row">
+      <div class="col">
+        <a class="text-secondary">SUBIR CUMPLIDO</a>
+      </div>
+    </div>
+    <hr />
+  
+    <form [formGroup]="cumplidoForm" (ngSubmit)="subirCumplido()">
+      <!-- <div class="row header-row">
+        <div class="col-4 label">ID de la Solicitud</div>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="comisiones_id"
+          />
+        </div>
+      </div> -->
+  
+      <div class="row regular-row">
+        <div class="col-4 label">Destinatarios</div>
+        <div class="col-sm-8">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+            />
+            <label class="form-check-label"> Secretaria del CIEN </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" />
+            <label class="form-check-label"> Programa de Extensión </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" />
+            <label class="form-check-label">
+              Fondo de Pasajes Internacionales
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" />
+            <label class="form-check-label">
+              Vicerrectoría de Investigación
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" />
+            <label class="form-check-label"> Centro de Investigaciones SIU</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" />
+            <label class="form-check-label">
+              Fondos de Vicerrectoría de Docencia
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row regular-row">
+        <div class="col-4 label">Otros Destinatarios</div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <textarea
+              class="form-control"
+              rows="3"
+              placeholder="Correos separados por comas"
+              formControlName="emails"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row regular-row">
+        <div class="col-4 label">Información Complementaria</div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <textarea
+              class="form-control"
+              rows="3"
+              formControlName="observations"
+              placeholder="Incluya aquí otra información complementaria que pueda ser de importancia para los destinatarios del cumplido. Así por ejemplo, si el cumplido esta relacionado con un Proyecto de Investigación y desea enviarlo a la dependencia que otorgo recursos relacionados, indique el nombre del Proyecto."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+        <!-- ARCHIVOS - DOCUMENTOS -->
+      <h6>
+          <span class="text-muted">Archivo de cumplido</span>
+      </h6>
+      <div class="alert-danger" *ngIf="files.length>0 && !validSize()">
+          <p>
+              Los archivos no deben pesar más de 2 MB.
+          </p>
+      </div>
+      <div class="formfloatig" style="display: flex; flex-direction: column;">
+          <div *ngFor="let producto of archivos; last as isLast; let i=index"
+              class="arrayLike formfloatig">
+              <div class="archivos" style="width:auto; margin-left: 10px;">
+                  <label class="btn-btn-default">
+                      <div class="fa fa-upload fa-2x "></div>
+                      <input [id]="i" class="file-upload" type="file" (change)='onUpload($event,i)'/>
+                      <label [for]="i"  style="margin-left: 10px;">{{files[i] ? files[i].name : 'Subir archivo' }}</label>
+                  </label>
+
+              </div>
+              <div class="buttons" style="width:fit-content; margin: 0;">
+                  <button class="btn btn-circle btn-remove" type="button" (click)="removeFile(i)"
+                      ><i class="fa fa-minus"></i>
+                  </button>
+                  <button class="btn btn-circle btn-add" type="button"
+                      (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
+                      <i class="fa fa-plus"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+      <div class="row regular-row">
+        <div class="col-4 label"></div>
+        <div class="col-sm-8">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" />
+            <label class="form-check-label" for="gridCheck1">
+              ¿Confirma que desea enviar correo de notificación?
+            </label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+        {{ error }}
+      </div>
+  
+      <hr />
+      <div class="footer-row d-grid gap-2 d-md-flex justify-content-md-end">
+        <div class="col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
+          <button
+            type="button"
+            class="btn btn-secondary btn-block"
+            [routerLink]="['/comisiones/ver-comision', this.getId]"
+          >
+            Cancelar
+          </button>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
+          <button
+            class="btn btn-green btn-success btn-block"
+          >
+            <span *ngIf="isLoading | async" 
+            class="spinner-border spinner-border-sm1"  
+            role="status" aria-hidden="true"
+            ></span>
+            Enviar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>

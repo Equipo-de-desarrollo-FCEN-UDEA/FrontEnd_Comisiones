@@ -1,15 +1,5 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {
-  NgbModalConfig,
-  NgbModal,
-  NgbActiveModal,
-} from '@ng-bootstrap/ng-bootstrap';
-import { VerComisionComponent } from '../../ver-comision.component';
+import {  Component, Input } from '@angular/core';
 
-
-
-// // ----------------------------
 @Component({
   selector: 'app-historial-estados',
   templateUrl: './historial-estados.component.html',

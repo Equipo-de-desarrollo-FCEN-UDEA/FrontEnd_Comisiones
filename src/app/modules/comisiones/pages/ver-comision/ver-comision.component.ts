@@ -1,12 +1,11 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
-//import { saveAs } from ‘file-saver’;
 import Swal from 'sweetalert2';
 
 
-// --------- SERVICIOS ---------
+// --------- SERVICIOS E INTERFACES ---------
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { Comision } from '@interfaces/comisiones';
 import { LoaderService } from '@services/interceptors/loader.service';
@@ -28,8 +27,6 @@ export class VerComisionComponent {
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
-  private id_prueba = 0;
-
   documentosArray:any = [];
   fechaCreacion:any = '';
 
@@ -47,7 +44,6 @@ export class VerComisionComponent {
     private descargarDocumentoSvc: DescargarDocumentosService
   ) { 
 
-    
   }
 
   ngOnInit(): void {
@@ -84,8 +80,7 @@ export class VerComisionComponent {
 
 
   abrirDocumento(id:number){
-    const reader = new FileReader();
-    this.descargarDocumentoSvc.descargarDocumento(id).subscribe({
+    this.descargarDocumentoSvc.downloadDocumento(id).subscribe({
       next: (res) => {
         window.open(window.URL.createObjectURL(res))
       },
@@ -99,7 +94,7 @@ export class VerComisionComponent {
   }
 
   
-  eliminar(id: any): void {
+  eliminarComision(id: any): void {
     Swal.fire({
       title: '¿Seguro que quieres eliminar esta comisión?',
       text: 'No podrás revertir esta acción',
@@ -110,7 +105,7 @@ export class VerComisionComponent {
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.comisionesSvc.eliminar(id).subscribe({
+        this.comisionesSvc.deleteComision(id).subscribe({
           next: (response) => {
             console.log(response);
             this.router.navigate(['/home']);

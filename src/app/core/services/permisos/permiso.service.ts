@@ -31,19 +31,17 @@ export class PermisoService {
   }
 
 
-  delete(id: string | number): Observable<any> {
+  deletePermiso(id: string | number): Observable<any> {
     return this.http.delete<PermisosInside>(`${this.urlEndPoint}/${id}`);
   }
 
 
-  crearPermiso(permiso:any) {
-
+  postPermiso(permiso:any) {
     return this.http.post<PermisosDTO>(this.urlEndPoint, permiso);
   }
 
 
-  editarPermiso(id: string, paramList:any, files: File[], permiso:any): Observable<any> {
-
+  updatePermiso(id: string, paramList:any, files: File[], permiso:any): Observable<any> {
     // En el back: /api/permisoes/:id?request=[idDoc]
     
     const params = new HttpParams().set('require', paramList);

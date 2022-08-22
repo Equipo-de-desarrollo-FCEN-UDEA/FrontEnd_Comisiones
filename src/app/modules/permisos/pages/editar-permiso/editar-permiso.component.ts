@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +17,10 @@ import Swal from 'sweetalert2';
 import { TiposPermiso, TiposPermisoInside } from '@interfaces/tipos_permiso';
 import { PermisoService } from '@services/permisos/permiso.service';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 @Component({
   selector: 'app-editar-permiso',
   templateUrl: './editar-permiso.component.html',
@@ -20,6 +28,10 @@ import { PermisoService } from '@services/permisos/permiso.service';
 })
 export class EditarPermisoComponent implements OnInit {
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
@@ -55,7 +67,10 @@ export class EditarPermisoComponent implements OnInit {
     {id: 8, nombre: 'Licencia de luto'}
   ]
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   clicked = 0;
 
   constructor(
@@ -102,8 +117,11 @@ export class EditarPermisoComponent implements OnInit {
     this.editarPermisoForm = this.formBuilder.group({
       tipos_permiso_id: ['', [Validators.required, Validators.nullValidator]],
       justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
+<<<<<<< HEAD
       lugar: ['', [Validators.required, Validators.nullValidator]],
       idioma: [''],
+=======
+>>>>>>> main
       fecha_inicio: ['', Validators.required],
       fecha_fin: ['', Validators.required]
     });
@@ -236,8 +254,11 @@ export class EditarPermisoComponent implements OnInit {
     fecha_fin: this.editarPermisoForm.value.fecha_fin,
     fecha_resolucion: new Date(this.formatter.format(this.today)),
     justificacion: this.editarPermisoForm.value.justificacion,
+<<<<<<< HEAD
     idioma: this.editarPermisoForm.value.idioma,
     lugar:this.editarPermisoForm.value.lugar,
+=======
+>>>>>>> main
     tipos_permiso_id: this.editarPermisoForm.value.tipos_permiso_id
   }
 
@@ -249,8 +270,11 @@ export class EditarPermisoComponent implements OnInit {
   reqBody.append('fecha_inicio', body.fecha_inicio);
   reqBody.append('fecha_fin', body.fecha_fin);
   reqBody.append('justificacion', body.justificacion);
+<<<<<<< HEAD
   reqBody.append('idioma', body.idioma);
   reqBody.append('lugar', body.lugar);
+=======
+>>>>>>> main
 
   for (const file of this.files) {
     reqBody.append('archivo', file, file.name) 
@@ -258,14 +282,24 @@ export class EditarPermisoComponent implements OnInit {
   
 
   // Edita la permiso: ID de la permiso, ID de documentos borrados, Form 
+<<<<<<< HEAD
   this.permisoSvc.updatePermiso(this.getId, "["+this.docsBorrar.toString()+"]", 
+=======
+  this.permisoSvc.editarPermiso(this.getId, "["+this.docsBorrar.toString()+"]", 
+>>>>>>> main
     this.files, reqBody).subscribe({
       next: (res) => { 
         
         //facilitate change detection
+<<<<<<< HEAD
         // this.ngZone.run(() =>
         //   this.router.navigateByUrl(`/permisos/ver-permiso/${this.getId}`)
         // );
+=======
+        this.ngZone.run(() =>
+          this.router.navigateByUrl(`/permisos/ver-permiso/${this.getId}`)
+        );
+>>>>>>> main
         Swal.fire({
           title: 'Actulizada',
           text: '¡El permiso se actualizó con éxito!',

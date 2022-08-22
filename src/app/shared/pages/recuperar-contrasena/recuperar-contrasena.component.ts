@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { AuthService } from '@services/auth.service';
 import { Router } from '@angular/router';
+=======
+import { AuthService } from '@services/auth/auth.service';
+>>>>>>> 57f03e38f1e4db4f6c3cd31dc3bf14c714cb65f2
 
 @Component({
   selector: 'app-recuperar-contrasena',

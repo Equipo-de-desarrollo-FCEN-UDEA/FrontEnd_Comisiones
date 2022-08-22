@@ -13,7 +13,11 @@ export class DescargarDocumentosService {
   constructor(private http: HttpClient) { }
 
   descargarDocumento(id: string | number): Observable<any> {
+<<<<<<< HEAD
     return this.http.get(`${this.urlEndPoint}/${id}`)
+=======
+    return this.http.get(`${this.urlEndPoint}/${id}`, { responseType: 'blob'})
+>>>>>>> main
   }
   
 }

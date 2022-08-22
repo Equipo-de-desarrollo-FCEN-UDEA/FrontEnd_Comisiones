@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioAuth } from '@interfaces/usuario';
-import { AuthService } from '@services/auth.service';
-import { LoaderService } from '@services/loader.service';
+import { AuthService } from '@services/auth/auth.service';
+import { LoaderService } from '@services/interceptors/loader.service';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
   public isCollapsed=true;
   public tiposId=[
     'Cedula de Ciudadania',
@@ -32,6 +33,8 @@ export class LoginComponent implements OnInit {
     'Permiso especial formacion PEPFF',
     'Permiso por protección temporal'
   ]
+
+
   public roles = [
     {
       id: 5,
@@ -57,9 +60,14 @@ export class LoginComponent implements OnInit {
       nombre: 'Extensión'
     }
   ]
-  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
+
+
+  // private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; --> EL QUE SE USARÁ
+  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@gmail.com$/ ; 
   isLoading: Subject<boolean> = this.loadingService.isLoading;
   submitted = false;
+  error = '';
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -68,9 +76,15 @@ export class LoginComponent implements OnInit {
   ) { }
     
   formLogin = this.fb.group({
-    correoLogin : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
+
+    correoLogin : ['', [Validators.required
+      // , Validators.pattern(this.isCorreoValid)
+    ]],
+
     passwordLogin : ['', Validators.required]
   });
+
+
   formSignup = this.fb.group({
     correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
     passwordSignup : ['', Validators.required],
@@ -87,10 +101,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home']);
     }
   }
-  click(){
-    this.isCollapsed = !this.isCollapsed;
-    console.log(this.isCollapsed)
-  }
+
+  // click(){
+  //   this.isCollapsed = !this.isCollapsed;
+  //   console.log(this.isCollapsed)
+  // }
 
   get f() {
     return this.formLogin.controls;
@@ -101,14 +116,30 @@ export class LoginComponent implements OnInit {
       correo: this.formLogin.value.correoLogin || '',
       contrasena: this.formLogin.value.passwordLogin || ''
     };
+
     this.submitted = true;
-    this.authService.login(user).subscribe(
-      (data) => {
-        if (data){
-          this.router.navigate(['/home']);
-        }
+
+    // stop here if form is invalid
+    if (this.formLogin.invalid) {
+      console.log('invalido login')
+      return;
+    }
+
+    this.authService.login(user).subscribe({
+        next: (res) => {
+          this.router.navigateByUrl('/home');
+        },
+        error: (err) => {
+          if (err.status === 404 || err.status === 401) {
+            this.error = 'Usuario o contraseña incorrectos';
+          }
+        },
       }
+      // (data) => {
+      //   if (data){
+      //     this.router.navigate(['/home']);
+      //   }
+      // }
     )
   }
-
 }

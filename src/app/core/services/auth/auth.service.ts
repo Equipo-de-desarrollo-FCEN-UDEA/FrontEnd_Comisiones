@@ -57,7 +57,10 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     return this.cookieService.check('token') && this.cookieService.check('usuario');
   }
 

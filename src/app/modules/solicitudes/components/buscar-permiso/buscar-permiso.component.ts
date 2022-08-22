@@ -1,5 +1,9 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+<<<<<<< HEAD
+=======
+import { FormBuilder, Validators } from '@angular/forms';
+>>>>>>> main
 import { Permiso } from '@interfaces/permisos';
 import { BuscarPermisosService} from '@services/busquedas/buscar-permisos.service';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
@@ -25,15 +29,29 @@ export class BuscarPermisoComponent{
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
+<<<<<<< HEAD
     public service: BuscarPermisosService
+=======
+    public service: BuscarPermisosService,
+>>>>>>> main
     ) {
       this.permisos$ = service.permisos$;
       this.total$ = service.total$;
       this.ultimoElemento = ultimoElement;
+<<<<<<< HEAD
       
     
     }
 
+=======
+    }
+
+    changeOption(event:any){
+      console.log(event.target.value);
+      this.service.archivados(event.target.value);
+      this.service.ngOnchanges();
+    }
+>>>>>>> main
     
 
     onSort({ column, direction}: SortEvent) {

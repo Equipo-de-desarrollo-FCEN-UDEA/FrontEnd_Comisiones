@@ -111,8 +111,11 @@ export class BuscarUsuariosService {
     // 1. sort
     let usuarios = sort(this.USUARIOS, sortColumn, sortDirection);
 
+<<<<<<< HEAD
     console.log(usuarios)
 
+=======
+>>>>>>> main
     // 2. filter
     usuarios = usuarios.filter(usuarios => matches(usuarios, searchTerm, this.datepipe));
     const total = usuarios.length;

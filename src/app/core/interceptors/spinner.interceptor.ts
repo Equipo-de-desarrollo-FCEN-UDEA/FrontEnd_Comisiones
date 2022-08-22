@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { finalize, map, Observable } from 'rxjs';
-import { LoaderService } from '@services/loader.service';
+import { LoaderService } from '@services/interceptors/loader.service';
 
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
@@ -17,7 +17,6 @@ export class SpinnerInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    console.log('intercepted');
     this.loaderService.show();
 
     return next.handle(request).pipe(

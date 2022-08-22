@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +21,10 @@ import { Comision } from '@interfaces/comisiones';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 @Component({
   selector: 'app-editar-comision',
   templateUrl: './editar-comision.component.html',
@@ -143,20 +151,36 @@ export class EditarComisionComponent implements OnInit {
     console.log(fecha_1)
     console.log(DiasHabiles(fecha_1, fecha_2), fecha_1, fecha_2)
     return DiasHabiles(fecha_1, fecha_2);
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
   }
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
     } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
       this.toDate = date;
     } else {
       this.toDate = null;
       this.fromDate = date;
     }
+<<<<<<< HEAD
     this.editarComisionForm.patchValue({
       fecha_inicio : this.formatter.format(this.fromDate),
       fecha_fin : this.formatter.format(this.toDate)
+=======
+
+    this.editarComisionForm.patchValue({
+      fecha_inicio : this.formatter.format(this.fromDate),
+      fecha_fin : this.formatter.format(this.toDate)
+
+>>>>>>> main
     });
   }
 
@@ -170,6 +194,10 @@ export class EditarComisionComponent implements OnInit {
   isRange(date: NgbDate) {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
         this.isHovered(date);
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
@@ -182,13 +210,20 @@ export class EditarComisionComponent implements OnInit {
   // --------------------------------------
 
   onUpload(event:Event, index: number) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
     const element = event.target as HTMLInputElement;
     const file = element.files?.item(0);
     if (file) {
       this.files.splice(index, 1, file);
     }
     console.log(this.files);
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   }
 
   removeFile(index: number) {

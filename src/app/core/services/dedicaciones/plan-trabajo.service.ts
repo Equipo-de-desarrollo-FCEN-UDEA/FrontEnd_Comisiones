@@ -1,6 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
 import { PlanTrabajo } from '@interfaces/plantrabajo';
+=======
+import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
+>>>>>>> main
 import { prefix } from '@shared/data/ruta-api';
 import {saveAs} from 'file-saver';
 import { map, tap } from 'rxjs';

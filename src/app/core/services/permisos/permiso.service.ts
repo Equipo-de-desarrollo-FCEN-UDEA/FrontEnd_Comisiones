@@ -14,8 +14,16 @@ export class PermisoService {
 
   constructor( private http: HttpClient) { }
 
+<<<<<<< HEAD
   getPermisos(): Observable<Permiso[]> {
     return this.http.get<Permiso[]>(this.urlEndPoint)
+=======
+  getPermisos(archivado: number): Observable<Permiso[]> {
+    let params = archivado !=2 ? new HttpParams().append("archivado", archivado) : new HttpParams();
+    return this.http.get<Permiso[]>(this.urlEndPoint, {
+      params:params
+    })
+>>>>>>> main
   }
 
 
@@ -27,6 +35,7 @@ export class PermisoService {
     ); 
   }
 
+<<<<<<< HEAD
   postPermiso(permiso:any) {
     const headers = new HttpHeaders(
       {
@@ -70,6 +79,8 @@ export class PermisoService {
       }
     );
   }
+=======
+>>>>>>> main
 
   delete(id: string | number): Observable<any> {
     return this.http.delete<PermisosInside>(`${this.urlEndPoint}/${id}`);
@@ -82,7 +93,11 @@ export class PermisoService {
   }
 
 
+<<<<<<< HEAD
   updatePermiso(id: string, paramList:any, files: File[], permiso:any): Observable<any> {
+=======
+  editarPermiso(id: string, paramList:any, files: File[], permiso:any): Observable<any> {
+>>>>>>> main
 
     // En el back: /api/permisoes/:id?request=[idDoc]
     
@@ -90,5 +105,9 @@ export class PermisoService {
     permiso.archivo = files;
 
     return this.http.patch<PermisosDTO>(`${this.urlEndPoint}/${id}`, permiso, {params: params});
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
   }
 }

@@ -59,7 +59,11 @@ export class BuscarPermisosService {
 
   private _state: State = {
     page: 1,
+<<<<<<< HEAD
     pageSize: 4,
+=======
+    pageSize: 7,
+>>>>>>> main
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -67,6 +71,10 @@ export class BuscarPermisosService {
 
   PERMISOS : Permiso[] = [];
   
+<<<<<<< HEAD
+=======
+  archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+>>>>>>> main
 
   constructor(
     private permisosSvc: PermisoService,
@@ -84,10 +92,36 @@ export class BuscarPermisosService {
     });
 
     this._search$.next();
+<<<<<<< HEAD
     this.permisosSvc.getPermisos()
     .subscribe(
       (permisos: Permiso[]) => {
         this.PERMISOS = permisos;
+=======
+
+  
+
+    this.permisosSvc.getPermisos(this.archivado$.getValue())
+    .subscribe(
+      (permisos: Permiso[]) => {
+        this.PERMISOS = permisos;
+      }
+    )
+   }
+
+   archivados(archivado: number){
+    this.archivado$.next(archivado);
+    
+   }
+
+   ngOnchanges(){
+    this.permisosSvc.getPermisos(this.archivado$.getValue())
+    .subscribe(
+      (permisos: Permiso[]) => {
+        this.PERMISOS = permisos;
+        this._permisos$.next(this.PERMISOS);
+        this._search$.next();
+>>>>>>> main
       }
     )
    }
@@ -120,7 +154,11 @@ export class BuscarPermisosService {
     // 1. sort
     let permisos = sort(this.PERMISOS, sortColumn, sortDirection);
     
+<<<<<<< HEAD
 
+=======
+    console.log(permisos)
+>>>>>>> main
     // 2. filter
     permisos = permisos.filter(permisos => matches(permisos, searchTerm, this.datepipe));
     const total = permisos.length;

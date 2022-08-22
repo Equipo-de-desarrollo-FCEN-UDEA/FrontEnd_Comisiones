@@ -6,7 +6,22 @@
           <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
         </div>
         <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
+<<<<<<< HEAD
       </div>
+=======
+
+       <div class="col-xs-3 col-sm-auto">
+        <select class="form-select" (change)="changeOption($event)" style="width: auto"> 
+          <option value="0">No archivados</option>
+          <option value="1">Archivados</option>
+          <option value="2">Todos</option>
+          
+        </select>
+       </div>
+      </div>
+
+    
+>>>>>>> main
     
       <table class="table table-striped">
         <thead>
@@ -101,11 +116,15 @@
           </td>
 
           
+<<<<<<< HEAD
           <td>
             <a [routerLink]="[]"
               routerLinkActive="router-link-active">
             Ver...</a>
           </td>
+=======
+         
+>>>>>>> main
           
         </tbody>
       </table>
@@ -116,9 +135,15 @@
         </ngb-pagination> 
     
         <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize"> 
+<<<<<<< HEAD
           <option [ngValue]="2">2 items per page</option>
           <option [ngValue]="4">4 items per page</option>
           <option [ngValue]="6">6 items per page</option>
+=======
+          <option [ngValue]="7">7 items por página</option>
+          <option [ngValue]="6">6 items per página</option>
+          <option [ngValue]="5">5 items per página</option>
+>>>>>>> main
         </select>
       </div>
     

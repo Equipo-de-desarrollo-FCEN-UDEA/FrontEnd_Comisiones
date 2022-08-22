@@ -27,6 +27,7 @@ interface State {
 const compare = (v1: String | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
+<<<<<<< HEAD
   
   if (direction === '' || column === '') {
     return comisiones;
@@ -35,6 +36,12 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 
     return [...comisiones].sort((a : any, b : any) => {
 
+=======
+  if (direction === '' || column === '') {
+    return comisiones;
+  } else {
+    return [...comisiones].sort((a, b) => {
+>>>>>>> main
       const res = compare(a[column], b[column]);
       return direction === 'asc' ? res : -res;
     });
@@ -46,12 +53,20 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 
 
 
+<<<<<<< HEAD
 function matches(comisiones: Comision, term: string, pipe:PipeTransform) {
+=======
+function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
+>>>>>>> main
 
   return (
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())  ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
+<<<<<<< HEAD
     ultimoElement(comisiones.intermediate_comisiones)?.createdAt.includes(term)||
+=======
+    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt)?.includes(term)||
+>>>>>>> main
     // datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
     comisiones.usuarios?.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
@@ -84,7 +99,11 @@ export class BuscarComisionesService {
 
   constructor(
     private comisionesSvc: ComisionesService,
+<<<<<<< HEAD
     private pipe: DatePipe
+=======
+    private datepipe: DatePipe
+>>>>>>> main
     ) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
@@ -136,7 +155,11 @@ export class BuscarComisionesService {
 
     console.log(comisiones + "oe");
     // 2. filter
+<<<<<<< HEAD
     comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.pipe));
+=======
+    comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.datepipe));
+>>>>>>> main
     const total = comisiones.length;
 
 

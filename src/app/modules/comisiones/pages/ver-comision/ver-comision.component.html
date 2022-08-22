@@ -1,29 +1,47 @@
-<div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded" style="align-items: unset;">
+<div class="container card shadow mt-5 bg-white rounded p-4 w-75">
   <div class="row header-row">
     <div class="col">
-      <span class="text-secondary">Comisión</span>
+      <span class="text-secondary">COMISIÓN</span>
+    </div>
+  </div>
+
+  <hr />
+  <div class="row regular-row">
+    <div class="col-6 label">Solicitante</div>
+    <div class="col-sm-6">
+      {{ comision?.usuarios?.nombre }} {{ comision?.usuarios?.apellido }}
     </div>
   </div>
 
   <hr />
   <div class="row regular-row">
     <div class="col-6 label">Tipo de Comisión</div>
+
     <div class="col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
+
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
+
     <div class="col-sm-6">{{comision?.fecha_resolucion | date: "fullDate"}} </div>
+
+    <div class="col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
+
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
+
     <div class="col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
+
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
+
     <div class="col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
+
   </div>
 
   <div class="row regular-row">
@@ -34,6 +52,7 @@
   <div class="row regular-row">
     <div class="col-6 label">Lugar</div>
     <div class="col-sm-6">{{comision?.lugar}}</div>
+
   </div>
 
   <div class="row regular-row">
@@ -45,16 +64,47 @@
   <div class="row regular-row">
     <div class="col-6 label">Estado Actual de la Comisión</div>
       <div class="col-4">
-        <span
-          class="badge badge-pill pill">
+        <span 
+        class="badge badge-pill pill"
+        [ngClass]="{
+          'bg-solicitada':
+          estadoActual.nombre === 'SOLICITADA',
+          'bg-aprobada':
+            estadoActual.nombre === 'APROBADA',
+          'bg-visto-bueno':
+            estadoActual.nombre === 'VISTO BUENO',
+          'bg-finalizada':
+            estadoActual.nombre === 'FINALIZADA',
+          'bg-rechazada-decanato':
+            estadoActual.nombre === 'RECHAZADA DECANATO',
+          'bg-rechazada-coordinacion':
+            estadoActual.nombre === 'RECHAZADA COORDINACIÓN'
+        }"> 
+          {{estadoActual.nombre}}
         </span>
       </div>
   </div>
 
+
+<!-- <div class="row regular-row">
+    <div class="col-6 label">Estado Actual de la Comisión</div>
+      <div class="col-4">
+        {{estadoActual.observacion}}
+      </div>
+  </div> -->
+
+
   
+  <!-- DOCUMENTOS -->
   <div class="row regular-row">
-    <div class="col-6 label">Anexos</div>
-    <div class="col-sm-6"><i class="fas fa-circle"></i> Anexo 1</div>
+    <div class="col-6 label">Documentos</div>
+    <div class="col-sm-6">
+      <ul>
+        <li *ngFor="let doc of documentosArray" >
+          <span (click)="abrirDocumento(doc.id)">{{doc.nombre}}&nbsp;&nbsp;</span>&nbsp;
+        </li>
+      </ul>
+    </div>
   </div>
 
 
@@ -62,6 +112,20 @@
     <div class="col-6 label">Resolución</div>
     <div class="col-6"></div>
   </div>
+
+  <!--Button-->
+  <button
+  type="button"
+  class="btn btn-success btn-green btn-block"
+  (click)="open()"
+  >
+  Ver Historial de estados
+  </button>
+
+  <div class="row regular-row">
+    <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
+  </div>
+
 
   <!-- <div class="d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
@@ -84,29 +148,35 @@
       <app-ver-estados-comision></app-ver-estados-comision>
     </div> -->
   <!-- </div> -->
-  <div class="alert alert-danger mt-3 mb-0">
-    error
+  <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+    {{ error }}
   </div>
 
+  <!-- ELIMINAR O EDITAR -->
   <hr />
-
   <div class="footer-row d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
-        type="button"
-        class="btn btn-danger"
-        (click)="delete(comisiones.id)"
+      type="button"
+      class="btn btn-warning "
+        [routerLink]="['/comisiones/asociar-estado', comision?.id]"
       >
-        <span
-          class="spinner-border spinner-border-sm mr-1"
+        Asociar nuevo Estado
+      </button>
+    </div>
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button class="btn btn-danger" (click)="eliminar(comision?.id)">
+        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" 
         ></span>
         Eliminar
       </button>
     </div>
+
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"
         class="btn btn-warning "
+        [routerLink]="['/comisiones/editar-comision', comision?.id]"
       >
         Editar
       </button>

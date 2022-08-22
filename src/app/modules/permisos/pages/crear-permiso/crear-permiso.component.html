@@ -69,7 +69,7 @@
               </div>
 
 
-              <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
+              <div class="alert-danger alert" *ngIf="isInvalidForm('justificacion')">
                   Recuerda que la justificación debe tener al menos 30 caracteres y máximo 500 caracteres.
               </div>
               <div class="formfloatig">
@@ -83,7 +83,7 @@
               <h6>
                   <span class="text-muted">Archivos adjuntos del permiso</span>
               </h6>
-              <div class="alert-danger" *ngIf="files.length>0 && !validSize()">
+              <div class="alert-danger alert" *ngIf="files.length>0 && !validSize()">
                   <p>
                       Los archivos no deben pesar más de 2 MB.
                   </p>

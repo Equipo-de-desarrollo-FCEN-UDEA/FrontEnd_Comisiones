@@ -1,25 +1,78 @@
 import {DecimalPipe} from '@angular/common';
-import {Component, QueryList, ViewChildren} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {Observable} from 'rxjs';
 
+import { Comision } from "../../../../core/interfaces/comisiones";
+
 import {Country} from './country';
-import {CountryService} from './country.service';
+// import {CountryService} from './country.service';
 import {NgbdSortableHeader, SortEvent} from '@shared/directivas/sortable.directive';
+import { BuscarComisionesService } from '@services/buscar-comisiones.service';
+import { ComisionesService } from '@services/comisiones.service';
+import { Router } from '@angular/router';
+import { ultimoElement } from '@shared/clases/ultimo-estado';
 
 
-@Component(
-    {selector: 'app-tabla-solicitudes', templateUrl: './tabla-solicitudes.component.html', providers: [CountryService, DecimalPipe]})
+@Component({
+  selector: 'app-tabla-solicitudes', 
+  templateUrl: './tabla-solicitudes.component.html',
+  providers: [BuscarComisionesService, DecimalPipe]
+})
+
 export class TablaSolicitudesComponent {
-  countries$: Observable<Country[]>;
+  comisiones$: Observable<Comision[]>;
   total$: Observable<number>;
+  ListComisiones = false;
+  error= '';
+  ultimoElemento = ultimoElement
+  // ultimoEstado = ultimoEstado;
+  // ultimaFecha = ultimaFecha;
 
-  @ViewChildren(NgbdSortableHeader)
-  headers!: QueryList<NgbdSortableHeader>;
 
-  constructor(public service: CountryService) {
-    this.countries$ = service.countries$;
-    this.total$ = service.total$;
-  }
+
+
+  @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
+
+
+
+  constructor(
+    public service: BuscarComisionesService,
+    ) {
+      this.comisiones$ = service.comisiones$;
+      this.total$ = service.total$;
+      this.ultimoElemento = ultimoElement
+      // this.ultimoEstado = ultimoEstado;
+      // this.ultimaFecha = ultimaFecha;
+
+    }
+
+    
+    
+  //  ultimoEstado(comision:Comision) {
+  //     return ultimoElement(comision.intermediate_comisiones).intermediate_estados.nombre
+  //   }
+
+  //   ultimaFecha(comision:Comision){
+  //     return ultimoElement(comision.intermediate_comisiones).created_at
+  //   }
+
+    // ngOnInit(): void {
+    //   this.comisiones$ = this.buscarComisionesService.comisiones$;
+    //   this.buscarComisionesService.comisiones$.subscribe({
+    //     next: (data)=>{
+    //       if(this.comisiones$){
+    //         this.ListComisiones = true;
+    //       }
+    //     },
+    //     error: (err) => {
+    //       if(err.status ==404 || err.status === 401){
+    //           this.error = err.error.msg;
+    //         }
+    //       },
+    //     });
+    //     this.total$ = this.buscarComisionesService.total$
+    // }
+
 
   onSort({column, direction}: SortEvent) {
     // resetting other headers

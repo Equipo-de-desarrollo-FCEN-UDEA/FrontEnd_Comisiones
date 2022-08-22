@@ -1,15 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-interface Pais {
-  id: number;
-  name: string;
-  iso2 : string;
-}
-interface Ciudad {
-  id: number;
-  name: string;
-}
+import {Pais, Ciudad, Estado} from '@interfaces/paises-ciudades';
+
 
 
 @Injectable({
@@ -23,14 +16,22 @@ export class PaisesCiudadesService {
     private http : HttpClient
   ) { }
 
-  getPaises() : Observable<Pais> {
-    var headers = new HttpHeaders()
-    headers.append("X-CSCAPI-KEY", "API_KEY")
-    return this.http.get<Pais>('https://api.countrystatecity.in/v1/countries');
+  private headers = new HttpHeaders(
+    {
+      'X-CSCAPI-KEY': "TFZ6T0s0NnZhYUc3WUgzY2tEQmRoYXNaaGU4SlpFeTNtTzRGQkROZA=="
+    }
+  )
+  getPaises() : Observable<Pais[]> {
+    
+    return this.http.get<Pais[]>('https://api.countrystatecity.in/v1/countries',{headers:this.headers} );
   }
 
-  getCiudades(pais : Pais) : Observable<Ciudad> {
-    return this.http.get<Ciudad>(`https://api.countrystatecity.in/v1/countries/${pais.iso2}/cities`);
+  getEstados(pais : Pais) :Observable<Estado[]>{
+    return this.http.get<Estado[]>(`https://api.countrystatecity.in/v1/countries/${pais.iso2}/states`,{headers:this.headers});
+  }
+
+  getCiudades(pais : Pais, estado : Estado) : Observable<Ciudad[]> {
+    return this.http.get<Ciudad[]>(`https://api.countrystatecity.in/v1/countries/${pais.iso2}/states/${estado.iso2}/cities`,{headers:this.headers});
   }
 
 }

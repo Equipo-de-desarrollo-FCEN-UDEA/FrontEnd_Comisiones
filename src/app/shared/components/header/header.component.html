@@ -20,7 +20,10 @@
           </span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="id01" ngbDropdownMenu>
-          <a class="dropdown-item" routerLink="usuarios/ver-usuario/me">Ver perfil</a>
+          <a class="dropdown-item"
+             [routerLink]="['/usuarios/ver-usuario', usuario?.id]"
+             >Ver perfil
+          </a>
           <li><hr class="dropdown-divider"></li>
           <a class="dropdown-item" (click)="logout()">Cerrar Sesi&oacute;n</a>
           
@@ -45,7 +48,7 @@
         <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Solicitudes</a>
       </li>
       <li class="nav-item">
-        <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Usuarios</a>
+        <a style="color:#fff" class="nav-link active" [routerLink]="['/usuarios/lista-usuarios']" aria-current="page">Usuarios</a>
       </li>
       <li class="nav-item">
         <a style="color:#fff" class="nav-link active" routerLink="../home" aria-current="page">Registrar Usuarios</a>
@@ -120,8 +123,8 @@
                   <span>GENERAL</span>
                 </div>
                 <ul>
-                  <li  routerLink="usuarios/ver-usuario/me">
-                    <a routerLink="">
+                  <li  [routerLink]="['/usuarios/ver-usuario', usuario?.id]">
+                    <a>
                       <span>
                         <i class="fa-solid fa-user-astronaut"></i>
                         Mi Perfil
@@ -156,8 +159,8 @@
                         Facultades
                       </span>
                     </a>
-                  <li routerLink="../usuarios/lista-usuarios">
-                    <a href="#">
+                  <li [routerLink]="['/usuarios/lista-usuarios']">
+                    <a>
                       <span>
                         <i class="fa-solid fa-users"></i>
                         Usuarios

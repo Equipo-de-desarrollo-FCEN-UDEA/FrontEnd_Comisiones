@@ -2,10 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsuariosRoutingModule } from './usuarios-routing.module';
-import { VerUsuarioComponent } from './ver-usuario/ver-usuario.component';
-import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
-import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { VerUsuarioComponent } from './pages/ver-usuario/ver-usuario.component';
+import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
+import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { EditarContrasenaComponent } from './pages/editar-contrasena/editar-contrasena.component';
+
+import { NgbdSortableHeader } from '@shared/directivas/sortable.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '@shared/shared.module';
+
 
 
 @NgModule({
@@ -13,13 +20,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   
     VerUsuarioComponent,
        ListaUsuariosComponent,
-       EditarUsuarioComponent
+       EditarUsuarioComponent,
+
+       EditarContrasenaComponent
+
+      // NgbdSortableHeader
+
   ],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
+    NgbModule,
+    SharedModule
+  ],
+  providers:[
+    // NgbdSortableHeader
   ]
 })
 export class UsuariosModule { }

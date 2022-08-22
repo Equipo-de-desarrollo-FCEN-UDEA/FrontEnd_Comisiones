@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from '@guards/admin.guard';
-import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
-import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
-import { VerUsuarioComponent } from './ver-usuario/ver-usuario.component';
+import { EditarContrasenaComponent } from './pages/editar-contrasena/editar-contrasena.component';
+import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.component';
+import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
+import { VerUsuarioComponent } from './pages/ver-usuario/ver-usuario.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,11 @@ const routes: Routes = [
   {
     path: 'editar-usuario/:id',
     component: EditarUsuarioComponent
-  }
+  },
+ {
+  path: 'editar-contrasena/:id',
+  component: EditarContrasenaComponent
+ }
 ];
 
 @NgModule({

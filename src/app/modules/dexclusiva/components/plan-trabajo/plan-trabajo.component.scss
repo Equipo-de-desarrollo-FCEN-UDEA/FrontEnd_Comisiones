@@ -1,0 +1,40 @@
+.container{
+    max-width: 1400px;
+}
+
+.lineGroup{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.btn-remove {
+    color: #212529;
+    background-color: #ef434d;
+    border-color: #020202
+  }
+  
+  .btn-remove:hover {
+    color: #212529;
+    background-color: #d45f57;
+    border-color: #000000
+  }
+  
+  .btn-add {
+    color: #212529;
+    background-color: #43b649;
+    border-color: #030303
+  }
+  
+  .btn-add:hover {
+    color: #212529;
+    background-color: #79b97c;
+    border-color: #000000
+  }
+  
+.buttons{
+    align-items: flex-end;
+    margin-right: 0;
+}

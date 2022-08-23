@@ -89,7 +89,6 @@
   </div>
 
 
-
   
   <!-- DOCUMENTOS -->
   <div class="row regular-row">
@@ -99,6 +98,15 @@
         <li *ngFor="let doc of documentosArray" >
           <span (click)="abrirDocumento(doc.id)">{{doc.nombre}}&nbsp;&nbsp;</span>&nbsp;
         </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-6 label">Cumplido</div>
+    <div class="col-sm-6">
+      <ul>
+        <li><span (click)="abrirDocumento(cumplidosArray.id)">{{cumplidosArray?.nombre}}&nbsp;&nbsp;</span>&nbsp;</li>
       </ul>
     </div>
   </div>

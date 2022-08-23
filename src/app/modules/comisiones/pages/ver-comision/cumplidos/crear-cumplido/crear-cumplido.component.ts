@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -12,8 +12,8 @@ import { LoaderService } from '@services/interceptors/loader.service';
 
 @Component({
   selector: 'app-cumplido',
-  templateUrl: './cumplido.component.html',
-  styleUrls: ['./cumplido.component.scss']
+  templateUrl: './crear-cumplido.component.html',
+  styleUrls: ['./crear-cumplido.component.scss']
 })
 export class CumplidoComponent implements OnInit {
 
@@ -29,8 +29,18 @@ export class CumplidoComponent implements OnInit {
   files : any[]=[];
 
   archivos = [1];
+  correosArray:any = [];
 
   cumplidoForm: FormGroup;
+
+  correosPredeterminados: any= [
+    { nombre: 'Secretaria del CIEN', value: 'dandrea.torres@udea.edu.co' },
+    { nombre: 'Programa de Extensión', value: 'dandrea.torres@udea.edu.co' },
+    { nombre: 'Fondo de Pasajes Internacionales', value: 'dandrea.torres@udea.edu.co' },
+    { nombre: 'Vicerrectoría de Investigación', value: 'david.torresg@udea.edu.co' },
+    { nombre: 'Centro de Investigaciones SIU', value: 'david.torresg@udea.edu.co' },
+    { nombre: 'Fondos de Vicerrectoría de Docencia', value: 'david.torresg@udea.edu.co' }
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,14 +54,34 @@ export class CumplidoComponent implements OnInit {
 
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
 
+
     this.cumplidoForm = this.formBuilder.group({
-      observations: [''],
-      emails: [''],
+      observaciones: [''],
+      correos:  new FormArray([]),
+      otrosDestinatarios: [''],
       comisiones_id: [this.getId]
     })
   }
 
   ngOnInit(): void {
+    
+  }
+
+
+  // ----------------------------------------------
+  // --------------- CHECKBOX CORREOS -------------
+  // ---------------------------------------------
+  onCheckboxChange(event: any) {
+    
+    const correos = (this.cumplidoForm.controls['correos'] as FormArray);
+
+    if (event.target.checked) {
+      correos.push(new FormControl(event.target.value));
+
+    } else {
+      const index = correos.controls.findIndex(x => x.value === event.target.value);
+      correos.removeAt(index);
+    }
   }
 
   // --------------------------------------------------
@@ -100,21 +130,26 @@ export class CumplidoComponent implements OnInit {
     }
 
     const body = {
-      observations: this.cumplidoForm.value.observations,
-      emails: this.cumplidoForm.value.emails,
-      comisiones_id: this.cumplidoForm.value.comisiones_id
+      observaciones: this.cumplidoForm.value.observaciones,
+      correos: this.cumplidoForm.value.correos,
+      comisiones_id: this.cumplidoForm.value.comisiones_id,
+      otrosDestinatarios : this.cumplidoForm.value.otrosDestinatarios.split(",")
     }
 
+    body.otrosDestinatarios.forEach((correo: any) => body.correos.push(correo));
+
+
     const reqBody: FormData = new FormData();
-    reqBody.append('observations', body.observations);
-    reqBody.append('emails', body.emails);
+    reqBody.append('observaciones', body.observaciones);
+    reqBody.append('correos', body.correos);
     reqBody.append('comisiones_id', body.comisiones_id);
 
     for (const file of this.files) {
       reqBody.append('archivo', file, file.name) 
     }
 
-    console.log(reqBody.get('archivo'));
+    console.log(reqBody.get('correos'));
+    console.log(body.correos);
 
 
     // Post cumplido 

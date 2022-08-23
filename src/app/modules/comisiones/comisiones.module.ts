@@ -9,7 +9,7 @@ import { NgbActiveModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-boot
 import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
 import { HistorialEstadosComponent } from './pages/ver-comision/estados/historial-estados/historial-estados.component';
 import { EstadosComisionComponent } from './pages/ver-comision/estados/estados-comision/estados-comision.component';
-import { CumplidoComponent } from './pages/ver-comision/cumplido/cumplido.component';
+import { CumplidoComponent } from './pages/ver-comision/cumplidos/crear-cumplido/crear-cumplido.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,7 @@ import { CumplidoComponent } from './pages/ver-comision/cumplido/cumplido.compon
     EditarComisionComponent,
     HistorialEstadosComponent,
     EstadosComisionComponent,
-    CumplidoComponent
-    
+    CumplidoComponent    
     
   ],
   imports: [

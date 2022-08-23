@@ -28,6 +28,7 @@ export class VerComisionComponent {
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   documentosArray:any = [];
+  cumplidosArray:any;
   fechaCreacion:any = '';
 
   ultimoElemento = ultimoElement
@@ -58,7 +59,8 @@ export class VerComisionComponent {
                 this.fechaCreacion = this.comision?.intermediate_comisiones[0].createdAt;
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
                 this.estados = this.comision.intermediate_comisiones;
-                console.log(this.estados); 
+                this.cumplidosArray = this.ultimoElemento(this.comision.cumplidos);
+                console.log(this.cumplidosArray); 
               });
             }
         },

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CumplidoComponent } from './cumplido.component';
+import { CumplidoComponent } from './crear-cumplido.component';
 
 describe('CumplidoComponent', () => {
   let component: CumplidoComponent;

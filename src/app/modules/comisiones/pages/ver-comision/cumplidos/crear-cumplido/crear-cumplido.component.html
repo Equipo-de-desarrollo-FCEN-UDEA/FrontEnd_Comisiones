@@ -7,52 +7,18 @@
     <hr />
   
     <form [formGroup]="cumplidoForm" (ngSubmit)="subirCumplido()">
-      <!-- <div class="row header-row">
-        <div class="col-4 label">ID de la Solicitud</div>
-        <div class="col-sm-8">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="comisiones_id"
-          />
-        </div>
-      </div> -->
-  
+      
       <div class="row regular-row">
         <div class="col-4 label">Destinatarios</div>
         <div class="col-sm-8">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-            />
-            <label class="form-check-label"> Secretaria del CIEN </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label"> Programa de Extensión </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label">
-              Fondo de Pasajes Internacionales
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label">
-              Vicerrectoría de Investigación
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label"> Centro de Investigaciones SIU</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label">
-              Fondos de Vicerrectoría de Docencia
-            </label>
+          <div class="form-check" 
+          *ngFor="let correo of correosPredeterminados; let i=index">
+          <input class="form-check-input" 
+          type="checkbox" 
+          formArrayName="correos"
+          [value]="correo.value" (change)="onCheckboxChange($event)" 
+          />
+          <label class="form-check-label"> {{ correo.nombre }} </label>
           </div>
         </div>
       </div>
@@ -65,7 +31,7 @@
               class="form-control"
               rows="3"
               placeholder="Correos separados por comas"
-              formControlName="emails"
+              formControlName="otrosDestinatarios"
             ></textarea>
           </div>
         </div>
@@ -78,7 +44,7 @@
             <textarea
               class="form-control"
               rows="3"
-              formControlName="observations"
+              formControlName="observaciones"
               placeholder="Incluya aquí otra información complementaria que pueda ser de importancia para los destinatarios del cumplido. Así por ejemplo, si el cumplido esta relacionado con un Proyecto de Investigación y desea enviarlo a la dependencia que otorgo recursos relacionados, indique el nombre del Proyecto."
             ></textarea>
           </div>

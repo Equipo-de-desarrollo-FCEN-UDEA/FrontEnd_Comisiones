@@ -39,14 +39,14 @@
         <div class="row">
             <div class="col-lg-6 formfloatig">
                 <input id="floatingExt" placeholder=" " formControlName="extension_oficina" class="form-control">
-                <label for="floatingExt" class="formLabel" style="padding-left:0.5em;"> Número de extención
+                <label for="floatingExt" class="formLabel" style="padding-left:1em;"> Número de extención
                     oficina</label>
             </div>
 
             <div class="col-lg-6 formfloatig">
-                <input id="floatingcelular" formControlName="celular" class="form-control" style="padding-left:5em;"
+                <input id="floatingcelular" formControlName="celular" class="form-control" 
                     type="number" placeholder=" " [ngClass]="{'is-invalid': fBasicInfo.controls['celular'].invalid }">
-                <label for="floatingcelular" class="formLabel"> Número de teléfono celular</label>
+                <label style="padding-left:1em;" for="floatingcelular" class="formLabel"> Número de teléfono celular</label>
             </div>
         </div>
 

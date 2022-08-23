@@ -43,6 +43,7 @@ export class CrearDedicacionComponent implements OnInit {
       if (result.value) {
         this.dexclusivaSvc.postDedicacion(result.value).subscribe(
           (data: any) => {
+            console.log(data);
             this.comunicacionSvc.setId(data.dedicaciones_id);
           })
         Swal.fire({

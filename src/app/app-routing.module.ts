@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@guards/auth.guard';
-import { TablaSolicitudesComponent } from '@shared/components/solicitudes/tabla-solicitudes/tabla-solicitudes.component';
 import { LoginComponent } from '@shared/pages/login/login.component';
 import { NotFoundComponent } from '@shared/pages/not-found/not-found.component';
 import { RecuperarContrasenaComponent } from '@shared/pages/recuperar-contrasena/recuperar-contrasena.component';
 
 const routes: Routes = [
   {
-    path: 'dexclusiva',
+    path: 'dedicaciones',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/dexclusiva/dexclusiva.module')
-      .then(m => m.DexclusivaModule)
+    loadChildren: () => import('./modules/dedicaciones/dedicaciones.module')
+      .then(m => m.DedicacionesModule)
   },
   {
     path: 'comisiones',
@@ -33,10 +32,6 @@ const routes: Routes = [
     path: '404',
     component: NotFoundComponent
   },
-  // {
-  //   path: 'recuperar-contrasena',
-  //   component: RecuperarContrasenaComponent
-  // },
   {
     path: 'recuperar-contrasena',
     component: RecuperarContrasenaComponent
@@ -44,13 +39,12 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    
     pathMatch: 'full'
   },
   { path: 'home',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./shared/components/solicitudes/solicitudes.module')
-      .then(m => m.SolicitudesModule) 
+    loadChildren: () => import('./modules/solicitudes/solicitudes.module')
+    .then(m=>m.SolicitudesModule)
   },
   { path: 'usuarios',
     canActivate: [AuthGuard], 

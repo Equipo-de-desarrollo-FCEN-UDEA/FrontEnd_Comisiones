@@ -1,0 +1,134 @@
+<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded ">
+    <form>
+      <div class="mb-3 row">
+        <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar:</label>
+        <div class="col-xs-3 col-sm-auto">
+          <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
+        </div>
+        <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
+
+       <div class="col-xs-3 col-sm-auto">
+        <select class="form-select" (change)="changeOption($event)" style="width: auto"> 
+          <option value="0">No archivados</option>
+          <option value="1">Archivados</option>
+          <option value="2">Todos</option>
+          
+        </select>
+       </div>
+      </div>
+
+    
+    
+      <table class="table table-striped">
+        <thead>
+        <tr>
+        
+          <th scope="col">#</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
+          <th scope="col" sortable="nombre"(sort)="onSort($event)">Estado</th>
+          <th scope="col" sortable="createdAt"(sort)="onSort($event)">Fecha</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Nombre</th>
+          <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamento</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)" >Descargas</th>
+          <th> </th>
+    
+        </tr>
+        </thead>
+        <tbody>
+        
+          <tr *ngFor="let permiso of permisos$ | async">
+    
+          <th scope="row">{{ permiso.id }}</th>
+
+          <td>
+            <ngb-highlight 
+            [result]="permiso.tipos_permiso.nombre" 
+            [term]="service.searchTerm">
+            </ngb-highlight>
+          </td>
+          
+          <td>
+            <ngb-highlight
+              [result]="ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre"
+              [term]="service.searchTerm"
+              class="badge badge-pill pill"
+              [ngClass]="{
+                'bg-solicitada':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'SOLICITADA',
+                
+                'bg-aprobada': ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'APROBADA',
+
+                'bg-visto-bueno':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'VISTO BUENO',
+                'bg-finalizada':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'FINALIZADA',
+                'bg-rechazada-decanato':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA DECANATO',
+                'bg-rechazada-coordinacion':
+                ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
+              }"
+            ></ngb-highlight>
+          </td>
+    
+          <td>
+            <ngb-highlight 
+            [result]="ultimoElemento(permiso.intermediate_permisos).createdAt | date:'yyyy-MM-dd'" 
+            [term]="service.searchTerm">
+            </ngb-highlight>
+          </td>
+    
+          <td>
+            <ngb-highlight
+            [result]="permiso.usuarios.nombre" [term]="service.searchTerm">
+            </ngb-highlight>
+          </td>
+    
+          <td>
+            <ngb-highlight
+            [result]="permiso.usuarios.apellido" [term]="service.searchTerm">
+            </ngb-highlight>
+          </td>
+    
+          <td>
+            <ngb-highlight
+            [result]="permiso.usuarios.departamentos.nombre" [term]="service.searchTerm">
+            </ngb-highlight>
+          </td>
+    
+          <td>
+            <ngb-highlight
+            [result]="permiso.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
+            </ngb-highlight>
+         
+          </td>
+
+          <td>
+            <ngb-highlight
+            [result]="permiso.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
+            </ngb-highlight>
+         
+          </td>
+
+          
+         
+          
+        </tbody>
+      </table>
+    
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+        </ngb-pagination> 
+    
+        <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize"> 
+          <option [ngValue]="7">7 items por página</option>
+          <option [ngValue]="6">6 items per página</option>
+          <option [ngValue]="5">5 items per página</option>
+        </select>
+      </div>
+    
+    </form>
+    </div>
+    

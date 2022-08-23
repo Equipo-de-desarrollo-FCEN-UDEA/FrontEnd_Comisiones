@@ -7,8 +7,7 @@ import { Comision } from "../../../../core/interfaces/comisiones";
 import {Country} from './country';
 // import {CountryService} from './country.service';
 import {NgbdSortableHeader, SortEvent} from '@shared/directivas/sortable.directive';
-import { BuscarComisionesService } from '@services/buscar-comisiones.service';
-import { ComisionesService } from '@services/comisiones.service';
+import { BuscarComisionesService } from '@services/busquedas/buscar-comisiones.service';
 import { Router } from '@angular/router';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
 

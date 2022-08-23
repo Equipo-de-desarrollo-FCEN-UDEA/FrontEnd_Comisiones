@@ -6,6 +6,7 @@ import { UsuarioInside } from "./usuario";
 
 export interface PermisosInside {
     id: number;
+    createdAt: Date;
     fecha_inicio: Date;
     fecha_fin: Date;
     justificacion: string;
@@ -26,6 +27,6 @@ export interface Permiso extends PermisosInDB {
     documentos: DocumentosInside[];
     usuarios: UsuarioInside;
     intermediate_permisos: PermisosxestadoInside[];
-    Comision: Comision[]
+    tipos_permiso_id: number;
 }
 

@@ -1,4 +1,4 @@
-<div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded" style="align-items: unset;">
+<div class="container card shadow mt-5 bg-white rounded p-4 w-75">
   <div class="row header-row">
     <div class="col">
       <span class="text-secondary">PERMISO</span>
@@ -7,44 +7,74 @@
 
   <hr />
   <div class="row regular-row">
-    <div class="col-6 label">Tipo de Permiso</div>
-    <div class="col-sm-6">permiso.tipos_permisos</div>
+    <div class="col-6 label">Solicitante</div>
+    <div class="col-sm-6">
+      {{ permiso?.usuarios?.nombre }} {{ permiso?.usuarios?.apellido }}
+    </div>
+  </div>
+
+  <hr />
+  <div class="row regular-row">
+    <div class="col-6 label">Tipo de Comisión</div>
+    <div class="col-sm-6">{{permiso?.tipos_permiso?.nombre}}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
-    <div class="col-sm-6">permiso.createdAt | date: "fullDate" </div>
+    <div class="col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
-    <div class="col-sm-6">permiso.fecha_inicio | date: "fullDate"</div>
+    <div class="col-sm-6">{{permiso?.fecha_inicio | date: "fullDate"}}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
-    <div class="col-sm-6">permiso.fecha_fin | date: "fullDate"</div>
+    <div class="col-sm-6">{{permiso?.fecha_fin | date: "fullDate"}}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Justificación</div>
-    <div class="col-sm-6">permiso.justificacion</div>
+    <div class="col-sm-6">{{permiso?.justificacion}}</div>
   </div>
 
 
   <div class="row regular-row">
-    <div class="col-6 label">Estado Actual del Permiso</div>
+    <div class="col-6 label">Estado Actual de la Comisión</div>
       <div class="col-4">
-        <span
-          class="badge badge-pill pill">
+        <span 
+        class="badge badge-pill pill"
+        [ngClass]="{
+          'bg-solicitada':
+          estadoActual === 'SOLICITADA',
+          'bg-aprobada':
+            estadoActual === 'APROBADA',
+          'bg-visto-bueno':
+            estadoActual === 'VISTO BUENO',
+          'bg-finalizada':
+            estadoActual === 'FINALIZADA',
+          'bg-rechazada-decanato':
+            estadoActual === 'RECHAZADA DECANATO',
+          'bg-rechazada-coordinacion':
+            estadoActual === 'RECHAZADA COORDINACIÓN'
+        }"> 
+          {{estadoActual}}
         </span>
       </div>
   </div>
 
   
+  <!-- DOCUMENTOS -->
   <div class="row regular-row">
-    <div class="col-6 label">Anexos</div>
-    <div class="col-sm-6"><i class="fas fa-circle"></i> Anexo 1</div>
+    <div class="col-6 label">Documentos</div>
+    <div class="col-sm-6">
+      <ul>
+        <li *ngFor="let doc of documentosArray" >
+          <span (click)="abrirDocumento(doc.id)">{{doc.nombre}}&nbsp;&nbsp;</span>&nbsp;
+        </li>
+      </ul>
+    </div>
   </div>
 
 
@@ -53,14 +83,33 @@
     <div class="col-6"></div>
   </div>
 
-  <!-- <div class="d-md-flex justify-content-md-end">
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
-      <button 
-      type="button" 
-      class="btn btn-success" 
+  <!-- <div class="row regular-row">
+    <div class="col-4">
+      <span
+        class="badge badge-pill pill"
+        [ngClass]="{
+          'bg-solicitada':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'SOLICITADA',
+          'bg-aprobada':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'APROBADA',
+          'bg-visto-bueno':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'VISTO BUENO',
+          'bg-finalizada':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'FINALIZADA',
+          'bg-rechazada-decanato':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'RECHAZADA DECANATO',
+          'bg-rechazada-coordinacion':
+            solicitud.estadoActual['intermediate_estados']['nombre'] ===
+            'RECHAZADA COORDINACIÓN'
+        }"
       >
-        Agregar Estado
-      </button>
+        {{ solicitud.estadoActual["intermediate_estados"]["nombre"] }}
+      </span>
     </div>
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
       <button
@@ -71,25 +120,20 @@
       </button>
     </div> -->
     <!-- <div  class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-      <app-ver-estados-comision></app-ver-estados-comision>
+      <app-ver-estados-permiso></app-ver-estados-permiso>
     </div> -->
   <!-- </div> -->
-  <div class="alert alert-danger mt-3 mb-0">
-    error
+  <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+    {{ error }}
   </div>
 
+  <!-- ELIMINAR O EDITAR -->
   <hr />
-
   <div class="footer-row d-md-flex justify-content-md-end">
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-      <button
-        type="button"
-        class="btn btn-danger"
-        (click)="delete(permisos.id)"
-      >
-        <span
-          class="spinner-border spinner-border-sm mr-1"
-        ></span>
+      <button class="btn btn-danger" 
+      (click)="delete(permiso?.id)">
+        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" ></span>
         Eliminar
       </button>
     </div>
@@ -97,6 +141,7 @@
       <button
         type="button"
         class="btn btn-warning "
+        [routerLink]="['/permisos/editar-permiso', permiso?.id]"
       >
         Editar
       </button>

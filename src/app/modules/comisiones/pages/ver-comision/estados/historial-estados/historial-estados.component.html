@@ -1,0 +1,36 @@
+<div class="modal-body">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Estado</th>
+          <th scope="col">Fecha de Actualización</th>
+          <th scope="col">Observación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let estado of estados">
+          <th>
+            <ngb-highlight
+              [result]="estado.intermediate_estados.nombre"
+              class="badge badge-pill pill"
+              [ngClass]="{
+                'bg-solicitada':
+                estado.intermediate_estados.nombre === 'SOLICITADA',
+                'bg-aprobada': estado.intermediate_estados.nombre === 'APROBADA',
+                'bg-visto-bueno':
+                estado.intermediate_estados.nombre === 'VISTO BUENO',
+                'bg-finalizada':
+                estado.intermediate_estados.nombre === 'FINALIZADA',
+                'bg-rechazada-decanato':
+                estado.intermediate_estados.nombre === 'RECHAZADA DECANATO',
+                'bg-rechazada-coordinacion':
+                estado.intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
+              }"
+            >{{estado.intermediate_estados.nombre}}</ngb-highlight>
+            <td>{{estado.createdAt | date }}</td>
+            <td>{{estado.observacion}}</td>
+      </tbody>
+    </table>
+  </div>
+</div>

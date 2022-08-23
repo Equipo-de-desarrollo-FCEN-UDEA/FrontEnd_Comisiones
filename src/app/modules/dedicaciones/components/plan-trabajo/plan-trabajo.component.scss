@@ -1,0 +1,72 @@
+.container{
+    max-width: 1400px;
+}
+
+// .lineGroup{
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+//     align-items: center;
+//     margin-bottom: 10px;
+// }
+
+*{
+  box-sizing: border-box;
+  font-size: small;
+}
+
+.card{
+  margin-top:0;
+}
+h6{
+  margin-top: 1em;
+}
+
+.row{
+  width: 100%;
+  align-items: flex-end;
+  & > div {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.btn-remove {
+    color: #212529;
+    background-color: #ef434d;
+    border-color: #020202
+  }
+  
+  .btn-remove:hover {
+    color: #212529;
+    background-color: #d45f57;
+    border-color: #000000
+  }
+  
+  .btn-add {
+    color: #212529;
+    background-color: #43b649;
+    border-color: #030303
+  }
+  
+  .btn-add:hover {
+    color: #212529;
+    background-color: #79b97c;
+    border-color: #000000
+  }
+  
+.buttons{
+    align-items: center;
+    margin: 0.5em;
+    width: fit-content;
+}
+
+.arrayLike{
+  padding: 0;
+  margin-bottom: 1em;
+}
+
+.formfloatig{
+  padding: 0;
+  margin: 0;
+}

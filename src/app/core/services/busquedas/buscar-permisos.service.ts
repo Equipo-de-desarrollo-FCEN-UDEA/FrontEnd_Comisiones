@@ -90,8 +90,8 @@ export class BuscarPermisosService {
 
     this.permisosSvc.getPermisos(this.archivado$.getValue())
     .subscribe(
-      (permisos: Permiso[]) => {
-        this.PERMISOS = permisos;
+      (resp: any) => {
+        this.PERMISOS = resp.permisos;
       }
     )
    }

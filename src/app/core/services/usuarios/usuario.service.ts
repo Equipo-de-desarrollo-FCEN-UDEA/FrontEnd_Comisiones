@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioInDB, UsuarioResponse } from '@interfaces/usuario';
+import { Comision } from '@interfaces/comisiones';
+import { Usuario, UsuarioInDB, UsuarioResponse } from '@interfaces/usuario';
 import { prefix } from '@shared/data/ruta-api';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +39,8 @@ export class UsuarioService {
     return this.http.get<UsuarioResponse>(`${this.prefix}/${id}`);
   }
 
-  getAllUsuarios(){
-    return this.http.get<UsuarioResponse[]>(`${this.prefix}`);
+  getAllUsuarios():Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(`${this.prefix}`);
   }
 
   updateUsuario(usuario: any) {

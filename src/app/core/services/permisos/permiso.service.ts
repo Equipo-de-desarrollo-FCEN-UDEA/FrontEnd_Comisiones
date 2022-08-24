@@ -11,15 +11,32 @@ import { map, Observable } from 'rxjs';
 })
 export class PermisoService {
   private urlEndPoint:string = prefix+'permisos';
+  getPermisos: any;
 
   constructor( private http: HttpClient) { }
 
-  getPermisos(archivado: number): Observable<Permiso[]> {
-    let params = archivado !=2 ? new HttpParams().append("archivado", archivado) : new HttpParams();
-    return this.http.get<Permiso[]>(this.urlEndPoint, {
+  scopegetPermisos(archivado: number): Observable<any> {
+    let params = new HttpParams()
+
+    if (archivado != 2 ) {params.append("archivado", archivado)}
+    params.append("offset", 0)
+    params.append("limit", 100)
+    
+    return this.http.get<Permiso[]>(`${this.urlEndPoint}`, {
       params:params
-    })
+    } 
+      
+    )
   }
+
+  // scopegetPermisos(offset:number,limit:number,archivado: number): Observable<Permiso[]> {
+  //   let params = archivado !=2 ? new HttpParams().append("archivado", archivado): new HttpParams();
+  //   return this.http.get<Permiso[]>(this.urlEndPoint, {
+  //     params:params
+  //   })
+  // }
+  
+
 
 
   getPermiso(id: string | number): Observable<any> {

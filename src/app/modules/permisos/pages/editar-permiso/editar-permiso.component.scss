@@ -15,15 +15,24 @@
 .custom-day.faded {
   background-color: #43b649af;
 }
+
 .container{
   min-height: 100vh;
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   padding: 1em;
+  align-items: unset;
+  margin-bottom: 6em!important;
 }
+
+p {
+  text-align: center; 
+  margin: 0; 
+  color: green;
+}
+
 .card{
 margin: auto;
 margin-top: 0;
@@ -54,6 +63,10 @@ left: 1.7em;
 display: none;
 }
 
+.buttons {
+  width: fit-content; 
+  margin: 0;
+}
 
 .btn-success {
   background-color: #43b649;
@@ -63,22 +76,14 @@ display: none;
   color: #fff;
   background-color: var(--032c);
   border-color: #fff;
-}
-
-.btn-remove:hover {
-  color: #fff;;
+} .btn-remove:hover {
   background-color: #d45f57;
-  border-color: #fff;
 }
 
 .btn-add {
   color: #fff;
+  border-color: #fff;
   background-color: #43b649;
-  border-color: #fff;
-}
-
-.btn-add:hover {
-  color: #fff;
+} .btn-add:hover {
   background-color: #79b97c;
-  border-color: #fff;
 }

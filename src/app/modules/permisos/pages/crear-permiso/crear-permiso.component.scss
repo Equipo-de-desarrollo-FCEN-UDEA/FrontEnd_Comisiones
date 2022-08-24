@@ -20,15 +20,22 @@
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     padding: 1em;
+    align-items: unset;
+    margin-bottom: 6em!important;
   }
   .card{
   margin: auto;
   margin-top: 0;
   padding: 1em 0.5em;
   }
+
+p {
+  text-align: center; 
+  margin: 0; 
+  color: green;
+}
   
   @media screen and (max-width: 576px){
   :host ::ng-deep .ngb-dp-months {
@@ -55,29 +62,28 @@
   }
   
   
-  
+  .buttons {
+    width: fit-content; 
+    margin: 0;
+  }
   
   .btn-remove {
-    color: #212529;
+    border-color: #fff;
+    color: #fff;
     background-color: var(--032c);
-    border-color: #020202
   }
   
   .btn-remove:hover {
-    color: #212529;
     background-color: #d45f57;
-    border-color: #000000
   }
   
   .btn-add {
-    color: #212529;
+    border-color: #fff;
+    color: #fff;
     background-color: #43b649;
-    border-color: #030303
   }
   
   .btn-add:hover {
-    color: #212529;
     background-color: #79b97c;
-    border-color: #000000
   }
   

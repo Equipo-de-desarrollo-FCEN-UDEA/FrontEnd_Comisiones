@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -37,7 +38,7 @@ export class RecuperarContrasenaComponent implements OnInit {
 
     this.authService
     .forgotPassword(this.f['correo'].value)
-    
+
   }
 
 }

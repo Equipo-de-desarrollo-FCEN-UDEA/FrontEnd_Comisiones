@@ -19,11 +19,18 @@ export class PermisoService {
 
   
   
-  scopegetPermisos(archivado: any): Observable<any> {
-    const params = new HttpParams()
-    .set('archivado', archivado)
-    .set("offset", 0)
-    .set('limit', 100)
+  scopegetPermisos(archivado: number): Observable<any> {
+    let params = new HttpParams()
+    // .set('archivado', archivado)
+    // .set("offset", 0)
+    // .set('limit', 100)
+
+    if (archivado != 2 ){
+      params = params.append('archivado', archivado);
+    }
+    params = params.append('offset', 0);
+    params = params.append('limit', 100);
+
     console.log(params+"  parametros")
 
     return this.http.get<Permiso[]>(`${this.urlEndPoint}`, {

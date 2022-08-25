@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Rol } from '@interfaces/roles';
-import { Usuario, UsuarioBase, UsuarioInside } from '@interfaces/usuario';
+import { Usuario, UsuarioInside } from '@interfaces/usuario';
 import { AuthService } from '@services/auth/auth.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { filter} from 'rxjs';
@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
       next: (params) => {
       this.usuarioService.getUsuario().subscribe((resUsuario) => {
         this.usuario = resUsuario;
-        console.log(this.usuario)
       });
     } 
     });

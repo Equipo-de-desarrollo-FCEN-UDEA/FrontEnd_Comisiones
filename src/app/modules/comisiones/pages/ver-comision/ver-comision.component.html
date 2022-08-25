@@ -7,60 +7,60 @@
 
   <hr />
   <div class="row regular-row">
-    <div class="col-6 label">Solicitante</div>
-    <div class="col-sm-6">
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Solicitante</div>
+    <div class="col-xs-12 col-sm-6">
       {{ comision?.usuarios?.nombre }} {{ comision?.usuarios?.apellido }}
     </div>
   </div>
 
   <hr />
   <div class="row regular-row">
-    <div class="col-6 label">Tipo de Comisión</div>
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Tipo de Comisión</div>
 
-    <div class="col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
-
-  </div>
-
-  <div class="row regular-row">
-    <div class="col-6 label">Fecha de Creación</div>
-
-    <div class="col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
+    <div class="col-xs-12 col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
 
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Día que Inicia</div>
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Fecha de Creación</div>
 
-    <div class="col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
-
-  </div>
-
-  <div class="row regular-row">
-    <div class="col-6 label">Día que Termina</div>
-
-    <div class="col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
+    <div class="col-xs-12 col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
 
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Idioma</div>
-    <div class="col-sm-6">{{comision?.idioma}}</div>
-  </div>
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Día que Inicia</div>
 
-  <div class="row regular-row">
-    <div class="col-6 label">Lugar</div>
-    <div class="col-sm-6">{{comision?.lugar}}</div>
+    <div class="col-xs-12 col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
 
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Justificación</div>
-    <div class="col-sm-6">{{comision?.justificacion}}</div>
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Día que Termina</div>
+
+    <div class="col-xs-12 col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
+
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Idioma</div>
+    <div class="col-xs-12 col-sm-6">{{comision?.idioma}}</div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Lugar</div>
+    <div class="col-xs-12 col-sm-6">{{comision?.lugar}}</div>
+
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Justificación</div>
+    <div class="col-xs-12 col-sm-6">{{comision?.justificacion}}</div>
   </div>
 
 
   <div class="row regular-row">
-    <div class="col-6 label">Estado Actual de la Comisión</div>
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Estado Actual de la Comisión</div>
       <div class="col-4">
         <span 
         class="badge badge-pill pill"
@@ -84,7 +84,7 @@
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Resolución</div>
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Resolución</div>
     <div class="col-6">{{comision?.resolucion}}</div>
   </div>
 
@@ -92,8 +92,8 @@
   
   <!-- DOCUMENTOS -->
   <div class="row regular-row">
-    <div class="col-6 label">Documentos</div>
-    <div class="col-sm-6">
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Documentos</div>
+    <div class="col-xs-12 col-sm-6">
       <ul>
         <li *ngFor="let doc of documentosArray" >
           <span (click)="abrirDocumento(doc.id)">{{doc.nombre}}&nbsp;&nbsp;</span>&nbsp;
@@ -103,8 +103,8 @@
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Cumplido</div>
-    <div class="col-sm-6">
+    <div class="col-xs-12 col-sm-6 label fw-bolds">Cumplido</div>
+    <div class="col-xs-12 col-sm-6">
       <ul>
         <li><span (click)="abrirDocumento(cumplidosArray.id)">{{cumplidosArray?.nombre}}&nbsp;&nbsp;</span>&nbsp;</li>
       </ul>
@@ -113,13 +113,17 @@
 
 
   <!-- VER HISTORIAL ESTADOS -->
-  <button
-  type="button"
-  class="btn btn-success btn-green btn-block"
-  (click)="open()"
-  >
-  Ver Historial de estados
-  </button>
+  <div class="d-flex justify-content-center">
+    <button
+    type="button"
+    class="btn btn-success btn-green btn-block col-10"
+    (click)="open()"
+    >
+    Ver Historial de estados
+    </button>
+  </div>
+
+  <hr />
 
   <div class="row regular-row">
     <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
@@ -129,9 +133,31 @@
     {{ error }}
   </div>
 
+ <!-- <div class="footer-row d-md-flex justify-content-md-end">
+  <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+    <button
+    type="button"
+    class="btn btn-light"
+    [routerLink]="['/comisiones/asociar-estado', comision?.id]"
+    >
+      Asociar nuevo Estado
+    </button>
+  </div>
+  <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+    <button
+    type="button"
+    class="btn btn-light"
+    [routerLink]="['/comisiones/subir-cumplido', comision?.id]"
+    >
+      Subir Cumplido
+    </button>
+  </div>
+</div> -->
+
   <!-- ELIMINAR O EDITAR -->
-  <hr />
+
   <div class="footer-row d-md-flex justify-content-md-end">
+
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
       type="button"

@@ -42,7 +42,7 @@ import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
   
   ],
   providers: [ 
-    { provide: LOCALE_ID, useValue: 'es' },
+    //{ provide: LOCALE_ID, useValue: 'es' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
     DatePipe

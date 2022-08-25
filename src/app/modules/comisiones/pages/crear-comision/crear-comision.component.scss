@@ -20,9 +20,10 @@
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   padding: 1em;
+  align-items: unset;
+  margin-bottom: 6em!important;
 }
 .card{
 margin: auto;
@@ -38,6 +39,12 @@ padding: 1em 0.5em;
 :host ::ng-deep .ngb-dp-month {
   flex: 1 0 auto;
 }
+}
+
+p {
+  text-align: center; 
+  margin: 0; 
+  color: green;
 }
 
 .btn-dark {
@@ -59,26 +66,31 @@ display: none;
 }
 
 
+.buttons {
+  width: fit-content; 
+  margin: 0;
+}
+
 .btn-remove {
-color: #212529;
-background-color: #ef434d;
-border-color: #020202
+  border-color: #fff;
+  color: #fff;
+  background-color: var(--032c);
 }
 
 .btn-remove:hover {
-color: #212529;
-background-color: #d45f57;
-border-color: #000000
+  background-color: #d45f57;
 }
 
 .btn-add {
-color: #212529;
-background-color: #43b649;
-border-color: #030303
+  border-color: #fff;
+  color: #fff;
+  background-color: #43b649;
 }
 
 .btn-add:hover {
-color: #212529;
-background-color: #79b97c;
-border-color: #000000
+  background-color: #79b97c;
+}
+
+.btn-success {
+  background-color: #43b649;
 }

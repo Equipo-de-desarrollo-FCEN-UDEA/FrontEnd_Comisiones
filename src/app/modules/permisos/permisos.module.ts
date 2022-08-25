@@ -12,14 +12,10 @@ import { EstadosPermisoComponent } from './pages/ver-permiso/estados-permiso/est
 
 @NgModule({
   declarations: [
-  
     VerPermisoComponent,
     CrearPermisoComponent,
     EditarPermisoComponent,
     EstadosPermisoComponent
-
-
-    
   ],
   imports: [
     CommonModule,

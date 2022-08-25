@@ -28,6 +28,7 @@ const routes: Routes = [
  },
  {
   path: 'registrar-usuarios',
+  canActivate: [AdminGuard],
   component: RegistrarUsuariosComponent
  }
 ];

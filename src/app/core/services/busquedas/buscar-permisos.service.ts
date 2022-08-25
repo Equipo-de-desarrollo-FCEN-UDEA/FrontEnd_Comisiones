@@ -12,6 +12,7 @@ export type SortColumn = keyof Permiso | "";
 interface SearchResult {
   permisos: Permiso[];
   total: number;
+  
 }
 
 interface State {
@@ -57,6 +58,7 @@ export class BuscarPermisosService {
   private _permisos$ = new BehaviorSubject<Permiso[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
+
   private _state: State = {
     page: 1,
     pageSize: 7,
@@ -68,6 +70,8 @@ export class BuscarPermisosService {
   PERMISOS : Permiso[] = [];
   
   archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+  
 
   constructor(
     private permisosSvc: PermisoService,
@@ -82,16 +86,19 @@ export class BuscarPermisosService {
     ).subscribe(result => {
       this._permisos$.next(result.permisos);
       this._total$.next(result.total);
+
+      
+      
     });
 
     this._search$.next();
 
   
 
-    this.permisosSvc.getPermisos(this.archivado$.getValue())
+    this.permisosSvc.scopegetPermisos(this.archivado$.getValue())
     .subscribe(
-      (permisos: Permiso[]) => {
-        this.PERMISOS = permisos;
+      (resp: any) => {
+        this.PERMISOS = resp.permisos;
       }
     )
    }
@@ -102,10 +109,14 @@ export class BuscarPermisosService {
    }
 
    ngOnchanges(){
-    this.permisosSvc.getPermisos(this.archivado$.getValue())
+
+    if (this.archivado$) {
+      
+    }
+    this.permisosSvc.scopegetPermisos(this.archivado$.getValue())
     .subscribe(
-      (permisos: Permiso[]) => {
-        this.PERMISOS = permisos;
+      (resp: any) => {
+        this.PERMISOS = resp.permisos;
         this._permisos$.next(this.PERMISOS);
         this._search$.next();
       }

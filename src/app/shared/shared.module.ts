@@ -8,12 +8,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './directivas/sortable.directive';
 import { BrowserModule } from '@angular/platform-browser';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 
 @NgModule({
   declarations: [
     RecuperarContrasenaComponent,
     NgbdSortableHeader,
     StepperComponent,
+    PlanDesarrolloInstitucionalComponent,
    
   ],
   imports: [

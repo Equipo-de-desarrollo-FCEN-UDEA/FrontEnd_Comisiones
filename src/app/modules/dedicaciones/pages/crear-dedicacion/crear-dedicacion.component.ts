@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -9,7 +9,7 @@ import { CrearComisionComponentsService } from '../../services/crear-comision-co
   templateUrl: './crear-dedicacion.component.html',
   styleUrls: ['./crear-dedicacion.component.scss']
 })
-export class CrearDedicacionComponent implements OnInit {
+export class CrearDedicacionComponent implements OnInit, OnChanges {
 
   @Input()
   isLinear = false;
@@ -27,6 +27,9 @@ export class CrearDedicacionComponent implements OnInit {
     private comunicacionSvc : CrearComisionComponentsService
   ) {
    }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('cambios')
+  }
 
   ngOnInit(): void {
     Swal.fire({

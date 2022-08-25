@@ -10,24 +10,20 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PermisoService {
-  private urlEndPoint:string = prefix+'permisos';
+  private urlEndPoint:string = prefix +'permisos';
+  private urlEndPointArch:string = prefix +'archivarpermiso';
+  
   getPermisos: any;
 
   constructor( private http: HttpClient) { }
-
-
-
-  
   
   scopegetPermisos(archivado: number): Observable<any> {
     let params = new HttpParams()
-    // .set('archivado', archivado)
-    // .set("offset", 0)
-    // .set('limit', 100)
-
+    
     if (archivado != 2 ){
       params = params.append('archivado', archivado);
     }
+    
     params = params.append('offset', 0);
     params = params.append('limit', 100);
 
@@ -41,58 +37,23 @@ export class PermisoService {
       
     )
 
-    
-    
-
-
-    // if (archivado != 2) {
-      
-     
-     
-
-    // }else{
-    //   const params = new HttpParams()
-    //  params.set('archivado', archivado)
-     
-    // }
-
-    
-    // let params = archivado !=2 ? new HttpParams()
-    // .set("archivado", archivado)
-    // .set('archivado', archivado)
-    // .set("offset", 0)
-    // .set('limit', 100) : new HttpParams()
-    
-    // let params = archivado !=2 ? new HttpParams()
-       
-    
-
-    // this.http.get<Permiso>(`${this.urlEndPoint}/`)
-
-    // if (archivado != 2 ) {
-    // params.append("archivado", archivado),
-    // params.append("offset", 0) }
-    
-    // params.append("limit", 100)
-   
-  }
-
-  // scopegetPermisos(offset:number,limit:number,archivado: number): Observable<Permiso[]> {
-  //   let params = archivado !=2 ? new HttpParams().append("archivado", archivado): new HttpParams();
-  //   return this.http.get<Permiso[]>(this.urlEndPoint, {
-  //     params:params
-  //   })
-  // }
-  
-
-
-
-  getPermiso(id: string | number): Observable<any> {
+ }
+ 
+ getPermiso(id: string | number): Observable<any> {
     return this.http.get<PermisosInside>(`${this.urlEndPoint}/${id}`).pipe(
       map((res) => {
         return res;
       })
     ); 
+  }
+
+  patchPermiso(permiso:Permiso): Observable<Permiso> {
+    return this.http.patch<Permiso>(`${this.urlEndPointArch}/${permiso.id}`,permiso)
+    // .pipe(
+      // map((resp)=> {
+      //   return resp;
+      // })
+    // )
   }
 
 

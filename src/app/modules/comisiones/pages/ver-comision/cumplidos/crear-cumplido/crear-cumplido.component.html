@@ -29,8 +29,8 @@
           <div class="form-group">
             <textarea
               class="form-control"
-              rows="3"
-              placeholder="Correos separados por comas"
+              rows="5"
+              placeholder="Correos separados por comas: ejem@udea.edu.co, ejem2@udea.edu.co"
               formControlName="otrosDestinatarios"
             ></textarea>
           </div>
@@ -43,7 +43,7 @@
           <div class="form-group">
             <textarea
               class="form-control"
-              rows="3"
+              rows="10"
               formControlName="observaciones"
               placeholder="Incluya aquí otra información complementaria que pueda ser de importancia para los destinatarios del cumplido. Así por ejemplo, si el cumplido esta relacionado con un Proyecto de Investigación y desea enviarlo a la dependencia que otorgo recursos relacionados, indique el nombre del Proyecto."
             ></textarea>
@@ -82,17 +82,7 @@
               </div>
           </div>
       </div>
-      <div class="row regular-row">
-        <div class="col-4 label"></div>
-        <div class="col-sm-8">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" />
-            <label class="form-check-label" for="gridCheck1">
-              ¿Confirma que desea enviar correo de notificación?
-            </label>
-          </div>
-        </div>
-      </div>
+
       <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
         {{ error }}
       </div>

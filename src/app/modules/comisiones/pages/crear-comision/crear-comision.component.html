@@ -70,28 +70,29 @@
                         [ngClass]="{'isFill': creaComisionForm.controls['pais'].valid}">País de la comision</label>
             </div>
 
-                <!-- <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingestado" formControlName="estado"
-                        [ngClass]="{'is-invalid': isInvalidForm('estado')}" (change)="onChangeEstado($event)" placeholder=" ">
-                        <option [value]="i" *ngFor="let estado of estados;let i=index">{{estado.name}}</option>
-                    </select>
-                    <label for="floatingestado" class="selectLabel"
-                        [ngClass]="{'isFill': creaComisionForm.controls['estado'].valid}">
+             <div class="formfloatig">
+                <select class="form-select form-select-lg mb-3" id="floatingestado" formControlName="provincia"
+                     (change)="onChangeEstado($event)" placeholder=" ">
+                        <option [value]="i" *ngFor="let provincia of provincias;let i=index">{{provincia.name}}</option>
+                </select>
+                <label for="floatingestado" class="selectLabel"
+                        [ngClass]="{'isFill': creaComisionForm.controls['pais'].valid}">
                         <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-                        Estado de la comision</label>
-                </div> -->
+                        Provincia o Departamento de la comisión
+                </label>
+            </div> 
 
-                <!-- <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingciudad" formControlName="ciudad"
-                        [ngClass]="{'is-invalid': isInvalidForm('ciudad')}" [disabled]="!creaComisionForm.controls['pais'].valid" placeholder=" ">
+            <div class="formfloatig">
+                <select class="form-select form-select-lg mb-3" id="floatingciudad" formControlName="ciudad"
+                        [disabled]="!creaComisionForm.controls['pais'].valid" placeholder=" ">
                         <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">{{ciudad.name}}</option>
-                    </select>
-                    <label for="floatingpais" class="selectLabel"
-                        [ngClass]="{'isFill': creaComisionForm.controls['ciudad'].valid}">
-                        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-                        Ciudad de la comision
-                    </label>
-                </div> -->
+                </select>
+                <label for="floatingpais" class="selectLabel"
+                        [ngClass]="{'isFill': creaComisionForm.controls['pais'].valid}">
+                    <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
+                        Ciudad de la comisión
+                </label>
+            </div> 
                 
                 <h6>
                     <span class="text-secondary">Rango de fechas de la comision</span>
@@ -125,16 +126,15 @@
                     </label>
                 </div>
                 
-                <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
-                    Recuerda que la justificación debe tener al menos 30 caracteres y máximo 500 caracteres.
-                </div>
                 <div class="formfloatig">
-
                     <textarea id="floatingjustificacion" formControlName="justificacion" class="form-control"
                         type="justificacion" placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('justificacion')}"
                      rows="5"></textarea>
                     <label for="floatingjustificacion" class="formLabel"> Justificación
                     </label>
+                </div>
+                <div class="alert-danger" *ngIf="isInvalidForm('justificacion')">
+                    Recuerda que la justificación debe tener al menos 30 caracteres y máximo 500 caracteres.
                 </div>
 
                 <!-- ARCHIVOS - DOCUMENTOS -->

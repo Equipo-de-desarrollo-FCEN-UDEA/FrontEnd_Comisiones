@@ -32,6 +32,8 @@ export class VerPermisoComponent implements OnInit {
   // Estados 
   ultimoElemento = ultimoElement
   estadoActual:any = '';
+  estados:any = [];
+  mostrarEstados = false;
 
 
   constructor(
@@ -57,9 +59,11 @@ export class VerPermisoComponent implements OnInit {
             this.permisosSvc.getPermiso(id).subscribe((res) => {
               this.permiso = res;
               this.permiso?.documentos.forEach(documento => this.documentosArray.push(documento));
-              //this.fechaCreacion = this.permiso?.intermediate_permisos[0].created_at;
+              this.estados = this.permiso?.intermediate_permisos;
+              this.fechaCreacion = this.permiso?.intermediate_permisos[0].createdAt;
               this.estadoActual = this.ultimoElemento(res.intermediate_permisos).intermediate_estados?.nombre;
               console.log(this.permiso); 
+              console.log(this.fechaCreacion);
             });
           }
 
@@ -71,6 +75,11 @@ export class VerPermisoComponent implements OnInit {
         }
       },
     });
+  }
+
+
+  open(){ 
+    this.mostrarEstados = !this.mostrarEstados ;
   }
 
 

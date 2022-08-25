@@ -152,24 +152,34 @@ export class CumplidoComponent implements OnInit {
     console.log(body.correos);
 
 
-    // Post cumplido 
-    this.cumplidoSvc.postCumplido(reqBody).subscribe({
-      next: (res) => { 
-        Swal.fire({
-          title: 'Creado',
-          text: '¡El cumplido se creó con éxito!',
-          icon: 'success',
-          confirmButtonColor: '#3AB795',
+    // Post cumplido
+    Swal.fire({
+      title: '¿Seguro que quieres enviar el cumplido?',
+      text: 'No podrás revertir esta acción',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3AB795',
+      confirmButtonText: 'Enviar!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.cumplidoSvc.postCumplido(reqBody).subscribe({
+          next: (response) => {
+            console.log(response);
+            this.router.navigate(['/home']);
+            Swal.fire({
+              title: 'Creado!',
+              text: '¡El cumplido se creó y envió con éxito!',
+              icon: 'success',
+              confirmButtonColor: '#3AB795',
+            });
+          },
+          error: (err) => {
+            if (err.status === 404 || err.status === 401) {
+              this.error = err.error.msg;
+            }
+          },
         });
-        //ngZone: facilitate change detection
-        this.ngZone.run(() =>
-          this.router.navigateByUrl(`/home`)
-        );
-      },
-      error: (err) => {
-        if (err.status === 404 || err.status === 401) {
-          this.error = err.error.msg;
-        }
       }
     });
 

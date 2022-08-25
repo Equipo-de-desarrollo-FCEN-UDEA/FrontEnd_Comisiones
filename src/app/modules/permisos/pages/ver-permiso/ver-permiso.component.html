@@ -21,7 +21,7 @@
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Fecha de Creación</div>
-    <div class="col-xs-12 col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
+    <div class="col-xs-12 col-sm-6">{{ fechaCreacion | date: "fullDate" }} </div>
   </div>
 
   <div class="row regular-row">
@@ -77,10 +77,17 @@
     </div>
   </div>
 
+  <!-- VER HISTORIAL ESTADOS -->
+  <button
+  type="button"
+  class="btn btn-success btn-green btn-block"
+  (click)="open()"
+  >
+  Ver Historial de estados
+  </button>
 
   <div class="row regular-row">
-    <div class="col-xs-12 col-sm-6 label fw-bold">Resolución</div>
-    <div class="col-xs-12 col-sm-6"></div>
+    <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
   </div>
 
   <div *ngIf="error" class="alert alert-danger mt-3 mb-0">

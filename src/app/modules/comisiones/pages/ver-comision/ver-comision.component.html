@@ -16,30 +16,22 @@
   <hr />
   <div class="row regular-row">
     <div class="col-6 label">Tipo de Comisión</div>
-
     <div class="col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
-
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
-
     <div class="col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
-
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
-
     <div class="col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
-
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
-
     <div class="col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
-
   </div>
 
   <div class="row regular-row">
@@ -50,7 +42,6 @@
   <div class="row regular-row">
     <div class="col-6 label">Lugar</div>
     <div class="col-sm-6">{{comision?.lugar}}</div>
-
   </div>
 
   <div class="row regular-row">
@@ -102,7 +93,8 @@
     </div>
   </div>
 
-  <div class="row regular-row">
+  <!-- SI HAY UN CUMPLIDO -->
+  <div class="row regular-row" *ngIf="cumplidosArray">
     <div class="col-6 label">Cumplido</div>
     <div class="col-sm-6">
       <ul>
@@ -141,7 +133,8 @@
         Asociar nuevo Estado
       </button>
     </div>
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2" 
+    *ngIf="estadoActual.nombre === 'APROBADA'">
       <button
       type="button"
       class="btn btn-light"

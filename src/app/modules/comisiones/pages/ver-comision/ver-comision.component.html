@@ -133,7 +133,7 @@
     {{ error }}
   </div>
 
- <!-- <div class="footer-row d-md-flex justify-content-md-end">
+ <div class="footer-row d-md-flex justify-content-md-end">
   <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
     <button
     type="button"
@@ -152,13 +152,14 @@
       Subir Cumplido
     </button>
   </div>
-</div> -->
+</div>
 
+<hr />
   <!-- ELIMINAR O EDITAR -->
 
   <div class="footer-row d-md-flex justify-content-md-end">
 
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+    <!-- <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
       type="button"
       class="btn btn-light"
@@ -175,7 +176,7 @@
       >
         Subir Cumplido
       </button>
-    </div>
+    </div> -->
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button class="btn btn-danger" (click)="eliminarComision(comision?.id)">
         <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" 

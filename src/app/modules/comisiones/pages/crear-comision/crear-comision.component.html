@@ -133,43 +133,69 @@
       <div class="row regular-row mt-4">
         <div class="col-md-4 col-xs-12 col-sm-6 label">Provincia</div>
         <div class="col-sm-8 col-xs-12 col-md-8 col-12">
-      <div class="formfloatig">
-        <select 
-          class="form-select form-select-lg mb-3" 
-          id="floatingestado" 
-          formControlName="estado"
-          [ngClass]="{'is-invalid': 
-          isInvalidForm('estado')}" 
-          (change)="onChangeEstado($event)" 
-          placeholder=" ">
-            <option [value]="i" *ngFor="let estado of estados;let i=index">{{estado.name}}</option>
-          </select>
-          <label 
-          for="floatingestado" 
-          class="selectLabel"
-          [ngClass]="{'isFill': creaComisionForm.controls['estado'].valid}">
-          <span 
-            *ngIf="isLoading | async" 
-            class="spinner-border spinner-border-sm"  
-            role="status" 
-            aria-hidden="true" >
-          </span>
-          Provincia de la comision</label>
+          <div class="formfloatig">
+            <select
+              class="form-select form-select-lg mb-3"
+              id="floatingestado"
+              formControlName="estado"
+              [ngClass]="{ 'is-invalid': isInvalidForm('estado') }"
+              (change)="onChangeEstado($event)"
+              placeholder=" "
+            >
+              <option [value]="i" *ngFor="let estado of estados; let i = index">
+                {{ estado.name }}
+              </option>
+            </select>
+            <label
+              for="floatingestado"
+              class="selectLabel"
+              [ngClass]="{ isFill: creaComisionForm.controls['estado'].valid }"
+            >
+              <span
+                *ngIf="isLoading | async"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              >
+              </span>
+              Provincia de la comision</label
+            >
+          </div>
         </div>
       </div>
-    </div>
 
-      <!-- <div class="formfloatig">
-                    <select class="form-select form-select-lg mb-3" id="floatingciudad" formControlName="ciudad"
-                        [ngClass]="{'is-invalid': isInvalidForm('ciudad')}" [disabled]="!creaComisionForm.controls['pais'].valid" placeholder=" ">
-                        <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">{{ciudad.name}}</option>
-                    </select>
-                    <label for="floatingpais" class="selectLabel"
-                        [ngClass]="{'isFill': creaComisionForm.controls['ciudad'].valid}">
-                        <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-                        Ciudad de la comision
-                    </label>
-                </div> -->
+      <div class="row regular-row mt-4">
+        <div class="col-md-4 col-xs-12 col-sm-6 label">Ciudad</div>
+        <div class="col-sm-8 col-xs-12 col-md-8 col-12">
+      <div class="formfloatig">
+        <select
+          class="form-select form-select-lg mb-3"
+          id="floatingciudad"
+          formControlName="ciudad"
+          [ngClass]="{ 'is-invalid': isInvalidForm('ciudad') }"
+          [disabled]="!creaComisionForm.controls['pais'].valid"
+          placeholder=" "
+        >
+          <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">
+            {{ ciudad.name }}
+          </option>
+        </select>
+        <label
+          for="floatingpais"
+          class="selectLabel"
+          [ngClass]="{ isFill: creaComisionForm.controls['ciudad'].valid }"
+        >
+          <span
+            *ngIf="isLoading | async"
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Ciudad de la comision
+        </label>
+      </div>
+    </div>
+  </div>
 
       <div class="mt-4 row regular-row">
         <span class="col-md-4 col-xs-12 col-sm-12 label">Fechas *</span>

@@ -71,6 +71,8 @@ export class BuscarPermisosService {
   
   archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
+  
+
   constructor(
     private permisosSvc: PermisoService,
     private datepipe: DatePipe
@@ -84,6 +86,8 @@ export class BuscarPermisosService {
     ).subscribe(result => {
       this._permisos$.next(result.permisos);
       this._total$.next(result.total);
+
+      
       
     });
 
@@ -95,7 +99,6 @@ export class BuscarPermisosService {
     .subscribe(
       (resp: any) => {
         this.PERMISOS = resp.permisos;
-        console.log(resp+"response")
       }
     )
    }
@@ -106,6 +109,10 @@ export class BuscarPermisosService {
    }
 
    ngOnchanges(){
+
+    if (this.archivado$) {
+      
+    }
     this.permisosSvc.scopegetPermisos(this.archivado$.getValue())
     .subscribe(
       (resp: any) => {

@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.component';
 import { EstadosPermisoComponent } from './pages/ver-permiso/estados-permiso/estados-permiso.component';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -15,14 +16,15 @@ import { EstadosPermisoComponent } from './pages/ver-permiso/estados-permiso/est
     VerPermisoComponent,
     CrearPermisoComponent,
     EditarPermisoComponent,
-    EstadosPermisoComponent
+    EstadosPermisoComponent,
   ],
   imports: [
     CommonModule,
     PermisosRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    SharedModule
   ]
 })
 export class PermisosModule { }

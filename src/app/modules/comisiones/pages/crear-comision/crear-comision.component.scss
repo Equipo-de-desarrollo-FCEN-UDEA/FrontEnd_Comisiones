@@ -39,7 +39,12 @@ padding: 1em 0.5em;
 :host ::ng-deep .ngb-dp-month {
   flex: 1 0 auto;
 }
+.container {
+  width: 95%!important;
+ 
+ }
 }
+
 
 p {
   text-align: center; 

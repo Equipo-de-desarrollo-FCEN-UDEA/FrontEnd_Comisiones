@@ -4,6 +4,7 @@
       <span class="text-secondary">CREAR COMISION</span>
     </div>
   </div>
+
   <hr />
 
   <form
@@ -17,8 +18,16 @@
 
     <ng-template #footerTemplate>
       <hr class="my-0" />
-      <p *ngIf="fromDate && !toDate">Elige la segunda fecha</p>
-      <p *ngIf="!fromDate">Elige la primera fecha</p>
+      <p 
+        *ngIf="fromDate && !toDate"
+        >
+        Elige la segunda fecha
+      </p>
+      <p 
+        *ngIf="!fromDate"
+        >
+        Elige la primera fecha
+      </p>
       <button
         class="btn btn-primary btn-sm m-2 float-start"
         (click)="model = today; datepicker.close()"
@@ -105,8 +114,8 @@
       <hr />
 
       <div class="row regular-row mt-4">
-        <div class="col-md-4 col-xs-12 col-sm-6 label">Pais *</div>
-        <div class="col-sm-8 col-xs-12 col-md-8 col-12">
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Pais *</div>
+        <div class="col-sm-12 col-xs-12 col-md-8 col-12">
           <div class="formfloatig">
             <select
               class="form-select form-select-lg mb-3"
@@ -131,25 +140,30 @@
       </div>
 
       <div class="row regular-row mt-4">
-        <div class="col-md-4 col-xs-12 col-sm-6 label">Provincia</div>
-        <div class="col-sm-8 col-xs-12 col-md-8 col-12">
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Provincia</div>
+        <div class="col-sm-12 col-xs-12 col-md-8 col-12">
           <div class="formfloatig">
             <select
               class="form-select form-select-lg mb-3"
               id="floatingestado"
               formControlName="estado"
-              [ngClass]="{ 'is-invalid': isInvalidForm('estado') }"
+              [ngClass]="{ 'is-invalid': isInvalidForm('provincia') }"
               (change)="onChangeEstado($event)"
               placeholder=" "
             >
-              <option [value]="i" *ngFor="let estado of estados; let i = index">
-                {{ estado.name }}
+              <option
+                [value]="i"
+                *ngFor="let provincia of provincias; let i = index"
+              >
+                {{ provincia.name }}
               </option>
             </select>
             <label
               for="floatingestado"
               class="selectLabel"
-              [ngClass]="{ isFill: creaComisionForm.controls['estado'].valid }"
+              [ngClass]="{
+                isFill: creaComisionForm.controls['provincia'].valid
+              }"
             >
               <span
                 *ngIf="isLoading | async"
@@ -165,41 +179,41 @@
       </div>
 
       <div class="row regular-row mt-4">
-        <div class="col-md-4 col-xs-12 col-sm-6 label">Ciudad</div>
-        <div class="col-sm-8 col-xs-12 col-md-8 col-12">
-      <div class="formfloatig">
-        <select
-          class="form-select form-select-lg mb-3"
-          id="floatingciudad"
-          formControlName="ciudad"
-          [ngClass]="{ 'is-invalid': isInvalidForm('ciudad') }"
-          [disabled]="!creaComisionForm.controls['pais'].valid"
-          placeholder=" "
-        >
-          <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">
-            {{ ciudad.name }}
-          </option>
-        </select>
-        <label
-          for="floatingpais"
-          class="selectLabel"
-          [ngClass]="{ isFill: creaComisionForm.controls['ciudad'].valid }"
-        >
-          <span
-            *ngIf="isLoading | async"
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-          ></span>
-          Ciudad de la comision
-        </label>
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Ciudad</div>
+        <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+          <div class="formfloatig">
+            <select
+              class="form-select form-select-lg mb-3"
+              id="floatingciudad"
+              formControlName="ciudad"
+              [ngClass]="{ 'is-invalid': isInvalidForm('ciudad') }"
+              [disabled]="!creaComisionForm.controls['pais'].valid"
+              placeholder=" "
+            >
+              <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">
+                {{ ciudad.name }}
+              </option>
+            </select>
+            <label
+              for="floatingpais"
+              class="selectLabel"
+              [ngClass]="{ isFill: creaComisionForm.controls['ciudad'].valid }"
+            >
+              <span
+                *ngIf="isLoading | async"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Ciudad de la comision
+            </label>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
       <div class="mt-4 row regular-row">
-        <span class="col-md-4 col-xs-12 col-sm-12 label">Fechas *</span>
-        <div class="col-sm-8 col-xs-12 col-md-8" style="margin-bottom: 5px">
+        <span class="col-md-4 col-xs-12 col-sm-12 label mb-2">Fechas *</span>
+        <div class="col-sm-12 col-xs-12 col-md-8" style="margin-bottom: 5px">
           <div class="input-group">
             <input
               #dpFromDate
@@ -248,8 +262,8 @@
       </div>
 
       <div class="row regular-row mt-4">
-        <div class="col-md-4 col-xs-12 col-sm-6 label">Idioma</div>
-        <div class="col-sm-8 col-xs-12 col-md-8">
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Idioma</div>
+        <div class="col-sm-12 col-xs-12 col-md-8">
           <div class="formfloatig">
             <input
               id="floatingidioma"
@@ -265,8 +279,10 @@
       </div>
 
       <div class="row regular-row mt-4">
-        <div class="col-md-4 col-xs-12 col-sm-6 label">Justificación *</div>
-        <div class="col-sm-8 col-xs-12 col-md-8">
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+          Justificación *
+        </div>
+        <div class="col-sm-12 col-xs-12 col-md-8">
           <div class="formfloatig">
             <textarea
               id="floatingjustificacion"
@@ -338,6 +354,7 @@
       </div>
     </div>
     <hr />
+
     <div class="footer-row d-md-flex justify-content-md-end mb-3">
       <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
         <button
@@ -350,19 +367,19 @@
       </div>
       <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
         <button
-          class="btn btn-success"
+          class="btn btn-add"
           (submit)="(true)"
           [disabled]="
             creaComisionForm.invalid || !validSize() || (isLoading | async)
           "
         >
           <span
-            *ngIf="isLoading | async"
-            class="spinner-border spinner-border-sm"
+            class="spinner-border spinner-border-sm1"
             role="status"
             aria-hidden="true"
-          ></span>
-          Enviar
+            *ngIf="isLoading | async"
+          ></span
+          >Enviar
         </button>
       </div>
     </div>

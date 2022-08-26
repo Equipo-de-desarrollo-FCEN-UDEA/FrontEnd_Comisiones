@@ -45,7 +45,7 @@ export class CrearComisionComponent implements OnInit {
     name: '',
     iso2: ''
   };
-  private estado : Estado = {
+  private provincia : Estado = {
       id: 0,
       name: '',
       iso2: '',
@@ -54,7 +54,7 @@ export class CrearComisionComponent implements OnInit {
   @ViewChild('floatingpais') floatingpais: ElementRef | null = null;
   public paises: Pais[]=[];
   public ciudades: Ciudad[]=[];
-  public estados: Estado[]=[];
+  public provincias: Estado[]=[];
 
 
   // Tipos de comision desde back
@@ -62,7 +62,6 @@ export class CrearComisionComponent implements OnInit {
 
   // Loader
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
-
 
   // Verificaciones
   clicked = 0;
@@ -94,8 +93,8 @@ export class CrearComisionComponent implements OnInit {
     justificacion : ['', [Validators.required, Validators.minLength(30),Validators.maxLength(350)]],
     idioma : ['', Validators.maxLength(255)],
     pais : ['', [Validators.required]],
-    estado: [''],//[Validators.required]],
-    ciudad : [''],//[Validators.required,Validators.minLength(3),Validators.maxLength(255)]],
+    provincia: [''],
+    ciudad : [''],
   });
 
     this.fromDate = null;
@@ -171,7 +170,6 @@ export class CrearComisionComponent implements OnInit {
   // ----------- MANEJO DE ERRORES EN EL FORM ---------
   // --------------------------------------------------
   get f() {
-  
     return this.creaComisionForm.controls;
   }
 
@@ -212,15 +210,15 @@ export class CrearComisionComponent implements OnInit {
     this.pais = this.paises[paisId];
     this.paisesCiudadesSvc.getEstados(this.pais).subscribe(
       (data:Estado[]) => {
-        this.estados = data;
+        this.provincias = data;
       }
     )
   }
 
   onChangeEstado(event:any) {
     const estadoId = event.target.value;
-    this.estado = this.estados[estadoId];
-    this.paisesCiudadesSvc.getCiudades(this.pais, this.estado).subscribe(
+    this.provincia = this.provincias[estadoId];
+    this.paisesCiudadesSvc.getCiudades(this.pais, this.provincia).subscribe(
       (data:Ciudad[]) => {
         this.ciudades = data;
       }
@@ -246,7 +244,7 @@ export class CrearComisionComponent implements OnInit {
       fecha_resolucion: new Date(this.formatter.format(this.today)),
       justificacion: this.creaComisionForm.value.justificacion,
       idioma: this.creaComisionForm.value.idioma,
-      lugar:this.pais.name+', '+this.estado.name,
+      lugar:this.pais.name+', '+this.provincia.name,
       tipos_comision_id: this.creaComisionForm.value.tipos_comision_id
     }
 

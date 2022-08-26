@@ -7,7 +7,6 @@
 
 	<hr />
 
-
   <form
     class="need-validation"
     need-validation
@@ -24,7 +23,9 @@
       >
         Elige la segunda fecha
       </p>
-      <p *ngIf="!fromDate">
+      <p 
+      *ngIf="!fromDate"
+      >
         Elige la primera fecha
       </p>
       <button

@@ -29,7 +29,7 @@ import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
     SideBarComponent,
     LoginComponent,
     PreventDefaultDirective,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,15 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+// --------- SERVICIOS E INTERFACES ---------
 import { ComisionxestadoService } from '@services/comisiones/comisionesxestado.service';
-import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, Subject } from 'rxjs';
 import { LoaderService } from '@services/interceptors/loader.service';
+import { Estado } from '@interfaces/estados';
+import { EstadosService } from '@services/estados.service';
 
 @Component({
   selector: 'app-estados-comision',
@@ -27,11 +30,9 @@ export class EstadosComisionComponent {
   // Loader
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
-  public nuevoEstado = [
-    {id: 2, nombre: 'vistubueo'},
-    {id: 3, nombre: 'rechazado coor'},
-    {id: 4, nombre: 'aprovado'}
-  ]
+  // Estados
+  nuevoEstado$: Observable<Estado[]>;
+
 
   constructor(
     private comisionxEstadoSvc: ComisionxestadoService,
@@ -41,9 +42,12 @@ export class EstadosComisionComponent {
     private activateRoute: ActivatedRoute,
     private router: Router,
     private ngZone: NgZone,
-    private loaderService: LoaderService
+
+    private loaderService: LoaderService,
+    private estadosSvc: EstadosService
     ) { 
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
+    this.nuevoEstado$ = this.estadosSvc.getEstados();
 
     console.log('id en child ',this.getId);
 
@@ -65,17 +69,14 @@ export class EstadosComisionComponent {
 
   asociarEstado(){
 
-    console.log(this.asociarEstadoForm.value)
-
-
     this.submitted = true;
 
-    // stop here if form is invalid
+    // Se detiene si el formulario es inválido
     if (this.asociarEstadoForm.invalid) {
       return;
     }
 
-    this.comisionxEstadoSvc.crearComisionxEstado(this.getId, this.asociarEstadoForm.value)
+    this.comisionxEstadoSvc.postComisionxEstado(this.getId, this.asociarEstadoForm.value)
     .subscribe({
           next: (res) => {
             console.log(this.asociarEstadoForm.value)

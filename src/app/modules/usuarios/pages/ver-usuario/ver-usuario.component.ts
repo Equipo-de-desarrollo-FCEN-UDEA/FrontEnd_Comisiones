@@ -22,7 +22,6 @@ export class VerUsuarioComponent implements OnInit {
 
   ) {
     this.router.params.pipe(take(1)).subscribe(params => this.id = params['id']);
-  
    }
 
   ngOnInit(): void {
@@ -32,8 +31,7 @@ export class VerUsuarioComponent implements OnInit {
         this.usuario = resUsuario;
         console.log(this.usuario)
       });
-    } 
+      } 
     });
-}
-
+  }
 }

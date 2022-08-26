@@ -1,4 +1,4 @@
-<div class="container card shadow mt-5 bg-white rounded p-4 w-75">
+<div class="container card shadow mt-5 bg-white rounded p-5 w-75">
   <div class="row header-row">
     <div class="col">
       <span class="text-secondary">COMISIÓN</span>
@@ -16,32 +16,22 @@
   <hr />
   <div class="row regular-row">
     <div class="col-6 label">Tipo de Comisión</div>
-
     <div class="col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
-
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Fecha de Creación</div>
-
-    <div class="col-sm-6">{{comision?.fecha_resolucion | date: "fullDate"}} </div>
-
     <div class="col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
-
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Inicia</div>
-
     <div class="col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
-
   </div>
 
   <div class="row regular-row">
     <div class="col-6 label">Día que Termina</div>
-
     <div class="col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
-
   </div>
 
   <div class="row regular-row">
@@ -52,7 +42,6 @@
   <div class="row regular-row">
     <div class="col-6 label">Lugar</div>
     <div class="col-sm-6">{{comision?.lugar}}</div>
-
   </div>
 
   <div class="row regular-row">
@@ -85,13 +74,10 @@
       </div>
   </div>
 
-
-<!-- <div class="row regular-row">
-    <div class="col-6 label">Estado Actual de la Comisión</div>
-      <div class="col-4">
-        {{estadoActual.observacion}}
-      </div>
-  </div> -->
+  <div class="row regular-row">
+    <div class="col-6 label">Resolución</div>
+    <div class="col-6">{{comision?.resolucion}}</div>
+  </div>
 
 
   
@@ -107,13 +93,18 @@
     </div>
   </div>
 
-
-  <div class="row regular-row">
-    <div class="col-6 label">Resolución</div>
-    <div class="col-6"></div>
+  <!-- SI HAY UN CUMPLIDO -->
+  <div class="row regular-row" *ngIf="cumplidosArray">
+    <div class="col-6 label">Cumplido</div>
+    <div class="col-sm-6">
+      <ul>
+        <li><span (click)="abrirDocumento(cumplidosArray.id)">{{cumplidosArray?.nombre}}&nbsp;&nbsp;</span>&nbsp;</li>
+      </ul>
+    </div>
   </div>
 
-  <!--Button-->
+
+  <!-- VER HISTORIAL ESTADOS -->
   <button
   type="button"
   class="btn btn-success btn-green btn-block"
@@ -126,28 +117,6 @@
     <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
   </div>
 
-
-  <!-- <div class="d-md-flex justify-content-md-end">
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
-      <button 
-      type="button" 
-      class="btn btn-success" 
-      >
-        Agregar Estado
-      </button>
-    </div>
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
-      <button
-        type="button"
-        class="btn btn-success"
-      >
-        Subir cumplido
-      </button>
-    </div> -->
-    <!-- <div  class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-      <app-ver-estados-comision></app-ver-estados-comision>
-    </div> -->
-  <!-- </div> -->
   <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
     {{ error }}
   </div>
@@ -158,14 +127,24 @@
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
       type="button"
-      class="btn btn-warning "
-        [routerLink]="['/comisiones/asociar-estado', comision?.id]"
+      class="btn btn-light"
+      [routerLink]="['/comisiones/asociar-estado', comision?.id]"
       >
         Asociar nuevo Estado
       </button>
     </div>
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2" 
+    *ngIf="estadoActual.nombre === 'APROBADA'">
+      <button
+      type="button"
+      class="btn btn-light"
+      [routerLink]="['/comisiones/subir-cumplido', comision?.id]"
+      >
+        Subir Cumplido
+      </button>
+    </div>
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-      <button class="btn btn-danger" (click)="eliminar(comision?.id)">
+      <button class="btn btn-danger" (click)="eliminarComision(comision?.id)">
         <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" 
         ></span>
         Eliminar

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UsuarioResponse } from '@interfaces/usuario';
+import { Usuario, UsuarioResponse } from '@interfaces/usuario';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { ConfirmedValidator } from '@shared/clases/confirmed-validator';
@@ -17,12 +17,15 @@ export class EditarUsuarioComponent implements OnInit {
   public id : Number | string = 0;
   public tiposId = tiposId;
   public isLoading = this.loadingSvc.isLoading;
+  public usuarioBase!: Usuario;
   private usuario : UsuarioResponse | undefined;
 
   constructor(
     private usuarioSvc: UsuarioService,
     private router: ActivatedRoute,
     private fb : FormBuilder,
+    public activateRoute: ActivatedRoute,
+    public usuarioService: UsuarioService,
     public loadingSvc : LoaderService
   ) {
     this.router.params.pipe(take(1)).subscribe(params => this.id = params['id']);
@@ -38,6 +41,14 @@ export class EditarUsuarioComponent implements OnInit {
    }, {validator: ConfirmedValidator('contrasena', 'validarcontrasena')});
 
   ngOnInit(): void {
+      this.activateRoute.params.subscribe({
+        next: (params) => {
+        this.usuarioService.getUsuario().subscribe((resUsuario) => {
+          this.usuario = resUsuario;
+          console.log(this.usuario)
+        });
+        } 
+      });
 
     if (this.id == 'me'){
       this.usuarioSvc.getUsuario().subscribe(
@@ -55,8 +66,6 @@ export class EditarUsuarioComponent implements OnInit {
     );
   }
     }
-  
-
 
   submitUpdate() {
     const usuario = this.formUpdate.value;
@@ -65,4 +74,6 @@ export class EditarUsuarioComponent implements OnInit {
     }
     );
   }
+
+  
 }

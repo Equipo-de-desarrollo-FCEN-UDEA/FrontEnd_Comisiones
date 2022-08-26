@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VerPermisoComponent } from './pages/ver-permiso/ver-permiso.component';
 import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.component';
 import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.component';
+import { EstadosPermisoComponent } from './pages/ver-permiso/estados-permiso/estados-permiso.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: 'editar-permiso/:id',
     component: EditarPermisoComponent
+  },
+
+  {
+    path: 'asociar-estado/:id',
+    component: EstadosPermisoComponent
   }
 
 ];

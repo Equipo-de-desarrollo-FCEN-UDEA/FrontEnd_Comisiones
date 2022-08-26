@@ -47,7 +47,7 @@ export class PermisoService {
     ); 
   }
 
-  patchPermiso(permiso:Permiso): Observable<Permiso> {
+  cambiarArchivado(permiso:Permiso): Observable<Permiso> {
     return this.http.patch<Permiso>(`${this.urlEndPointArch}/${permiso.id}`,permiso)
     // .pipe(
       // map((resp)=> {

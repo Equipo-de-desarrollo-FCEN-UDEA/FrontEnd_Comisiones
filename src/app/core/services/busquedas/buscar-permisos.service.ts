@@ -109,13 +109,10 @@ export class BuscarPermisosService {
    }
 
    ngOnchanges(){
-
-    if (this.archivado$) {
-      
-    }
     this.permisosSvc.scopegetPermisos(this.archivado$.getValue())
     .subscribe(
       (resp: any) => {
+        console.log(resp+"respOnchange")
         this.PERMISOS = resp.permisos;
         this._permisos$.next(this.PERMISOS);
         this._search$.next();

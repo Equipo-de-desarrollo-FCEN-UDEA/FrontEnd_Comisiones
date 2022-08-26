@@ -19,8 +19,11 @@ export class BuscarPermisoComponent implements OnInit {
   
   permisos$: Observable<Permiso[]>;
   total$: Observable<number>;
+  archivar:boolean = false
+
   
-  ListPermisos = false;
+  
+ 
   error='';
   ultimoElemento = ultimoElement;
   
@@ -51,7 +54,7 @@ export class BuscarPermisoComponent implements OnInit {
     }
 
     archivarPermiso(){
-      console.log(this.permisoService.patchPermiso+" patchPermiso")
+      console.log(this.permisoService.cambiarArchivado+" patchPermiso")
 
     }
     

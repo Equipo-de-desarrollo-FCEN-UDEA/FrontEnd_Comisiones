@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,34 +27,49 @@ import { DiasHabiles } from '@shared/clases/dias-habiles';
 })
 export class EditarComisionComponent implements OnInit {
 
-  hoveredDate: NgbDate | null = null;
-  fromDate: NgbDate | null;
-  toDate: NgbDate | null = null;
-  model: NgbDateStruct | null = null;
-  today = this.calendar.getToday();
+  public hoveredDate: NgbDate | null = null;
+  public fromDate: NgbDate | null;
+  public toDate: NgbDate | null = null;
+  public model: NgbDateStruct | null = null;
+  public today = this.calendar.getToday();
 
-  error = '';
-  clicked = 0;
-  submitted = false;
+  public error = '';
+  public clicked = 0;
+  public submitted = false;
 
   // Tipos de comision desde back
-  tiposComision$: Observable<TipoComision[]>;
-  editarComisionForm: FormGroup;
+  public tiposComision$: Observable<TipoComision[]>;
+  public editarComisionForm: FormGroup;
   
+  @ViewChild('floatingpais') floatingpais: ElementRef | null = null;
+  public paises: Pais[]=[];
+  public ciudades: Ciudad[]=[];
+  public provincias: Estado[]=[];
 
   // ID de la comsision a editar
-  getId: any;
+  public getId: any;
 
 
-  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+  public isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   // Archivos nuevos
-  files : any[]=[];
-  archivos = [1];
+  public files : any[]=[];
+  public archivos = [1];
 
   // Documentos Actuales
-  docsBorrar:any = [];
-  documentosArray:any = [];
+  public docsBorrar:any = [];
+  public documentosArray:any = [];
+
+  private pais : Pais={
+    id: 0,
+    name: '',
+    iso2: ''
+  };
+  private provincia : Estado = {
+      id: 0,
+      name: '',
+      iso2: '',
+  }
 
 
 
@@ -73,6 +88,7 @@ export class EditarComisionComponent implements OnInit {
     private comisionSvc: ComisionesService,
     private tipoComisionSvc: TipoComisionService,
     private loaderSvc: LoaderService,
+    private paisesCiudadesSvc: PaisesCiudadesService
   ) { 
 
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
@@ -81,15 +97,19 @@ export class EditarComisionComponent implements OnInit {
     this.editarComisionForm = this.formBuilder.group({
       tipos_comision_id: ['', [Validators.required, Validators.nullValidator]],
       justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
-      lugar: ['', [Validators.required, Validators.nullValidator]],
       idioma: [''],
       fecha_inicio: ['', Validators.required],
-      fecha_fin: ['', Validators.required]
+      fecha_fin: ['', Validators.required],
+      pais : ['', [Validators.required]],
+      provincia: [''],
+      ciudad : [''],
     });
 
     this.fromDate = null;
 
   }
+
+  
 
   ngOnInit(): void {
 
@@ -198,6 +218,16 @@ export class EditarComisionComponent implements OnInit {
     console.log(this.files);
   }
 
+  onChangeEstado(event:any) {
+    const estadoId = event.target.value;
+    this.provincia = this.provincias[estadoId];
+    this.paisesCiudadesSvc.getCiudades(this.pais, this.provincia).subscribe(
+      (data:Ciudad[]) => {
+        this.ciudades = data;
+      }
+    );
+  }
+
   removeFile(index: number) {
     if (this.archivos.length > 1) {
     this.archivos.splice(index, 1);
@@ -210,9 +240,11 @@ export class EditarComisionComponent implements OnInit {
     return size < 2 * 1024 * 1024;
   }
 
-  // isInvalidForm(controlName: string) {
-  //   return this.editarComisionForm.get(controlName)?.invalid && this.editarComisionForm.get(controlName)?.touched;
-  // }
+  
+
+  isInvalidForm(controlName: string) {
+    return this.editarComisionForm.get(controlName)?.invalid && this.editarComisionForm.get(controlName)?.touched;
+  }
 
   
   borrarDocActual(idDoc: number, index: number){

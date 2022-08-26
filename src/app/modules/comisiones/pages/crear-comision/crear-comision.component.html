@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <hr />
+	<hr />
 
   <form
     class="need-validation"
@@ -17,7 +17,7 @@
     <!-- DATEPICKER -->
 
     <ng-template #footerTemplate>
-      <hr class="my-0" />
+     <hr class="my-0" />
       <p 
         *ngIf="fromDate && !toDate"
         >
@@ -76,19 +76,19 @@
     </div>
 
     <div class="row">
-      <hr />
+      
       <div class="row">
         <div class="formfloatig">
           <select
             formControlName="tipos_comision_id"
-            class="form-control"
+            class="form-control  form-select-lg mb-3"
             (change)="onChangeSolicitud($event)"
             [ngClass]="{
               'is-invalid': submitted && f['tipos_comision_id'].errors
             }"
           >
             <option value="" disabled selected>
-              Elige tipo el tipo de comisión
+              tipo de comisión
             </option>
             <option
               [value]="tipo.id | number"
@@ -97,15 +97,15 @@
               {{ tipo.nombre }}
             </option>
           </select>
-          <label for="floatingidioma" class="formLabel">
-            Elige tipo el tipo de comisión</label
+          <label for="floatingidioma" class="formLabel selectLabel">
+            </label
           >
           <div
             *ngIf="submitted && f['tipos_comision_id'].errors"
             class="invalid-feedback"
           >
             <div *ngIf="f['tipos_comision_id'].errors['required']">
-              Elige un tipo de Solicitud
+              Elige un tipo de comisión
             </div>
           </div>
         </div>

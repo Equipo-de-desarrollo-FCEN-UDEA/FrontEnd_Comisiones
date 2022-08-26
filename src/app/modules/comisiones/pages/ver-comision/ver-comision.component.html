@@ -110,27 +110,31 @@
     </div>
   </div>
 
+  <hr class="mt-3" />
 
   <!-- VER HISTORIAL ESTADOS -->
   <div class="d-flex justify-content-center">
     <button
     type="button"
-    class="btn btn-success btn-green btn-block col-10"
+    class="btn btn-success btn-green btn-block col-12"
     (click)="open()"
     >
     Ver Historial de estados
     </button>
   </div>
 
-  <hr />
 
   <div class="row regular-row">
     <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
   </div>
 
+  <hr *ngIf="error" class="mt-3" />
+
   <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
     {{ error }}
   </div>
+
+  <hr class="mt-3" />
 
  <div class="footer-row d-md-flex justify-content-md-end">
   <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
@@ -153,7 +157,7 @@
   </div>
 </div>
 
-<hr />
+<hr class="mt-3" />
   <!-- ELIMINAR O EDITAR -->
 
   <div class="footer-row d-md-flex justify-content-md-end">

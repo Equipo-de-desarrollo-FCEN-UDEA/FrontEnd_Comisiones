@@ -7,17 +7,17 @@ import { CrearComisionComponent } from './pages/crear-comision/crear-comision.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
-import { HistorialEstadosComponent } from './pages/ver-comision/estados/historial-estados/historial-estados.component';
-import { EstadosComisionComponent } from './pages/ver-comision/estados/estados/estados-comision.component';
+import { EstadosComisionComponent } from './pages/ver-comision/estados/estados-comision/estados-comision.component';
+import { CumplidoComponent } from './pages/ver-comision/cumplidos/crear-cumplido/crear-cumplido.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
     VerComisionComponent,
     CrearComisionComponent,
     EditarComisionComponent,
-    HistorialEstadosComponent,
-    EstadosComisionComponent
-    
+    EstadosComisionComponent,
+    CumplidoComponent    
     
   ],
   imports: [
@@ -25,6 +25,7 @@ import { EstadosComisionComponent } from './pages/ver-comision/estados/estados/e
     ComisionesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     NgbModule,
   ],
   providers : [NgbActiveModal, NgbModalConfig]

@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
-registerLocaleData(localeEs, 'es');
+
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ registerLocaleData(localeEs, 'es');
     SideBarComponent,
     LoginComponent,
     PreventDefaultDirective,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,7 @@ registerLocaleData(localeEs, 'es');
   
   ],
   providers: [ 
-    { provide: LOCALE_ID, useValue: 'es' },
+    // { provide: LOCALE_ID, useValue: 'es' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
     DatePipe

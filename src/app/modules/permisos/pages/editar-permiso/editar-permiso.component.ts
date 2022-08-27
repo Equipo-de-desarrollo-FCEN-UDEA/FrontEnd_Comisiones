@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { TiposPermiso, TiposPermisoInside } from '@interfaces/tipos_permiso';
 import { PermisoService } from '@services/permisos/permiso.service';
 import { TipoPermisoService } from '@services/permisos/tipo-permiso.service';
+import { ReturnStatement } from '@angular/compiler';
 
 
 @Component({

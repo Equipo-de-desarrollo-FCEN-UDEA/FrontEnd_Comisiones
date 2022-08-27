@@ -35,8 +35,8 @@
 
             <div class="col-sm-12 col-md-6 col-lg-2">
                 <div class="formfloatig">
-                    <input id='floatingescalafon' type="text" formControlName='escalafon'
-                        class="form-control" placeholder=" ">
+                    <input id='floatingescalafon' type="text" formControlName='escalafon' class="form-control"
+                        placeholder=" ">
                     <label for="floatingescalafon" class="formLabel">Escalafón</label>
                 </div>
             </div>
@@ -66,93 +66,126 @@
                 class="arrayLike formfloatig" [formGroupName]="i">
 
                 <div class="row">
-                    <div class="lineGroup  col-sm-12 col-md-6 col-lg-3 " formGroupName="identificacion_actividad">
-                        <div class="formfloatig">
-                            <input id='floatingCodigo{{i}}' type="text" formControlName='codigo' class="form-control"
-                                placeholder=" ">
-                            <label for="floatingCodigo{{i}}" class="formLabel">Código</label>
-                        </div>
+                    <div class="lineGroup  col-xs-12 col-md-6 col-lg-5 " style="margin-right: 0.5em; margin-bottom: 0.5em;"
+                        formGroupName="identificacion_actividad">
+                        <div class="row" style="margin-left: 0px">
 
-                        <div class="formfloatig">
-                            <input id='floatingGrupo{{i}}' type="text" formControlName='grupo' class="form-control"
-                                placeholder=" ">
-                            <label for="floatingGrupo{{i}}" class="formLabel">Grupo</label>
-                        </div>
+                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
+                                <span>Identificación actividad</span>
+                                <hr style="margin: 0; margin-bottom: 3px;">
+                            </div>
 
-                        <div class="formfloatig">
-                            <input id='floatingNombre{{i}}' type="text" formControlName='nombre' class="form-control"
-                                placeholder=" ">
-                            <label for="floatingNombre{{i}}" class="formLabel">Nombre</label>
+                            <div class="formfloatig col-sm-12 col-md-3 col-lg-3">
+                                <input id='floatingCodigo{{i}}' type="text" formControlName='codigo'
+                                    class="form-control" placeholder=" ">
+                                <label for="floatingCodigo{{i}}" class="formLabel">Código</label>
+                            </div>
+
+                            <div class="formfloatig col-sm-12 col-md-2 col-lg-2">
+                                <input id='floatingGrupo{{i}}' type="text" formControlName='grupo' class="form-control"
+                                    placeholder=" ">
+                                <label for="floatingGrupo{{i}}" class="formLabel">Grupo</label>
+                            </div>
+
+                            <div class="formfloatig col-sm-12 col-md-7 col-lg-7">
+                                <input id='floatingNombre{{i}}' type="text" formControlName='nombre'
+                                    class="form-control" placeholder=" ">
+                                <label for="floatingNombre{{i}}" class="formLabel">Nombre</label>
+                            </div>
                         </div>
 
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-3">
-                        <div class="formfloatig">
-                            <input id='floatingNumero_estudiantes{{i}}' type="number"
-                                formControlName='numero_estudiantes' class="form-control" placeholder=" ">
-                            <label for="floatingNumero_estudiantes{{i}}" class="formLabel">Número_estudiantes</label>
-                        </div>
-                    </div>
+                    <div class="col-sm-12 col-md-5 col-lg-2" style="margin-right: 0.5em; margin-bottom: 0.5em;">
+                        <div class="row" style="margin-left: 0px">
+                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
+                                <span>Estudiantes</span>
+                                <hr style="margin: 0; margin-bottom: 3px;">
+                            </div>
 
-                    <div class="col-sm-12 col-md-6 col-lg-1">
-                        <div class="formfloatig">
-                            <input id='floatingNivel{{i}}' type="text" formControlName='nivel' class="form-control"
-                                placeholder=" ">
-                            <label for="floatingNivel{{i}}" class="formLabel">Nivel</label>
-                        </div>
-                    </div>
+                            <div class="formfloatig col-sm-12 col-md-4 col-lg-5">
+                                <input id='floatingNumero_estudiantes{{i}}' type="number"
+                                    formControlName='numero_estudiantes' class="form-control" placeholder=" ">
+                                <label for="floatingNumero_estudiantes{{i}}" class="formLabel">Cantidad</label>
+                            </div>
 
-
-
-
-                    <div class="lineGroup col-sm-12 col-md-6 col-lg-2" formGroupName="horas_semana">
-                        <div class="formfloatig">
-                            <input id='floatingT{{i}}' type="number" formControlName='T' class="form-control"
-                                placeholder=" ">
-                            <label for="floatingT{{i}}" class="formLabel">T</label>
-
-                        </div>
-                        <div class="formfloatig">
-                            <input id='floatingTP{{i}}' type="number" formControlName='TP' class="form-control"
-                                placeholder=" ">
-                            <label for="floatingTP{{i}}" class="formLabel">TP</label>
-                        </div>
-
-                        <div class="formfloatig">
-                            <input id='floatingP{{i}}' type="number" formControlName='P' class="form-control"
-                                placeholder=" ">
-                            <label for="floatingP{{i}}" class="formLabel">P</label>
+                            <div class="formfloatig col-sm-12 col-md-8 col-lg-7">
+                                <input id='floatingNivel{{i}}' type="text" formControlName='nivel' class="form-control"
+                                    placeholder=" ">
+                                <label for="floatingNivel{{i}}" class="formLabel">Nivel</label>
+                            </div>
                         </div>
 
                     </div>
 
-                    <div class="lineGroup col-sm-12 col-md-6 col-lg-3" formGroupName="total_horas">
-                        <div class="formfloatig">
-                            <input id='floatingSemanal{{i}}' type="number" formControlName='semanal'
-                                class="form-control" placeholder=" ">
-                            <label for="floatingSemanal{{i}}" class="formLabel">Semanal</label>
+
+
+
+                    <div class="lineGroup col-sm-12 col-md-4 col-lg-2" formGroupName="horas_semana" style="margin-right: 0.5em; margin-bottom: 0.5em;">
+                        <div class="row" style="margin-left: 0;">
+                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
+                                <span>Horas semana</span>
+                                <hr style="margin: 0; margin-bottom: 3px;">
+                            </div>
+                            <div class="formfloatig col-sm-4">
+                                <input id='floatingT{{i}}' type="number" formControlName='T' class="form-control"
+                                    placeholder=" ">
+                                <label for="floatingT{{i}}" class="formLabel">T</label>
+
+                            </div>
+                            <div class="formfloatig col-sm-4">
+                                <input id='floatingTP{{i}}' type="number" formControlName='TP' class="form-control"
+                                    placeholder=" ">
+                                <label for="floatingTP{{i}}" class="formLabel">TP</label>
+                            </div>
+                            <div class="formfloatig col-sm-4">
+                                <input id='floatingP{{i}}' type="number" formControlName='P' class="form-control"
+                                    placeholder=" ">
+                                <label for="floatingP{{i}}" class="formLabel">P</label>
+
+                            </div>
+
                         </div>
-                        <div class="formfloatig">
-                            <input id='floatingSemestral{{i}}' type="number" formControlName='semestral'
-                                class="form-control" placeholder=" ">
-                            <label for="floatingSemestral{{i}}" class="formLabel">Semestral</label>
+
+
+
+
+                    </div>
+
+                    <div class="lineGroup col-sm-12 col-md-7 col-lg-2" formGroupName="total_horas" style="margin-right: 0.5em; margin-bottom: 0.5em;">
+                        <div class="row" style="margin-left:0;">
+                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
+                                <span>Total horas</span>
+                                <hr style="margin: 0; margin-bottom: 3px;">
+                            </div>
+                            <div class="formfloatig col-sm-12 col-md-6 col-lg-6">
+                                <input id='floatingSemanal{{i}}' type="number" formControlName='semanal'
+                                    class="form-control" placeholder=" ">
+                                <label for="floatingSemanal{{i}}" class="formLabel">Semana</label>
+                            </div>
+                            <div class="formfloatig col-sm-12 col-md-6 col-lg-6">
+                                <input id='floatingSemestral{{i}}' type="number" formControlName='semestral'
+                                    class="form-control" placeholder=" ">
+                                <label for="floatingSemestral{{i}}" class="formLabel">Semestre</label>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="buttons col-1">
+                    <div class="buttons col-sm-12 col-md-12 col-lg-1" style="margin-right: 0.5em; margin-bottom: 0.5em;">
+                        <button class="btn btn-add btn-sm" type="button" (click)="addActividadDocencia()"
+                            *ngIf="isLast">
+                            <i class="fa fa-plus"></i>
+                        </button>
                         <button class="btn btn-remove btn-sm" type="button"
                             (click)="removeInput('actividades_docencia',i)" *ngIf="actividadesDocenciaArr.length > 1">
                             <i class="fa fa-minus"></i>
 
                         </button>
-                        <button class="btn btn-add btn-sm" type="button" (click)="addActividadDocencia()"
-                            *ngIf="isLast">
-                            <i class="fa fa-plus"></i>
-                        </button>
+                        
                     </div>
 
-
+                    <hr *ngIf="actividadesDocenciaArr.length > 1 ">
                 </div>
+                
 
 
 
@@ -194,8 +227,8 @@
 
                         <div class="col-sm-12 col-md-5 col-lg-2">
                             <div class="formfloatig">
-                                <input id='floatinginvesresponsabilidad{{i}}' type="text" formControlName='responsabilidad'
-                                    class="form-control" placeholder=" ">
+                                <input id='floatinginvesresponsabilidad{{i}}' type="text"
+                                    formControlName='responsabilidad' class="form-control" placeholder=" ">
                                 <label for="floatinginvesresponsabilidad{{i}}" class="formLabel">Responsabilidad</label>
                             </div>
 
@@ -209,19 +242,18 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-5 col-lg-3">
+                        <div class="col-sm-12 col-md-5 col-lg-2">
                             <div class="formfloatig">
                                 <input id='floatingacta_respaldo{{i}}' type="text" formControlName='acta_respaldo'
                                     class="form-control" placeholder=" ">
-                                <label for="floatingacta_respaldo{{i}}" class="formLabel">Acta o respaldo
-                                    institucional</label>
+                                <label for="floatingacta_respaldo{{i}}" class="formLabel">Acta o respaldo</label>
                             </div>
                         </div>
 
                         <div class="col-sm-12 col-md-2 col-lg-1">
                             <div class="formfloatig">
-                                <input id='floatinginveshoras_semestre{{i}}' type="number" formControlName='horas_semestre'
-                                    class="form-control" placeholder=" ">
+                                <input id='floatinginveshoras_semestre{{i}}' type="number"
+                                    formControlName='horas_semestre' class="form-control" placeholder=" ">
                                 <label for="floatinginveshoras_semestre{{i}}" class="formLabel">Horas</label>
                             </div>
                         </div>
@@ -273,15 +305,16 @@
                             <div class="formfloatig">
                                 <input id='floatingidentificacion_actividad{{i}}' type="text"
                                     formControlName='identificacion_actividad' class="form-control" placeholder=" ">
-                                <label for="floatingidentificacion_actividad{{i}}" class="formLabel">Identificación de la
+                                <label for="floatingidentificacion_actividad{{i}}" class="formLabel">Identificación de
+                                    la
                                     actividad</label>
                             </div>
                         </div>
 
                         <div class="col-sm-12 col-md-5 col-lg-2">
                             <div class="formfloatig">
-                                <input id='floatingextenresponsabilidad{{i}}' type="text" formControlName='responsabilidad'
-                                    class="form-control" placeholder=" ">
+                                <input id='floatingextenresponsabilidad{{i}}' type="text"
+                                    formControlName='responsabilidad' class="form-control" placeholder=" ">
                                 <label for="floatingextenresponsabilidad{{i}}" class="formLabel">Responsabilidad</label>
                             </div>
 
@@ -291,24 +324,25 @@
                             <div class="formfloatig">
                                 <input id='floatingextencosto_responsable{{i}}' type="text"
                                     formControlName='costo_responsable' class="form-control" placeholder=" ">
-                                <label for="floatingextencosto_responsable{{i}}" class="formLabel">Costo Responsable</label>
+                                <label for="floatingextencosto_responsable{{i}}" class="formLabel">Costo
+                                    Responsable</label>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-2">
-                            <div class="formfloatig">
-                                <input id='floatingextenhoras_semana{{i}}' type="number" formControlName='horas_semana'
-                                    class="form-control" placeholder=" ">
-                                <label for="floatingextenhoras_semana{{i}}" class="formLabel">Horas semana</label>
+                        <div class="col-sm-12 col-md-7 col-lg-3">
+                            <div class="row">
+                                <div class="formfloatig col-lg-6">
+                                    <input id='floatingextenhoras_semana{{i}}' type="number"
+                                        formControlName='horas_semana' class="form-control" placeholder=" ">
+                                    <label for="floatingextenhoras_semana{{i}}" class="formLabel">Horas semestre</label>
+                                </div>
+                                <div class="formfloatig col-lg-6">
+                                    <input id='floatinghoras_semestre{{i}}' type="number"
+                                        formControlName='horas_semestre' class="form-control" placeholder=" ">
+                                    <label for="floatinghoras_semestre{{i}}" class="formLabel">Horas semana</label>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-sm-12 col-md-3 col-lg-2">
-                            <div class="formfloatig">
-                                <input id='floatinghoras_semestre{{i}}' type="number" formControlName='horas_semestre'
-                                    class="form-control" placeholder=" ">
-                                <label for="floatinghoras_semestre{{i}}" class="formLabel">Horas semestre</label>
-                            </div>
                         </div>
 
                         <div class="buttons col-1">
@@ -353,16 +387,16 @@
                                 <label for="floatingcargo{{i}}" class="formLabel">Cargo</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-12 col-md-4 col-lg-2">
                             <div class="formfloatig">
-                                <input id='floatingadminhoras_semestre{{i}}' type="number" formControlName='horas_semestre'
-                                    class="form-control" placeholder=" ">
+                                <input id='floatingadminhoras_semestre{{i}}' type="number"
+                                    formControlName='horas_semestre' class="form-control" placeholder=" ">
                                 <label for="floatingadminhoras_semestre{{i}}" class="formLabel">Horas semestre</label>
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-8 col-lg-4">
+                        <div class="col-sm-12 col-md-8 col-lg-3">
                             <div class="formfloatig">
                                 <input id='floatingotras_actividades{{i}}' type="text"
                                     formControlName='otras_actividades' class="form-control" placeholder=" ">
@@ -372,8 +406,8 @@
 
                         <div class="col-sm-12 col-md-4 col-lg-2">
                             <div class="formfloatig">
-                                <input id='floatingotras_horas_semestre{{i}}' type="number" formControlName='otras_horas_semestre'
-                                    class="form-control" placeholder=" ">
+                                <input id='floatingotras_horas_semestre{{i}}' type="number"
+                                    formControlName='otras_horas_semestre' class="form-control" placeholder=" ">
                                 <label for="floatingotras_horas_semestre{{i}}" class="formLabel">Horas semestre</label>
                             </div>
                         </div>
@@ -385,8 +419,8 @@
                                 <i class="fa fa-minus"></i>
 
                             </button>
-                            <button class="btn btn-add btn-sm" type="button" (click)="addActividadAdministracionAcademica()"
-                                *ngIf="isLast">
+                            <button class="btn btn-add btn-sm" type="button"
+                                (click)="addActividadAdministracionAcademica()" *ngIf="isLast">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
@@ -413,18 +447,19 @@
                     class="arrayLike formfloatig" [formGroupName]="i">
                     <div class="row" style="width:100%;">
 
-                        <div class="col-sm-8 col-md-8 col-lg-8">
+                        <div class="col-sm-8 col-md-8 col-lg-7">
                             <div class="formfloatig">
-                                <input id='floatingotrasidentidicacion_actividad{{i}}' type="text" formControlName='identificacion_actividad' class="form-control"
-                                    placeholder=" ">
-                                <label for="floatingotrasidentidicacion_actividad{{i}}" class="formLabel">Identificación de la actividad</label>
+                                <input id='floatingotrasidentidicacion_actividad{{i}}' type="text"
+                                    formControlName='identificacion_actividad' class="form-control" placeholder=" ">
+                                <label for="floatingotrasidentidicacion_actividad{{i}}" class="formLabel">Identificación
+                                    de la actividad</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-4 col-md-4 col-lg-4">
                             <div class="formfloatig">
-                                <input id='floatingotrashoras_semestre{{i}}' type="number" formControlName='horas_semestre'
-                                    class="form-control" placeholder=" ">
+                                <input id='floatingotrashoras_semestre{{i}}' type="number"
+                                    formControlName='horas_semestre' class="form-control" placeholder=" ">
                                 <label for="floatingotashoras_semestre{{i}}" class="formLabel">Horas semestre</label>
                             </div>
                         </div>
@@ -468,12 +503,14 @@
 
                         <div class="col-sm-12 col-md-8 col-lg-4">
                             <div class="formfloatig">
-                                <input id='floatingseguimientoidentidicacion_actividad{{i}}' type="text" formControlName='identificacion_actividad' class="form-control"
-                                    placeholder=" ">
-                                <label for="floatingseguimientoidentidicacion_actividad{{i}}" class="formLabel">Identificación de la actividad</label>
+                                <input id='floatingseguimientoidentidicacion_actividad{{i}}' type="text"
+                                    formControlName='identificacion_actividad' class="form-control" placeholder=" ">
+                                <label for="floatingseguimientoidentidicacion_actividad{{i}}"
+                                    class="formLabel">Identificación
+                                    de la actividad</label>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-6 col-md-4 col-lg-2">
                             <div class="formfloatig">
                                 <input id='floatingseguimientofecha_1{{i}}' type="date" formControlName='fecha_1'
@@ -490,7 +527,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-8 col-lg-4">
+                        <div class="col-sm-12 col-md-8 col-lg-3">
                             <div class="formfloatig">
                                 <input id='floatingseguimeintoOtros{{i}}' type="text" formControlName='otros'
                                     class="form-control" placeholder=" ">
@@ -529,31 +566,31 @@
                     Jornada de trabajo
                 </span>
             </h6>
-            <div style="width: 100%" formArrayName="jornada_trabajo">
+            <div class="row" style="width: 100%" formArrayName="jornada_trabajo">
                 <div *ngFor="let actividad of jornadaTrabajoArr.controls; last as isLast; let i=index"
-                    class="arrayLike formfloatig" [formGroupName]="i">
-                    <div class="row" style="width:50%; margin: auto; min-width:320px">
-                        <div class="col">
+                    class="col-lg-4 arrayLike formfloatig" [formGroupName]="i">
+                    <div class="row" style="width:100%; margin: auto; min-width:320px">
+                        <div class="col-lg-4">
                             <span style="padding-left: 0;">
                                 <i class="fa fa-clock"></i>
                                 {{semana[i]}}
                             </span>
                         </div>
-                        <div class="col">
+                        <div class="col-lg-4">
                             <div class="formfloatig" style="padding-right: 0;">
-                                <input atp-time-picker id='floatingjornadatrabajomañana{{i}}' type="time" formControlName='mañana'
-                                    class="form-control" placeholder=" ">
+                                <input atp-time-picker id='floatingjornadatrabajomañana{{i}}' type="time"
+                                    formControlName='mañana' class="form-control" placeholder=" ">
                                 <label for="floatingjornadatrabajomañana{{i}}" class="formLabel">Mañana</label>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-lg-4">
                             <div class="formfloatig">
-                                <input atp-time-picker id='floatingjornadatrabajotarde{{i}}' type="time"  formControlName='tarde'
-                                    class="form-control" placeholder=" ">
+                                <input atp-time-picker id='floatingjornadatrabajotarde{{i}}' type="time"
+                                    formControlName='tarde' class="form-control" placeholder=" ">
                                 <label for="floatingjornadatrabajotarde{{i}}" class="formLabel">Tarde</label>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -571,7 +608,7 @@
 
             <div class="formfloatig">
                 <textarea id='floatingobservacionesgenerales' formControlName='observaciones_generales'
-                    class="form-control" placeholder=" " rows="5"></textarea>
+                    class="form-control" placeholder=" " rows="3"></textarea>
                 <label for="floatingobservacionesgenerales" class="formLabel">Observaciones</label>
             </div>
 
@@ -581,7 +618,8 @@
 
 
         <button class="btn btn-success" id="Enviar" (submit)="true">
-            <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
             Enviar
         </button>
 

@@ -29,7 +29,7 @@
   
  <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Email</div>
-    <div class="col-sm-6 col-xs-12"> {{usuario.correo }}</div>
+    <div class="col-sm-6 col-xs-12"> {{usuario?.correo }}</div>
   </div> 
 
   <div class="row regular-row">
@@ -39,7 +39,7 @@
 
   <div class="row regular-row">
     <div class="ccol-xs-12 col-sm-6 label fw-bold">Estado</div>
-    <div class="col-sm-6 col-xs-12">{{ usuario.estado }}</div>
+    <div class="col-sm-6 col-xs-12">{{ usuario?.estado }}</div>
   </div>
 
   <!-- <div class="row regular-row">
@@ -50,13 +50,13 @@
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Facultad</div>
     <div class="col-sm-6 col-xs-12">
-        {{ usuario.departamentos.facultades.nombre }}
+        {{ usuario?.departamentos?.facultades?.nombre }}
     </div>
   </div>
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Departamento</div>
-    <div class="col-sm-6 col-xs-12"> {{ usuario.departamentos.nombre }}</div>
+    <div class="col-sm-6 col-xs-12"> {{ usuario?.departamentos?.nombre }}</div>
   </div>
 </div>
 

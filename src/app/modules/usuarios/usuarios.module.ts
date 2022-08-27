@@ -20,11 +20,10 @@ import { RegistrarUsuariosComponent } from './pages/registrar-usuarios/registrar
   declarations: [
   
     VerUsuarioComponent,
-       ListaUsuariosComponent,
-       EditarUsuarioComponent,
-
-       EditarContrasenaComponent,
-         RegistrarUsuariosComponent
+    ListaUsuariosComponent,
+    EditarUsuarioComponent,
+    EditarContrasenaComponent,
+    RegistrarUsuariosComponent
 
       // NgbdSortableHeader
 

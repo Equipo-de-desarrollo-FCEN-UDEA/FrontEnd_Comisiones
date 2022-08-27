@@ -17,9 +17,6 @@ import { SharedModule } from '@shared/shared.module';
     CrearPermisoComponent,
     EditarPermisoComponent,
     EstadosPermisoComponent,
-
-
-    
   ],
   imports: [
     CommonModule,

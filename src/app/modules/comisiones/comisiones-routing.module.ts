@@ -26,14 +26,23 @@ const routes: Routes = [
   },
   
   {
-  path: 'asociar-estado/:id',
-  component: EstadosComisionComponent
+    path: 'asociar-estado/:id',
+    component: EstadosComisionComponent
   },
-
   {
-  path: 'subir-cumplido/:id',
-  component: CumplidoComponent
-  }
+    path: 'subir-cumplido/:id',
+    component: CumplidoComponent
+  },
+  { 
+    path: '**', 
+    redirectTo: 'home', 
+    pathMatch: 'full' 
+  },
+  { 
+    path: '', 
+    redirectTo: '/404', 
+    pathMatch: 'full' 
+  },
 
 ];
 

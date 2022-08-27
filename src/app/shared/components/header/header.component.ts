@@ -13,11 +13,13 @@ import { filter} from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
   public isNavbarCollapsed=true;
   public currentURL: any;
   public usuario!: Usuario; 
   public rol!: Rol
   public usuarioInside!: UsuarioInside;
+
   constructor(
     private authService : AuthService,
     private usuarioService : UsuarioService,
@@ -32,7 +34,7 @@ export class HeaderComponent implements OnInit {
         this.currentURL = this.router.url;
       }
       );  
-      console.log('ruta '+this.currentURL);
+      // console.log('ruta '+this.currentURL);
   }
 
 
@@ -41,7 +43,7 @@ export class HeaderComponent implements OnInit {
       next: (params) => {
       this.usuarioService.getUsuario().subscribe((resUsuario) => {
         this.usuario = resUsuario;
-        console.log(this.usuario)
+        // console.log(this.usuario)
       });
     } 
     });

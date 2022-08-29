@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Tema, temas } from '@shared/data/plan-desarrollo';
 
 @Component({
   selector: 'app-plan-desarrollo-institucional',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
+  temas : Tema[] = temas;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  select(value: string) {
+    console.log(value)
   }
 
 }

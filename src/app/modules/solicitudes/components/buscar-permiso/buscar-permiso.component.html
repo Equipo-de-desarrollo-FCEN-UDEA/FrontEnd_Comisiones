@@ -46,7 +46,9 @@
         </thead>
         <tbody>
         
-          <tr *ngFor="let permiso of permisos$ | async">
+          <tr *ngFor="let permiso of permisos$ | async"
+          [routerLink]="['/permisos/ver-permiso', permiso.id]"
+          class="click-table">
     
           <th scope="row">{{ permiso.id }}</th>
 
@@ -118,8 +120,9 @@
             </ngb-highlight>
           </td>
 
-        <td *ngIf="true">
-          <button type="button" class="btn btn-info">Archivar</button>
+        <td>
+          <button *ngIf="permiso.archivado == 0" type="button" class="btn btn-info">Archivar</button>
+          <button *ngIf="permiso.archivado == 1" type="button" class="btn btn-info">Desarchivar</button>
         </td>
 
           

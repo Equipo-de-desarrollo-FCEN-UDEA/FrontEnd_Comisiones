@@ -1,13 +1,9 @@
 
 import { Comision, ComisionDTO } from '@interfaces/comisiones';
-
-
 import { Injectable } from '@angular/core';
 import { Observable, of, map, pipe } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { prefix } from '@shared/data/ruta-api';
-
-
 
 @Injectable({
   providedIn: 'root'

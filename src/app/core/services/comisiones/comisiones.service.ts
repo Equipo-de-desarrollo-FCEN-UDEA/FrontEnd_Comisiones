@@ -23,7 +23,11 @@ export class ComisionesService {
   }
   
   getComision(id: string | number) {
-    return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)
+    return this.http.get<Comision>(`${this.urlEndPoint}/${id}`).pipe(
+      map((res) => {
+        return res;
+      })
+    );
   }
   
   postComision(comision:any) {

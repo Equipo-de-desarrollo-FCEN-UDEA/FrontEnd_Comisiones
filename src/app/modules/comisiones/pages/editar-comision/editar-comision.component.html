@@ -1,7 +1,7 @@
 <div class="container card shadow mt-5 bg-white rounded p-5 w-75">
   <div class="row header-row mb-1">
     <div class="col">
-      <span class="text-secondary">EDITAR COMISION</span>
+      <span class="text-secondary">EDITAR COMISIÓN</span>
     </div>
   </div>
 
@@ -10,14 +10,60 @@
   <form [formGroup]="editarComisionForm" (ngSubmit)="onUpdate()">
     <!-- DATEPICKER -->
 
+    <ng-template #footerTemplate>
+      <hr class="my-0" />
+      <p *ngIf="fromDate && !toDate">Elige la segunda fecha</p>
+      <p *ngIf="!fromDate">Elige la primera fecha</p>
+      <button
+        class="btn btn-primary btn-sm m-2 float-start"
+        (click)="model = today; datepicker.close()"
+      >
+        Hoy
+      </button>
+      <button
+        class="btn btn-secondary btn-sm m-2 float-end"
+        (click)="datepicker.close()"
+      >
+        Cerrar
+      </button>
+    </ng-template>
 
+    <div class="dp-hidden position-absolute">
+      <div class="input-group">
+        <input
+          name="datepicker"
+          class="form-control-none"
+          ngbDatepicker
+          #datepicker="ngbDatepicker"
+          [autoClose]="'outside'"
+          (dateSelect)="onDateSelection($event)"
+          [displayMonths]="2"
+          [dayTemplate]="t"
+          outsideDays="hidden"
+          [startDate]="fromDate!"
+          tabindex="-1"
+          [footerTemplate]="footerTemplate"
+          placement="left"
+          [positionTarget]="buttonEl"
+        />
+        <ng-template #t let-date let-focused="focused">
+          <span
+            class="custom-day"
+            [class.focused]="focused"
+            [class.range]="isRange(date)"
+            [class.faded]="isHovered(date) || isInside(date)"
+            (mouseenter)="hoveredDate = date"
+            (mouseleave)="hoveredDate = null"
+          >
+            {{ date.day }}
+          </span>
+        </ng-template>
+      </div>
+    </div>
 
     <!-- CAMPOS COMISIÓN -->
     <div class="row regular-row">
-      <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
-        Tipo de Comisión *
-      </div>
-      <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+      <div class="col-12">
         <select
           formControlName="tipos_comision_id"
           class="form-control"
@@ -41,7 +87,7 @@
           class="invalid-feedback"
         >
           <div *ngIf="f['tipos_comision_id'].errors['required']">
-            Elige un tipo de Solicitud
+            Elige un tipo de Comisión
           </div>
         </div>
       </div>
@@ -57,8 +103,8 @@
             class="form-select form-select-lg mb-3"
             id="floatingpais"
             formControlName="pais"
-            [ngClass]="{ 'is-invalid': isInvalidForm('pais') }"
-            (change)="onChangeEstado($event)"
+            [ngClass]="{ 'is-invalid': submitted && isInvalidForm('pais') }"
+            (change)="onChangeProvincia($event)"
             placeholder=" "
           >
             <option [value]="i" *ngFor="let country of paises; let i = index">
@@ -82,9 +128,9 @@
           <select
             class="form-select form-select-lg mb-3"
             id="floatingestado"
-            formControlName="estado"
+            formControlName="provincia"
             [ngClass]="{ 'is-invalid': isInvalidForm('provincia') }"
-            (change)="onChangeEstado($event)"
+            (change)="onChangeProvincia($event)"
             placeholder=" "
           >
             <option
@@ -147,6 +193,59 @@
       </div>
     </div>
 
+    <hr />
+
+    <div class="row regular-row mt-4">
+      <span class="col-md-4 col-xs-12 col-sm-12 label">Fechas *</span>
+      <div class="col-sm-12 col-xs-12 col-md-8" style="margin-bottom: 5px">
+        <div class="input-group">
+          <input
+            #dpFromDate
+            class="form-control"
+            type="text"
+            (click)="datepicker.toggle(); clicked = clicked + 1"
+            placeholder="aaaa-mm-dd"
+            name="dpFromDate"
+            formControlName="fecha_inicio"
+            (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+            [value]="
+              formatter.format(fromDate) ? formatter.format(fromDate) : null
+            "
+            [ngClass]="{ 'is-invalid': !fromDate && clicked !== 0 }"
+          />
+          <input
+            #dpToDate
+            class="form-control"
+            placeholder="aaaa-mm-dd"
+            name="dpToDate"
+            formControlName="fecha_fin"
+            [value]="formatter.format(toDate)"
+            (input)="toDate = validateInput(toDate, dpToDate.value)"
+            [value]="formatter.format(toDate) ? formatter.format(toDate) : null"
+            [ngClass]="{ 'is-invalid': !toDate && clicked !== 0 }"
+        />
+          <span 
+            #buttonEl
+            class="btn btn-outline-secondary">
+            <i class="fa fa-calendar"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-6 col-md-6" hidden>
+        <div class="input-group" (click)="datepicker.toggle()">
+          <input
+            #dpToDate
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dpToDate"
+            formControlName="fecha_fin"
+            [value]="formatter.format(toDate)"
+            (input)="toDate = validateInput(toDate, dpToDate.value)"
+          />
+        </div>
+      </div>
+    </div>
+
     <div class="row regular-row mt-4">
       <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Idioma</div>
       <div class="col-sm-12 col-xs-12 col-md-8 col-12">
@@ -177,6 +276,8 @@
     </div>
 
     <!-- DOCUMENTOS -->
+
+
     <div class="row regular-row mt-4">
       <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Documentos</div>
       <div class="col-sm-8">
@@ -203,109 +304,19 @@
       </div>
     </div>
 
+    <!--- ERRORES -->
 
-    
-    <!--- FECHAS  -->
-    <hr />
-    <h6>
-      <span class="text-muted">Rango de fechas de la comision *</span>
-    </h6>
-
-    <div class="dp-hidden position-absolute">
-      <div class="input-group">
-        <input
-          name="datepicker"
-          class="form-control"
-          ngbDatepicker
-          #datepicker="ngbDatepicker"
-          [autoClose]="'outside'"
-          (dateSelect)="onDateSelection($event)"
-          [displayMonths]="2"
-          [dayTemplate]="t"
-          outsideDays="hidden"
-          [startDate]="fromDate!"
-          tabindex="-1"
-          [footerTemplate]="footerTemplate"
-          placement="left"
-        />
-        <ng-template #t let-date let-focused="focused">
-          <span
-            class="custom-day"
-            [class.focused]="focused"
-            [class.range]="isRange(date)"
-            [class.faded]="isHovered(date) || isInside(date)"
-            (mouseenter)="hoveredDate = date"
-            (mouseleave)="hoveredDate = null"
-          >
-            {{ date.day }}
-          </span>
-        </ng-template>
-      </div>
+    <div
+    class="alert-danger alert mt-2"
+    *ngIf="isInvalidForm('justificacion')"
+    >
+    Recuerda que la justificación debe tener al menos 30 caracteres y máximo
+    500 caracteres.
+    </div>
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+    {{ error }}
     </div>
 
-    <div class="row regular-row mt-4">
-      <div class="col-sm-6 label">
-        <div class="input-group">
-          <input
-            #dpFromDate
-            class="form-control"
-            type="text"
-            (click)="datepicker.toggle(); clicked = clicked + 1"
-            placeholder="aaaa-mm-dd"
-            name="dpFromDate"
-            formControlName="fecha_inicio"
-            (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
-            [value]="
-              formatter.format(fromDate) ? formatter.format(fromDate) : null
-            "
-            [ngClass]="{ 'is-invalid': !fromDate && clicked !== 0 }"
-          />
-          <div class="input-group-append">
-            <span class="input-group-text">
-              <i class="fa fa-calendar"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="input-group" (click)="datepicker.toggle()">
-          <input
-            #dpToDate
-            class="form-control"
-            placeholder="aaaa-mm-dd"
-            name="dpToDate"
-            formControlName="fecha_fin"
-            [value]="formatter.format(toDate)"
-            (input)="toDate = validateInput(toDate, dpToDate.value)"
-            [value]="formatter.format(toDate) ? formatter.format(toDate) : null"
-            [ngClass]="{ 'is-invalid': !toDate && clicked !== 0 }"
-          />
-          <div class="input-group-append">
-            <span class="input-group-text">
-              <i class="fa fa-calendar"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <ng-template #footerTemplate>
-      <hr class="my-0 position-absolute" />
-      <p *ngIf="fromDate && !toDate">Elige la segunda fecha</p>
-      <p *ngIf="!fromDate">Elige la primera fecha</p>
-      <button
-        class="btn btn-primary btn-sm m-2 float-start"
-        (click)="model = today; datepicker.close()"
-      >
-        Hoy
-      </button>
-      <button
-        class="btn btn-secondary btn-sm m-2 float-end"
-        (click)="datepicker.close()"
-      >
-        Cerrar
-      </button>
-    </ng-template>
 
     <hr />
     <!-- ARCHIVOS ANEXOS -->

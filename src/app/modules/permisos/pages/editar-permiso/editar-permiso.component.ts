@@ -99,8 +99,7 @@ export class EditarPermisoComponent implements OnInit {
         });
 
         res.documentos.forEach((documento: any) => this.documentosArray.push(documento)) 
-
-        console.log(res);
+  
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {

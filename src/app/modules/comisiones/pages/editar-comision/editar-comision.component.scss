@@ -31,6 +31,10 @@ margin-top: 0;
 padding: 1em 0.5em;
 }
 
+.form-control-none{
+  display: none;
+}
+
 @media screen and (max-width: 576px){
 :host ::ng-deep .ngb-dp-months {
   flex-flow: row wrap;

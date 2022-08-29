@@ -6,6 +6,7 @@ export interface PermisosxestadoBase {
 }
 
 export interface PermisosxestadoInside extends PermisosxestadoBase {
+    createdAt: Date; 
     intermediate_estados: EstadoInside[];
 }
 

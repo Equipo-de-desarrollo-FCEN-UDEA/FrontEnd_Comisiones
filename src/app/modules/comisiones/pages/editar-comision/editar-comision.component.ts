@@ -1,22 +1,23 @@
-
-import { ChangeDetectorRef, Component, NgZone, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoaderService } from '@services/interceptors/loader.service';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
-import { DiasHabiles } from '@shared/clases/dias-habiles';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 
-// ----------- SERVICIOS ------------
+// --------- SERVICIOS E INTERFACES ---------
 import { ComisionesService } from '@services/comisiones/comisiones.service';
 import { TipoComision } from '@interfaces/tipos_comision';
 import { TipoComisionService } from '@services/comisiones/tipo-comision.service';
 import { Comision } from '@interfaces/comisiones';
 import { PaisesCiudadesService } from '@services/paises-ciudades.service';
 import { Ciudad, Pais, Estado } from '@interfaces/paises-ciudades';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { DiasHabiles } from '@shared/clases/dias-habiles';
+
+
 
 
 @Component({
@@ -32,17 +33,19 @@ export class EditarComisionComponent implements OnInit {
   model: NgbDateStruct | null = null;
   today = this.calendar.getToday();
 
-  editarComisionForm: FormGroup;
   error = '';
+  clicked = 0;
+  submitted = false;
 
   // Tipos de comision desde back
   tiposComision$: Observable<TipoComision[]>;
+  editarComisionForm: FormGroup;
   
 
   // ID de la comsision a editar
   getId: any;
 
-  submitted = false;
+
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   // Archivos nuevos
@@ -54,8 +57,6 @@ export class EditarComisionComponent implements OnInit {
   documentosArray:any = [];
 
 
-  clicked = 0;
-
 
  // ------------ CONSTRUCTOR ---------------
   constructor(
@@ -65,18 +66,32 @@ export class EditarComisionComponent implements OnInit {
 
     private formBuilder: FormBuilder,
     private cd: ChangeDetectorRef,
-    
+    private activateRoute: ActivatedRoute,
+    private ngZone: NgZone,
+    private router: Router,
+
     private comisionSvc: ComisionesService,
     private tipoComisionSvc: TipoComisionService,
     private loaderSvc: LoaderService,
-    
-    private activateRoute: ActivatedRoute,
-    private ngZone: NgZone,
-    private router: Router
   ) { 
 
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
     this.tiposComision$ = this.tipoComisionSvc.getTipoSolicitud();
+
+    this.editarComisionForm = this.formBuilder.group({
+      tipos_comision_id: ['', [Validators.required, Validators.nullValidator]],
+      justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
+      lugar: ['', [Validators.required, Validators.nullValidator]],
+      idioma: [''],
+      fecha_inicio: ['', Validators.required],
+      fecha_fin: ['', Validators.required]
+    });
+
+    this.fromDate = null;
+
+  }
+
+  ngOnInit(): void {
 
     // Trae los valores actuales de la comisión
     this.comisionSvc.getComision(this.getId).subscribe({
@@ -101,34 +116,19 @@ export class EditarComisionComponent implements OnInit {
         }
       },
     });
-
-    this.editarComisionForm = this.formBuilder.group({
-      tipos_comision_id: ['', [Validators.required, Validators.nullValidator]],
-      justificacion: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(350)]],
-      lugar: ['', [Validators.required, Validators.nullValidator]],
-      idioma: [''],
-      fecha_inicio: ['', Validators.required],
-      fecha_fin: ['', Validators.required]
-    });
-
-    this.fromDate = null;
-
-}
-
-
-  ngOnInit(): void {
     
   }
 
-
-  // ----------- MANEJO DE ERRORES EN EL FORM ------------
+  // --------------------------------------------------
+  // ----------- MANEJO DE ERRORES EN EL FORM ---------
+  // --------------------------------------------------
   get f() {
-  
     return this.editarComisionForm.controls;
   }
 
-  // ----------- TIPO DE SOLICITUD ------------
-
+  // --------------------------------------
+  // ----------- TIPO DE SOLICITUD ---------
+  // --------------------------------------
   onChangeSolicitud(e: any): void {
     this.cd.detectChanges();
   }
@@ -210,9 +210,9 @@ export class EditarComisionComponent implements OnInit {
     return size < 2 * 1024 * 1024;
   }
 
-  isInvalidForm(controlName: string) {
-    return this.editarComisionForm.get(controlName)?.invalid && this.editarComisionForm.get(controlName)?.touched;
-  }
+  // isInvalidForm(controlName: string) {
+  //   return this.editarComisionForm.get(controlName)?.invalid && this.editarComisionForm.get(controlName)?.touched;
+  // }
 
   
   borrarDocActual(idDoc: number, index: number){
@@ -252,9 +252,7 @@ export class EditarComisionComponent implements OnInit {
       tipos_comision_id: this.editarComisionForm.value.tipos_comision_id
     }
 
-
-    console.log(body)
-
+    // crea un body con los datos y los archivos
     const reqBody: FormData = new FormData();
     reqBody.append('tipos_comision_id', body.tipos_comision_id);
     reqBody.append('fecha_inicio', body.fecha_inicio);
@@ -273,7 +271,7 @@ export class EditarComisionComponent implements OnInit {
       this.files, reqBody).subscribe({
         next: (res) => { 
           
-          //facilitate change detection
+          //ngZone: facilitate change detection
           this.ngZone.run(() =>
             this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
           );

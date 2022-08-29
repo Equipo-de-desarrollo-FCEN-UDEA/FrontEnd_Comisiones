@@ -1,12 +1,15 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { Subject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
+// --------- SERVICIOS E INTERFACES ---------
 import { LoaderService } from '@services/interceptors/loader.service';
 import { PermisoService } from '@services/permisos/permiso.service';
+import { TiposPermiso } from '@interfaces/tipos_permiso';
+import { TipoPermisoService } from '@services/permisos/tipo-permiso.service';
 
 @Component({
   selector: 'app-crear-permiso',
@@ -34,17 +37,8 @@ export class CrearPermisoComponent implements OnInit {
   // Loader
   isLoading: Subject<boolean> = this.loaderService.isLoading;
 
-
-  public tipospermiso = [
-    {id: 1, nombre: 'Permiso por matrimonio'},
-    {id: 2, nombre: 'Permiso corto'},
-    {id: 3, nombre: 'Permiso de medio dia de la jornada por cumpleaños'},
-    {id: 4, nombre: 'Licencia de maternidad'},
-    {id: 5, nombre: 'Licencia de patermidad'},
-    {id: 6, nombre: 'Licencia de calamiad domestica'},
-    {id: 7, nombre: 'Licencia no remunerada'},
-    {id: 8, nombre: 'Licencia de luto'}
-  ]
+  // Tipos Permiso
+  tiposPermiso$: Observable<TiposPermiso[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,15 +48,20 @@ export class CrearPermisoComponent implements OnInit {
     private router: Router,
 
     private loaderService: LoaderService,
-    private permisosSvc: PermisoService
+    private permisosSvc: PermisoService,
+    private tiposPermisoSvc: TipoPermisoService
 
   ) {
 
+    // Tipos de permiso
+    this.tiposPermiso$ = this.tiposPermisoSvc.getTiposPermiso();
+
+    // Form permiso
     this.formPermiso = this.formBuilder.group({
       fecha_inicio : ['', [Validators.required]],
       fecha_fin : ['',[Validators.required]],
       justificacion : ['', [Validators.required,Validators.minLength(30),Validators.maxLength(350)]],
-      tipos_permiso_id : [0,[Validators.required,Validators.min(1),Validators.max(this.tipospermiso.length)]]
+      tipos_permiso_id : [0,[Validators.required,Validators.min(1)]]
     });
     
     this.fromDate = null;
@@ -183,7 +182,7 @@ export class CrearPermisoComponent implements OnInit {
     reqBody.append('archivo', file, file.name) 
   }
   
-  this.permisosSvc.crearPermiso(reqBody).subscribe({
+  this.permisosSvc.postPermiso(reqBody).subscribe({
     next: (res) => { 
       Swal.fire({
         title: 'Creada',

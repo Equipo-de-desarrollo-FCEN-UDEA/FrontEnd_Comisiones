@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './directivas/sortable.directive';
 import { BrowserModule } from '@angular/platform-browser';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { HistorialEstadosComponent } from './components/historial-estados/historial-estados.component';
 import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrol
     RecuperarContrasenaComponent,
     NgbdSortableHeader,
     StepperComponent,
+    HistorialEstadosComponent,
     PlanDesarrolloInstitucionalComponent,
    
   ],
@@ -33,7 +35,8 @@ import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrol
     ReactiveFormsModule,
     NgbdSortableHeader,
     StepperComponent,
-    CdkStepperModule
+    CdkStepperModule,
+    HistorialEstadosComponent
   ],
   providers:[
     // NgbdSortableHeader

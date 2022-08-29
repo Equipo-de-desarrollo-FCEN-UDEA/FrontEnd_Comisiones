@@ -7,14 +7,16 @@ import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.component';
+import { EstadosPermisoComponent } from './pages/ver-permiso/estados-permiso/estados-permiso.component';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
   declarations: [
-  
     VerPermisoComponent,
     CrearPermisoComponent,
-    EditarPermisoComponent
+    EditarPermisoComponent,
+    EstadosPermisoComponent,
 
 
     
@@ -24,7 +26,8 @@ import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.co
     PermisosRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    SharedModule
   ]
 })
 export class PermisosModule { }

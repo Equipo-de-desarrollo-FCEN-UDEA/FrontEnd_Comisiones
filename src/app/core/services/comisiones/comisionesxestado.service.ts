@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
 import { prefix } from '@shared/data/ruta-api';
+import { ComisionesXEstadoInDB } from '@interfaces/comisionesxestado';
 
 // import { ComisionEstados } from "../interfaces/comisionesxestado";
 
@@ -12,19 +12,14 @@ export class ComisionxestadoService {
 
   private urlEndPoint:string = prefix+'comisiones-estados';
 
-
   constructor( private http : HttpClient) { }
 
   getComisionxEstado() {
-    // return this.http.get(this.urlEndPoint).pipe(
-    //   map((response) => response as ComisionEstados[])
-    // ) }
+  
   }
 
-  crearComisionxEstado(id: string | number, estado: any){
-
-    return this.http.post(`${this.urlEndPoint}/${id}`, estado);
-
+  postComisionxEstado(id: string | number, estado: any){
+    return this.http.post< ComisionesXEstadoInDB >(`${this.urlEndPoint}/${id}`, estado);
   }
 
 }

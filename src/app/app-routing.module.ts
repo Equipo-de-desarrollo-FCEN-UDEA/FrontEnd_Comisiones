@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@guards/auth.guard';
+import { PlanDesarrolloInstitucionalComponent } from '@shared/components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 import { LoginComponent } from '@shared/pages/login/login.component';
 import { NotFoundComponent } from '@shared/pages/not-found/not-found.component';
 import { RecuperarContrasenaComponent } from '@shared/pages/recuperar-contrasena/recuperar-contrasena.component';
@@ -35,6 +36,11 @@ const routes: Routes = [
   {
     path: 'recuperar-contrasena',
     component: RecuperarContrasenaComponent
+  },
+
+  {
+    path: 'plan',
+    component: PlanDesarrolloInstitucionalComponent
   },
   {
     path: '',

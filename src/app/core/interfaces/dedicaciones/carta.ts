@@ -1,7 +1,7 @@
 export interface Carta {
     body?: string;
     dedicaciones_id: number | string;
-    archivo?: File;
+    archivo: File | string;
 }
 
 export interface CartaInside extends Carta {

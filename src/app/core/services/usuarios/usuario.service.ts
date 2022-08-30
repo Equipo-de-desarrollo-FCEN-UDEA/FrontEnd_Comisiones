@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioInDB, UsuarioResponse } from '@interfaces/usuario';
+import { UsuarioResponse } from '@interfaces/usuario';
 import { prefix } from '@shared/data/ruta-api';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -39,6 +39,11 @@ export class UsuarioService {
 
   getAllUsuarios(){
     return this.http.get<UsuarioResponse[]>(`${this.prefix}`);
+  }
+
+
+  postUsuario(usuario:any){
+    return this.http.post<UsuarioResponse>(`${this.prefix}`, usuario);
   }
 
   updateUsuario(usuario: any) {

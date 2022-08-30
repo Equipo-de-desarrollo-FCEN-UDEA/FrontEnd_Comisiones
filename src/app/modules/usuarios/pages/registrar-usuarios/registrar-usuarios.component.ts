@@ -21,15 +21,15 @@ export class RegistrarUsuariosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  formSignup = this.formBuilder.group({
-    correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
-    passwordSignup : ['', Validators.required],
-    nombreSignup : ['', Validators.required],
-    apellidoSignup : ['', Validators.required],
-    tipoIdSignup : ['', Validators.required],
-    identificacionSignup : ['', Validators.required],
-    departamentoSignup : ['', Validators.required],
-    rolSignup : ['', Validators.required]
+  crearUsuarioForm = this.formBuilder.group({
+    correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
+    password : ['', Validators.required],
+    nombre : ['', Validators.required],
+    apellido : ['', Validators.required],
+    tipo_identificacion : ['', Validators.required],
+    identificacion : ['', Validators.required],
+    departamento : ['', Validators.required],
+    roles_id : ['', Validators.required]
   });
 
 }

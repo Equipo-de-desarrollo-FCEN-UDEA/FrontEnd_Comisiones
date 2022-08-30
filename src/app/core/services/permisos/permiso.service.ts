@@ -10,24 +10,50 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PermisoService {
-  private urlEndPoint:string = prefix+'permisos';
+  private urlEndPoint:string = prefix +'permisos';
+  private urlEndPointArch:string = prefix +'archivarpermiso';
+  
+  getPermisos: any;
 
   constructor( private http: HttpClient) { }
+  
+  scopegetPermisos(archivado: number): Observable<any> {
+    let params = new HttpParams()
+    
+    if (archivado != 2 ){
+      params = params.append('archivado', archivado);
+    }
+    
+    params = params.append('offset', 0);
+    params = params.append('limit', 100);
 
-  getPermisos(archivado: number): Observable<Permiso[]> {
-    let params = archivado !=2 ? new HttpParams().append("archivado", archivado) : new HttpParams();
-    return this.http.get<Permiso[]>(this.urlEndPoint, {
+    console.log(params+"  parametros")
+
+    return this.http.get<Permiso[]>(`${this.urlEndPoint}`, {
       params:params
-    })
-  }
+      
+    } 
+    
+      
+    )
 
-
-  getPermiso(id: string | number): Observable<any> {
+ }
+ 
+ getPermiso(id: string | number): Observable<any> {
     return this.http.get<PermisosInside>(`${this.urlEndPoint}/${id}`).pipe(
       map((res) => {
         return res;
       })
     ); 
+  }
+
+  cambiarArchivado(permiso:Permiso): Observable<Permiso> {
+    return this.http.patch<Permiso>(`${this.urlEndPointArch}/${permiso.id}`,permiso)
+    // .pipe(
+      // map((resp)=> {
+      //   return resp;
+      // })
+    // )
   }
 
 

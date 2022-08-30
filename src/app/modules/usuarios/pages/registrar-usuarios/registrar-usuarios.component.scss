@@ -1,0 +1,22 @@
+.container{
+  min-height: 100vh;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+  align-items: unset;
+  margin-bottom: 6em!important;
+}
+
+@media screen and (max-width: 576px){
+  .container {
+    width: 95%!important;
+   
+   }
+  }
+
+  .btn-success {
+    background-color: #43b649;
+  }
+  

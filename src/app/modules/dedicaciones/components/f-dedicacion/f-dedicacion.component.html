@@ -44,9 +44,12 @@
             </div>
 
             <div class="col-lg-6 formfloatig">
-                <input id="floatingcelular" formControlName="celular" class="form-control" 
-                    type="number" placeholder=" " [ngClass]="{'is-invalid': fBasicInfo.controls['celular'].invalid }">
-                <label style="padding-left:1em;" for="floatingcelular" class="formLabel"> Número de teléfono celular</label>
+
+                <input id="floatingcelular" formControlName="celular" class="form-control" type="number" placeholder=" "
+                    [ngClass]="{'is-invalid': fBasicInfo.controls['celular'].invalid }">
+                <label style="padding-left:1em;" for="floatingcelular" class="formLabel"> Número de teléfono
+                    celular</label>
+
             </div>
         </div>
 
@@ -105,8 +108,9 @@
         </div>
 
         <hr>
-        <h5>Apoya al plan de Desarrollo Institucional Vigente en:</h5>
-        <div class="row">
+        <h5>Apoya al plan de desarrollo y acción institucional vigente en:</h5>
+        <button class="btn btn-primary btn-sm" type="button" (click)="open()">Ver plan de desarrollo y acción</button>
+        <!-- <div class="row">
             <div class="col-md-6 col-lg-6">
                 <h6>Temas:<span style="color:red">*</span></h6>
                 <div style="width: 100%;" formArrayName="tema_estrategico">
@@ -166,33 +170,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-6">
-                <h6>Meta(s):<span style="color:red">*</span></h6>
-                <div style="width: 100%;" formArrayName="metas">
-
-                    <div *ngFor="let meta of metasArr.controls; last as isLast; let i=index"
-                        class="arrayLike formfloatig" [formGroupName]="i">
-                        <textarea id="floatingMeta{{i}}" formControlName="meta" rows="1" class="form-control"
-                            type="text" placeholder=" "
-                            [ngClass]="{'is-invalid': meta.invalid && meta.touched}"></textarea>
-                        <label for="floatingMeta{{i}}" class="formLabel">Meta {{i+1}}</label>
-                        <div class="buttons">
-                            <button class="btn btn-circle btn-danger btn-sm" type="button"
-                                (click)="removeInput('metas',i)" *ngIf="metasArr.length > 1">
-                                <i class="fa fa-minus"></i>
-
-                            </button>
-                            <button class="btn btn-circle btn-primary btn-sm" type="button" (click)="addInputMetas()"
-                                *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
+            
 
             <div class="col-md-6 col-lg-6">
                 <h6>Accion(es) Estratégica(s):<span style="color:red">*</span></h6>
@@ -283,39 +261,77 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
         <hr>
-        <h6>Productos:<span style="color:red">*</span></h6>
+        
         <!-- <div class="alert alert-info">
             <p>El profesor debe indicar los productos adquiere y se compromete a entregar una vez culmine su período de
                 Dedicación Exclusiva. Esta información será consignada en la Resolución de Vicerrectoría de Docencia.
             </p>
         </div> -->
-        <div style="width: 100%" formArrayName="productos">
+        <h6>Productos y metas que el profesor adquiere y se compromete a entregar una vez culmine su período de Dedicación Exclusiva. Esta información será consignada en la Resolución de Vicerrectoría de Docencia.</h6>
+        <div class="row">
 
-            <div *ngFor="let producto of productosArr.controls; last as isLast; let i=index"
-                class="arrayLike formfloatig" [formGroupName]="i">
-                <textarea id="floatingproductos{{i}}" formControlName="producto" rows="1" class="form-control"
-                    type="text" placeholder=" " [ngClass]="{'is-invalid': producto.invalid && producto.touched}">
-                </textarea>
-                <label for="floatingproductos{{i}}" class="formLabel">Producto {{i+1}}</label>
-                <div class="buttons">
-                    <button class="btn btn-circle btn-danger btn-sm" type="button" (click)="removeInput('productos',i)"
-                        *ngIf="productosArr.length > 1">
+            <div class="col-md-6 col-lg-6">
+                <h6>Meta(s):<span style="color:red">*</span></h6>
+                <div style="width: 100%;" formArrayName="metas">
 
-                        <i class="fa fa-minus"></i>
+                    <div *ngFor="let meta of metasArr.controls; last as isLast; let i=index"
+                        class="arrayLike formfloatig" [formGroupName]="i">
+                        <textarea id="floatingMeta{{i}}" formControlName="meta" rows="1" class="form-control"
+                            type="text" placeholder=" "
+                            [ngClass]="{'is-invalid': meta.invalid && meta.touched}"></textarea>
+                        <label for="floatingMeta{{i}}" class="formLabel">Meta {{i+1}}</label>
+                        <div class="buttons">
+                            <button class="btn btn-circle btn-danger btn-sm" type="button"
+                                (click)="removeInput('metas',i)" *ngIf="metasArr.length > 1">
+                                <i class="fa fa-minus"></i>
 
-                    </button>
-                    <button class="btn btn-circle btn-primary btn-sm" type="button" (click)="addInputProductos()"
-                        *ngIf="isLast">
-                        <i class="fa fa-plus"></i>
-                    </button>
+                            </button>
+                            <button class="btn btn-circle btn-primary btn-sm" type="button" (click)="addInputMetas()"
+                                *ngIf="isLast">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+
+                    </div>
                 </div>
 
 
-
             </div>
+
+            <div class="col-md-6 col-lg-6" >
+                <h6>Productos:<span style="color:red">*</span></h6>
+                <div style="width: 100%;" formArrayName="productos">
+                    <div *ngFor="let producto of productosArr.controls; last as isLast; let i=index"
+                    class="arrayLike formfloatig" [formGroupName]="i">
+                    <textarea id="floatingproductos{{i}}" formControlName="producto" rows="1" class="form-control"
+                        type="text" placeholder=" " [ngClass]="{'is-invalid': producto.invalid && producto.touched}">
+                    </textarea>
+                    <label for="floatingproductos{{i}}" class="formLabel">Producto {{i+1}}</label>
+                    <div class="buttons">
+                        <button class="btn btn-circle btn-danger btn-sm" type="button"
+                            (click)="removeInput('productos',i)" *ngIf="productosArr.length > 1">
+
+                            <i class="fa fa-minus"></i>
+
+                        </button>
+                        <button class="btn btn-circle btn-primary btn-sm" type="button" (click)="addInputProductos()"
+                            *ngIf="isLast">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+
+
+
+                </div>
+
+                </div>
+                
+            </div>
+
         </div>
+
 
 
         <button class="btn btn-success" id="Enviar" (submit)="true"

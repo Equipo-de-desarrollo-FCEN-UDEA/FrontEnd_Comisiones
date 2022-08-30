@@ -104,7 +104,7 @@
             id="floatingpais"
             formControlName="pais"
             [ngClass]="{ 'is-invalid': submitted && isInvalidForm('pais') }"
-            (change)="onChangeProvincia($event)"
+            
             placeholder=" "
           >
             <option [value]="i" *ngFor="let country of paises; let i = index">
@@ -129,8 +129,7 @@
             class="form-select form-select-lg mb-3"
             id="floatingestado"
             formControlName="provincia"
-            [ngClass]="{ 'is-invalid': isInvalidForm('provincia') }"
-            (change)="onChangeProvincia($event)"
+            
             placeholder=" "
           >
             <option
@@ -168,7 +167,7 @@
             class="form-select form-select-lg mb-3"
             id="floatingciudad"
             formControlName="ciudad"
-            [ngClass]="{ 'is-invalid': isInvalidForm('ciudad') }"
+            
             [disabled]="!editarComisionForm.controls['pais'].valid"
             placeholder=" "
           >
@@ -249,7 +248,11 @@
     <div class="row regular-row mt-4">
       <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Idioma</div>
       <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-        <input class="form-control" type="text" formControlName="idioma" />
+        <input 
+          class="form-control" 
+          type="text" 
+          formControlName="idioma" 
+          />
       </div>
     </div>
 
@@ -285,7 +288,7 @@
           *ngFor="let doc of documentosArray; let i = index"
           class="list-group"
         >
-          <li [id]="i" class="list-group-item">
+          <li [id]="i" class="list-group-item d-flex justify-content-between">
             <span>{{ doc.nombre }}</span>
             <span
               class="input-group-text"
@@ -323,7 +326,7 @@
     <h6>
       <span class="text-muted">Archivos adjuntos a la solicitud</span>
     </h6>
-    <div class="alert-danger" *ngIf="files.length > 0 && !validSize()">
+    <div class="alert-danger alert" *ngIf="files.length > 0 && !validSize()">
       <p>Los archivos no deben pesar más de 2 MB.</p>
     </div>
     <div class="formfloatig" style="display: flex; flex-direction: column">

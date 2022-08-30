@@ -13,6 +13,8 @@ import { CrearComisionComponentsService } from '../../services/crear-comision-co
 import Swal from 'sweetalert2';
 import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
 import { FormatoViceService } from '@services/dedicaciones/formato-vice.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PlanDesarrolloInstitucionalComponent } from '@shared/components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 
@@ -23,18 +25,19 @@ library.add(fas);
 })
 export class FDedicacionComponent implements OnInit {
 
-  @Input() Dedicacion : Dexclusiva | null = null;
+  @Input() Dedicacion: Dexclusiva | null = null;
 
 
   isLoading: Subject<boolean> = this.loadingSvc.isLoading;
   constructor(
-    private fb : FormBuilder,
+    private fb: FormBuilder,
     private formatoSvc: FormatoViceService,
     private usuarioSvc: UsuarioService,
-    private loadingSvc : LoaderService,
-    private comunicationSvc : CrearComisionComponentsService
+    private loadingSvc: LoaderService,
+    private comunicationSvc: CrearComisionComponentsService,
+    private modalSvc: NgbModal
   ) { }
-  
+
   public unidades = [
     'Instituto de Química, Facultad de Ciencias Exactas y Naturales',
   ]
@@ -49,7 +52,7 @@ export class FDedicacionComponent implements OnInit {
   public Usuario = this.usuarioSvc.getActualUsuario();
 
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
-  private fExclusiva : FormatoVice = {
+  private fExclusiva: FormatoVice = {
     titulo: '',
     tiempo_solicitado: 0,
     campo_modalidad: '',
@@ -70,7 +73,7 @@ export class FDedicacionComponent implements OnInit {
     nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
     apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
     identificacion: [NaN, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
-    correo: ['',[Validators.required, Validators.pattern(this.isCorreoValid)]],
+    correo: ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
   });
 
   fBasicInfo = this.fb.group({
@@ -78,15 +81,15 @@ export class FDedicacionComponent implements OnInit {
     celular: [NaN, [Validators.min(1000000000), Validators.max(9999999999)]],
     titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
     tiempo_solicitado: [NaN, [Validators.required, Validators.min(1), Validators.max(11)]],
-    campo_modalidad: ['', [Validators.required , Validators.minLength(3), Validators.maxLength(50000)]],
-    descripcion_comprobante: ['',[Validators.minLength(3), Validators.maxLength(255)]],
-    tema_estrategico: this.fb.array([this.temasgroup()],[Validators.required]),
-    objetivo_estrategico_desarrollo: this.fb.array([this.objEstrategicasgroup()],[Validators.required]),
-    metas: this.fb.array([this.metasgroup()],[Validators.required]),
-    acciones_estrategicas: this.fb.array([this.acciones_estrategicasgroup()],[Validators.required]),
-    objetivo_estrategico_institucional: this.fb.array([this.objetivo_estrategico_institucionalgroup()],[Validators.required]),
-    indicador: this.fb.array([this.indicadorgroup()],[Validators.required]),
-    productos: this.fb.array([this.productosgroup()],[Validators.required]),
+    campo_modalidad: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50000)]],
+    descripcion_comprobante: ['', [Validators.minLength(3), Validators.maxLength(255)]],
+    tema_estrategico: this.fb.array([this.temasgroup()], [Validators.required]),
+    objetivo_estrategico_desarrollo: this.fb.array([this.objEstrategicasgroup()], [Validators.required]),
+    metas: this.fb.array([this.metasgroup()], [Validators.required]),
+    acciones_estrategicas: this.fb.array([this.acciones_estrategicasgroup()], [Validators.required]),
+    objetivo_estrategico_institucional: this.fb.array([this.objetivo_estrategico_institucionalgroup()], [Validators.required]),
+    // indicador: this.fb.array([this.indicadorgroup()], [Validators.required]),
+    productos: this.fb.array([this.productosgroup()], [Validators.required]),
   })
 
   ngOnInit(): void {
@@ -101,33 +104,58 @@ export class FDedicacionComponent implements OnInit {
     }
   }
 
-  onSubmit(){
-    let Dedicacion = this.fBasicInfo.value as FormatoVice;
-    
-    let dedicacion_id : number | string = 0;
+  onSubmit() {
+    console.log(this.fBasicInfo.value)
+    // let Dedicacion = this.fBasicInfo.value as FormatoVice;
 
-    this.comunicationSvc.id$.subscribe(
-      (      id: string | number) => {
-        dedicacion_id = id;
-      }
-    );
-    
+    // let dedicacion_id: number | string = 0;
 
-    this.formatoSvc.postFormulario(Dedicacion, dedicacion_id).subscribe(
-      (res : any) => {
-        if (res){
-          Swal.fire({
-            text: 'Formato generado con éxito',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-          }
-          )
-          this.comunicationSvc.setFormatoSuccess(true);
+    // this.comunicationSvc.id$.subscribe(
+    //   (id: string | number) => {
+    //     dedicacion_id = id;
+    //   }
+    // );
+
+
+    // this.formatoSvc.postFormulario(Dedicacion, dedicacion_id).subscribe(
+    //   (res: any) => {
+    //     if (res) {
+    //       Swal.fire({
+    //         text: 'Formato generado con éxito',
+    //         icon: 'success',
+    //         confirmButtonText: 'Aceptar'
+    //       }
+    //       )
+    //       this.comunicationSvc.setFormatoSuccess(true);
+    //     }
+    //   }
+    // );
+
+
+  }
+
+  open() {
+    const modalRef = this.modalSvc.open(PlanDesarrolloInstitucionalComponent, { size: 'xl' })
+    modalRef.result.then(
+      (res: any) => {
+        const steps = res.steps;
+        const object = {
+          tema_estrategico: [{tema:steps[0].temas}],
+          objetivo_estrategico_desarrollo: [{objEstrategico:steps[1].objetivo}],
+          objetivo_estrategico_institucional: [{objetivo:steps[1].objetivo}],
+          acciones_estrategicas: [{accion:steps[2].accion}]
         }
+        this.fBasicInfo.patchValue(object)
+      }
+    ).catch(
+      (err:any) => {
+        Swal.fire({
+          icon: 'error',
+          text: 'Algo ocurrió mal, vuelve a seleccional tu plan de desarrollo institucional',
+          confirmButtonText: 'Aceptar'
+        })
       }
     );
-
-    
   }
 
   temasgroup() {
@@ -136,7 +164,7 @@ export class FDedicacionComponent implements OnInit {
     });
   }
 
-  get temasArr() : FormArray {
+  get temasArr(): FormArray {
     return this.fBasicInfo.get('tema_estrategico') as FormArray;
   }
   addInputTemas() {
@@ -151,7 +179,7 @@ export class FDedicacionComponent implements OnInit {
     });
   }
 
-  get objEstrategicosArr() : FormArray {
+  get objEstrategicosArr(): FormArray {
     return this.fBasicInfo.get('objetivo_estrategico_desarrollo') as FormArray;
   }
 
@@ -162,7 +190,7 @@ export class FDedicacionComponent implements OnInit {
 
 
 
-// Metas
+  // Metas
 
   metasgroup() {
     return this.fb.group({
@@ -171,14 +199,14 @@ export class FDedicacionComponent implements OnInit {
   }
 
 
-  get metasArr() : FormArray {
+  get metasArr(): FormArray {
     return this.fBasicInfo.get('metas') as FormArray;
   }
   addInputMetas() {
     this.metasArr.push(this.metasgroup());
   }
 
-// Acciones Estrategicas
+  // Acciones Estrategicas
   acciones_estrategicasgroup() {
     return this.fb.group({
       accion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
@@ -186,7 +214,7 @@ export class FDedicacionComponent implements OnInit {
   }
 
 
-  get acciones_estrategicasArr() : FormArray {
+  get acciones_estrategicasArr(): FormArray {
     return this.fBasicInfo.get('acciones_estrategicas') as FormArray;
   }
   addInputacciones_estrategicas() {
@@ -201,7 +229,7 @@ export class FDedicacionComponent implements OnInit {
     });
   }
 
-  get objetivo_estrategico_institucionalArr() : FormArray {
+  get objetivo_estrategico_institucionalArr(): FormArray {
     return this.fBasicInfo.get('objetivo_estrategico_institucional') as FormArray;
   }
 
@@ -210,22 +238,22 @@ export class FDedicacionComponent implements OnInit {
   }
 
   // Indicador
-  indicadorgroup() {
-    return this.fb.group({
-      indicador: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    });
-  }
+  // indicadorgroup() {
+  //   return this.fb.group({
+  //     indicador: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+  //   });
+  // }
 
-  get indicadorArr() : FormArray {
-    return this.fBasicInfo.get('indicador') as FormArray;
-  }
+  // get indicadorArr(): FormArray {
+  //   return this.fBasicInfo.get('indicador') as FormArray;
+  // }
 
-  addInputIndicador() {
-    this.indicadorArr.push(this.indicadorgroup());
-  }
+  // addInputIndicador() {
+  //   this.indicadorArr.push(this.indicadorgroup());
+  // }
 
 
-// Productos
+  // Productos
 
   productosgroup() {
     return this.fb.group({
@@ -233,7 +261,7 @@ export class FDedicacionComponent implements OnInit {
     });
   }
 
-  get productosArr() : FormArray {
+  get productosArr(): FormArray {
     return this.fBasicInfo.get('productos') as FormArray;
   }
 
@@ -242,7 +270,7 @@ export class FDedicacionComponent implements OnInit {
   }
 
 
-// Eliminar del control
+  // Eliminar del control
   removeInput(controlName: string, index: number) {
     const control = this.fBasicInfo.get(controlName) as FormArray;
     control.removeAt(index);
@@ -250,9 +278,9 @@ export class FDedicacionComponent implements OnInit {
 
 
 
-  
+
   isInvalidForm(controlName: string) {
     return this.fBasicInfo.get(controlName)?.invalid && this.fBasicInfo.get(controlName)?.touched;
   }
-  
+
 }

@@ -15,7 +15,11 @@ export class CartaInicioService {
   ) { }
 
   postCarta (carta: Carta) {
-  return this.http.post<any>(this.prefix, carta);
+    let body : FormData = new FormData();
+    body.append('body',carta.body? carta.body: '');
+    body.append('dedicaciones_id', `${carta.dedicaciones_id}`);
+    body.append('archivo',carta.archivo, `carta_inicio${carta.dedicaciones_id}.pdf`);
+  return this.http.post<any>(this.prefix, body);
   }
     
 

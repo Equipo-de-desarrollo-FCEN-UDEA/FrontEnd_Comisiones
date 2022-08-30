@@ -77,10 +77,12 @@ export class BuscarUsuariosService {
     });
 
     this._search$.next();
+
     this.usuariosSvc.getAllUsuarios()
     .subscribe(
-      (comisiones: Usuario[]) => {
-        this.USUARIOS = comisiones;
+      (resp: any ) => {
+        this.USUARIOS = resp;
+        console.log(resp)
       }
     )
   }
@@ -114,6 +116,7 @@ export class BuscarUsuariosService {
     // 2. filter
     usuarios = usuarios.filter(usuarios => matches(usuarios, searchTerm, this.datepipe));
     const total = usuarios.length;
+    console.log(usuarios+" Filterusuarios")
 
 
     // 3. paginate

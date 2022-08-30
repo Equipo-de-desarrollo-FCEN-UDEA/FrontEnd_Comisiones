@@ -4,6 +4,7 @@ import { AdminGuard } from '@guards/admin.guard';
 import { EditarContrasenaComponent } from './pages/editar-contrasena/editar-contrasena.component';
 import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.component';
 import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
+import { RegistrarUsuariosComponent } from './pages/registrar-usuarios/registrar-usuarios.component';
 import { VerUsuarioComponent } from './pages/ver-usuario/ver-usuario.component';
 
 
@@ -24,6 +25,10 @@ const routes: Routes = [
  {
   path: 'editar-contrasena/:id',
   component: EditarContrasenaComponent
+ },
+ {
+  path: 'registrar-usuarios',
+  component: RegistrarUsuariosComponent
  }
 ];
 

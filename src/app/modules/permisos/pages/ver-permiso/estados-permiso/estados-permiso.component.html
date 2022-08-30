@@ -1,7 +1,7 @@
-<div class="container shadow-sm pt-4 pl-4 pr-4 mb-5 bg-white rounded">
+<div class="container card shadow mt-5 bg-white rounded p-5 w-75">
     <div class="row header-row">
       <div class="col">
-        <p class="text-secondary">ASOCIAR UN ESTADO A LA COMISIÓN </p>
+        <p class="text-secondary">ASOCIAR UN ESTADO AL PERMISO </p>
       </div>
     </div>
     <hr />
@@ -12,7 +12,7 @@
         <div class="col-sm-8">
           <select formControlName="estados_id" class="form-control" 
             [ngClass]="{ 'is-invalid': submitted && f['estados_id'].errors }">
-            <option [value]="op.id | number" *ngFor="let op of nuevoEstado">
+            <option [value]="op.id | number" *ngFor="let op of nuevoEstado$ | async">
               {{ op.nombre }}
             </option>
           </select>
@@ -27,7 +27,7 @@
       <div>
 
         <div class="row regular-row">
-          <div class="col-4 label">Justificación *</div>
+          <div class="col-4 label">Observación</div>
           <div class="col-sm-8">
             <div class="form-group">
               <textarea class="form-control" rows="3" formControlName="observacion"></textarea>
@@ -43,7 +43,8 @@
       <hr />
       <div class="row footer-row">
         <div class="col-sm-9">
-          <button type="button" class="btn btn-secondary float-right" [routerLink]="['/home']">
+          <button type="button" class="btn btn-secondary float-right" 
+          [routerLink]="['/permisos/ver-permiso', this.getId]">
             Cancelar
           </button>
           <div class="col-sm-1"></div>

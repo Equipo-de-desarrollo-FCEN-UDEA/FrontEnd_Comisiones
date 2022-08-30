@@ -1,4 +1,4 @@
-<div class="container card shadow mt-5 bg-white rounded p-4 w-75">
+<div class="container card shadow mt-5 bg-white rounded p-5 w-75">
   <div class="row header-row">
     <div class="col">
       <span class="text-secondary">PERMISO</span>
@@ -7,42 +7,42 @@
 
   <hr />
   <div class="row regular-row">
-    <div class="col-6 label">Solicitante</div>
-    <div class="col-sm-6">
+    <div class="col-xs-12 col-sm-6 label fw-bold">Solicitante</div>
+    <div class="col-xs-12 col-sm-6">
       {{ permiso?.usuarios?.nombre }} {{ permiso?.usuarios?.apellido }}
     </div>
   </div>
 
   <hr />
   <div class="row regular-row">
-    <div class="col-6 label">Tipo de Comisión</div>
-    <div class="col-sm-6">{{permiso?.tipos_permiso?.nombre}}</div>
+    <div class="col-xs-12 col-sm-6 label fw-bold">Tipo de Comisión</div>
+    <div class="col-xs-12 col-sm-6">{{permiso?.tipos_permiso?.nombre}}</div>
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Fecha de Creación</div>
-    <div class="col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
+    <div class="col-xs-12 col-sm-6 label fw-bold">Fecha de Creación</div>
+    <div class="col-xs-12 col-sm-6">{{ fechaCreacion | date: "fullDate" }} </div>
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Día que Inicia</div>
-    <div class="col-sm-6">{{permiso?.fecha_inicio | date: "fullDate"}}</div>
+    <div class="col-xs-12 col-sm-6 label fw-bold">Día que Inicia</div>
+    <div class="col-xs-12 col-sm-6">{{permiso?.fecha_inicio | date: "fullDate"}}</div>
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Día que Termina</div>
-    <div class="col-sm-6">{{permiso?.fecha_fin | date: "fullDate"}}</div>
+    <div class="col-xs-12 col-sm-6 label fw-bold">Día que Termina</div>
+    <div class="col-xs-12 col-sm-6">{{permiso?.fecha_fin | date: "fullDate"}}</div>
   </div>
 
   <div class="row regular-row">
-    <div class="col-6 label">Justificación</div>
-    <div class="col-sm-6">{{permiso?.justificacion}}</div>
+    <div class="col-xs-12 col-sm-6 label fw-bold">Justificación</div>
+    <div class="col-xs-12 col-sm-6">{{permiso?.justificacion}}</div>
   </div>
 
 
   <div class="row regular-row">
-    <div class="col-6 label">Estado Actual de la Comisión</div>
-      <div class="col-4">
+    <div class="col-xs-12 col-sm-6 label fw-bold">Estado Actual de la Comisión</div>
+      <div class="col-xs-12 col-sm-6">
         <span 
         class="badge badge-pill pill"
         [ngClass]="{
@@ -67,8 +67,8 @@
   
   <!-- DOCUMENTOS -->
   <div class="row regular-row">
-    <div class="col-6 label">Documentos</div>
-    <div class="col-sm-6">
+    <div class="col-xs-12 col-sm-6 label fw-bold">Documentos</div>
+    <div class="col-xs-12 col-sm-6">
       <ul>
         <li *ngFor="let doc of documentosArray" >
           <span (click)="abrirDocumento(doc.id)">{{doc.nombre}}&nbsp;&nbsp;</span>&nbsp;
@@ -77,52 +77,19 @@
     </div>
   </div>
 
+  <!-- VER HISTORIAL ESTADOS -->
+  <button
+  type="button"
+  class="btn btn-success btn-green btn-block"
+  (click)="open()"
+  >
+  Ver Historial de estados
+  </button>
 
   <div class="row regular-row">
-    <div class="col-6 label">Resolución</div>
-    <div class="col-6"></div>
+    <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
   </div>
 
-  <!-- <div class="row regular-row">
-    <div class="col-4">
-      <span
-        class="badge badge-pill pill"
-        [ngClass]="{
-          'bg-solicitada':
-            solicitud.estadoActual['intermediate_estados']['nombre'] ===
-            'SOLICITADA',
-          'bg-aprobada':
-            solicitud.estadoActual['intermediate_estados']['nombre'] ===
-            'APROBADA',
-          'bg-visto-bueno':
-            solicitud.estadoActual['intermediate_estados']['nombre'] ===
-            'VISTO BUENO',
-          'bg-finalizada':
-            solicitud.estadoActual['intermediate_estados']['nombre'] ===
-            'FINALIZADA',
-          'bg-rechazada-decanato':
-            solicitud.estadoActual['intermediate_estados']['nombre'] ===
-            'RECHAZADA DECANATO',
-          'bg-rechazada-coordinacion':
-            solicitud.estadoActual['intermediate_estados']['nombre'] ===
-            'RECHAZADA COORDINACIÓN'
-        }"
-      >
-        {{ solicitud.estadoActual["intermediate_estados"]["nombre"] }}
-      </span>
-    </div>
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
-      <button
-        type="button"
-        class="btn btn-success"
-      >
-        Subir cumplido
-      </button>
-    </div> -->
-    <!-- <div  class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-      <app-ver-estados-permiso></app-ver-estados-permiso>
-    </div> -->
-  <!-- </div> -->
   <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
     {{ error }}
   </div>
@@ -130,6 +97,15 @@
   <!-- ELIMINAR O EDITAR -->
   <hr />
   <div class="footer-row d-md-flex justify-content-md-end">
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+      type="button"
+      class="btn btn-light "
+      [routerLink]="['/permisos/asociar-estado', permiso?.id]"
+      >
+        Asociar nuevo Estado
+      </button>
+    </div>
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button class="btn btn-danger" 
       (click)="delete(permiso?.id)">

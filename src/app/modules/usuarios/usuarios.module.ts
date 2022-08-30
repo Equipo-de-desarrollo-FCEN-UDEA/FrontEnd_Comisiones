@@ -12,6 +12,7 @@ import { EditarContrasenaComponent } from './pages/editar-contrasena/editar-cont
 import { NgbdSortableHeader } from '@shared/directivas/sortable.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '@shared/shared.module';
+import { RegistrarUsuariosComponent } from './pages/registrar-usuarios/registrar-usuarios.component';
 
 
 
@@ -22,7 +23,8 @@ import { SharedModule } from '@shared/shared.module';
        ListaUsuariosComponent,
        EditarUsuarioComponent,
 
-       EditarContrasenaComponent
+       EditarContrasenaComponent,
+         RegistrarUsuariosComponent
 
       // NgbdSortableHeader
 

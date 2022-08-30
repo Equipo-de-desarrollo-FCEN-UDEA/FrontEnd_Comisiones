@@ -1,0 +1,24 @@
+.tema{
+    background-color: #43b649;
+    height: 100%;
+    color: white;
+    margin: 0.25em;
+    padding: 0.5em;
+}
+
+.tema:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.selected{
+    border: 4px solid #000;
+}
+
+.my-footer {
+    margin: 0 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+

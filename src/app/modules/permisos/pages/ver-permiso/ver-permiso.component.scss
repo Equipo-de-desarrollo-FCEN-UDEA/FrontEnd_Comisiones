@@ -1,0 +1,16 @@
+.container { 
+  margin-bottom: 10em;
+  align-items: unset;
+  min-height: 50vh;
+  width: 50em;
+}
+
+.btn-warning { 
+  background-color: #f9a12c;
+}
+
+@media (max-width: 576px) {
+  .container {
+      width: 100%;
+  }
+}

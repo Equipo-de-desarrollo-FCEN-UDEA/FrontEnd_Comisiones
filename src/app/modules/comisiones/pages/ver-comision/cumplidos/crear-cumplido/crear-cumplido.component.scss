@@ -1,0 +1,59 @@
+.card{
+    margin: auto;
+    margin-top: 0;
+    padding: 1em 0.5em;
+  }
+  
+  @media screen and (max-width: 576px){
+    :host ::ng-deep .ngb-dp-months {
+      flex-flow: row wrap;
+      justify-content: flex-start;
+    }
+    :host ::ng-deep .ngb-dp-month {
+      flex: 1 0 auto;
+    }
+  }
+    
+  .btn-dark {
+    background-color: #43B649;
+    border-color: #43B649;
+  } 
+  
+  
+  .formLabel{
+    left: 1.7em;
+  }
+  
+  .selectLabel{
+    left: 1.7em;
+  }
+  
+  .file-upload{
+    display: none;
+  }
+  
+  
+  .btn-remove {
+    color: #212529;
+    background-color: #ef434d;
+    border-color: #020202
+  }
+  
+  .btn-remove:hover {
+    color: #212529;
+    background-color: #d45f57;
+    border-color: #000000
+  }
+  
+  .btn-add {
+    color: #212529;
+    background-color: #43b649;
+    border-color: #030303
+  }
+  
+  .btn-add:hover {
+    color: #212529;
+    background-color: #79b97c;
+    border-color: #000000
+  }
+  

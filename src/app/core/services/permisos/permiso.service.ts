@@ -1,6 +1,5 @@
 
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-
 import { Injectable } from '@angular/core';
 import { Permiso, PermisosDTO, PermisosInside } from '@interfaces/permisos';
 import { prefix } from '@shared/data/ruta-api';
@@ -13,11 +12,9 @@ export class PermisoService {
   private urlEndPoint:string = prefix +'permisos';
   private urlEndPointArch:string = prefix +'archivarpermiso';
   
-  getPermisos: any;
-
   constructor( private http: HttpClient) { }
   
-  scopegetPermisos(archivado: number): Observable<any> {
+  scopeGetPermisos(archivado: number): Observable<any> {
     let params = new HttpParams()
     
     if (archivado != 2 ){
@@ -31,13 +28,8 @@ export class PermisoService {
 
     return this.http.get<Permiso[]>(`${this.urlEndPoint}`, {
       params:params
-      
-    } 
-    
-      
-    )
-
- }
+    })
+  }
  
  getPermiso(id: string | number): Observable<any> {
     return this.http.get<PermisosInside>(`${this.urlEndPoint}/${id}`).pipe(

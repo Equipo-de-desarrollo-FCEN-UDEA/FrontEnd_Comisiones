@@ -38,34 +38,24 @@ export class BuscarPermisoComponent {
     this.Buscarservice.ngOnchanges();
   }
 
-    archivarPermiso(id:number){
-      this.permisoService.Archivado(id).subscribe()
-      this.Buscarservice.ngOnchanges()
-
-    }
-
-    desarchivarPermiso(id:number){
-      this.permisoService.NoArchivado(id).subscribe()
-      this.Buscarservice.ngOnchanges()
-      
-    }
-
-    
-
-    onSort({ column, direction}: SortEvent) {
+  archivarPermiso(id:number){
+    this.permisoService.Archivado(id).subscribe()
+    this.Buscarservice.ngOnchanges()
+  }
+  
+  desarchivarPermiso(id:number){
+    this.permisoService.NoArchivado(id).subscribe()
+    this.Buscarservice.ngOnchanges()
+  }
+  
+  onSort({ column, direction}: SortEvent) {
       // resetting other headers
-
-      this.headers.forEach(header => {
-        if (header.sortable !== column) {
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
           header.direction = '';
         }
-      });
-  
-      this.Buscarservice.sortColumn = "";
-      this.Buscarservice.sortDirection = direction;
-    }
-
-
-
-
+    });
+    this.Buscarservice.sortColumn = "";
+    this.Buscarservice.sortDirection = direction;
+  }
 }

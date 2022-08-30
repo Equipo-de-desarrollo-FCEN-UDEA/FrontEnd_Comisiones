@@ -54,10 +54,9 @@ export class BuscarComisionesService {
   private _search$ = new Subject<void>();
   private _comisiones$ = new BehaviorSubject<Comision[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 15,
     searchTerm: '',
     sortColumn: '',
     sortDirection: 'asc'
@@ -65,32 +64,47 @@ export class BuscarComisionesService {
 
   COMISIONES : Comision[] = [];
 
+  archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
   constructor(
     private comisionesSvc: ComisionesService,
     private datepipe: DatePipe
-    ) {
-    this._search$.pipe(
-      tap(() => this._loading$.next(true)),
-      debounceTime(200),
-      switchMap(() => this._search()),
-      delay(200),
-      tap(() => this._loading$.next(false))
-    ).subscribe(result => {
-      this._comisiones$.next(result.comisiones);
-      this._total$.next(result.total);
-    });
+    ){
+        this._search$.pipe(
+          tap(() => this._loading$.next(true)),
+          debounceTime(200),
+          switchMap(() => this._search()),
+          delay(200),
+          tap(() => this._loading$.next(false))
+        ).subscribe(result => {
+            this._comisiones$.next(result.comisiones);
+            this._total$.next(result.total);
+          });
 
-    this._search$.next();
-    this.comisionesSvc.getComisiones()
+        this._search$.next();
+        this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
+        .subscribe(
+          (resp: any ) => {
+            this.COMISIONES = resp.comisiones;
+          })
+      }
+
+  archivados(archivado: number){
+    this.archivado$.next(archivado);
+  }
+
+  ngOnchanges(){
+    this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
     .subscribe(
-      (resp: any ) => {
-        this.COMISIONES = resp.comisiones;
-        console.log(this.COMISIONES)
+      (resp: any) => {
+        console.log(resp+"respOnchange")
+        this.COMISIONES = resp.permisos;
+        this._comisiones$.next(this.COMISIONES);
+        this._search$.next();
       }
     )
-  }
-  
-
+   }
+   
   get comisiones$() { return this._comisiones$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }

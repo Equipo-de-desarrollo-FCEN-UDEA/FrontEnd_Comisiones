@@ -10,13 +10,30 @@ import { prefix } from '@shared/data/ruta-api';
 })
 export class ComisionesService {
   private urlEndPoint:string = prefix+'comisiones';
-
-
+  private urlEndPointArch:string = prefix +'archivarcomision';
+  
   constructor( private http: HttpClient) { }
 
-  getComisiones(): Observable<Comision[]> {
-    return this.http.get<Comision[]>(this.urlEndPoint)
+  scopeGetComisiones(archivado: number): Observable<any> {
+    let params = new HttpParams()
+    
+    if (archivado != 2 ){
+      params = params.append('archivado', archivado);
+    }
+    
+    params = params.append('offset', 0);
+    params = params.append('limit', 100);
+
+    console.log(params+"  parametros")
+
+    return this.http.get<Comision[]>(`${this.urlEndPoint}`, {
+      params:params
+    })
   }
+
+  // getComisiones(): Observable<Comision[]> {
+  //   return this.http.get<Comision[]>(this.urlEndPoint)
+  // }
   
   getComision(id: string | number) {
     return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)

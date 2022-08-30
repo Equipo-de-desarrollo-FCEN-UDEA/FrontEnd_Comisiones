@@ -11,20 +11,20 @@
       <input 
         id="table-complete-search" type="text" 
         class="form-control" name="searchTerm" 
-        [(ngModel)]="service.searchTerm">
+        [(ngModel)]="Buscarservice.searchTerm">
 
     </div>
 
     <span class="col col-form-label" 
-      *ngIf="service.loading$ | async">Loading...
+      *ngIf="Buscarservice.loading$ | async">Loading...
     </span>
 
-    <!-- <select class="form-select" (change)="changeOption($event)" style="width: auto"> 
+    <select class="form-select" (change)="changeOption($event)" style="width: auto"> 
       <option value="0">No archivados</option>
       <option value="1">Archivados</option>
       <option value="2">Todos</option>
       
-    </select> -->
+    </select>
     
     
    
@@ -60,14 +60,14 @@
         <td>
           <ngb-highlight 
           [result]="comision.tipos_comision.nombre" 
-          [term]="service.searchTerm">
+          [term]="Buscarservice.searchTerm">
           </ngb-highlight>
         </td>
         
         <td>
           <ngb-highlight
             [result]="ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre"
-            [term]="service.searchTerm"
+            [term]="Buscarservice.searchTerm"
             class="badge badge-pill pill"
             [ngClass]="{
               'bg-solicitada':
@@ -88,38 +88,38 @@
         <td>
           <ngb-highlight 
           [result]="ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd'" 
-          [term]="service.searchTerm">
+          [term]="Buscarservice.searchTerm">
           </ngb-highlight>
         </td>
   
         <td>
           <ngb-highlight
-          [result]="comision.usuarios.nombre" [term]="service.searchTerm">
+          [result]="comision.usuarios.nombre" [term]="Buscarservice.searchTerm">
           </ngb-highlight>
         </td>
   
         <td>
           <ngb-highlight
-          [result]="comision.usuarios.apellido" [term]="service.searchTerm">
+          [result]="comision.usuarios.apellido" [term]="Buscarservice.searchTerm">
           </ngb-highlight>
         </td>
   
         <td>
           <ngb-highlight
-          [result]="comision.usuarios.departamentos.nombre" [term]="service.searchTerm">
+          [result]="comision.usuarios.departamentos.nombre" [term]="Buscarservice.searchTerm">
           </ngb-highlight>
         </td>
   
         <td>
           <ngb-highlight
-          [result]="comision.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
+          [result]="comision.usuarios.departamentos.facultades.nombre" [term]="Buscarservice.searchTerm">
           </ngb-highlight>
        
         </td>
   
         <td>
           <ngb-highlight
-          [result]="comision.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
+          [result]="comision.usuarios.departamentos.facultades.nombre" [term]="Buscarservice.searchTerm">
           </ngb-highlight>
        
         </td>
@@ -137,14 +137,9 @@
 
   <div class="d-flex justify-content-between p-2">
     <ngb-pagination
-      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+      [collectionSize]="(total$ | async)!" [(page)]="Buscarservice.page" [pageSize]="Buscarservice.pageSize">
     </ngb-pagination> 
 
-    <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize"> 
-      <option [ngValue]="2">2 items per page</option>
-      <option [ngValue]="4">4 items per page</option>
-      <option [ngValue]="6">6 items per page</option>
-    </select>
   </div>
 
 </form>

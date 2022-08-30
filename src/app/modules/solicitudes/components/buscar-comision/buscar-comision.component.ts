@@ -31,7 +31,8 @@ export class BuscarComisionComponent {
     }
 
     changeOption(event:any){
-      this.
+      this.Buscarservice.archivados(event.target.value);
+      this.Buscarservice.ngOnchanges();
     }
 
 
@@ -43,8 +44,8 @@ export class BuscarComisionComponent {
         }
       });
   
-      this.service.sortColumn = "";
-      this.service.sortDirection = direction;
+      this.Buscarservice.sortColumn = "";
+      this.Buscarservice.sortDirection = direction;
     }
 
   }

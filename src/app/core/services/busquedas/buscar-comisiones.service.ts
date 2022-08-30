@@ -1,7 +1,5 @@
 import {Injectable, Pipe, PipeTransform} from '@angular/core';
-
 import {BehaviorSubject, Observable, of, pipe, Subject} from 'rxjs';
-
 import {Comision} from '../../interfaces/comisiones';
 import {ComisionesService} from '../comisiones/comisiones.service';
 import {DatePipe, DecimalPipe, JsonPipe, LowerCasePipe} from '@angular/common';
@@ -9,7 +7,7 @@ import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from '@shared/directivas/sortable.directive';
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 
-export type SortColumn = keyof Comision | "" ;
+export type SortColumn = keyof Comision | "";
 
 interface SearchResult {
   comisiones: Comision[];
@@ -35,32 +33,21 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
       return direction === 'asc' ? res : -res;
     });
   }
-
-  
 }
 
-
-
-
 function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
-
   return (
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())  ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
     datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt)?.includes(term)||
-    // datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
     comisiones.usuarios?.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.facultades.nombre.toLowerCase().includes(term) 
-    //|| datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).created_at, 'd MMM y')
   );
 } 
 
-
 @Injectable({providedIn: 'root'})
-
-
 
 export class BuscarComisionesService {
   private _loading$ = new BehaviorSubject<boolean>(true);

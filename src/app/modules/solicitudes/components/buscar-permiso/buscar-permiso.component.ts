@@ -1,7 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Permiso } from '@interfaces/permisos';
 import { BuscarPermisosService} from '@services/busquedas/buscar-permisos.service';
 import { PermisoService } from '@services/permisos/permiso.service';
@@ -15,45 +14,42 @@ import { Observable } from 'rxjs';
   styleUrls: ['./buscar-permiso.component.scss'],
   providers: [BuscarPermisosService, DecimalPipe]
 })
-export class BuscarPermisoComponent implements OnInit {
-  
+
+export class BuscarPermisoComponent {
   permisos$: Observable<Permiso[]>;
   total$: Observable<number>;
-  
-  ListPermisos = false;
-  error='';
   ultimoElemento = ultimoElement;
   
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
-    public service: BuscarPermisosService,
-    public permisoService: PermisoService,
-    public activateRoute: ActivatedRoute
-
-
+    public Buscarservice: BuscarPermisosService,
+    public permisoService: PermisoService
     ) {
-      this.permisos$ = service.permisos$;
-      this.total$ = service.total$;
+      this.permisos$ = Buscarservice.permisos$;
+      this.total$ = Buscarservice.total$;
       this.ultimoElemento = ultimoElement;
     }
+    
+  changeOption(event:any){
+    console.log(event.target.value + "Primer console log");
+    this.Buscarservice.archivados(event.target.value);
+    this.Buscarservice.ngOnchanges();
+  }
 
-    ngOnInit(): void {
-      this.activateRoute.params
-      .subscribe(({id})=> console.log(id))
-    }
-
-    changeOption(event:any){
-      console.log(event.target.value);
-      this.service.archivados(event.target.value);
-      this.service.ngOnchanges();
-    }
-
-    archivarPermiso(){
-      console.log(this.permisoService.patchPermiso+" patchPermiso")
+    archivarPermiso(id:number){
+      this.permisoService.Archivado(id).subscribe()
+      this.Buscarservice.ngOnchanges()
 
     }
+
+    desarchivarPermiso(id:number){
+      this.permisoService.NoArchivado(id).subscribe()
+      this.Buscarservice.ngOnchanges()
+      
+    }
+
     
 
     onSort({ column, direction}: SortEvent) {
@@ -65,8 +61,8 @@ export class BuscarPermisoComponent implements OnInit {
         }
       });
   
-      this.service.sortColumn = "";
-      this.service.sortDirection = direction;
+      this.Buscarservice.sortColumn = "";
+      this.Buscarservice.sortDirection = direction;
     }
 
 

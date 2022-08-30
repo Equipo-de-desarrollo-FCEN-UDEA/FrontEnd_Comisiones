@@ -12,7 +12,6 @@ export type SortColumn = keyof Permiso | "";
 interface SearchResult {
   permisos: Permiso[];
   total: number;
-  
 }
 
 interface State {
@@ -46,7 +45,6 @@ function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
     permisos.usuarios.apellido.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.facultades.nombre.toLocaleLowerCase().includes(term) 
-    //|| datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).created_at, 'd MMM y')
   );
 }
 
@@ -61,7 +59,7 @@ export class BuscarPermisosService {
 
   private _state: State = {
     page: 1,
-    pageSize: 7,
+    pageSize: 15,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -109,13 +107,10 @@ export class BuscarPermisosService {
    }
 
    ngOnchanges(){
-
-    if (this.archivado$) {
-      
-    }
     this.permisosSvc.scopegetPermisos(this.archivado$.getValue())
     .subscribe(
       (resp: any) => {
+        console.log(resp+"respOnchange")
         this.PERMISOS = resp.permisos;
         this._permisos$.next(this.PERMISOS);
         this._search$.next();

@@ -48,7 +48,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       console.log('no pasó guard');
-      this.route.navigate(['/auth/login']);
+      this.route.navigate(['/login']);
       return false;
     }
   }

@@ -55,6 +55,7 @@ export class BuscarPermisoComponent {
           header.direction = '';
         }
     });
+    
     this.Buscarservice.sortColumn = "";
     this.Buscarservice.sortDirection = direction;
   }

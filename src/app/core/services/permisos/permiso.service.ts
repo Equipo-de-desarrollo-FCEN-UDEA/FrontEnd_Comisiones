@@ -41,20 +41,10 @@ export class PermisoService {
 
   Archivado(id:number): Observable<any>{
     return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:1})
-    // .pipe(
-      // map((resp)=> {
-      //   return resp;
-      // })
-    // )
   }
 
   NoArchivado(id:number): Observable<any>{
     return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:0})
-    // .pipe(
-      // map((resp)=> {
-      //   return resp;
-      // })
-    // )
   }
 
 

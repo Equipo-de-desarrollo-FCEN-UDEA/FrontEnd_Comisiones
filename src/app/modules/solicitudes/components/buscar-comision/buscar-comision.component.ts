@@ -35,7 +35,16 @@ export class BuscarComisionComponent {
       this.Buscarservice.ngOnchanges();
     }
 
+    archivarComision(id:number){
+      this.comisionService.Archivado(id).subscribe()
+      this.Buscarservice.ngOnchanges()
+    }
 
+    desarchivarComision(id:number){
+      this.comisionService.NoArchivado(id).subscribe()
+      this.Buscarservice.ngOnchanges()
+    }
+    
     onSort({column, direction}: SortEvent) {
       // resetting other headers
       this.headers.forEach(header => {
@@ -47,7 +56,6 @@ export class BuscarComisionComponent {
       this.Buscarservice.sortColumn = "";
       this.Buscarservice.sortDirection = direction;
     }
-
   }
 
 

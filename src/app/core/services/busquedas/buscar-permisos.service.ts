@@ -124,9 +124,7 @@ export class BuscarPermisosService {
     Object.assign(this._state, patch);
     this._search$.next();
   }
-
   
-
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
@@ -142,13 +140,5 @@ export class BuscarPermisosService {
     // 3. paginate
     permisos = permisos.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({permisos, total});
-
-    
   }
-
-
-
-
-
-
 }

@@ -98,7 +98,7 @@ export class BuscarComisionesService {
     .subscribe(
       (resp: any) => {
         console.log(resp+"respOnchange")
-        this.COMISIONES = resp.permisos;
+        this.COMISIONES = resp.comisiones;
         this._comisiones$.next(this.COMISIONES);
         this._search$.next();
       }
@@ -124,8 +124,7 @@ export class BuscarComisionesService {
     Object.assign(this._state, patch);
     this._search$.next();
   }
-
-
+  
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 

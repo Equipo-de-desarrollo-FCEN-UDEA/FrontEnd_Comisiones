@@ -24,7 +24,7 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: String | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: string | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(comisiones: Comision[], column: SortColumn, direction: string): Comision[] {
   if (direction === '' || column === '') {
@@ -96,8 +96,9 @@ export class BuscarComisionesService {
     this._search$.next();
     this.comisionesSvc.getComisiones()
     .subscribe(
-      (comisiones: Comision[]) => {
-        this.COMISIONES = comisiones;
+      (resp: any ) => {
+        this.COMISIONES = resp.comisiones;
+        console.log(this.COMISIONES)
       }
     )
   }

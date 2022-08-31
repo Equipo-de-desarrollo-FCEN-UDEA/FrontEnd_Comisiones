@@ -7,7 +7,7 @@
 
   <hr />
 
-  <form [formGroup]="editarPermisoForm"  (ngSubmit)="onUpdate()">
+  <form [formGroup]="editarPermisoForm" (ngSubmit)="onUpdate()">
     <!-- CAMPOS PERMISO -->
 
     <ng-template #footerTemplate>
@@ -61,32 +61,31 @@
       </div>
     </div>
 
-      <div class="formfloatig col-12">
-        <select
-          class="form-select form-select-lg"
-          id="floatingtipos_permiso_id"
-          formControlName="tipos_permiso_id"
-          required
-          [ngClass]="{ 'is-invalid': isInvalidForm('tipos_permiso_id') }"
-          placeholder=" "
-        >
-          <option [value]="tipo.id" *ngFor="let tipo of tiposPermiso$ | async">
-            {{ tipo.nombre }}
-          </option>
-        </select>
-        <label
-          for="floatingtipos_permiso_id"
-          class="selectLabel"
-          [ngClass]="{
-            isFill: editarPermisoForm.controls['tipos_permiso_id'].valid
-          }"
-          >  </label
-        >
-      </div>
-    
+    <div class="formfloatig col-12">
+      <select
+        class="form-select form-select-lg"
+        id="floatingtipos_permiso_id"
+        formControlName="tipos_permiso_id"
+        required
+        [ngClass]="{ 'is-invalid': isInvalidForm('tipos_permiso_id') }"
+        placeholder=" "
+      >
+        <option [value]="tipo.id" *ngFor="let tipo of tiposPermiso$ | async">
+          {{ tipo.nombre }}
+        </option>
+      </select>
+      <label
+        for="floatingtipos_permiso_id"
+        class="selectLabel"
+        [ngClass]="{
+          isFill: editarPermisoForm.controls['tipos_permiso_id'].valid
+        }"
+      >
+      </label>
+    </div>
+
     <hr />
 
-    <div>
       <div class="row regular-row mt-4">
         <div class="col-md-4 col-xs-12 col-sm-12 label">Justificación *</div>
         <div class="col-sm-12 col-xs-12 col-md-8">
@@ -109,7 +108,6 @@
             </div>
           </div>
         </div>
-      </div>
 
       <!-- DOCUMENTOS -->
       <div class="row regular-row mt-4">
@@ -121,10 +119,7 @@
           >
             <li [id]="i" class="list-group-item d-flex justify-content-between">
               <span>{{ doc.nombre }}</span>
-              <span
-                class="input-group"
-                style="width: fit-content; margin: 0"
-              >
+              <span class="input-group" style="width: fit-content; margin: 0">
                 <button
                   class="btn btn-circle"
                   type="button"
@@ -140,40 +135,38 @@
 
       <!--- FECHAS  -->
 
-      
-
       <div class="mt-4 row regular-row">
         <span class="col-md-4 col-xs-12 col-sm-12 label">Fechas *</span>
         <div class="col-sm-12 col-xs-12 col-md-8" style="margin-bottom: 5px">
-          <div class="input-group ">
+          <div class="input-group">
             <input
               #dpFromDate
               class="form-control"
               type="text"
               (click)="datepicker.toggle(); clicked = clicked + 1"
-              placeholder="aaaa-mm-dd - aaaa-mm-dd"
+              placeholder="aaaa-mm-dd"
               name="dpFromDate"
               formControlName="fecha_inicio"
               (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
-              [value]="formatter.format(fromDate)? formatter.format(fromDate): null "
+              [value]="
+                formatter.format(fromDate) ? formatter.format(fromDate) : null
+              "
               [ngClass]="{
                 'is-invalid': (!fromDate || !toDate) && clicked !== 0
               }"
             />
             <input
-            #dpFromDate
-            class="form-control"
-            type="text"
-            (click)="datepicker.toggle(); clicked = clicked + 1"
-            placeholder="aaaa-mm-dd - aaaa-mm-dd"
-            name="dpFromDate"
-            formControlName="fecha_fin"
-            (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
-            [value]="formatter.format(toDate)? formatter.format(toDate): null "
-            [ngClass]="{
-              'is-invalid': (!fromDate || !toDate) && clicked !== 0
-            }"
-          />
+              #dpFromDate
+              class="form-control"
+              type="text"
+              (click)="datepicker.toggle(); clicked = clicked + 1"
+              placeholder="aaaa-mm-dd"
+              name="dpFromDate"
+              formControlName="fecha_fin"
+              (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+              [value]=" formatter.format(toDate) ? formatter.format(toDate) : null"
+              [ngClass]="{ 'is-invalid': (!fromDate || !toDate) && clicked !== 0 }"
+            />
             <span
               #buttonEl
               class="btn btn-outline-secondary"
@@ -183,7 +176,7 @@
             </span>
           </div>
         </div>
-  
+
         <div class="col-sm-6 col-xs-6 col-md-6" hidden>
           <div class="input-group" (click)="datepicker.toggle()">
             <input
@@ -245,7 +238,10 @@
         </div>
       </div>
 
-      <div class="alert-danger alert mt-2" *ngIf="isInvalidForm('justificacion')">
+      <div
+        class="alert-danger alert mt-2"
+        *ngIf="isInvalidForm('justificacion')"
+      >
         Recuerda que la justificación debe tener al menos 30 caracteres y máximo
         500 caracteres.
       </div>

@@ -47,7 +47,7 @@ export class EditarComisionComponent implements OnInit {
   public provincias: Estado[]=[];
 
   // ID de la comsision a editar
-  public getId: any;
+  getId: any;
 
 
   public isLoading: Subject<boolean> = this.loaderSvc.isLoading;
@@ -112,7 +112,7 @@ export class EditarComisionComponent implements OnInit {
   
 
   ngOnInit(): void {
-
+  
     // Trae los valores actuales de la comisión
     this.comisionSvc.getComision(this.getId).subscribe({
       next: (res) => {
@@ -125,9 +125,7 @@ export class EditarComisionComponent implements OnInit {
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
         });
 
-        res.documentos.forEach((documento:any) => this.documentosArray.push(documento)) 
-
-        console.log(res);
+        res.documentos.forEach((documento:any) => this.documentosArray.push(documento))
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
@@ -136,6 +134,12 @@ export class EditarComisionComponent implements OnInit {
         }
       },
     });
+
+    this.paisesCiudadesSvc.getPaises().subscribe(
+      (data:Pais[]) => {
+        this.paises = data;
+      }
+     )
     
   }
 
@@ -161,9 +165,6 @@ export class EditarComisionComponent implements OnInit {
   inRange(fecha_1 : any, fecha_2 : any){
     fecha_1 = new Date(this.formatter.format(fecha_1));
     fecha_2 = new Date(this.formatter.format(fecha_2));
-    console.log('paso')
-    console.log(fecha_1)
-    console.log(DiasHabiles(fecha_1, fecha_2), fecha_1, fecha_2)
     return DiasHabiles(fecha_1, fecha_2);
 
   }
@@ -218,7 +219,7 @@ export class EditarComisionComponent implements OnInit {
     console.log(this.files);
   }
 
-  onChangeEstado(event:any) {
+  onChangeProvincia(event:any) {
     const estadoId = event.target.value;
     this.provincia = this.provincias[estadoId];
     this.paisesCiudadesSvc.getCiudades(this.pais, this.provincia).subscribe(

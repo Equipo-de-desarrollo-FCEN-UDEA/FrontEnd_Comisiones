@@ -1,0 +1,155 @@
+<!-- <<<<<<< HEAD
+<div class="container">
+    <h3 class="header"> Elige el tema estratégico </h3>
+
+    <div class="temas">
+        <ngb-accordion [closeOthers]="true" activeIds="0" style="width: 100%;">
+
+            <ngb-panel *ngFor="let tema of temas; let i=index" [title]="tema.titulo" [id]="''+i">
+                
+                <ng-template ngbPanelContent>
+                    <h6>
+                        {{tema.subtitulo}}
+                    </h6>
+                    
+                    <hr>
+
+                    <p>A continuación elige el objetivo estratégico:</p>
+
+
+                    <ul class="objetivos" *ngFor="let objetivo of tema.objetivos">
+                        <button  style="text-align:left; width: 100%;" class="btn btn-outline-primary " (click)="select(objetivo.descripcion)">
+                            <span >{{objetivo.descripcion}}</span>
+                        </button>
+                    </ul>
+
+
+                </ng-template>
+
+            </ngb-panel>
+
+        </ngb-accordion>
+
+
+    </div>
+</div>
+======= -->
+<div class="modal-header">
+    <button type="button" class="btn-close" aria-describedby="modal-title" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+<form [formGroup]="FormPlan" (submit)="submit();">
+    <app-stepper #cdkStepper formArrayName="steps" [linear]="true">
+        <cdk-step [editable]="true" formGroupName="0" label="Temas" [optional]="false"
+            [stepControl]="formArray.get([0])!">
+            <ng-template cdkStepLabel>
+                <span class="icon is-medium">
+                    <img src="../../../../assets/one-svgrepo-com.svg" style="margin: auto;" width="25px" *ngIf="formArray.get([0])!.invalid">
+                    <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([0])!.valid"></i>
+                </span>
+            </ng-template>
+            <div class="container">
+                <h3 class="header"> Apoya al plan de desarrollo institucional en alguno de los siguientes temas</h3>
+                <div class="temas row">
+                    <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
+                        *ngFor="let tema of temas; let i = index">
+                        <div class="tema card" [ngClass]="{'selected': selectedTema==i}" (click)="selectTema(i)">
+                            <h5>{{tema.titulo}}</h5>
+                            <hr>
+                            <span>{{tema.subtitulo}}</span>
+                        </div>
+                    </div>
+                </div>
+                <footer class="my-footer">
+                    <div class="buttons">
+                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-primary" cdkStepperNext>
+                            <span> Objetivos </span>
+                            <span class="icon medium">
+                                <i class="fas fa-solid fa-thin fa-arrow-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+
+        </cdk-step>
+        <cdk-step label="Objetivo" [optional]="false">
+            <ng-template cdkStepLabel>
+                <span class="icon is-medium">
+                    <img src="../../../../assets/two-svgrepo-com.svg" width="25px" *ngIf="formArray.get([1])!.invalid">
+                    <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([1])!.valid"></i>
+                </span>
+            </ng-template>
+            <div class="container">
+                <h3> Apoya al plan de desarrollo institucional en alguno de los siguientes objetivos</h3>
+
+                <div class="objetivos row">
+                    <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
+                        *ngFor="let objetivo of objetivos$ | async; let i = index">
+                        <div class="tema card" [ngClass]="{'selected': selectedObjetivo == i}"
+                            (click)="selectObjetivo(i,objetivo.descripcion,objetivo.acciones);">
+                            <h5>{{"Objetivo estratégico " + (i+1)}}</h5>
+                            <hr>
+                            <span>{{objetivo.descripcion}}</span>
+                        </div>
+                    </div>
+                </div>
+                <footer class="my-footer">
+                    <div class="buttons">
+                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-primary" cdkStepperPrevious>
+                            <span class="icon medium">
+                                <i class="fas fa-solid fa-thin fa-arrow-left"></i>
+                            </span>
+                            <span> Temas </span>
+                        </button>
+                        <button [disabled]="formArray.get([1])!.invalid" class="btn btn-primary" cdkStepperNext>
+                            <span> Acciones </span>
+                            <span class="icon medium">
+                                <i class="fas fa-solid fa-thin fa-arrow-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+
+        </cdk-step>
+        <cdk-step label="Personal Details" [optional]="false">
+            <ng-template cdkStepLabel>
+                <span class="icon is-medium">
+                    <img src="../../../../assets/three-svgrepo-com.svg" width="25px" *ngIf="formArray.get([2])!.invalid">
+                    <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([2])!.valid"></i>
+                </span>
+            </ng-template>
+            <div class="container">
+                <h3>Apoya al plan de desarrollo institucional en alguna de las siguientes acciones estratégicas</h3>
+
+                <div class="acciones row">
+                    <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
+                        *ngFor="let accion of acciones$ | async; let i = index">
+                        <div class="tema card" [ngClass]="{'selected': selectedAccion == i}"
+                        (click)="selectAccion(i,accion);">
+                            <h5>{{"Acción estratégica " + (i+1)}}</h5>
+                            <hr>
+                            <span>{{accion}}</span>
+                        </div>
+                    </div>
+                </div>
+                <footer class="my-footer">
+                    <div class="buttons">
+                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-primary" cdkStepperPrevious>
+                            <span class="icon medium">
+                                <i class="fas fa-solid fa-thin fa-arrow-left"></i>
+                            </span>
+                            <span> Objetivos </span>
+                        </button>
+                        <button [disabled]="formArray.get([2])!.invalid || formArray.get([0])!.invalid || formArray.get([1])!.invalid" class="btn btn-primary" (submit)="true">
+                            <span> Finalizar </span>
+                            <span class="icon medium">
+                                <i class="fas fa-solid fa-thin fa-arrow-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </cdk-step>
+    </app-stepper>
+</form>

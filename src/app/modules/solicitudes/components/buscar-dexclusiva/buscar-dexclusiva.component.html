@@ -23,7 +23,8 @@
         </select>
       </div>
       
-      <table class="table table-striped">
+      <div class="table-responsive-sm">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -82,7 +83,10 @@
               </td>
           </tbody>
         </table>
-        
+              
+
+      </div>
+  
         <div class="d-flex justify-content-between p-2">
           <ngb-pagination 
             [collectionSize]="(total$ | async)!" 

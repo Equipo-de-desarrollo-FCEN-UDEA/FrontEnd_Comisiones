@@ -43,9 +43,9 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
         this.fb.group({
           accion: ['', Validators.required]
         }),
-        // this.fb.group({
-        //   acciones: ['', Validators.required]
-        // })
+        this.fb.group({
+          indicador: this.fb.array([this.indicadorgroup()], [Validators.required])
+        })
       ])}
     );
   }
@@ -78,7 +78,28 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
   }
 
   submit() {
+    // console.log(this.FormPlan.value)
     this.activeModal.close(this.FormPlan.value);
+  }
+
+    indicadorgroup() {
+    return this.fb.group({
+      indicador: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+    });
+  }
+
+  get indicadorArr(): FormArray {
+    const array = this.formArray
+    return array.get('3')?.get('indicador') as FormArray;
+  }
+
+  addInputIndicador() {
+    this.indicadorArr.push(this.indicadorgroup());
+  }
+
+  removeInput(controlName: string, index: number) {
+    const control = this.indicadorArr;
+    control.removeAt(index);
   }
 
 }

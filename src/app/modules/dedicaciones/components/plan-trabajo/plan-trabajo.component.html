@@ -257,14 +257,13 @@
                                 <div class="formfloatig col-sm-12 col-md-6 col-lg-4">
                                     <input id='floatingcosto_responsable{{i}}' type="text"
                                         formControlName='costo_responsable' class="form-control" placeholder=" ">
-                                    <label for="floatingcosto_responsable{{i}}" class="formLabel">Costo
-                                        Responsable</label>
+                                    <label for="floatingcosto_responsable{{i}}" class="formLabel">Costo</label>
                                 </div>
 
                                 <div class="formfloatig col-sm-12 col-md-12 col-lg-4">
                                     <input id='floatingacta_respaldo{{i}}' type="text" formControlName='acta_respaldo'
                                         class="form-control" placeholder=" ">
-                                    <label for="floatingacta_respaldo{{i}}" class="formLabel">Acta o respaldo</label>
+                                    <label for="floatingacta_respaldo{{i}}" class="formLabel">Acta</label>
                                 </div>
                             </div>
                         </div>
@@ -362,8 +361,7 @@
                                 <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
                                     <input id='floatingextencosto_responsable{{i}}' type="text"
                                         formControlName='costo_responsable' class="form-control" placeholder=" ">
-                                    <label for="floatingextencosto_responsable{{i}}" class="formLabel">Costo
-                                        Responsable</label>
+                                    <label for="floatingextencosto_responsable{{i}}" class="formLabel">Costo</label>
                                 </div>
 
                             </div>
@@ -392,16 +390,18 @@
                         </div>
 
                         <div class="buttons col-1" style="margin-bottom: 0.5em; margin-right: 0.5em;">
+                            <button class="btn btn-add btn-sm" type="button" (click)="addActividadExtension()"
+                                *ngIf="isLast">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            
                             <button class="btn btn-remove btn-sm" type="button"
                                 (click)="removeInput('actividades_extension',i)"
                                 *ngIf="actividadesExtensionArr.length > 1">
                                 <i class="fa fa-minus"></i>
 
                             </button>
-                            <button class="btn btn-add btn-sm" type="button" (click)="addActividadExtension()"
-                                *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
+                            
                         </div>
 
 
@@ -459,16 +459,18 @@
                         </div>
 
                         <div class="buttons col-1">
+
+                            <button class="btn btn-add btn-sm" type="button"
+                                (click)="addActividadAdministracionAcademica()" *ngIf="isLast">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <button class="btn btn-remove btn-sm" type="button"
                                 (click)="removeInput('administracion_academica',i)"
                                 *ngIf="actividadesAdministracionAcademicaArr.length > 1">
                                 <i class="fa fa-minus"></i>
 
                             </button>
-                            <button class="btn btn-add btn-sm" type="button"
-                                (click)="addActividadAdministracionAcademica()" *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
+                            
                         </div>
 
 
@@ -511,16 +513,18 @@
                         </div>
 
                         <div class="buttons col-1">
+
+                            <button class="btn btn-add btn-sm" type="button" (click)="addActividadOtrasActividades()"
+                                *ngIf="isLast">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <button class="btn btn-remove btn-sm" type="button"
                                 (click)="removeInput('otras_actividades',i)"
                                 *ngIf="actividadesOtrasActividadesArr.length > 1">
                                 <i class="fa fa-minus"></i>
 
                             </button>
-                            <button class="btn btn-add btn-sm" type="button" (click)="addActividadOtrasActividades()"
-                                *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
+                            
                         </div>
 
 
@@ -584,16 +588,17 @@
 
 
                         <div class="buttons col-1">
+                            <button class="btn btn-add btn-sm" type="button" (click)="addSeguimientoActividades()"
+                                *ngIf="isLast">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <button class="btn btn-remove btn-sm" type="button"
                                 (click)="removeInput('seguimiento_actividades',i)"
                                 *ngIf="seguimientoActividadesArr.length > 1">
                                 <i class="fa fa-minus"></i>
 
                             </button>
-                            <button class="btn btn-add btn-sm" type="button" (click)="addSeguimientoActividades()"
-                                *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
+                            
                         </div>
 
 

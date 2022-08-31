@@ -9,7 +9,6 @@ import { NgbdSortableHeader } from './directivas/sortable.directive';
 import { BrowserModule } from '@angular/platform-browser';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { HistorialEstadosComponent } from './components/historial-estados/historial-estados.component';
-import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrol
     NgbdSortableHeader,
     StepperComponent,
     HistorialEstadosComponent,
-    PlanDesarrolloInstitucionalComponent,
    
   ],
   imports: [

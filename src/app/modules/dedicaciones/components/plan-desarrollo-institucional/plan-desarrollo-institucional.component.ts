@@ -82,9 +82,6 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
     this.activeModal.close(this.FormPlan.value);
   }
 
-<<<<<<< HEAD:src/app/shared/components/plan-desarrollo-institucional/plan-desarrollo-institucional.component.ts
-}
-=======
     indicadorgroup() {
     return this.fb.group({
       indicador: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
@@ -106,4 +103,3 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
   }
 
 }
->>>>>>> Simon:src/app/modules/dedicaciones/components/plan-desarrollo-institucional/plan-desarrollo-institucional.component.ts

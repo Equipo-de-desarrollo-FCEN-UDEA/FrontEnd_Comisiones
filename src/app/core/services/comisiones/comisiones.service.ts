@@ -9,6 +9,7 @@ import { prefix } from '@shared/data/ruta-api';
   providedIn: 'root'
 })
 export class ComisionesService {
+  
   private urlEndPoint:string = prefix+'comisiones';
   private urlEndPointArch:string = prefix +'archivarcomision';
   
@@ -49,6 +50,7 @@ export class ComisionesService {
 
   NoArchivado(id:number): Observable<any>{
     return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:0})
+
   }
   
   postComision(comision:any) {
@@ -65,11 +67,9 @@ export class ComisionesService {
     return this.http.patch<ComisionDTO>(`${this.urlEndPoint}/${id}`, comision, {params: params});
   }
 
-    
   deleteComision(id: string | number): Observable<ComisionDTO> {
     return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
   }
-
 
 
 }

@@ -8,10 +8,10 @@
   
     <form [formGroup]="cumplidoForm" (ngSubmit)="subirCumplido()">
       
-      <div class="row regular-row">
-        <div class="col-4 label">Destinatarios</div>
-        <div class="col-sm-8">
-          <div class="form-check" 
+      <div class="row regular-row mt-4">
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2 mt-4">Destinatarios</div>
+        <div class="col-sm-12 col-xs-12 col-md-8">
+          <div class="form-check mb-3" 
           *ngFor="let correo of correosPredeterminados; let i=index">
           <input class="form-check-input" 
           type="checkbox" 
@@ -23,9 +23,9 @@
         </div>
       </div>
   
-      <div class="row regular-row">
-        <div class="col-4 label">Otros Destinatarios</div>
-        <div class="col-sm-8">
+      <div class="row regular-row mt-4">
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2 mt-4">Otros Destinatarios</div>
+        <div class="col-sm-12 col-xs-12 col-md-8">
           <div class="form-group">
             <textarea
               class="form-control"
@@ -37,9 +37,9 @@
         </div>
       </div>
 
-      <div class="row regular-row">
-        <div class="col-4 label">Información Complementaria</div>
-        <div class="col-sm-8">
+      <div class="row regular-row mt-4">
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2 mt-4">Información Complementaria</div>
+        <div class="col-sm-12 col-xs-12 col-md-8">
           <div class="form-group">
             <textarea
               class="form-control"
@@ -51,15 +51,17 @@
         </div>
       </div>
 
+
         <!-- ARCHIVOS - DOCUMENTOS -->
-      <h6>
+      <h6 class="mt-3">
           <span class="text-muted">Archivo de cumplido</span>
       </h6>
-      <div class="alert-danger" *ngIf="files.length>0 && !validSize()">
+      <div class="alert-danger alert" *ngIf="files.length>0 && !validSize()">
           <p>
               Los archivos no deben pesar más de 2 MB.
           </p>
       </div>
+
       <div class="formfloatig" style="display: flex; flex-direction: column;">
           <div *ngFor="let producto of archivos; last as isLast; let i=index"
               class="arrayLike formfloatig">
@@ -72,10 +74,10 @@
 
               </div>
               <div class="buttons" style="width:fit-content; margin: 0;">
-                  <button class="btn btn-circle btn-remove" type="button" (click)="removeFile(i)"
+                  <button class="btn btn-circle btn-remove m-1" type="button" (click)="removeFile(i)"
                       ><i class="fa fa-minus"></i>
                   </button>
-                  <button class="btn btn-circle btn-add" type="button"
+                  <button class="btn btn-circle btn-add m-1" type="button"
                       (click)="archivos.push(1)" *ngIf="isLast && archivos.length<3">
                       <i class="fa fa-plus"></i>
                   </button>
@@ -88,8 +90,8 @@
       </div>
   
       <hr />
-      <div class="footer-row d-grid gap-2 d-md-flex justify-content-md-end">
-        <div class="col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
+      <div class="footer-row d-md-flex justify-content-md-end mb-3">
+        <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
           <button
             type="button"
             class="btn btn-secondary btn-block"
@@ -98,7 +100,7 @@
             Cancelar
           </button>
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-2 col-xl-2 p-2">
+        <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
           <button
             class="btn btn-green btn-success btn-block"
           >

@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { TiposPermiso, TiposPermisoInside } from '@interfaces/tipos_permiso';
 import { PermisoService } from '@services/permisos/permiso.service';
 import { TipoPermisoService } from '@services/permisos/tipo-permiso.service';
+import { ReturnStatement } from '@angular/compiler';
 
 
 @Component({
@@ -98,8 +99,7 @@ export class EditarPermisoComponent implements OnInit {
         });
 
         res.documentos.forEach((documento: any) => this.documentosArray.push(documento)) 
-
-        console.log(res);
+  
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {

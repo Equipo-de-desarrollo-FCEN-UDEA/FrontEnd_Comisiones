@@ -36,6 +36,13 @@ const routes: Routes = [
     path: 'recuperar-contrasena',
     component: RecuperarContrasenaComponent
   },
+<<<<<<< HEAD
+  {
+    path: 'plan',
+    component: PlanDesarrolloInstitucionalComponent
+  },
+=======
+>>>>>>> Simon
   {
     path: '',
     redirectTo: 'home',
@@ -56,6 +63,11 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: '404'
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
 ];
 

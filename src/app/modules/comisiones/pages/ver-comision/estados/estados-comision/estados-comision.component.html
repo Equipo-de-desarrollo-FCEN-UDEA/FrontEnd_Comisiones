@@ -1,15 +1,16 @@
-<div class="container card shadow mt-5 bg-white rounded p-5 w-75">
-    <div class="row header-row">
-      <div class="col">
-        <p class="text-secondary">ASOCIAR UN ESTADO A LA COMISIÓN </p>
-      </div>
+<div class="containerInside card shadow mt-5 bg-white rounded p-5 w-75">
+  <div class="row header-row">
+    <div class="col">
+      <span class="text-secondary">ASOCIAR UN ESTADO A LA COMISIÓN</span>
     </div>
+  </div>
+ 
     <hr />
     <form [formGroup]="asociarEstadoForm" (ngSubmit)="asociarEstado()">
-      <div class="row regular-row">
+      <div class="row regular-row mt-4">
         
-        <div class="col-4 label">Nuevo Estado</div>
-        <div class="col-sm-8">
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Nuevo Estado</div>
+        <div class="col-sm-12 col-xs-12 col-md-8">
           <select formControlName="estados_id" class="form-control" 
             [ngClass]="{ 'is-invalid': submitted && f['estados_id'].errors }">
             <option [value]="op.id | number" *ngFor="let op of nuevoEstado$ | async">
@@ -26,9 +27,9 @@
       <hr />
       <div>
 
-        <div class="row regular-row">
-          <div class="col-4 label">Observación</div>
-          <div class="col-sm-8">
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2 mt-4">Observación</div>
+          <div class="col-sm-12 col-xs-12 col-md-8">
             <div class="form-group">
               <textarea class="form-control" rows="3" formControlName="observacion"></textarea>
             </div>
@@ -41,15 +42,14 @@
       </div>
   
       <hr />
-      <div class="row footer-row">
-        <div class="col-sm-9">
+      <div class="footer-row d-md-flex justify-content-md-end mb-3">
+        <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
           <button type="button" class="btn btn-secondary float-right" 
           [routerLink]="['/comisiones/ver-comision', this.getId]">
             Cancelar
           </button>
-          <div class="col-sm-1"></div>
         </div>
-        <div class="col-sm-2 form-group">
+        <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
           <button class="btn btn-green btn-success float-right">
             <span  *ngIf="isLoading | async" class="spinner-border spinner-border-sm mr-1"></span>
             Enviar

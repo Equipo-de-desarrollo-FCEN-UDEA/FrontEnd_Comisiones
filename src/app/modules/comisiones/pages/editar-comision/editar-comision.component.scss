@@ -1,90 +1,105 @@
-
-.btn-success {
-  background-color: #43b649;
-}
-
 .custom-day {
-    text-align: center;
-    padding: 0.185rem 0.25rem;
-    display: inline-block;
-    height: 2rem;
-    width: 2rem;
-  }
-  .custom-day.focused {
-    background-color: #e6e6e6;
-  }
-  .custom-day.range, .custom-day:hover {
-    background-color: #43b649;
-    color: white;
-  }
-  .custom-day.faded {
-    background-color: #43b649ab;
-  }
-  .container{
-    min-height: 100vh;
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+  background-color: #43B649;
+  color: white;
+}
+.custom-day.faded {
+  background-color: #43b649c0;
+}
+.container{
+  min-height: 100vh;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+  align-items: unset;
+  margin-bottom: 6em!important;
 }
 .card{
-  margin: auto;
-  margin-top: 0;
-  padding: 1em 0.5em;
+margin: auto;
+margin-top: 0;
+padding: 1em 0.5em;
+}
+
+.form-control-none{
+  display: none;
 }
 
 @media screen and (max-width: 576px){
-  :host ::ng-deep .ngb-dp-months {
-    flex-flow: row wrap;
-    justify-content: flex-start;
-  }
-  :host ::ng-deep .ngb-dp-month {
-    flex: 1 0 auto;
-  }
+:host ::ng-deep .ngb-dp-months {
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
-  
+:host ::ng-deep .ngb-dp-month {
+  flex: 1 0 auto;
+}
+.container {
+  width: 95%!important;
+ 
+ }
+}
+
+
+p {
+  text-align: center; 
+  margin: 0; 
+  color: green;
+}
+
 .btn-dark {
-  background-color: #43B649;
-  border-color: #43B649;
+background-color: #43B649;
+border-color: #43B649;
 } 
 
 
 .formLabel{
-  left: 1.7em;
+left: 1.7em;
 }
 
 .selectLabel{
-  left: 1.7em;
+left: 1.7em;
 }
 
 .file-upload{
-  display: none;
+display: none;
 }
 
 
+.buttons {
+  width: fit-content; 
+  margin: 0;
+}
+
 .btn-remove {
-  color: #212529;
-  background-color: #ef434d;
-  border-color: #020202
+  border-color: #fff;
+  color: #fff;
+  background-color: var(--032c);
 }
 
 .btn-remove:hover {
-  color: #212529;
   background-color: #d45f57;
-  border-color: #000000
 }
 
 .btn-add {
-  color: #212529;
+  border-color: #fff;
+  color: #fff;
   background-color: #43b649;
-  border-color: #030303
 }
 
 .btn-add:hover {
-  color: #212529;
   background-color: #79b97c;
-  border-color: #000000
 }
 
+.btn-success {
+  background-color: #43b649;
+}

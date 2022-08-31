@@ -9,8 +9,20 @@
   background-color: #f9a12c;
 }
 
-@media (max-width: 576px) {
+.btn-light {
+  color: #000;
+   background-color: #f9a12c;
+}
+
+
+@media screen and (max-width: 576px){
   .container {
-      width: 100%;
+    width: 95%!important;
+   
+   }
   }
+
+.link-success{
+  text-decoration: underline;
+  cursor: pointer;
 }

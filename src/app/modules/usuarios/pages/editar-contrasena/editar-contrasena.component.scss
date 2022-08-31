@@ -6,6 +6,13 @@
   
 }
 
-.btn-warning { 
-  background-color: #f9a12c;
+
+@media (max-width: 576px) {
+  .container {
+      width: 95%;
+  }
+}
+
+.btn-success {
+  background-color: #43b649;
 }

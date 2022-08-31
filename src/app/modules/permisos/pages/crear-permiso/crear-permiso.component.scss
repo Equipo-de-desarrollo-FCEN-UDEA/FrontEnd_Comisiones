@@ -37,7 +37,7 @@ p {
   color: green;
 }
   
-  @media screen and (max-width: 576px){
+@media screen and (max-width: 576px){
   :host ::ng-deep .ngb-dp-months {
     flex-flow: row wrap;
     justify-content: flex-start;
@@ -45,8 +45,10 @@ p {
   :host ::ng-deep .ngb-dp-month {
     flex: 1 0 auto;
   }
+  .container {
+    width: 95%!important;
   }
-  
+}
   
   
   .formLabel{

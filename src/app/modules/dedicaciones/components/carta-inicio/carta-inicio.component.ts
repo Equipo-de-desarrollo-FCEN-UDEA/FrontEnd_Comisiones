@@ -23,8 +23,9 @@ export class CartaInicioComponent implements OnInit {
   carta : Carta = {
     body: '',
     dedicaciones_id: 0,
+    archivo: '',
   }
-
+  archivo : any;
   _Body : string = '';
 
   @Input() set Body(value : string) {
@@ -59,7 +60,7 @@ export class CartaInicioComponent implements OnInit {
   ngOnInit(): void {
   }
     
-  makePdf() {
+  makePdf(): any {
     let DATA: any = document.getElementById('carta');
     const boton = document.getElementById('Generador-carta') as HTMLButtonElement;
     const spinner = document.getElementById('spinner') as HTMLDivElement;
@@ -75,6 +76,35 @@ export class CartaInicioComponent implements OnInit {
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('acta-de-inicio.pdf');
+      this.archivo = new Blob([PDF.output('blob')],{type : 'application/pdf'});
+      this.archivo.lastModified = new Date();
+      this.archivo.name = 'Acta de Inicio.pdf';
+      this.archivo = <File>this.archivo
+      let dedicacion_id : number | string = 0;
+      this.comunicationSvc.id$.subscribe(
+        (      id: string | number) => {
+          dedicacion_id = id;
+        }
+      ).unsubscribe();
+
+
+      this.carta = {
+        body: this.FormCarta.value.Cuerpo || '',
+        dedicaciones_id: dedicacion_id,
+        archivo: this.archivo
+      }
+      this.cartaSvc.postCarta(this.carta).subscribe(
+        (data:any) => {
+            Swal.fire({
+              // title: 'Carta de Inicio',
+              text: data.message,
+              icon: 'success',
+             confirmButtonText: 'Aceptar'
+           })
+           this.comunicationSvc.setCartaSuccess(true);
+        });
+
+    
     }).then(() => {
       spinner.style.display = 'none';
       boton.disabled = false;
@@ -85,32 +115,7 @@ export class CartaInicioComponent implements OnInit {
   }
   
   OnSubmit() {
-    this.makePdf();
-    let dedicacion_id : number | string = 0;
-
-    this.comunicationSvc.id$.subscribe(
-      (      id: string | number) => {
-        dedicacion_id = id;
-      }
-    ).unsubscribe();
-
-
-    this.carta = {
-      body: this.FormCarta.value.Cuerpo || '',
-      dedicaciones_id: dedicacion_id,
-    }
-    this.cartaSvc.postCarta(this.carta).subscribe(
-      (data:any) => {
-          Swal.fire({
-            // title: 'Carta de Inicio',
-            text: data.message,
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-          this.comunicationSvc.setCartaSuccess(true);
-      });
-
-    
+    this.makePdf()
   }
 
 

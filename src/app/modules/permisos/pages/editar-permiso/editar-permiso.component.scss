@@ -27,6 +27,17 @@
   margin-bottom: 6em!important;
 }
 
+.archivos {
+  width: auto; 
+  margin-left: 10px;
+}
+
+
+.fa-times-circle{
+  color: #ef434d;
+  font-size: 2em;
+}
+
 p {
   text-align: center; 
   margin: 0; 
@@ -47,6 +58,10 @@ padding: 1em 0.5em;
 :host ::ng-deep .ngb-dp-month {
   flex: 1 0 auto;
 }
+.container {
+  width: 95%!important;
+ 
+ }
 }
 
 

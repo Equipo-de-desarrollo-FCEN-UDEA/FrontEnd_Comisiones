@@ -13,6 +13,7 @@ import { prefix } from '@shared/data/ruta-api';
   providedIn: 'root'
 })
 export class ComisionesService {
+  
   private urlEndPoint:string = prefix+'comisiones';
 
 

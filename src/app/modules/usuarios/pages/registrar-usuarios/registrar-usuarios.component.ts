@@ -1,8 +1,14 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DepartamentoInDB } from '@interfaces/departamentos';
+import { Rol, RolResponse } from '@interfaces/roles';
+import { DepartamentoService } from '@services/departamentos/departamento.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { RolService } from '@services/roles/rol.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { tiposId } from '@shared/data/tipos-id';
+import { Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class RegistrarUsuariosComponent implements OnInit {
 
-  formSignup: FormGroup;
+  crearUsuarioForm: FormGroup;
 
   tiposId = tiposId;
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; //--> EL QUE SE USARÁ
@@ -21,22 +27,46 @@ export class RegistrarUsuariosComponent implements OnInit {
   public error:string = "";
   public submitted:boolean = false;
 
+  // Loader
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+
+  // Departamentos 
+  departamentos$: Observable<DepartamentoInDB[]>;
+
+
+  // Roles 
+  //roles$: Observable<RolResponse[]>
+
+  roles = [
+    {
+      nombre: "PROFESOR", 
+      id: "8"
+    }
+  ]
 
   constructor(
     private formBuilder: FormBuilder,
-    private usuarioSvc: UsuarioService,
     private ngZone: NgZone,
-    private router: Router
+    private router: Router, 
+
+    private loaderSvc: LoaderService,
+    private usuarioSvc: UsuarioService,
+    private departamentosSvc: DepartamentoService,
+    private rolesSvc: RolService
   ) { 
-    this.formSignup = this.formBuilder.group({
-      correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
-      passwordSignup : ['', Validators.required],
-      nombreSignup : ['', Validators.required],
-      apellidoSignup : ['', Validators.required],
-      tipoIdSignup : ['', Validators.required],
-      identificacionSignup : ['', Validators.required],
-      departamentoSignup : ['', Validators.required],
-      rolSignup : ['', Validators.required]
+
+    this.departamentos$ = this.departamentosSvc.getDepartamentos();
+    //this.roles$ = this.rolesSvc.getRoles();
+
+    this.crearUsuarioForm = this.formBuilder.group({
+      correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
+      contrasena : ['', Validators.required],
+      nombre : ['', Validators.required],
+      apellido : ['', Validators.required],
+      tipo_identificacion : ['', Validators.required],
+      identificacion : ['', Validators.required],
+      departamentos_id : ['', Validators.required],
+      roles_id : ['', Validators.required]
     });
   }
 
@@ -46,39 +76,19 @@ export class RegistrarUsuariosComponent implements OnInit {
 
 
   get f() {
-    return this.formSignup.controls;
+    return this.crearUsuarioForm.controls;
   }
 
   onSubmit() {
     this.submitted = true;
 
     // verificacion de errores
-    if (this.formSignup.invalid) {
+    if (this.crearUsuarioForm.invalid) {
       return;
     }
 
-    const body = {
-      correoSignup: this.formSignup.value.correoSignup,
-      passwordSignup: this.formSignup.value.passwordSignup,
-      nombreSignup: this.formSignup.value.nombreSignup,
-      apellidoSignup: this.formSignup.value.apellidoSignup,
-      tipoIdSignup: this.formSignup.value.tipoIdSignup,
-      identificacionSignup: this.formSignup.value.identificacionSignup,
-      departamentoSignup: this.formSignup.value.departamentoSignup,
-      rolSignup: this.formSignup.value.rolSignup,
-    }
 
-    const reqBody: FormData = new FormData();
-    reqBody.append('correoSignup', body.correoSignup);
-    reqBody.append('passwordSignup', body.passwordSignup);
-    reqBody.append('nombreSignup', body.nombreSignup);
-    reqBody.append('apellidoSignup', body.apellidoSignup);
-    reqBody.append('tipoIdSignup', body.tipoIdSignup);
-    reqBody.append('identificacionSignup', body.identificacionSignup);
-    reqBody.append('departamentoSignup', body.departamentoSignup);
-    reqBody.append('rolSignup', body.rolSignup);
-
-    this.usuarioSvc.updateUsuario(reqBody).subscribe({
+    this.usuarioSvc.postUsuario(this.crearUsuarioForm.value).subscribe({
       next: (res) => { 
         Swal.fire({
           title: 'Creado',
@@ -86,6 +96,7 @@ export class RegistrarUsuariosComponent implements OnInit {
           icon: 'success',
           confirmButtonColor: '#3AB795',
         });
+
         //ngZone: facilitate change detection
         this.ngZone.run(() =>
           this.router.navigateByUrl(`/home`)

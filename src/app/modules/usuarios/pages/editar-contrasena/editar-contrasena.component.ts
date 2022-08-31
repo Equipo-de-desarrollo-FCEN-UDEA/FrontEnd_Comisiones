@@ -28,21 +28,22 @@ export class EditarContrasenaComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
   ) { 
-    this.router.params.pipe(take(1)).subscribe(params => this.id = params['id']);
 
     this.editarContrasenaForm = this.formBuilder.group({
-      contrasena: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(250)]],
+      actualContrasena: ['', [Validators.required]],
+      nuevaContrasena: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(250)]],
+      confirmarContrasena: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(250)]],
     });
   }
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe({
-      next: (params) => {
-      this.usuarioService.getUsuario().subscribe((resUsuario) => {
-        this.usuario = resUsuario;
-      });
-      } 
-    });
+    // this.activateRoute.params.subscribe({
+    //   next: (params) => {
+    //   this.usuarioService.getUsuario().subscribe((resUsuario) => {
+    //     this.usuario = resUsuario;
+    //   });
+    //   } 
+    // });
   }
 
     // --------------------------------------------------
@@ -53,5 +54,12 @@ export class EditarContrasenaComponent implements OnInit {
   }
 
 
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.editarContrasenaForm.invalid) {
+      return;
+    }
+  }
 
 }

@@ -10,8 +10,9 @@ export interface DedicacionBase {
 
 export interface Dedicacion extends DedicacionBase {
     id: number;
-    archivado: boolean;
-    usuarios_id: number;
+    archivado: number;
+    usuarios: UsuarioInside;
+    
 }
 
 export interface DedicacionDTO extends Dedicacion{

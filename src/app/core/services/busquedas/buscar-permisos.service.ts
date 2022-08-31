@@ -12,7 +12,6 @@ export type SortColumn = keyof Permiso | "";
 interface SearchResult {
   permisos: Permiso[];
   total: number;
-  
 }
 
 interface State {
@@ -37,7 +36,6 @@ function sort(permisos: Permiso[], column: SortColumn, direction: string ): Perm
 }
 
 function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
-
   return (
     permisos.tipos_permiso.nombre.toLowerCase().includes(term.toLowerCase()) ||
     ultimoElement(permisos.intermediate_permisos)?.intermediate_estados.nombre.toLowerCase().includes(term)||
@@ -46,7 +44,6 @@ function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
     permisos.usuarios.apellido.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.facultades.nombre.toLocaleLowerCase().includes(term) 
-    //|| datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).created_at, 'd MMM y')
   );
 }
 
@@ -57,11 +54,9 @@ export class BuscarPermisosService {
   private _search$ = new Subject<void>();
   private _permisos$ = new BehaviorSubject<Permiso[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-
-
   private _state: State = {
     page: 1,
-    pageSize: 7,
+    pageSize: 15,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -70,46 +65,36 @@ export class BuscarPermisosService {
   PERMISOS : Permiso[] = [];
   
   archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
-
   
-
   constructor(
     private permisosSvc: PermisoService,
     private datepipe: DatePipe
   ) {
-    this._search$.pipe(
-      tap(() => this._loading$.next(true)),
-      debounceTime(200),
-      switchMap(() => this._search()),
-      delay(200),
-      tap(() => this._loading$.next(false))
-    ).subscribe(result => {
-      this._permisos$.next(result.permisos);
-      this._total$.next(result.total);
+      this._search$.pipe(
+        tap(() => this._loading$.next(true)),
+        debounceTime(200),
+        switchMap(() => this._search()),
+        delay(200),
+        tap(() => this._loading$.next(false))
+      ).subscribe(result => {
+          this._permisos$.next(result.permisos);
+          this._total$.next(result.total);
+        });
 
-      
-      
-    });
+      this._search$.next();
+      this.permisosSvc.scopeGetPermisos(this.archivado$.getValue())
+      .subscribe(
+        (resp: any) => {
+          this.PERMISOS = resp.permisos;
+        })
+    }
 
-    this._search$.next();
-
-  
-
-    this.permisosSvc.scopegetPermisos(this.archivado$.getValue())
-    .subscribe(
-      (resp: any) => {
-        this.PERMISOS = resp.permisos;
-      }
-    )
-   }
-
-   archivados(archivado: number){
+  archivados(archivado: number){
     this.archivado$.next(archivado);
-    
-   }
+  }
 
    ngOnchanges(){
-    this.permisosSvc.scopegetPermisos(this.archivado$.getValue())
+    this.permisosSvc.scopeGetPermisos(this.archivado$.getValue())
     .subscribe(
       (resp: any) => {
         console.log(resp+"respOnchange")
@@ -139,9 +124,7 @@ export class BuscarPermisosService {
     Object.assign(this._state, patch);
     this._search$.next();
   }
-
   
-
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
@@ -157,13 +140,5 @@ export class BuscarPermisosService {
     // 3. paginate
     permisos = permisos.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({permisos, total});
-
-    
   }
-
-
-
-
-
-
 }

@@ -1,144 +1,130 @@
 <div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded">
-<form>
-  <div class="mb-3 row">
-    <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar</label>
-    <div class="col-xs-3 col-sm-auto">
-      <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
+  <form>
+    <div class="mb-3 d-flex justify-content-between p-2">
+      <div class="d-flex">
+        <label 
+          for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
+        </label>
+
+        <input id="table-complete-search" type="text" 
+          class="form-control" name="searchTerm"
+          [(ngModel)]="Buscarservice.searchTerm">
+      </div>
+
+      <span class="col col-form-label" 
+        *ngIf="Buscarservice.loading$ | async">Loading...
+      </span>
+
+      <select class="form-select" 
+        (change)="changeOption($event)" style="width: auto">
+        <option value="0">No archivados</option>
+        <option value="1">Archivados</option>
+        <option value="2">Todos</option>
+      </select>
     </div>
-    <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
-  </div>
-
-  <div class="table-responsive">
-
+    
     <table class="table table-striped">
-      <thead>
-      <tr>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Estado</th>
+            <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
+            <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th>
+            <th> </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let comision of comisiones$ | async"
+            [routerLink]="['/comisiones/ver-comision', comision.id]"
+            class="click-table">
+            
+            <th scope="row">{{ comision.id }}</th>
+            
+            <td>
+              <ngb-highlight 
+                [result]="comision.tipos_comision.nombre" 
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight 
+                [result]="ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre"
+                [term]="Buscarservice.searchTerm" 
+                class="badge badge-pill pill" 
+                [ngClass]="{
+                  'bg-solicitada':
+                    ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'SOLICITADA',
+                  'bg-aprobada': 
+                    ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA',
+                  'bg-visto-bueno':
+                    ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'VISTO BUENO',
+                  'bg-finalizada':
+                    ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'FINALIZADA',
+                  'bg-rechazada-decanato':
+                    ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA DECANATO',
+                  'bg-rechazada-coordinacion':
+                    ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
+                  }">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight 
+                [result]="ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd'"
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight 
+                [result]="comision.usuarios.nombre" 
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight 
+                [result]="comision.usuarios.apellido" 
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight 
+                [result]="comision.usuarios.departamentos.nombre" 
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight 
+                [result]="comision.usuarios.departamentos.facultades.nombre"
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <button *ngIf="comision.archivado == 0" type="button" (click)="archivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Archivar</button>
+              <button *ngIf="comision.archivado == 1" type="button" (click)="desarchivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Desarchivar</button>
+            </td>
+        </tbody>
+      </table>
       
-        <th scope="col">#</th>
-        <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
-        <th scope="col" sortable="nombre" (sort)="onSort($event)">Estado</th>
-        <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
-        <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
-        <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
-        <th scope="col" sortable="nombre" (sort)="onSort($event)" >Departamentos</th>
-        <th scope="col" sortable="nombre" (sort)="onSort($event)" >Facultad</th>
-        <th scope="col" sortable="nombre" (sort)="onSort($event)" >Descargas</th>
-        <th> </th>
-  
-      </tr>
-      </thead>
-      <tbody>
-      
-        <tr *ngFor="let comision of comisiones$ | async"
-        [routerLink]="['/comisiones/ver-comision', comision.id]"
-        class="click-table">
-  
-        <th scope="row">{{ comision.id }}</th>
-  
-        <td>
-          <ngb-highlight 
-          [result]="comision.tipos_comision.nombre" 
-          [term]="service.searchTerm">
-          </ngb-highlight>
-        </td>
-        
-        <td>
-          <ngb-highlight
-            [result]="ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre"
-            [term]="service.searchTerm"
-            class="badge badge-pill pill"
-            [ngClass]="{
-              'bg-solicitada':
-              ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'SOLICITADA',
-              'bg-aprobada': ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA',
-              'bg-visto-bueno':
-              ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'VISTO BUENO',
-              'bg-finalizada':
-              ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'FINALIZADA',
-              'bg-rechazada-decanato':
-              ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA DECANATO',
-              'bg-rechazada-coordinacion':
-              ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
-            }"
-          ></ngb-highlight>
-        </td>
-  
-        <td>
-          <ngb-highlight 
-          [result]="ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd'" 
-          [term]="service.searchTerm">
-          </ngb-highlight>
-        </td>
-  
-        <td>
-          <ngb-highlight
-          [result]="comision.usuarios.nombre" [term]="service.searchTerm">
-          </ngb-highlight>
-        </td>
-  
-        <td>
-          <ngb-highlight
-          [result]="comision.usuarios.apellido" [term]="service.searchTerm">
-          </ngb-highlight>
-        </td>
-  
-        <td>
-          <ngb-highlight
-          [result]="comision.usuarios.departamentos.nombre" [term]="service.searchTerm">
-          </ngb-highlight>
-        </td>
-  
-        <td>
-          <ngb-highlight
-          [result]="comision.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
-          </ngb-highlight>
-       
-        </td>
-  
-        <td>
-          <ngb-highlight
-          [result]="comision.usuarios.departamentos.facultades.nombre" [term]="service.searchTerm">
-          </ngb-highlight>
-       
-        </td>
-  
-        <td>
-          <a [routerLink]="[]"
-            routerLinkActive="router-link-active">
-          Ver...</a>
-        </td>
-  
-      </tbody>
-    </table>
-  </div>
-  
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination 
+          [collectionSize]="(total$ | async)!" 
+          [(page)]="Buscarservice.page"
+          [pageSize]="Buscarservice.pageSize">
+        </ngb-pagination>
+      </div>
 
-  <div class="d-flex justify-content-between p-2">
-    <ngb-pagination
-      [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
-    </ngb-pagination> 
+  </form>
 
-    <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize"> 
-      <option [ngValue]="2">2 items per page</option>
-      <option [ngValue]="4">4 items per page</option>
-      <option [ngValue]="6">6 items per page</option>
-    </select>
-  </div>
-
-</form>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -35,15 +35,17 @@
 </div>
 ======= -->
 <div class="modal-header">
-    <button type="button" class="btn-close" aria-describedby="modal-title" (click)="activeModal.dismiss('Cross click')"></button>
-  </div>
+    <button type="button" class="btn-close" aria-describedby="modal-title"
+        (click)="activeModal.dismiss('Cross click')"></button>
+</div>
 <form [formGroup]="FormPlan" (submit)="submit();">
     <app-stepper #cdkStepper formArrayName="steps" [linear]="true">
         <cdk-step [editable]="true" formGroupName="0" label="Temas" [optional]="false"
             [stepControl]="formArray.get([0])!">
             <ng-template cdkStepLabel>
                 <span class="icon is-medium">
-                    <img src="../../../../assets/one-svgrepo-com.svg" style="margin: auto;" width="25px" *ngIf="formArray.get([0])!.invalid">
+                    <img src="../../../../assets/one-svgrepo-com.svg" style="margin: auto;" width="25px"
+                        *ngIf="formArray.get([0])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([0])!.valid"></i>
                 </span>
             </ng-template>
@@ -72,7 +74,7 @@
             </div>
 
         </cdk-step>
-        <cdk-step label="Objetivo" [optional]="false">
+        <cdk-step label="Objetivos" [optional]="false">
             <ng-template cdkStepLabel>
                 <span class="icon is-medium">
                     <img src="../../../../assets/two-svgrepo-com.svg" width="25px" *ngIf="formArray.get([1])!.invalid">
@@ -112,10 +114,11 @@
             </div>
 
         </cdk-step>
-        <cdk-step label="Personal Details" [optional]="false">
+        <cdk-step label="Acciones estratégicas" [optional]="false">
             <ng-template cdkStepLabel>
                 <span class="icon is-medium">
-                    <img src="../../../../assets/three-svgrepo-com.svg" width="25px" *ngIf="formArray.get([2])!.invalid">
+                    <img src="../../../../assets/three-svgrepo-com.svg" width="25px"
+                        *ngIf="formArray.get([2])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([2])!.valid"></i>
                 </span>
             </ng-template>
@@ -126,7 +129,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let accion of acciones$ | async; let i = index">
                         <div class="tema card" [ngClass]="{'selected': selectedAccion == i}"
-                        (click)="selectAccion(i,accion);">
+                            (click)="selectAccion(i,accion);">
                             <h5>{{"Acción estratégica " + (i+1)}}</h5>
                             <hr>
                             <span>{{accion}}</span>
@@ -141,10 +144,72 @@
                             </span>
                             <span> Objetivos </span>
                         </button>
-                        <button [disabled]="formArray.get([2])!.invalid || formArray.get([0])!.invalid || formArray.get([1])!.invalid" class="btn btn-primary" (submit)="true">
-                            <span> Finalizar </span>
+                        <button [disabled]="formArray.get([2])!.invalid" class="btn btn-primary" cdkStepperNext>
+                            <span> Indicadores </span>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-arrow-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </footer>
+            </div>
+        </cdk-step>
+        <cdk-step label="Acciones estratégicas" [optional]="false" formGroupName="3">
+            <ng-template cdkStepLabel>
+                <span class="icon is-medium">
+                    <img src="../../../../assets/three-svgrepo-com.svg" width="25px"
+                        *ngIf="formArray.get([2])!.invalid">
+                    <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([2])!.valid"></i>
+                </span>
+            </ng-template>
+            <div class="container">
+                <h3>Apoya al plan de desarrollo institucional en alguna de las siguientes acciones estratégicas</h3>
+
+                <div class="indicadores row" style="width: 100%;">
+                    <h6>Indicador(es):<span style="color:red">*</span></h6>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div style="width: 100%" formArrayName="indicador">
+                            <div *ngFor="let indicador of indicadorArr.controls; last as isLast; let i=index"
+                                class="arrayLike formfloatig" [formGroupName]="i">
+
+                                <textarea id="floatingindicador{{i}}" formControlName="indicador" rows="3"
+                                    class="form-control" type="text" placeholder=" "
+                                    [ngClass]="{'is-invalid': indicador.invalid && indicador.touched}">
+                            </textarea>
+                                <label for="floatingindicador{{i}}" class="formLabel">Indicador {{i+1}}</label>
+
+                                <div class="buttons" style="margin-left: 10px;">
+                                    <button class="btn btn-circle btn-danger btn-sm" type="button"
+                                        (click)="removeInput('indicador',i)" *ngIf="indicadorArr.length > 1">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <button class="btn btn-circle btn-primary btn-sm" type="button"
+                                        (click)="addInputIndicador()" *ngIf="isLast">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <footer class="my-footer">
+                    <div class="buttons">
+                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-primary" cdkStepperPrevious>
+                            <span class="icon medium">
+                                <i class="fas fa-solid fa-thin fa-arrow-left"></i>
+                            </span>
+                            <span> Acciones  </span>
+                        </button>
+                        <button
+                            [disabled]="formArray.get([2])!.invalid || formArray.get([0])!.invalid || formArray.get([1])!.invalid"
+                            class="btn btn-primary" (submit)="true">
+                            <span> Finalizar </span>
+                            <span class="icon medium">
+                                <i class="fas fa-solid fa-thin fa-check-circle"></i>
                             </span>
                         </button>
                     </div>

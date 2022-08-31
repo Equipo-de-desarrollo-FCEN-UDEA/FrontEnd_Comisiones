@@ -14,6 +14,7 @@ import { CrearDedicacionComponent } from './pages/crear-dedicacion/crear-dedicac
 import { EditarDedicacionComponent } from './pages/editar-dedicacion/editar-dedicacion.component';
 import { VerDedicacionComponent } from './pages/ver-dedicacion/ver-dedicacion.component';
 import { SharedModule } from '@shared/shared.module';
+import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SharedModule } from '@shared/shared.module';
     PlanTrabajoComponent,
     CrearDedicacionComponent,
     EditarDedicacionComponent,
-    VerDedicacionComponent
+    VerDedicacionComponent,
+    PlanDesarrolloInstitucionalComponent
   ],
   imports: [
     CommonModule,

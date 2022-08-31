@@ -11,12 +11,12 @@ import { LoaderService } from '@services/interceptors/loader.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 import Swal from 'sweetalert2';
-import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
+
 import { FormatoViceService } from '@services/dedicaciones/formato-vice.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PlanDesarrolloInstitucionalComponent } from '@shared/components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
+import { PlanDesarrolloInstitucionalComponent } from '../plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 
 @Component({
   selector: 'app-f-dedicacion',
@@ -88,7 +88,7 @@ export class FDedicacionComponent implements OnInit {
     metas: this.fb.array([this.metasgroup()], [Validators.required]),
     acciones_estrategicas: this.fb.array([this.acciones_estrategicasgroup()], [Validators.required]),
     objetivo_estrategico_institucional: this.fb.array([this.objetivo_estrategico_institucionalgroup()], [Validators.required]),
-    // indicador: this.fb.array([this.indicadorgroup()], [Validators.required]),
+    indicador: this.fb.array([this.indicadorgroup()]),
     productos: this.fb.array([this.productosgroup()], [Validators.required]),
   })
 
@@ -105,31 +105,31 @@ export class FDedicacionComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.fBasicInfo.value)
-    // let Dedicacion = this.fBasicInfo.value as FormatoVice;
+    // console.log(this.fBasicInfo.value)
+    let Dedicacion = this.fBasicInfo.value as FormatoVice;
 
-    // let dedicacion_id: number | string = 0;
+    let dedicacion_id: number | string = 0;
 
-    // this.comunicationSvc.id$.subscribe(
-    //   (id: string | number) => {
-    //     dedicacion_id = id;
-    //   }
-    // );
+    this.comunicationSvc.id$.subscribe(
+      (id: string | number) => {
+        dedicacion_id = id;
+      }
+    );
 
 
-    // this.formatoSvc.postFormulario(Dedicacion, dedicacion_id).subscribe(
-    //   (res: any) => {
-    //     if (res) {
-    //       Swal.fire({
-    //         text: 'Formato generado con éxito',
-    //         icon: 'success',
-    //         confirmButtonText: 'Aceptar'
-    //       }
-    //       )
-    //       this.comunicationSvc.setFormatoSuccess(true);
-    //     }
-    //   }
-    // );
+    this.formatoSvc.postFormulario(Dedicacion, dedicacion_id).subscribe(
+      (res: any) => {
+        if (res) {
+          Swal.fire({
+            text: 'Formato generado con éxito',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          }
+          )
+          this.comunicationSvc.setFormatoSuccess(true);
+        }
+      }
+    );
 
 
   }
@@ -139,13 +139,18 @@ export class FDedicacionComponent implements OnInit {
     modalRef.result.then(
       (res: any) => {
         const steps = res.steps;
+        for (let i = 0; i < steps[3].indicador.length; i++)  {
+          this.addInputIndicador()
+        }
         const object = {
           tema_estrategico: [{tema:steps[0].temas}],
           objetivo_estrategico_desarrollo: [{objEstrategico:steps[1].objetivo}],
           objetivo_estrategico_institucional: [{objetivo:steps[1].objetivo}],
-          acciones_estrategicas: [{accion:steps[2].accion}]
+          acciones_estrategicas: [{accion:steps[2].accion}],
+          indicador: steps[3].indicador
         }
         this.fBasicInfo.patchValue(object)
+        console.log(this.fBasicInfo.value)
       }
     ).catch(
       (err:any) => {
@@ -238,19 +243,19 @@ export class FDedicacionComponent implements OnInit {
   }
 
   // Indicador
-  // indicadorgroup() {
-  //   return this.fb.group({
-  //     indicador: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-  //   });
-  // }
+  indicadorgroup() {
+    return this.fb.group({
+      indicador: [''],
+    });
+  }
 
-  // get indicadorArr(): FormArray {
-  //   return this.fBasicInfo.get('indicador') as FormArray;
-  // }
+  get indicadorArr(): FormArray {
+    return this.fBasicInfo.get('indicador') as FormArray;
+  }
 
-  // addInputIndicador() {
-  //   this.indicadorArr.push(this.indicadorgroup());
-  // }
+  addInputIndicador() {
+    this.indicadorArr.push(this.indicadorgroup());
+  }
 
 
   // Productos

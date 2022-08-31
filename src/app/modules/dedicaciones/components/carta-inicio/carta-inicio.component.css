@@ -23,6 +23,7 @@ h3, h5{
     border: 1px solid #ccc;
     padding: 15px;
     border-radius: 25px;
+    background-color: #fff;
 }
  
 :host #discipline-qe /deep/ .ql-container{

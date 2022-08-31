@@ -1,32 +1,34 @@
-<form [formGroup]="editarContrasenaForm" (ngSubmit)="onSubmit()">
-  <div class="container card shadow mt-5 bg-white rounded p-4">
-    <div class="row header-row">
-      <div class="col">
-        <span class="text-secondary">MODIFICAR CONTRASEÑA</span>
-      </div>
+<div class="container card shadow mt-5 bg-white rounded p-4 ">
+  <div class="row header-row">
+    <div class="col">
+      <span class="text-secondary">MODIFICAR CONTRASEÑA</span>
     </div>
-    <hr />
+  </div>
+  <hr />
+
+  <form>
 
     <div class="row regular-row">
       <div class="col-12">
         <input
           type="password"
           placeholder="Contraseña Actual"
-          formControlName="actualContrasena"
+          formControlName="contrasena"
           class="form-control"
           [ngClass]="{
-            'is-invalid': submitted && f['actualContrasena'].errors
+            'is-invalid': submitted && f['contrasena'].errors
           }"
         />
-        <!-- <div         
+        <div         
           *ngIf="submitted && f['contrasena'].errors"
           class="invalid-feedback">
             <div 
             class="alert alert-danger"
-            *ngIf="f['actualContrasena'].errors">
+            *ngIf="f['contrasena'].errors['minLength']">
               La contraseña es requerida
             </div>
-        </div> -->
+        </div>
+        
       </div>
     </div>
 
@@ -35,28 +37,28 @@
         <input
           type="password"
           placeholder="Nueva Contraseña"
-          formControlName="nuevaContrasena"
+          formControlName="contrasena"
           class="form-control"
         />
-        <!-- <div         
-          *ngIf="submitted && f['nuevaContrasena'].errors"
+        <div         
+          *ngIf="submitted && f['contrasena'].errors"
           class="invalid-feedback">
           <div 
-            *ngIf="f['nuevaContrasena'].errors" 
+            *ngIf="f['contrasena'].errors['minLength']" 
             class="alert alert-danger">
             La contraseña es requerida
           </div>
         </div>
 
         <div         
-          *ngIf="submitted && f['nuevaContrasena'].errors"
+          *ngIf="submitted && f['contrasena'].errors"
           class="invalid-feedback">
           <div 
-            *ngIf="f['nuevaContrasena'].errors['maxLength']"
+            *ngIf="f['contrasena'].errors['maxLength']"
             class="alert alert-danger" >
             La contraseña es demasiado larga
           </div>
-        </div> -->
+      </div>
       </div>
     </div>
 
@@ -66,9 +68,11 @@
           type="password"
           class="form-control"
           placeholder="Confirmar Contraseña"
-          formControlName="confirmarContrasena"
+          formControlName="confirmContrasena"
+         
         />
-        <!-- <div
+        <div
+         
           class="invalid-feedback alert alert-danger"
         >
           <div>
@@ -77,10 +81,10 @@
           <div >
             Confirmar la contraseña es requerido
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
-    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+    <div  *ngIf="error" class="alert alert-danger mt-3 mb-0">
       {{ error }}
     </div>
 
@@ -99,8 +103,6 @@
         <button
           type="button"
           class="btn btn-green btn-success btn-block"
-          (submit)="(true)"
-          id="btn-sub"
         >
           <span
             *ngIf="loading"
@@ -110,5 +112,5 @@
         </button>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+</div>

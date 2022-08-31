@@ -5,6 +5,7 @@ import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { NgbdSortableHeader, SortEvent } from '@shared/directivas/sortable.directive';
 import { BuscarComisionesService } from '@services/busquedas/buscar-comisiones.service';
 import { DecimalPipe } from '@angular/common';
+import { ComisionesService } from '@services/comisiones/comisiones.service';
 
 @Component({
   selector: 'app-buscar-comision',
@@ -12,25 +13,38 @@ import { DecimalPipe } from '@angular/common';
   styleUrls: ['./buscar-comision.component.scss'],
   providers: [BuscarComisionesService, DecimalPipe]
 })
+
 export class BuscarComisionComponent {
   comisiones$: Observable<Comision[]>;
   total$: Observable<number>;
-  ListComisiones = false;
-  error='';
   ultimoElemento = ultimoElement
-
-
+  
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
-    public service: BuscarComisionesService,
+    public Buscarservice: BuscarComisionesService,
+    public comisionService: ComisionesService
     ) {
-      this.comisiones$ = service.comisiones$;
-      this.total$ = service.total$;
+      this.comisiones$ = Buscarservice.comisiones$;
+      this.total$ = Buscarservice.total$;
       this.ultimoElemento = ultimoElement;
     }
 
+    changeOption(event:any){
+      this.Buscarservice.archivados(event.target.value);
+      this.Buscarservice.ngOnchanges();
+    }
 
+    archivarComision(id:number){
+      this.comisionService.Archivado(id).subscribe()
+      this.Buscarservice.ngOnchanges()
+    }
+
+    desarchivarComision(id:number){
+      this.comisionService.NoArchivado(id).subscribe()
+      this.Buscarservice.ngOnchanges()
+    }
+    
     onSort({column, direction}: SortEvent) {
       // resetting other headers
       this.headers.forEach(header => {
@@ -39,10 +53,9 @@ export class BuscarComisionComponent {
         }
       });
   
-      this.service.sortColumn = "";
-      this.service.sortDirection = direction;
+      this.Buscarservice.sortColumn = "";
+      this.Buscarservice.sortDirection = direction;
     }
-
   }
 
 

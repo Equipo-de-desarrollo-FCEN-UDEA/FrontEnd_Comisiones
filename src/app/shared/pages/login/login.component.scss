@@ -10,9 +10,13 @@
     width: 100%;
     max-width: 400px;
     margin: 5px;
+    border-radius: 4%;
+    background-color: #fff;
     /* // border:none; */
 
   }
+
+
 
   .btr{
     border-top-right-radius: 5px !important;
@@ -23,15 +27,16 @@
     border-top-left-radius: 5px !important;
   }
 
-  .btn-dark {
-      color: #fff;
-      background-color: #43b649;
-      border-color: #3AB795;
-  } .btn-dark:hover {
-    background-color: #8dc63f;
-  } .btn-dark:active {
-    border-color: #8dc63f;
+  .btn-submit{
+    color: #fff;
+    border-color: #fff;
+    background: linear-gradient(90deg, rgba(67,182,73, 0.8) 0%, rgba(67,182,73,0.9) 35%, rgba(141,198,63,1) 100%);
+  }.btn-submit:hover{
+    transition: all 0.5s ease-out;
+    background-color: #000;
   }
+
+
 
 
   .nav-pills{

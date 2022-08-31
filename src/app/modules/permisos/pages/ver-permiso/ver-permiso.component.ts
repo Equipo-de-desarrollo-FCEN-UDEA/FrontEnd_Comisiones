@@ -19,6 +19,7 @@ import { PermisoService } from '@services/permisos/permiso.service';
 export class VerPermisoComponent implements OnInit {
 
   loading:boolean = false;
+  isDelete:boolean = false;
   error:string = '';
   permiso: Permiso| undefined;
 
@@ -106,6 +107,7 @@ export class VerPermisoComponent implements OnInit {
   // ------------ ELIMINAR PERMISO ------------
   // -----------------------------------------
   delete(id: any): void {
+    this.isDelete = true;
     Swal.fire({
       title: '¿Seguro que quieres eliminar este permiso?',
       text: 'No podrás revertir esta acción',

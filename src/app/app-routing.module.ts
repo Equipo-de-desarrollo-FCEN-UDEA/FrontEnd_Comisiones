@@ -37,7 +37,6 @@ const routes: Routes = [
     path: 'recuperar-contrasena',
     component: RecuperarContrasenaComponent
   },
-
   {
     path: 'plan',
     component: PlanDesarrolloInstitucionalComponent
@@ -62,6 +61,11 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: '404'
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
 ];
 

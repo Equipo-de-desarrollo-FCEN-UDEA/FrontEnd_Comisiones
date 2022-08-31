@@ -1,7 +1,7 @@
 <form
   need-validation
   novalidate
-  [formGroup]="formSignup"  
+  [formGroup]="crearUsuarioForm"
   (ngSubmit)="onSubmit()"
   class="container card shadow mt-5 bg-white rounded"
 >
@@ -24,7 +24,7 @@
               placeholder=" "
               formControlName="apellido"
               [ngClass]="{
-                'is-invalid': submitted && f['apellidoSignup'].errors
+                'is-invalid': submitted && f['apellido'].errors
               }"
             />
             </div>     
@@ -40,7 +40,7 @@
               placeholder=""
               formControlName="nombre"
               [ngClass]="{
-                'is-invalid': submitted && f['nombreSignup'].errors
+                'is-invalid': submitted && f['nombre'].errors
               }"
             /></div>
           </div>
@@ -51,15 +51,16 @@
             <div class="col-sm-12 col-xs-12 col-md-8 col-12">
               <div class="formfloatig ">
                 <input
-                  id="Correo-signup"
+                  formControlName="correo"
+                  id="Correo-"
                   type="text"
                   class="form-control"
                   placeholder=" "
                   [ngClass]="{
-                    'is-invalid': submitted && f['correoSignup'].errors
+                    'is-invalid': submitted && f['correo'].errors
                   }"            
                 />
-                <label for="Correo-signup" class="formLabel"
+                <label for="Correo-" class="formLabel"
                   ></label
                 >
               </div>
@@ -72,12 +73,12 @@
               <div class="formfloatig">
                 <select
                   class="form-select form-select-lg"
-                  id="floatingcampo_modalidad"
-                  formControlName="campo_modalidad"
+                  id="tipo_identificacion"
+                  formControlName="tipo_identificacion"
                   required
                   placeholder=" "
                   [ngClass]="{
-                    'is-invalid': submitted && f['tipoIdSignup'].errors
+                    'is-invalid': submitted && f['tipo_identificacion'].errors
                   }"
                 >
                   <option [value]="tipo" *ngFor="let tipo of tiposId">
@@ -85,7 +86,7 @@
                   </option>
                 </select>
                 <label
-                  for="floatingcampo_modalidad"
+                  for="tipo_identificacion"
                   class="selectLabel"
                   [ngClass]="{ isFill: true }"
                   >Tipo de Identificación</label
@@ -99,15 +100,16 @@
             <div class="col-sm-12 col-xs-12 col-md-8 col-12">
               <div class="formfloatig">
                 <input
-                  id="Identificacion"
+                  id="identificacion"
+                  formControlName="identificacion"
                   type="text"
                   class="form-control"
                   placeholder=" "
                   [ngClass]="{
-                    'is-invalid': submitted && f['identificacionSignup'].errors
+                    'is-invalid': submitted && f['identificacion'].errors
                   }"
                 />
-                <label for="Identificacion" class="formLabel">
+                <label for="identificacion" class="formLabel">
                 </label>
               </div>
             </div>
@@ -119,20 +121,20 @@
               <div class="formfloatig">
                 <select
                   class="form-select form-select-lg"
-                  id="roles"
+                  id="roles_id"
                   formControlName="roles_id"
                   required
                   placeholder=" "
                   [ngClass]="{
-                    'is-invalid': submitted && f['rolSignup'].errors
+                    'is-invalid': submitted && f['roles_id'].errors
                   }"
                 >
-                  <!-- <option [value]="rol.id" *ngFor="let rol of roles">
-                    {{ rol.nombre | uppercase }}
-                  </option> -->
+                <option [value]="rol.id" *ngFor="let rol of roles">
+                    {{ rol.nombre| uppercase }}
+                </option>
                 </select>
                 <label
-                  for="roles"
+                  for="roles_id"
                   class="selectLabel"
                   [ngClass]="{ isFill: true }"
                   >Cargo</label
@@ -152,15 +154,15 @@
                   required
                   placeholder=" "
                   [ngClass]="{
-                    'is-invalid': submitted && f['departamentoSignup'].errors
+                    'is-invalid': submitted && f['departamentos_id'].errors
                   }"
                 >
-                  <!-- <option
+                <option
+                    *ngFor="let departamento of departamentos$ | async"
                     [value]="departamento.id"
-                    *ngFor="let departamento of deparmentos"
                   > 
                     {{ departamento.nombre | uppercase }}
-                  </option>-->
+                </option>
                 </select>
                 <label
                   for="departamentos_id"
@@ -184,7 +186,7 @@
                   class="form-control"
                   placeholder=" "
                   [ngClass]="{
-                    'is-invalid': submitted && f['passwordSignup'].errors
+                    'is-invalid': submitted && f['contrasena'].errors
                   }"
                 />
                 <label for="Contrasena" class="formLabel"></label>
@@ -200,9 +202,10 @@
                   id="Confirmar"
                   type="password"
                   class="form-control"
+                  formControlName="contrasena"
                   placeholder=" "
                   [ngClass]="{
-                    'is-invalid': submitted && f['passwordSignup'].errors
+                    'is-invalid': submitted && f['contrasena'].errors
                   }"
                 />
                 <label for="Confirmar" class="formLabel"

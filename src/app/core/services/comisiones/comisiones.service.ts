@@ -13,6 +13,7 @@ import { prefix } from '@shared/data/ruta-api';
   providedIn: 'root'
 })
 export class ComisionesService {
+  
   private urlEndPoint:string = prefix+'comisiones';
 
 
@@ -44,11 +45,9 @@ export class ComisionesService {
     return this.http.patch<ComisionDTO>(`${this.urlEndPoint}/${id}`, comision, {params: params});
   }
 
-    
   deleteComision(id: string | number): Observable<ComisionDTO> {
     return this.http.delete<ComisionDTO>(`${this.urlEndPoint}/${id}`);
   }
-
 
 
 }

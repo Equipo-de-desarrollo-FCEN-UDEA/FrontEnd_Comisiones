@@ -22,15 +22,24 @@ const routes: Routes = [
     path: 'editar-usuario/:id',
     component: EditarUsuarioComponent
   },
- {
-  path: 'editar-contrasena/:id',
-  component: EditarContrasenaComponent
- },
- {
-  path: 'registrar-usuarios',
-  canActivate: [AdminGuard],
-  component: RegistrarUsuariosComponent
- }
+  {
+    path: 'editar-contrasena/:id',
+    component: EditarContrasenaComponent
+  },
+  {
+    path: 'registrar-usuarios',
+    component: RegistrarUsuariosComponent
+  },
+  { 
+    path: '**', 
+    redirectTo: 'home', 
+    pathMatch: 'full' 
+  },
+  { 
+    path: '', 
+    redirectTo: '/404', 
+    pathMatch: 'full' 
+  },
 ];
 
 @NgModule({

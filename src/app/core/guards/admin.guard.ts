@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { RolService } from '@services/auth/roles.service';
+import { RolService } from '@services/roles/rol.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AdminGuard implements CanActivate {
   rol='';
   constructor( 
-    private roler: RolService,
+    private rolSvc: RolService,
     
     ) {
     
@@ -19,12 +19,13 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      this.roler.getRoles().subscribe(data=>{
+      this.rolSvc.getRoles().subscribe(
+        res=>{
         
-      this.rol=data.nombre;
-      console.log(this.rol)
+      //this.rol = res.nombre;
+      console.log(this.rol)}
     
-    });
+    );
 
 
 

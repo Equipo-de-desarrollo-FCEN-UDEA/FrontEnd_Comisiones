@@ -29,6 +29,7 @@ export class VerUsuarioComponent implements OnInit {
       next: (params) => {
       this.usuarioService.getUsuario().subscribe((resUsuario) => {
         this.usuario = resUsuario;
+        console.log(this.usuario)
       });
       } 
     });

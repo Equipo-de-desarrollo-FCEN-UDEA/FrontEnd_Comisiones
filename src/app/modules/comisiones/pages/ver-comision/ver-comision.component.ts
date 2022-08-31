@@ -19,7 +19,6 @@ import { DescargarDocumentosService } from '@services/descargar-documentos.servi
 })
 export class VerComisionComponent {
 
-  loading:boolean = false;
   mostrarEstados = false;
   error:string = '';
 
@@ -70,8 +69,6 @@ export class VerComisionComponent {
         },
         error: (err) => {
           if (err.status === 404 || err.status === 401) {
-            this.error = err.error.msg; // mensaje desde el back
-            this.loading = false;
           }
         },
       });
@@ -83,8 +80,6 @@ export class VerComisionComponent {
   }
 
 
-
-
   abrirDocumento(id:number){
     this.descargarDocumentoSvc.downloadDocumento(id).subscribe({
       next: (res) => {
@@ -93,7 +88,6 @@ export class VerComisionComponent {
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg;
-          this.loading = false;
         }
       },
     });
@@ -125,7 +119,6 @@ export class VerComisionComponent {
           error: (err) => {
             if (err.status === 404 || err.status === 401) {
               this.error = err.error.msg;
-              this.loading = false;
             }
           },
         });

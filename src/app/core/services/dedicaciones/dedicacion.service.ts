@@ -37,6 +37,8 @@ export class DedicacionService {
     })
   }
 
+  
+
   Archivado(id:number): Observable<any>{
     return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:1})
   }

@@ -48,7 +48,7 @@ export class EditarUsuarioComponent implements OnInit {
     identificacion: [0, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
     contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    roles_id : ['', Validators.required]
+    roles_id : [NaN, Validators.required]
    });
 
   ngOnInit(): void {

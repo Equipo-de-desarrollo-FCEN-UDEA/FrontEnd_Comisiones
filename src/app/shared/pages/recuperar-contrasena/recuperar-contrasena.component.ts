@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@services/auth/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -23,6 +25,7 @@ export class RecuperarContrasenaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private loaderSvc: LoaderService
   ) { }
 
   ngOnInit(): void {

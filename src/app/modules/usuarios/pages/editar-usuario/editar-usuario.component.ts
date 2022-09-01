@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DepartamentoInDB } from '@interfaces/departamentos';
+import { RolResponse } from '@interfaces/roles';
 import { Usuario, UsuarioResponse } from '@interfaces/usuario';
+import { DepartamentoService } from '@services/departamentos/departamento.service';
 import { LoaderService } from '@services/interceptors/loader.service';
+import { RolService } from '@services/roles/rol.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { ConfirmedValidator } from '@shared/clases/confirmed-validator';
 import { tiposId } from '@shared/data/tipos-id';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -23,6 +27,10 @@ export class EditarUsuarioComponent implements OnInit {
   public error:string = "";
   public submitted:boolean = false;
 
+  public departamentos$: Observable<DepartamentoInDB[]>;
+  public roles$: Observable<RolResponse[]>;
+
+
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; 
 
 
@@ -32,8 +40,13 @@ export class EditarUsuarioComponent implements OnInit {
     private fb : FormBuilder,
     public activateRoute: ActivatedRoute,
     public usuarioService: UsuarioService,
-    public loadingSvc : LoaderService
+    public loadingSvc : LoaderService,
+    private departamentosSvc: DepartamentoService,
+    private rolesSvc: RolService
   ) {
+
+    this.departamentos$ = this.departamentosSvc.getDepartamentos();
+    this.roles$ = this.rolesSvc.getRoles();
     this.router.params.pipe(take(1)).subscribe(params => this.id = params['id']);
   
    }

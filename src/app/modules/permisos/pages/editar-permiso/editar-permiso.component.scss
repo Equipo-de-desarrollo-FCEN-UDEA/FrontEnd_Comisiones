@@ -16,9 +16,8 @@
   background-color: #43b649af;
 }
 
-.container{
-  min-height: 100vh;
-  max-width: 900px;
+.containerInside{
+  width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,7 +57,7 @@ padding: 1em 0.5em;
 :host ::ng-deep .ngb-dp-month {
   flex: 1 0 auto;
 }
-.container {
+.containerInside {
   width: 95%!important;
  
  }

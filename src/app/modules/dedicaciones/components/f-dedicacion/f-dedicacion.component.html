@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container card shadow bg-white rounded p-4">
 
 
     <form class="need-validation card" novalidate [formGroup]="fBasicInfo" (ngSubmit)="onSubmit()">
-        <h3 class="formTitle">
-            Formulario solicitud dedicación exclusiva
-        </h3>
+        <h2 class="formTitle">
+            FORMATO DE EVALUACIÓN DE PROPUESTA O PROYECTO DE DEDICACIÓN EXCLUSIVA
+        </h2>
 
         <h5>Datos del profesor solicitante</h5>
         <!-- <div class="alert alert-info">
@@ -109,7 +109,7 @@
 
         <hr>
         <h5>Apoya al plan de desarrollo y acción institucional vigente en:</h5>
-        <button class="btn btn-primary btn-sm" type="button" (click)="open()">Ver plan de desarrollo y acción</button>
+        <button class="btn btn-success btn-sm" type="button" (click)="open()">Ver plan de desarrollo y acción</button>
         <!-- <div class="row">
             <div class="col-md-6 col-lg-6">
                 <h6>Temas:<span style="color:red">*</span></h6>
@@ -283,12 +283,12 @@
                             [ngClass]="{'is-invalid': meta.invalid && meta.touched}"></textarea>
                         <label for="floatingMeta{{i}}" class="formLabel">Meta {{i+1}}</label>
                         <div class="buttons">
-                            <button class="btn btn-circle btn-danger btn-sm" type="button"
+                            <button class="btn btn-circle btn-remove btn-sm" type="button"
                                 (click)="removeInput('metas',i)" *ngIf="metasArr.length > 1">
                                 <i class="fa fa-minus"></i>
 
                             </button>
-                            <button class="btn btn-circle btn-primary btn-sm" type="button" (click)="addInputMetas()"
+                            <button class="btn btn-circle btn-add btn-sm" type="button" (click)="addInputMetas()"
                                 *ngIf="isLast">
                                 <i class="fa fa-plus"></i>
                             </button>
@@ -310,13 +310,13 @@
                     </textarea>
                     <label for="floatingproductos{{i}}" class="formLabel">Producto {{i+1}}</label>
                     <div class="buttons">
-                        <button class="btn btn-circle btn-danger btn-sm" type="button"
+                        <button class="btn btn-circle btn-remove btn-sm" type="button"
                             (click)="removeInput('productos',i)" *ngIf="productosArr.length > 1">
 
                             <i class="fa fa-minus"></i>
 
                         </button>
-                        <button class="btn btn-circle btn-primary btn-sm" type="button" (click)="addInputProductos()"
+                        <button class="btn btn-circle btn-add btn-sm" type="button" (click)="addInputProductos()"
                             *ngIf="isLast">
                             <i class="fa fa-plus"></i>
                         </button>
@@ -334,7 +334,7 @@
 
 
 
-        <button class="btn btn-success" id="Enviar" (submit)="true"
+        <button class="btn btn-add" id="Enviar" (submit)="true"
             [disabled]="fBasicInfo.invalid || (isLoading|async)">
             <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
                 aria-hidden="true"></span>

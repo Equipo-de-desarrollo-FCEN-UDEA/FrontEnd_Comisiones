@@ -103,9 +103,8 @@
             class="form-select form-select-lg mb-3"
             id="floatingpais"
             formControlName="pais"
-            [ngClass]="{ 'is-invalid': submitted && isInvalidForm('pais') }"
-            
-            placeholder=" "
+            [ngClass]="{ 'is-invalid': isInvalidForm('pais') }"
+            (change)="onChangePais($event)"
           >
             <option [value]="i" *ngFor="let country of paises; let i = index">
               {{ country.name }}
@@ -129,8 +128,8 @@
             class="form-select form-select-lg mb-3"
             id="floatingestado"
             formControlName="provincia"
-            
-            placeholder=" "
+            [ngClass]="{ 'is-invalid': isInvalidForm('provincia') }"
+            (change)="onChangeProvincia($event)"
           >
             <option
               [value]="i"
@@ -142,9 +141,7 @@
           <label
             for="floatingestado"
             class="selectLabel"
-            [ngClass]="{
-              isFill: editarComisionForm.controls['provincia'].valid
-            }"
+            [ngClass]="{ isFill: editarComisionForm.controls['provincia'].valid }"
           >
             <span
               *ngIf="isLoading | async"
@@ -291,16 +288,15 @@
           <li [id]="i" class="list-group-item d-flex justify-content-between">
             <span>{{ doc.nombre }}</span>
             <span
-              class="input-group-text"
               style="width: fit-content; margin: 0"
             >
-              <button
-                class="btn btn-circle"
-                type="button"
-                (click)="borrarDocActual(doc.id, i)"
-              >
-                <i class="fa fa-times-circle"></i>
-              </button>
+            <button
+            class="btn btn-circle"
+            type="button"
+            (click)="borrarDocActual(doc.id, i)"
+          >
+            <i class="fa fa-times-circle"></i>
+            </button>
             </span>
           </li>
         </ul>
@@ -315,9 +311,6 @@
     >
     Recuerda que la justificación debe tener al menos 30 caracteres y máximo
     500 caracteres.
-    </div>
-    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
-    {{ error }}
     </div>
 
 

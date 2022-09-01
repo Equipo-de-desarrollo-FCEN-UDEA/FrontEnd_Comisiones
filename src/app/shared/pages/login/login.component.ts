@@ -131,15 +131,10 @@ export class LoginComponent implements OnInit {
         },
         error: (err) => {
           if (err.status === 404 || err.status === 401) {
-            this.error = 'Usuario o contraseña incorrectos';
+            this.error = err.error.msg;
           }
         },
       }
-      // (data) => {
-      //   if (data){
-      //     this.router.navigate(['/home']);
-      //   }
-      // }
     )
   }
 }

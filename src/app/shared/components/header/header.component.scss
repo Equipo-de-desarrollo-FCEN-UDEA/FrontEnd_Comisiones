@@ -42,7 +42,7 @@ ul, li{
   .user-pic{
     color: #43B649;
   }
-  
+
   .user-info{
     text-align: center;
     font-size: 20px;
@@ -79,11 +79,27 @@ ul, li{
           transition: all .1s linear;
         }
   /*******************/
+  .btn-item{
+    color: #fff;
+    background-color:#43B649;
+    height: 2.5em;
+    width: 18em;
+    border: 1px solid #43B649;
+    border-radius: 10px;
+    font-size: 17px;
+    border-radius: 20px;
+  }
+    .btn-item:hover{
+      background-color: #43b649be;
+      transition: all .3s linear;
+    }
+
+
   /******** Sidebar Menu **************/
   .header-menu{
     padding: 0.3em;
   }
-  
+
   .sidebar-menu ul{
       text-decoration: none;
       list-style: none;
@@ -180,7 +196,7 @@ ul, li{
     text-align: center;
     font-size: 2.5em;
   }
-  
+
   .btn-small-request{
     color:#43B649;
     font-size: 2.5em;
@@ -192,7 +208,7 @@ ul, li{
       color: #31a37f;
       transition: all .2s linear;
     }
-  
+
   /* .btn-circle{
     color:#57CC99;
     font-size: 2em;
@@ -218,12 +234,12 @@ ul, li{
         border-radius: 5px;
         transition: all .3s linear;
       }
-  
+
   .sidebar-small-menu{
     margin-top:2em;
     text-align: center;
   }
-  
+
   .margin-icon span i {
     color: #000;
   }
@@ -231,7 +247,7 @@ ul, li{
       color: #5f5f5f;
       transition: all .3s linear;
     }
-  
+
   .sidebar-footer {
     color: #000;
     padding: 0;

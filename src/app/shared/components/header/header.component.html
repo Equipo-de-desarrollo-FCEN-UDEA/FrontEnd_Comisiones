@@ -26,7 +26,7 @@
           </a>
           <li><hr class="dropdown-divider"></li>
           <a class="dropdown-item" (click)="logout()">Cerrar Sesi&oacute;n</a>
-          
+
         </div>
       </li>
     </ul>
@@ -34,9 +34,9 @@
 
   <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
     <div class="navbar-brand d-flex">
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown btn-item">
         <a style="color:#fff" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Crear Solicitud 
+          Crear Solicitud
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
           <li><a class="dropdown-item" [routerLink]="['/permisos/crear-permiso']">Permiso</a></li>
@@ -56,7 +56,7 @@
     </div>
   </div>
 
-<!-- 
+<!--
   <div class="navbar-brand">
     <ul>
       <li ngbDropdown>
@@ -68,9 +68,9 @@
     </li>
     </ul>
   </div>  -->
-  
 
-  
+
+
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
@@ -84,11 +84,11 @@
               <div class="sidebar-header">
                 <span class="user-pic">
                   <i class="fas fa-user-circle"></i>
-                </span> 
+                </span>
               </div>
               <div class="user-info">
                 <span class="user-name">
-                   {{usuario?.nombre}} 
+                   {{usuario?.nombre}}
                   <br />
                    {{usuario?.apellido}}
                 </span>
@@ -97,7 +97,7 @@
                   <span class="user-status">
                     <i class="fa fa-circle"></i>
                   </span>
-                  {{usuario?.roles?.nombre}} 
+                  {{usuario?.roles?.nombre}}
                 </span>
               </div>
               <!-- sidebar-header  -->
@@ -142,7 +142,7 @@
                 <div class="header-menu">
                   <span> ESPECÍFICO </span>
                 </div>
-                <ul> 
+                <ul>
                   <li [routerLink]="['/usuarios/lista-usuarios']">
                     <a>
                       <span>
@@ -160,7 +160,7 @@
                     </a>
                   </li>
                 </ul>
-              </div> 
+              </div>
               <!-- sidebar-menu  -->
               <!-- sidebar-content  -->
               <div class="sidebar-footer">

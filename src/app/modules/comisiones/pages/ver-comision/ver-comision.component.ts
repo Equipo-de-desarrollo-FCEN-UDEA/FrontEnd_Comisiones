@@ -21,6 +21,7 @@ export class VerComisionComponent {
 
   mostrarEstados = false;
   error:string = '';
+  isDelete = false;
 
   public comision!: Comision;
 
@@ -105,6 +106,9 @@ export class VerComisionComponent {
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
+
+        this.isDelete = true;
+
         this.comisionesSvc.deleteComision(id).subscribe({
           next: (response) => {
             console.log(response);

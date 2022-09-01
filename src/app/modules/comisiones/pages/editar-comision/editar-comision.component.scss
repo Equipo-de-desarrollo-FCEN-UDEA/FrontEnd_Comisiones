@@ -74,6 +74,15 @@ left: 1.7em;
 display: none;
 }
 
+.archivos {
+  width: auto; 
+  margin-left: 10px;
+}
+
+.fa-times-circle{
+  color: #ef434d;
+  font-size: 2em;
+}
 
 .buttons {
   width: fit-content; 
@@ -86,7 +95,11 @@ display: none;
   background-color: var(--032c);
 }
 
-.btn-remove:hover {
+.btn-remove {
+  color: #fff;
+  background-color: var(--032c);
+  border-color: #fff;
+} .btn-remove:hover {
   background-color: #d45f57;
 }
 
@@ -102,4 +115,9 @@ display: none;
 
 .btn-success {
   background-color: #43b649;
+}
+
+.fa-times-circle{
+  color: #ef434d;
+  font-size: 2em;
 }

@@ -1,13 +1,14 @@
 
 <div class="container d-flex justify-content-center align-items-center p-0 ">
-  <h2 class=" mt-4">Universidad de Antioquia</h2>
+  <h1 class=" mt-4 fw-bold" style="color:green;">SIGA UdeA</h1>
   <div class="card p-0 shadow">
-    <h5 class=" mt-4">
-      Sistema Integrado de Gestión Administrativa</h5>
+    <h6 class="mt-4 text-wrap">
+      Sistema Integrado de Gestión Administrativa
+    </h6>
     <hr/>
 
 		<div class="card-body" >
-			<h5 style="color:rgba(50, 50, 50, 0.874)">Inicio de Sesión</h5>
+			<h4 style="color:rgba(50, 50, 50, 0.874)">Inicio de Sesión</h4>
       <form
         need-validation
         novalidate
@@ -66,7 +67,7 @@
 
               <!-- OLVIDO CONTRASENA -->
               <div class="d-flex justify-content-start">
-                <a routerLink="../recuperar-contrasena" class="btn btn-link pr-0"
+                <a routerLink="../recuperar-contrasena" class="btn btn-link link-success pr-0"
                 >¿Olvidaste tu contraseña?</a>
               </div>
 							<div class="d-grid gap-2 col-12">
@@ -85,6 +86,9 @@
 									Ingresar
 								</button>
 							</div>
+              <div class="alert alert-danger" *ngIf="error">
+                {{error}}
+              </div>
             </div>
           </div>
     	</form>

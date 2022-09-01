@@ -112,13 +112,6 @@
               [term]="Buscarservice.searchTerm">
             </ngb-highlight>
           </td>
-
-          <td>
-            <ngb-highlight
-              [result]="permiso.usuarios.departamentos.facultades.nombre" 
-              [term]="Buscarservice.searchTerm">
-            </ngb-highlight>
-          </td>
   
           <td>
             <button *ngIf="permiso.archivado == 0" type="button" (click)="archivarPermiso(permiso.id);$event.stopPropagation()" class="btn btn-info">Archivar</button>

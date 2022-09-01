@@ -22,3 +22,11 @@ form{
   .btn-add:hover {
     background-color: #79b97c;
   }
+
+  .btn-remove {
+    color: #fff;
+    background-color: var(--032c);
+    border-color: #fff;
+  } .btn-remove:hover {
+    background-color: #d45f57;
+  }

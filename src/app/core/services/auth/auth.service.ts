@@ -13,7 +13,7 @@ import { prefix } from '@shared/data/ruta-api';
 })
 export class AuthService {
 
-  prefix = prefix + 'signin';
+  prefix_ = prefix + 'signin';
 
   constructor(
     private cookieService : CookieService,
@@ -30,7 +30,7 @@ export class AuthService {
       }
       );
     const body = `correo=${user.correo}&contrasena=${user.contrasena}`;
-    return this.http.post<Auth>(`${this.prefix}`, body, {headers:headers} )
+    return this.http.post<Auth>(`${this.prefix_}`, body, {headers:headers} )
     .pipe(
     map(
       (response: Auth) => {
@@ -67,9 +67,8 @@ export class AuthService {
   }
   
   forgotPassword(correo: string) {
-    return this.http.post(``, {
-      correo,
-    });
+    console.log(`${prefix}restorePassword`);
+    return this.http.post(`${prefix}restorePassword`, {correo});
   }
 
 }

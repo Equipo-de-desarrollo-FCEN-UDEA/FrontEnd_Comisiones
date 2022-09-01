@@ -16,19 +16,18 @@
           <button
             id="btn-sub"
             (submit)="(true)"
-            [disabled]="loading"
             class="btn btn-dark"
           >
             <span
               class="spinner-border spinner-border-sm"
-              *ngIf="loading"
               role="status"
               aria-hidden="true"
+              *ngIf="isLoading"
             ></span>
-            Ingresar
+            Enviar
           </button>
 
-          <a href="../login" class="btn btn-link ">Cancelar </a>
+          <a  href="../login" >Cancelar </a>
 
         </div>
       </form>

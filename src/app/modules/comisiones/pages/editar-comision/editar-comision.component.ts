@@ -128,8 +128,6 @@ export class EditarComisionComponent implements OnInit {
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
         });
 
-        console.log(this.editarComisionForm.value);
-
         res.documentos.forEach((documento:any) => this.documentosArray.push(documento))
       },
       error: (err) => {

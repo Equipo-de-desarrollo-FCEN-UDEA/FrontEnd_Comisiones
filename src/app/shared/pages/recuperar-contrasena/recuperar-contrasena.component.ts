@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@services/auth/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { Subject } from 'rxjs';
+import { LoaderService } from '@services/interceptors/loader.service';
 
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -13,9 +16,16 @@ export class RecuperarContrasenaComponent implements OnInit {
     loading = false;
     submitted = false;
 
+    error = "";
+
+    // Loader
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private loaderSvc: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -34,11 +44,27 @@ export class RecuperarContrasenaComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
     this.loading = true;
 
-    this.authService
-    .forgotPassword(this.f['correo'].value)
+    this.authService.forgotPassword(this.f['correo'].value).subscribe({
+      next: (res) => {
+        this.router.navigate(['/home']);
+        Swal.fire({
+          title: 'Enviado!',
+          text: '¡Revise el correo ingresado!',
+          icon: 'success',
+          confirmButtonColor: '#3AB795',
+        });
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+      },
+    });
 
   }
+
 
 }

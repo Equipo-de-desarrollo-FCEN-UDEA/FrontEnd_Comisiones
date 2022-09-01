@@ -63,7 +63,7 @@ export class VerComisionComponent {
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
                 this.estados = this.comision.intermediate_comisiones;
                 this.cumplidosArray = this.ultimoElemento(this.comision.cumplidos);
-                console.log(this.cumplidosArray); 
+                console.log(this.comision); 
                 
               });
             }
@@ -111,7 +111,6 @@ export class VerComisionComponent {
 
         this.comisionesSvc.deleteComision(id).subscribe({
           next: (response) => {
-            console.log(response);
             this.router.navigate(['/home']);
             Swal.fire({
               title: 'Eliminada!',

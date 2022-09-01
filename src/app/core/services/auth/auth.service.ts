@@ -49,8 +49,8 @@ export class AuthService {
   }
   logout() {
 
-    this.cookieService.delete('token');
-    this.cookieService.delete('usuario');
+    this.cookieService.delete('token')
+    this.cookieService.delete('usuario')
     
     if (this.isLoggedIn()) {
       this.logout();

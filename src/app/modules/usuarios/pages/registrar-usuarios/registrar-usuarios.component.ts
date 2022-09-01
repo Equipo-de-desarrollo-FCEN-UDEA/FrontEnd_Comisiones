@@ -21,15 +21,41 @@ export class RegistrarUsuariosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  formSignup = this.formBuilder.group({
-    correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
-    passwordSignup : ['', Validators.required],
-    nombreSignup : ['', Validators.required],
-    apellidoSignup : ['', Validators.required],
-    tipoIdSignup : ['', Validators.required],
-    identificacionSignup : ['', Validators.required],
-    departamentoSignup : ['', Validators.required],
-    rolSignup : ['', Validators.required]
-  });
+
+  get f() {
+    return this.crearUsuarioForm.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // verificacion de errores
+    if (this.crearUsuarioForm.invalid) {
+      return;
+    }
+
+
+    this.usuarioSvc.postUsuario(this.crearUsuarioForm.value).subscribe({
+      next: (res:any) => { 
+        Swal.fire({
+          title: 'Creado',
+          text: res.message,
+          icon: 'success',
+          confirmButtonColor: '#3AB795',
+        });
+
+        //ngZone: facilitate change detection
+        this.ngZone.run(() =>
+          this.router.navigateByUrl(`/home`)
+        );
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+      }
+    });
+  }
+
 
 }

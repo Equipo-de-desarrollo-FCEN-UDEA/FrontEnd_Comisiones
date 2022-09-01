@@ -11,6 +11,7 @@ h3, h5{
 
 .container{
     margin:auto;
+    width: 100%;
     margin-bottom: 60px;
     max-width: 1440px;
     padding: 30px;
@@ -127,3 +128,13 @@ h3, h5{
 .cuerpo p {
     margin-bottom: -0.1em;
 }
+
+.btn-add {
+    border-color: #fff;
+    color: #fff;
+    background-color: #43b649;
+  }
+  
+  .btn-add:hover {
+    background-color: #79b97c;
+  }

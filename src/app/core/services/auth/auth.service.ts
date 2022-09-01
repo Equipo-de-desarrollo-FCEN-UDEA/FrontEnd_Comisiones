@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario, UsuarioAuth} from '@interfaces/usuario';
+import { UsuarioAuth} from '@interfaces/usuario';
 import { CookieService } from 'ngx-cookie-service';
 import { Auth } from '@interfaces/auth';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { prefix } from '@shared/data/ruta-api';
 
@@ -14,15 +14,13 @@ import { prefix } from '@shared/data/ruta-api';
 export class AuthService {
 
   prefix = prefix + 'signin';
-  private userSubject: BehaviorSubject<Usuario>;
-  role:string = <string>localStorage.getItem('ACCESS_USER_ROLE');
 
   constructor(
     private cookieService : CookieService,
     private http : HttpClient,
     private router : Router
   ) { 
-    this.userSubject = new BehaviorSubject<Usuario>(JSON.parse(this.role));
+    
   }
 
   login(user: UsuarioAuth):Observable<Boolean> {
@@ -47,6 +45,8 @@ export class AuthService {
     ))
     ;
   }
+
+
   logout() {
 
     this.cookieService.delete('token')
@@ -72,13 +72,4 @@ export class AuthService {
     });
   }
 
-  public get userValue(): Usuario {
-    return this.userSubject.value;
-  }
-
-  public hasAccessToModule(p: number) {
-    return this.userValue && this.getRole() === '1';
-  }
-
 }
-

@@ -57,6 +57,11 @@ const routes: Routes = [
     path: '**',
     redirectTo: '404'
   },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

@@ -1,3 +1,39 @@
+<!-- <<<<<<< HEAD
+<div class="container">
+    <h3 class="header"> Elige el tema estratégico </h3>
+
+    <div class="temas">
+        <ngb-accordion [closeOthers]="true" activeIds="0" style="width: 100%;">
+
+            <ngb-panel *ngFor="let tema of temas; let i=index" [title]="tema.titulo" [id]="''+i">
+                
+                <ng-template ngbPanelContent>
+                    <h6>
+                        {{tema.subtitulo}}
+                    </h6>
+                    
+                    <hr>
+
+                    <p>A continuación elige el objetivo estratégico:</p>
+
+
+                    <ul class="objetivos" *ngFor="let objetivo of tema.objetivos">
+                        <button  style="text-align:left; width: 100%;" class="btn btn-outline-primary " (click)="select(objetivo.descripcion)">
+                            <span >{{objetivo.descripcion}}</span>
+                        </button>
+                    </ul>
+
+
+                </ng-template>
+
+            </ngb-panel>
+
+        </ngb-accordion>
+
+
+    </div>
+</div>
+======= -->
 <div class="modal-header">
     <button type="button" class="btn-close" aria-describedby="modal-title"
         (click)="activeModal.dismiss('Cross click')"></button>

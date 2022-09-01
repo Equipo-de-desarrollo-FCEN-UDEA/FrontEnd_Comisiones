@@ -1,7 +1,5 @@
 import {Injectable, Pipe, PipeTransform} from '@angular/core';
-
 import {BehaviorSubject, Observable, of, pipe, Subject} from 'rxjs';
-
 import {Comision} from '../../interfaces/comisiones';
 import {ComisionesService} from '../comisiones/comisiones.service';
 import {DatePipe, DecimalPipe, JsonPipe, LowerCasePipe} from '@angular/common';
@@ -9,7 +7,7 @@ import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from '@shared/directivas/sortable.directive';
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 
-export type SortColumn = keyof Comision | "" ;
+export type SortColumn = keyof Comision | "";
 
 interface SearchResult {
   comisiones: Comision[];
@@ -35,42 +33,30 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
       return direction === 'asc' ? res : -res;
     });
   }
-
-  
 }
 
-
-
-
 function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
-
   return (
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())  ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
     datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt)?.includes(term)||
-    // datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).createdAt)?.includes(term)||
     comisiones.usuarios?.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.facultades.nombre.toLowerCase().includes(term) 
-    //|| datepipe.transform(ultimoElement(comisiones.intermediate_comisiones).created_at, 'd MMM y')
   );
 } 
 
-
 @Injectable({providedIn: 'root'})
-
-
 
 export class BuscarComisionesService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _comisiones$ = new BehaviorSubject<Comision[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
-
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 15,
     searchTerm: '',
     sortColumn: '',
     sortDirection: 'asc'
@@ -78,32 +64,47 @@ export class BuscarComisionesService {
 
   COMISIONES : Comision[] = [];
 
+  archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
   constructor(
     private comisionesSvc: ComisionesService,
     private datepipe: DatePipe
-    ) {
-    this._search$.pipe(
-      tap(() => this._loading$.next(true)),
-      debounceTime(200),
-      switchMap(() => this._search()),
-      delay(200),
-      tap(() => this._loading$.next(false))
-    ).subscribe(result => {
-      this._comisiones$.next(result.comisiones);
-      this._total$.next(result.total);
-    });
+    ){
+        this._search$.pipe(
+          tap(() => this._loading$.next(true)),
+          debounceTime(200),
+          switchMap(() => this._search()),
+          delay(200),
+          tap(() => this._loading$.next(false))
+        ).subscribe(result => {
+            this._comisiones$.next(result.comisiones);
+            this._total$.next(result.total);
+          });
 
-    this._search$.next();
-    this.comisionesSvc.getComisiones()
+        this._search$.next();
+        this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
+        .subscribe(
+          (resp: any ) => {
+            this.COMISIONES = resp.comisiones;
+          })
+      }
+
+  archivados(archivado: number){
+    this.archivado$.next(archivado);
+  }
+
+  ngOnchanges(){
+    this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
     .subscribe(
-      (resp: any ) => {
+      (resp: any) => {
+        console.log(resp+"respOnchange")
         this.COMISIONES = resp.comisiones;
-        console.log(this.COMISIONES)
+        this._comisiones$.next(this.COMISIONES);
+        this._search$.next();
       }
     )
-  }
-  
-
+   }
+   
   get comisiones$() { return this._comisiones$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
@@ -123,8 +124,7 @@ export class BuscarComisionesService {
     Object.assign(this._state, patch);
     this._search$.next();
   }
-
-
+  
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 

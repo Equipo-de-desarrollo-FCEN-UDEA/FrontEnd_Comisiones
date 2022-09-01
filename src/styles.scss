@@ -29,6 +29,10 @@ body {
     min-height: 80vh;
 }
 
+.body {
+    background-color: #EAEBF0;
+}
+
 app-root {
   background-color: #F7F7F7;  
 }
@@ -76,6 +80,8 @@ h5,h6 {
         flex-direction: column;
     }
 }
+
+
 
 
 
@@ -200,7 +206,7 @@ a:hover {
 }
 
 .bg-solicitada {
-    background-color: #3381B5;
+    background-color: #137598;
 }
 
 .bg-finalizada {

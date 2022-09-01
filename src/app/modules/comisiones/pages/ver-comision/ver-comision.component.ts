@@ -19,11 +19,10 @@ import { DescargarDocumentosService } from '@services/descargar-documentos.servi
 })
 export class VerComisionComponent {
 
-  loading:boolean = false;
   mostrarEstados = false;
   error:string = '';
 
-  comision: Comision| undefined;
+  public comision!: Comision;
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
@@ -48,26 +47,28 @@ export class VerComisionComponent {
   }
 
   ngOnInit(): void {
+    console.log('entro al init')
 
     this.activateRoute.params.subscribe({
         next: (paramId) => {
            const id = paramId['id'];
+           console.log(id)
             if (id) {
               this.comisionesSvc.getComision(id).subscribe((res: Comision) => {
                 this.comision = res;
+                console.log('´res'); 
                 this.comision?.documentos.forEach(documento => this.documentosArray.push(documento));
                 this.fechaCreacion = this.comision?.intermediate_comisiones[0].createdAt;
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
                 this.estados = this.comision.intermediate_comisiones;
                 this.cumplidosArray = this.ultimoElemento(this.comision.cumplidos);
                 console.log(this.cumplidosArray); 
+                
               });
             }
         },
         error: (err) => {
           if (err.status === 404 || err.status === 401) {
-            this.error = err.error.msg; // mensaje desde el back
-            this.loading = false;
           }
         },
       });
@@ -79,8 +80,6 @@ export class VerComisionComponent {
   }
 
 
-
-
   abrirDocumento(id:number){
     this.descargarDocumentoSvc.downloadDocumento(id).subscribe({
       next: (res) => {
@@ -89,7 +88,6 @@ export class VerComisionComponent {
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg;
-          this.loading = false;
         }
       },
     });
@@ -121,7 +119,6 @@ export class VerComisionComponent {
           error: (err) => {
             if (err.status === 404 || err.status === 401) {
               this.error = err.error.msg;
-              this.loading = false;
             }
           },
         });

@@ -43,6 +43,11 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(`${this.prefix}`);
   }
 
+
+  postUsuario(usuario:any){
+    return this.http.post<UsuarioResponse>(`${this.prefix}`, usuario);
+  }
+
   updateUsuario(usuario: any) {
     return this.http.patch<UsuarioResponse>(`${this.prefix}/${usuario.id}`, usuario);
   }

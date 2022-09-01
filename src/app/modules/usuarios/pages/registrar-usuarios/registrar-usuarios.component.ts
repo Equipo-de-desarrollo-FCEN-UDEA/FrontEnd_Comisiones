@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DepartamentoInDB } from '@interfaces/departamentos';
+import { Rol, RolResponse } from '@interfaces/roles';
+import { DepartamentoService } from '@services/departamentos/departamento.service';
+import { LoaderService } from '@services/interceptors/loader.service';
+import { RolService } from '@services/roles/rol.service';
+import { UsuarioService } from '@services/usuarios/usuario.service';
 import { tiposId } from '@shared/data/tipos-id';
+import { Observable, Subject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar-usuarios',
@@ -9,13 +18,57 @@ import { tiposId } from '@shared/data/tipos-id';
 })
 export class RegistrarUsuariosComponent implements OnInit {
 
+  crearUsuarioForm: FormGroup;
+
   tiposId = tiposId;
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; //--> EL QUE SE USARÁ
 
+  public loading:boolean = false;
+  public error:string = "";
+  public submitted:boolean = false;
+
+  // Loader
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+
+  // Departamentos 
+  departamentos$: Observable<DepartamentoInDB[]>;
+
+
+  // Roles 
+  //roles$: Observable<RolResponse[]>
+
+  roles = [
+    {
+      nombre: "PROFESOR", 
+      id: "8"
+    }
+  ]
 
   constructor(
     private formBuilder: FormBuilder,
-  ) { }
+    private ngZone: NgZone,
+    private router: Router, 
+
+    private loaderSvc: LoaderService,
+    private usuarioSvc: UsuarioService,
+    private departamentosSvc: DepartamentoService,
+    private rolesSvc: RolService
+  ) { 
+
+    this.departamentos$ = this.departamentosSvc.getDepartamentos();
+    //this.roles$ = this.rolesSvc.getRoles();
+
+    this.crearUsuarioForm = this.formBuilder.group({
+      correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
+      contrasena : ['', Validators.required],
+      nombre : ['', Validators.required],
+      apellido : ['', Validators.required],
+      tipo_identificacion : ['', Validators.required],
+      identificacion : ['', Validators.required],
+      departamentos_id : ['', Validators.required],
+      roles_id : ['', Validators.required]
+    });
+  }
 
 
   ngOnInit(): void {
@@ -36,10 +89,17 @@ export class RegistrarUsuariosComponent implements OnInit {
 
 
     this.usuarioSvc.postUsuario(this.crearUsuarioForm.value).subscribe({
+<<<<<<< HEAD
       next: (res:any) => { 
         Swal.fire({
           title: 'Creado',
           text: res.message,
+=======
+      next: (res) => { 
+        Swal.fire({
+          title: 'Creado',
+          text: '¡El usuario se creó correctamente!',
+>>>>>>> daniandre
           icon: 'success',
           confirmButtonColor: '#3AB795',
         });

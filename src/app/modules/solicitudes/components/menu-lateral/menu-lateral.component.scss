@@ -1,0 +1,25 @@
+.list-group { 
+  height: 10em;
+}
+
+@media screen and (max-width: 1199px){
+  .container {
+    width: 95%!important;
+   
+   }
+  }
+
+.list-group-item:active {
+  background-color: #43b649;
+  border-color: #43b649;
+  
+}.list-group-item:hover {
+  transition: all 0.2s linear;
+  background-color: rgba(234, 234, 234, 0.998);
+  border-color: rgba(212, 212, 212, 0.998);
+}
+
+.active{
+  background-color: #43b649;
+  border-color: #43b649;
+}

@@ -20,6 +20,8 @@ export class EditarUsuarioComponent implements OnInit {
   public usuarioBase!: Usuario;
   private usuario : UsuarioResponse | undefined;
 
+  public error:string = "";
+
   constructor(
     private usuarioSvc: UsuarioService,
     private router: ActivatedRoute,

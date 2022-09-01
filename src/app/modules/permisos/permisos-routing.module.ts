@@ -25,7 +25,17 @@ const routes: Routes = [
   {
     path: 'asociar-estado/:id',
     component: EstadosPermisoComponent
-  }
+  },
+  { 
+    path: '**', 
+    redirectTo: 'home', 
+    pathMatch: 'full' 
+  },
+  { 
+    path: '', 
+    redirectTo: '/404', 
+    pathMatch: 'full' 
+  },
 
 ];
 

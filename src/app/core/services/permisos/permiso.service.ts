@@ -1,6 +1,5 @@
 
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-
 import { Injectable } from '@angular/core';
 import { Permiso, PermisosDTO, PermisosInside } from '@interfaces/permisos';
 import { prefix } from '@shared/data/ruta-api';
@@ -13,11 +12,9 @@ export class PermisoService {
   private urlEndPoint:string = prefix +'permisos';
   private urlEndPointArch:string = prefix +'archivarpermiso';
   
-  getPermisos: any;
-
   constructor( private http: HttpClient) { }
   
-  scopegetPermisos(archivado: number): Observable<any> {
+  scopeGetPermisos(archivado: number): Observable<any> {
     let params = new HttpParams()
     
     if (archivado != 2 ){
@@ -31,13 +28,8 @@ export class PermisoService {
 
     return this.http.get<Permiso[]>(`${this.urlEndPoint}`, {
       params:params
-      
-    } 
-    
-      
-    )
-
- }
+    })
+  }
  
  getPermiso(id: string | number): Observable<any> {
     return this.http.get<PermisosInside>(`${this.urlEndPoint}/${id}`).pipe(
@@ -47,13 +39,12 @@ export class PermisoService {
     ); 
   }
 
-  cambiarArchivado(permiso:Permiso): Observable<Permiso> {
-    return this.http.patch<Permiso>(`${this.urlEndPointArch}/${permiso.id}`,permiso)
-    // .pipe(
-      // map((resp)=> {
-      //   return resp;
-      // })
-    // )
+  Archivado(id:number): Observable<any>{
+    return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:1})
+  }
+
+  NoArchivado(id:number): Observable<any>{
+    return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:0})
   }
 
 

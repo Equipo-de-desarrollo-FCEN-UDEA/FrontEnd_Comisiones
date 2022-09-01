@@ -8,7 +8,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdSortableHeader } from './directivas/sortable.directive';
 import { BrowserModule } from '@angular/platform-browser';
 import { StepperComponent } from './components/stepper/stepper.component';
+
 import { HistorialEstadosComponent } from './components/historial-estados/historial-estados.component';
+
+
+
+
 
 @NgModule({
   declarations: [

@@ -93,8 +93,8 @@ export class CrearComisionComponent implements OnInit {
     justificacion : ['', [Validators.required, Validators.minLength(30),Validators.maxLength(350)]],
     idioma : ['', Validators.maxLength(255)],
     pais : ['', [Validators.required]],
-    provincia: [''],
-    ciudad : [''],
+    provincia : [''],
+    ciudad : ['']
   });
 
     this.fromDate = null;
@@ -118,9 +118,6 @@ export class CrearComisionComponent implements OnInit {
   inRange(fecha_1 : any, fecha_2 : any){
     fecha_1 = new Date(this.formatter.format(fecha_1));
     fecha_2 = new Date(this.formatter.format(fecha_2));
-    console.log('paso')
-    console.log(fecha_1)
-    console.log(DiasHabiles(fecha_1, fecha_2), fecha_1, fecha_2)
     return DiasHabiles(fecha_1, fecha_2) > this.dias_permiso;
   }
 
@@ -235,7 +232,6 @@ export class CrearComisionComponent implements OnInit {
     
     // Se detiene aqui si el formulario es invalido
     if (this.creaComisionForm.invalid) {
-      console.log('invalid form')
       return;
     }
     

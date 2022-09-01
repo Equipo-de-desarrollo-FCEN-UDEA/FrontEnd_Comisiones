@@ -1,0 +1,21 @@
+.containerInside{
+  width: 40%;
+  align-items: unset;
+  margin-bottom: 6em!important;
+   }
+.card{
+margin: auto;
+margin-top: 0;
+padding: 1em 0.5em;
+}
+
+@media screen and (max-width: 576px){
+  .containerInside {
+    width: 95%!important;
+   
+   }
+  }
+
+  .btn-success {
+    background-color: #43b649;
+  }

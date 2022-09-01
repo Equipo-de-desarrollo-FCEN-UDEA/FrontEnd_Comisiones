@@ -8,6 +8,7 @@ import { ComisionesXEstadoInDB } from '@interfaces/comisionesxestado';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ComisionxestadoService {
 
   private urlEndPoint:string = prefix+'comisiones-estados';

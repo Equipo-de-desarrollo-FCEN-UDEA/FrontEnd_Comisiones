@@ -81,17 +81,18 @@ ul, li{
   /*******************/
   .btn-item{
     color: #fff;
-    background-color:#43B649;
-    height: 2.5em;
-    width: 18em;
-    border: 1px solid #43B649;
+    text-align: center;
+    // background-color:#43B649;
+    // height: 2.5em;
+    // width: 18em;
+    padding: 10px;
+    // border: 1px solid #43B649;
     border-radius: 10px;
-    font-size: 17px;
-    border-radius: 20px;
+    // font-size: 17px;
   }
     .btn-item:hover{
       background-color: #43b649be;
-      transition: all .3s linear;
+      // transition: all .3s linear;
     }
 
 

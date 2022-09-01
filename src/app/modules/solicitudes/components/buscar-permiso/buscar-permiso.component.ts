@@ -23,6 +23,9 @@ export class BuscarPermisoComponent {
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
+  public rol : string = localStorage.getItem('rol') || '';
+  
+
   constructor(
     public Buscarservice: BuscarPermisosService,
     public permisoService: PermisoService

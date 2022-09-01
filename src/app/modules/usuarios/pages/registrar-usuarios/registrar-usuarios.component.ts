@@ -2,7 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DepartamentoInDB } from '@interfaces/departamentos';
-import { Rol, RolResponse } from '@interfaces/roles';
+import { Rol } from '@interfaces/roles';
 import { DepartamentoService } from '@services/departamentos/departamento.service';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { RolService } from '@services/roles/rol.service';
@@ -89,17 +89,10 @@ export class RegistrarUsuariosComponent implements OnInit {
 
 
     this.usuarioSvc.postUsuario(this.crearUsuarioForm.value).subscribe({
-<<<<<<< HEAD
       next: (res:any) => { 
         Swal.fire({
           title: 'Creado',
           text: res.message,
-=======
-      next: (res) => { 
-        Swal.fire({
-          title: 'Creado',
-          text: '¡El usuario se creó correctamente!',
->>>>>>> daniandre
           icon: 'success',
           confirmButtonColor: '#3AB795',
         });

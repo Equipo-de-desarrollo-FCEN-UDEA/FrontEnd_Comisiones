@@ -14,7 +14,7 @@ import { UsuarioService } from '@services/usuarios/usuario.service';
 })
 export class AuthService {
 
-  prefix = prefix + 'signin';
+  prefix_ = prefix + 'signin';
 
   constructor(
     private cookieService : CookieService,
@@ -32,7 +32,7 @@ export class AuthService {
       }
       );
     const body = `correo=${user.correo}&contrasena=${user.contrasena}`;
-    return this.http.post<Auth>(`${this.prefix}`, body, {headers:headers} )
+    return this.http.post<Auth>(`${this.prefix_}`, body, {headers:headers} )
     .pipe(
     map(
       (response: Auth) => {

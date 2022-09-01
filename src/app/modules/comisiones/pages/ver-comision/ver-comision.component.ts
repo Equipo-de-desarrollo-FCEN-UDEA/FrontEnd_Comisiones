@@ -21,6 +21,7 @@ export class VerComisionComponent {
 
   mostrarEstados = false;
   error:string = '';
+  isDelete = false;
 
   public comision!: Comision;
 
@@ -62,7 +63,7 @@ export class VerComisionComponent {
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
                 this.estados = this.comision.intermediate_comisiones;
                 this.cumplidosArray = this.ultimoElemento(this.comision.cumplidos);
-                console.log(this.cumplidosArray); 
+                console.log(this.comision); 
                 
               });
             }
@@ -105,9 +106,11 @@ export class VerComisionComponent {
       confirmButtonText: 'Eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
+
+        this.isDelete = true;
+
         this.comisionesSvc.deleteComision(id).subscribe({
           next: (response) => {
-            console.log(response);
             this.router.navigate(['/home']);
             Swal.fire({
               title: 'Eliminada!',

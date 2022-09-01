@@ -14,6 +14,11 @@ export class RecuperarContrasenaComponent implements OnInit {
     loading = false;
     submitted = false;
 
+    error = "";
+
+    // Loader
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -36,6 +41,7 @@ export class RecuperarContrasenaComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
     this.loading = true;
     this.authService.forgotPassword(this.f['correo'].value).subscribe({
       next: (res:any) =>{
@@ -60,5 +66,6 @@ export class RecuperarContrasenaComponent implements OnInit {
     )
 
   }
+
 
 }

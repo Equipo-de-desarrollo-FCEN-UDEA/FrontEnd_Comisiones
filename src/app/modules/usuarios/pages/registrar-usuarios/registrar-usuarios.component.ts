@@ -35,14 +35,8 @@ export class RegistrarUsuariosComponent implements OnInit {
 
 
   // Roles 
-  //roles$: Observable<RolResponse[]>
+  roles$: Observable<Rol[]>
 
-  roles = [
-    {
-      nombre: "PROFESOR", 
-      id: "8"
-    }
-  ]
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,7 +50,7 @@ export class RegistrarUsuariosComponent implements OnInit {
   ) { 
 
     this.departamentos$ = this.departamentosSvc.getDepartamentos();
-    //this.roles$ = this.rolesSvc.getRoles();
+    this.roles$ = this.rolesSvc.getRoles();
 
     this.crearUsuarioForm = this.formBuilder.group({
       correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],

@@ -13,7 +13,7 @@ export class RolService {
 
   constructor(private http: HttpClient) { }
 
-  getRoles():Observable<RolResponse[]>{
-    return this.http.get<RolResponse[]>(this.urlEndPoint);
+  getRoles():Observable<Rol[]>{
+    return this.http.get<Rol[]>(this.urlEndPoint);
   }
 }

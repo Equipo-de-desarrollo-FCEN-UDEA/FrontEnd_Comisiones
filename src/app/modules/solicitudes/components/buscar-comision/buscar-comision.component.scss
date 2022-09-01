@@ -1,17 +1,14 @@
-.buscador{
-
-    background-color: aqua;
-    height: 4em;
+#table-complete-search {
+    margin-left: 1em;
+}
+.container-inside {
+    margin-bottom: 6em !important;
 }
 
-
-.navbar{
-    border-radius: 2em;
-}
-
-
-
-.click-table:hover {
-    background-color: #d1d1d3ec;
+.btn-info {
+    background-color: #f9a12c;
+    border-color: #f9a12c;;
+}.btn-info:hover { 
+    background-color: #f9a02cb5;
 }
 

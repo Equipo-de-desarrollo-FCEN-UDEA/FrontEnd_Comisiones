@@ -99,14 +99,15 @@ export class CrearComisionComponent implements OnInit {
 
     this.fromDate = null;
     this.toDate = null;
-  }
-
-  ngOnInit(): void {
-     this.paisesCiudadesSvc.getPaises().subscribe(
+    this.paisesCiudadesSvc.getPaises().subscribe(
       (data:Pais[]) => {
         this.paises = data;
       }
      )
+  }
+
+  ngOnInit(): void {
+     
   }
 
 

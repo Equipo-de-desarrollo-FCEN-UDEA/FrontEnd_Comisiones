@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container card shadow bg-white rounded">
 
 
     <form class="need-validation card" novalidate [formGroup]="fBasicInfo" (ngSubmit)="onSubmit()">
-        <h3 class="formTitle">
-            Formulario solicitud dedicación exclusiva
-        </h3>
+        <h2 class="formTitle">
+            FORMATO DE EVALUACIÓN DE PROPUESTA O PROYECTO DE DEDICACIÓN EXCLUSIVA
+        </h2>
 
         <h5>Datos del profesor solicitante</h5>
         <!-- <div class="alert alert-info">
@@ -332,7 +332,7 @@
 
 
 
-        <button class="btn btn-success" id="Enviar" (submit)="true"
+        <button class="btn btn-add" id="Enviar" (submit)="true"
             [disabled]="fBasicInfo.invalid || (isLoading|async)">
             <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
                 aria-hidden="true"></span>

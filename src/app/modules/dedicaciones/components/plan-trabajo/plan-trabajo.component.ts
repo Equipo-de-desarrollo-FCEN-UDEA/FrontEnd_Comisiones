@@ -22,7 +22,6 @@ export class PlanTrabajoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuarioSvc: UsuarioService,
-    private loaderService: LoaderService,
     private planTrabajoSvc: PlanTrabajoService,
     private loadingSvc: LoaderService,
     private comunicacionSvc: CrearComisionComponentsService
@@ -73,7 +72,7 @@ export class PlanTrabajoComponent implements OnInit {
     }
 
     
-
+    this.loadingSvc.show();
     this.planTrabajoSvc.postPlanTrabajo(plan).subscribe(
       (res: any) => {
         if (res) {
@@ -85,6 +84,7 @@ export class PlanTrabajoComponent implements OnInit {
             }
           )
           this.comunicacionSvc.setPlanSuccess(true);
+          this.loadingSvc.hide();
         }
       }
     );

@@ -13,12 +13,12 @@
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([0])!.valid"></i>
                 </span>
             </ng-template>
-            <div class="container">
+            <div class="container card shadow bg-white rounded">
                 <h3 class="header"> Apoya al plan de desarrollo institucional en alguno de los siguientes temas</h3>
                 <div class="temas row">
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let tema of temas; let i = index">
-                        <div class="tema card" [ngClass]="{'selected': selectedTema==i}" (click)="selectTema(i)">
+                        <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedTema==i}" (click)="selectTema(i)">
                             <h5>{{tema.titulo}}</h5>
                             <hr>
                             <span>{{tema.subtitulo}}</span>
@@ -27,7 +27,7 @@
                 </div>
                 <footer class="my-footer">
                     <div class="buttons">
-                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-primary" cdkStepperNext>
+                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-add" cdkStepperNext>
                             <span> Objetivos </span>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-arrow-right"></i>
@@ -45,13 +45,13 @@
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([1])!.valid"></i>
                 </span>
             </ng-template>
-            <div class="container">
+            <div class="container card shadow bg-white rounded">
                 <h3> Apoya al plan de desarrollo institucional en alguno de los siguientes objetivos</h3>
 
-                <div class="objetivos row">
+                <div class="objetivos row ">
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let objetivo of objetivos$ | async; let i = index">
-                        <div class="tema card" [ngClass]="{'selected': selectedObjetivo == i}"
+                        <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedObjetivo == i}"
                             (click)="selectObjetivo(i,objetivo.descripcion,objetivo.acciones);">
                             <h5>{{"Objetivo estratégico " + (i+1)}}</h5>
                             <hr>
@@ -61,13 +61,13 @@
                 </div>
                 <footer class="my-footer">
                     <div class="buttons">
-                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-primary" cdkStepperPrevious>
+                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-add" cdkStepperPrevious>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-arrow-left"></i>
                             </span>
                             <span> Temas </span>
                         </button>
-                        <button [disabled]="formArray.get([1])!.invalid" class="btn btn-primary" cdkStepperNext>
+                        <button [disabled]="formArray.get([1])!.invalid" class="btn btn-add" cdkStepperNext>
                             <span> Acciones </span>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-arrow-right"></i>
@@ -86,13 +86,13 @@
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([2])!.valid"></i>
                 </span>
             </ng-template>
-            <div class="container">
+            <div class="container card shadow bg-white rounded">
                 <h3>Apoya al plan de desarrollo institucional en alguna de las siguientes acciones estratégicas</h3>
 
                 <div class="acciones row">
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let accion of acciones$ | async; let i = index">
-                        <div class="tema card" [ngClass]="{'selected': selectedAccion == i}"
+                        <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedAccion == i}"
                             (click)="selectAccion(i,accion);">
                             <h5>{{"Acción estratégica " + (i+1)}}</h5>
                             <hr>
@@ -102,13 +102,13 @@
                 </div>
                 <footer class="my-footer">
                     <div class="buttons">
-                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-primary" cdkStepperPrevious>
+                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-add" cdkStepperPrevious>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-arrow-left"></i>
                             </span>
                             <span> Objetivos </span>
                         </button>
-                        <button [disabled]="formArray.get([2])!.invalid" class="btn btn-primary" cdkStepperNext>
+                        <button [disabled]="formArray.get([2])!.invalid" class="btn btn-add" cdkStepperNext>
                             <span> Indicadores </span>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-arrow-right"></i>
@@ -126,7 +126,7 @@
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([2])!.valid"></i>
                 </span>
             </ng-template>
-            <div class="container">
+            <div class="container card shadow bg-white rounded">
                 <h3>Apoya al plan de desarrollo institucional en alguna de las siguientes acciones estratégicas</h3>
 
                 <div class="indicadores row" style="width: 100%;">
@@ -148,7 +148,7 @@
                                         (click)="removeInput('indicador',i)" *ngIf="indicadorArr.length > 1">
                                         <i class="fa fa-minus"></i>
                                     </button>
-                                    <button class="btn btn-circle btn-primary btn-sm" type="button"
+                                    <button class="btn btn-circle btn-add btn-sm" type="button"
                                         (click)="addInputIndicador()" *ngIf="isLast">
                                         <i class="fa fa-plus"></i>
                                     </button>
@@ -162,7 +162,7 @@
                 </div>
                 <footer class="my-footer">
                     <div class="buttons">
-                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-primary" cdkStepperPrevious>
+                        <button [disabled]="formArray.get([0])!.invalid" class="btn btn-add" cdkStepperPrevious>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-arrow-left"></i>
                             </span>
@@ -170,7 +170,7 @@
                         </button>
                         <button
                             [disabled]="formArray.get([2])!.invalid || formArray.get([0])!.invalid || formArray.get([1])!.invalid"
-                            class="btn btn-primary" (submit)="true">
+                            class="btn btn-add" (submit)="true">
                             <span> Finalizar </span>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-check-circle"></i>

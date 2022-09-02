@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   public usuario!: Usuario; 
   public rol!: Rol
   public usuarioInside!: UsuarioInside;
+  public admin: any = true;
 
   constructor(
     private authService : AuthService,

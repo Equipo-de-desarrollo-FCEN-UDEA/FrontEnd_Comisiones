@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth } from '@interfaces/auth';
 import { UsuarioAuth } from '@interfaces/usuario';
 import { AuthService } from '@services/auth/auth.service';
 import { LoaderService } from '@services/interceptors/loader.service';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -72,7 +75,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private loadingService: LoaderService
+    private loadingService: LoaderService,
+    private cookieSvc : CookieService,
   ) { }
     
   formLogin = this.fb.group({
@@ -126,20 +130,23 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(user).subscribe({
-        next: (res) => {
-          this.router.navigateByUrl('/home');
+        next: (res:Auth) => {
+          this.router.navigate(['/home']);
+          
         },
         error: (err) => {
           if (err.status === 404 || err.status === 401) {
             this.error = 'Usuario o contraseña incorrectos';
+            Swal.fire({
+              title: 'Usuario o contraseña incorrectos',
+              confirmButtonText: 'Intentar de nuevo',
+              icon: 'warning'
+            })
           }
+
         },
       }
-      // (data) => {
-      //   if (data){
-      //     this.router.navigate(['/home']);
-      //   }
-      // }
+
     )
   }
 }

@@ -1,7 +1,7 @@
-import { Usuario } from "./usuario";
+import { Usuario, UsuarioResponse } from "./usuario";
 
 export interface Auth {
-    usuario: Usuario;
+    usuario: UsuarioResponse;
     token: string;
     expiresIn: string;
 }

@@ -21,6 +21,8 @@ export class BuscarComisionComponent {
   
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
+  public rol : string = localStorage.getItem('rol') || '';
+
   constructor(
     public Buscarservice: BuscarComisionesService,
     public comisionService: ComisionesService

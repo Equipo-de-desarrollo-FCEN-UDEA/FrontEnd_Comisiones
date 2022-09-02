@@ -13,8 +13,6 @@ export function ultimaFecha(comision:Comision):any {
 
 }
 
-console.log("elemento"+ultimoElement)
-
 
 
 export function ultimoElement(res:any[]):any{

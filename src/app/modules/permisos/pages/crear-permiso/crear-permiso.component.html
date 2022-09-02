@@ -1,4 +1,4 @@
-<div class="container card shadow mt-5 bg-white rounded p-5 w-75">
+<div class="container card shadow mt-5 bg-white rounded p-5">
   <div class="row header-row mb-1">
     <div class="col">
       <span class="text-secondary">CREAR PERMISO</span>
@@ -83,6 +83,7 @@
           formControlName="tipos_permiso_id"
           required
           [ngClass]="{ 'is-invalid': isInvalidForm('tipos_permiso_id') }"
+          ngModel (ngModelChange)="onTipoDePermiso($event)"
           placeholder=" "
         >
           <option [value]="tipo.id" *ngFor="let tipo of tiposPermiso$ | async">
@@ -97,6 +98,10 @@
         >
       </div>
 			<hr />
+
+      <div class="alert alert-warning mt-3 mb-0" *ngIf="diaHabil > 0">
+        <strong>¡Importante!</strong> Para este tipo de permiso solo puedes elegir {{ diaHabil }} días hábiles
+      </div>
 
       <div class="mt-4 row regular-row">
       <span class="col-md-4 col-xs-12 col-sm-12 label">Fechas *</span>

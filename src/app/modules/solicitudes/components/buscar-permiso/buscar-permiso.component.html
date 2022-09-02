@@ -33,8 +33,8 @@
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
             <th scope="col" sortable="nombre"(sort)="onSort($event)">Estado</th>
             <th scope="col" sortable="createdAt"(sort)="onSort($event)">Fecha</th>
-            <th scope="col" sortable="nombre" (sort)="onSort($event)" >Nombre</th>
-            <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
+            <th scope="col" sortable="apellido" (sort)="onSort($event)"*ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamento</th>
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
             <th scope="col" sortable="nombre" (sort)="onSort($event)" >Descargas</th>
@@ -85,14 +85,14 @@
             </ngb-highlight>
           </td>
           
-          <td>
-            <ngb-highlight
+          <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
+            <ngb-highlight 
               [result]="permiso.usuarios.nombre" 
               [term]="Buscarservice.searchTerm">
             </ngb-highlight>
           </td>
           
-          <td>
+          <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
             <ngb-highlight
               [result]="permiso.usuarios.apellido" 
               [term]="Buscarservice.searchTerm">

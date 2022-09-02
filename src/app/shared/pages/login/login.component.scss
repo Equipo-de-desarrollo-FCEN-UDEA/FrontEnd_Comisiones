@@ -2,7 +2,7 @@
   .backg{
     // background-image: "https://pbs.twimg.com/media/FTKY5SKWYBEy49o.jpg";
     // background-image: url(https://pbs.twimg.com/media/FTKY5SKWYBEy49o.jpg);
-    height:200%;
+    // height:200%;
     width: 100%;
   }
 
@@ -14,6 +14,10 @@
     background-color: #fff;
     /* // border:none; */
 
+  }
+
+  html{
+    overflow-y: hidden;
   }
 
 .container{

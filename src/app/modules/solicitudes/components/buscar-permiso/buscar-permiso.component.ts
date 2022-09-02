@@ -41,6 +41,7 @@ export class BuscarPermisoComponent {
   archivarPermiso(id:number){
     this.permisoService.Archivado(id).subscribe()
     this.Buscarservice.ngOnchanges()
+    console.log("archivado")
   }
   
   desarchivarPermiso(id:number){

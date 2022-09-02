@@ -34,7 +34,7 @@
 
   <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
     <div class="navbar-brand d-flex">
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="!(usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR')">
         <a style="color:#fff" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Crear Solicitud 
         </a>
@@ -102,7 +102,7 @@
               </div>
               <!-- sidebar-header  -->
               <hr color="#f5f5f5" />
-              <div class="create-request">
+              <div class="create-request" *ngIf="!(usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR')">
                 <button type="button" class="btn-request dropdown-toggle w-75" id="navbarScrollingDropdown" data-bs-toggle="dropdown">
                   <span style="color: #ffff; margin: 0">
                     <i class="fas fa-plus-circle"></i>
@@ -112,7 +112,7 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                   <li><a class="dropdown-item" [routerLink]="['/permisos/crear-permiso']">Permiso</a></li>
                   <li><a class="dropdown-item" [routerLink]="['/comisiones/crear-comision']">Comisión</a></li>
-                  <li><a class="dropdown-item" [routerLink]="['/dedicaciones/crear-dedicacion']">Dedicación Exclusiva</a></li>
+                  <li><a class="dropdown-item" [routerLink]="['/dedicaciones/crear-dedicacion']" >Dedicación Exclusiva</a></li>
                 </ul>
               </div>
               <!-- sidebar-search  -->
@@ -139,10 +139,10 @@
                     </a>
                   </li>
                 </ul>
-                <div class="header-menu">
+                <div *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'" class="header-menu">
                   <span> ESPECÍFICO </span>
                 </div>
-                <ul> 
+                <ul *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'"> 
                   <li [routerLink]="['/usuarios/lista-usuarios']">
                     <a>
                       <span>

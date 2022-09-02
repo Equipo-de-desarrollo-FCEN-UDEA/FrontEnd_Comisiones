@@ -19,6 +19,8 @@ import { DescargarDocumentosService } from '@services/descargar-documentos.servi
 })
 export class VerComisionComponent {
 
+  public rol : string = localStorage.getItem('rol') || '';
+
   mostrarEstados = false;
   error:string = '';
   isDelete = false;

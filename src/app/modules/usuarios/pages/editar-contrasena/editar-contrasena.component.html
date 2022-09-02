@@ -6,85 +6,56 @@
   </div>
   <hr />
 
-  <form>
+  <form [formGroup]="editarContrasenaForm" (ngSubmit)="submit()">
 
     <div class="row regular-row">
       <div class="col-12">
-        <input
-          type="password"
-          placeholder="Contraseña Actual"
-          formControlName="contrasena"
-          class="form-control"
+        <input type="password" placeholder="Contraseña Actual" formControlName="contrasena_actual" class="form-control"
           [ngClass]="{
-            'is-invalid': submitted && f['contrasena'].errors
-          }"
-        />
-        <div         
-          *ngIf="submitted && f['contrasena'].errors"
-          class="invalid-feedback">
-            <div 
-            class="alert alert-danger"
-            *ngIf="f['contrasena'].errors['minLength']">
-              La contraseña es requerida
-            </div>
-        </div>
-        
-      </div>
-    </div>
-
-    <div class="row regular-row mt-3">
-      <div class="col-12">
-        <input
-          type="password"
-          placeholder="Nueva Contraseña"
-          formControlName="contrasena"
-          class="form-control"
-        />
-        <div         
-          *ngIf="submitted && f['contrasena'].errors"
-          class="invalid-feedback">
-          <div 
-            *ngIf="f['contrasena'].errors['minLength']" 
-            class="alert alert-danger">
+            'is-invalid': isInvalidForm('contrasena_actual')
+          }" />
+        <div *ngIf="submitted && f['contrasena'].errors" class="invalid-feedback">
+          <div class="alert alert-danger" *ngIf="f['contrasena'].errors['minLength']">
             La contraseña es requerida
           </div>
         </div>
 
-        <div         
-          *ngIf="submitted && f['contrasena'].errors"
-          class="invalid-feedback">
-          <div 
-            *ngIf="f['contrasena'].errors['maxLength']"
-            class="alert alert-danger" >
-            La contraseña es demasiado larga
-          </div>
-      </div>
       </div>
     </div>
 
     <div class="row regular-row mt-3">
       <div class="col-12">
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Confirmar Contraseña"
-          formControlName="confirmContrasena"
-         
-        />
-        <div
-         
-          class="invalid-feedback alert alert-danger"
-        >
-          <div>
-            Las contraseñas no coinciden
+        <input type="password" placeholder="Nueva Contraseña" formControlName="contrasena_expected_1"
+          class="form-control" [ngClass]="{
+            'is-invalid': isInvalidForm('contrasena_expected_1')
+          }" />
+        <div *ngIf="submitted && f['contrasena'].errors" class="invalid-feedback">
+          <div *ngIf="f['contrasena'].errors['minLength']" class="alert alert-danger">
+            La contraseña es requerida
           </div>
-          <div >
-            Confirmar la contraseña es requerido
+        </div>
+
+        <div *ngIf="submitted && f['contrasena'].errors" class="invalid-feedback">
+          <div *ngIf="f['contrasena'].errors['maxLength']" class="alert alert-danger">
+            La contraseña es demasiado larga
           </div>
         </div>
       </div>
     </div>
-    <div  *ngIf="error" class="alert alert-danger mt-3 mb-0">
+
+    <div class="row regular-row mt-3">
+      <div class="col-12">
+        <input type="password" class="form-control" placeholder="Confirmar Contraseña"
+          formControlName="contrasena_expected_2" [ngClass]="{
+            'is-invalid': isInvalidForm('contrasena_expected_2')
+          }" />
+        <span style="color: red;" *ngIf="ValidatePasswords()">
+          Las contraseñas no coinciden
+        </span>
+       
+      </div>
+    </div>
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
       {{ error }}
     </div>
 
@@ -92,22 +63,13 @@
 
     <div class="footer-row d-md-flex justify-content-md-end mb-3">
       <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-        <button
-          class="btn btn-secondary"
-          [routerLink]="['/usuarios/ver-usuario', usuario?.id]"
-        >
+        <button class="btn btn-secondary" [routerLink]="['/usuarios/ver-usuario', usuario?.id]">
           Cancelar
         </button>
       </div>
       <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-        <button
-          type="button"
-          class="btn btn-green btn-success btn-block"
-        >
-          <span
-            *ngIf="loading"
-            class="spinner-border spinner-border-sm mr-1"
-          ></span>
+        <button class="btn btn-green btn-success btn-block" (submit)="true" [disabled]="ValidatePasswords() || editarContrasenaForm.invalid">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Enviar
         </button>
       </div>

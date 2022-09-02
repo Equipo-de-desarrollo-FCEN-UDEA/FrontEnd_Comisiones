@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Usuario, UsuarioResponse } from '@interfaces/usuario';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
-import { ConfirmedValidator } from '@shared/clases/confirmed-validator';
 import { tiposId } from '@shared/data/tipos-id';
 import { take } from 'rxjs';
 
@@ -54,9 +53,9 @@ export class EditarUsuarioComponent implements OnInit {
     tipo_identificacion: ['', [Validators.maxLength(250)]],
     identificacion: [0, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
     departamentos_id : ['', Validators.required],
-    roles_id : ['', Validators.required],
     contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]]
+    validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
+    roles_id : [NaN, Validators.required]
    });
 
   ngOnInit(): void {

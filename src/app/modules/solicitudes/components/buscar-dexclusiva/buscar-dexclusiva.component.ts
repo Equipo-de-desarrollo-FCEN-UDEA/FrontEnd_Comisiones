@@ -18,6 +18,8 @@ export class BuscarDexclusivaComponent {
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
+  public rol : string = localStorage.getItem('rol') || '';
+
   constructor(
     public Buscarservice: BuscarDedicacionService,
     public dedicacionService: DedicacionService

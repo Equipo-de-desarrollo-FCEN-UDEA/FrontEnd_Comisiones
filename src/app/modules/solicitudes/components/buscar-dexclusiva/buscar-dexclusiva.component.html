@@ -1,29 +1,31 @@
-<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded">
-    <form>
-      <div class="mb-3 d-flex justify-content-between p-2">
-        <div class="d-flex">
-          <label 
-            for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
-          </label>
+<div class="container-inside shadow-sm pt-4 pl-4 pr-2 mb-5 p-4 m-3 mt-5 bg-white rounded">
+  <div class="mb-3 d-flex justify-content-between p-2">
+    <div class="d-flex">
+      <label 
+        for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
+      </label>
   
-          <input id="table-complete-search" type="text" 
-            class="form-control" name="searchTerm"
-            [(ngModel)]="Buscarservice.searchTerm">
-        </div>
+      <input id="table-complete-search" type="text" 
+        class="form-control" name="searchTerm"
+        [(ngModel)]="Buscarservice.searchTerm">
+    </div>
   
-        <span class="col col-form-label" 
-          *ngIf="Buscarservice.loading$ | async">Loading...
-        </span>
-  
-        <select class="form-select" 
-          (change)="changeOption($event)" style="width: auto">
-          <option value="0">No archivados</option>
-          <option value="1">Archivados</option>
-          <option value="2">Todos</option>
-        </select>
-      </div>
+      <span class="col col-form-label" 
+        *ngIf="Buscarservice.loading$ | async">Loading...
+      </span>
       
-      <div class="table-responsive-sm">
+      <select class="form-select" 
+        (change)="changeOption($event)" style="width: auto">
+        <option value="0">No archivados</option>
+        <option value="1">Archivados</option>
+        <option value="2">Todos</option>
+      </select>
+    </div>
+
+    <hr/>
+
+    <form class="table-responsive">
+      <div class="table-responsive">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -31,8 +33,8 @@
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Estado</th>
               <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
-              <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
+              <th scope="col" sortable="nombre" (sort)="onSort($event) " *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
+              <th scope="col" sortable="apellido" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th>
@@ -49,14 +51,14 @@
               
              
   
-              <td>
+              <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
                 <ngb-highlight 
                   [result]="dedicacion.usuarios.nombre" 
                   [term]="Buscarservice.searchTerm">
                 </ngb-highlight>
               </td>
   
-              <td>
+              <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
                 <ngb-highlight 
                   [result]="dedicacion.usuarios.apellido" 
                   [term]="Buscarservice.searchTerm">
@@ -83,18 +85,16 @@
               </td>
           </tbody>
         </table>
-              
-
       </div>
-  
-        <div class="d-flex justify-content-between p-2">
-          <ngb-pagination 
-            [collectionSize]="(total$ | async)!" 
-            [(page)]="Buscarservice.page"
-            [pageSize]="Buscarservice.pageSize">
-          </ngb-pagination>
-        </div>
-  
-    </form>
-  
-  </div>
+
+      <hr/>
+      
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination 
+        [collectionSize]="(total$ | async)!" 
+        [(page)]="Buscarservice.page"
+        [pageSize]="Buscarservice.pageSize">
+      </ngb-pagination>
+    </div>
+  </form>
+</div>

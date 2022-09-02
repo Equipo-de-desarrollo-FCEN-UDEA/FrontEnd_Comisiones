@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Rol, RolResponse } from '@interfaces/roles';
+import { Rol } from '@interfaces/roles';
 import { prefix } from '@shared/data/ruta-api';
 import { Observable } from 'rxjs';
 

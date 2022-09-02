@@ -18,6 +18,7 @@ import { PermisoService } from '@services/permisos/permiso.service';
 })
 export class VerPermisoComponent implements OnInit {
 
+  public rol : string = localStorage.getItem('rol') || '';
   loading:boolean = false;
   isDelete:boolean = false;
   error:string = '';

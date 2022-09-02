@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@services/auth/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Subject } from 'rxjs';
 import { LoaderService } from '@services/interceptors/loader.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -46,23 +46,27 @@ export class RecuperarContrasenaComponent implements OnInit {
     }
 
     this.loading = true;
-
     this.authService.forgotPassword(this.f['correo'].value).subscribe({
-      next: (res) => {
-        this.router.navigate(['/home']);
+      next: (res:any) =>{
         Swal.fire({
-          title: 'Enviado!',
-          text: '¡Revise el correo ingresado!',
+          title: 'Una nueva contraseña fue enviada al correo electrónico'+ this.f['correo'].value,
+          text: res.message,
           icon: 'success',
-          confirmButtonColor: '#3AB795',
-        });
-      },
-      error: (err) => {
-        if (err.status === 404 || err.status === 401) {
-          this.error = err.error.msg;
+          showLoaderOnConfirm: true,
+          confirmButtonText: 'Aceptar'
         }
+        )
       },
-    });
+      error: (err:any) => {
+        Swal.fire({
+          title: 'Algo ocurrió mal',
+          text: err.message,
+          icon: 'error',
+          showLoaderOnConfirm: true,
+          confirmButtonText: 'Aceptar'
+      })
+    }}
+    )
 
   }
 

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth } from '@interfaces/auth';
 import { UsuarioAuth } from '@interfaces/usuario';
 import { AuthService } from '@services/auth/auth.service';
 import { LoaderService } from '@services/interceptors/loader.service';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -13,53 +16,53 @@ import { Subject } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  // public isCollapsed=true;
-  // public tiposId=[
-  //   'Cedula de Ciudadania',
-  //   'Cedula de Extranjeria',
-  //   'Pasaporte',
-  //   'Tarjeta de Identidad',
-  //   'Diplomatico',
-  //   'Doc. Ident. De Extranjeros',
-  //   'Ident. Fiscal. Para Ext.',
-  //   'NIT',
-  //   'NIT Persona Natural',
-  //   'NUIP',
-  //   'Registro Civil',
-  //   'Certificado Nacido Vivo',
-  //   'Pasaporte ONU',
-  //   'Permiso especial de permanencia',
-  //   'Salvoconducto de permanencia',
-  //   'Permiso especial formacion PEPFF',
-  //   'Permiso por protección temporal'
-  // ]
+  public isCollapsed=true;
+  public tiposId=[
+    'Cedula de Ciudadania',
+    'Cedula de Extranjeria',
+    'Pasaporte',
+    'Tarjeta de Identidad',
+    'Diplomatico',
+    'Doc. Ident. De Extranjeros',
+    'Ident. Fiscal. Para Ext.',
+    'NIT',
+    'NIT Persona Natural',
+    'NUIP',
+    'Registro Civil',
+    'Certificado Nacido Vivo',
+    'Pasaporte ONU',
+    'Permiso especial de permanencia',
+    'Salvoconducto de permanencia',
+    'Permiso especial formacion PEPFF',
+    'Permiso por protección temporal'
+  ]
 
 
-  // public roles = [
-  //   {
-  //     id: 5,
-  //     nombre: 'Empleado'
-  //   },
-  //   {
-  //     id: 6,
-  //     nombre: 'Profesor'
-  //   },
-  //   {
-  //     id: 7,
-  //     nombre: 'Estudiante'
-  //   }
-  // ]
+  public roles = [
+    {
+      id: 5,
+      nombre: 'Empleado'
+    },
+    {
+      id: 6,
+      nombre: 'Profesor'
+    },
+    {
+      id: 7,
+      nombre: 'Estudiante'
+    }
+  ]
 
-  // public deparmentos = [
-  //   {
-  //     id: 1,
-  //     nombre: 'Vicedecanatura FCEN'
-  //   },
-  //   {
-  //     id: 2,
-  //     nombre: 'Extensión'
-  //   }
-  // ]
+  public deparmentos = [
+    {
+      id: 1,
+      nombre: 'Vicedecanatura FCEN'
+    },
+    {
+      id: 2,
+      nombre: 'Extensión'
+    }
+  ]
 
 
   // private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; --> EL QUE SE USARÁ
@@ -72,7 +75,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private loadingService: LoaderService
+    private loadingService: LoaderService,
+    private cookieSvc : CookieService,
   ) { }
     
   formLogin = this.fb.group({
@@ -85,16 +89,16 @@ export class LoginComponent implements OnInit {
   });
 
 
-  // formSignup = this.fb.group({
-  //   correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
-  //   passwordSignup : ['', Validators.required],
-  //   nombreSignup : ['', Validators.required],
-  //   apellidoSignup : ['', Validators.required],
-  //   tipoIdSignup : ['', Validators.required],
-  //   identificacionSignup : ['', Validators.required],
-  //   departamentoSignup : ['', Validators.required],
-  //   rolSignup : ['', Validators.required]
-  // });
+  formSignup = this.fb.group({
+    correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
+    passwordSignup : ['', Validators.required],
+    nombreSignup : ['', Validators.required],
+    apellidoSignup : ['', Validators.required],
+    tipoIdSignup : ['', Validators.required],
+    identificacionSignup : ['', Validators.required],
+    departamentoSignup : ['', Validators.required],
+    rolSignup : ['', Validators.required]
+  });
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()){
@@ -121,19 +125,28 @@ export class LoginComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.formLogin.invalid) {
+      console.log('invalido login')
       return;
     }
 
     this.authService.login(user).subscribe({
-        next: (res) => {
-          this.router.navigateByUrl('/home');
+        next: (res:Auth) => {
+          this.router.navigate(['/home']);
+          
         },
         error: (err) => {
           if (err.status === 404 || err.status === 401) {
-            this.error = err.error.msg;
+            this.error = 'Usuario o contraseña incorrectos';
+            Swal.fire({
+              title: 'Usuario o contraseña incorrectos',
+              confirmButtonText: 'Intentar de nuevo',
+              icon: 'warning'
+            })
           }
+
         },
       }
+
     )
   }
 }

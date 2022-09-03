@@ -8,7 +8,6 @@ import { DepartamentoService } from '@services/departamentos/departamento.servic
 import { LoaderService } from '@services/interceptors/loader.service';
 import { RolService } from '@services/roles/rol.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
-import { ConfirmedValidator } from '@shared/clases/confirmed-validator';
 import { tiposId } from '@shared/data/tipos-id';
 import { Observable, take } from 'rxjs';
 
@@ -60,7 +59,7 @@ export class EditarUsuarioComponent implements OnInit {
     roles_id : ['', Validators.required],
     contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-   }, {validator: ConfirmedValidator('contrasena', 'validarcontrasena')});
+   });
 
   ngOnInit(): void {
       this.activateRoute.params.subscribe({
@@ -72,29 +71,31 @@ export class EditarUsuarioComponent implements OnInit {
         } 
       });
 
-    if (this.id == 'me'){
-      this.usuarioSvc.getUsuario().subscribe(
-        (data: UsuarioResponse) => {
-          this.usuario = data;
-          this.id = data.id
-          this.formUpdate.patchValue(this.usuario);
-        }
-      );
-    } else {
-    this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe(res => {
-      this.usuario = res;
-      this.formUpdate.patchValue(this.usuario);
-    }
-    );
-  }
-    }
+  //   if (this.id == 'me'){
+  //     this.usuarioSvc.getUsuario().subscribe(
+  //       (data: UsuarioResponse) => {
+  //         this.usuario = data;
+  //         this.id = data.id
+  //         this.formUpdate.patchValue(this.usuario);
+  //       }
+  //     );
+  //   } else {
+  //   this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe(res => {
+  //     this.usuario = res;
+  //     this.formUpdate.patchValue(this.usuario);
+  //   }
+  //   );
+  // }
+}
 
-    get f() {
-      return this.formUpdate.controls;
-    }
+get f() {
+  return this.formUpdate.controls;
+}
 
   submitUpdate() {
+    this.submitted = true;
     const usuario = this.formUpdate.value;
+    console.log(this.formUpdate.value);
     this.usuarioSvc.updateUsuario({id:this.id ,...usuario}).subscribe(res => {
       console.log(res);
     }

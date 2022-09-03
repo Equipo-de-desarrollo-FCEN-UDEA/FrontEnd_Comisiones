@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminGuard } from '@guards/admin.guard';
+import { RolGuard } from '@guards/rol.guard';
 import { EditarContrasenaComponent } from './pages/editar-contrasena/editar-contrasena.component';
 import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.component';
 import { ListaUsuariosComponent } from './pages/lista-usuarios/lista-usuarios.component';
@@ -11,7 +11,7 @@ import { VerUsuarioComponent } from './pages/ver-usuario/ver-usuario.component';
 const routes: Routes = [
   {
     path: 'lista-usuarios',
-    canActivate: [AdminGuard],
+    canActivate: [RolGuard],
     component: ListaUsuariosComponent
   },
   {
@@ -28,6 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'registrar-usuarios',
+    canActivate: [RolGuard],
     component: RegistrarUsuariosComponent
   },
   { 

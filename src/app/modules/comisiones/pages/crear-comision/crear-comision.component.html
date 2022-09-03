@@ -84,7 +84,7 @@
             class="form-control  form-select-lg mb-3"
             (change)="onChangeSolicitud($event)"
             [ngClass]="{
-              'is-invalid': submitted && f['tipos_comision_id'].errors
+              'is-invalid': f['tipos_comision_id'].errors
             }"
           >
             <option value="" disabled selected>
@@ -101,7 +101,7 @@
             </label
           >
           <div
-            *ngIf="submitted && f['tipos_comision_id'].errors"
+            *ngIf="f['tipos_comision_id'].errors"
             class="invalid-feedback"
           >
             <div *ngIf="f['tipos_comision_id'].errors['required']">

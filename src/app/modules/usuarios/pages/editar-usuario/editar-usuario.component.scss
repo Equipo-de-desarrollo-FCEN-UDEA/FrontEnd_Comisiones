@@ -10,7 +10,7 @@ h5{
   width: 75%; 
   margin-bottom: 10em;
   align-items: unset;
-  min-height: 50vh;
+  min-height: 10vh;
   width: 50em;
 }
 
@@ -20,7 +20,7 @@ h5{
 }
 
 
-@media (max-width: 576px) {
+@media (max-width: 920px) {
   .containerInside {
       width: 95%;
   }

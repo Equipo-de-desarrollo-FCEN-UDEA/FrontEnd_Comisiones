@@ -102,21 +102,23 @@
       type="button"
       class="btn btn-light "
       [routerLink]="['/permisos/asociar-estado', permiso?.id]"
+      *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
       >
         Asociar nuevo Estado
       </button>
     </div>
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-      <button class="btn btn-danger" (click)="delete(permiso?.id)">
+    <div *ngIf="(rol == 'PROFESOR' || rol == 'EMPLEADO')" class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button class="btn btn-danger" (click)="delete(permiso?.id)" *ngIf="(rol == 'PROFESOR' || rol == 'EMPLEADO')">
         <span *ngIf="(isLoading | async) && (isDelete)"  class="spinner-border spinner-border-sm" ></span>
         Eliminar
       </button>
     </div>
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+    <div *ngIf="(rol == 'PROFESOR' || rol == 'EMPLEADO')" class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
       <button
         type="button"
         class="btn btn-warning "
         [routerLink]="['/permisos/editar-permiso', permiso?.id]"
+        *ngIf="(rol == 'PROFESOR' || rol == 'EMPLEADO')"
       >
         Editar
       </button>

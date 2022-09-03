@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioAuth} from '@interfaces/usuario';
+import { UsuarioAuth, UsuarioResponse} from '@interfaces/usuario';
 import { CookieService } from 'ngx-cookie-service';
 import { Auth } from '@interfaces/auth';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { prefix } from '@shared/data/ruta-api';
+import { UsuarioService } from '@services/usuarios/usuario.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,13 @@ export class AuthService {
   constructor(
     private cookieService : CookieService,
     private http : HttpClient,
-    private router : Router
+    private router : Router,
+    private usuarioSvc: UsuarioService
   ) { 
     
   }
 
-  login(user: UsuarioAuth):Observable<Boolean> {
+  login(user: UsuarioAuth):Observable<Auth> {
     const headers = new HttpHeaders(
       {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -37,9 +39,14 @@ export class AuthService {
         if (response.token) {
           this.cookieService.set('token', response.token, 1);
           this.cookieService.set('usuario', JSON.stringify(response.usuario), 1);
-          return true;
+          this.usuarioSvc.getUsuario().subscribe(
+            (usuario: UsuarioResponse) => {
+              localStorage.setItem('rol', usuario.roles.nombre);
+            }
+          )
+          return response;
         } else {
-          return false;
+          return response;
         }
       }
     ))
@@ -49,8 +56,9 @@ export class AuthService {
 
   logout() {
 
-    this.cookieService.delete('token');
-    this.cookieService.delete('usuario');
+    this.cookieService.delete('token', '/');
+    this.cookieService.delete('usuario', '/');
+    this.cookieService.deleteAll('/');
     
     if (this.isLoggedIn()) {
       this.logout();
@@ -67,8 +75,8 @@ export class AuthService {
   }
   
   forgotPassword(correo: string) {
-    return this.http.post(``, {
-      correo,
+    return this.http.post(`${this.prefix}`+'/restorePassword', {
+      correo:correo,
     });
   }
 

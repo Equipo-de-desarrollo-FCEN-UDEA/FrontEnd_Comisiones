@@ -68,9 +68,7 @@
           formControlName="tipos_comision_id"
           class="form-control"
           (change)="onChangeSolicitud($event)"
-          [ngClass]="{
-            'is-invalid': submitted && f['tipos_comision_id'].errors
-          }"
+          [ngClass]="{ 'is-invalid': f['tipos_comision_id'].errors }"
         >
           <option value="" disabled selected>
             Elige tipo el tipo de comisión
@@ -83,7 +81,7 @@
           </option>
         </select>
         <div
-          *ngIf="submitted && f['tipos_comision_id'].errors"
+          *ngIf="f['tipos_comision_id'].errors"
           class="invalid-feedback"
         >
           <div *ngIf="f['tipos_comision_id'].errors['required']">
@@ -164,9 +162,7 @@
             class="form-select form-select-lg mb-3"
             id="floatingciudad"
             formControlName="ciudad"
-            
             [disabled]="!editarComisionForm.controls['pais'].valid"
-            placeholder=" "
           >
             <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">
               {{ ciudad.name }}
@@ -261,16 +257,7 @@
             class="form-control"
             rows="3"
             formControlName="justificacion"
-            [ngClass]="{ 'is-invalid': submitted && f['justificacion'].errors }"
           ></textarea>
-          <div
-            *ngIf="submitted && f['justificacion'].errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f['justificacion'].errors['minLength']">
-              La justificación es requerida
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -378,7 +365,10 @@
         </button>
       </div>
       <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-        <button class="btn btn-green btn-success btn-block">
+        <button class="btn btn-green btn-success btn-block"
+        [disabled]="
+            editarComisionForm.invalid || !validSize() || (isLoading | async)
+          ">
           <span
             *ngIf="isLoading | async"
             class="spinner-border spinner-border-sm1"

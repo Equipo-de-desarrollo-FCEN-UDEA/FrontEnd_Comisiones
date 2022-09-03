@@ -19,6 +19,8 @@ import { DescargarDocumentosService } from '@services/descargar-documentos.servi
 })
 export class VerComisionComponent {
 
+  public rol : string = localStorage.getItem('rol') || '';
+
   mostrarEstados = false;
   error:string = '';
   isDelete = false;
@@ -63,7 +65,7 @@ export class VerComisionComponent {
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
                 this.estados = this.comision.intermediate_comisiones;
                 this.cumplidosArray = this.ultimoElemento(this.comision.cumplidos);
-                console.log(this.cumplidosArray); 
+                console.log(this.comision); 
                 
               });
             }
@@ -111,7 +113,6 @@ export class VerComisionComponent {
 
         this.comisionesSvc.deleteComision(id).subscribe({
           next: (response) => {
-            console.log(response);
             this.router.navigate(['/home']);
             Swal.fire({
               title: 'Eliminada!',

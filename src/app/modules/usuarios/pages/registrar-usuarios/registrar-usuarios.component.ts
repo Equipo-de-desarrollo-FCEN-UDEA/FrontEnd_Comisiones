@@ -83,10 +83,10 @@ export class RegistrarUsuariosComponent implements OnInit {
 
 
     this.usuarioSvc.postUsuario(this.crearUsuarioForm.value).subscribe({
-      next: (res) => { 
+      next: (res:any) => { 
         Swal.fire({
           title: 'Creado',
-          text: '¡El usuario se creó correctamente!',
+          text: res.message,
           icon: 'success',
           confirmButtonColor: '#3AB795',
         });

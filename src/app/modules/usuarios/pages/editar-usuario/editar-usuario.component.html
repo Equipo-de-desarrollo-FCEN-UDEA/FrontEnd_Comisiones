@@ -67,7 +67,6 @@
             id="floatingcampo_modalidad"
             formControlName="tipo_identificacion"
             required
-            placeholder=" "
           >
             <option [value]="tipo" *ngFor="let tipo of tiposId">
               {{ tipo | uppercase }}
@@ -203,7 +202,7 @@
           <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
             <button 
             class="btn btn-secondary "
-            [routerLink]="['/usuarios/ver-usuario', usuarioBase?.id]"
+            [routerLink]="['/home']"
             >
               Cancelar
             </button>

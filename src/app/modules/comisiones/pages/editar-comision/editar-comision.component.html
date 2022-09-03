@@ -68,9 +68,7 @@
           formControlName="tipos_comision_id"
           class="form-control"
           (change)="onChangeSolicitud($event)"
-          [ngClass]="{
-            'is-invalid': submitted && f['tipos_comision_id'].errors
-          }"
+          [ngClass]="{ 'is-invalid': f['tipos_comision_id'].errors }"
         >
           <option value="" disabled selected>
             Elige tipo el tipo de comisión
@@ -83,7 +81,7 @@
           </option>
         </select>
         <div
-          *ngIf="submitted && f['tipos_comision_id'].errors"
+          *ngIf="f['tipos_comision_id'].errors"
           class="invalid-feedback"
         >
           <div *ngIf="f['tipos_comision_id'].errors['required']">
@@ -103,9 +101,8 @@
             class="form-select form-select-lg mb-3"
             id="floatingpais"
             formControlName="pais"
-            [ngClass]="{ 'is-invalid': submitted && isInvalidForm('pais') }"
-            
-            placeholder=" "
+            [ngClass]="{ 'is-invalid': isInvalidForm('pais') }"
+            (change)="onChangePais($event)"
           >
             <option [value]="i" *ngFor="let country of paises; let i = index">
               {{ country.name }}
@@ -129,8 +126,8 @@
             class="form-select form-select-lg mb-3"
             id="floatingestado"
             formControlName="provincia"
-            
-            placeholder=" "
+            [ngClass]="{ 'is-invalid': isInvalidForm('provincia') }"
+            (change)="onChangeProvincia($event)"
           >
             <option
               [value]="i"
@@ -142,9 +139,7 @@
           <label
             for="floatingestado"
             class="selectLabel"
-            [ngClass]="{
-              isFill: editarComisionForm.controls['provincia'].valid
-            }"
+            [ngClass]="{ isFill: editarComisionForm.controls['provincia'].valid }"
           >
             <span
               *ngIf="isLoading | async"
@@ -167,9 +162,7 @@
             class="form-select form-select-lg mb-3"
             id="floatingciudad"
             formControlName="ciudad"
-            
             [disabled]="!editarComisionForm.controls['pais'].valid"
-            placeholder=" "
           >
             <option [value]="ciudad.name" *ngFor="let ciudad of ciudades">
               {{ ciudad.name }}
@@ -264,16 +257,7 @@
             class="form-control"
             rows="3"
             formControlName="justificacion"
-            [ngClass]="{ 'is-invalid': submitted && f['justificacion'].errors }"
           ></textarea>
-          <div
-            *ngIf="submitted && f['justificacion'].errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f['justificacion'].errors['minLength']">
-              La justificación es requerida
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -291,16 +275,15 @@
           <li [id]="i" class="list-group-item d-flex justify-content-between">
             <span>{{ doc.nombre }}</span>
             <span
-              class="input-group-text"
               style="width: fit-content; margin: 0"
             >
-              <button
-                class="btn btn-circle"
-                type="button"
-                (click)="borrarDocActual(doc.id, i)"
-              >
-                <i class="fa fa-times-circle"></i>
-              </button>
+            <button
+            class="btn btn-circle"
+            type="button"
+            (click)="borrarDocActual(doc.id, i)"
+          >
+            <i class="fa fa-times-circle"></i>
+            </button>
             </span>
           </li>
         </ul>
@@ -315,9 +298,6 @@
     >
     Recuerda que la justificación debe tener al menos 30 caracteres y máximo
     500 caracteres.
-    </div>
-    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
-    {{ error }}
     </div>
 
 
@@ -385,7 +365,10 @@
         </button>
       </div>
       <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-        <button class="btn btn-green btn-success btn-block">
+        <button class="btn btn-green btn-success btn-block"
+        [disabled]="
+            editarComisionForm.invalid || !validSize() || (isLoading | async)
+          ">
           <span
             *ngIf="isLoading | async"
             class="spinner-border spinner-border-sm1"

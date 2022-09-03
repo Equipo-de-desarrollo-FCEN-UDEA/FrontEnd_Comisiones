@@ -25,6 +25,7 @@ export class CrearPermisoComponent implements OnInit {
   fromDate: NgbDate | null;
   toDate: NgbDate | null = null;
   model: NgbDateStruct | null = null;
+  diaHabil:number = 0;
 
 
   today = this.calendar.getToday();
@@ -52,7 +53,6 @@ export class CrearPermisoComponent implements OnInit {
     private tiposPermisoSvc: TipoPermisoService
 
   ) {
-
     // Tipos de permiso
     this.tiposPermiso$ = this.tiposPermisoSvc.getTiposPermiso();
 
@@ -82,7 +82,7 @@ export class CrearPermisoComponent implements OnInit {
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+    } else if (this.fromDate && !this.toDate && date ) {
       this.toDate = date;
     } else {
       this.toDate = null;
@@ -113,6 +113,17 @@ export class CrearPermisoComponent implements OnInit {
   }
 
 
+  // ----------- TIPOS DE PERMISOS ------------
+
+  onTipoDePermiso(event:any){
+    const idTipoPermiso = event;
+
+    this.tiposPermisoSvc.getTipoPermisoId(idTipoPermiso).subscribe({
+      next: (res) => {
+        this.diaHabil = res.dias;
+      }
+    });
+  }
 
   // ----------- MANEJO DE ERRORES EN EL FORM ------------
   get f() {

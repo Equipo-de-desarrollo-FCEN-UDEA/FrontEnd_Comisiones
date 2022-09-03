@@ -20,7 +20,7 @@ export class UsuarioService {
 
   prefix = prefix + 'usuarios';
 
-  getUsuario() {
+  getUsuario() : Observable<UsuarioResponse> {
     const basicUsuario = JSON.parse(this.cookie.get('usuario'));
     return this.http.get<UsuarioResponse>(`${this.prefix}/${basicUsuario.id}`);
   }

@@ -2,9 +2,9 @@
 
 
     <form class="need-validation card" novalidate [formGroup]="fBasicInfo" (ngSubmit)="onSubmit()">
-        <h2 class="formTitle">
+        <h1  >
             FORMATO DE EVALUACIÓN DE PROPUESTA O PROYECTO DE DEDICACIÓN EXCLUSIVA
-        </h2>
+        </h1>
 
         <h5>Datos del profesor solicitante</h5>
         <!-- <div class="alert alert-info">
@@ -109,7 +109,7 @@
 
         <hr>
         <h5>Apoya al plan de desarrollo y acción institucional vigente en:</h5>
-        <button class="btn btn-primary btn-sm" type="button" (click)="open()">Ver plan de desarrollo y acción</button>
+        <button class="btn btn-primary btn-sm" type="button" title="Texto flotante" (click)="open()">Ver plan de desarrollo y acción</button>
         <!-- <div class="row">
             <div class="col-md-6 col-lg-6">
                 <h6>Temas:<span style="color:red">*</span></h6>
@@ -170,7 +170,7 @@
                 </div>
             </div>
 
-            
+
 
             <div class="col-md-6 col-lg-6">
                 <h6>Accion(es) Estratégica(s):<span style="color:red">*</span></h6>
@@ -233,7 +233,7 @@
 
                 </div>
             </div>
-            
+
 
             <div class="col-md-6 col-lg-6">
                 <h6>Indicador(es):<span style="color:red">*</span></h6>
@@ -263,7 +263,7 @@
             </div>
         </div> -->
         <hr>
-        
+
         <!-- <div class="alert alert-info">
             <p>El profesor debe indicar los productos adquiere y se compromete a entregar una vez culmine su período de
                 Dedicación Exclusiva. Esta información será consignada en la Resolución de Vicerrectoría de Docencia.
@@ -327,14 +327,14 @@
                 </div>
 
                 </div>
-                
+
             </div>
 
         </div>
 
 
 
-        <button class="btn btn-add" id="Enviar" (submit)="true"
+        <button class="btn btn-add" id="Enviar"   (submit)="true"
             [disabled]="fBasicInfo.invalid || (isLoading|async)">
             <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
                 aria-hidden="true"></span>

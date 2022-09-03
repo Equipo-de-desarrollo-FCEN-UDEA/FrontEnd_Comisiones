@@ -1,7 +1,7 @@
 <app-stepper #cdkStepper [linear]="isLinear">
     <cdk-step label="Carta de iniciación"  [optional]="false">
         <ng-template cdkStepLabel>
-            <span *ngIf="!(cartaSuccess$ | async) "class="icon is-medium">
+            <span *ngIf="!(cartaSuccess$ | async) "class="icon is-medium" title="Plantilla para carta de iniciación">
                 <i class="fas fa-duotone fa-envelopes-bulk"></i>
             </span>
             <span *ngIf="cartaSuccess$| async" class="icon is-medium">
@@ -12,7 +12,7 @@
     </cdk-step>
     <cdk-step label="Formulario" [optional]="false">
         <ng-template cdkStepLabel>
-            <span *ngIf="!(formatoSuccess$ | async)" class="icon is-medium">
+            <span *ngIf="!(formatoSuccess$ | async)" class="icon is-medium" title="Formato de evaluación">
                 <i class="fas fa-duotone fa-rectangle-list"></i>
             </span>
             <span *ngIf="formatoSuccess$ | async" class="icon is-medium">
@@ -21,9 +21,9 @@
     </ng-template>
         <app-f-dedicacion (dedicacion_id)="id$"></app-f-dedicacion>
     </cdk-step>
-    <cdk-step label="Personal Details"  [optional]="false">
+    <cdk-step label="Personal Details" title="Texto flotante" [optional]="false" >
         <ng-template cdkStepLabel>
-            <span *ngIf="!(planSuccess$|async)"class="icon is-medium">
+            <span *ngIf="!(planSuccess$|async)"class="icon is-medium" title="Formato de detalles personales">
                 <i class="fas fa-user"></i>
             </span>
             <span *ngIf="planSuccess$ | async" class="icon is-medium">

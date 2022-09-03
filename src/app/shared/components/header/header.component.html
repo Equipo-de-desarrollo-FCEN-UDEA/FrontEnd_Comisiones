@@ -33,10 +33,13 @@
   </div>
 
   <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
-    <div class="navbar-brand d-flex btn-item">
+    <div class="navbar-brand d-flex ">
+      <li class="nav-item  ">
+        <a style="color:#fff" class="nav-link active btn-item" [routerLink]="['/home']" aria-current="page">Solicitudes</a>
+      </li>
       <li class="nav-item dropdown" *ngIf="!(usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR')">
-        <a style="color:#fff" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Crear Solicitud
+        <a style="color:#fff" class="nav-link dropdown-toggle btn-item " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Generar Solicitud
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
           <li><a class="dropdown-item" [routerLink]="['/permisos/crear-permiso']">Permiso</a></li>
@@ -44,14 +47,12 @@
           <li><a class="dropdown-item" [routerLink]="['/dedicaciones/crear-dedicacion']">Dedicación Exclusiva</a></li>
         </ul>
       </li>
-      <li class="nav-item btn-item">
-        <a style="color:#fff" class="nav-link active" [routerLink]="['/home']" aria-current="page">Solicitudes</a>
+
+      <li class="nav-item " *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'">
+        <a style="color:#fff" class="nav-link active btn-item" [routerLink]="['/usuarios/lista-usuarios']" aria-current="page">Usuarios</a>
       </li>
-      <li class="nav-item  btn-item" *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'">
-        <a style="color:#fff" class="nav-link active" [routerLink]="['/usuarios/lista-usuarios']" aria-current="page">Usuarios</a>
-      </li>
-      <li class="nav-item" *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'">
-        <a style="color:#fff" class="nav-link active"  [routerLink]="['/usuarios/registrar-usuarios']" aria-current="page">Registrar Usuarios</a>
+      <li class="nav-item " *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'">
+        <a style="color:#fff" class="nav-link active btn-item"  [routerLink]="['/usuarios/registrar-usuarios']" aria-current="page">Registrar Usuarios</a>
       </li>
     </div>
   </div>

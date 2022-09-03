@@ -75,7 +75,7 @@ export class AuthService {
   }
   
   forgotPassword(correo: string) {
-    return this.http.post(`${this.prefix}`+'/restorePassword', {
+    return this.http.post(`${this.prefix}/restorePassword/${correo}`, {
       correo:correo,
     });
   }

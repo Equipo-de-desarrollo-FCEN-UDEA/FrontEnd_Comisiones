@@ -11,6 +11,7 @@ import { Comision } from '@interfaces/comisiones';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { ComisionesService } from '@services/comisiones/comisiones.service';
 import { DescargarDocumentosService } from '@services/descargar-documentos.service';
+import { CumplidosService } from '@services/comisiones/cumplidos.service';
 
 @Component({
   selector: 'app-ver-comision',
@@ -30,7 +31,8 @@ export class VerComisionComponent {
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   documentosArray:any = [];
-  cumplidosArray:any;
+  cumplidosArray:any = [];
+  documentCumplido:any; 
   fechaCreacion:any = '';
 
   ultimoElemento = ultimoElement
@@ -44,7 +46,8 @@ export class VerComisionComponent {
     private loaderSvc: LoaderService,
 
     private comisionesSvc: ComisionesService,
-    private descargarDocumentoSvc: DescargarDocumentosService
+    private descargarDocumentoSvc: DescargarDocumentosService,
+    private cumplidosSvc: CumplidosService
   ) { 
 
   }
@@ -59,12 +62,11 @@ export class VerComisionComponent {
             if (id) {
               this.comisionesSvc.getComision(id).subscribe((res: Comision) => {
                 this.comision = res;
-                console.log('´res'); 
                 this.comision?.documentos.forEach(documento => this.documentosArray.push(documento));
+                this.comision?.cumplidos.forEach(cumplido => this.cumplidosArray.push(cumplido));
                 this.fechaCreacion = this.comision?.intermediate_comisiones[0].createdAt;
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
                 this.estados = this.comision.intermediate_comisiones;
-                this.cumplidosArray = this.ultimoElemento(this.comision.cumplidos);
                 console.log(this.comision); 
                 
               });
@@ -94,6 +96,23 @@ export class VerComisionComponent {
         }
       },
     });
+  }
+
+
+  abrirCumplido(id:number){
+    // Buscar el documento del cumplido
+    this.cumplidosSvc.getCumplido(id).subscribe({
+      next: (res)=> {
+        this.documentCumplido = res;
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+      }
+    });
+    //Abrir el cumplido
+    this.abrirDocumento(this.documentCumplido.id)
   }
 
   

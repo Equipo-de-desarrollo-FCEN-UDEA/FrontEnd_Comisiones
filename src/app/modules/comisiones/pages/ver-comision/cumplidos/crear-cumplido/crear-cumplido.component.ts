@@ -130,7 +130,6 @@ export class CumplidoComponent implements OnInit {
     }
 
     const body = {
-      nombre: "lslsl",
       observaciones: this.cumplidoForm.value.observaciones,
       correos: this.cumplidoForm.value.correos,
       comisiones_id: this.cumplidoForm.value.comisiones_id,
@@ -141,7 +140,6 @@ export class CumplidoComponent implements OnInit {
 
 
     const reqBody: FormData = new FormData();
-    reqBody.append('nombre', body.nombre);
     reqBody.append('observaciones', body.observaciones);
     reqBody.append('correos', body.correos);
     reqBody.append('comisiones_id', body.comisiones_id);

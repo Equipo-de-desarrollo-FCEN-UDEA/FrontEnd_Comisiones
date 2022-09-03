@@ -35,7 +35,7 @@ export class RegistrarUsuariosComponent implements OnInit {
 
 
   // Roles 
-  roles$: Observable<RolResponse[]>
+  roles$: Observable<Rol[]>
 
 
   constructor(

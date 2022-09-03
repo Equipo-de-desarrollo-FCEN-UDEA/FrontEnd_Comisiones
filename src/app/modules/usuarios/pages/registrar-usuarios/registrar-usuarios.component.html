@@ -129,7 +129,11 @@
                     'is-invalid': submitted && f['roles_id'].errors
                   }"
                 >
+<<<<<<< HEAD
                 <option [value]="rol.nombre" *ngFor="let rol of roles$ | async">
+=======
+                <option [value]="rol.id" *ngFor="let rol of roles$ | async">
+>>>>>>> daniandre
                     {{ rol.nombre| uppercase }}
                 </option>
                 </select>

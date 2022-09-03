@@ -244,7 +244,7 @@ export class CrearComisionComponent implements OnInit {
       fecha_resolucion: new Date(this.formatter.format(this.today)),
       justificacion: this.creaComisionForm.value.justificacion,
       idioma: this.creaComisionForm.value.idioma,
-      lugar: this.pais.name +', '+ provincia +', ' + ciudad,
+      lugar: this.pais.name +', '+ provincia,
       tipos_comision_id: this.creaComisionForm.value.tipos_comision_id
     }
 

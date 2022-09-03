@@ -16,6 +16,7 @@ import { Observable, take } from 'rxjs';
   templateUrl: './editar-usuario.component.html',
   styleUrls: ['./editar-usuario.component.scss']
 })
+
 export class EditarUsuarioComponent implements OnInit {
   public id : Number | string = 0;
   public tiposId = tiposId;
@@ -56,9 +57,9 @@ export class EditarUsuarioComponent implements OnInit {
     tipo_identificacion: ['', [Validators.maxLength(250)]],
     identificacion: [0, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
     departamentos_id : ['', Validators.required],
-    roles_id : ['', Validators.required],
     contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
+    roles_id : [0,[Validators.required]]
    });
 
   ngOnInit(): void {

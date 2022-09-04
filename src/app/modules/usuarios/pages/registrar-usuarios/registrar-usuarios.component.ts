@@ -37,7 +37,6 @@ export class RegistrarUsuariosComponent implements OnInit {
   // Roles 
   roles$: Observable<Rol[]>
 
-
   constructor(
     private formBuilder: FormBuilder,
     private ngZone: NgZone,

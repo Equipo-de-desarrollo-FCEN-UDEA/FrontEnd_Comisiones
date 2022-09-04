@@ -98,10 +98,9 @@
           </div>
         </div>
 
-        <!-- <div class="row regular-row mt-4"> 
+        <div class="row regular-row m-2 align-items-baseline"> 
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div> 
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
->>>>>>> david
             <div class="formfloatig">
               <select
                 class="form-select form-select-lg"
@@ -113,7 +112,7 @@
                   'is-invalid': submitted && f['roles_id'].errors
                 }"
               >
-              <option [value]="rol.id" *ngFor="let rol of roles">
+              <option [value]="rol.nombre" *ngFor="let rol of roles$ | async">
                   {{ rol.nombre| uppercase }}
               </option>
               </select>
@@ -125,17 +124,16 @@
               >
             </div>
           </div>
-<<<<<<< HEAD
         </div>
 
         <div class="row regular-row m-2">
           <div class="col-xs-12 col-sm-6 label">Contraseña</div>
-          <div class="col-xs-12 col-sm-6">           
-=======
-        </div> -->
+          <div class="col-xs-12 col-sm-6">      
+        </div>
+        </div>
 
 
-        <!-- <div class="row regular-row mt-4"> 
+        <div class="row regular-row m-2 align-items-baseline"> 
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento</div> 
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
@@ -164,7 +162,7 @@
               >
             </div>
           </div>
-        </div> -->
+        </div>
 
         <hr />
         
@@ -177,14 +175,13 @@
             class="form-control"
             placeholder=" "
             formControlName="contrasena"
+            [ngClass]="{
+              'is-invalid': submitted && f['contrasena'].errors
+            }"
           />
           </div>
         </div>
-        <!-- <div class="d-flex justify-content-end m-2">
-          <span class="text-danger">La contraseña es requerida</span>
-          <span class="text-danger">Contraseña incorrecta</span>
-          <span class="text-danger">Las contraseñas no coinciden</span>
-        </div> -->
+
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Confirmar Contraseña</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">           
@@ -194,13 +191,13 @@
             class="form-control"
             placeholder=" "
             formControlName="validarcontrasena"
+            [ngClass]="{
+              'is-invalid': submitted && f['validarcontrasena'].errors
+            }"
           />
           </div>
         </div>
-        <!-- <div class="d-flex justify-content-end m-2">
-          <span class="text-danger">Las contraseñas no coinciden</span>
-          <span class="text-danger">La contraseña es requerida</span>
-        </div> -->
+
         <div class="alert alert-danger" *ngIf="error">
           {{error}}
         </div>

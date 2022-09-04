@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DepartamentoInDB } from '@interfaces/departamentos';
+import { RolResponse } from '@interfaces/roles';
 import { Usuario, UsuarioResponse } from '@interfaces/usuario';
+import { DepartamentoService } from '@services/departamentos/departamento.service';
 import { LoaderService } from '@services/interceptors/loader.service';
+import { RolService } from '@services/roles/rol.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { tiposId } from '@shared/data/tipos-id';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -19,17 +23,13 @@ export class EditarUsuarioComponent implements OnInit {
   public isLoading = this.loadingSvc.isLoading;
   public usuarioBase!: Usuario;
   private usuario : UsuarioResponse | undefined;
-
   public error:string = "";
 
   submitted:boolean = false;
 
-  roles = [
-    {
-      nombre: "PROFESOR", 
-      id: "8"
-    }
-  ]
+  public departamentos$: Observable<DepartamentoInDB[]>;
+  public roles$: Observable<RolResponse[]>;
+
 
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; 
 
@@ -41,8 +41,13 @@ export class EditarUsuarioComponent implements OnInit {
     private fb : FormBuilder,
     public activateRoute: ActivatedRoute,
     public usuarioService: UsuarioService,
-    public loadingSvc : LoaderService
+    public loadingSvc : LoaderService,
+    private departamentosSvc: DepartamentoService,
+    private rolesSvc: RolService
   ) {
+
+    this.departamentos$ = this.departamentosSvc.getDepartamentos();
+    this.roles$ = this.rolesSvc.getRoles();
     this.router.params.pipe(take(1)).subscribe(params => this.id = params['id']);
   
    }
@@ -55,7 +60,7 @@ export class EditarUsuarioComponent implements OnInit {
     departamentos_id : ['', Validators.required],
     contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    roles_id : [NaN, Validators.required]
+    roles_id : [0, Validators.required]
    });
 
   ngOnInit(): void {

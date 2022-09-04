@@ -53,7 +53,9 @@ export class RegistrarUsuariosComponent implements OnInit {
     this.roles$ = this.rolesSvc.getRoles();
 
     this.crearUsuarioForm = this.formBuilder.group({
-      correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
+      correo : ['', [Validators.required, 
+        //Validators.pattern(this.isCorreoValid)
+      ]],
       contrasena : ['', Validators.required],
       nombre : ['', Validators.required],
       apellido : ['', Validators.required],

@@ -24,15 +24,13 @@ export class EditarUsuarioComponent implements OnInit {
   public usuarioBase!: Usuario;
   private usuario : UsuarioResponse | undefined;
   public error:string = "";
-
-  submitted:boolean = false;
+  public submitted:boolean = false;
 
   public departamentos$: Observable<DepartamentoInDB[]>;
   public roles$: Observable<RolResponse[]>;
 
 
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; 
-
 
 
   constructor(
@@ -60,7 +58,7 @@ export class EditarUsuarioComponent implements OnInit {
     departamentos_id : ['', Validators.required],
     contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    roles_id : [0, Validators.required]
+    roles_id : [0,[Validators.required]]
    });
 
   ngOnInit(): void {
@@ -73,21 +71,21 @@ export class EditarUsuarioComponent implements OnInit {
         } 
       });
 
-    if (this.id == 'me'){
-      this.usuarioSvc.getUsuario().subscribe(
-        (data: UsuarioResponse) => {
-          this.usuario = data;
-          this.id = data.id
-          this.formUpdate.patchValue(this.usuario);
-        }
-      );
-    } else {
-    this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe(res => {
-      this.usuario = res;
-      this.formUpdate.patchValue(this.usuario);
-    }
-    );
-  }
+  //   if (this.id == 'me'){
+  //     this.usuarioSvc.getUsuario().subscribe(
+  //       (data: UsuarioResponse) => {
+  //         this.usuario = data;
+  //         this.id = data.id
+  //         this.formUpdate.patchValue(this.usuario);
+  //       }
+  //     );
+  //   } else {
+  //   this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe(res => {
+  //     this.usuario = res;
+  //     this.formUpdate.patchValue(this.usuario);
+  //   }
+  //   );
+  // }
 }
 
 get f() {

@@ -10,6 +10,41 @@
 //     margin-bottom: 10px;
 // }
 
+@media (max-width: 576px) {
+  .container {
+      width: 95%;
+  }
+}
+
+@media (min-width: 991px ) {
+  .card-plan {
+    height: 17em;
+  }
+
+  .card-plan-general {
+    height: 20em!important;
+    align-items: center;
+  }
+  .card-plan-seguimiento { 
+    height: 10.3em!important;
+  }
+}
+
+
+.need-validation {
+  text-align: -webkit-center;
+}
+
+ .formActividades {
+  justify-content: center;
+  align-items: baseline;
+ }
+
+.card-plan, .card-plan-general {
+  align-items: center;
+}
+
+
 *{
   box-sizing: border-box;
   font-size: small;

@@ -1,5 +1,6 @@
 .containerInside{
   width: 75%;
+  min-height: 10vh!important;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +11,7 @@
 
 @media screen and (max-width: 920px){
   .containerInside {
-    width: 95%!important;
+    width: 90%!important;
    
    }
   }

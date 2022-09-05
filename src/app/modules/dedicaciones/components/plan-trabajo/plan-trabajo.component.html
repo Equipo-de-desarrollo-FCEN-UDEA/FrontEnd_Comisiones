@@ -1,680 +1,1079 @@
-<div class="container card shadow bg-white rounded p-3">
-
-    <form novalidate [formGroup]="fPlanTrabajo" (ngSubmit)="onSubmit()" class="need-validation card">
-        <h6>
-            <span class="muted">
-                <i class="fa fa-info-circle" title="Información sobre cómo llenar estos campos del formu"></i>
-                Información del plan de trabajo general
-            </span>
-        </h6>
-
-        <div class="informacion-general row">
-            <div class="col-sm-6 col-md-6 col-lg-2">
-                <div class="formfloatig">
-                    <input id='floatingSemestre' type="text" formControlName='semestre' class="form-control"
-                        placeholder=" ">
-                    <label for="floatingSemestre" class="formLabel">Semestre</label>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-6 col-lg-2">
-                <div class="formfloatig">
-                    <input id='floatingRegistro' type="number" formControlName='registro' class="form-control"
-                        placeholder=" ">
-                    <label for="floatingRegistro" class="formLabel">Registro</label>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-12 col-lg-3">
-                <div class="formfloatig">
-                    <input id='floatingtipo_vinculacion' type="text" formControlName='tipo_vinculacion'
-                        class="form-control" placeholder=" ">
-                    <label for="floatingtipo_vinculacion" class="formLabel">Tipo Vinculación</label>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-2">
-                <div class="formfloatig">
-                    <input id='floatingescalafon' type="text" formControlName='escalafon' class="form-control"
-                        placeholder=" ">
-                    <label for="floatingescalafon" class="formLabel">Escalafón</label>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-3">
-                <div class="formfloatig">
-                    <input id='floatingtiempo_parcial' type="number" formControlName='tiempo_parcial'
-                        class="form-control" placeholder=" ">
-                    <label for="floatingtiempo_parcial" class="formLabel">Tiempo parcial Horas mes</label>
-                </div>
-            </div>
-
-        </div> <!-- /.informacion-general -->
-
-        <h6>
-            <span class="muted">
-                <i class="fa fa-info-circle"
-                    title="A continuación llene los siguientes campos para cada actividad de docencia, por cada actividad haga click sobre el botón +"></i>
-                Actividades de docencia
-            </span>
-        </h6>
-
-
-        <div style="width: 100%" formArrayName="actividades_docencia">
-
-            <div *ngFor="let actividad of actividadesDocenciaArr.controls; last as isLast; let i=index"
-                class="arrayLike formfloatig" [formGroupName]="i">
-
-                <div class="row">
-                    <div class="lineGroup  col-xs-12 col-md-6 col-lg-5 "
-                        style="margin-right: 0.5em; margin-bottom: 0.5em;" formGroupName="identificacion_actividad">
-                        <div class="row" style="margin-left: 0px">
-
-                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                <span>Identificación actividad</span>
-                                <hr style="margin: 0; margin-bottom: 3px;">
-                            </div>
-
-                            <div class="formfloatig col-sm-12 col-md-3 col-lg-3">
-                                <input id='floatingCodigo{{i}}' type="text" formControlName='codigo'
-                                    class="form-control" placeholder=" ">
-                                <label for="floatingCodigo{{i}}" class="formLabel">Código</label>
-                            </div>
-
-                            <div class="formfloatig col-sm-12 col-md-2 col-lg-2">
-                                <input id='floatingGrupo{{i}}' type="text" formControlName='grupo' class="form-control"
-                                    placeholder=" ">
-                                <label for="floatingGrupo{{i}}" class="formLabel">Grupo</label>
-                            </div>
-
-                            <div class="formfloatig col-sm-12 col-md-7 col-lg-7">
-                                <input id='floatingNombre{{i}}' type="text" formControlName='nombre'
-                                    class="form-control" placeholder=" ">
-                                <label for="floatingNombre{{i}}" class="formLabel">Nombre</label>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-sm-12 col-md-5 col-lg-2" style="margin-right: 0.5em; margin-bottom: 0.5em;">
-                        <div class="row" style="margin-left: 0px">
-                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                <span>Estudiantes</span>
-                                <hr style="margin: 0; margin-bottom: 3px;">
-                            </div>
-
-                            <div class="formfloatig col-sm-12 col-md-4 col-lg-5">
-                                <input id='floatingNumero_estudiantes{{i}}' type="number"
-                                    formControlName='numero_estudiantes' class="form-control" placeholder=" ">
-                                <label for="floatingNumero_estudiantes{{i}}" class="formLabel">Cantidad</label>
-                            </div>
-
-                            <div class="formfloatig col-sm-12 col-md-8 col-lg-7">
-                                <input id='floatingNivel{{i}}' type="text" formControlName='nivel' class="form-control"
-                                    placeholder=" ">
-                                <label for="floatingNivel{{i}}" class="formLabel">Nivel</label>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-
-                    <div class="lineGroup col-sm-12 col-md-4 col-lg-2" formGroupName="horas_semana"
-                        style="margin-right: 0.5em; margin-bottom: 0.5em;">
-                        <div class="row" style="margin-left: 0;">
-                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                <span>Horas semana</span>
-                                <hr style="margin: 0; margin-bottom: 3px;">
-                            </div>
-                            <div class="formfloatig col-sm-4">
-                                <input id='floatingT{{i}}' type="number" formControlName='T' class="form-control"
-                                    placeholder=" ">
-                                <label for="floatingT{{i}}" class="formLabel">T</label>
-
-                            </div>
-                            <div class="formfloatig col-sm-4">
-                                <input id='floatingTP{{i}}' type="number" formControlName='TP' class="form-control"
-                                    placeholder=" ">
-                                <label for="floatingTP{{i}}" class="formLabel">TP</label>
-                            </div>
-                            <div class="formfloatig col-sm-4">
-                                <input id='floatingP{{i}}' type="number" formControlName='P' class="form-control"
-                                    placeholder=" ">
-                                <label for="floatingP{{i}}" class="formLabel">P</label>
-
-                            </div>
-
-                        </div>
-
-
-
-
-                    </div>
-
-                    <div class="lineGroup col-sm-12 col-md-7 col-lg-2" formGroupName="total_horas"
-                        style="margin-right: 0.5em; margin-bottom: 0.5em;">
-                        <div class="row" style="margin-left:0;">
-                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                <span>Total horas</span>
-                                <hr style="margin: 0; margin-bottom: 3px;">
-                            </div>
-                            <div class="formfloatig col-sm-12 col-md-6 col-lg-6">
-                                <input id='floatingSemanal{{i}}' type="number"
-                                    [value]="fPlanTrabajo.controls.actividades_docencia.value[i].horas_semana"
-                                    formControlName='semanal' class="form-control" placeholder=" ">
-                                <label for="floatingSemanal{{i}}" class="formLabel">Semana</label>
-                            </div>
-                            <div class="formfloatig col-sm-12 col-md-6 col-lg-6">
-                                <input id='floatingSemestral{{i}}' type="number" formControlName='semestral'
-                                    class="form-control" placeholder=" ">
-                                <label for="floatingSemestral{{i}}" class="formLabel">Semestre</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="buttons col-sm-12 col-md-12 col-lg-1"
-                        style="margin-right: 0.5em; margin-bottom: 0.5em;">
-                        <button class="btn btn-add btn-sm" type="button" (click)="addActividadDocencia()"
-                            *ngIf="isLast">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                        <button class="btn btn-remove btn-sm" type="button"
-                            (click)="removeInput('actividades_docencia',i)" *ngIf="actividadesDocenciaArr.length > 1">
-                            <i class="fa fa-minus"></i>
-
-                        </button>
-
-                    </div>
-
-                    <hr *ngIf="actividadesDocenciaArr.length > 1 ">
-                </div>
-
-
-
-
-
-            </div>
-
-        </div> <!-- /.actividades_docencia -->
-
-        <div class="actividades-investigacion">
-
-            <h6>
-                <span class="muted">
-                    <i class="fa fa-info-circle"
-                        title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"></i>
-                    Actividades de investigación
-                </span>
-            </h6>
-            <div style="width: 100%" formArrayName="actividades_investigacion">
-                <div *ngFor="let actividad of actividadesInvestigacionArr.controls; last as isLast; let i=index"
-                    class="arrayLike formfloatig" [formGroupName]="i">
-                    <div class="row">
-
-                        <div class="col-xs-12 col-md-7 col-lg-5" style="margin-right: 0.5em; margin-bottom: 0.5em;">
-
-                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                <span>Identificación actividad</span>
-                                <hr style="margin: 0; margin-bottom: 3px;">
-                            </div>
-
-                            <div class="row" style="margin-left:0;">
-
-                                <div class="formfloatig col-xs-12 col-md-6 col-lg-2">
-                                    <input id='floatinginvesCodigo{{i}}' type="text" formControlName='codigo'
-                                        class="form-control" placeholder=" ">
-                                    <label for="floatinginvesCodigo{{i}}" class="formLabel">Código</label>
-                                </div>
-
-                                <div class="formfloatig col-xs-12 col-md-6 col-lg-10">
-                                    <input id='floatingidentificacion_proyecto{{i}}' type="text"
-                                        formControlName='identificacion_proyecto' class="form-control" placeholder=" ">
-                                    <label for="floatingidentificacion_proyecto{{i}}" class="formLabel">Identificación
-                                        del
-                                        proyecto</label>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-12 col-md-5 col-lg-5" style="margin-bottom: 0.5em; margin-right: 0.5em;">
-                            <div class="row" style="margin-left:0;">
-
-                                <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                    <span>Responsabilidades</span>
-                                    <hr style="margin: 0; margin-bottom: 3px;">
-                                </div>
-
-                                <div class="formfloatig col-sm-12 col-md-6 col-lg-4">
-                                    <input id='floatinginvesresponsabilidad{{i}}' type="text"
-                                        formControlName='responsabilidad' class="form-control" placeholder=" ">
-                                    <label for="floatinginvesresponsabilidad{{i}}"
-                                        class="formLabel">Responsabilidad</label>
-                                </div>
-
-
-                                <div class="formfloatig col-sm-12 col-md-6 col-lg-4">
-                                    <input id='floatingcosto_responsable{{i}}' type="text"
-                                        formControlName='costo_responsable' class="form-control" placeholder=" ">
-                                    <label for="floatingcosto_responsable{{i}}" class="formLabel">Costo</label>
-                                </div>
-
-                                <div class="formfloatig col-sm-12 col-md-12 col-lg-4">
-                                    <input id='floatingacta_respaldo{{i}}' type="text" formControlName='acta_respaldo'
-                                        class="form-control" placeholder=" ">
-                                    <label for="floatingacta_respaldo{{i}}" class="formLabel">Acta</label>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-12 col-md-2 col-lg-1" style="margin-right: 1em; margin-bottom: 0.5em;">
-                            <div class="row" style="margin-left: 0;">
-
-                                <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                    <span>Horas</span>
-                                    <hr style="margin: 0; margin-bottom: 3px;">
-                                </div>
-                                <div class="formfloatig col-12">
-                                    <input id='floatinginveshoras_semestre{{i}}' type="number"
-                                        formControlName='horas_semestre' class="form-control" placeholder=" ">
-                                    <label for="floatinginveshoras_semestre{{i}}" class="formLabel">
-                                        Semestre</label>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="buttons col-sm-12 col-md-12 col-lg-1"
-                            style="margin-right: 0.5em; margin-bottom: 0.5em;">
-                            <button class="btn btn-add btn-sm" type="button" (click)="addActividadInvestigacion()"
-                                *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                            <button class="btn btn-remove btn-sm" type="button"
-                                (click)="removeInput('actividades_investigacion',i)"
-                                *ngIf="actividadesInvestigacionArr.length > 1">
-                                <i class="fa fa-minus"></i>
-
-                            </button>
-
-                        </div>
-
-                        <hr *ngIf="actividadesInvestigacionArr.length > 1 ">
-                    </div>
-                </div>
-
-            </div>
-
-        </div> <!-- /.actividades-investigacion -->
-
-
-        <div class="actividades-extension">
-            <h6>
-                <span class="muted">
-                    <i class="fa fa-info-circle"
-                        title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"></i>
-                    Actividades de extensión
-                </span>
-            </h6>
-            <div style="width: 100%" formArrayName="actividades_extension">
-                <div *ngFor="let actividad of actividadesExtensionArr.controls; last as isLast; let i=index"
-                    class="arrayLike formfloatig" [formGroupName]="i">
-                    <div class="row">
-
-                        <div class="col-xs-12 col-md-12 col-lg-5" style="margin-bottom: 0.5em; margin-right: 0.5em;">
-                            <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                <span>identificación actividad</span>
-                                <hr style="margin: 0; margin-bottom: 3px;">
-                            </div>
-                            <div class="row" style="margin-left:0 ;">
-                                <div class="formfloatig col-xs-12 col-md-4 col-lg-2">
-                                    <input id='floatingextenCodigo{{i}}' type="text" formControlName='codigo'
-                                        class="form-control" placeholder=" ">
-                                    <label for="floatingextenCodigo{{i}}" class="formLabel">Código</label>
-                                </div>
-                                <div class="formfloatig col-xs-12 col-md-8 col-lg-10">
-                                    <input id='floatingidentificacion_actividad{{i}}' type="text"
-                                        formControlName='identificacion_actividad' class="form-control" placeholder=" ">
-                                    <label for="floatingidentificacion_actividad{{i}}" class="formLabel">Identificación
-                                        de
-                                        la
-                                        actividad</label>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-12 col-md-12 col-lg-4" style="margin-bottom: 0.5em; margin-right: 0.5em;">
-                            <div class="row" style="margin-left:0 ;">
-                                <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                    <span>Responsabilidades</span>
-                                    <hr style="margin: 0; margin-bottom: 3px;">
-                                </div>
-                                <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
-                                    <input id='floatingextenresponsabilidad{{i}}' type="text"
-                                        formControlName='responsabilidad' class="form-control" placeholder=" ">
-                                    <label for="floatingextenresponsabilidad{{i}}"
-                                        class="formLabel">Responsabilidad</label>
-                                </div>
-                                <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
-                                    <input id='floatingextencosto_responsable{{i}}' type="text"
-                                        formControlName='costo_responsable' class="form-control" placeholder=" ">
-                                    <label for="floatingextencosto_responsable{{i}}" class="formLabel">Costo</label>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-sm-12 col-md-7 col-lg-2" style="margin-bottom: 0.5em; margin-right: 1em;">
-                            <div class="row" style="margin-left:0 ;">
-                                <div class="col-12" style="text-align: center;" *ngIf="i==0">
-                                    <span>Horas</span>
-                                    <hr style="margin: 0; margin-bottom: 3px;">
-                                </div>
-                                <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
-                                    <input id='floatingextenhoras_semana{{i}}' type="number"
-                                        formControlName='horas_semana' class="form-control" placeholder=" ">
-                                    <label for="floatingextenhoras_semana{{i}}" class="formLabel">Semestre</label>
-                                </div>
-                                <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
-
-                                    <input id='floatinghoras_semestre{{i}}' type="number"
-                                        formControlName='horas_semestre' class="form-control" placeholder=" ">
-                                    <label for="floatinghoras_semestre{{i}}" class="formLabel">Semana</label>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="buttons col-1" style="margin-bottom: 0.5em; margin-right: 0.5em;">
-                            <button class="btn btn-add btn-sm" type="button" (click)="addActividadExtension()"
-                                *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                            
-                            <button class="btn btn-remove btn-sm" type="button"
-                                (click)="removeInput('actividades_extension',i)"
-                                *ngIf="actividadesExtensionArr.length > 1">
-                                <i class="fa fa-minus"></i>
-
-                            </button>
-                            
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div> <!-- /.actividades-extension -->
-
-        <div class="actividades-administracion">
-            <h6>
-                <span class="muted">
-                    <i class="fa fa-info-circle"
-                        title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"></i>
-                    Administración académica
-                </span>
-            </h6>
-            <div style="width: 100%" formArrayName="administracion_academica">
-                <div *ngFor="let actividad of actividadesAdministracionAcademicaArr.controls; last as isLast; let i=index"
-                    class="arrayLike formfloatig" [formGroupName]="i">
-                    <div class="row" style="width:100%;">
-
-                        <div class="col-sm-12 col-md-8 col-lg-4">
-                            <div class="formfloatig">
-                                <input id='floatingcargo{{i}}' type="text" formControlName='cargo' class="form-control"
-                                    placeholder=" ">
-                                <label for="floatingcargo{{i}}" class="formLabel">Cargo</label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4 col-lg-2">
-                            <div class="formfloatig">
-                                <input id='floatingadminhoras_semestre{{i}}' type="number"
-                                    formControlName='horas_semestre' class="form-control" placeholder=" ">
-                                <label for="floatingadminhoras_semestre{{i}}" class="formLabel">Horas semestre</label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-8 col-lg-3">
-                            <div class="formfloatig">
-                                <input id='floatingotras_actividades{{i}}' type="text"
-                                    formControlName='otras_actividades' class="form-control" placeholder=" ">
-                                <label for="floatingotras_actividades{{i}}" class="formLabel">Otras actividades</label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4 col-lg-2">
-                            <div class="formfloatig">
-                                <input id='floatingotras_horas_semestre{{i}}' type="number"
-                                    formControlName='otras_horas_semestre' class="form-control" placeholder=" ">
-                                <label for="floatingotras_horas_semestre{{i}}" class="formLabel">Horas semestre</label>
-                            </div>
-                        </div>
-
-                        <div class="buttons col-1">
-
-                            <button class="btn btn-add btn-sm" type="button"
-                                (click)="addActividadAdministracionAcademica()" *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                            <button class="btn btn-remove btn-sm" type="button"
-                                (click)="removeInput('administracion_academica',i)"
-                                *ngIf="actividadesAdministracionAcademicaArr.length > 1">
-                                <i class="fa fa-minus"></i>
-
-                            </button>
-                            
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div> <!-- /.actividades-administracion -->
-
-        <div class="otras-actividades">
-
-            <h6>
-                <span class="muted">
-                    <i class="fa fa-info-circle"
-                        title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"></i>
-                    Otras actividades
-                </span>
-            </h6>
-            <div style="width: 100%" formArrayName="otras_actividades">
-                <div *ngFor="let actividad of actividadesOtrasActividadesArr.controls; last as isLast; let i=index"
-                    class="arrayLike formfloatig" [formGroupName]="i">
-                    <div class="row" style="width:100%;">
-
-                        <div class="col-sm-8 col-md-10 col-lg-9">
-                            <div class="formfloatig">
-                                <input id='floatingotrasidentidicacion_actividad{{i}}' type="text"
-                                    formControlName='identificacion_actividad' class="form-control" placeholder=" ">
-                                <label for="floatingotrasidentidicacion_actividad{{i}}" class="formLabel">Identificación
-                                    de la actividad</label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4 col-md-2 col-lg-2">
-                            <div class="formfloatig">
-                                <input id='floatingotrashoras_semestre{{i}}' type="number"
-                                    formControlName='horas_semestre' class="form-control" placeholder=" ">
-                                <label for="floatingotashoras_semestre{{i}}" class="formLabel">Horas semestre</label>
-                            </div>
-                        </div>
-
-                        <div class="buttons col-1">
-
-                            <button class="btn btn-add btn-sm" type="button" (click)="addActividadOtrasActividades()"
-                                *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                            <button class="btn btn-remove btn-sm" type="button"
-                                (click)="removeInput('otras_actividades',i)"
-                                *ngIf="actividadesOtrasActividadesArr.length > 1">
-                                <i class="fa fa-minus"></i>
-
-                            </button>
-                            
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div> <!-- /.otras-actividades -->
-
-        <div class="seguimiento-actividades">
-
-
-            <h6>
-                <span class="muted">
-                    <i class="fa fa-info-circle"
-                        title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"></i>
-                    Seguimiento actividades
-                </span>
-            </h6>
-            <div style="width: 100%" formArrayName="seguimiento_actividades">
-                <div *ngFor="let actividad of seguimientoActividadesArr.controls; last as isLast; let i=index"
-                    class="arrayLike formfloatig" [formGroupName]="i">
-                    <div class="row" style="width:100%;">
-
-                        <div class="col-sm-12 col-md-8 col-lg-4">
-                            <div class="formfloatig">
-                                <input id='floatingseguimientoidentidicacion_actividad{{i}}' type="text"
-                                    formControlName='identificacion_actividad' class="form-control" placeholder=" ">
-                                <label for="floatingseguimientoidentidicacion_actividad{{i}}"
-                                    class="formLabel">Identificación
-                                    de la actividad</label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-2">
-                            <div class="formfloatig">
-                                <input id='floatingseguimientofecha_1{{i}}' type="date" formControlName='fecha_1'
-                                    class="form-control" placeholder=" ">
-                                <label for="floatingseguimientofecha_1{{i}}" class="formLabel">Fecha 1</label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-4 col-lg-2">
-                            <div class="formfloatig">
-                                <input id='floatingseguimeintofecha_2{{i}}' type="date" formControlName='fecha_1'
-                                    class="form-control" placeholder=" ">
-                                <label for="floatingseguimeintofecha_2{{i}}" class="formLabel">Fecha 2</label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-8 col-lg-3">
-                            <div class="formfloatig">
-                                <input id='floatingseguimeintoOtros{{i}}' type="text" formControlName='otros'
-                                    class="form-control" placeholder=" ">
-                                <label for="floatingseguimeintoOtros{{i}}" class="formLabel">Otros</label>
-                            </div>
-                        </div>
-
-
-
-                        <div class="buttons col-1">
-                            <button class="btn btn-add btn-sm" type="button" (click)="addSeguimientoActividades()"
-                                *ngIf="isLast">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                            <button class="btn btn-remove btn-sm" type="button"
-                                (click)="removeInput('seguimiento_actividades',i)"
-                                *ngIf="seguimientoActividadesArr.length > 1">
-                                <i class="fa fa-minus"></i>
-
-                            </button>
-                            
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div> <!-- /.seguimiento-actividades -->
-
-        <div class="jornada-trabajo">
-            <h6>
-                <span class="muted">
-                    <i class="fa fa-info-circle"
-                        title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"></i>
-                    Jornada de trabajo
-                </span>
-            </h6>
-            <div class="row" style="width: 100%" formArrayName="jornada_trabajo">
-                <div *ngFor="let actividad of jornadaTrabajoArr.controls; last as isLast; let i=index"
-                    class="col-lg-4 arrayLike formfloatig" [formGroupName]="i">
-                    <div class="row" style="width:100%; margin: auto; min-width:320px">
-                        <div class="col-lg-4">
-                            <span>
-                                <i class="fa fa-clock"></i>
-                                {{semana[i]}}
-                            </span>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="formfloatig" style="padding-right: 0;">
-                                <input atp-time-picker id='floatingjornadatrabajomañana{{i}}' type="time"
-                                    formControlName='mañana' class="form-control" placeholder=" ">
-                                <label for="floatingjornadatrabajomañana{{i}}" class="formLabel">Mañana</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="formfloatig">
-                                <input atp-time-picker id='floatingjornadatrabajotarde{{i}}' type="time"
-                                    formControlName='tarde' class="form-control" placeholder=" ">
-                                <label for="floatingjornadatrabajotarde{{i}}" class="formLabel">Tarde</label>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.jornada-trabajo -->
-
-        <div class="observaciones_generales">
-
-            <h6>
-                <span class="muted">
-                    <i class="fa fa-info-circle"
-                        title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"></i>
-                    Observaciones generales
-                </span>
-            </h6>
-
-            <div class="formfloatig">
-                <textarea id='floatingobservacionesgenerales' formControlName='observaciones_generales'
-                    class="form-control" placeholder=" " rows="3"></textarea>
-                <label for="floatingobservacionesgenerales" class="formLabel">Observaciones</label>
-            </div>
-
+<div class="">
+  <form
+    novalidate
+    [formGroup]="fPlanTrabajo"
+    (ngSubmit)="onSubmit()"
+    class="need-validation" 
+  >
+
+  <!-- Información del plan de trabajo general -->
+  <div class="row justify-content-center">
+    <div class="card card-plan-general col-lg-5 col-ms-6 col-xs-12 shadow p-2 m-2 h-25">
+      <h6>
+        <span class="muted">
+          <i
+            class="fa fa-info-circle"
+            title="Información sobre cómo llenar estos campos del formu"
+          ></i>
+          Información del plan de trabajo general
+        </span>
+      </h6>
+  
+    <div class="informacion-general row">
+      <div class="col-sm-12 col-md-12 col-lg-6 mt-3">
+        <div class="formfloatig">
+          <input
+            id="floatingSemestre"
+            type="text"
+            formControlName="semestre"
+            class="form-control"
+            placeholder=" "
+          />
+          <label for="floatingSemestre" class="formLabel">Semestre</label>
         </div>
+      </div>
+  
+      <div class="col-sm-12 col-md-12 col-lg-6 mt-3">
+        <div class="formfloatig">
+          <input
+            id="floatingRegistro"
+            type="number"
+            formControlName="registro"
+            class="form-control"
+            placeholder=" "
+          />
+          <label for="floatingRegistro" class="formLabel">Registro</label>
+        </div>
+      </div>
+  
+      <div class="col-sm-12 col-md-12 col-lg-6 mt-3">
+        <div class="formfloatig">
+          <input
+            id="floatingtipo_vinculacion"
+            type="text"
+            formControlName="tipo_vinculacion"
+            class="form-control"
+            placeholder=" "
+          />
+          <label for="floatingtipo_vinculacion" class="formLabel"
+            >Tipo Vinculación</label
+          >
+        </div>
+      </div>
+  
+      <div class="col-sm-12 col-md-12 col-lg-6 mt-3">
+        <div class="formfloatig">
+          <input
+            id="floatingescalafon"
+            type="text"
+            formControlName="escalafon"
+            class="form-control"
+            placeholder=" "
+          />
+          <label for="floatingescalafon" class="formLabel">Escalafón</label>
+        </div>
+      </div>
+  
+      <div class="col-sm-12 col-md-12 col-lg-12 mt-3">
+        <div class="formfloatig">
+          <input
+            id="floatingtiempo_parcial"
+            type="number"
+            formControlName="tiempo_parcial"
+            class="form-control"
+            placeholder=" "
+          />
+          <label for="floatingtiempo_parcial" class="formLabel"
+            >Tiempo parcial Horas mes</label
+          >
+        </div>
+      </div>
+    </div>
+    </div>
+  
+  
+  
+      <!-- /.actividades_docencia -->
+  
+      <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+        <h6>
+          <span class="muted">
+            <i
+              class="fa fa-info-circle"
+              title="A continuación llene los siguientes campos para cada actividad de docencia, por cada actividad haga click sobre el botón +"
+            ></i>
+            Actividades de docencia
+          </span>
+        </h6>
+    
+        <div style="width: 100%" formArrayName="actividades_docencia">
+          <div
+            *ngFor="
+              let actividad of actividadesDocenciaArr.controls;
+              last as isLast;
+              let i = index
+            "
+            class="arrayLike formfloatig justify-content-center"
+            [formGroupName]="i"
+          >
+            <div class="row formActividades">
+              <div
+                class="lineGroup col-xs-12 col-md-12 col-lg-6"
+                style="margin-right: 0.5em; margin-bottom: 0.5em"
+                formGroupName="identificacion_actividad"
+              >
+                <div class="row" style="margin-left: 0px">
+                  <div class="col-12" style="text-align: center" *ngIf="i == 0">
+                    <span>Identificación actividad</span>
+                    <hr style="margin: 0; margin-bottom: 3px" />
+                  </div>
+    
+                  <div class="formfloatig col-sm-12 col-md-12 col-lg-6">
+                    <input
+                      id="floatingCodigo{{ i }}"
+                      type="text"
+                      formControlName="codigo"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingCodigo{{ i }}" class="formLabel"
+                      >Código</label
+                    >
+                  </div>
+    
+                  <div class="formfloatig col-sm-12 col-md-12 col-lg-6">
+                    <input
+                      id="floatingGrupo{{ i }}"
+                      type="text"
+                      formControlName="grupo"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingGrupo{{ i }}" class="formLabel"
+                      >Grupo</label
+                    >
+                  </div>
+    
+                  <div class="formfloatig col-sm-12 col-md-12 col-lg-12">
+                    <input
+                      id="floatingNombre{{ i }}"
+                      type="text"
+                      formControlName="nombre"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingNombre{{ i }}" class="formLabel"
+                      >Nombre</label
+                    >
+                  </div>
+                </div>
+              </div>
+  
+              <div
+                class="col-sm-12 col-md-12 col-lg-5"
+                style="margin-right: 0.5em; margin-bottom: 0.5em"
+              >
+                <div class="row" style="margin-left: 0px">
+                  <div class="col-12" style="text-align: center" *ngIf="i == 0">
+                    <span>Estudiantes</span>
+                    <hr style="margin: 0; margin-bottom: 3px" />
+                  </div>
+    
+                  <div class="formfloatig col-sm-12 col-md-12 col-lg-6">
+                    <input
+                      id="floatingNumero_estudiantes{{ i }}"
+                      type="number"
+                      formControlName="numero_estudiantes"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingNumero_estudiantes{{ i }}" class="formLabel"
+                      >Cantidad</label
+                    >
+                  </div>
+    
+                  <div class="formfloatig col-sm-12 col-md-12 col-lg-6">
+                    <input
+                      id="floatingNivel{{ i }}"
+                      type="text"
+                      formControlName="nivel"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingNivel{{ i }}" class="formLabel"
+                      >Nivel</label
+                    >
+                  </div>
+                </div>
+              </div>
+    
+              <div
+                class="lineGroup col-sm-12 col-md-12 col-lg-6"
+                formGroupName="horas_semana"
+                style="margin-right: 0.5em; margin-bottom: 0.5em"
+              >
+                <div class="row" style="margin-left: 0">
+                  <div class="col-12" style="text-align: center" *ngIf="i == 0">
+                    <span>Horas semana</span>
+                    <hr style="margin: 0; margin-bottom: 3px" />
+                  </div>
+                  <div class="formfloatig col-sm-4">
+                    <input
+                      id="floatingT{{ i }}"
+                      type="number"
+                      formControlName="T"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingT{{ i }}" class="formLabel">T</label>
+                  </div>
+                  <div class="formfloatig col-sm-4">
+                    <input
+                      id="floatingTP{{ i }}"
+                      type="number"
+                      formControlName="TP"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingTP{{ i }}" class="formLabel">TP</label>
+                  </div>
+                  <div class="formfloatig col-sm-4">
+                    <input
+                      id="floatingP{{ i }}"
+                      type="number"
+                      formControlName="P"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingP{{ i }}" class="formLabel">P</label>
+                  </div>
+                </div>
+              </div>
+    
+              <div
+                class="lineGroup col-sm-12 col-md-12 col-lg-5"
+                formGroupName="total_horas"
+                style="margin-right: 0.5em; margin-bottom: 0.5em"
+              >
+                <div class="row" style="margin-left: 0">
+                  <div class="col-12" style="text-align: center" *ngIf="i == 0">
+                    <span>Total horas</span>
+                    <hr style="margin: 0; margin-bottom: 3px" />
+                  </div>
+                  <div class="formfloatig col-sm-12 col-md-6 col-lg-6">
+                    <input
+                      id="floatingSemanal{{ i }}"
+                      type="number"
+                      [value]="
+                        fPlanTrabajo.controls.actividades_docencia.value[i]
+                          .horas_semana
+                      "
+                      formControlName="semanal"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingSemanal{{ i }}" class="formLabel"
+                      >Semana</label
+                    >
+                  </div>
+                  <div class="formfloatig col-sm-12 col-md-6 col-lg-6">
+                    <input
+                      id="floatingSemestral{{ i }}"
+                      type="number"
+                      formControlName="semestral"
+                      class="form-control"
+                      placeholder=" "
+                    />
+                    <label for="floatingSemestral{{ i }}" class="formLabel"
+                      >Semestre</label
+                    >
+                  </div>
+                </div>
+              </div>
+    
+              <div
+                class="buttons col-sm-12 col-md-12 col-lg-2 ms-4"
+                style="margin-right: 0.5em; margin-bottom: 0.5em"
+              >
+                <button
+                  class="btn btn-add btn-sm"
+                  type="button"
+                  (click)="addActividadDocencia()"
+                  *ngIf="isLast"
+                >
+                  <i class="fa fa-plus"></i>
+                </button>
+                <button
+                  class="btn btn-remove btn-sm"
+                  type="button"
+                  (click)="removeInput('actividades_docencia', i)"
+                  *ngIf="actividadesDocenciaArr.length > 1"
+                >
+                  <i class="fa fa-minus"></i>
+                </button>
+              </div>
+    
+              <hr *ngIf="actividadesDocenciaArr.length > 1" />
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    
+  </div>
+
+  <div class="row justify-content-center">
+   <!-- /.actividades-investigacion -->
+
+
+   <div class="card card-plan col-lg-5 col-ms-6 col-xs-12 shadow h-25 p-2 m-2">
+    <h6>
+      <span class="muted">
+        <i
+          class="fa fa-info-circle"
+          title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+        ></i>
+        Actividades de investigación
+      </span>
+    </h6>
+    <div style="width: 100%" formArrayName="actividades_investigacion">
+      <div
+        *ngFor="
+          let actividad of actividadesInvestigacionArr.controls;
+          last as isLast;
+          let i = index
+        "
+        class="arrayLike formfloatig justify-content-center"
+        [formGroupName]="i"
+      >
+        <div class="row formActividades">
+          <div
+            class="col-xs-12 col-md-12 col-lg-12"
+            style="margin-right: 0.5em; margin-bottom: 0.5em"
+          >
+            <div class="col-12" style="text-align: center" *ngIf="i == 0">
+              <span>Identificación actividad</span>
+              <hr style="margin: 0; margin-bottom: 3px" />
+            </div>
+
+            <div class="row" style="margin-left: 0">
+              <div class="formfloatig col-xs-12 col-md-6 col-lg-2">
+                <input
+                  id="floatinginvesCodigo{{ i }}"
+                  type="text"
+                  formControlName="codigo"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="floatinginvesCodigo{{ i }}" class="formLabel"
+                  >Código</label
+                >
+              </div>
+
+              <div class="formfloatig col-xs-12 col-md-6 col-lg-10">
+                <input
+                  id="floatingidentificacion_proyecto{{ i }}"
+                  type="text"
+                  formControlName="identificacion_proyecto"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingidentificacion_proyecto{{ i }}"
+                  class="formLabel"
+                  >Identificación del proyecto</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-sm-12 col-md-12 col-lg-12"
+            style="margin-bottom: 0.5em; margin-right: 0.5em"
+          >
+            <div class="row" style="margin-left: 0">
+              <div class="col-12" style="text-align: center" *ngIf="i == 0">
+                <span>Responsabilidades</span>
+                <hr style="margin: 0; margin-bottom: 3px" />
+              </div>
+
+              <div class="formfloatig col-sm-12 col-md-6 col-lg-4">
+                <input
+                  id="floatinginvesresponsabilidad{{ i }}"
+                  type="text"
+                  formControlName="responsabilidad"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatinginvesresponsabilidad{{ i }}"
+                  class="formLabel"
+                  >Responsabilidad</label
+                >
+              </div>
+
+              <div class="formfloatig col-sm-12 col-md-6 col-lg-4">
+                <input
+                  id="floatingcosto_responsable{{ i }}"
+                  type="text"
+                  formControlName="costo_responsable"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingcosto_responsable{{ i }}"
+                  class="formLabel"
+                  >Costo</label
+                >
+              </div>
+
+              <div class="formfloatig col-sm-12 col-md-12 col-lg-4">
+                <input
+                  id="floatingacta_respaldo{{ i }}"
+                  type="text"
+                  formControlName="acta_respaldo"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="floatingacta_respaldo{{ i }}" class="formLabel"
+                  >Acta</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-sm-12 col-md-12 col-lg-12"
+            style="margin-right: 1em; margin-bottom: 0.5em"
+          >
+            <div class="row" style="margin-left: 0">
+              <div class="col-12" style="text-align: center" *ngIf="i == 0">
+                <span>Horas</span>
+                <hr style="margin: 0; margin-bottom: 3px" />
+              </div>
+              <div class="formfloatig col-12">
+                <input
+                  id="floatinginveshoras_semestre{{ i }}"
+                  type="number"
+                  formControlName="horas_semestre"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatinginveshoras_semestre{{ i }}"
+                  class="formLabel"
+                >
+                  Semestre</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="buttons col-sm-12 col-md-12 col-lg-1"
+            style="margin-right: 0.5em; margin-bottom: 0.5em"
+          >
+            <button
+              class="btn btn-add btn-sm"
+              type="button"
+              (click)="addActividadInvestigacion()"
+              *ngIf="isLast"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+            <button
+              class="btn btn-remove btn-sm"
+              type="button"
+              (click)="removeInput('actividades_investigacion', i)"
+              *ngIf="actividadesInvestigacionArr.length > 1"
+            >
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+
+          <hr *ngIf="actividadesInvestigacionArr.length > 1" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- /.actividades-extension -->
+
+  <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+    <h6>
+      <span class="muted">
+        <i
+          class="fa fa-info-circle"
+          title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+        ></i>
+        Actividades de extensión
+      </span>
+    </h6>
+    <div style="width: 100%" formArrayName="actividades_extension">
+      <div
+        *ngFor="
+          let actividad of actividadesExtensionArr.controls;
+          last as isLast;
+          let i = index
+        "
+        class="arrayLike formfloatig justify-content-center"
+        [formGroupName]="i"
+      >
+        <div class="row formActividades">
+          <div
+            class="col-xs-12 col-md-12 col-lg-12 "
+            style="margin-bottom: 0.5em; margin-right: 0.5em"
+          >
+            <div class="col-12" style="text-align: center" *ngIf="i == 0">
+              <span>identificación actividad</span>
+              <hr style="margin: 0; margin-bottom: 3px" />
+            </div>
+            <div class="row" style="margin-left: 0">
+              <div class="formfloatig col-xs-12 col-md-4 col-lg-2">
+                <input
+                  id="floatingextenCodigo{{ i }}"
+                  type="text"
+                  formControlName="codigo"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="floatingextenCodigo{{ i }}" class="formLabel"
+                  >Código</label
+                >
+              </div>
+              <div class="formfloatig col-xs-12 col-md-8 col-lg-10">
+                <input
+                  id="floatingidentificacion_actividad{{ i }}"
+                  type="text"
+                  formControlName="identificacion_actividad"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingidentificacion_actividad{{ i }}"
+                  class="formLabel"
+                  >Identificación de la actividad</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-sm-12 col-md-12 col-lg-12 col-12"
+            style="margin-bottom: 0.5em; margin-right: 0.5em"
+          >
+            <div class="row" style="margin-left: 0">
+              <div class="col-12" style="text-align: center" *ngIf="i == 0">
+                <span>Responsabilidades</span>
+                <hr style="margin: 0; margin-bottom: 3px" />
+              </div>
+              <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
+                <input
+                  id="floatingextenresponsabilidad{{ i }}"
+                  type="text"
+                  formControlName="responsabilidad"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingextenresponsabilidad{{ i }}"
+                  class="formLabel"
+                  >Responsabilidad</label
+                >
+              </div>
+              <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
+                <input
+                  id="floatingextencosto_responsable{{ i }}"
+                  type="text"
+                  formControlName="costo_responsable"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingextencosto_responsable{{ i }}"
+                  class="formLabel"
+                  >Costo</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-sm-12 col-md-12 col-lg-12"
+            style="margin-bottom: 0.5em; margin-right: 1em"
+          >
+            <div class="row" style="margin-left: 0">
+              <div class="col-12" style="text-align: center" *ngIf="i == 0">
+                <span>Horas</span>
+                <hr style="margin: 0; margin-bottom: 3px" />
+              </div>
+              <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
+                <input
+                  id="floatingextenhoras_semana{{ i }}"
+                  type="number"
+                  formControlName="horas_semana"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingextenhoras_semana{{ i }}"
+                  class="formLabel"
+                  >Semestre</label
+                >
+              </div>
+              <div class="formfloatig col-xs-12 col-md-12 col-lg-6">
+                <input
+                  id="floatinghoras_semestre{{ i }}"
+                  type="number"
+                  formControlName="horas_semestre"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="floatinghoras_semestre{{ i }}" class="formLabel"
+                  >Semana</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="buttons col-sm-12 col-md-12 col-lg-2 ms-4"
+            style="margin-bottom: 0.5em; margin-right: 0.5em"
+          >
+            <button
+              class="btn btn-add btn-sm"
+              type="button"
+              (click)="addActividadExtension()"
+              *ngIf="isLast"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+
+            <button
+              class="btn btn-remove btn-sm"
+              type="button"
+              (click)="removeInput('actividades_extension', i)"
+              *ngIf="actividadesExtensionArr.length > 1"
+            >
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="row justify-content-center">
+  <!-- /.actividades-administracion -->
+
+  <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+    <h6>
+      <span class="muted">
+        <i
+          class="fa fa-info-circle"
+          title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+        ></i>
+        Administración académica
+      </span>
+    </h6>
+    <div style="width: 100%" formArrayName="administracion_academica">
+      <div
+        *ngFor="
+          let actividad of actividadesAdministracionAcademicaArr.controls;
+          last as isLast;
+          let i = index
+        "
+        class="arrayLike formfloatig justify-content-center"
+        [formGroupName]="i"
+      >
+        <div class="row formActividades" style="width: 100%">
+          <div class="col-sm-12 col-md-8 col-lg-3">
+            <div class="formfloatig">
+              <input
+                id="floatingcargo{{ i }}"
+                type="text"
+                formControlName="cargo"
+                class="form-control"
+                placeholder=" "
+              />
+              <label for="floatingcargo{{ i }}" class="formLabel"
+                >Cargo</label
+              >
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-2">
+            <div class="formfloatig">
+              <input
+                id="floatingadminhoras_semestre{{ i }}"
+                type="number"
+                formControlName="horas_semestre"
+                class="form-control"
+                placeholder=" "
+              />
+              <label
+                for="floatingadminhoras_semestre{{ i }}"
+                class="formLabel"
+                >Horas semestre</label
+              >
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-8 col-lg-3">
+            <div class="formfloatig">
+              <input
+                id="floatingotras_actividades{{ i }}"
+                type="text"
+                formControlName="otras_actividades"
+                class="form-control"
+                placeholder=" "
+              />
+              <label for="floatingotras_actividades{{ i }}" class="formLabel"
+                >Otras actividades</label
+              >
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="formfloatig">
+              <input
+                id="floatingotras_horas_semestre{{ i }}"
+                type="number"
+                formControlName="otras_horas_semestre"
+                class="form-control"
+                placeholder=" "
+              />
+              <label
+                for="floatingotras_horas_semestre{{ i }}"
+                class="formLabel"
+                >Horas semestre</label
+              >
+            </div>
+          </div>
+
+          <div class="buttons col-sm-12 col-md-12 col-lg-2 ">
+            <button
+              class="btn btn-add btn-sm"
+              type="button"
+              (click)="addActividadAdministracionAcademica()"
+              *ngIf="isLast"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+            <button
+              class="btn btn-remove btn-sm"
+              type="button"
+              (click)="removeInput('administracion_academica', i)"
+              *ngIf="actividadesAdministracionAcademicaArr.length > 1"
+            >
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- /.otras-actividades -->
+
+  <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+    <h6>
+      <span class="muted">
+        <i
+          class="fa fa-info-circle"
+          title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+        ></i>
+        Otras actividades
+      </span>
+    </h6>
+    <div style="width: 100%" formArrayName="otras_actividades">
+      <div
+        *ngFor="
+          let actividad of actividadesOtrasActividadesArr.controls;
+          last as isLast;
+          let i = index
+        "
+        class="arrayLike formfloatig justify-content-center"
+        [formGroupName]="i"
+      >
+        <div class="row formActividades" style="width: 100%">
+          <div class="col-sm-8 col-md-10 col-lg-7">
+            <div class="formfloatig">
+              <input
+                id="floatingotrasidentidicacion_actividad{{ i }}"
+                type="text"
+                formControlName="identificacion_actividad"
+                class="form-control"
+                placeholder=" "
+              />
+              <label
+                for="floatingotrasidentidicacion_actividad{{ i }}"
+                class="formLabel"
+                >Identificación de la actividad</label
+              >
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-md-2 col-lg-4">
+            <div class="formfloatig">
+              <input
+                id="floatingotrashoras_semestre{{ i }}"
+                type="number"
+                formControlName="horas_semestre"
+                class="form-control"
+                placeholder=" "
+              />
+              <label for="floatingotashoras_semestre{{ i }}" class="formLabel"
+                >Horas semestre</label
+              >
+            </div>
+          </div>
+
+          <div class="buttons col-lg-12">
+            <button
+              class="btn btn-add btn-sm"
+              type="button"
+              (click)="addActividadOtrasActividades()"
+              *ngIf="isLast"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+            <button
+              class="btn btn-remove btn-sm"
+              type="button"
+              (click)="removeInput('otras_actividades', i)"
+              *ngIf="actividadesOtrasActividadesArr.length > 1"
+            >
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
 
 
 
-        <button class="btn btn-success" id="Enviar" (submit)="true">
-            <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
-                aria-hidden="true"></span>
-            Enviar
-        </button>
+  <!-- /.seguimiento-actividades -->
 
-    </form>
+  <div class="row justify-content-center">
+    <div class="card card-plan card-plan-seguimiento col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+      <h6>
+        <span class="muted">
+          <i
+            class="fa fa-info-circle"
+            title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+          ></i>
+          Seguimiento actividades
+        </span>
+      </h6>
+      <div style="width: 100%" formArrayName="seguimiento_actividades">
+        <div
+          *ngFor="
+            let actividad of seguimientoActividadesArr.controls;
+            last as isLast;
+            let i = index
+          "
+          class="arrayLike formfloatig justify-content-center"
+          [formGroupName]="i"
+        >
+          <div class="row formActividades" style="width: 100%">
+            <div class="col-sm-12 col-md-8 col-lg-4">
+              <div class="formfloatig">
+                <input
+                  id="floatingseguimientoidentidicacion_actividad{{ i }}"
+                  type="text"
+                  formControlName="identificacion_actividad"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingseguimientoidentidicacion_actividad{{ i }}"
+                  class="formLabel"
+                  >Identificación de la actividad</label
+                >
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <div class="formfloatig">
+                <input
+                  id="floatingseguimientofecha_1{{ i }}"
+                  type="date"
+                  formControlName="fecha_1"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="floatingseguimientofecha_1{{ i }}" class="formLabel"
+                  >Fecha 1</label
+                >
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <div class="formfloatig">
+                <input
+                  id="floatingseguimeintofecha_2{{ i }}"
+                  type="date"
+                  formControlName="fecha_1"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="floatingseguimeintofecha_2{{ i }}" class="formLabel"
+                  >Fecha 2</label
+                >
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-8 col-lg-3">
+              <div class="formfloatig">
+                <input
+                  id="floatingseguimeintoOtros{{ i }}"
+                  type="text"
+                  formControlName="otros"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label for="floatingseguimeintoOtros{{ i }}" class="formLabel"
+                  >Otros</label
+                >
+              </div>
+            </div>
+
+            <div class="buttons col-1">
+              <button
+                class="btn btn-add btn-sm"
+                type="button"
+                (click)="addSeguimientoActividades()"
+                *ngIf="isLast"
+              >
+                <i class="fa fa-plus"></i>
+              </button>
+              <button
+                class="btn btn-remove btn-sm"
+                type="button"
+                (click)="removeInput('seguimiento_actividades', i)"
+                *ngIf="seguimientoActividadesArr.length > 1"
+              >
+                <i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- /.jornada-trabajo -->
+
+    <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+      <h6>
+        <span class="muted">
+          <i
+            class="fa fa-info-circle"
+            title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+          ></i>
+          Observaciones generales
+        </span>
+      </h6>
+
+      <div class="formfloatig">
+        <textarea
+          id="floatingobservacionesgenerales"
+          formControlName="observaciones_generales"
+          class="form-control"
+          placeholder=" "
+          rows="3"
+        ></textarea>
+        <label for="floatingobservacionesgenerales" class="formLabel"
+          >Observaciones</label
+        >
+      </div>
+    </div>
+  </div>
 
 
+    <!-- Jornada de trabajo -->
+
+
+    <div class="card card-plan col-lg-12 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+      <h6>
+        <span class="muted">
+          <i
+            class="fa fa-info-circle"
+            title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+          ></i>
+          Jornada de trabajo
+        </span>
+      </h6>
+      <div class="row" style="width: 100%" formArrayName="jornada_trabajo">
+        <div
+          *ngFor="
+            let actividad of jornadaTrabajoArr.controls;
+            last as isLast;
+            let i = index
+          "
+          class="col-lg-4 arrayLike formfloatig justify-content-center"
+          [formGroupName]="i"
+        >
+          <div class="row formActividades" style="width: 100%; margin: auto; min-width: 320px">
+            <div class="col-lg-4">
+              <span>
+                <i class="fa fa-clock"></i>
+                {{ semana[i] }}
+              </span>
+            </div>
+            <div class="col-lg-4">
+              <div class="formfloatig" style="padding-right: 0">
+                <input
+                  atp-time-picker
+                  id="floatingjornadatrabajomañana{{ i }}"
+                  type="time"
+                  formControlName="mañana"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingjornadatrabajomañana{{ i }}"
+                  class="formLabel"
+                  >Mañana</label
+                >
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="formfloatig">
+                <input
+                  atp-time-picker
+                  id="floatingjornadatrabajotarde{{ i }}"
+                  type="time"
+                  formControlName="tarde"
+                  class="form-control"
+                  placeholder=" "
+                />
+                <label
+                  for="floatingjornadatrabajotarde{{ i }}"
+                  class="formLabel"
+                  >Tarde</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <button class="btn btn-success col-lg-7 btn-add col-md-12 col-xs-12 col-12" id="Enviar" (submit)="(true)">
+      <span
+        *ngIf="isLoading | async"
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      Enviar
+    </button>
+  </form>
 </div>

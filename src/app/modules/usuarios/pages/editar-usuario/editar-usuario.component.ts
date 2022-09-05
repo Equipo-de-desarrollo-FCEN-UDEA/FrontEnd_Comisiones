@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario, UsuarioResponse } from '@interfaces/usuario';
 import { LoaderService } from '@services/interceptors/loader.service';
@@ -12,6 +12,7 @@ import { take } from 'rxjs';
   templateUrl: './editar-usuario.component.html',
   styleUrls: ['./editar-usuario.component.scss']
 })
+
 export class EditarUsuarioComponent implements OnInit {
   public id : Number | string = 0;
   public tiposId = tiposId;
@@ -20,6 +21,7 @@ export class EditarUsuarioComponent implements OnInit {
   private usuario : UsuarioResponse | undefined;
 
   public error:string = "";
+
   submitted:boolean = false;
 
   roles = [
@@ -28,6 +30,10 @@ export class EditarUsuarioComponent implements OnInit {
       id: "8"
     }
   ]
+
+  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; 
+
+
 
   constructor(
     private usuarioSvc: UsuarioService,
@@ -41,10 +47,12 @@ export class EditarUsuarioComponent implements OnInit {
   
    }
    formUpdate = this.fb.group({
+    correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
     nombre: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     apellido: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     tipo_identificacion: ['', [Validators.maxLength(250)]],
     identificacion: [0, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
+    departamentos_id : ['', Validators.required],
     contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     roles_id : [NaN, Validators.required]

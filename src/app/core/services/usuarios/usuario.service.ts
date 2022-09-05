@@ -49,7 +49,7 @@ export class UsuarioService {
   }
 
   updateUsuario(usuario: any) {
-    return this.http.patch<UsuarioResponse>(`${this.prefix}/${usuario.id}`, usuario);
+    return this.http.patch(`${this.prefix}/${usuario.id}`, usuario);
   }
 
 }

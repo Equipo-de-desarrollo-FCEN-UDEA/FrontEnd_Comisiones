@@ -165,7 +165,7 @@ export class FDedicacionComponent implements OnInit {
 
   temasgroup() {
     return this.fb.group({
-      tema: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      tema: ['', [Validators.required]],
     });
   }
 
@@ -180,7 +180,7 @@ export class FDedicacionComponent implements OnInit {
   // Objetivos Estrategicos
   objEstrategicasgroup() {
     return this.fb.group({
-      objEstrategico: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      objEstrategico: ['', [Validators.required]],
     });
   }
 
@@ -214,7 +214,7 @@ export class FDedicacionComponent implements OnInit {
   // Acciones Estrategicas
   acciones_estrategicasgroup() {
     return this.fb.group({
-      accion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      accion: ['', [Validators.required]],
     });
   }
 
@@ -230,7 +230,7 @@ export class FDedicacionComponent implements OnInit {
   // Objetivo Estrategico Institucional
   objetivo_estrategico_institucionalgroup() {
     return this.fb.group({
-      objetivo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      objetivo: ['', [Validators.required]],
     });
   }
 

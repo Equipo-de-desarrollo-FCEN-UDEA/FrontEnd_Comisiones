@@ -4,7 +4,7 @@ import { AuthGuard } from '@guards/auth.guard';
 import { LoginComponent } from '@shared/pages/login/login.component';
 import { NotFoundComponent } from '@shared/pages/not-found/not-found.component';
 import { RecuperarContrasenaComponent } from '@shared/pages/recuperar-contrasena/recuperar-contrasena.component';
-
+import { QuicklinkStrategy } from 'ngx-quicklink';
 const routes: Routes = [
   {
     path: 'dedicaciones',
@@ -65,7 +65,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy:QuicklinkStrategy
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

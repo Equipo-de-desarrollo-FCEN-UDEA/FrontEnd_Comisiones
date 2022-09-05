@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Usuario, UsuarioResponse } from '@interfaces/usuario';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { tiposId } from '@shared/data/tipos-id';
 import { take } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -17,12 +18,12 @@ export class EditarUsuarioComponent implements OnInit {
   public id : Number | string = 0;
   public tiposId = tiposId;
   public isLoading = this.loadingSvc.isLoading;
-  public usuarioBase!: Usuario;
+  public usuarioBase: Usuario | undefined;
   private usuario : UsuarioResponse | undefined;
 
-  public error:string = "";
+  public error : string = "";
 
-  submitted:boolean = false;
+  submitted : boolean = false;
 
   roles = [
     {
@@ -37,14 +38,13 @@ export class EditarUsuarioComponent implements OnInit {
 
   constructor(
     private usuarioSvc: UsuarioService,
-    private router: ActivatedRoute,
+    private router: Router,
     private fb : FormBuilder,
     public activateRoute: ActivatedRoute,
     public usuarioService: UsuarioService,
     public loadingSvc : LoaderService
   ) {
-    this.router.params.pipe(take(1)).subscribe(params => this.id = params['id']);
-  
+    this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
    }
    formUpdate = this.fb.group({
     correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
@@ -55,7 +55,7 @@ export class EditarUsuarioComponent implements OnInit {
     departamentos_id : ['', Validators.required],
     contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    roles_id : [NaN, Validators.required]
+    // roles_id : [NaN, Validators.required]
    });
 
   ngOnInit(): void {
@@ -93,10 +93,26 @@ get f() {
     this.submitted = true;
     const usuario = this.formUpdate.value;
     console.log(this.formUpdate.value);
-    this.usuarioSvc.updateUsuario({id:this.id ,...usuario}).subscribe(res => {
-      console.log(res);
+    this.usuarioSvc.updateUsuario({id:this.id ,...usuario}).subscribe({
+      next: (res: any) => {
+      Swal.fire({
+        title: 'Usuario actualizado con éxito',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      }).then(() => {
+        this.router.navigate(['usuarios/ver-usuario',this.id])
+      })
+    },
+    error: (err: any) => {
+      Swal.fire({
+        title: 'Algo ocurrió mal vuelve a intentar',
+        text: err.msg,
+        confirmButtonText: 'Aceptar'
+      })
     }
+  }
     );
+  
   }
 
   

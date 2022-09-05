@@ -14,15 +14,15 @@ export class PermisoService {
   
   constructor( private http: HttpClient) { }
   
-  scopeGetPermisos(archivado: number): Observable<any> {
+  scopeGetPermisos(archivado: number, offset ?: number, limit ?: number ): Observable<any> {
     let params = new HttpParams()
     
     if (archivado != 2 ){
       params = params.append('archivado', archivado);
     }
     
-    params = params.append('offset', 0);
-    params = params.append('limit', 100);
+    params = params.append('offset', offset? offset : 0);
+    params = params.append('limit', limit? limit: 100);
 
     console.log(params+" parametros")
 

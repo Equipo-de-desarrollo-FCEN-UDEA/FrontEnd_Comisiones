@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import {LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es');
 import { LoginComponent } from './shared/pages/login/login.component';
 import { PreventDefaultDirective } from './shared/directivas/prevent-default.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +20,8 @@ import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/pages/not-found/not-found.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
+import { QuicklinkModule } from 'ngx-quicklink';
+
 
 
 @NgModule({
@@ -38,11 +41,12 @@ import { SpinnerInterceptor } from './core/interceptors/spinner.interceptor';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuicklinkModule
   
   ],
   providers: [ 
-    //{ provide: LOCALE_ID, useValue: 'es' },
+    { provide: LOCALE_ID, useValue: 'es' },
 
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },

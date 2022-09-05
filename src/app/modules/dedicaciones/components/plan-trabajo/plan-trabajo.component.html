@@ -8,7 +8,7 @@
 
   <!-- Información del plan de trabajo general -->
   <div class="row justify-content-center">
-    <div class="card card-plan col-lg-5 col-ms-6 col-xs-12 shadow p-2 m-2">
+    <div class="card card-plan-general col-lg-5 col-ms-6 col-xs-12 shadow p-2 m-2 h-25">
       <h6>
         <span class="muted">
           <i
@@ -118,7 +118,7 @@
           >
             <div class="row formActividades">
               <div
-                class="lineGroup col-xs-12 col-md-12 col-lg-5"
+                class="lineGroup col-xs-12 col-md-12 col-lg-6"
                 style="margin-right: 0.5em; margin-bottom: 0.5em"
                 formGroupName="identificacion_actividad"
               >
@@ -208,7 +208,7 @@
               </div>
     
               <div
-                class="lineGroup col-sm-12 col-md-12 col-lg-5"
+                class="lineGroup col-sm-12 col-md-12 col-lg-6"
                 formGroupName="horas_semana"
                 style="margin-right: 0.5em; margin-bottom: 0.5em"
               >
@@ -292,7 +292,7 @@
               </div>
     
               <div
-                class="buttons col-sm-12 col-md-12 col-lg-1"
+                class="buttons col-sm-12 col-md-12 col-lg-2 ms-4"
                 style="margin-right: 0.5em; margin-bottom: 0.5em"
               >
                 <button
@@ -638,7 +638,7 @@
           </div>
 
           <div
-            class="buttons col-1"
+            class="buttons col-sm-12 col-md-12 col-lg-2 ms-4"
             style="margin-bottom: 0.5em; margin-right: 0.5em"
           >
             <button
@@ -753,7 +753,7 @@
             </div>
           </div>
 
-          <div class="buttons col-1">
+          <div class="buttons col-sm-12 col-md-12 col-lg-2 ">
             <button
               class="btn btn-add btn-sm"
               type="button"
@@ -831,7 +831,7 @@
             </div>
           </div>
 
-          <div class="buttons col-1">
+          <div class="buttons col-lg-12">
             <button
               class="btn btn-add btn-sm"
               type="button"
@@ -856,11 +856,12 @@
   </div>
 
 
-   
 
 
+  <!-- /.seguimiento-actividades -->
 
-    <div class="seguimiento-actividades">
+  <div class="row justify-content-center">
+    <div class="card card-plan card-plan-seguimiento col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
       <h6>
         <span class="muted">
           <i
@@ -877,10 +878,10 @@
             last as isLast;
             let i = index
           "
-          class="arrayLike formfloatig"
+          class="arrayLike formfloatig justify-content-center"
           [formGroupName]="i"
         >
-          <div class="row" style="width: 100%">
+          <div class="row formActividades" style="width: 100%">
             <div class="col-sm-12 col-md-8 col-lg-4">
               <div class="formfloatig">
                 <input
@@ -965,9 +966,40 @@
         </div>
       </div>
     </div>
-    <!-- /.seguimiento-actividades -->
+ 
+    <!-- /.jornada-trabajo -->
 
-    <div class="jornada-trabajo">
+    <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+      <h6>
+        <span class="muted">
+          <i
+            class="fa fa-info-circle"
+            title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+          ></i>
+          Observaciones generales
+        </span>
+      </h6>
+
+      <div class="formfloatig">
+        <textarea
+          id="floatingobservacionesgenerales"
+          formControlName="observaciones_generales"
+          class="form-control"
+          placeholder=" "
+          rows="3"
+        ></textarea>
+        <label for="floatingobservacionesgenerales" class="formLabel"
+          >Observaciones</label
+        >
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Jornada de trabajo -->
+
+
+    <div class="card card-plan col-lg-12 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
       <h6>
         <span class="muted">
           <i
@@ -984,10 +1016,10 @@
             last as isLast;
             let i = index
           "
-          class="col-lg-4 arrayLike formfloatig"
+          class="col-lg-4 arrayLike formfloatig justify-content-center"
           [formGroupName]="i"
         >
-          <div class="row" style="width: 100%; margin: auto; min-width: 320px">
+          <div class="row formActividades" style="width: 100%; margin: auto; min-width: 320px">
             <div class="col-lg-4">
               <span>
                 <i class="fa fa-clock"></i>
@@ -1032,34 +1064,9 @@
         </div>
       </div>
     </div>
-    <!-- /.jornada-trabajo -->
 
-    <div class="observaciones_generales">
-      <h6>
-        <span class="muted">
-          <i
-            class="fa fa-info-circle"
-            title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
-          ></i>
-          Observaciones generales
-        </span>
-      </h6>
 
-      <div class="formfloatig">
-        <textarea
-          id="floatingobservacionesgenerales"
-          formControlName="observaciones_generales"
-          class="form-control"
-          placeholder=" "
-          rows="3"
-        ></textarea>
-        <label for="floatingobservacionesgenerales" class="formLabel"
-          >Observaciones</label
-        >
-      </div>
-    </div>
-
-    <button class="btn btn-success" id="Enviar" (submit)="(true)">
+    <button class="btn btn-success col-lg-7 btn-add col-md-12 col-xs-12 col-12" id="Enviar" (submit)="(true)">
       <span
         *ngIf="isLoading | async"
         class="spinner-border spinner-border-sm"

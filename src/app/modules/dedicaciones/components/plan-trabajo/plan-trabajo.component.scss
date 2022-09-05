@@ -20,7 +20,16 @@
   .card-plan {
     height: 17em;
   }
+
+  .card-plan-general {
+    height: 20em!important;
+    align-items: center;
+  }
+  .card-plan-seguimiento { 
+    height: 10.3em!important;
+  }
 }
+
 
 .need-validation {
   text-align: -webkit-center;
@@ -31,9 +40,10 @@
   align-items: baseline;
  }
 
-.card-plan {
+.card-plan, .card-plan-general {
   align-items: center;
 }
+
 
 *{
   box-sizing: border-box;

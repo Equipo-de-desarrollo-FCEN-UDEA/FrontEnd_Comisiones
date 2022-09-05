@@ -58,7 +58,7 @@ export class AuthService {
 
     this.cookieService.delete('token', '/');
     this.cookieService.delete('usuario', '/');
-    this.cookieService.deleteAll('/');
+    this.cookieService.deleteAll('/','/');
     
     if (this.isLoggedIn()) {
       this.logout();
@@ -79,5 +79,11 @@ export class AuthService {
       correo:correo,
     });
   }
+
+  cambiarContrasena(contrasena: string, newcontrasena: string) {
+    return this.http.post(`${this.prefix}/cambiarcontrasena`, {contrasena : contrasena, newcontrasena: newcontrasena})
+  }
+
+  
 
 }

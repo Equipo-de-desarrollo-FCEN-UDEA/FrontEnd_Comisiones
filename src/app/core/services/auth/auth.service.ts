@@ -59,10 +59,6 @@ export class AuthService {
     this.cookieService.delete('token', '/');
     this.cookieService.delete('usuario', '/');
     this.cookieService.deleteAll('/','/');
-    
-    if (this.isLoggedIn()) {
-      this.logout();
-    }
     this.router.navigate(['/login']);
   }
 

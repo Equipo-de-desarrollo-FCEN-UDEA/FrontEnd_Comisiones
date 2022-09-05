@@ -10,6 +10,16 @@
 //     margin-bottom: 10px;
 // }
 
+@media (max-width: 576px) {
+  .container {
+      width: 95%;
+  }
+}
+ 
+.card-plan {
+  align-items: center;
+}
+
 *{
   box-sizing: border-box;
   font-size: small;

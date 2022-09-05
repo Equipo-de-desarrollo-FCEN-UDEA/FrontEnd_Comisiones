@@ -9,11 +9,12 @@ h5{
     padding-bottom: 0.5em;
 }
 
-h3{
+.ptitle{
   color: #ffffff;
   background-color: #026937;
   padding: 0.5em;
   border-radius: 0.2em;
+  text-align: center;
 }
 
 .container{
@@ -145,3 +146,4 @@ h3{
   .btn-add:hover {
     background-color: #79b97c;
   }
+

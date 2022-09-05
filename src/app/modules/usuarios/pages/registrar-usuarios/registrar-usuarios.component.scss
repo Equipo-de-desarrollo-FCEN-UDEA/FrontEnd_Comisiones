@@ -8,14 +8,21 @@
   margin-bottom: 6em!important;
 }
 
+.ptitle{
+  color: #ffffff;
+  background-color: #026937;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  text-align: center;
+}
+
 @media screen and (max-width: 920px){
   .containerInside {
     width: 95%!important;
-   
+
    }
   }
 
   .btn-success {
     background-color: #43b649;
   }
-  

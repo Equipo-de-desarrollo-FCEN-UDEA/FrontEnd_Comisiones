@@ -27,7 +27,7 @@
 }
 
 .archivos {
-  width: auto; 
+  width: auto;
   margin-left: 10px;
 }
 
@@ -38,8 +38,8 @@
 }
 
 p {
-  text-align: center; 
-  margin: 0; 
+  text-align: center;
+  margin: 0;
   color: green;
 }
 
@@ -59,7 +59,7 @@ padding: 1em 0.5em;
 }
 .containerInside {
   width: 95%!important;
- 
+
  }
 }
 
@@ -78,7 +78,7 @@ display: none;
 }
 
 .buttons {
-  width: fit-content; 
+  width: fit-content;
   margin: 0;
 }
 
@@ -100,4 +100,11 @@ display: none;
   background-color: #43b649;
 } .btn-add:hover {
   background-color: #79b97c;
+}
+
+.ptitle{
+  color: #ffffff;
+  background-color: #026937;
+  padding: 0.5em;
+  border-radius: 0.2em;
 }

@@ -44,21 +44,21 @@ padding: 1em 0.5em;
 }
 .containerInside {
   width: 95%!important;
- 
+
  }
 }
 
 
 p {
-  text-align: center; 
-  margin: 0; 
+  text-align: center;
+  margin: 0;
   color: green;
 }
 
 .btn-dark {
 background-color: #43B649;
 border-color: #43B649;
-} 
+}
 
 
 .formLabel{
@@ -74,7 +74,7 @@ display: none;
 }
 
 .archivos {
-  width: auto; 
+  width: auto;
   margin-left: 10px;
 }
 
@@ -84,7 +84,7 @@ display: none;
 }
 
 .buttons {
-  width: fit-content; 
+  width: fit-content;
   margin: 0;
 }
 
@@ -119,4 +119,11 @@ display: none;
 .fa-times-circle{
   color: #ef434d;
   font-size: 2em;
+}
+
+.ptitle{
+  color: #ffffff;
+  background-color: #026937;
+  padding: 0.5em;
+  border-radius: 0.2em;
 }

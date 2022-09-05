@@ -33,7 +33,7 @@
         >
           <a
             class="dropdown-item"
-            [routerLink]="['/usuarios/ver-usuario', usuario.id]"
+            [routerLink]="['/usuarios/ver-usuario', usuario?.id]"
             >Ver perfil
           </a>
           <li><hr class="dropdown-divider" /></li>
@@ -250,7 +250,7 @@
                   <span>GENERAL</span>
                 </div>
                 <ul>
-                  <li [routerLink]="['/usuarios/ver-usuario', usuario.id]">
+                  <li [routerLink]="['/usuarios/ver-usuario', usuario?.id]">
                     <a>
                       <span>
                         <i class="fa-solid fa-user-astronaut"></i>

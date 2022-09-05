@@ -1,4 +1,4 @@
-<div class="container card shadow bg-white rounded p-5">
+<div class="">
   <form
     novalidate
     [formGroup]="fPlanTrabajo"
@@ -7,8 +7,8 @@
   >
 
   <!-- Información del plan de trabajo general -->
-  <div class="row">
-    <div class="card card-plan col-lg-6 col-ms-6 col-xs-12 shadow p-2">
+  <div class="row justify-content-center">
+    <div class="card card-plan col-lg-5 col-ms-6 col-xs-12 shadow p-2 m-2">
       <h6>
         <span class="muted">
           <i
@@ -95,7 +95,7 @@
   
       <!-- /.actividades_docencia -->
   
-      <div class="card card-plan col-lg-6 col-md-12 col-xs-12 shadow h-25 p-2">
+      <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
         <h6>
           <span class="muted">
             <i
@@ -322,11 +322,11 @@
     
   </div>
 
-  <div class="row">
+  <div class="row justify-content-center">
    <!-- /.actividades-investigacion -->
 
 
-   <div class="card card-plan col-lg-6 col-ms-6 col-xs-12 shadow h-25 p-2">
+   <div class="card card-plan col-lg-5 col-ms-6 col-xs-12 shadow h-25 p-2 m-2">
     <h6>
       <span class="muted">
         <i
@@ -500,9 +500,7 @@
 
   <!-- /.actividades-extension -->
 
-
-
-  <div class="card card-plan col-lg-6 col-ms-6 col-xs-12 shadow h-25 p-2">
+  <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
     <h6>
       <span class="muted">
         <i
@@ -667,199 +665,200 @@
   </div>
   </div>
 
- 
- 
+  <div class="row justify-content-center">
+  <!-- /.actividades-administracion -->
 
-
-
-
-
-
-    <div class="actividades-administracion">
-      <h6>
-        <span class="muted">
-          <i
-            class="fa fa-info-circle"
-            title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
-          ></i>
-          Administración académica
-        </span>
-      </h6>
-      <div style="width: 100%" formArrayName="administracion_academica">
-        <div
-          *ngFor="
-            let actividad of actividadesAdministracionAcademicaArr.controls;
-            last as isLast;
-            let i = index
-          "
-          class="arrayLike formfloatig"
-          [formGroupName]="i"
-        >
-          <div class="row" style="width: 100%">
-            <div class="col-sm-12 col-md-8 col-lg-4">
-              <div class="formfloatig">
-                <input
-                  id="floatingcargo{{ i }}"
-                  type="text"
-                  formControlName="cargo"
-                  class="form-control"
-                  placeholder=" "
-                />
-                <label for="floatingcargo{{ i }}" class="formLabel"
-                  >Cargo</label
-                >
-              </div>
-            </div>
-
-            <div class="col-sm-12 col-md-4 col-lg-2">
-              <div class="formfloatig">
-                <input
-                  id="floatingadminhoras_semestre{{ i }}"
-                  type="number"
-                  formControlName="horas_semestre"
-                  class="form-control"
-                  placeholder=" "
-                />
-                <label
-                  for="floatingadminhoras_semestre{{ i }}"
-                  class="formLabel"
-                  >Horas semestre</label
-                >
-              </div>
-            </div>
-
-            <div class="col-sm-12 col-md-8 col-lg-3">
-              <div class="formfloatig">
-                <input
-                  id="floatingotras_actividades{{ i }}"
-                  type="text"
-                  formControlName="otras_actividades"
-                  class="form-control"
-                  placeholder=" "
-                />
-                <label for="floatingotras_actividades{{ i }}" class="formLabel"
-                  >Otras actividades</label
-                >
-              </div>
-            </div>
-
-            <div class="col-sm-12 col-md-4 col-lg-2">
-              <div class="formfloatig">
-                <input
-                  id="floatingotras_horas_semestre{{ i }}"
-                  type="number"
-                  formControlName="otras_horas_semestre"
-                  class="form-control"
-                  placeholder=" "
-                />
-                <label
-                  for="floatingotras_horas_semestre{{ i }}"
-                  class="formLabel"
-                  >Horas semestre</label
-                >
-              </div>
-            </div>
-
-            <div class="buttons col-1">
-              <button
-                class="btn btn-add btn-sm"
-                type="button"
-                (click)="addActividadAdministracionAcademica()"
-                *ngIf="isLast"
+  <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+    <h6>
+      <span class="muted">
+        <i
+          class="fa fa-info-circle"
+          title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+        ></i>
+        Administración académica
+      </span>
+    </h6>
+    <div style="width: 100%" formArrayName="administracion_academica">
+      <div
+        *ngFor="
+          let actividad of actividadesAdministracionAcademicaArr.controls;
+          last as isLast;
+          let i = index
+        "
+        class="arrayLike formfloatig justify-content-center"
+        [formGroupName]="i"
+      >
+        <div class="row formActividades" style="width: 100%">
+          <div class="col-sm-12 col-md-8 col-lg-3">
+            <div class="formfloatig">
+              <input
+                id="floatingcargo{{ i }}"
+                type="text"
+                formControlName="cargo"
+                class="form-control"
+                placeholder=" "
+              />
+              <label for="floatingcargo{{ i }}" class="formLabel"
+                >Cargo</label
               >
-                <i class="fa fa-plus"></i>
-              </button>
-              <button
-                class="btn btn-remove btn-sm"
-                type="button"
-                (click)="removeInput('administracion_academica', i)"
-                *ngIf="actividadesAdministracionAcademicaArr.length > 1"
-              >
-                <i class="fa fa-minus"></i>
-              </button>
             </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-2">
+            <div class="formfloatig">
+              <input
+                id="floatingadminhoras_semestre{{ i }}"
+                type="number"
+                formControlName="horas_semestre"
+                class="form-control"
+                placeholder=" "
+              />
+              <label
+                for="floatingadminhoras_semestre{{ i }}"
+                class="formLabel"
+                >Horas semestre</label
+              >
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-8 col-lg-3">
+            <div class="formfloatig">
+              <input
+                id="floatingotras_actividades{{ i }}"
+                type="text"
+                formControlName="otras_actividades"
+                class="form-control"
+                placeholder=" "
+              />
+              <label for="floatingotras_actividades{{ i }}" class="formLabel"
+                >Otras actividades</label
+              >
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="formfloatig">
+              <input
+                id="floatingotras_horas_semestre{{ i }}"
+                type="number"
+                formControlName="otras_horas_semestre"
+                class="form-control"
+                placeholder=" "
+              />
+              <label
+                for="floatingotras_horas_semestre{{ i }}"
+                class="formLabel"
+                >Horas semestre</label
+              >
+            </div>
+          </div>
+
+          <div class="buttons col-1">
+            <button
+              class="btn btn-add btn-sm"
+              type="button"
+              (click)="addActividadAdministracionAcademica()"
+              *ngIf="isLast"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+            <button
+              class="btn btn-remove btn-sm"
+              type="button"
+              (click)="removeInput('administracion_academica', i)"
+              *ngIf="actividadesAdministracionAcademicaArr.length > 1"
+            >
+              <i class="fa fa-minus"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- /.actividades-administracion -->
+  </div>
 
-    <div class="otras-actividades">
-      <h6>
-        <span class="muted">
-          <i
-            class="fa fa-info-circle"
-            title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
-          ></i>
-          Otras actividades
-        </span>
-      </h6>
-      <div style="width: 100%" formArrayName="otras_actividades">
-        <div
-          *ngFor="
-            let actividad of actividadesOtrasActividadesArr.controls;
-            last as isLast;
-            let i = index
-          "
-          class="arrayLike formfloatig"
-          [formGroupName]="i"
-        >
-          <div class="row" style="width: 100%">
-            <div class="col-sm-8 col-md-10 col-lg-9">
-              <div class="formfloatig">
-                <input
-                  id="floatingotrasidentidicacion_actividad{{ i }}"
-                  type="text"
-                  formControlName="identificacion_actividad"
-                  class="form-control"
-                  placeholder=" "
-                />
-                <label
-                  for="floatingotrasidentidicacion_actividad{{ i }}"
-                  class="formLabel"
-                  >Identificación de la actividad</label
-                >
-              </div>
-            </div>
+  <!-- /.otras-actividades -->
 
-            <div class="col-sm-4 col-md-2 col-lg-2">
-              <div class="formfloatig">
-                <input
-                  id="floatingotrashoras_semestre{{ i }}"
-                  type="number"
-                  formControlName="horas_semestre"
-                  class="form-control"
-                  placeholder=" "
-                />
-                <label for="floatingotashoras_semestre{{ i }}" class="formLabel"
-                  >Horas semestre</label
-                >
-              </div>
-            </div>
-
-            <div class="buttons col-1">
-              <button
-                class="btn btn-add btn-sm"
-                type="button"
-                (click)="addActividadOtrasActividades()"
-                *ngIf="isLast"
+  <div class="card card-plan col-lg-5 col-md-12 col-xs-12 shadow h-25 p-2 m-2">
+    <h6>
+      <span class="muted">
+        <i
+          class="fa fa-info-circle"
+          title="A continuación llene los siguientes campos para cada actividad de investigación, por cada actividad haga click sobre el botón +"
+        ></i>
+        Otras actividades
+      </span>
+    </h6>
+    <div style="width: 100%" formArrayName="otras_actividades">
+      <div
+        *ngFor="
+          let actividad of actividadesOtrasActividadesArr.controls;
+          last as isLast;
+          let i = index
+        "
+        class="arrayLike formfloatig justify-content-center"
+        [formGroupName]="i"
+      >
+        <div class="row formActividades" style="width: 100%">
+          <div class="col-sm-8 col-md-10 col-lg-7">
+            <div class="formfloatig">
+              <input
+                id="floatingotrasidentidicacion_actividad{{ i }}"
+                type="text"
+                formControlName="identificacion_actividad"
+                class="form-control"
+                placeholder=" "
+              />
+              <label
+                for="floatingotrasidentidicacion_actividad{{ i }}"
+                class="formLabel"
+                >Identificación de la actividad</label
               >
-                <i class="fa fa-plus"></i>
-              </button>
-              <button
-                class="btn btn-remove btn-sm"
-                type="button"
-                (click)="removeInput('otras_actividades', i)"
-                *ngIf="actividadesOtrasActividadesArr.length > 1"
-              >
-                <i class="fa fa-minus"></i>
-              </button>
             </div>
+          </div>
+
+          <div class="col-sm-4 col-md-2 col-lg-4">
+            <div class="formfloatig">
+              <input
+                id="floatingotrashoras_semestre{{ i }}"
+                type="number"
+                formControlName="horas_semestre"
+                class="form-control"
+                placeholder=" "
+              />
+              <label for="floatingotashoras_semestre{{ i }}" class="formLabel"
+                >Horas semestre</label
+              >
+            </div>
+          </div>
+
+          <div class="buttons col-1">
+            <button
+              class="btn btn-add btn-sm"
+              type="button"
+              (click)="addActividadOtrasActividades()"
+              *ngIf="isLast"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+            <button
+              class="btn btn-remove btn-sm"
+              type="button"
+              (click)="removeInput('otras_actividades', i)"
+              *ngIf="actividadesOtrasActividadesArr.length > 1"
+            >
+              <i class="fa fa-minus"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- /.otras-actividades -->
+  </div>
+  </div>
+
+
+   
+
+
 
     <div class="seguimiento-actividades">
       <h6>

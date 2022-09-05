@@ -9,7 +9,7 @@
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Solicitante</div>
     <div class="col-xs-12 col-sm-6">
-      {{ comision?.usuarios?.nombre }} {{ comision?.usuarios?.apellido }}
+      {{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}
     </div>
   </div>
 
@@ -17,7 +17,7 @@
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Tipo de Comisión</div>
 
-    <div class="col-xs-12 col-sm-6">{{comision?.tipos_comision?.nombre}}</div>
+    <div class="col-xs-12 col-sm-6">{{comision.tipos_comision.nombre}}</div>
 
   </div>
 
@@ -31,28 +31,28 @@
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Día que Inicia</div>
 
-    <div class="col-xs-12 col-sm-6">{{comision?.fecha_inicio | date: "fullDate"}}</div>
+    <div class="col-xs-12 col-sm-6">{{comision.fecha_inicio | date: "fullDate"}}</div>
 
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Día que Termina</div>
 
-    <div class="col-xs-12 col-sm-6">{{comision?.fecha_fin | date: "fullDate"}}</div>
+    <div class="col-xs-12 col-sm-6">{{comision.fecha_fin | date: "fullDate"}}</div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Idioma</div>
-    <div class="col-xs-12 col-sm-6">{{comision?.idioma}}</div>
+    <div class="col-xs-12 col-sm-6">{{comision.idioma}}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Lugar</div>
-    <div class="col-xs-12 col-sm-6">{{comision?.lugar}}</div>
+    <div class="col-xs-12 col-sm-6">{{comision.lugar}}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Justificación</div>
-    <div class="col-xs-12 col-sm-6">{{comision?.justificacion}}</div>
+    <div class="col-xs-12 col-sm-6">{{comision.justificacion}}</div>
   </div>
 
 
@@ -82,7 +82,7 @@
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Resolución</div>
-    <div class="col-6">{{comision?.resolucion}}</div>
+    <div class="col-6">{{comision.resolucion}}</div>
   </div>
 
 
@@ -138,7 +138,7 @@
     <button
     type="button"
     class="btn btn-warning"
-    [routerLink]="['/comisiones/asociar-estado', comision?.id]"
+    [routerLink]="['/comisiones/asociar-estado', comision.id]"
     *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
     
     >
@@ -150,7 +150,7 @@
     <button
     type="button"
     class="btn btn-light"
-    [routerLink]="['/comisiones/subir-cumplido', comision?.id]"
+    [routerLink]="['/comisiones/subir-cumplido', comision.id]"
     
     >
       Subir Cumplido
@@ -164,7 +164,7 @@
   <div class="footer-row d-md-flex justify-content-md-end">
 
     <div *ngIf="(rol == 'PROFESOR' || rol == 'EMPLEADO')" class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-      <button class="btn btn-danger" (click)="eliminarComision(comision?.id)">
+      <button class="btn btn-danger" (click)="eliminarComision(comision.id)">
         <span *ngIf="(isLoading | async)  && (isDelete)" class="spinner-border spinner-border-sm" 
         ></span>
         Eliminar
@@ -175,7 +175,7 @@
       <button
         type="button"
         class="btn btn-warning "
-        [routerLink]="['/comisiones/editar-comision', comision?.id]"
+        [routerLink]="['/comisiones/editar-comision', comision.id]"
       >
         Editar
       </button>

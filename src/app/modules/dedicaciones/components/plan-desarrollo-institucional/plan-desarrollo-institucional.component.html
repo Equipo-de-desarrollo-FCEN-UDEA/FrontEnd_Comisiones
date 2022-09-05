@@ -6,12 +6,12 @@
         <ngb-accordion [closeOthers]="true" activeIds="0" style="width: 100%;">
 
             <ngb-panel *ngFor="let tema of temas; let i=index" [title]="tema.titulo" [id]="''+i">
-                
+
                 <ng-template ngbPanelContent>
                     <h6>
                         {{tema.subtitulo}}
                     </h6>
-                    
+
                     <hr>
 
                     <p>A continuación elige el objetivo estratégico:</p>
@@ -38,36 +38,41 @@
     <button type="button" class="btn-close" aria-describedby="modal-title"
         (click)="activeModal.dismiss('Cross click')"></button>
 </div>
+
 <form [formGroup]="FormPlan" (submit)="submit();">
+
+
+  <!-- TEMAS -->
     <app-stepper #cdkStepper formArrayName="steps" [linear]="true">
         <cdk-step [editable]="true" formGroupName="0" label="Temas" [optional]="false"
             [stepControl]="formArray.get([0])!">
-            <ng-template cdkStepLabel class="cdk-step-label">
+            <ng-template cdkStepLabel class="cdk-step-label" >
                 <span class="icon is-medium">
-                    <img src="../../../../assets/one-svgrepo-com.svg" style="margin: auto;" width="25px"
+                    <img src="../../../../assets/one-svgrepo-com.svg" title="Temas"  style="margin: auto;" width="25px"
                         *ngIf="formArray.get([0])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([0])!.valid"></i>
                 </span>
             </ng-template>
-            <div class="container card shadow bg-white rounded">
+            <div class="container card shadow bg-white rounded pad">
                 <h3 class="header"> Apoya al plan de desarrollo institucional en alguno de los siguientes temas</h3>
                 <span class="m-2">A continuación elige uno o algunos de los siguientes temas que se desarrollarán a lo
-                    largo de tu
-                    proyecto de dedicación exclusiva, recuerda que también puedes consultar más información acerca de
+                    largo de tu proyecto de dedicación exclusiva, recuerda que también puedes consultar más información acerca de
                     estos haciendo clíck <a
                         href="http://www2.udea.edu.co/webmaster/multimedia/plan-desarrollo-udea/plan-desarrollo-udea.pdf"
                         target="_blank">aquí</a>.</span>
+                        <hr>
                 <div class="temas row">
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let tema of temas; let i = index">
                         <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedTema==i}"
                             (click)="selectTema(i)">
-                            <h5>{{tema.titulo}}</h5>
+                            <h6>{{tema.titulo}}</h6>
                             <hr>
-                            <span>{{tema.subtitulo}}</span>
+                            <span class="spantext">{{tema.subtitulo}}</span>
                         </div>
                     </div>
                 </div>
+                <hr>
                 <footer class="my-footer">
                     <div class="buttons">
                         <button [disabled]="formArray.get([0])!.invalid" class="btn btn-add" cdkStepperNext>
@@ -80,11 +85,12 @@
                 </footer>
             </div>
 
+     <!-- OBJETIVOS -->
         </cdk-step>
-        <cdk-step label="Objetivos" [optional]="false">
-            <ng-template cdkStepLabel class="cdk-step-label">
-                <span class="icon is-medium">
-                    <img src="../../../../assets/two-svgrepo-com.svg" width="25px" *ngIf="formArray.get([1])!.invalid">
+        <cdk-step label="Objetivos" [optional]="false" >
+            <ng-template cdkStepLabel class="cdk-step-label" >
+                <span class="icon is-medium" title="Objetivos">
+                    <img src="../../../../assets/two-svgrepo-com.svg"  width="25px" *ngIf="formArray.get([1])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([1])!.valid"></i>
                 </span>
             </ng-template>
@@ -96,14 +102,15 @@
                     estos haciendo clíck <a
                         href="http://www2.udea.edu.co/webmaster/multimedia/plan-desarrollo-udea/plan-desarrollo-udea.pdf"
                         target="_blank">aquí</a>.</span>
+                        <hr>
                 <div class="objetivos row ">
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let objetivo of objetivos$ | async; let i = index">
                         <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedObjetivo == i}"
                             (click)="selectObjetivo(i,objetivo.descripcion,objetivo.acciones);">
-                            <h5>{{"Objetivo estratégico " + (i+1)}}</h5>
+                            <h6>{{"Objetivo estratégico " + (i+1)}}</h6>
                             <hr>
-                            <span>{{objetivo.descripcion}}</span>
+                            <span class="spantext">{{objetivo.descripcion}}</span>
                         </div>
                     </div>
                 </div>
@@ -125,10 +132,11 @@
                 </footer>
             </div>
 
+    <!-- ACCIONES ESTRATEGICAS -->
         </cdk-step>
         <cdk-step label="Acciones estratégicas" [optional]="false">
             <ng-template cdkStepLabel class="cdk-step-label">
-                <span class="icon is-medium">
+                <span class="icon is-medium" title="Acciones estratégicas">
                     <img src="../../../../assets/three-svgrepo-com.svg" width="25px"
                         *ngIf="formArray.get([2])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([2])!.valid"></i>
@@ -142,14 +150,15 @@
                     estos haciendo clíck <a
                         href="http://www2.udea.edu.co/webmaster/multimedia/plan-desarrollo-udea/plan-desarrollo-udea.pdf"
                         target="_blank">aquí</a>.</span>
+                    <hr>
                 <div class="acciones row">
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let accion of acciones$ | async; let i = index">
                         <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedAccion == i}"
                             (click)="selectAccion(i,accion);">
-                            <h5>{{"Acción estratégica " + (i+1)}}</h5>
+                            <h6>{{"Acción estratégica " + (i+1)}}</h6>
                             <hr>
-                            <span>{{accion}}</span>
+                            <span class="spantext" >{{accion}}</span>
                         </div>
                     </div>
                 </div>
@@ -171,12 +180,15 @@
                 </footer>
             </div>
         </cdk-step>
-        <cdk-step label="Acciones estratégicas" [optional]="false" formGroupName="3">
+
+
+  <!-- INDICADORES -->
+        <cdk-step label="Indicadores" [optional]="false" formGroupName="3">
             <ng-template cdkStepLabel class="cdk-step-label">
                 <span class="icon is-medium">
-                    <img src="../../../../assets/three-svgrepo-com.svg" width="25px"
-                        *ngIf="formArray.get([2])!.invalid">
-                    <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([2])!.valid"></i>
+                    <img src="../../../../../assets/four-svgrepo-com.svg" width="25px"
+                        *ngIf="formArray.get([3])!.invalid">
+                    <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([3])!.valid"></i>
                 </span>
             </ng-template>
             <div class="container card shadow bg-white rounded">
@@ -189,7 +201,7 @@
                         target="_blank">aquí</a>.</span>
                 <div class="indicadores row" style="width: 100%;">
                     <h6>Indicador(es):<span style="color:red">*</span></h6>
-
+                   <hr>
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div style="width: 100%" formArrayName="indicador">
                             <div *ngFor="let indicador of indicadorArr.controls; last as isLast; let i=index"

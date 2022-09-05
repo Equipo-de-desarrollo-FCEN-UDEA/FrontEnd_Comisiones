@@ -15,7 +15,22 @@
       width: 95%;
   }
 }
- 
+
+@media (min-width: 991px ) {
+  .card-plan {
+    height: 17em;
+  }
+}
+
+.need-validation {
+  text-align: -webkit-center;
+}
+
+ .formActividades {
+  justify-content: center;
+  align-items: baseline;
+ }
+
 .card-plan {
   align-items: center;
 }

@@ -35,7 +35,7 @@ export class UsuarioService {
     }
   }
 
-  getUsuariobyId(id:Number){
+  getUsuariobyId(id:number | string){
     return this.http.get<UsuarioResponse>(`${this.prefix}/${id}`);
   }
 

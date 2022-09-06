@@ -77,7 +77,7 @@ export class EditarUsuarioComponent implements OnInit {
         }
       );
     } else {
-    this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe(res => {
+    this.usuarioSvc.getUsuariobyId(this.id as number).subscribe(res => {
       this.usuario = res;
       this.formUpdate.patchValue(this.usuario);
     }

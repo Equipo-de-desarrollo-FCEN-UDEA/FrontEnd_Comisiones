@@ -14,7 +14,7 @@ import { take } from 'rxjs';
 export class VerUsuarioComponent implements OnInit {
   public usuario!: Usuario;
   public usuarioResponse!: UsuarioResponse;
-  public id : Number | string = 0;
+  public id : number | string = 0;
   constructor(
     private usuarioService: UsuarioService,
     private router: ActivatedRoute,
@@ -27,9 +27,8 @@ export class VerUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.activateRoute.params.subscribe({
       next: (params) => {
-      this.usuarioService.getUsuario().subscribe((resUsuario) => {
+      this.usuarioService.getUsuariobyId(this.id).subscribe((resUsuario) => {
         this.usuario = resUsuario;
-        console.log(this.usuario)
       });
       } 
     });

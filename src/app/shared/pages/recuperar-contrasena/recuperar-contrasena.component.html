@@ -23,13 +23,12 @@
               class="spinner-border spinner-border-sm"
               role="status"
               aria-hidden="true"
-              *ngIf="isLoading"
+              *ngIf="isLoading | async"
             ></span>
             Enviar
           </button>
 
           <a  href="../login" >Cancelar </a>
-
         </div>
       </form>
     </div>

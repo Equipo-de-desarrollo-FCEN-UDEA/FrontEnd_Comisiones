@@ -27,6 +27,12 @@ export class EditarUsuarioComponent implements OnInit {
 
   submitted : boolean = false;
 
+  roles = [
+    {
+      nombre: "PROFESOR", 
+      id: "8"
+    }
+  ]
 
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; 
 

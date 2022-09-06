@@ -34,7 +34,10 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let usuario of usuarios$ | async">
+          <tr *ngFor="let usuario of usuarios$ | async"
+          [routerLink]="['/usuarios/ver-usuario', usuario.id]"
+          class="click-table"
+          >
             
           <th scope="row">{{ usuario.id }}</th>
           
@@ -78,13 +81,13 @@
           
           <td>
             <ngb-highlight
-            [result]="usuario.departamentos?.nombre" [term]="service.searchTerm">
+            [result]="usuario.departamentos.nombre" [term]="service.searchTerm">
             </ngb-highlight>
           </td>
 
           <td>
             <ngb-highlight 
-            [result]="usuario.departamentos?.facultades?.nombre"  [term]="service.searchTerm">
+            [result]="usuario.departamentos.facultades.nombre"  [term]="service.searchTerm">
             </ngb-highlight>
           </td>
 

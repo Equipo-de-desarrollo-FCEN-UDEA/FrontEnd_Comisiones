@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '@interfaces/usuario';
+import { AuthService } from '@services/auth/auth.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { take } from 'rxjs';
-import { CustomValidators } from '@shared/clases/confirmed-validator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-contrasena',
@@ -25,11 +26,12 @@ export class EditarContrasenaComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private router: ActivatedRoute,
+    private router: Router,
     private activateRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private authSvc : AuthService
   ) {
-    this.router.params.pipe(take(1)).subscribe(params => this.id = params['id']);
+    this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
 
     this.editarContrasenaForm = this.formBuilder.group({
       contrasena_actual: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(250)]],
@@ -70,7 +72,28 @@ export class EditarContrasenaComponent implements OnInit {
   }
 
   submit(){
-    
+    console.log('asd')
+    this.authSvc.cambiarContrasena(this.editarContrasenaForm.get('contrasena_actual')?.value, this.editarContrasenaForm.get('contrasena_expected_2')?.value).subscribe({
+       next: (res : any) => {
+        Swal.fire({
+          title: 'Cambio de contraseña exitoso',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }
+        ).then(() => {
+          this.router.navigate(['/']);
+        })
+      },
+      error: (err : any) => {
+        Swal.fire({
+          title: 'Algo salío mal, intenta de nuevo',
+          text: err.msg,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+
+    }
+  });
   }
 
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Comision } from '@interfaces/comisiones';
@@ -12,11 +12,35 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
 
+  private urlEndPoint:string = prefix +'usuarios';
+  // private urlEndPointArch:string = prefix +'archivarusuarios';
+
+
   constructor(
     private cookie: CookieService,
     private route: Router,
     private http: HttpClient
   ) { }
+
+  scopeGetusuarios( ): Observable<any> {
+    let params = new HttpParams()
+    
+    // if (archivado != 2 ){
+    //   params = params.append('archivado', archivado);
+    // }
+    
+    params = params.append('offset', 0);
+    params = params.append('limit', 100);
+
+    console.log(params+" parametros")
+
+    return this.http.get<Usuario[]>(`${this.urlEndPoint}`, {
+      params:params
+    })
+  }
+
+
+
 
   prefix = prefix + 'usuarios';
 
@@ -35,7 +59,7 @@ export class UsuarioService {
     }
   }
 
-  getUsuariobyId(id:Number){
+  getUsuariobyId(id:number | string){
     return this.http.get<UsuarioResponse>(`${this.prefix}/${id}`);
   }
 
@@ -49,7 +73,7 @@ export class UsuarioService {
   }
 
   updateUsuario(usuario: any) {
-    return this.http.patch<UsuarioResponse>(`${this.prefix}/${usuario.id}`, usuario);
+    return this.http.patch(`${this.prefix}/${usuario.id}`, usuario);
   }
 
 }

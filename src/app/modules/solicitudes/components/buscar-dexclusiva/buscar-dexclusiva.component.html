@@ -31,7 +31,6 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Estado</th>
               <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event) " *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
               <th scope="col" sortable="apellido" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>

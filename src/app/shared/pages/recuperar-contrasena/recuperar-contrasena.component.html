@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-items-center mt-5">
   <div class="card shadow p-3 pr-5" style="width: 35%;">
     <div class="card-body">
-      <h4 class="text-center">Recuperar Contraseña</h4>
+      <p class="ptitle"> Recupera tu contraseña </p>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label>Correo Institucional</label>
@@ -12,24 +12,33 @@
             placeholder="ejemplo@udea.edu.co"
           />
         </div>
-        <div class="d-grid gap-2 col-12 mt-4">
+
+
+      <div class="footer-row d-md-flex justify-content-md-end mb-3">
+
+        <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+          <a  class=" btn-canc"  href="../login" > Cancelar </a>
+        </div>
+
+        <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
           <button
             id="btn-sub"
             (submit)="true"
             [disabled]="loading"
-            class="btn btn-dark"
-          >
-            <span
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-              *ngIf="isLoading | async"
-            ></span>
+            class="btn btn-dark btn-submit">
+              <span
+                  *ngIf="isLoading"
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+
+                ></span>
             Enviar
           </button>
-
-          <a  href="../login" >Cancelar </a>
         </div>
+
+      </div>
+
       </form>
     </div>
   </div>

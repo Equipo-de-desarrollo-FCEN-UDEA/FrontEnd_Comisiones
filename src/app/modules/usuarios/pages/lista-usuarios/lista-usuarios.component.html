@@ -1,27 +1,18 @@
-<div class="container-inside shadow-sm pt-4 pl-4 pr-2 mb-5 p-4 m-3 mt-5 bg-white rounded ">
-  <div class="mb-3 d-flex justify-content-between p-2 ">
-    <div class="d-flex">
-      <label 
-        for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
-      </label>
+<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded ">
+    <form>
+      <div class="mb-3 row">
+        <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar Usuarios:</label>
+        <div class="col-xs-3 col-sm-auto">
+          <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
+        </div>
+        <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
+      </div>
 
-      <input id="table-complete-search" type="text" 
-        class="form-control" name="searchTerm" 
-        [(ngModel)]="service.searchTerm">
-    </div>
-
-    <span class="col col-form-label" 
-      *ngIf="service.loading$ | async">Loading...
-    </span>
-  </div>
-
-  <hr/>
-  
-  <form class="table-responsive">
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead class="">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
           <tr>
+
             <th scope="col">#</th>
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
             <th scope="col" sortable="createdAt" (sort)="onSort($event)">Apellido</th>
@@ -31,31 +22,31 @@
             <th scope="col" sortable="nombre" (sort)="onSort($event)" >Creado</th>
             <th> </th>
           </tr>
-        </thead>
+          </thead>
+          <tbody>
 
-        <tbody>
-          <tr *ngFor="let usuario of usuarios$ | async"
-          [routerLink]="['/usuarios/ver-usuario', usuario.id]"
-          class="click-table"
-          >
-            
-          <th scope="row">{{ usuario.id }}</th>
-          
-          <td>
-            <ngb-highlight
-            [result]="usuario?.nombre" [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
+            <tr *ngFor="let usuario of usuarios$ | async">
 
-          <td>
-            <ngb-highlight
-            [result]="usuario?.apellido" [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
-          
-          <td>
-            <ngb-highlight
-              [result]="usuario.roles.nombre" 
+            <th scope="row">{{ usuario.id }}</th>
+
+
+
+            <td>
+              <ngb-highlight
+              [result]="usuario?.nombre" [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight
+              [result]="usuario?.apellido" [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+
+
+            <td>
+              <ngb-highlight
+              [result]="usuario.roles.nombre"
               class="badge badge-pill pill"
               [term]="service.searchTerm"
               [ngClass]="{
@@ -70,60 +61,91 @@
                 'bg-empleado':
                   usuario.roles.nombre === 'EMPLEADO',
                 'bg-profesor':
-                  usuario.roles.nombre === 'PROFESOR',
-                'bg-secretariacoor':
-                  usuario.roles.nombre === 'SECRETARIA COORDINACION',
-                'bg-secretarideca':
-                  usuario.roles.nombre === 'SECRETARIA DECANATURA'
-                }">
-            </ngb-highlight>
-          </td>
-          
-          <td>
-            <ngb-highlight
-            [result]="usuario.departamentos.nombre" [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
+                usuario.roles.nombre === 'PROFESOR'
+              }"
 
-          <td>
-            <ngb-highlight 
-            [result]="usuario.departamentos.facultades.nombre"  [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
 
-          <td>
-            <ngb-highlight 
-            [result]="usuario.createdAt | date:'yyyy-MM-dd'" 
-            [term]="service.searchTerm">
-            </ngb-highlight>
-          </td>
-        </tbody>
-      </table>
+
+
+              >
+
+              </ngb-highlight>
+            </td>
+
+            <!-- <td>
+              <ngb-highlight
+                [result]="ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre"
+                [term]="service.searchTerm"
+                class="badge badgee-pill pill"
+                [ngClass]="{
+                  'bg-solicitada':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'SOLICITADA',
+                  'bg-aprobada': ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'APROBADA',
+                  'bg-visto-bueno':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'VISTO BUENO',
+                  'bg-finalizada':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'FINALIZADA',
+                  'bg-rechazada-decanato':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA DECANATO',
+                  'bg-rechazada-coordinacion':
+                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
+                }"
+              ></ngb-highlight>
+            </td> -->
+
+            <td>
+              <ngb-highlight
+              [result]="usuario.departamentos?.nombre" [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight
+              [result]="usuario.departamentos?.facultades?.nombre"  [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight
+              [result]="usuario.createdAt | date:'yyyy-MM-dd'"
+              [term]="service.searchTerm">
+              </ngb-highlight>
+            </td>
+
+
+
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+        </ngb-pagination>
+
+        <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+          <option [ngValue]="2">2 items por pag.</option>
+          <option [ngValue]="4">4 items por pag.</option>
+          <option [ngValue]="6">6 items por pag.</option>
+        </select>
+      </div>
+
+    </form>
     </div>
 
-    <hr/>
-    
-    <div class="d-flex justify-content-between p-2">
-      <ngb-pagination
-        [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
-      </ngb-pagination> 
-    </div>
-  
-  </form>
-</div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -59,7 +59,7 @@ export class UsuarioService {
     }
   }
 
-  getUsuariobyId(id:Number){
+  getUsuariobyId(id:number | string){
     return this.http.get<UsuarioResponse>(`${this.prefix}/${id}`);
   }
 
@@ -73,7 +73,7 @@ export class UsuarioService {
   }
 
   updateUsuario(usuario: any) {
-    return this.http.patch<UsuarioResponse>(`${this.prefix}/${usuario.id}`, usuario);
+    return this.http.patch(`${this.prefix}/${usuario.id}`, usuario);
   }
 
 }

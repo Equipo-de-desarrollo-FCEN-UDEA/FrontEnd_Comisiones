@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Tema, temas } from '@shared/data/plan-desarrollo';
+import { Tema, temas, Objetivo } from '@shared/data/plan-desarrollo';
 import { Observable, Subject, switchMap } from 'rxjs';
 
 @Component({
@@ -9,17 +9,26 @@ import { Observable, Subject, switchMap } from 'rxjs';
   templateUrl: './plan-desarrollo-institucional.component.html',
   styleUrls: ['./plan-desarrollo-institucional.component.scss']
 })
+
+
+
 export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
   temas : Tema[] = temas;
 
   FormPlan: FormGroup = this.fb.group({});
 
-  selectedTema : number  = 1000;
+  selectedTema : number[]  = [];
 
-  selectedObjetivo : number  = 1000;
+  selectedTemas : Tema[] = [];
 
-  selectedAccion: number = 1000;
+  selectedObjetivo : string[]  = [];
+
+  selectedObjetivos : Objetivo[] = [];
+
+  selectedAccion : string[] = [];
+
+  acciones : any[] = [];
 
   objetivos$: Subject<any[] | undefined> = new Subject();
   acciones$: Subject<any[] | undefined> = new Subject();
@@ -51,22 +60,53 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
   }
   
   selectTema(value: number) {
-    this.selectedTema = value
-    this.objetivos$.next(this.temas[value].objetivos)
-    this.getSteps.patchValue([{temas: `${this.temas[value].titulo}`}])
-    this.selectedObjetivo = 1000
+    if (this.selectedTema.indexOf(value) != -1) {
+      let index = this.selectedTema.indexOf(value);
+      this.selectedTema.splice(index, 1);
+      this.selectedTemas.splice(index, 1);
+    } else {
+      this.selectedTema.push(value);
+      this.selectedTemas.push(this.temas[value]);
+    }
+    let temas = ''
+    for (let i = 0; i < this.selectedTemas.length; i++) {
+      temas += ' | ' + this.selectedTemas[i].titulo 
+    }
+    this.getSteps.patchValue([{temas: temas}])
   }
 
-  selectObjetivo(value: number, objetivo: string, acciones: string[]) {
-    this.selectedObjetivo = value
-    this.acciones$.next(acciones)
-    this.selectedAccion = 1000
-    this.getSteps.patchValue([null,{objetivo:`${objetivo}` }])
+  selectObjetivo(iO: string, iT: string, objetivo: Objetivo) {
+    let index = this.selectedObjetivo.indexOf(iO + iT);
+    if (index != -1){
+      this.selectedObjetivo.splice(index, 1);
+      this.selectedObjetivos.splice(index, 1);
+    } else {
+      this.selectedObjetivo.push(iO + iT);
+      this.selectedObjetivos.push(objetivo);
+    }
+    
+    let objetivos = ''
+    for (let i = 0; i < this.selectedObjetivos.length; i++) {
+      objetivos+= ' | ' + this.selectedObjetivos[i].descripcion;
+    }
+    this.getSteps.patchValue([null, {objetivo: objetivos}]);
   }
 
-  selectAccion(index:number, value: string) {
-    this.selectedAccion = index
-    this.getSteps.patchValue([null,null, {accion: value}])
+  selectAccion(io:string, value: string) {
+    let index = this.selectedAccion.indexOf(io);
+    if (index != -1) {
+      this.selectedAccion.splice(index, 1);
+      this.acciones.slice(index, 1);
+    } else {
+      this.selectedAccion.push(io)
+      this.acciones.push(value);
+    }
+
+    let acciones =''
+    for (let i = 0; i < this.selectedAccion.length; i++) {
+      acciones+= ' | ' + this.acciones[i]
+    }
+    this.getSteps.patchValue([null,null,{accion:acciones}]);
   }
 
   get getSteps() : FormArray {
@@ -78,7 +118,6 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
   }
 
   submit() {
-    // console.log(this.FormPlan.value)
     this.activeModal.close(this.FormPlan.value);
   }
 

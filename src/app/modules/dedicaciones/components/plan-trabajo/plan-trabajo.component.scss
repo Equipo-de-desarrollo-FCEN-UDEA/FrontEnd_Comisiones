@@ -31,29 +31,23 @@ h6{
   }
 }
 
+.btn-add {
+  border-color: #fff;
+  color: #fff;
+  background-color: #43b649;
+}
+
+.btn-add:hover {
+  background-color: #79b97c;
+}
+
 .btn-remove {
-    color: #212529;
-    background-color: #ef434d;
-    border-color: #020202
-  }
-  
-  .btn-remove:hover {
-    color: #212529;
-    background-color: #d45f57;
-    border-color: #000000
-  }
-  
-  .btn-add {
-    color: #212529;
-    background-color: #43b649;
-    border-color: #030303
-  }
-  
-  .btn-add:hover {
-    color: #212529;
-    background-color: #79b97c;
-    border-color: #000000
-  }
+  color: #fff;
+  background-color: var(--032c);
+  border-color: #fff;
+} .btn-remove:hover {
+  background-color: #d45f57;
+}
   
 .buttons{
     align-items: center;

@@ -6,7 +6,8 @@ h5{
   margin-top: 10px;
 }
 
-.container { 
+.containerInside {
+  width: 75%; 
   margin-bottom: 10em;
   align-items: unset;
   min-height: 50vh;
@@ -20,7 +21,7 @@ h5{
 
 
 @media (max-width: 576px) {
-  .container {
+  .containerInside {
       width: 95%;
   }
 }

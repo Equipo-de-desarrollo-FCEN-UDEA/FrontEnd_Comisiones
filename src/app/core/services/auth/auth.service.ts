@@ -58,11 +58,7 @@ export class AuthService {
 
     this.cookieService.delete('token', '/');
     this.cookieService.delete('usuario', '/');
-    this.cookieService.deleteAll('/');
-    
-    if (this.isLoggedIn()) {
-      this.logout();
-    }
+    this.cookieService.deleteAll('/','/');
     this.router.navigate(['/login']);
   }
 
@@ -75,9 +71,15 @@ export class AuthService {
   }
   
   forgotPassword(correo: string) {
-    return this.http.post(`${this.prefix}`+'/restorePassword', {
+    return this.http.post(`${this.prefix}/restorePassword/${correo}`, {
       correo:correo,
     });
   }
+
+  cambiarContrasena(contrasena: string, newcontrasena: string) {
+    return this.http.post(`${this.prefix}/cambiarcontrasena`, {contrasena : contrasena, newcontrasena: newcontrasena})
+  }
+
+  
 
 }

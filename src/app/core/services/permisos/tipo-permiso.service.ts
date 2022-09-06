@@ -16,4 +16,8 @@ export class TipoPermisoService {
   getTiposPermiso(){
     return this.http.get<TiposPermiso[]>(this.urlEndPoint)
   }
+
+  getTipoPermisoId(id:number){
+    return this.http.get<TiposPermiso>(`${this.urlEndPoint}/${id}`)
+  }
 }

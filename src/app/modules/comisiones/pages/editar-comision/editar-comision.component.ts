@@ -73,6 +73,7 @@ export class EditarComisionComponent implements OnInit {
 
 
 
+
  // ------------ CONSTRUCTOR ---------------
   constructor(
     private calendar: NgbCalendar,
@@ -120,7 +121,9 @@ export class EditarComisionComponent implements OnInit {
           tipos_comision_id: Number(res.tipos_comision.id),
           justificacion: res.justificacion,
           idioma: res.idioma,
-          lugar: res.lugar,
+          pais: res.lugar?.split(",")[0],
+          provincia:  res.lugar?.split(",")[1]? res.lugar?.split(",")[1]: "",
+          ciudad: res.lugar?.split(",")[2]? res.lugar?.split(",")[2]: "",
           fecha_inicio: this.datepipe.transform(res.fecha_inicio, 'YYYY-MM-dd'),
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
         });
@@ -219,15 +222,6 @@ export class EditarComisionComponent implements OnInit {
     console.log(this.files);
   }
 
-  onChangeProvincia(event:any) {
-    const estadoId = event.target.value;
-    this.provincia = this.provincias[estadoId];
-    this.paisesCiudadesSvc.getCiudades(this.pais, this.provincia).subscribe(
-      (data:Ciudad[]) => {
-        this.ciudades = data;
-      }
-    );
-  }
 
   removeFile(index: number) {
     if (this.archivos.length > 1) {
@@ -260,6 +254,31 @@ export class EditarComisionComponent implements OnInit {
   }
 
 
+  // --------------------------------------
+  // -------- LUGAR - PAISES - CIUDAD -----
+  // --------------------------------------
+
+  onChangePais(event:any) {
+    const paisId = event.target.value;
+    this.pais = this.paises[paisId];
+    this.paisesCiudadesSvc.getEstados(this.pais).subscribe(
+      (data:Estado[]) => {
+        this.provincias = data;
+      }
+    )
+  }
+
+  onChangeProvincia(event:any) {
+    const estadoId = event.target.value;
+    this.provincia = this.provincias[estadoId];
+    this.paisesCiudadesSvc.getCiudades(this.pais, this.provincia).subscribe(
+      (data:Ciudad[]) => {
+        this.ciudades = data;
+      }
+    );
+  }
+
+
  // ----------------------------------------
  // ----------- EDITAR COMISION ------------
  // ----------------------------------------
@@ -281,7 +300,7 @@ export class EditarComisionComponent implements OnInit {
       fecha_resolucion: new Date(this.formatter.format(this.today)),
       justificacion: this.editarComisionForm.value.justificacion,
       idioma: this.editarComisionForm.value.idioma,
-      lugar:this.editarComisionForm.value.lugar,
+      lugar: this.pais.name+', '+this.provincia.name,
       tipos_comision_id: this.editarComisionForm.value.tipos_comision_id
     }
 

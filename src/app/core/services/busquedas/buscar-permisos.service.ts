@@ -56,7 +56,7 @@ export class BuscarPermisosService {
   private _total$ = new BehaviorSubject<number>(0);
   private _state: State = {
     page: 1,
-    pageSize: 15,
+    pageSize: 10,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -86,6 +86,7 @@ export class BuscarPermisosService {
       .subscribe(
         (resp: any) => {
           this.PERMISOS = resp.permisos;
+          console.log(resp)
         })
     }
 

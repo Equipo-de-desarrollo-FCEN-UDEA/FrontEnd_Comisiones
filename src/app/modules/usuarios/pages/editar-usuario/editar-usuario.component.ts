@@ -10,6 +10,11 @@ import { tiposId } from '@shared/data/tipos-id';
 import { take } from 'rxjs';
 import Swal from 'sweetalert2';
 
+@Component({
+  selector: 'app-editar-usuario',
+  templateUrl: './editar-usuario.component.html',
+  styleUrls: ['./editar-usuario.component.scss']
+})
 
 export class EditarUsuarioComponent implements OnInit {
   public id : Number | string = 0;
@@ -22,6 +27,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   submitted : boolean = false;
 
+
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; 
 
 
@@ -31,10 +37,13 @@ export class EditarUsuarioComponent implements OnInit {
     private fb : FormBuilder,
     public activateRoute: ActivatedRoute,
     public usuarioService: UsuarioService,
-    public loadingSvc : LoaderService
+    public loadingSvc : LoaderService,
+    private departamentosSvc: DepartamentoService,
+    private rolesSvc: RolService
   ) {
     this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
    }
+   formUpdate = this.fb.group({
     correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
     nombre: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     apellido: ['', [Validators.minLength(3), Validators.maxLength(250)]],

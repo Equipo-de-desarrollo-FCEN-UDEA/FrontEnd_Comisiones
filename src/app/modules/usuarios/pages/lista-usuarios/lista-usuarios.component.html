@@ -25,7 +25,10 @@
           </thead>
           <tbody>
 
-            <tr *ngFor="let usuario of usuarios$ | async">
+            <tr *ngFor="let usuario of usuarios$ | async"
+            [routerLink]="['/usuarios/ver-usuario', usuario.id]"
+            class="click-table"
+            >
 
             <th scope="row">{{ usuario.id }}</th>
 

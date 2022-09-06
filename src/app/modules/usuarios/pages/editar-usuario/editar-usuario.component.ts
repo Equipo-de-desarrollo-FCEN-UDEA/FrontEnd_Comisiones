@@ -65,21 +65,21 @@ export class EditarUsuarioComponent implements OnInit {
         } 
       });
 
-  //   if (this.id == 'me'){
-  //     this.usuarioSvc.getUsuario().subscribe(
-  //       (data: UsuarioResponse) => {
-  //         this.usuario = data;
-  //         this.id = data.id
-  //         this.formUpdate.patchValue(this.usuario);
-  //       }
-  //     );
-  //   } else {
-  //   this.usuarioSvc.getUsuariobyId(this.id as Number).subscribe(res => {
-  //     this.usuario = res;
-  //     this.formUpdate.patchValue(this.usuario);
-  //   }
-  //   );
-  // }
+    if (this.id == 'me'){
+      this.usuarioSvc.getUsuario().subscribe(
+        (data: UsuarioResponse) => {
+          this.usuario = data;
+          this.id = data.id
+          this.formUpdate.patchValue(this.usuario);
+        }
+      );
+    } else {
+    this.usuarioSvc.getUsuariobyId(this.id as number).subscribe(res => {
+      this.usuario = res;
+      this.formUpdate.patchValue(this.usuario);
+    }
+    );
+  }
 }
 
 get f() {

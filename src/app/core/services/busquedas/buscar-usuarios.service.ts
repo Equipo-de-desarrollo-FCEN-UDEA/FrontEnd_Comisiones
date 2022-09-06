@@ -52,7 +52,7 @@ export class BuscarUsuariosService {
 
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 15,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -78,7 +78,7 @@ export class BuscarUsuariosService {
 
     this._search$.next();
 
-    this.usuariosSvc.getAllUsuarios()
+    this.usuariosSvc.scopeGetusuarios()
     .subscribe(
       (resp: any ) => {
         this.USUARIOS = resp;

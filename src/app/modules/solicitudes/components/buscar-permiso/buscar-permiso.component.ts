@@ -50,6 +50,7 @@ export class BuscarPermisoComponent {
   desarchivarPermiso(id:number){
     this.permisoService.NoArchivado(id).subscribe()
     this.Buscarservice.ngOnchanges()
+    console.log("desarchivado")
   }
   
   onSort({ column, direction}: SortEvent) {

@@ -4,6 +4,7 @@ import { Rol } from '@interfaces/roles';
 import { Usuario, UsuarioInside } from '@interfaces/usuario';
 import { AuthService } from '@services/auth/auth.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
+import { prefix } from '@shared/data/ruta-api';
 import { filter} from 'rxjs';
 
 
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
   public rol!: Rol
   public usuarioInside!: UsuarioInside;
   public admin: any = true;
+  public prefix = prefix
 
   constructor(
     private authService : AuthService,

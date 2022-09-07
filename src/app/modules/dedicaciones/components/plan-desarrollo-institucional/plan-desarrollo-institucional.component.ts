@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Tema, temas, Objetivo } from '@shared/data/plan-desarrollo';
+import { prefix } from '@shared/data/ruta-api';
 import { Observable, Subject, switchMap } from 'rxjs';
 
 @Component({
@@ -29,6 +30,8 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
   selectedAccion : string[] = [];
 
   acciones : any[] = [];
+
+  logosurl = prefix + 'logos/';
 
   objetivos$: Subject<any[] | undefined> = new Subject();
   acciones$: Subject<any[] | undefined> = new Subject();

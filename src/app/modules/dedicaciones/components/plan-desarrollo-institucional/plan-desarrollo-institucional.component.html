@@ -48,7 +48,7 @@
             [stepControl]="formArray.get([0])!">
             <ng-template cdkStepLabel class="cdk-step-label">
                 <span class="icon is-medium">
-                    <img src="../../../../assets/one-svgrepo-com.svg" title="Temas" style="margin: auto;" width="25px"
+                    <img [src]="logosurl+'one-svgrepo-com.svg'" title="Temas" style="margin: auto;" width="25px"
                         *ngIf="formArray.get([0])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([0])!.valid"></i>
                 </span>
@@ -91,7 +91,7 @@
         <cdk-step label="Objetivos" [optional]="false">
             <ng-template cdkStepLabel class="cdk-step-label">
                 <span class="icon is-medium" title="Objetivos">
-                    <img src="../../../../assets/two-svgrepo-com.svg" width="25px" *ngIf="formArray.get([1])!.invalid">
+                    <img [src]="logosurl+'two-svgrepo-com.svg'" width="25px" *ngIf="formArray.get([1])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([1])!.valid"></i>
                 </span>
             </ng-template>
@@ -142,7 +142,7 @@
         <cdk-step label="Acciones estratégicas" [optional]="false">
             <ng-template cdkStepLabel class="cdk-step-label">
                 <span class="icon is-medium" title="Acciones estratégicas">
-                    <img src="../../../../assets/three-svgrepo-com.svg" width="25px"
+                    <img [src]="logosurl+'three-svgrepo-com.svg'" width="25px"
                         *ngIf="formArray.get([2])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([2])!.valid"></i>
                 </span>
@@ -192,7 +192,7 @@
         <cdk-step label="Indicadores" [optional]="false" formGroupName="3">
             <ng-template cdkStepLabel class="cdk-step-label">
                 <span class="icon is-medium">
-                    <img src="../../../../../assets/four-svgrepo-com.svg" width="25px"
+                    <img [src]="logosurl+'four-svgrepo-com.svg'" width="25px"
                         *ngIf="formArray.get([3])!.invalid">
                     <i class="fas fa-duotone fa-lg fa-check-circle" *ngIf="formArray.get([3])!.valid"></i>
                 </span>

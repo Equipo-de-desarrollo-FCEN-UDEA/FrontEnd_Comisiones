@@ -219,6 +219,9 @@
                   <li>
                     <a
                       class="dropdown-item"
+                      type="button"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"
                       [routerLink]="['/permisos/crear-permiso']"
                       >Permiso</a
                     >
@@ -226,6 +229,9 @@
                   <li>
                     <a
                       class="dropdown-item"
+                      type="button"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"
                       [routerLink]="['/comisiones/crear-comision']"
                       >Comisión</a
                     >
@@ -249,7 +255,11 @@
                   <span>GENERAL</span>
                 </div>
                 <ul>
-                  <li [routerLink]="['/usuarios/ver-usuario', usuario.id]">
+                  <li 
+                    type="button"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                    [routerLink]="['/usuarios/ver-usuario', usuario.id]">
                     <a>
                       <span>
                         <i class="fa-solid fa-user-astronaut"></i>
@@ -257,7 +267,11 @@
                       </span>
                     </a>
                   </li>
-                  <li [routerLink]="['/home']">
+                  <li 
+                    type="button"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                    [routerLink]="['/home']">
                     <a>
                       <span>
                         <i class="fas fa-home"></i>
@@ -281,7 +295,11 @@
                     usuario.roles.nombre != 'PROFESOR'
                   "
                 >
-                  <li [routerLink]="['/usuarios/lista-usuarios']">
+                  <li 
+                    type="button"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                    [routerLink]="['/usuarios/lista-usuarios']">
                     <a>
                       <span>
                         <i class="fa-solid fa-users"></i>
@@ -289,7 +307,11 @@
                       </span>
                     </a>
                   </li>
-                  <li [routerLink]="['/usuarios/registrar-usuarios']">
+                  <li
+                    type="button"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close" 
+                    [routerLink]="['/usuarios/registrar-usuarios']">
                     <a>
                       <span>
                         <i class="fa-solid fa-user-group"></i>

@@ -1,10 +1,10 @@
-<div class="container card shadow bg-white rounded p-4">
+<div class="container card shadow bg-white rounded p-5">
 
 
-    <form class="need-validation card" novalidate [formGroup]="fBasicInfo" (ngSubmit)="onSubmit()">
-        <h1  >
+    <form class="need-validation" novalidate [formGroup]="fBasicInfo" (ngSubmit)="onSubmit()">
+        <h2 class="formTitle text-center m-2 mb-4">
             FORMATO DE EVALUACIÓN DE PROPUESTA O PROYECTO DE DEDICACIÓN EXCLUSIVA
-        </h1>
+        </h2>
 
         <h5>Datos del profesor solicitante</h5>
         <!-- <div class="alert alert-info">
@@ -109,7 +109,10 @@
 
         <hr>
         <h5>Apoya al plan de desarrollo y acción institucional vigente en:</h5>
-        <button class="btn btn-success btn-sm" type="button" (click)="open()">Ver plan de desarrollo y acción</button>
+        <div class="d-grid gap-2 m-3">
+            <button class="btn btn-success btn-sm" type="button" (click)="open()">Ver plan de desarrollo y acción</button>
+        </div>
+        
         <!-- <div class="row">
             <div class="col-md-6 col-lg-6">
                 <h6>Temas:<span style="color:red">*</span></h6>
@@ -332,14 +335,15 @@
 
         </div>
 
-
-
-        <button class="btn btn-add" id="Enviar"   (submit)="true"
+        <div class="d-grid gap-2 m-3">
+            <button class="btn btn-add" id="Enviar" (submit)="true"
             [disabled]="fBasicInfo.invalid || (isLoading|async)">
             <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
                 aria-hidden="true"></span>
             Enviar
         </button>
+        </div>
+
 
     </form>
 </div>

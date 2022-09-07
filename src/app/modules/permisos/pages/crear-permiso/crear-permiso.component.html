@@ -1,7 +1,9 @@
 <div class="containerInside card shadow mt-5 bg-white rounded p-5">
   <div class="row header-row mb-1">
     <div class="col">
-      <span class="text-secondary">CREAR PERMISO</span>
+<!-- 
+      <p class="ptitle"> Nuevo permiso</p> -->
+      <span class="text-secondary spantext">CREAR PERMISO</span>
     </div>
   </div>
 
@@ -15,7 +17,7 @@
     (ngSubmit)="onSubmit()"
   >
     <!-- DATEPICKER -->
-    
+
     <ng-template #footerTemplate>
       <hr class="my-0" />
       <p
@@ -23,7 +25,7 @@
       >
         Elige la segunda fecha
       </p>
-      <p 
+      <p
       *ngIf="!fromDate"
       >
         Elige la primera fecha
@@ -74,7 +76,7 @@
         </ng-template>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="formfloatig">
         <select
@@ -168,7 +170,7 @@
             rows="5"
           ></textarea>
           <label for="floatingjustificacion" class="formLabel">
-          
+
           </label>
           </div>
         </div>
@@ -229,7 +231,7 @@
     <div class="footer-row d-md-flex justify-content-md-end mb-3">
 			<div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
 				<button
-					type="button" 
+					type="button"
 					class="btn btn-secondary"
           [routerLink]="['/home']">
 					Cancelar

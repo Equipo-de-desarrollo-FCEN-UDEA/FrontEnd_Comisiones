@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Usuario, UsuarioResponse } from '@interfaces/usuario';
+import { DepartamentoService } from '@services/departamentos/departamento.service';
 import { LoaderService } from '@services/interceptors/loader.service';
+import { RolService } from '@services/roles/rol.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { tiposId } from '@shared/data/tipos-id';
 import { take } from 'rxjs';
@@ -35,14 +37,15 @@ export class EditarUsuarioComponent implements OnInit {
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; 
 
 
-
   constructor(
     private usuarioSvc: UsuarioService,
     private router: Router,
     private fb : FormBuilder,
     public activateRoute: ActivatedRoute,
     public usuarioService: UsuarioService,
-    public loadingSvc : LoaderService
+    public loadingSvc : LoaderService,
+    private departamentosSvc: DepartamentoService,
+    private rolesSvc: RolService
   ) {
     this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
    }

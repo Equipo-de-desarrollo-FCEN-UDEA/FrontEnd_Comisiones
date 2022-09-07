@@ -18,7 +18,7 @@ export class RecuperarContrasenaComponent implements OnInit {
 
     error = "";
 
-    // Loader
+  // Loader
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   constructor(

@@ -1,21 +1,25 @@
 
 <div class="container d-flex justify-content-center align-items-center p-0 ">
-<img src="../../../../assets/logosimbolo-vertical.png" alt="Logo vertical de la universidad de antioquia" class="mt-4" style="width:40%">
+<!-- <img src="../../../../assets/logosimbolo-vertical.png" alt="Logo vertical de la universidad de antioquia" class="mt-4" style="width:40%"> -->
   <div class="card p-0 shadow">
-    <h6 class="mt-4 text-wrap">
+    <h1 class="mt-4 text-wrap">
+      <strong>SIGA UdeA</strong>
+    </h1>
+    <h6 class="mt-2 text-wrap" style="color:black">
       Sistema Integrado de Gestión Administrativa
     </h6>
+
     <hr/>
 
 		<div class="card-body" >
-			<h4 style="color:rgba(50, 50, 50, 0.874)">Inicio de Sesión</h4>
+			<h4 style="color:rgba(50, 50, 50, 0.874)">Iniciar sesión</h4>
       <form
         need-validation
         novalidate
         [formGroup]="formLogin"
         (ngSubmit)="onSubmitLogin()"
       >
-      
+
       <!-- <div [ngbCollapse]="!isCollapsed" id="Login"> -->
           <div>
             <div class="form px-4 pt-1 m-2">
@@ -71,7 +75,7 @@
                 >¿Olvidaste tu contraseña?</a>
               </div>
 
-              
+
 							<div class="d-grid gap-2 col-12">
 								<button
 									id="btn-sub"
@@ -88,7 +92,7 @@
 									Ingresar
 								</button>
 							</div>
-              <div class="alert alert-danger" *ngIf="error">
+              <div class="alert alert-danger col-12 mt-3" *ngIf="error">
                 {{error}}
               </div>
             </div>

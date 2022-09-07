@@ -7,3 +7,25 @@ background-color: #8dc63f;
 } .btn-dark:active {
 border-color: #8dc63f;
 }
+
+.btn-canc {
+  text-align: center;
+  border-radius: 0.4em;
+  padding: 0.4em;
+  color: #fff;
+  background-color: #a9b1a9;
+  border-color: #7d8180;
+} .btn-canc:hover {
+background-color: #9e9b9b;
+} .btn-canc:active {
+border-color: #9e9b9b;
+}
+
+.ptitle{
+  color: #ffffff;
+  background-color: #026937;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  text-align: center;
+}
+

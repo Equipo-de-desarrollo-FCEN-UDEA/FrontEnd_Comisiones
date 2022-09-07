@@ -2,7 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DepartamentoInDB } from '@interfaces/departamentos';
-import { Rol } from '@interfaces/roles';
+import { Rol, RolResponse } from '@interfaces/roles';
 import { DepartamentoService } from '@services/departamentos/departamento.service';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { RolService } from '@services/roles/rol.service';
@@ -37,7 +37,6 @@ export class RegistrarUsuariosComponent implements OnInit {
   // Roles 
   roles$: Observable<Rol[]>
 
-
   constructor(
     private formBuilder: FormBuilder,
     private ngZone: NgZone,
@@ -53,7 +52,9 @@ export class RegistrarUsuariosComponent implements OnInit {
     this.roles$ = this.rolesSvc.getRoles();
 
     this.crearUsuarioForm = this.formBuilder.group({
-      correo : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
+      correo : ['', [Validators.required, 
+        //Validators.pattern(this.isCorreoValid)
+      ]],
       contrasena : ['', Validators.required],
       nombre : ['', Validators.required],
       apellido : ['', Validators.required],

@@ -7,10 +7,10 @@ h5{
 }
 
 .containerInside {
-  width: 75%; 
+  width: 75%;
   margin-bottom: 10em;
   align-items: unset;
-  min-height: 50vh;
+  min-height: 10vh;
   width: 50em;
 }
 
@@ -20,8 +20,16 @@ h5{
 }
 
 
-@media (max-width: 576px) {
+@media (max-width: 920px) {
   .containerInside {
       width: 95%;
   }
+}
+
+.ptitle{
+  color: #ffffff;
+  background-color: #026937;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  text-align: center;
 }

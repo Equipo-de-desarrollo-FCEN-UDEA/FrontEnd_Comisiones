@@ -1,9 +1,9 @@
-.containerInside { 
+.containerInside {
   margin-bottom: 10em;
   width: 50%;
   align-items: unset;
   min-height: 10vh;
-  
+
 }
 
 
@@ -15,4 +15,12 @@
 
 .btn-success {
   background-color: #43b649;
+}
+
+.ptitle{
+  color: #ffffff;
+  background-color: #026937;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  text-align: center;
 }

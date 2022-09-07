@@ -1,63 +1,135 @@
-
-<nav class="navbar navbar-expand-xl navbar-light" >
-
-  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-    <i class="fa fa-bars" style="color:rgb(255, 255, 255);"></i>
+<nav class="navbar navbar-expand-xl navbar-light">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasNavbar"
+    aria-controls="offcanvasNavbar"
+  >
+    <i class="fa fa-bars" style="color: rgb(255, 255, 255)"></i>
   </button>
   <div class="logo">
     <a routerLink="home">
       <img [src]="prefix+'logos/'+'Logo+Facultad+de+Ciencias+Exactas+y+Naturales-blanco.png'" alt="Logo udea" width="180px" >
     </a>
-
   </div>
   <div class="profile .d-none .d-lg-block .d-xl-none navbar-brand">
     <ul>
-      <li ngbDropdown >
-        <a id="id01" ngbDropdownToggle >
+      <li ngbDropdown>
+        <a id="id01" ngbDropdownToggle>
           <span class="fa-stack fa-1x">
-            <i class="fas fa-circle fa-stack-2x" style="color:#fff;"></i>
+            <i class="fas fa-circle fa-stack-2x" style="color: #fff"></i>
             <i class="fas fa-user fa-stack-1x fa-inverse"></i>
           </span>
         </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="id01" ngbDropdownMenu>
-          <a class="dropdown-item"
-             [routerLink]="['/usuarios/ver-usuario', usuario.id]"
-             >Ver perfil
+        <div
+          class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="id01"
+          ngbDropdownMenu
+        >
+          <a
+            class="dropdown-item"
+            [routerLink]="['/usuarios/ver-usuario', usuario.id]"
+            >Ver perfil
           </a>
-          <li><hr class="dropdown-divider"></li>
+          <li><hr class="dropdown-divider" /></li>
           <a class="dropdown-item" (click)="logout()">Cerrar Sesi&oacute;n</a>
-
         </div>
       </li>
     </ul>
   </div>
 
-  <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
-    <div class="navbar-brand d-flex ">
-      <li class="nav-item  ">
-        <a style="color:#fff" class="nav-link active btn-item" [routerLink]="['/home']" aria-current="page">Solicitudes</a>
-      </li>
-      <li class="nav-item dropdown" *ngIf="!(usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR')">
-        <a style="color:#fff" class="nav-link dropdown-toggle btn-item " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Generar Solicitud
+  <div
+    [ngbCollapse]="isNavbarCollapsed"
+    class="collapse navbar-collapse"
+    id="navbarsDefault"
+  >
+    <div class="navbar-brand d-flex">
+      <li
+        class="nav-item dropdown"
+        *ngIf="
+          !(
+            usuario.roles.nombre != 'EMPLEADO' &&
+            usuario.roles.nombre != 'PROFESOR'
+          )
+        "
+      >
+        <a
+          style="color: #fff"
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Crear Solicitud
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-          <li><a class="dropdown-item" [routerLink]="['/permisos/crear-permiso']">Permiso</a></li>
-          <li><a class="dropdown-item" [routerLink]="['/comisiones/crear-comision']">Comisión</a></li>
-          <li><a class="dropdown-item" [routerLink]="['/dedicaciones/crear-dedicacion']">Dedicación Exclusiva</a></li>
+          <li>
+            <a class="dropdown-item" [routerLink]="['/permisos/crear-permiso']"
+              >Permiso</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              [routerLink]="['/comisiones/crear-comision']"
+              >Comisión</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              [routerLink]="['/dedicaciones/crear-dedicacion']"
+              >Dedicación Exclusiva</a
+            >
+          </li>
         </ul>
       </li>
-
-      <li class="nav-item " *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'">
-        <a style="color:#fff" class="nav-link active btn-item" [routerLink]="['/usuarios/lista-usuarios']" aria-current="page">Usuarios</a>
+      <li class="nav-item">
+        <a
+          style="color: #fff"
+          class="nav-link active"
+          [routerLink]="['/home']"
+          aria-current="page"
+          >Solicitudes</a
+        >
       </li>
-      <li class="nav-item " *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'">
-        <a style="color:#fff" class="nav-link active btn-item"  [routerLink]="['/usuarios/registrar-usuarios']" aria-current="page">Registrar Usuarios</a>
+      <li
+        class="nav-item"
+        *ngIf="
+          usuario.roles.nombre != 'EMPLEADO' &&
+          usuario.roles.nombre != 'PROFESOR'
+        "
+      >
+        <a
+          style="color: #fff"
+          class="nav-link active"
+          [routerLink]="['/usuarios/lista-usuarios']"
+          aria-current="page"
+          >Usuarios</a
+        >
+      </li>
+      <li
+        class="nav-item"
+        *ngIf="
+          usuario.roles.nombre != 'EMPLEADO' &&
+          usuario.roles.nombre != 'PROFESOR'
+        "
+      >
+        <a
+          style="color: #fff"
+          class="nav-link active"
+          [routerLink]="['/usuarios/registrar-usuarios']"
+          aria-current="page"
+          >Registrar Usuarios</a
+        >
       </li>
     </div>
   </div>
 
-<!--
+  <!-- 
   <div class="navbar-brand">
     <ul>
       <li ngbDropdown>
@@ -70,12 +142,21 @@
     </ul>
   </div>  -->
 
-
-
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+  <div
+    class="offcanvas offcanvas-start"
+    tabindex="-1"
+    id="offcanvasNavbar"
+    aria-labelledby="offcanvasNavbarLabel"
+  >
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
-      <button type="button" class="btn-close text-reset" style="margin-right: 1em;"  data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button
+        type="button"
+        class="btn-close text-reset"
+        style="margin-right: 1em"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
     </div>
     <div class="offcanvas-body">
       <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -89,31 +170,76 @@
               </div>
               <div class="user-info">
                 <span class="user-name">
-                   {{usuario.nombre}}
+                  {{ usuario.nombre }}
                   <br />
-                   {{usuario.apellido}}
+                  {{ usuario.apellido }}
                 </span>
                 <br />
                 <span class="user-role">
                   <span class="user-status">
                     <i class="fa fa-circle"></i>
                   </span>
-                  {{usuario.roles.nombre}}
+                  {{ usuario.roles.nombre }}
                 </span>
               </div>
               <!-- sidebar-header  -->
-              <hr color="#f5f5f5" />
-              <div class="create-request" *ngIf="!(usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR')">
-                <button type="button" class="btn-request dropdown-toggle w-75" id="navbarScrollingDropdown" data-bs-toggle="dropdown">
+              <hr
+                color="#f5f5f5"
+                *ngIf="
+                  !(
+                    usuario.roles.nombre != 'EMPLEADO' &&
+                    usuario.roles.nombre != 'PROFESOR'
+                  )
+                "
+              />
+              <div
+                class="create-request"
+                *ngIf="
+                  !(
+                    usuario.roles.nombre != 'EMPLEADO' &&
+                    usuario.roles.nombre != 'PROFESOR'
+                  )
+                "
+              >
+                <button
+                  type="button"
+                  class="btn-request dropdown-toggle w-75"
+                  id="navbarScrollingDropdown"
+                  data-bs-toggle="dropdown"
+                >
                   <span style="color: #ffff; margin: 0">
                     <i class="fas fa-plus-circle"></i>
                   </span>
                   Crear Solicitud
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><a class="dropdown-item" [routerLink]="['/permisos/crear-permiso']">Permiso</a></li>
-                  <li><a class="dropdown-item" [routerLink]="['/comisiones/crear-comision']">Comisión</a></li>
-                  <li><a class="dropdown-item" [routerLink]="['/dedicaciones/crear-dedicacion']" >Dedicación Exclusiva</a></li>
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="navbarScrollingDropdown"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/permisos/crear-permiso']"
+                      >Permiso</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="['/comisiones/crear-comision']"
+                      >Comisión</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      type="button"
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"
+                      [routerLink]="['/dedicaciones/crear-dedicacion']"
+                      >Dedicación Exclusiva</a
+                    >
+                  </li>
                 </ul>
               </div>
               <!-- sidebar-search  -->
@@ -123,7 +249,7 @@
                   <span>GENERAL</span>
                 </div>
                 <ul>
-                  <li  [routerLink]="['/usuarios/ver-usuario', usuario.id]">
+                  <li [routerLink]="['/usuarios/ver-usuario', usuario.id]">
                     <a>
                       <span>
                         <i class="fa-solid fa-user-astronaut"></i>
@@ -140,10 +266,21 @@
                     </a>
                   </li>
                 </ul>
-                <div *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'" class="header-menu">
+                <div
+                  *ngIf="
+                    usuario.roles.nombre != 'EMPLEADO' &&
+                    usuario.roles.nombre != 'PROFESOR'
+                  "
+                  class="header-menu"
+                >
                   <span> ESPECÍFICO </span>
                 </div>
-                <ul *ngIf="usuario?.roles?.nombre != 'EMPLEADO' && usuario?.roles?.nombre != 'PROFESOR'">
+                <ul
+                  *ngIf="
+                    usuario.roles.nombre != 'EMPLEADO' &&
+                    usuario.roles.nombre != 'PROFESOR'
+                  "
+                >
                   <li [routerLink]="['/usuarios/lista-usuarios']">
                     <a>
                       <span>
@@ -180,4 +317,3 @@
     </div>
   </div>
 </nav>
-

@@ -1,10 +1,10 @@
 <div class="container card shadow bt-white rounded">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ladoizquierdo">
-            <h3>
+            <!-- <p class="ptitle">
                 Carta de iniciación
-            </h3>
-
+            </p> -->
+            <span class="text-secondary spantext">CARTA INICIACIÓN</span>
             <form [formGroup]="FormCarta" (submit)="OnSubmit()">
                 <div class="form-group">
                     <quill-editor #disciplineQE id="discipline-qe" [placeholder]="'Ingrese aquí el cuerpo de la carta'"
@@ -88,5 +88,5 @@
             </button>
         <!-- <button class="btn btn-success btn-lg" (click)="OnSubmit()"  (submit)="true">Continuar <span><i class="fas fa-angle-right"></i></span></button> -->
     </div>
-   
+
 </div>

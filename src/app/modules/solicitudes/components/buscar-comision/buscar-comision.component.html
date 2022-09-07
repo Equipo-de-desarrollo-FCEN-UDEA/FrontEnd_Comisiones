@@ -14,7 +14,7 @@
         *ngIf="Buscarservice.loading$ | async">Loading...
       </span>
 
-      <select class="form-select" 
+      <select class="form-select"  *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
         (change)="changeOption($event)" style="width: auto">
         <option value="0">No archivados</option>
         <option value="1">Archivados</option>

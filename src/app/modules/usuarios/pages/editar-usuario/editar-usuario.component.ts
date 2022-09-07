@@ -27,11 +27,41 @@ export class EditarUsuarioComponent implements OnInit {
 
   submitted : boolean = false;
 
+  public rol : string = localStorage.getItem('rol') || '';
+
   roles = [
     {
       nombre: "PROFESOR", 
-      id: "8"
-    }
+      id: 8
+    },
+    { 
+      nombre: "ADMIN",
+      id: 1
+    },
+    { 
+      nombre: "VICERRECTORIA",
+      id: 2
+    },
+    { 
+      nombre: "DECANATURA",
+      id: 3
+    },
+    { 
+      nombre: "SECRETARIA DECANATURA",
+      id: 4
+    },
+    { 
+      nombre: "COORDINACION",
+      id: 5
+    },
+    { 
+      nombre: "SECRETARIA COORDINACION",
+      id: 6
+    },
+    { 
+      nombre: "EMPLEADO",
+      id: 7
+    },
   ]
 
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; 
@@ -55,10 +85,10 @@ export class EditarUsuarioComponent implements OnInit {
     apellido: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     tipo_identificacion: ['', [Validators.maxLength(250)]],
     identificacion: [0, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
-    departamentos_id : ['', Validators.required],
-    contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    // roles_id : [NaN, Validators.required]
+    // departamentos_id : ['', Validators.required],
+    // contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
+    // validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
+    roles_id : [NaN, Validators.required]
    });
 
   ngOnInit(): void {

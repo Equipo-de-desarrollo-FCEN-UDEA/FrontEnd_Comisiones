@@ -1,7 +1,6 @@
 import { TypeofExpr } from '@angular/compiler';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Country } from "../components/tablas/tabla-solicitudes/country";
 import { Comision } from '@interfaces/comisiones';
 import { Permiso } from '@interfaces/permisos';
 

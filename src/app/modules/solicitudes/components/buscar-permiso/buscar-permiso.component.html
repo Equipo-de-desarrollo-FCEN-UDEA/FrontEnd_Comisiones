@@ -14,7 +14,7 @@
       *ngIf="Buscarservice.loading$ | async">Loading...
     </span>
 
-    <select class="form-select" 
+    <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" 
       (change)="changeOption($event)" style="width: auto">
       <option value="0">No archivados</option>
       <option value="1">Archivados</option>
@@ -80,7 +80,7 @@
           
           <td>
             <ngb-highlight 
-              [result]="ultimoElemento(permiso.intermediate_permisos).createdAt | date:'yyyy-MM-dd'" 
+              [result]="(ultimoElemento(permiso.intermediate_permisos).createdAt | date:'yyyy-MM-dd')?.toString()" 
               [term]="Buscarservice.searchTerm">
             </ngb-highlight>
           </td>

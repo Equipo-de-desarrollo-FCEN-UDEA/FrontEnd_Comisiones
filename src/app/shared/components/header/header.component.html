@@ -49,8 +49,8 @@
         class="nav-item dropdown"
         *ngIf="
           !(
-            usuario.roles.nombre != 'EMPLEADO' &&
-            usuario.roles.nombre != 'PROFESOR'
+            usuario?.roles?.nombre != 'EMPLEADO' &&
+            usuario?.roles?.nombre != 'PROFESOR'
           )
         "
       >
@@ -99,8 +99,8 @@
       <li
         class="nav-item"
         *ngIf="
-          usuario.roles.nombre != 'EMPLEADO' &&
-          usuario.roles.nombre != 'PROFESOR'
+          usuario?.roles?.nombre != 'EMPLEADO' &&
+          usuario?.roles?.nombre != 'PROFESOR'
         "
       >
         <a
@@ -114,8 +114,8 @@
       <li
         class="nav-item"
         *ngIf="
-          usuario.roles.nombre != 'EMPLEADO' &&
-          usuario.roles.nombre != 'PROFESOR'
+          usuario?.roles?.nombre != 'EMPLEADO' &&
+          usuario?.roles?.nombre != 'PROFESOR'
         "
       >
         <a
@@ -187,8 +187,8 @@
                 color="#f5f5f5"
                 *ngIf="
                   !(
-                    usuario.roles.nombre != 'EMPLEADO' &&
-                    usuario.roles.nombre != 'PROFESOR'
+                    usuario?.roles?.nombre != 'EMPLEADO' &&
+                    usuario?.roles?.nombre != 'PROFESOR'
                   )
                 "
               />
@@ -196,8 +196,8 @@
                 class="create-request"
                 *ngIf="
                   !(
-                    usuario.roles.nombre != 'EMPLEADO' &&
-                    usuario.roles.nombre != 'PROFESOR'
+                    usuario?.roles?.nombre != 'EMPLEADO' &&
+                    usuario?.roles?.nombre != 'PROFESOR'
                   )
                 "
               >
@@ -282,8 +282,8 @@
                 </ul>
                 <div
                   *ngIf="
-                    usuario.roles.nombre != 'EMPLEADO' &&
-                    usuario.roles.nombre != 'PROFESOR'
+                    usuario?.roles?.nombre != 'EMPLEADO' &&
+                    usuario?.roles?.nombre != 'PROFESOR'
                   "
                   class="header-menu"
                 >
@@ -291,8 +291,8 @@
                 </div>
                 <ul
                   *ngIf="
-                    usuario.roles.nombre != 'EMPLEADO' &&
-                    usuario.roles.nombre != 'PROFESOR'
+                    usuario?.roles?.nombre != 'EMPLEADO' &&
+                    usuario?.roles?.nombre != 'PROFESOR'
                   "
                 >
                   <li 

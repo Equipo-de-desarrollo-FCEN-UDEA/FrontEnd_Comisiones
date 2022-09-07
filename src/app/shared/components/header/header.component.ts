@@ -38,17 +38,15 @@ export class HeaderComponent implements OnInit {
       }
       );  
       // console.log('ruta '+this.currentURL);
+      
+      this.usuarioService.getUsuario().subscribe((resUsuario) => {
+        this.usuario = resUsuario;
+      });
   }
 
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe({
-      next: (params) => {
-      this.usuarioService.getUsuario().subscribe((resUsuario) => {
-        this.usuario = resUsuario;
-      });
-    } 
-    });
+    
 }
 
   

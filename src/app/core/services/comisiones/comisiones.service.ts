@@ -37,7 +37,8 @@ export class ComisionesService {
   // }
   
   getComision(id: string | number) {
-    return this.http.get<Comision>(`${this.urlEndPoint}/${id}`).pipe(
+    return this.http.get<Comision>(`${this.urlEndPoint}/${id}`)
+    .pipe(
       map((res=> {
         return res
       }))
@@ -50,7 +51,6 @@ export class ComisionesService {
 
   NoArchivado(id:number): Observable<any>{
     return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:0})
-
   }
   
   postComision(comision:any) {

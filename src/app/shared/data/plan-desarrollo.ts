@@ -15,7 +15,7 @@ export var temas : Tema[] = [
         titulo: `
         Formación integral de ciudadanos con la articulación y el desarrollo de las funciones misionales, desde los territorios y en conexión con el mundo`,
         subtitulo: `Una universidad humanista, de investigación e innovadora, conectada con el mundo y comprometida con la transformación de sí misma y de la sociedad.`,
-        
+
         objetivos: [
             {
                 descripcion: `Articular la investigación y la extensión a la docencia para la formación integral de excelencia académica. `,
@@ -29,11 +29,18 @@ export var temas : Tema[] = [
                 `Procesos de autoevaluación instaurados como cultura universitaria, con planes de mejoramiento en los procesos académicos.`
             ],
                 indicadores: [
-                    'Numero de cursos de pregrado que integren o combinen asignaturas en distintas modalidades. desarrollo de las funciones misionales. desde los territorios yenconexi6n con el mundo.',
-                    
+                  `Número de cursos de pregrado que integren o combinen asignaturas en distintas modalidades. Desarrollo de las funciones misionales, desde los territorios y enconexión con el mundo.`,
+                  `Número de programas depregrado que esten en armonización curricular.`,
+                  `Número de estrategias didacticas innovadoras aplicadas en los programas de pregrado y posgrado en correspondencia con los cambios en los entornos de aprendizaje. `,
+                  `Número de integrantes de la comunidad universitaria participando en la nueva plataformade fortalecimiento de capacidades en internacionalización, interculturalidad y ciudadania global. `,
+                  `Número de aliados estrategicos internacionales con los que se realizan actividades de cooperaci6n cientifica, docente y de extension por ario. `,
+                  `Número de participantes en los cursos ofertados en el marco de formación complementaria, deportiva, cultural y de Bienestar. `,
+
+
+                  ``,
 
                 ]
-            
+
             },
             {
                 descripcion: `Fortalecer todas las expresiones de las artes y las culturas, que posicionen a la Universidad como referente humanista y cultural para el encuentro y el intercambio de la comunidad universitaria y la sociedad.`,
@@ -147,7 +154,7 @@ export var temas : Tema[] = [
             },
             {
                 descripcion: `Fomentar la democracia en el gobierno universitario y los mecanismos de participación, de modo que la comunidad universitaria fortalezca los procesos de toma de decisiones.`,
-                acciones: [ 
+                acciones: [
                     `Mecanismos de participación y canales de diálogo establecidos para el fortalecimiento de la toma de decisiones. `,
                     `Consultas reglamentadas que incidan efectivamente en la reforma de los estatutos y reglamentos referidos a los estamentos y en la elección de sus representantes a los órganos de gobierno. `,
                     `Normativa institucional simplificada, actualizada y publicitada, que permita acceder fácilmente a sus contenidos, esté acorde con las transformaciones de la educación superior, y se ajuste a las condiciones y particularidades institucionales en su construcción y aplicación.`,
@@ -197,7 +204,7 @@ export var temas : Tema[] = [
             },
             {
                 descripcion: `Consolidar la descentralización y desconcentración de estructuras, procesos y recursos, que le permitan a la Universidad la flexibilización y la sostenibilidad de la operación interna, y la mejora de la proyección y autonomía en los territorios en los que tiene presencia.`,
-                acciones:[ 
+                acciones:[
                     `Procesos académicos y administrativos descentralizados en seccionales y sedes, con autonomía, de acuerdo con las particularidades de los territorios y las capacidades institucionales.`,
                     `Procesos de la administración central desconcentrados.`,
                     `Enfoque implementado de trabajo por procesos y por proyectos.`,
@@ -306,7 +313,7 @@ export var temas : Tema[] = [
                     `Estrategias de producción, difusión, divulgación y visibilización del conocimiento en ambiente y biodiversidad, desarrolladas para orientar la toma de decisiones.`,
                     `Mecanismos instalados de articulación entre el Sistema Nacional Ambiental, los tomadores de decisiones y la Universidad.`,
                 ]
-                
+
             },
             {
                 descripcion: `Promover la apropiación social del conocimiento y el diálogo intercultural en ambiente y biodiversidad con los diferentes actores sociales en el territorio.`,

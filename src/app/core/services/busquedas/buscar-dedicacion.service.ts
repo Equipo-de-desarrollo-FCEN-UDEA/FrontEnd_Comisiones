@@ -82,7 +82,9 @@ export class BuscarDedicacionService {
     this.dedicacionesSvc.scopeGetDedicaciones(this.archivado$.getValue())
     .subscribe(
       (resp: any ) => {
-        this.DEDICACIONES = resp.dedicaciones;
+        console.log(resp);
+        this.DEDICACIONES = resp;
+        this._search$.next();
       })
    }
 

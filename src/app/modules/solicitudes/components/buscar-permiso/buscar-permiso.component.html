@@ -11,7 +11,9 @@
     </div>
 
     <span class="col col-form-label" 
-      *ngIf="Buscarservice.loading$ | async">Loading...
+      *ngIf="Buscarservice.loading$ | async"
+      style="padding-left: 1em"
+      >Cargando...
     </span>
 
     <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" 

@@ -22,19 +22,17 @@ export class DedicacionService {
   ) {}
 
   scopeGetDedicaciones(archivado: number): Observable<any> {
-    let params = new HttpParams()
-    if (archivado != 2 ){
-      params = params.append('archivado', archivado);
-    }
+    // let params = new HttpParams()
+    // if (archivado != 2 ){
+    //   params = params.append('archivado', archivado);
+    // }
     
-    params = params.append('offset', 0);
-    params = params.append('limit', 100);
+    // params = params.append('offset', 0);
+    // params = params.append('limit', 100);
 
-    console.log(params+"  parametros")
+    // console.log(params+"  parametros")
 
-    return this.http.get<Dedicacion[]>(`${this.urlEndPoint}`, {
-      params:params
-    })
+    return this.http.get<Dedicacion[]>(`${this.urlEndPoint}`)
   }
 
   

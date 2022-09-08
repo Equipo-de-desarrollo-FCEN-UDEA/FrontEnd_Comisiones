@@ -11,7 +11,8 @@
     </div>
   
       <span class="col col-form-label" 
-        *ngIf="Buscarservice.loading$ | async">Loading...
+        style="padding-left: 1em"
+        *ngIf="Buscarservice.loading$ | async">Cargando...
       </span>
       
       <!-- <select class="form-select" 
@@ -32,7 +33,7 @@
               <th scope="col">#</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Descripción</th>
               <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event) " *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
+              <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
               <th scope="col" sortable="apellido" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>

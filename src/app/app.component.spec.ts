@@ -1,15 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserTestingModule } from '@angular/platform-browser/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HeaderComponent } from '@shared/components/header/header.component';
+import { QuicklinkModule } from 'ngx-quicklink';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        BrowserTestingModule,
+        RouterTestingModule,
+        HttpClient,
+        FormsModule,
+        ReactiveFormsModule,
+        QuicklinkModule,
+        AppRoutingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
       ],
     }).compileComponents();
   });

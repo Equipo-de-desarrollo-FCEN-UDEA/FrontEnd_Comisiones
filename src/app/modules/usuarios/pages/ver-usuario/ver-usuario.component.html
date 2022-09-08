@@ -10,22 +10,22 @@
   <div>
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Documento</div>
-    <div class="col-xs-12 col-sm-6"> {{ usuario.tipo_identificacion }}</div>
+    <div class="col-xs-12 col-sm-6"> {{ usuario?.tipo_identificacion }}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold ">Identificación</div>
-    <div class="col-sm-6 col-xs-12"> {{ usuario.identificacion }}</div>
+    <div class="col-sm-6 col-xs-12"> {{ usuario?.identificacion }}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Nombre</div>
-    <div class="col-sm-6 col-xs-12"> {{ usuario.nombre }}</div>
+    <div class="col-sm-6 col-xs-12"> {{ usuario?.nombre }}</div>
   </div>
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Apellido</div>
-    <div class="col-sm-6 col-xs-12"> {{ usuario.apellido }}</div>
+    <div class="col-sm-6 col-xs-12"> {{ usuario?.apellido }}</div>
   </div>
 
  <div class="row regular-row">
@@ -35,29 +35,29 @@
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold ">Rol</div>
-    <div class="col-sm-6 col-xs-12">{{usuario.roles.nombre}} </div>
+    <div class="col-sm-6 col-xs-12">{{usuario?.roles?.nombre}} </div>
   </div>
 
   <div class="row regular-row">
     <div class="ccol-xs-12 col-sm-6 label fw-bold">Estado</div>
-    <div class="col-sm-6 col-xs-12">{{ usuario.estado }}</div>
+    <div class="col-sm-6 col-xs-12">{{ usuario?.estado }}</div>
   </div>
 
   <!-- <div class="row regular-row">
     <div class="col-4 label">Dias de Permiso Disponibles</div>
-    <div class="col-sm-8"> {{ usuario.dia_dispobible }}</div>
+    <div class="col-sm-8"> {{ usuario?.dia_dispobible }}</div>
   </div> -->
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Facultad</div>
     <div class="col-sm-6 col-xs-12">
-        {{ usuario.departamentos.facultades.nombre }}
+        {{ usuario?.departamentos?.facultades?.nombre }}
     </div>
   </div>
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Departamento</div>
-    <div class="col-sm-6 col-xs-12"> {{ usuario.departamentos.nombre }}</div>
+    <div class="col-sm-6 col-xs-12"> {{ usuario?.departamentos?.nombre }}</div>
   </div>
 </div>
 
@@ -67,7 +67,7 @@
       <button
         type="button"
         class="btn btn-green btn-success btn-block"
-        [routerLink]="['/usuarios/editar-contrasena', usuario.id]"
+        [routerLink]="['/usuario?s/editar-contrasena', usuario?.id]"
       >
         Modificar Contraseña
       </button>
@@ -77,7 +77,7 @@
       <button
         type="button"
         class="btn btn-warning btn-block"
-        [routerLink]="['/usuarios/editar-usuario', usuario.id]"
+        [routerLink]="['/usuario?s/editar-usuario?', usuario?.id]"
       >
         Editar Información
       </button>

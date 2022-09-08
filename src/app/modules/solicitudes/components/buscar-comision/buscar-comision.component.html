@@ -11,7 +11,8 @@
     </div>
 
       <span class="col col-form-label" 
-        *ngIf="Buscarservice.loading$ | async">Loading...
+        style="padding-left: 1em"
+        *ngIf="Buscarservice.loading$ | async">Cargando...
       </span>
 
       <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
@@ -65,7 +66,7 @@
                     'bg-solicitada':
                       ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'SOLICITADA',
                     'bg-aprobada': 
-                      ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA',
+                      (ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA' || ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA CONCEJO INSTITUTO'),
                     'bg-visto-bueno':
                       ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'VISTO BUENO',
                     'bg-finalizada':

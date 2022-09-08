@@ -11,7 +11,9 @@
     </div>
 
     <span class="col col-form-label" 
-      *ngIf="Buscarservice.loading$ | async">Loading...
+      *ngIf="Buscarservice.loading$ | async"
+      style="padding-left: 1em"
+      >Cargando...
     </span>
 
     <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
@@ -80,7 +82,7 @@
           
           <td>
             <ngb-highlight 
-              [result]="ultimoElemento(permiso.intermediate_permisos).createdAt | date:'yyyy-MM-dd'" 
+              [result]="(ultimoElemento(permiso.intermediate_permisos).createdAt | date:'yyyy-MM-dd')?.toString()" 
               [term]="Buscarservice.searchTerm">
             </ngb-highlight>
           </td>

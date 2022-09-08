@@ -8,7 +8,7 @@ import { AuthService } from '@services/auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'FrontEnd_Comisiones';
+  title = 'Siga Frontend';
   sidebarExpanded = true;
 
   constructor(

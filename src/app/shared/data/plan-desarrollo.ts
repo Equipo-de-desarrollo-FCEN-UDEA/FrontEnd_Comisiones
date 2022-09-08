@@ -27,18 +27,23 @@ export var temas : Tema[] = [
                 `Comunidades académicas consolidadas para, desde y con los territorios.`,
                 `Procesos de internacionalización implementados con una visión geopolítica, que conecten la Universidad con el mundo y le permitan posicionarse como destino y referente académico.`,
                 `Procesos de autoevaluación instaurados como cultura universitaria, con planes de mejoramiento en los procesos académicos.`
-            ],
+                ],
+
                 indicadores: [
-                  `Número de cursos de pregrado que integren o combinen asignaturas en distintas modalidades. Desarrollo de las funciones misionales, desde los territorios y enconexión con el mundo.`,
-                  `Número de programas depregrado que esten en armonización curricular.`,
-                  `Número de estrategias didacticas innovadoras aplicadas en los programas de pregrado y posgrado en correspondencia con los cambios en los entornos de aprendizaje. `,
-                  `Número de integrantes de la comunidad universitaria participando en la nueva plataformade fortalecimiento de capacidades en internacionalización, interculturalidad y ciudadania global. `,
-                  `Número de aliados estrategicos internacionales con los que se realizan actividades de cooperaci6n cientifica, docente y de extension por ario. `,
-                  `Número de participantes en los cursos ofertados en el marco de formación complementaria, deportiva, cultural y de Bienestar. `,
+                `Número de cursos de pregrado que integren o combinen asignaturas en distintas modalidades. Desarrollo de las funciones misionales, desde los territorios y enconexión con el mundo.`,
+                `Número de programas depregrado que esten en armonización curricular.`,
+                `Número de estrategias didacticas innovadoras aplicadas en los programas de pregrado y posgrado en correspondencia con los cambios en los entornos de aprendizaje. `,
+                `Número de integrantes de la comunidad universitaria participando en la nueva plataformade fortalecimiento de capacidades en internacionalización, interculturalidad y ciudadania global. `,
+                `Número de aliados estratégicos internacionales con los que se realizan actividades de cooperaci6n cientifica, docente y de extension por ario. `,
+                `Número de participantes en los cursos ofertados en el marco de formación complementaria, deportiva, cultural y de Bienestar. `,
 
 
-                  ``,
-
+                `Cantidad de publicaciones en bases de datos. `,
+                `Número de citacionesde Google Scholar por año que recibe la UdeA. `,
+                `Número departicipaciones de losestudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
+                `Número de emprendimientos beneficiados de los nuevos progra más institucionales para el fortalecimiento empresarial. `,
+                `Número de proyectos, convenios y contratos en actividades de ciencia, tecnología, innovación y emprendimiento entre Universidad- Empresa-Estado- Sociedad. `,
+                `Número proyectos de innovaci6n social. `,
                 ]
 
             },
@@ -48,7 +53,10 @@ export var temas : Tema[] = [
                     `Políticas y estrategias de cultura, implementadas.`,
                     `Acciones artísticas y culturales integradas en el desarrollo de las funciones misionales.`,
                     `Estrategias realizadas para la creación e investigación artística y cultural.`,
-                    `Actividades interculturales desarrolladas en los territorios.`
+                    `Actividades interculturales desarrolladas en los territorios.`,
+
+                    `Número de eventos culturales y de patrimonio realizados en la Universidad. `,
+                    `Número de beneficiarios de la actividad cultural y de patrimonio universitaria. `
                 ]
             },
             {
@@ -58,7 +66,18 @@ export var temas : Tema[] = [
                     `Política orgánica de los patrimonios universitarios, implementada.`,
                     `Patrimonios conservados, documentados, registrados, divulgados y visibilizados.`,
                     `Estrategias para la apropiación de los patrimonios, desarrolladas en sintonía con la diversidad territorial.`
-                ]
+                    ],
+                indicadores: [
+                    `Cantidad de publicaciones en bases de datos. `,
+                    `Número de citacionesde Google Scholar por año que recibe la UdeA. `,
+                    `Número departicipaciones de losestudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
+                    `Número de emprendimientos beneficiados de los nuevos progra más institucionales para el fortalecimiento empresarial. `,
+                    `Número de proyectos, convenios y contratos en actividades de ciencia, tecnología, innovación y emprendimiento entre Universidad- Empresa-Estado- Sociedad. `,
+                    `Número proyectos de innovaci6n social. `,
+
+                    `Número de eventos culturales y de patrimonio realizados en la Universidad. `,
+                    `Número de beneficiarios de la actividad cultural y de patrimonio universitaria. `
+                    ]
             },
             {
                 descripcion: `Fomentar el avance y la diversidad en la generación, aplicación y apropiación del conocimiento.`,
@@ -71,7 +90,8 @@ export var temas : Tema[] = [
                     `Estrategias desarrolladas para la apropiación social del conocimiento, y el diálogo de saberes.`,
                     `Procesos implementados de difusión, divulgación y visibilización del
                     conocimiento.`
-                ]
+                ],
+
             },
             {
                 descripcion: `Fomentar la innovación para la comprensión y solución de problemas y la potenciación de capacidades hacia la transformación de la Universidad y de los territorios.`,
@@ -81,7 +101,14 @@ export var temas : Tema[] = [
                     `Nuevos proyectos y productos de innovación, desarrollados a partir de resultados de procesos de investigación y docencia.`,
                     `Estrategias desarrolladas de emprendimiento basado en conocimiento.`,
                     `Procesos de participación de la Universidad en el ciclo de las políticas públicas, implementados en función del desarrollo y fomento de la ciencia, la tecnología y la innovación.`
-                ]
+                ],
+                indicadores: [
+                    `Cantidad de publicaciones en bases de datos. `,
+                    `Número de citacionesde Google Scholar por año que recibe la UdeA. `,
+                    `Número departicipaciones de losestudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
+                    `Número de emprendimientos beneficiados de los nuevos progra más institucionales para el fortalecimiento empresarial. `,
+                    `Número de proyectos, convenios y contratos en actividades de ciencia, tecnología, innovación y emprendimiento entre Universidad- Empresa-Estado- Sociedad. `,
+                    `Número proyectos de innovaci6n social. `,]
             }
         ]
 
@@ -101,7 +128,17 @@ export var temas : Tema[] = [
                     `Prácticas consolidadas de eliminación de barreras comunicativas, tecnológicas, actitudinales, administrativas y académicas que afrontan los estudiantes vulnerables, especialmente los priorizados por los lineamientos de educación superior inclusiva, en sus procesos de aprendizaje y en su participación durante el ciclo de vida universitaria`,
                     `Sistema implementado de caracterización, seguimiento, evaluación a la trayectoria y reconocimiento del desempeño de los estudiantes durante su ciclo de vida universitaria.`,
                     `Procesos consolidados de preparación de los estudiantes para el egreso y el ejercicio profesional con responsabilidad social. `
-                ]
+                ],
+
+                indicadores:[
+                    `Número de estudiantes beneficiarios de los programas y servicios  orientados a promover la permanencia estudiantil. `,
+                    `Tasa de deserci6n por semestre.`,
+                    `Número de participantes en actividades desarrolladas para promover el buen vivir en la comunidad universitaria.`,
+
+                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
+                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+
+                  ]
             },
             {
                 descripcion: `Fortalecer la formación integral de los profesores hacia la construcción de comunidad universitaria.`,
@@ -114,7 +151,23 @@ export var temas : Tema[] = [
                     `Procesos mejorados de reconocimiento y asignación de estímulos con principios de equidad para los profesores en sus diferentes funciones.`,
                     `Comunidades académicas y redes de conocimiento consolidadas para el desarrollo del ejercicio profesoral tanto en el ámbito nacional como internacional`,
                     `Prácticas de gestión de conocimiento incorporadas en la cultura universitaria, que permitan la identificación, la sistematización, la conservación y la difusión de los saberes propios del ejercicio profesoral en los procesos institucionales.`,
-                    `Procesos mejorados de acompañamiento y preparación para el retiro laboral, que cultiven el desarrollo intelectual, físico y psicoafectivo de los profesores.`
+                    `Procesos mejorados de acompañamiento y preparación para el retiro laboral, que cultiven el desarrollo intelectual, físico y psicoafectivo de los profesores.`,
+                  ],
+                indicadores:[
+                    `Número de estudiantes beneficiarios de los programas y servicios  orientados a promover la permanencia estudiantil. `,
+                    `Tasa de deserci6n por semestre.`,
+                    `Número de participantes en actividades desarrolladas para promover el buen vivir en la comunidad universitaria.`,
+
+                    `Porcentaje de profesores que realizan procesos formativos y de cualificación docente ofertados por la Universidad.`,
+                    `Porcentaje de implementación de teletrabajo.`,
+                    `Porcentaje planificación y retroalimentación de la labor.`,
+                    `Número de nuevos empleados vinculados en carrera administrativa por concurso público.`,
+                    `Número de plazas docentes de tiempo completos equivalentes ocupadas.`,
+                    `Número de plazas docentes de tiempo completos equivalentes creadas. `,
+
+                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
+                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+
                 ]
             },
             {
@@ -128,7 +181,23 @@ export var temas : Tema[] = [
                     `Prácticas de gestión de conocimiento incorporadas en la cultura universitaria que permitan la identificación, la sistematización, la conservación y la difusión de los saberes propios de la gestión administrativa en los procesos institucionales.`,
                     `Procesos mejorados de acompañamiento y preparación para el retiro laboral que cultiven el desarrollo intelectual, físico y psicoafectivo de los empleados administrativos.`,
 
-                ]
+                ],
+                indicadores:[
+                    `Número de estudiantes beneficiarios de los programas y servicios  orientados a promover la permanencia estudiantil. `,
+                    `Tasa de deserci6n por semestre.`,
+                    `Número de participantes en actividades desarrolladas para promover el buen vivir en la comunidad universitaria.`,
+
+                    `Porcentaje de profesores que realizan procesos formativos y de cualificación docente ofertados por la Universidad.`,
+                    `Porcentaje de implementación de teletrabajo.`,
+                    `Porcentaje planificación y retroalimentación de la labor.`,
+                    `Número de nuevos empleados vinculados en carrera administrativa por concurso público.`,
+                    `Número de plazas docentes de tiempo completos equivalentes ocupadas.`,
+                    `Número de plazas docentes de tiempo completos equivalentes creadas. `,
+
+                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
+                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+
+                  ]
             },
             {
                 descripcion: `Consolidar los vínculos de egresados, jubilados y pensionados con la vida universitaria.`,
@@ -147,9 +216,13 @@ export var temas : Tema[] = [
             {
                 descripcion: `Implementar procesos de formación ciudadana en la construcción de una cultura política democrática, que guíen la reflexión y actuación de los integrantes de la comunidad universitaria. `,
                 acciones: [
-                    `Política de formación ciudadana implementada para todos los estamentos de la Universidad, que cualifica el ejercicio de la participación y la cultura política democrática de los universitarios.`,
-                    `Mecanismos, instancias y espacios permanentes de participación, deliberación y concertación política entre los actores universitarios.`,
-                    `Reconocimiento y legitimidad de las organizaciones y colectivos universitarios ante el gobierno universitario y sus bases de origen, siempre y cuando actúen dentro del marco de la Constitución, la Ley y las normas universitarias.`
+                  `Política de formación ciudadana implementada para todos los estamentos de la Universidad, que cualifica el ejercicio de la participación y la cultura política democrática de los universitarios.`,
+                  `Mecanismos, instancias y espacios permanentes de participación, deliberación y concertación política entre los actores universitarios.`,
+                  `Reconocimiento y legitimidad de las organizaciones y colectivos universitarios ante el gobierno universitario y sus bases de origen, siempre y cuando actúen dentro del marco de la Constitución, la Ley y las normas universitarias.`
+                ],
+                indicadores: [
+                  `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participacón, ciudadanía y convivencia  para la comunidad universitaria. `,
+                  `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decision universitarios. `,
                 ]
             },
             {
@@ -159,6 +232,13 @@ export var temas : Tema[] = [
                     `Consultas reglamentadas que incidan efectivamente en la reforma de los estatutos y reglamentos referidos a los estamentos y en la elección de sus representantes a los órganos de gobierno. `,
                     `Normativa institucional simplificada, actualizada y publicitada, que permita acceder fácilmente a sus contenidos, esté acorde con las transformaciones de la educación superior, y se ajuste a las condiciones y particularidades institucionales en su construcción y aplicación.`,
                     `Órganos de gobierno y representaciones con reglamentos internos ajustados, que definan los principios de consecutividad, identidad y conexidad para el trámite de proyectos normativos, y las materias sobre las cuales rigen procedimientos, quórums o mayorías especiales.`
+                ],
+                indicadores:[
+                  `Número de temas de interes institucional priorizados que se actualizan desde lo normativo`,
+                  `Número de talleres de apoyo para la deliberación y proyección de la reforma de regulaciones especificas, priorizados por la Dirección Jurídica. `,
+
+                  `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participacón, ciudadanía y convivencia  para la comunidad universitaria. `,
+                  `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decision universitarios. `,
                 ]
             },
             {
@@ -167,6 +247,11 @@ export var temas : Tema[] = [
                     `Mecanismos y espacios fortalecidos de control a las actuaciones de las autoridades y sus órganos de gobierno en todos los niveles de decisión administrativa y académica.`,
                     `Política institucional de transparencia, desarrollada en el gobierno universitario, que garantice el acceso ágil y oportuno a la información relevante para la comunidad universitaria y la sociedad.`,
                     `Rendición pública y periódica de cuentas ajustada a la función institucional y a la gestión, que fomente el ejercicio autocrítico y la retroalimentación de la comunidad universitaria y de la sociedad.`
+                ],
+                indicadores:[
+                  `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participacón, ciudadanía y convivencia  para la comunidad universitaria. `,
+                  `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decision universitarios. `,
+
                 ]
             },
             {
@@ -192,6 +277,10 @@ export var temas : Tema[] = [
                     `Procesos incorporados para el análisis estratégico del entorno.`,
                     `Capacidades instaladas para el direccionamiento estratégico de la Institución`,
                     `Capacidades para la gestión de riesgos, implementadas e integradas al direccionamiento estratégico.`
+                ],
+                indicadores: [
+                  `Nivel de optimización de recurses en los nuevos procesos académicos o administrativos intervenidos. `,
+                  `Número de rocesos académicos y administrativos prioritarios estandarizados`,
                 ]
             },
             {
@@ -210,6 +299,10 @@ export var temas : Tema[] = [
                     `Enfoque implementado de trabajo por procesos y por proyectos.`,
                     `Estructuras académico-administrativas flexibles para el desarrollo misional en correspondencia con la integración de saberes y la gestión del conocimiento.`,
                     `Capacidades instaladas para la alineación, coordinación y colaboración en y entre unidades académicas y administrativas.`
+                ],
+                indicadores: [
+                  `Nivel de optimización de recurses en los nuevos procesos académicos o administrativos intervenidos. `,
+                  `Número de procesos académicos y administrativos prioritarios estandarizados.`,
                 ]
             },
             {
@@ -218,6 +311,10 @@ export var temas : Tema[] = [
                     `Sistema de comunicaciones institucional integrado.`,
                     `Mecanismos de comunicación e información institucional accesibles a todos los públicos, desarrollados con estándares de calidad, pertinencia y oportunidad.`,
                     `Estrategias integrales instauradas para la proyección y posicionamiento institucionales.`,
+                ],
+                indicadores: [
+                  `Índice de madurez de la transformación digital.`,
+                  `Índice de apropiación de la transformación digital. `,
                 ]
             },
             {
@@ -236,6 +333,10 @@ export var temas : Tema[] = [
                     `Espacios físicos adecuados, soportados logísticamente y habilitados en relación con las necesidades generales y específicas de los procesos y de la comunidad universitaria.`,
                     `Infraestructura física y logística planeada e instalada de manera eficiente y con gestión del ambiente y la biodiversidad.`,
                     `Esquemas de colaboración establecidos para el crecimiento y desarrollo de la infraestructura física con instituciones y organizaciones públicas y privadas.`
+                ],
+                indicadores:[
+                  `Número de metros cuadrados construídos para adaptar la infraestructura universitaria a nuevas dinámicas institucionales `,
+                  `Número de metros cuadrados adecuados para adaptar la infraestructura universitaria a nuevas dinámicas institucionales. `,
                 ]
             },
             {
@@ -263,6 +364,11 @@ export var temas : Tema[] = [
                     `Intervenciones ejecutadas, desde la misión de la universidad, sobre los procesos, diseñados por el gobierno nacional, con sus estrategias para el reconocimiento, visibilización y acompañamiento de las víctimas del conflicto armado desde procesos de memoria, búsqueda de la verdad, reparación integral y garantías de no repetición.`,
                     `Acciones desarrolladas desde los ejes misionales, que respondan a las necesidades regionales y aporten a la comprensión de los conflictos violentos que perviven y se reactualizan en las regiones afectadas por el conflicto armado.`,
                     `Formación para la participación política y social, desarrollada desde el ejercicio de derechos y obligaciones ciudadanos, derivados de la construcción de paz por parte de comunidades, regiones y territorios afectados por el conflicto armado.`,
+                ],
+               indicadores:[
+                `Número de programas académicos de pregrado interdisciplinarios ofertados con enfoque en paz. `,
+                `Número de proyectos de investigación y extensión con comunidades, que fortalezcan los procesos de construccion de paz con enfoque territorial. `,
+                `Número de participantes en espacios educativos, políticos y culturales implementados para la construcción de paz.`,
                 ]
             },
             {
@@ -273,6 +379,15 @@ export var temas : Tema[] = [
                     `Sistema Universitario de Información sobre Memoria constituido para la gestión documental y la unificación de proyectos, estudios y actividades en el marco de las reparaciones individuales y colectivas.`,
                     `Ejercicios adelantados desde la Universidad para la reconstrucción de la memoria de los estamentos, y de búsqueda de la verdad y reparación como víctima colectiva del conflicto armado.`,
                     `Formación adelantada para el desarrollo de capacidades para la reintegración a la vida civil de los excombatientes y acompañamiento a las víctimas mediante la generación de relaciones desde el respeto a la vida, a los derechos y al pluralismo en las regiones.`,
+                ],
+                indicadores:[
+                  `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
+                  `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+
+                  `Número de programas académicos de pregrado interdisciplinarios ofertados con enfoque en paz. `,
+                  `Número de proyectos de investigación y extensión con comunidades, que fortalezcan los procesos de construccion de paz con enfoque territorial. `,
+                  `Número de participantes en espacios educativos, políticos y culturales implementados para la construcción de paz.`,
+
                 ]
             },
             {
@@ -280,6 +395,11 @@ export var temas : Tema[] = [
                 acciones: [
                     `Educación para la paz por intermedio de estrategias que promuevan la noviolencia con propuestas pedagógicas que podrán ser enriquecidas con saberes ancestrales, prácticas socio-políticas y formación en derechos humanos.`,
                     `Políticas de enfoque diferencial, de género e interculturalidad consolidadas en la investigación y la extensión, que aporten al conocimiento sobre la Universidad y la sociedad.`,
+                ],
+                indicadores:[
+                  `Número de programas académicos de pregrado interdisciplinarios ofertados con enfoque en paz. `,
+                  `Número de proyectos de investigación y extensión con comunidades, que fortalezcan los procesos de construccion de paz con enfoque territorial. `,
+                  `Número de participantes en espacios educativos, políticos y culturales implementados para la construcción de paz.`,
                 ]
             },
             {
@@ -287,6 +407,14 @@ export var temas : Tema[] = [
                 acciones: [
                     `Políticas contra el acoso, la violencia y la discriminación basados en el sexo, la orientación sexual y la identidad de género, desarrolladas desde la sensibilización, la atención integral y la generación de protocolos que promuevan condiciones de convivencia y derechos humanos en la Universidad.`,
                     `Gestión para la apropiación social e institucional del conocimiento sobre la inclusión en la educación superior, desarrollada con base en los lineamientos políticos y avances teóricos latinoamericanos y globales.`,
+                ],
+                indicadores:[
+                  `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
+                  `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+
+                  `Número de programas académicos de pregrado interdisciplinarios ofertados con enfoque en paz. `,
+                  `Número de proyectos de investigación y extensión con comunidades, que fortalezcan los procesos de construccion de paz con enfoque territorial. `,
+                  `Número de participantes en espacios educativos, políticos y culturales implementados para la construcción de paz.`,
                 ]
             }
         ]
@@ -305,6 +433,10 @@ export var temas : Tema[] = [
                     `Agendas implementadas de investigación y formación en ambiente y biodiversidad.`,
                     `Colecciones y patrimonio ambiental conservados, documentados, registrados, divulgados y visibilizados, que generen estrategias para su apropiación.`,
                     `Estrategias implementadas para la asesoría y el acompañamiento jurídico a la investigación científica en ambiente y biodiversidad.`
+                ],
+                indicadores:[
+                  `Porcentaje de avance en la implementaci6n de la política de gestión ambiental. `,
+                  `Número de iniciativas ambientales en los campus y sedes universitarios. `,
                 ]
             },
             {
@@ -312,6 +444,10 @@ export var temas : Tema[] = [
                 acciones: [
                     `Estrategias de producción, difusión, divulgación y visibilización del conocimiento en ambiente y biodiversidad, desarrolladas para orientar la toma de decisiones.`,
                     `Mecanismos instalados de articulación entre el Sistema Nacional Ambiental, los tomadores de decisiones y la Universidad.`,
+                ],
+                indicadores:[
+                  `Porcentaje de avance en la implementaci6n de la política de gestión ambiental. `,
+                  `Número de iniciativas ambientales en los campus y sedes universitarios. `,
                 ]
 
             },
@@ -322,6 +458,10 @@ export var temas : Tema[] = [
                     `Eventos académicos y de extensión pertinentes en gestión del ambiente y biodiversidad, fortalecidos.`,
                     `Pedagogías y diálogos de saberes interdisciplinares e interculturales incorporados a la gestión del ambiente y la biodiversidad.`,
                     `Capacidades y oportunidades de las poblaciones locales, fortalecidas para la gestión del ambiente y de la biodiversidad, con énfasis en los territorios afectados por el conflicto armado.`
+                ],
+                indicadores:[
+                  `Porcentaje de avance en la implementaci6n de la política de gestión ambiental. `,
+                  `Número de iniciativas ambientales en los campus y sedes universitarios. `,
                 ]
             }
         ]

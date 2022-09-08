@@ -8,6 +8,7 @@ import { CartaInicioService } from '@services/dedicaciones/carta-inicio.service'
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 import { Carta } from '@interfaces/dedicaciones/carta';
 import Swal from 'sweetalert2';
+import { prefix } from '@shared/data/ruta-api';
 
 @Component({
   selector: 'app-carta-inicio',
@@ -25,6 +26,9 @@ export class CartaInicioComponent implements OnInit {
     dedicaciones_id: 0,
     archivo: '',
   }
+
+  prefix = prefix
+
   archivo : any;
   _Body : string = '';
 

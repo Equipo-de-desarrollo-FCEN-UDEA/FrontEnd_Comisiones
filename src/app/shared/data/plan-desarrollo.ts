@@ -37,7 +37,6 @@ export var temas : Tema[] = [
                 `Número de aliados estratégicos internacionales con los que se realizan actividades de cooperaci6n cientifica, docente y de extension por ario. `,
                 `Número de participantes en los cursos ofertados en el marco de formación complementaria, deportiva, cultural y de Bienestar. `,
 
-
                 `Cantidad de publicaciones en bases de datos. `,
                 `Número de citacionesde Google Scholar por año que recibe la UdeA. `,
                 `Número departicipaciones de losestudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
@@ -54,9 +53,10 @@ export var temas : Tema[] = [
                     `Acciones artísticas y culturales integradas en el desarrollo de las funciones misionales.`,
                     `Estrategias realizadas para la creación e investigación artística y cultural.`,
                     `Actividades interculturales desarrolladas en los territorios.`,
-
-                    `Número de eventos culturales y de patrimonio realizados en la Universidad. `,
-                    `Número de beneficiarios de la actividad cultural y de patrimonio universitaria. `
+                ],
+                indicadores:[
+                  `Número de eventos culturales y de patrimonio realizados en la Universidad. `,
+                  `Número de beneficiarios de la actividad cultural y de patrimonio universitaria. `
                 ]
             },
             {
@@ -89,8 +89,15 @@ export var temas : Tema[] = [
                     `Política y estrategias de la ciencia abierta*, implementadas en equilibrio con los criterios de propiedad intelectual respecto de publicaciones, datos, metodologías, métricas y herramientas.`,
                     `Estrategias desarrolladas para la apropiación social del conocimiento, y el diálogo de saberes.`,
                     `Procesos implementados de difusión, divulgación y visibilización del
-                    conocimiento.`
+                     conocimiento.`
                 ],
+                indicadores: [
+                    `Cantidad de publicaciones en bases de datos. `,
+                    `Número de citacionesde Google Scholar por año que recibe la UdeA. `,
+                    `Número de participaciones de los estudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
+                    `Número de emprendimientos beneficiados de los nuevos progra más institucionales para el fortalecimiento empresarial. `,
+                    `Número de proyectos, convenios y contratos en actividades de ciencia, tecnología, innovación y emprendimiento entre Universidad- Empresa-Estado- Sociedad. `,
+                    `Número proyectos de innovación social. `,]
 
             },
             {
@@ -105,10 +112,10 @@ export var temas : Tema[] = [
                 indicadores: [
                     `Cantidad de publicaciones en bases de datos. `,
                     `Número de citacionesde Google Scholar por año que recibe la UdeA. `,
-                    `Número departicipaciones de losestudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
+                    `Número de participaciones de los estudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
                     `Número de emprendimientos beneficiados de los nuevos progra más institucionales para el fortalecimiento empresarial. `,
                     `Número de proyectos, convenios y contratos en actividades de ciencia, tecnología, innovación y emprendimiento entre Universidad- Empresa-Estado- Sociedad. `,
-                    `Número proyectos de innovaci6n social. `,]
+                    `Número proyectos de innovación social. `,]
             }
         ]
 
@@ -129,7 +136,6 @@ export var temas : Tema[] = [
                     `Sistema implementado de caracterización, seguimiento, evaluación a la trayectoria y reconocimiento del desempeño de los estudiantes durante su ciclo de vida universitaria.`,
                     `Procesos consolidados de preparación de los estudiantes para el egreso y el ejercicio profesional con responsabilidad social. `
                 ],
-
                 indicadores:[
                     `Número de estudiantes beneficiarios de los programas y servicios  orientados a promover la permanencia estudiantil. `,
                     `Tasa de deserci6n por semestre.`,
@@ -137,7 +143,6 @@ export var temas : Tema[] = [
 
                     `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
                     `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
-
                   ]
             },
             {
@@ -249,8 +254,8 @@ export var temas : Tema[] = [
                     `Rendición pública y periódica de cuentas ajustada a la función institucional y a la gestión, que fomente el ejercicio autocrítico y la retroalimentación de la comunidad universitaria y de la sociedad.`
                 ],
                 indicadores:[
-                  `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participacón, ciudadanía y convivencia  para la comunidad universitaria. `,
-                  `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decision universitarios. `,
+                    `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participacón, ciudadanía y convivencia  para la comunidad universitaria. `,
+                    `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decision universitarios. `,
 
                 ]
             },

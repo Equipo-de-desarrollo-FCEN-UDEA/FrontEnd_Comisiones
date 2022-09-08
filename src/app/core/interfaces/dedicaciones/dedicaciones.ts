@@ -12,6 +12,7 @@ export interface Dedicacion extends DedicacionBase {
     id: number;
     archivado: number;
     usuarios: UsuarioInside;
+    createdAt: Date;
     
 }
 

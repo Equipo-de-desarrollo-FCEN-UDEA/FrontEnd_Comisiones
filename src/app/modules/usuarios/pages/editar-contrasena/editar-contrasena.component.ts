@@ -98,7 +98,7 @@ export class EditarContrasenaComponent implements OnInit {
       error: (err : any) => {
         Swal.fire({
           title: 'Algo salío mal, intenta de nuevo',
-          text: err.msg,
+          text: err.error.msg,
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });

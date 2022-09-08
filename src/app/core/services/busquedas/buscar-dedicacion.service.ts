@@ -35,9 +35,10 @@ function sort(dedicaciones: Dedicacion[], column: SortColumn, direction: string)
 }
 
 function matches(dedicaciones: Dedicacion, term: string, datepipe: DatePipe) {
+  term = term.toLowerCase();
   return (
     dedicaciones.descripcion.toLowerCase().includes(term) ||
-    datepipe.transform(dedicaciones.createdAt)?.includes(term)||
+    datepipe.transform(dedicaciones.createdAt)?.toString().includes(term)||
     dedicaciones.usuarios.nombre.toLowerCase().includes(term) ||
     dedicaciones.usuarios.apellido.toLowerCase().includes(term) ||
     dedicaciones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||

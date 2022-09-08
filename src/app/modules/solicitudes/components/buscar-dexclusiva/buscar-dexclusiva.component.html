@@ -37,7 +37,7 @@
               <th scope="col" sortable="apellido" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th>
+              <!-- <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th> -->
               <th> </th>
             </tr>
           </thead>
@@ -58,7 +58,7 @@
 
               <td>
                 <ngb-highlight 
-                  [result]="dedicacion.createdAt | date:'yyyy-MM-dd'"
+                  [result]="(dedicacion.createdAt | date:'yyyy-MM-dd')?.toString()"
                   [term]="Buscarservice.searchTerm">
                 </ngb-highlight>
               </td>

@@ -36,7 +36,7 @@ function sort(usuarios: Usuario[], column: SortColumn, direction: string): Usuar
 }
 
 function matches(usuarios: Usuario, term: string, datepipe: DatePipe) {
-
+  term = term.toLowerCase();
   return (
     usuarios.nombre.toLowerCase().includes(term) 
   );

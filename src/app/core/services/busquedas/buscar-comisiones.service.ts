@@ -36,10 +36,11 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 }
 
 function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
+  term = term.toLowerCase();
   return (
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())  ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
-    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt)?.includes(term)||
+    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt, 'yyyy-MM-dd')?.toString().includes(term)||
     comisiones.usuarios?.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||

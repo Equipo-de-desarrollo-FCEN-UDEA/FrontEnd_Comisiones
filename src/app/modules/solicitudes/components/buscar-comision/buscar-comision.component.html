@@ -81,7 +81,7 @@
   
               <td>
                 <ngb-highlight 
-                  [result]="ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd'"
+                  [result]="(ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd')?.toString()"
                   [term]="Buscarservice.searchTerm">
                 </ngb-highlight>
               </td>

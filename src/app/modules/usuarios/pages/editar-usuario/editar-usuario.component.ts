@@ -20,7 +20,7 @@ export class EditarUsuarioComponent implements OnInit {
   public id : Number | string = 0;
   public tiposId = tiposId;
   public isLoading = this.loadingSvc.isLoading;
-  public usuarioBase: Usuario | undefined;
+  public usuarioBase!: Usuario;
   private usuario : UsuarioResponse | undefined;
 
   public error : string = "";

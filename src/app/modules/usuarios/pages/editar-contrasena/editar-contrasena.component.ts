@@ -46,6 +46,17 @@ export class EditarContrasenaComponent implements OnInit {
         this.usuarioService.getUsuario().subscribe((resUsuario) => {
           this.usuario = resUsuario;
         });
+      },
+      error: (err) => {
+        console.log(err.status);
+        if (err.status == 401){
+        Swal.fire({
+          title: 'No autorizado',
+          text: 'No estás autorizado para ver este sitio',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        }).then(() => this.router.navigate(['/']));
+      }
       }
     });
   }
@@ -87,7 +98,7 @@ export class EditarContrasenaComponent implements OnInit {
       error: (err : any) => {
         Swal.fire({
           title: 'Algo salío mal, intenta de nuevo',
-          text: err.msg,
+          text: err.error.msg,
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });

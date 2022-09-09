@@ -29,20 +29,20 @@ export class BuscarDexclusivaComponent {
     this.ultimoElemento = ultimoElement
   }
 
-  changeOption(event:any){
-    this.Buscarservice.archivados(event.target.value);
-    this.Buscarservice.ngOnchanges();
-  }
+  // changeOption(event:any){
+  //   this.Buscarservice.archivados(event.target.value);
+  //   this.Buscarservice.ngOnchanges();
+  // }
   
-  archivarDedicacion(id:number){
-    this.dedicacionService.Archivado(id).subscribe()
-    this.Buscarservice.ngOnchanges()
-  }
+  // archivarDedicacion(id:number){
+  //   this.dedicacionService.Archivado(id).subscribe()
+  //   this.Buscarservice.ngOnchanges()
+  // }
 
-  desarchivarDedicacion(id:number){
-    this.dedicacionService.NoArchivado(id).subscribe()
-    this.Buscarservice.ngOnchanges()
-  }
+  // desarchivarDedicacion(id:number){
+  //   this.dedicacionService.NoArchivado(id).subscribe()
+  //   this.Buscarservice.ngOnchanges()
+  // }
 
   onSort({column, direction}: SortEvent) {
     // resetting other headers

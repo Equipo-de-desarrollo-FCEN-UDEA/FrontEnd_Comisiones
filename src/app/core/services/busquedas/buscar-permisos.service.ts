@@ -36,10 +36,12 @@ function sort(permisos: Permiso[], column: SortColumn, direction: string ): Perm
 }
 
 function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
+  term = term.toLowerCase()
   return (
     permisos.tipos_permiso.nombre.toLowerCase().includes(term.toLowerCase()) ||
     ultimoElement(permisos.intermediate_permisos)?.intermediate_estados.nombre.toLowerCase().includes(term)||
-    datepipe.transform(ultimoElement(permisos.intermediate_permisos)?.createdAt)?.includes(term)  ||
+    datepipe.transform(ultimoElement(permisos.intermediate_permisos)?.createdAt, 'yyyy-MM-dd')?.toString()?.includes(term)  ||
+    // ultimoElement(permisos.intermediate_permisos)?.createdAt?.includes(term)||
     permisos.usuarios.nombre.toLowerCase().includes(term) ||
     permisos.usuarios.apellido.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.nombre.toLowerCase().includes(term) ||

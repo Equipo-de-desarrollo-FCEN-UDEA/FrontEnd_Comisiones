@@ -30,14 +30,4 @@ export class AuthGuard implements CanActivate {
       }
     }
     
-    // if (this.authService.isLoggedIn()) {
-    //   console.log('paso el guard');
-    //   // logged in so return true
-    //   return true;
-    // } else {
-    //   console.log('no pasó guard');
-    //   this.route.navigate(['/login']);
-    //   return false;
-    // }
-  // }
 }

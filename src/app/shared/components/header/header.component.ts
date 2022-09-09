@@ -4,6 +4,7 @@ import { Rol } from '@interfaces/roles';
 import { Usuario, UsuarioInside } from '@interfaces/usuario';
 import { AuthService } from '@services/auth/auth.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
+import { prefix } from '@shared/data/ruta-api';
 import { filter} from 'rxjs';
 
 
@@ -16,10 +17,11 @@ export class HeaderComponent implements OnInit {
 
   public isNavbarCollapsed=true;
   public currentURL: any;
-  public usuario!: Usuario; 
+  public usuario: Usuario | undefined; 
   public rol!: Rol
   public usuarioInside!: UsuarioInside;
   public admin: any = true;
+  public prefix = prefix
 
   constructor(
     private authService : AuthService,
@@ -36,17 +38,15 @@ export class HeaderComponent implements OnInit {
       }
       );  
       // console.log('ruta '+this.currentURL);
+      
+      this.usuarioService.getUsuario().subscribe((resUsuario) => {
+        this.usuario = resUsuario;
+      });
   }
 
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe({
-      next: (params) => {
-      this.usuarioService.getUsuario().subscribe((resUsuario) => {
-        this.usuario = resUsuario;
-      });
-    } 
-    });
+    
 }
 
   

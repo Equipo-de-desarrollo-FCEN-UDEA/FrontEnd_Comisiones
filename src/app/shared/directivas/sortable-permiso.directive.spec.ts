@@ -1,8 +1,8 @@
-import { SortablePermisoDirective } from './sortable-permiso.directive';
+import { NgbdSortablePermiso } from './sortable-permiso.directive';
 
-describe('SortablePermisoDirective', () => {
+describe('NgbdSortablePermiso', () => {
   it('should create an instance', () => {
-    const directive = new SortablePermisoDirective();
+    const directive = new NgbdSortablePermiso();
     expect(directive).toBeTruthy();
   });
 });

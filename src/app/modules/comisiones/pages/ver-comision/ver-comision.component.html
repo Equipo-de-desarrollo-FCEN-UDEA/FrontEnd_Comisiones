@@ -115,7 +115,7 @@
   <!-- VER HISTORIAL ESTADOS -->
     <button
     type="button"
-    class="btn btn-historial btn-green btn-block col-12 mt-3"
+    class="btn btn-success btn-block col-12 mt-3"
     (click)="open()"
     >
     Ver Historial de estados
@@ -149,7 +149,7 @@
     *ngIf="(estadoActual.nombre === 'APROBADA') || (estadoActual.nombre === 'FINALIZADA') ">
     <button
     type="button"
-    class="btn btn-light"
+    class="btn btn-cumplido"
     [routerLink]="['/comisiones/subir-cumplido', comision.id]"
     
     >

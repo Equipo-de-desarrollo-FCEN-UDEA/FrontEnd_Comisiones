@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RolGuard implements CanActivate {
+export class RoladminGuard implements CanActivate {
 
   public rol : string = localStorage.getItem('rol') || '';
   constructor(
@@ -20,7 +20,7 @@ export class RolGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return !(this.rol == 'EMPLEADO' || this.rol == 'PROFESOR');
+    return (this.rol == 'EMPLEADO' || this.rol == 'PROFESOR');
   }
   
 }

@@ -32,6 +32,7 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
    }
   ngOnChanges(changes: SimpleChanges): void {
     console.log('cambios')
+    
   }
 
   ngOnInit(): void {
@@ -68,9 +69,10 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
             })}
         })
         
-      } else {
-        // this.router.navigate(['/'])
-      }
+      } 
+      // else {
+      //   this.router.navigate(['/'])
+      // }
     })
   }
 

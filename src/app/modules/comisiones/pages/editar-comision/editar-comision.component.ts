@@ -328,7 +328,7 @@ export class EditarComisionComponent implements OnInit {
             this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
           );
           Swal.fire({
-            title: 'Actulizada',
+            title: 'Actualizada',
             text: '¡La comisión se actualizó con éxito!',
             icon: 'success',
             confirmButtonColor: '#3AB795',

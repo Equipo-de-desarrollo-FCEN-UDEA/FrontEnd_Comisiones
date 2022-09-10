@@ -60,7 +60,8 @@ export class VerComisionComponent {
            const id = paramId['id'];
            console.log(id)
             if (id) {
-              this.comisionesSvc.getComision(id).subscribe((res: Comision) => {
+              this.comisionesSvc.getComision(id).subscribe({
+                next: (res) => {
                 this.comision = res;
                 this.comision?.documentos.forEach(documento => this.documentosArray.push(documento));
                 this.comision?.cumplidos.forEach(cumplido => this.cumplidosArray.push(cumplido));
@@ -68,7 +69,12 @@ export class VerComisionComponent {
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
                 this.estados = this.comision.intermediate_comisiones;
                 console.log(this.comision); 
-                
+              }, error: (err) => {
+                if (err.status === 404 || err.status === 401) {
+                  this.error = err.error.msg; // mensaje desde el back
+                   this.router.navigate(['/'])
+                }
+              }
               });
             }
         },

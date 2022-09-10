@@ -5,12 +5,15 @@ import { VerComisionComponent } from './pages/ver-comision/ver-comision.componen
 import { EditarComisionComponent } from './pages/editar-comision/editar-comision.component';
 import { EstadosComisionComponent } from './pages/ver-comision/estados/estados-comision/estados-comision.component';
 import { CumplidoComponent } from './pages/ver-comision/cumplidos/crear-cumplido/crear-cumplido.component';
+import { RolGuard } from '@guards/rol.guard';
+import { RoladminGuard } from '@guards/roladmin.guard';
 
 
 const routes: Routes = [
 
 {
     path: 'crear-comision',
+    canActivate: [RoladminGuard],
     component: CrearComisionComponent
   },
 
@@ -22,6 +25,7 @@ const routes: Routes = [
 
   {
     path: 'editar-comision/:id',
+    canActivate: [RoladminGuard],
     component: EditarComisionComponent
   },
   
@@ -31,6 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'subir-cumplido/:id',
+    canActivate: [RoladminGuard],
     component: CumplidoComponent
   },
   { 

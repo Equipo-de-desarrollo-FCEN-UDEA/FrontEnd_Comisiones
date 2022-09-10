@@ -1,6 +1,7 @@
 export interface Objetivo {
     descripcion: string;
     acciones: string[];
+    indicadores?: string[];
 }
 
 export interface Tema {
@@ -26,7 +27,13 @@ export var temas : Tema[] = [
                 `Comunidades académicas consolidadas para, desde y con los territorios.`,
                 `Procesos de internacionalización implementados con una visión geopolítica, que conecten la Universidad con el mundo y le permitan posicionarse como destino y referente académico.`,
                 `Procesos de autoevaluación instaurados como cultura universitaria, con planes de mejoramiento en los procesos académicos.`
-            ]
+            ],
+                indicadores: [
+                    'Numero de cursos de pregrado que integren o combinen asignaturas en distintas modalidades. desarrollo de las funciones misionales. desde los territorios yenconexi6n con el mundo.',
+                    
+
+                ]
+            
             },
             {
                 descripcion: `Fortalecer todas las expresiones de las artes y las culturas, que posicionen a la Universidad como referente humanista y cultural para el encuentro y el intercambio de la comunidad universitaria y la sociedad.`,

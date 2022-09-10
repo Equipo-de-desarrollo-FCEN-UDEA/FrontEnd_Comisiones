@@ -36,10 +36,11 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 }
 
 function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
+  term = term.toLowerCase();
   return (
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())  ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
-    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt)?.includes(term)||
+    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt, 'yyyy-MM-dd')?.toString().includes(term)||
     comisiones.usuarios?.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
@@ -116,7 +117,7 @@ export class BuscarComisionesService {
   set page(page: number) { this._set({page}); }
   set pageSize(pageSize: number) { this._set({pageSize}); }
   set searchTerm(searchTerm: string) { this._set({searchTerm}); }
-  set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
+  set sortColumn(sortColumn: SortColumn | any) { this._set({sortColumn}); }
   set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
 
 

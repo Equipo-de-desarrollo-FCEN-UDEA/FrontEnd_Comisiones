@@ -9,97 +9,178 @@
     <div class="card-body">
       <div class="row header-row P-2">
         <div class="col">
-          <span class="text-secondary">EDITAR PERFIL</span>
+          <!-- <p class="ptitle ">Editar mi perfil</p> -->
+          <span class="text-secondary"> EDITAR PERFIL</span>
         </div>
       </div>
       <hr />
       <div class="form">
-
         <div class="row regular-row m-2 align-items-baseline">
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Nombre Completo</div>
-          <div class="col-sm-12 col-xs-12 col-md-8 col-12">           
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Nombre Completo
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input
-            id="nombre"
-            type="text"
-            class="form-control"
-            placeholder=""
-            formControlName="nombre"
-          /></div>
+              id="nombre"
+              type="text"
+              class="form-control"
+              placeholder=""
+              formControlName="nombre"
+            />
+          </div>
         </div>
 
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
-          <div class="col-sm-12 col-xs-12 col-md-8 col-12">           
-            <input
-            id="apellido"
-            type="text"
-            class="form-control"
-            placeholder=" "
-            formControlName="apellido"
-          />
-          </div>
-        </div>
-
-        <div class="row regular-row m-2 align-items-baseline"> 
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Correo Institucional</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <input
-                formControlName="correo"
-                id="Correo-"
-                type="text"
-                class="form-control"
-                placeholder="ejemplo@udea.edu.co"
-                [ngClass]="{
-                  'is-invalid': submitted && f['correo'].errors
-                }"            
-              />
-              <label for="Correo-" class="formLabel"
-                ></label
-              >
+            <input
+              id="apellido"
+              type="text"
+              class="form-control"
+              placeholder=" "
+              formControlName="apellido"
+            />
           </div>
         </div>
 
         <div class="row regular-row m-2 align-items-baseline">
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Tipo de Identificacion</div>
-          <div class="col-sm-12 col-xs-12 col-md-8 col-12">           
-            <select
-            class="form-select form-select-lg"
-            id="floatingcampo_modalidad"
-            formControlName="tipo_identificacion"
-            required
-          >
-            <option [value]="tipo" *ngFor="let tipo of tiposId">
-              {{ tipo | uppercase }}
-            </option>
-          </select>
-          <label
-            for="floatingcampo_modalidad"
-            class="selectLabel"
-            [ngClass]="{ isFill: true }"
-            ></label
-          >
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Correo Institucional
           </div>
-        </div>
-        <div class="row regular-row m-2 align-items-baseline"> 
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Numero de Identificación</div> 
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <input
-                id="identificacion"
-                formControlName="identificacion"
-                type="text"
-                class="form-control"
-                placeholder=" "
-                [ngClass]="{
-                  'is-invalid': submitted && f['identificacion'].errors
-                }"
-              />
-              <label for="identificacion" class="formLabel">
-              </label>
+            <input
+              formControlName="correo"
+              id="Correo-"
+              type="text"
+              class="form-control"
+              placeholder="ejemplo@udea.edu.co"
+              [ngClass]="{
+                'is-invalid': submitted && f['correo'].errors
+              }"
+            />
+            <label for="Correo-" class="formLabel"></label>
           </div>
         </div>
 
-        <!-- <div class="row regular-row m-2 align-items-baseline"> 
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div> 
+        <div class="row regular-row m-2 align-items-baseline">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Tipo de Identificacion
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <select
+              class="form-select form-select-lg"
+              id="floatingcampo_modalidad"
+              formControlName="tipo_identificacion"
+              required
+            >
+              <option [value]="tipo" *ngFor="let tipo of tiposId">
+                {{ tipo | uppercase }}
+              </option>
+            </select>
+            <label
+              for="floatingcampo_modalidad"
+              class="selectLabel"
+              [ngClass]="{ isFill: true }"
+            ></label>
+          </div>
+        </div>
+        <div class="row regular-row m-2 align-items-baseline">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Numero de Identificación
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input
+              id="identificacion"
+              formControlName="identificacion"
+              type="text"
+              class="form-control"
+              placeholder=" "
+              [ngClass]="{
+                'is-invalid': submitted && f['identificacion'].errors
+              }"
+            />
+            <label for="identificacion" class="formLabel"> </label>
+          </div>
+        </div>
+        <div
+          class="row regular-row m-2 align-items-baseline"
+          *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
+        >
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <select
+                class="form-select form-select-lg"
+                id="roles_id"
+                formControlName="roles_id"
+                required
+                placeholder=" "
+                [ngClass]="{
+                  'is-invalid': submitted && f['roles_id'].errors
+                }"
+              >
+                <option [value]="rol.id" *ngFor="let rol of roles$ | async">
+                  {{ rol.nombre | uppercase }}
+                </option>
+              </select>
+              <label
+                for="roles_id"
+                class="selectLabel"
+                [ngClass]="{ isFill: true }"
+                >Cargo</label
+              >
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row regular-row m-2 align-items-baseline">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Contraseña <span style="color:red">*</span></div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input
+            id="contrasena"
+            type="password"
+            class="form-control"
+            placeholder=" "
+            formControlName="contrasena"
+            [ngClass]="{
+              'is-invalid': submitted && f['contrasena'].errors
+            }"
+          />
+          </div>
+        </div> -->
+        <div class="footer-row d-md-flex justify-content-md-end mb-3">
+          <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              [routerLink]="['/usuarios/ver-usuario', usuario?.id]"
+            >
+              Cancelar
+            </button>
+          </div>
+          <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+            <button
+              id="btn-sub"
+              (submit)="(true)"
+              class="btn btn-success"
+              [disabled]="formUpdate.invalid"
+            >
+              <span
+                *ngIf="isLoading | async"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
               <select
@@ -124,9 +205,23 @@
               >
             </div>
           </div>
+<<<<<<< HEAD
         </div> -->
-        <!-- <div class="row regular-row m-2 align-items-baseline"> 
+<!-- <div class="row regular-row m-2 align-items-baseline"> 
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento</div> 
+=======
+<<<<<<< HEAD
+        </div>
+
+        <div class="row regular-row m-2">
+          <div class="col-xs-12 col-sm-6 label">Contraseña</div>
+          <div class="col-xs-12 col-sm-6">
+=======
+        </div> -->
+
+<!-- <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento</div>
+>>>>>>> main
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
               <select
@@ -142,7 +237,7 @@
               <option
                   *ngFor="let departamento of departamentos$ | async"
                   [value]="departamento.id"
-                > 
+                >
                   {{ departamento.nombre | uppercase }}
               </option>
               </select>
@@ -156,11 +251,11 @@
           </div>
         </div> -->
 
-        <hr />
-        
+<!-- <hr />
+
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Contraseña</div>
-          <div class="col-sm-12 col-xs-12 col-md-8 col-12">           
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input
             id="contrasena"
             type="password"
@@ -176,7 +271,7 @@
 
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Confirmar Contraseña</div>
-          <div class="col-sm-12 col-xs-12 col-md-8 col-12">           
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input
             id="validarcontrasena"
             type="password"
@@ -197,7 +292,7 @@
 
         <div class="footer-row d-md-flex justify-content-md-end mb-3">
           <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-            <button 
+            <button
             class="btn btn-secondary "
             [routerLink]="['/usuarios/ver-usuario', usuarioBase?.id]"
             >
@@ -224,4 +319,4 @@
       </div>
     </div>
   </div>
-</form>
+</form> --->

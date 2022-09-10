@@ -35,7 +35,10 @@ function sort(dedicaciones: Dedicacion[], column: SortColumn, direction: string)
 }
 
 function matches(dedicaciones: Dedicacion, term: string, datepipe: DatePipe) {
+  term = term.toLowerCase();
   return (
+    dedicaciones.descripcion.toLowerCase().includes(term) ||
+    datepipe.transform(dedicaciones.createdAt)?.toString().includes(term)||
     dedicaciones.usuarios.nombre.toLowerCase().includes(term) ||
     dedicaciones.usuarios.apellido.toLowerCase().includes(term) ||
     dedicaciones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
@@ -59,9 +62,9 @@ export class BuscarDedicacionService {
     sortDirection: 'asc'
   };
 
-  DEDICACIONES : Dedicacion[] = [];
+  DEDICACIONES : any[] = [];
 
-  archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  // archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(
     private dedicacionesSvc: DedicacionService,
@@ -79,28 +82,29 @@ export class BuscarDedicacionService {
       });
 
     this._search$.next();
-    this.dedicacionesSvc.scopeGetDedicaciones(this.archivado$.getValue())
+    this.dedicacionesSvc.getDedicaciones()
     .subscribe(
       (resp: any ) => {
-        this.DEDICACIONES = resp.dedicaciones;
+        this.DEDICACIONES = resp;
+        console.log(this.DEDICACIONES)
       })
-   }
-
-  archivados(archivado:number){
-    this.archivado$.next(archivado);
   }
 
-  ngOnchanges(){
-    this.dedicacionesSvc.scopeGetDedicaciones(this.archivado$.getValue())
-    .subscribe(
-      (resp: any) => {
-        console.log(resp+"respOnchange")
-        this.DEDICACIONES = resp.dedicaciones;
-        this._dedicaciones$.next(this.DEDICACIONES);
-        this._search$.next();
-      }
-    )
-   }
+  // archivados(archivado:number){
+  //   this.archivado$.next(archivado);
+  // }
+
+  // ngOnchanges(){
+  //   this.dedicacionesSvc.scopeGetDedicaciones()
+  //   .subscribe(
+  //     (resp: any) => {
+  //       console.log(resp+"respOnchange")
+  //       this.DEDICACIONES = resp.dedicaciones;
+  //       this._dedicaciones$.next(this.DEDICACIONES);
+  //       this._search$.next();
+  //     }
+  //   )
+  //  }
    
   get dedicaciones$() { return this._dedicaciones$.asObservable(); }
   get total$() { return this._total$.asObservable(); }

@@ -53,8 +53,6 @@ export class VerComisionComponent {
   }
 
   ngOnInit(): void {
-    console.log('entro al init')
-
     this.activateRoute.params.subscribe({
         next: (paramId) => {
            const id = paramId['id'];
@@ -68,7 +66,6 @@ export class VerComisionComponent {
                 this.fechaCreacion = this.comision?.intermediate_comisiones[0].createdAt;
                 this.estadoActual = this.ultimoElemento(res.intermediate_comisiones).intermediate_estados;
                 this.estados = this.comision.intermediate_comisiones;
-                console.log(this.comision); 
               }, error: (err) => {
                 if (err.status === 404 || err.status === 401) {
                   this.error = err.error.msg; // mensaje desde el back

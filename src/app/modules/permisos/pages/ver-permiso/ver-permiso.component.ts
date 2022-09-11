@@ -65,6 +65,7 @@ export class VerPermisoComponent implements OnInit {
                 this.estados = this.permiso?.intermediate_permisos;
                 this.fechaCreacion = this.permiso?.intermediate_permisos[0].createdAt;
                 this.estadoActual = this.ultimoElemento(res.intermediate_permisos).intermediate_estados?.nombre;
+                console.log(this.permiso)
               },
               error: (err) => {
                 if (err.status === 404 || err.status === 401) {

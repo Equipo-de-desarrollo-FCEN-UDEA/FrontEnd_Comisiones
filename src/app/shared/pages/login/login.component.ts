@@ -17,52 +17,52 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   public isCollapsed=true;
-  public tiposId=[
-    'Cedula de Ciudadania',
-    'Cedula de Extranjeria',
-    'Pasaporte',
-    'Tarjeta de Identidad',
-    'Diplomatico',
-    'Doc. Ident. De Extranjeros',
-    'Ident. Fiscal. Para Ext.',
-    'NIT',
-    'NIT Persona Natural',
-    'NUIP',
-    'Registro Civil',
-    'Certificado Nacido Vivo',
-    'Pasaporte ONU',
-    'Permiso especial de permanencia',
-    'Salvoconducto de permanencia',
-    'Permiso especial formacion PEPFF',
-    'Permiso por protección temporal'
-  ]
+  // public tiposId=[
+  //   'Cedula de Ciudadania',
+  //   'Cedula de Extranjeria',
+  //   'Pasaporte',
+  //   'Tarjeta de Identidad',
+  //   'Diplomatico',
+  //   'Doc. Ident. De Extranjeros',
+  //   'Ident. Fiscal. Para Ext.',
+  //   'NIT',
+  //   'NIT Persona Natural',
+  //   'NUIP',
+  //   'Registro Civil',
+  //   'Certificado Nacido Vivo',
+  //   'Pasaporte ONU',
+  //   'Permiso especial de permanencia',
+  //   'Salvoconducto de permanencia',
+  //   'Permiso especial formacion PEPFF',
+  //   'Permiso por protección temporal'
+  // ]
 
 
-  public roles = [
-    {
-      id: 5,
-      nombre: 'Empleado'
-    },
-    {
-      id: 6,
-      nombre: 'Profesor'
-    },
-    {
-      id: 7,
-      nombre: 'Estudiante'
-    }
-  ]
+  // public roles = [
+  //   {
+  //     id: 5,
+  //     nombre: 'Empleado'
+  //   },
+  //   {
+  //     id: 6,
+  //     nombre: 'Profesor'
+  //   },
+  //   {
+  //     id: 7,
+  //     nombre: 'Estudiante'
+  //   }
+  // ]
 
-  public deparmentos = [
-    {
-      id: 1,
-      nombre: 'Vicedecanatura FCEN'
-    },
-    {
-      id: 2,
-      nombre: 'Extensión'
-    }
-  ]
+  // public deparmentos = [
+  //   {
+  //     id: 1,
+  //     nombre: 'Vicedecanatura FCEN'
+  //   },
+  //   {
+  //     id: 2,
+  //     nombre: 'Extensión'
+  //   }
+  // ]
 
 
   // private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; --> EL QUE SE USARÁ
@@ -89,16 +89,16 @@ export class LoginComponent implements OnInit {
   });
 
 
-  formSignup = this.fb.group({
-    correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
-    passwordSignup : ['', Validators.required],
-    nombreSignup : ['', Validators.required],
-    apellidoSignup : ['', Validators.required],
-    tipoIdSignup : ['', Validators.required],
-    identificacionSignup : ['', Validators.required],
-    departamentoSignup : ['', Validators.required],
-    rolSignup : ['', Validators.required]
-  });
+  // formSignup = this.fb.group({
+  //   correoSignup : ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
+  //   passwordSignup : ['', Validators.required],
+  //   nombreSignup : ['', Validators.required],
+  //   apellidoSignup : ['', Validators.required],
+  //   tipoIdSignup : ['', Validators.required],
+  //   identificacionSignup : ['', Validators.required],
+  //   departamentoSignup : ['', Validators.required],
+  //   rolSignup : ['', Validators.required]
+  // });
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()){

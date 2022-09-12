@@ -33,16 +33,17 @@ export var temas : Tema[] = [
                 `Número de cursos de pregrado que integren o combinen asignaturas en distintas modalidades. Desarrollo de las funciones misionales, desde los territorios y enconexión con el mundo.`,
                 `Número de programas depregrado que esten en armonización curricular.`,
                 `Número de estrategias didacticas innovadoras aplicadas en los programas de pregrado y posgrado en correspondencia con los cambios en los entornos de aprendizaje. `,
+
                 `Número de integrantes de la comunidad universitaria participando en la nueva plataformade fortalecimiento de capacidades en internacionalización, interculturalidad y ciudadania global. `,
                 `Número de aliados estratégicos internacionales con los que se realizan actividades de cooperaci6n cientifica, docente y de extension por ario. `,
                 `Número de participantes en los cursos ofertados en el marco de formación complementaria, deportiva, cultural y de Bienestar. `,
 
                 `Cantidad de publicaciones en bases de datos. `,
                 `Número de citacionesde Google Scholar por año que recibe la UdeA. `,
-                `Número departicipaciones de losestudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
+                `Número de participaciones de los estudiantes en actividades y estrategias que permiten fortalecerla formación eninvestigación. `,
                 `Número de emprendimientos beneficiados de los nuevos progra más institucionales para el fortalecimiento empresarial. `,
                 `Número de proyectos, convenios y contratos en actividades de ciencia, tecnología, innovación y emprendimiento entre Universidad- Empresa-Estado- Sociedad. `,
-                `Número proyectos de innovaci6n social. `,
+                `Número proyectos de innovación social. `,
                 ]
 
             },
@@ -138,11 +139,11 @@ export var temas : Tema[] = [
                 ],
                 indicadores:[
                     `Número de estudiantes beneficiarios de los programas y servicios  orientados a promover la permanencia estudiantil. `,
-                    `Tasa de deserci6n por semestre.`,
+                    `Tasa de deserción por semestre.`,
                     `Número de participantes en actividades desarrolladas para promover el buen vivir en la comunidad universitaria.`,
 
-                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
-                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Dirección de Bienestar Universitario `,
+                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusión de personas con capacidades diversas (fase: circulación y  espacio público)`,
                   ]
             },
             {
@@ -160,7 +161,7 @@ export var temas : Tema[] = [
                   ],
                 indicadores:[
                     `Número de estudiantes beneficiarios de los programas y servicios  orientados a promover la permanencia estudiantil. `,
-                    `Tasa de deserci6n por semestre.`,
+                    `Tasa de deserción por semestre.`,
                     `Número de participantes en actividades desarrolladas para promover el buen vivir en la comunidad universitaria.`,
 
                     `Porcentaje de profesores que realizan procesos formativos y de cualificación docente ofertados por la Universidad.`,
@@ -170,8 +171,8 @@ export var temas : Tema[] = [
                     `Número de plazas docentes de tiempo completos equivalentes ocupadas.`,
                     `Número de plazas docentes de tiempo completos equivalentes creadas. `,
 
-                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
-                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Dirección de Bienestar Universitario `,
+                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusión de personas con capacidades diversas (fase: circulación y  espacio público)`,
 
                 ]
             },
@@ -189,7 +190,7 @@ export var temas : Tema[] = [
                 ],
                 indicadores:[
                     `Número de estudiantes beneficiarios de los programas y servicios  orientados a promover la permanencia estudiantil. `,
-                    `Tasa de deserci6n por semestre.`,
+                    `Tasa de deserción por semestre.`,
                     `Número de participantes en actividades desarrolladas para promover el buen vivir en la comunidad universitaria.`,
 
                     `Porcentaje de profesores que realizan procesos formativos y de cualificación docente ofertados por la Universidad.`,
@@ -199,8 +200,8 @@ export var temas : Tema[] = [
                     `Número de plazas docentes de tiempo completos equivalentes ocupadas.`,
                     `Número de plazas docentes de tiempo completos equivalentes creadas. `,
 
-                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
-                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+                    `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Dirección de Bienestar Universitario `,
+                    `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusión de personas con capacidades diversas (fase: circulación y  espacio público)`,
 
                   ]
             },
@@ -226,8 +227,8 @@ export var temas : Tema[] = [
                   `Reconocimiento y legitimidad de las organizaciones y colectivos universitarios ante el gobierno universitario y sus bases de origen, siempre y cuando actúen dentro del marco de la Constitución, la Ley y las normas universitarias.`
                 ],
                 indicadores: [
-                  `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participacón, ciudadanía y convivencia  para la comunidad universitaria. `,
-                  `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decision universitarios. `,
+                  `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participación, ciudadanía y convivencia  para la comunidad universitaria. `,
+                  `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decisión universitarios. `,
                 ]
             },
             {
@@ -239,11 +240,11 @@ export var temas : Tema[] = [
                     `Órganos de gobierno y representaciones con reglamentos internos ajustados, que definan los principios de consecutividad, identidad y conexidad para el trámite de proyectos normativos, y las materias sobre las cuales rigen procedimientos, quórums o mayorías especiales.`
                 ],
                 indicadores:[
-                  `Número de temas de interes institucional priorizados que se actualizan desde lo normativo`,
+                  `Número de temas de interés institucional priorizados que se actualizan desde lo normativo`,
                   `Número de talleres de apoyo para la deliberación y proyección de la reforma de regulaciones especificas, priorizados por la Dirección Jurídica. `,
 
-                  `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participacón, ciudadanía y convivencia  para la comunidad universitaria. `,
-                  `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decision universitarios. `,
+                  `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participación, ciudadanía y convivencia  para la comunidad universitaria. `,
+                  `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decisión universitarios. `,
                 ]
             },
             {
@@ -254,8 +255,8 @@ export var temas : Tema[] = [
                     `Rendición pública y periódica de cuentas ajustada a la función institucional y a la gestión, que fomente el ejercicio autocrítico y la retroalimentación de la comunidad universitaria y de la sociedad.`
                 ],
                 indicadores:[
-                    `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participacón, ciudadanía y convivencia  para la comunidad universitaria. `,
-                    `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decision universitarios. `,
+                    `Número de eventos de formación y divulgación sobre temas de gobierno, democracia, participación, ciudadanía y convivencia  para la comunidad universitaria. `,
+                    `Nivel de participación de la comunidad universitaria en los procesos de elección y consulta para la designación de autoridades y de representantes en órganos de decisión universitarios. `,
 
                 ]
             },
@@ -284,8 +285,8 @@ export var temas : Tema[] = [
                     `Capacidades para la gestión de riesgos, implementadas e integradas al direccionamiento estratégico.`
                 ],
                 indicadores: [
-                  `Nivel de optimización de recurses en los nuevos procesos académicos o administrativos intervenidos. `,
-                  `Número de rocesos académicos y administrativos prioritarios estandarizados`,
+                  `Nivel de optimización de recursos en los nuevos procesos académicos o administrativos intervenidos. `,
+                  `Número de procesos académicos y administrativos prioritarios estandarizados`,
                 ]
             },
             {
@@ -306,7 +307,7 @@ export var temas : Tema[] = [
                     `Capacidades instaladas para la alineación, coordinación y colaboración en y entre unidades académicas y administrativas.`
                 ],
                 indicadores: [
-                  `Nivel de optimización de recurses en los nuevos procesos académicos o administrativos intervenidos. `,
+                  `Nivel de optimización de recursos en los nuevos procesos académicos o administrativos intervenidos. `,
                   `Número de procesos académicos y administrativos prioritarios estandarizados.`,
                 ]
             },
@@ -386,8 +387,8 @@ export var temas : Tema[] = [
                     `Formación adelantada para el desarrollo de capacidades para la reintegración a la vida civil de los excombatientes y acompañamiento a las víctimas mediante la generación de relaciones desde el respeto a la vida, a los derechos y al pluralismo en las regiones.`,
                 ],
                 indicadores:[
-                  `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
-                  `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+                  `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Dirección de Bienestar Universitario `,
+                  `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusión de personas con capacidades diversas (fase: circulación y  espacio público)`,
 
                   `Número de programas académicos de pregrado interdisciplinarios ofertados con enfoque en paz. `,
                   `Número de proyectos de investigación y extensión con comunidades, que fortalezcan los procesos de construccion de paz con enfoque territorial. `,
@@ -414,8 +415,8 @@ export var temas : Tema[] = [
                     `Gestión para la apropiación social e institucional del conocimiento sobre la inclusión en la educación superior, desarrollada con base en los lineamientos políticos y avances teóricos latinoamericanos y globales.`,
                 ],
                 indicadores:[
-                  `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Direcci6n de Bienestar Universitario `,
-                  `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusion de personas con capacidades diversas (fase: circulación y  espacio público)`,
+                  `Número de estudiantes con capacidades diversas participes o beneficiarios de las actividades, programas y servicios de la Dirección de Bienestar Universitario `,
+                  `Nivel de implementación de adecuaciones en la CiudadnUniversitaria que faciliten procesos de inclusión de personas con capacidades diversas (fase: circulación y  espacio público)`,
 
                   `Número de programas académicos de pregrado interdisciplinarios ofertados con enfoque en paz. `,
                   `Número de proyectos de investigación y extensión con comunidades, que fortalezcan los procesos de construccion de paz con enfoque territorial. `,
@@ -440,7 +441,7 @@ export var temas : Tema[] = [
                     `Estrategias implementadas para la asesoría y el acompañamiento jurídico a la investigación científica en ambiente y biodiversidad.`
                 ],
                 indicadores:[
-                  `Porcentaje de avance en la implementaci6n de la política de gestión ambiental. `,
+                  `Porcentaje de avance en la implementación de la política de gestión ambiental. `,
                   `Número de iniciativas ambientales en los campus y sedes universitarios. `,
                 ]
             },
@@ -451,7 +452,7 @@ export var temas : Tema[] = [
                     `Mecanismos instalados de articulación entre el Sistema Nacional Ambiental, los tomadores de decisiones y la Universidad.`,
                 ],
                 indicadores:[
-                  `Porcentaje de avance en la implementaci6n de la política de gestión ambiental. `,
+                  `Porcentaje de avance en la implementación de la política de gestión ambiental. `,
                   `Número de iniciativas ambientales en los campus y sedes universitarios. `,
                 ]
 
@@ -465,7 +466,7 @@ export var temas : Tema[] = [
                     `Capacidades y oportunidades de las poblaciones locales, fortalecidas para la gestión del ambiente y de la biodiversidad, con énfasis en los territorios afectados por el conflicto armado.`
                 ],
                 indicadores:[
-                  `Porcentaje de avance en la implementaci6n de la política de gestión ambiental. `,
+                  `Porcentaje de avance en la implementación de la política de gestión ambiental. `,
                   `Número de iniciativas ambientales en los campus y sedes universitarios. `,
                 ]
             }

@@ -31,6 +31,7 @@ export class VerPermisoComponent implements OnInit {
   documentosArray:any = [];
   fechaCreacion:any = '';
 
+
   // Estados 
   ultimoElemento = ultimoElement
   estadoActual:any = '';

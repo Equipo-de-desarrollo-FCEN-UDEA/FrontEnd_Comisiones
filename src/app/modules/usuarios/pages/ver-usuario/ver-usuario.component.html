@@ -34,19 +34,30 @@
   </div>
 
   <div class="row regular-row">
-    <div class="col-xs-12 col-sm-6 label fw-bold ">Rol</div>
-    <div class="col-sm-6 col-xs-12">{{usuario?.roles?.nombre}} </div>
+    <div class="col-xs-12 col-sm-6 label fw-bold ">Tipo de Vinculacion</div>
+    <div class="col-sm-6 col-xs-12">{{usuario?.tipo_vinculacion}} </div>
   </div>
+
+  <!-- <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bold ">Oficina</div>
+    <div class="col-sm-6 col-xs-12">{{usuario?.oficina}} </div>
+  </div> -->
 
   <div class="row regular-row">
     <div class="ccol-xs-12 col-sm-6 label fw-bold">Estado</div>
     <div class="col-sm-6 col-xs-12">{{ usuario?.estado }}</div>
   </div>
 
-  <!-- <div class="row regular-row">
-    <div class="col-4 label">Dias de Permiso Disponibles</div>
-    <div class="col-sm-8"> {{ usuario?.dia_dispobible }}</div>
-  </div> -->
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bold ">Escalafón</div>
+    <div class="col-sm-6 col-xs-12">{{usuario?.escalafon}} </div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bold ">Rol</div>
+    <div class="col-sm-6 col-xs-12">{{usuario?.roles?.nombre}} </div>
+  </div>
+
 
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Facultad</div>
@@ -73,7 +84,9 @@
       </button>
     </div>
 
-    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+    <div 
+      *ngIf="rol == 'DECANATURA' || rol == 'ADMIN' || rol == 'COORDINACION'"
+      class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
       <button
         type="button"
         class="btn btn-warning btn-block"

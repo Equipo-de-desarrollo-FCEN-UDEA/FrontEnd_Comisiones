@@ -1,5 +1,3 @@
-
-
 .containerInside { 
   width: 75%;
   margin-bottom: 10em;
@@ -15,6 +13,9 @@
 .btn-cumplido{
   color: #fff;
   background-color: #04351f;
+}.btn-cumplido:hover {
+  color: #fff;
+  background-color: #04351fe2;
 }
 
 .btn-light {

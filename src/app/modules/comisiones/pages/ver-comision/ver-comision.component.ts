@@ -28,6 +28,7 @@ export class VerComisionComponent {
 
   public comision!: Comision;
 
+
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   documentosArray:any = [];

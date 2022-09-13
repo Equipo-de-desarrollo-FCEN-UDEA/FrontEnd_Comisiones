@@ -26,12 +26,16 @@ export interface Usuario extends UsuarioBase{
     tipo_identificacion?: string;
     identificacion?: number;
     correo: string;
-    estado?: string;
+    tipo_vinculacion: string;
     createdAt: Date;
     updated_at: Date;
     departamentos: DepResInside;
     roles_id: number,
     roles: RolResponse;
+    escalafon: string;
+    oficina?: string;
+    telefono?: number;
+    estado?: string;
 }
 
 export interface UsuarioInDB extends Usuario {

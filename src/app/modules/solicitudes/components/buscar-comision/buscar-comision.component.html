@@ -114,13 +114,6 @@
                 </ngb-highlight>
               </td>
 
-              <td>
-                <ngb-highlight 
-                  [result]="comision.usuarios.departamentos.facultades.nombre"
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
               <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
                 <button *ngIf="comision.archivado == 0" type="button" (click)="archivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Archivar</button>
                 <button *ngIf="comision.archivado == 1" type="button" (click)="desarchivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Desarchivar</button>

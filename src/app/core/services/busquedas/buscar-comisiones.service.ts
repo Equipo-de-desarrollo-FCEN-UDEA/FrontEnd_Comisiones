@@ -86,6 +86,7 @@ export class BuscarComisionesService {
         this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
         .subscribe(
           (resp: any ) => {
+            console.log(resp.comisiones)
             this.COMISIONES = resp.comisiones;
           })
       }
@@ -98,7 +99,6 @@ export class BuscarComisionesService {
     this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
     .subscribe(
       (resp: any) => {
-        console.log(resp+"respOnchange")
         this.COMISIONES = resp.comisiones;
         this._comisiones$.next(this.COMISIONES);
         this._search$.next();
@@ -132,7 +132,6 @@ export class BuscarComisionesService {
     // 1. sort
     let comisiones = sort(this.COMISIONES, sortColumn, sortDirection);
 
-    console.log(comisiones + "oe");
     // 2. filter
     comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.datepipe));
     const total = comisiones.length;

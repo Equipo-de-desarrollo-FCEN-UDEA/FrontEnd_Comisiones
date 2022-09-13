@@ -40,11 +40,11 @@ export class EditarComisionComponent implements OnInit {
   // Tipos de comision desde back
   public tiposComision$: Observable<TipoComision[]>;
   public editarComisionForm: FormGroup;
-  
+
   @ViewChild('floatingpais') floatingpais: ElementRef | null = null;
-  public paises: Pais[]=[];
-  public ciudades: Ciudad[]=[];
-  public provincias: Estado[]=[];
+  public paises: Pais[] = [];
+  public ciudades: Ciudad[] = [];
+  public provincias: Estado[] = [];
 
   // ID de la comsision a editar
   getId: any;
@@ -53,28 +53,28 @@ export class EditarComisionComponent implements OnInit {
   public isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   // Archivos nuevos
-  public files : any[]=[];
+  public files: any[] = [];
   public archivos = [1];
 
   // Documentos Actuales
-  public docsBorrar:any = [];
-  public documentosArray:any = [];
+  public docsBorrar: any = [];
+  public documentosArray: any = [];
 
-  private pais : Pais={
+  private pais: Pais = {
     id: 0,
     name: '',
     iso2: ''
   };
-  private provincia : Estado = {
-      id: 0,
-      name: '',
-      iso2: '',
+  private provincia: Estado = {
+    id: 0,
+    name: '',
+    iso2: '',
   }
 
 
 
 
- // ------------ CONSTRUCTOR ---------------
+  // ------------ CONSTRUCTOR ---------------
   constructor(
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
@@ -90,7 +90,7 @@ export class EditarComisionComponent implements OnInit {
     private tipoComisionSvc: TipoComisionService,
     private loaderSvc: LoaderService,
     private paisesCiudadesSvc: PaisesCiudadesService
-  ) { 
+  ) {
 
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
     this.tiposComision$ = this.tipoComisionSvc.getTipoSolicitud();
@@ -101,19 +101,19 @@ export class EditarComisionComponent implements OnInit {
       idioma: [''],
       fecha_inicio: ['', Validators.required],
       fecha_fin: ['', Validators.required],
-      pais : ['', [Validators.required]],
+      pais: ['', [Validators.required]],
       provincia: [''],
-      ciudad : [''],
+      ciudad: [''],
     });
 
     this.fromDate = null;
 
   }
 
-  
+
 
   ngOnInit(): void {
-  
+
     // Trae los valores actuales de la comisión
     this.comisionSvc.getComision(this.getId).subscribe({
       next: (res) => {
@@ -122,13 +122,13 @@ export class EditarComisionComponent implements OnInit {
           justificacion: res.justificacion,
           idioma: res.idioma,
           pais: res.lugar?.split(",")[0],
-          provincia:  res.lugar?.split(",")[1]? res.lugar?.split(",")[1]: "",
-          ciudad: res.lugar?.split(",")[2]? res.lugar?.split(",")[2]: "",
+          provincia: res.lugar?.split(",")[1] ? res.lugar?.split(",")[1] : "",
+          ciudad: res.lugar?.split(",")[2] ? res.lugar?.split(",")[2] : "",
           fecha_inicio: this.datepipe.transform(res.fecha_inicio, 'YYYY-MM-dd'),
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
         });
 
-        res.documentos.forEach((documento:any) => this.documentosArray.push(documento))
+        res.documentos.forEach((documento: any) => this.documentosArray.push(documento))
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
@@ -139,11 +139,11 @@ export class EditarComisionComponent implements OnInit {
     });
 
     this.paisesCiudadesSvc.getPaises().subscribe(
-      (data:Pais[]) => {
+      (data: Pais[]) => {
         this.paises = data;
       }
-     )
-    
+    )
+
   }
 
   // --------------------------------------------------
@@ -164,8 +164,8 @@ export class EditarComisionComponent implements OnInit {
   // --------------------------------------
   // ------------- DATEPICKER -------------
   // --------------------------------------
-  
-  inRange(fecha_1 : any, fecha_2 : any){
+
+  inRange(fecha_1: any, fecha_2: any) {
     fecha_1 = new Date(this.formatter.format(fecha_1));
     fecha_2 = new Date(this.formatter.format(fecha_2));
     return DiasHabiles(fecha_1, fecha_2);
@@ -184,22 +184,22 @@ export class EditarComisionComponent implements OnInit {
     }
 
     this.editarComisionForm.patchValue({
-      fecha_inicio : this.formatter.format(this.fromDate),
-      fecha_fin : this.formatter.format(this.toDate)
+      fecha_inicio: this.formatter.format(this.fromDate),
+      fecha_fin: this.formatter.format(this.toDate)
 
     });
   }
 
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
-        date.before(this.hoveredDate);
+      date.before(this.hoveredDate);
   }
 
   isInside(date: NgbDate) { return this.toDate && date.after(this.fromDate) && date.before(this.toDate); }
 
   isRange(date: NgbDate) {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
-        this.isHovered(date);
+      this.isHovered(date);
 
   }
 
@@ -212,7 +212,7 @@ export class EditarComisionComponent implements OnInit {
   // -------- ARCHIVOS - ANEXOS -----------
   // --------------------------------------
 
-  onUpload(event:Event, index: number) {
+  onUpload(event: Event, index: number) {
 
     const element = event.target as HTMLInputElement;
     const file = element.files?.item(0);
@@ -225,7 +225,7 @@ export class EditarComisionComponent implements OnInit {
 
   removeFile(index: number) {
     if (this.archivos.length > 1) {
-    this.archivos.splice(index, 1);
+      this.archivos.splice(index, 1);
     };
     this.files.splice(index, 1);
   }
@@ -235,19 +235,19 @@ export class EditarComisionComponent implements OnInit {
     return size < 2 * 1024 * 1024;
   }
 
-  
+
 
   isInvalidForm(controlName: string) {
     return this.editarComisionForm.get(controlName)?.invalid && this.editarComisionForm.get(controlName)?.touched;
   }
 
-  
-  borrarDocActual(idDoc: number, index: number){
+
+  borrarDocActual(idDoc: number, index: number) {
 
     // Si elimina documentos que ya están asociados a la comision
     if (this.documentosArray.length >= 1) {
       this.documentosArray.splice(index, 1);
-      };
+    };
 
     // array de documentos que se borrarán y serán parámetros en el service
     this.docsBorrar.push(idDoc);
@@ -258,30 +258,30 @@ export class EditarComisionComponent implements OnInit {
   // -------- LUGAR - PAISES - CIUDAD -----
   // --------------------------------------
 
-  onChangePais(event:any) {
+  onChangePais(event: any) {
     const paisId = event.target.value;
     this.pais = this.paises[paisId];
     this.paisesCiudadesSvc.getEstados(this.pais).subscribe(
-      (data:Estado[]) => {
+      (data: Estado[]) => {
         this.provincias = data;
       }
     )
   }
 
-  onChangeProvincia(event:any) {
+  onChangeProvincia(event: any) {
     const estadoId = event.target.value;
     this.provincia = this.provincias[estadoId];
     this.paisesCiudadesSvc.getCiudades(this.pais, this.provincia).subscribe(
-      (data:Ciudad[]) => {
+      (data: Ciudad[]) => {
         this.ciudades = data;
       }
     );
   }
 
 
- // ----------------------------------------
- // ----------- EDITAR COMISION ------------
- // ----------------------------------------
+  // ----------------------------------------
+  // ----------- EDITAR COMISION ------------
+  // ----------------------------------------
   onUpdate(): any {
 
     // Convertir el id del tipo de comision: de string a numero
@@ -294,13 +294,22 @@ export class EditarComisionComponent implements OnInit {
       return;
     }
 
+    // Convierte los strings a fechas en UTC, y se remueve GMT 
+    let fecha_inicio = new Date(this.editarComisionForm.value.fecha_inicio).toUTCString().slice(0, -4);
+    let fecha_fin = new Date(this.editarComisionForm.value.fecha_fin).toUTCString().slice(0, -4);
+
+
+    // Se agregan las horas de diferencia 
+    let fecha_inicio_utc = new Date(fecha_inicio).toUTCString()
+    let fecha_fin_utc = new Date(fecha_fin).toUTCString()
+
     const body = {
-      fecha_inicio: this.editarComisionForm.value.fecha_inicio,
-      fecha_fin: this.editarComisionForm.value.fecha_fin,
+      fecha_inicio: fecha_inicio_utc,
+      fecha_fin: fecha_fin_utc,
       fecha_resolucion: new Date(this.formatter.format(this.today)),
       justificacion: this.editarComisionForm.value.justificacion,
       idioma: this.editarComisionForm.value.idioma,
-      lugar: this.pais.name+', '+this.provincia.name,
+      lugar: this.pais.name + ', ' + this.provincia.name,
       tipos_comision_id: this.editarComisionForm.value.tipos_comision_id
     }
 
@@ -314,21 +323,21 @@ export class EditarComisionComponent implements OnInit {
     reqBody.append('lugar', body.lugar);
 
     for (const file of this.files) {
-      reqBody.append('archivo', file, file.name) 
+      reqBody.append('archivo', file, file.name)
     }
-    
+
 
     // Edita la comision: ID de la comision, ID de documentos borrados, Form 
-    this.comisionSvc.updateComision(this.getId, "["+this.docsBorrar.toString()+"]", 
+    this.comisionSvc.updateComision(this.getId, "[" + this.docsBorrar.toString() + "]",
       this.files, reqBody).subscribe({
-        next: (res) => { 
-          
+        next: (res) => {
+
           //ngZone: facilitate change detection
           this.ngZone.run(() =>
             this.router.navigateByUrl(`/comisiones/ver-comision/${this.getId}`)
           );
           Swal.fire({
-            title: 'Actulizada',
+            title: 'Actualizada',
             text: '¡La comisión se actualizó con éxito!',
             icon: 'success',
             confirmButtonColor: '#3AB795',
@@ -339,9 +348,9 @@ export class EditarComisionComponent implements OnInit {
             this.error = err.error.msg;
           }
         },
-    });
+      });
 
-    
+
   }
 
 }

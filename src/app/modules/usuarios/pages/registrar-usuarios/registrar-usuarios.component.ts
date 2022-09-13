@@ -2,12 +2,13 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DepartamentoInDB } from '@interfaces/departamentos';
-import { Rol, RolResponse } from '@interfaces/roles';
+import { Rol } from '@interfaces/roles';
 import { DepartamentoService } from '@services/departamentos/departamento.service';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { RolService } from '@services/roles/rol.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { tiposId } from '@shared/data/tipos-id';
+import { escalafon } from '@shared/data/escalafon';
 import { Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -21,6 +22,7 @@ export class RegistrarUsuariosComponent implements OnInit {
   crearUsuarioForm: FormGroup;
 
   tiposId = tiposId;
+  escalafon = escalafon;
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/; //--> EL QUE SE USARÁ
 
   public loading:boolean = false;
@@ -61,6 +63,10 @@ export class RegistrarUsuariosComponent implements OnInit {
       tipo_identificacion : ['', Validators.required],
       identificacion : ['', Validators.required],
       departamentos_id : ['', Validators.required],
+      telefono: ['', Validators.required],
+      escalafon: [''],
+      oficina: [0],
+      tipo_vinculacion: [''],
       roles_id : ['', Validators.required]
     });
   }

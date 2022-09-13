@@ -28,7 +28,7 @@ export class EditarPermisoComponent implements OnInit {
   error = '';
   clicked = 0;
   submitted = false;
-  
+
   // Datepicker
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
@@ -42,12 +42,12 @@ export class EditarPermisoComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   // Archivos nuevos
-  files : any[]=[];
+  files: any[] = [];
   archivos = [1];
 
   // Documentos Actuales
-  docsBorrar:any = [];
-  documentosArray:any = [];
+  docsBorrar: any = [];
+  documentosArray: any = [];
 
   // Tipos Permiso
   tiposPermiso$: Observable<TiposPermiso[]>;
@@ -62,11 +62,11 @@ export class EditarPermisoComponent implements OnInit {
 
     private formBuilder: FormBuilder,
     private cd: ChangeDetectorRef,
-    
+
     private permisoSvc: PermisoService,
     private loaderSvc: LoaderService,
     private tiposPermisoSvc: TipoPermisoService,
-    
+
     private activateRoute: ActivatedRoute,
     private ngZone: NgZone,
     private router: Router
@@ -86,7 +86,7 @@ export class EditarPermisoComponent implements OnInit {
     });
 
     this.fromDate = null;
-   }
+  }
 
   ngOnInit(): void {
     this.permisoSvc.getPermiso(this.getId).subscribe({
@@ -98,8 +98,8 @@ export class EditarPermisoComponent implements OnInit {
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
         });
 
-        res.documentos.forEach((documento: any) => this.documentosArray.push(documento)) 
-  
+        res.documentos.forEach((documento: any) => this.documentosArray.push(documento))
+
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
@@ -111,166 +111,166 @@ export class EditarPermisoComponent implements OnInit {
   }
 
 
-    // ----------- MANEJO DE ERRORES EN EL FORM ------------
-    get f() {
-      return this.editarPermisoForm.controls;
+  // ----------- MANEJO DE ERRORES EN EL FORM ------------
+  get f() {
+    return this.editarPermisoForm.controls;
+  }
+
+  // ----------- TIPO DE SOLICITUD ------------
+  onChangeSolicitud(e: any): void {
+    this.cd.detectChanges();
+  }
+
+
+  // --------------------------------------
+  // ------------- DATEPICKER -------------
+  // --------------------------------------
+
+  inRange(fecha_1: any, fecha_2: any) {
+    fecha_1 = new Date(this.formatter.format(fecha_1));
+    fecha_2 = new Date(this.formatter.format(fecha_2));
+    console.log('paso')
+    console.log(fecha_1)
+    console.log(DiasHabiles(fecha_1, fecha_2), fecha_1, fecha_2)
+    return DiasHabiles(fecha_1, fecha_2);
+  }
+
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
     }
-  
-    // ----------- TIPO DE SOLICITUD ------------
-    onChangeSolicitud(e: any): void {
-      this.cd.detectChanges();
+    this.editarPermisoForm.patchValue({
+      fecha_inicio: this.formatter.format(this.fromDate),
+      fecha_fin: this.formatter.format(this.toDate)
+    });
+  }
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
+      date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) { return this.toDate && date.after(this.fromDate) && date.before(this.toDate); }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
+      this.isHovered(date);
+  }
+
+  validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
+    const parsed = this.formatter.parse(input);
+    return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
+  }
+
+  // --------------------------------------
+  // -------- ARCHIVOS - ANEXOS -----------
+  // --------------------------------------
+
+  onUpload(event: Event, index: number) {
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0);
+    if (file) {
+      this.files.splice(index, 1, file);
     }
-  
-  
-    // --------------------------------------
-    // ------------- DATEPICKER -------------
-    // --------------------------------------
-    
-    inRange(fecha_1 : any, fecha_2 : any){
-      fecha_1 = new Date(this.formatter.format(fecha_1));
-      fecha_2 = new Date(this.formatter.format(fecha_2));
-      console.log('paso')
-      console.log(fecha_1)
-      console.log(DiasHabiles(fecha_1, fecha_2), fecha_1, fecha_2)
-      return DiasHabiles(fecha_1, fecha_2);
-    }
-  
-    onDateSelection(date: NgbDate) {
-      if (!this.fromDate && !this.toDate) {
-        this.fromDate = date;
-      } else if (this.fromDate && !this.toDate && date) {
-        this.toDate = date;
-      } else {
-        this.toDate = null;
-        this.fromDate = date;
-      }
-      this.editarPermisoForm.patchValue({
-        fecha_inicio : this.formatter.format(this.fromDate),
-        fecha_fin : this.formatter.format(this.toDate)
-      });
-    }
-  
-    isHovered(date: NgbDate) {
-      return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
-          date.before(this.hoveredDate);
-    }
-  
-    isInside(date: NgbDate) { return this.toDate && date.after(this.fromDate) && date.before(this.toDate); }
-  
-    isRange(date: NgbDate) {
-      return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
-          this.isHovered(date);
-    }
-  
-    validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-      const parsed = this.formatter.parse(input);
-      return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-    }
-  
-    // --------------------------------------
-    // -------- ARCHIVOS - ANEXOS -----------
-    // --------------------------------------
-  
-    onUpload(event:Event, index: number) {
-      const element = event.target as HTMLInputElement;
-      const file = element.files?.item(0);
-      if (file) {
-        this.files.splice(index, 1, file);
-      }
-      console.log(this.files);
-  
-    }
-  
-    removeFile(index: number) {
-      if (this.archivos.length > 1) {
+    console.log(this.files);
+
+  }
+
+  removeFile(index: number) {
+    if (this.archivos.length > 1) {
       this.archivos.splice(index, 1);
-      };
-      this.files.splice(index, 1);
-    }
-  
-    validSize() {
-      const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
-      return size < 2 * 1024 * 1024;
-    }
-  
-    isInvalidForm(controlName: string) {
-      return this.editarPermisoForm.get(controlName)?.invalid && this.editarPermisoForm.get(controlName)?.touched;
-    }
-  
-    
-    borrarDocActual(idDoc: number, index: number){
-  
-      // Si elimina documentos que ya están asociados a la permiso
-      if (this.documentosArray.length >= 1) {
-        this.documentosArray.splice(index, 1);
-        };
-  
-      // array de documentos que se borrarán y serán parámetros en el service
-      this.docsBorrar.push(idDoc);
-    }
-
-
- // ----------------------------------------
- // ----------- EDITAR PERMISO ------------
- // ----------------------------------------
- onUpdate(): any {
-
-  // Convertir el id del tipo de permiso: de string a numero
-  this.editarPermisoForm.value.tipo_permiso_id = Number(this.editarPermisoForm.value.tipo_permiso_id);  // the + operator will change the type to number
-  this.submitted = true;
-
-  // Se detiene aqui si el formulario es invalido
-  if (this.editarPermisoForm.invalid) {
-    console.log('invalid form')
-    return;
+    };
+    this.files.splice(index, 1);
   }
 
-  const body = {
-    fecha_inicio: this.editarPermisoForm.value.fecha_inicio,
-    fecha_fin: this.editarPermisoForm.value.fecha_fin,
-    fecha_resolucion: new Date(this.formatter.format(this.today)),
-    justificacion: this.editarPermisoForm.value.justificacion,
-    tipos_permiso_id: this.editarPermisoForm.value.tipos_permiso_id
+  validSize() {
+    const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
+    return size < 2 * 1024 * 1024;
+  }
+
+  isInvalidForm(controlName: string) {
+    return this.editarPermisoForm.get(controlName)?.invalid && this.editarPermisoForm.get(controlName)?.touched;
   }
 
 
-  console.log(body)
+  borrarDocActual(idDoc: number, index: number) {
 
-  const reqBody: FormData = new FormData();
-  reqBody.append('tipos_permiso_id', body.tipos_permiso_id);
-  reqBody.append('fecha_inicio', body.fecha_inicio);
-  reqBody.append('fecha_fin', body.fecha_fin);
-  reqBody.append('justificacion', body.justificacion);
+    // Si elimina documentos que ya están asociados a la permiso
+    if (this.documentosArray.length >= 1) {
+      this.documentosArray.splice(index, 1);
+    };
 
-  for (const file of this.files) {
-    reqBody.append('archivo', file, file.name) 
+    // array de documentos que se borrarán y serán parámetros en el service
+    this.docsBorrar.push(idDoc);
   }
-  
 
-  // Edita la permiso: ID de la permiso, ID de documentos borrados, Form 
-  this.permisoSvc.updatePermiso(this.getId, "["+this.docsBorrar.toString()+"]", 
-    this.files, reqBody).subscribe({
-      next: (res) => { 
-        
-        //facilitate change detection
-        this.ngZone.run(() =>
-          this.router.navigateByUrl(`/permisos/ver-permiso/${this.getId}`)
-        );
-        Swal.fire({
-          title: 'Actulizada',
-          text: '¡El permiso se actualizó con éxito!',
-          icon: 'success',
-          confirmButtonColor: '#3AB795',
-        });
-      },
-      error: (err) => {
-        if (err.status === 404 || err.status === 401) {
-          this.error = err.error.msg;
-        }
-      },
-  });
 
-  
-}
+  // ----------------------------------------
+  // ----------- EDITAR PERMISO ------------
+  // ----------------------------------------
+  onUpdate(): any {
+
+    // Convertir el id del tipo de permiso: de string a numero
+    this.editarPermisoForm.value.tipo_permiso_id = Number(this.editarPermisoForm.value.tipo_permiso_id);  // the + operator will change the type to number
+    this.submitted = true;
+
+    // Se detiene aqui si el formulario es invalido
+    if (this.editarPermisoForm.invalid) {
+      console.log('invalid form')
+      return;
+    }
+
+
+    // Convierte los strings a fechas en UTC, y se remueve GMT 
+    let fecha_inicio = new Date(this.editarPermisoForm.value.fecha_inicio).toUTCString().slice(0, -4);
+    let fecha_fin = new Date(this.editarPermisoForm.value.fecha_fin).toUTCString().slice(0, -4);
+
+
+    // Se agregan las horas de diferencia 
+    let fecha_inicio_utc = new Date(fecha_inicio).toUTCString()
+    let fecha_fin_utc = new Date(fecha_fin).toUTCString()
+
+
+    const reqBody: FormData = new FormData();
+    reqBody.append('tipos_permiso_id', this.editarPermisoForm.value.tipos_permiso_id);
+    reqBody.append('fecha_inicio', fecha_inicio_utc);
+    reqBody.append('fecha_fin', fecha_fin_utc);
+    reqBody.append('justificacion', this.editarPermisoForm.value.justificacion);
+
+    for (const file of this.files) {
+      reqBody.append('archivo', file, file.name)
+    }
+
+
+    // Edita la permiso: ID de la permiso, ID de documentos borrados, Form 
+    this.permisoSvc.updatePermiso(this.getId, "[" + this.docsBorrar.toString() + "]",
+      this.files, reqBody).subscribe({
+        next: (res) => {
+
+          //facilitate change detection
+          this.ngZone.run(() =>
+            this.router.navigateByUrl(`/permisos/ver-permiso/${this.getId}`)
+          );
+          Swal.fire({
+            title: 'Actulizada',
+            text: '¡El permiso se actualizó con éxito!',
+            icon: 'success',
+            confirmButtonColor: '#3AB795',
+          });
+        },
+        error: (err) => {
+          if (err.status === 404 || err.status === 401) {
+            this.error = err.error.msg;
+          }
+        },
+      });
+
+
+  }
 
 }

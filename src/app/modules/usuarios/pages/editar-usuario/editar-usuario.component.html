@@ -1,4 +1,4 @@
-<form
+s<form
   need-validation
   novalidate
   [formGroup]="formUpdate"
@@ -15,91 +15,98 @@
       </div>
       <hr />
       <div class="form">
-
         <div class="row regular-row m-2 align-items-baseline">
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Nombre Completo</div>
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Nombre Completo
+          </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input
-            id="nombre"
-            type="text"
-            class="form-control"
-            placeholder=""
-            formControlName="nombre"
-          /></div>
+              id="nombre"
+              type="text"
+              class="form-control"
+              placeholder=""
+              formControlName="nombre"
+            />
+          </div>
         </div>
 
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input
-            id="apellido"
-            type="text"
-            class="form-control"
-            placeholder=" "
-            formControlName="apellido"
-          />
+              id="apellido"
+              type="text"
+              class="form-control"
+              placeholder=" "
+              formControlName="apellido"
+            />
           </div>
         </div>
 
-        <div class="row regular-row m-2 align-items-baseline">
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Correo Institucional</div>
+        <!-- <div class="row regular-row m-2 align-items-baseline">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Correo Institucional
+          </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <input
-                formControlName="correo"
-                id="Correo-"
-                type="text"
-                class="form-control"
-                placeholder="ejemplo@udea.edu.co"
-                [ngClass]="{
-                  'is-invalid': submitted && f['correo'].errors
-                }"
-              />
-              <label for="Correo-" class="formLabel"
-                ></label
-              >
+            <input
+              formControlName="correo"
+              id="Correo-"
+              type="text"
+              class="form-control"
+              placeholder="ejemplo@udea.edu.co"
+              [ngClass]="{
+                'is-invalid': submitted && f['correo'].errors
+              }"
+            />
+            <label for="Correo-" class="formLabel"></label>
           </div>
-        </div>
+        </div> -->
 
         <div class="row regular-row m-2 align-items-baseline">
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Tipo de Identificacion</div>
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Tipo de Identificacion
+          </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <select
-            class="form-select form-select-lg"
-            id="floatingcampo_modalidad"
-            formControlName="tipo_identificacion"
-            required
-          >
-            <option [value]="tipo" *ngFor="let tipo of tiposId">
-              {{ tipo | uppercase }}
-            </option>
-          </select>
-          <label
-            for="floatingcampo_modalidad"
-            class="selectLabel"
-            [ngClass]="{ isFill: true }"
-            ></label
-          >
+              class="form-select form-select-lg"
+              id="floatingcampo_modalidad"
+              formControlName="tipo_identificacion"
+              required
+            >
+              <option [value]="tipo" *ngFor="let tipo of tiposId">
+                {{ tipo | uppercase }}
+              </option>
+            </select>
+            <label
+              for="floatingcampo_modalidad"
+              class="selectLabel"
+              [ngClass]="{ isFill: true }"
+            ></label>
           </div>
         </div>
         <div class="row regular-row m-2 align-items-baseline">
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Numero de Identificación</div>
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Numero de Identificación
+          </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <input
-                id="identificacion"
-                formControlName="identificacion"
-                type="text"
-                class="form-control"
-                placeholder=" "
-                [ngClass]="{
-                  'is-invalid': submitted && f['identificacion'].errors
-                }"
-              />
-              <label for="identificacion" class="formLabel">
-              </label>
+            <input
+              id="identificacion"
+              formControlName="identificacion"
+              type="text"
+              class="form-control"
+              placeholder=" "
+              [ngClass]="{
+                'is-invalid': submitted && f['identificacion'].errors
+              }"
+            />
+            <label for="identificacion" class="formLabel"> </label>
           </div>
         </div>
-        <div class="row regular-row m-2 align-items-baseline" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
-        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
+        <div
+          class="row regular-row m-2 align-items-baseline"
+          *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
+        >
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
               <select
@@ -112,9 +119,9 @@
                   'is-invalid': submitted && f['roles_id'].errors
                 }"
               >
-              <option [value]="rol.id" *ngFor="let rol of roles$ | async">
-                  {{ rol.nombre| uppercase }}
-              </option>
+                <option [value]="rol.id" *ngFor="let rol of roles$ | async">
+                  {{ rol.nombre | uppercase }}
+                </option>
               </select>
               <label
                 for="roles_id"
@@ -155,28 +162,32 @@
           </div> -->
           <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
             <button
-            id="btn-sub"
-            (submit)="(true)"
-            class="btn btn-success"
-            [disabled]="formUpdate.invalid"
-          >
-            <span
-              *ngIf="isLoading | async"
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Confirmar
-          </button>
+              id="btn-sub"
+              (submit)="(true)"
+              class="btn btn-success"
+              [disabled]="formUpdate.invalid"
+            >
+              <span
+                *ngIf="isLoading | async"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Confirmar
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</form> 
+</form>
 
+<<<<<<< HEAD
 
         <!-- <div class="row regular-row mt-4">
+=======
+<!-- <div class="row regular-row mt-4">
+>>>>>>> daniandre
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
@@ -203,6 +214,11 @@
             </div>
           </div>
 <<<<<<< HEAD
+        </div> -->
+<!-- <div class="row regular-row m-2 align-items-baseline"> 
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento</div> 
+=======
+<<<<<<< HEAD
         </div>
 
         <div class="row regular-row m-2">
@@ -211,9 +227,9 @@
 =======
         </div> -->
 
-
-        <!-- <div class="row regular-row mt-4">
+<!-- <div class="row regular-row mt-4">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento</div>
+>>>>>>> main
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
               <select
@@ -241,9 +257,9 @@
               >
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <hr />
+<!-- <hr />
 
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Contraseña</div>

@@ -10,17 +10,15 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-editar-contrasena',
   templateUrl: './editar-contrasena.component.html',
-  styleUrls: ['./editar-contrasena.component.scss']
+  styleUrls: ['./editar-contrasena.component.scss'],
 })
 export class EditarContrasenaComponent implements OnInit {
-
   public usuario!: Usuario;
   public id: Number | string = 0;
 
-  public error: string = "";
+  public error: string = '';
   public loading: boolean = false;
   public submitted: boolean = false;
-
 
   public editarContrasenaForm: FormGroup;
 
@@ -29,14 +27,37 @@ export class EditarContrasenaComponent implements OnInit {
     private router: Router,
     private activateRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private authSvc : AuthService
+    private authSvc: AuthService
   ) {
-    this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
+    this.activateRoute.params
+      .pipe(take(1))
+      .subscribe((params) => (this.id = params['id']));
 
     this.editarContrasenaForm = this.formBuilder.group({
-      contrasena_actual: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(250)]],
-      contrasena_expected_1: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(250)]],
-      contrasena_expected_2: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(250)]]
+      contrasena_actual: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(250),
+        ],
+      ],
+      contrasena_expected_1: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(250),
+        ],
+      ],
+      contrasena_expected_2: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(250),
+        ],
+      ],
     });
   }
 
@@ -49,15 +70,15 @@ export class EditarContrasenaComponent implements OnInit {
       },
       error: (err) => {
         console.log(err.status);
-        if (err.status == 401){
-        Swal.fire({
-          title: 'No autorizado',
-          text: 'No estás autorizado para ver este sitio',
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        }).then(() => this.router.navigate(['/']));
-      }
-      }
+        if (err.status == 401) {
+          Swal.fire({
+            title: 'No autorizado',
+            text: 'No estás autorizado para ver este sitio',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          }).then(() => this.router.navigate(['/']));
+        }
+      },
     });
   }
   get passwordMatchError() {
@@ -75,36 +96,45 @@ export class EditarContrasenaComponent implements OnInit {
   }
 
   isInvalidForm(controlName: string) {
-    return this.editarContrasenaForm.get(controlName)?.invalid && this.editarContrasenaForm.get(controlName)?.touched;
+    return (
+      this.editarContrasenaForm.get(controlName)?.invalid &&
+      this.editarContrasenaForm.get(controlName)?.touched
+    );
   }
 
   ValidatePasswords() {
-    return this.editarContrasenaForm.get('contrasena_expected_2')?.touched && this.editarContrasenaForm.get('contrasena_expected_1')?.value != this.editarContrasenaForm.get('contrasena_expected_2')?.value
+    return (
+      this.editarContrasenaForm.get('contrasena_expected_2')?.touched &&
+      this.editarContrasenaForm.get('contrasena_expected_1')?.value !=
+        this.editarContrasenaForm.get('contrasena_expected_2')?.value
+    );
   }
 
-  submit(){
-    console.log('asd')
-    this.authSvc.cambiarContrasena(this.editarContrasenaForm.get('contrasena_actual')?.value, this.editarContrasenaForm.get('contrasena_expected_2')?.value).subscribe({
-       next: (res : any) => {
-        Swal.fire({
-          title: 'Cambio de contraseña exitoso',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        }
-        ).then(() => {
-          this.router.navigate(['/']);
-        })
-      },
-      error: (err : any) => {
-        Swal.fire({
-          title: 'Algo salío mal, intenta de nuevo',
-          text: err.error.msg,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-
-    }
-  });
+  submit() {
+    console.log('asd');
+    this.authSvc
+      .cambiarContrasena(
+        this.editarContrasenaForm.get('contrasena_actual')?.value,
+        this.editarContrasenaForm.get('contrasena_expected_2')?.value
+      )
+      .subscribe({
+        next: (res: any) => {
+          Swal.fire({
+            title: 'Cambio de contraseña exitoso',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          }).then(() => {
+            this.router.navigate(['/']);
+          });
+        },
+        error: (err: any) => {
+          Swal.fire({
+            title: 'Algo salío mal, intenta de nuevo',
+            text: err.error.msg,
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+        },
+      });
   }
-
 }

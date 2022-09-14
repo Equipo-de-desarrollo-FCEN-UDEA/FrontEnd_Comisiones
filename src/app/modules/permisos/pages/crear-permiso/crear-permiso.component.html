@@ -34,7 +34,7 @@
       *ngIf="(selectDias(fromDate, toDate))"
       style="color:red"
       >
-        La cantidad de días permitidos sobre pasa {{diaHabil}}
+        La cantidad de días permitidos sobrepasa {{diaHabil}} día(s)
       </p>
       <button
         class="btn btn-primary btn-sm m-2 float-start"
@@ -72,8 +72,10 @@
           <span
             class="custom-day"
             [class.focused]="focused"
-            [class.range]="isRange(date)"
+            [class.range]="isRange(date) && !(selectDias(fromDate, toDate))"
             [class.faded]="isHovered(date) || isInside(date)"
+            [class.invalidRange]="isInside(date) && (selectDias(fromDate, toDate)) && isRange(date)"
+            [class.invalidRange]=" isHoveredInvalid(date)"
             (mouseenter)="hoveredDate = date"
             (mouseleave)="hoveredDate = null"
           >
@@ -90,7 +92,7 @@
           id="floatingtipos_permiso_id"
           formControlName="tipos_permiso_id"
           required
-          [ngClass]="{ 'is-invalid': isInvalidForm('tipos_permiso_id') }"
+          [ngClass]="{ 'is-invalid': isInvalidForm('tipos_permiso_id') || selectDias(fromDate, toDate)}"
           ngModel (ngModelChange)="onTipoDePermiso($event)"
           placeholder=" "
         >
@@ -247,7 +249,7 @@
 				<button
         class="btn btn-add"
         (submit)="(true)"
-        [disabled]="formPermiso.invalid || !validSize()"
+        [disabled]="formPermiso.invalid || !validSize() || (selectDias(fromDate, toDate))"
       >
         <span
           class="spinner-border spinner-border-sm1"

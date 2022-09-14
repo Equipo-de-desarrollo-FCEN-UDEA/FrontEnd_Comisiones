@@ -123,6 +123,16 @@ export class CrearPermisoComponent implements OnInit {
       date.before(this.hoveredDate)
     );
   }
+  isHoveredInvalid(date: NgbDate) {
+    return (
+      this.fromDate &&
+      !this.toDate &&
+      this.hoveredDate &&
+      this.selectDias(this.fromDate, this.hoveredDate) &&
+      date.after(this.fromDate) &&
+      date.before(this.hoveredDate)
+    );
+  }
 
   isInside(date: NgbDate) {
     return this.toDate && date.after(this.fromDate) && date.before(this.toDate);

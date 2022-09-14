@@ -17,6 +17,8 @@ import { TiposPermiso } from '@interfaces/tipos_permiso';
 import { TipoPermisoService } from '@services/permisos/tipo-permiso.service';
 import { DatePipe } from '@angular/common';
 
+import { DiasHabiles } from '@shared/clases/dias-habiles';
+
 @Component({
   selector: 'app-crear-permiso',
   templateUrl: './crear-permiso.component.html',
@@ -76,9 +78,14 @@ export class CrearPermisoComponent implements OnInit {
 
     this.fromDate = null;
     this.toDate = null;
+
+    
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(DiasHabiles(new Date('2022-09-14'),new Date('2022-09-25')))
+  }
 
   // --------------------------------------
   // ------------- DATEPICKER -------------

@@ -10,8 +10,6 @@ export  function DiasHabiles(fecha_1 : Date , fecha_2 :Date) {
 
     var workdays = weeks * 5
 
-    return workdays
-    
-
+    return daysdifference
 
 }

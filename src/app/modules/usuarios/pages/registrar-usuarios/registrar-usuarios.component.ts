@@ -65,7 +65,7 @@ export class RegistrarUsuariosComponent implements OnInit {
       departamentos_id : ['', Validators.required],
       telefono: ['', Validators.required],
       escalafon: [''],
-      oficina: [0],
+      oficina: [''],
       tipo_vinculacion: [''],
       roles_id : ['', Validators.required]
     });

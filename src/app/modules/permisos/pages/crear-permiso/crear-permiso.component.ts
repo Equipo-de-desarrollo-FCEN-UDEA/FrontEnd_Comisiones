@@ -84,7 +84,15 @@ export class CrearPermisoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(DiasHabiles(new Date('2022-09-14'),new Date('2022-09-25')))
+    console.log(DiasHabiles(new Date('2022-09-14'),new Date('2022-09-30')))
+  }
+
+  selectDias(fromDate: NgbDate | null, toDate: NgbDate | null):boolean {
+    if (fromDate || toDate) {
+      return DiasHabiles(new Date(this.formatter.format(fromDate)),new Date( this.formatter.format(toDate))) > this.diaHabil
+    } else {
+      return false
+    }
   }
 
   // --------------------------------------

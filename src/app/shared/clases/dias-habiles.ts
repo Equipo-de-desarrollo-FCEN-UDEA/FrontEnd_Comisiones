@@ -1,15 +1,15 @@
-export  function DiasHabiles(fecha_1 : Date , fecha_2 :Date) {
-    var days2 = (fecha_2.getTime() - Date.UTC(fecha_2.getFullYear(),0,0) ) / 1000 / 60 / 60 / 24;
-    const days1 = (fecha_1.getTime() - Date.UTC(fecha_1.getFullYear(),0,0) ) / 1000 / 60 / 60 / 24;
-    if (fecha_2.getFullYear()!=fecha_1.getFullYear()) {
-        days2 = 365 + days2
-    }
-    var daysdifference = Math.floor(days2 - days1)
-    
-    var weeks = Math.floor(daysdifference / 7)
+export  function DiasHabiles(startDate : Date, endDate : Date){
+    var result = 0;
 
-    var workdays = weeks * 5
+   var currentDate = startDate;
+   while (currentDate <= endDate)  {  
 
-    return daysdifference
+       var weekDay = currentDate.getDay();
+       if(weekDay != 7 && weekDay != 6)
+           result++;
 
+        currentDate.setDate(currentDate.getDate()+1); 
+   }
+
+   return result;
 }

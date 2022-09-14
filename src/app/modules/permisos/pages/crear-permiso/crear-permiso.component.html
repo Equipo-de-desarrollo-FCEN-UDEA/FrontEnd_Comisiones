@@ -30,6 +30,12 @@
       >
         Elige la primera fecha
       </p>
+      <p
+      *ngIf="(selectDias(fromDate, toDate))"
+      style="color:red"
+      >
+        La cantidad de días permitidos sobre pasa {{diaHabil}}
+      </p>
       <button
         class="btn btn-primary btn-sm m-2 float-start"
         (click)="model = today; datepicker.close()"

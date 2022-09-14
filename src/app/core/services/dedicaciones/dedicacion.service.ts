@@ -21,20 +21,15 @@ export class DedicacionService {
     private cookie: CookieService
   ) {}
 
-  scopeGetDedicaciones(archivado: number): Observable<any> {
-    let params = new HttpParams()
-    if (archivado != 2 ){
-      params = params.append('archivado', archivado);
-    }
+  getDedicaciones(){
+    // let params = new HttpParams()
+    // if (archivado != 2 ){
+    //   params = params.append('archivado', archivado);
+    // }
     
-    params = params.append('offset', 0);
-    params = params.append('limit', 100);
-
-    console.log(params+"  parametros")
-
-    return this.http.get<Dedicacion[]>(`${this.urlEndPoint}`, {
-      params:params
-    })
+    // params = params.append('offset', 0);
+    // params = params.append('limit', 100);
+    return this.http.get(this.urlEndPoint)
   }
 
   

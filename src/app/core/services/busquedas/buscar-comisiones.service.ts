@@ -36,10 +36,11 @@ function sort(comisiones: Comision[], column: SortColumn, direction: string): Co
 }
 
 function matches(comisiones: Comision, term: string, datepipe: DatePipe) {
+  term = term.toLowerCase();
   return (
     comisiones.tipos_comision.nombre.toLowerCase().includes(term.toLowerCase())  ||
     ultimoElement(comisiones.intermediate_comisiones)?.intermediate_estados.nombre.toLowerCase().includes(term.toLocaleLowerCase())||
-    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt)?.includes(term)||
+    datepipe.transform(ultimoElement(comisiones.intermediate_comisiones)?.createdAt, 'yyyy-MM-dd')?.toString().includes(term)||
     comisiones.usuarios?.nombre.toLowerCase().includes(term) ||
     comisiones.usuarios.apellido.toLowerCase().includes(term) ||
     comisiones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
@@ -85,6 +86,7 @@ export class BuscarComisionesService {
         this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
         .subscribe(
           (resp: any ) => {
+            console.log(resp.comisiones)
             this.COMISIONES = resp.comisiones;
           })
       }
@@ -97,7 +99,6 @@ export class BuscarComisionesService {
     this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
     .subscribe(
       (resp: any) => {
-        console.log(resp+"respOnchange")
         this.COMISIONES = resp.comisiones;
         this._comisiones$.next(this.COMISIONES);
         this._search$.next();
@@ -131,7 +132,6 @@ export class BuscarComisionesService {
     // 1. sort
     let comisiones = sort(this.COMISIONES, sortColumn, sortDirection);
 
-    console.log(comisiones + "oe");
     // 2. filter
     comisiones = comisiones.filter(comision => matches(comision, searchTerm, this.datepipe));
     const total = comisiones.length;

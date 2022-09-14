@@ -29,7 +29,7 @@
         >
           <a
             class="dropdown-item"
-            [routerLink]="['/usuarios/ver-usuario', usuario.id]"
+            [routerLink]="['/usuarios/ver-usuario', usuario?.id]"
             >Ver perfil
           </a>
           <li><hr class="dropdown-divider" /></li>
@@ -81,6 +81,7 @@
           <li>
             <a
               class="dropdown-item"
+              *ngIf="usuario?.roles?.nombre == 'PROFESOR'"
               [routerLink]="['/dedicaciones/crear-dedicacion']"
               >Dedicación Exclusiva</a
             >
@@ -170,16 +171,16 @@
               </div>
               <div class="user-info">
                 <span class="user-name">
-                  {{ usuario.nombre }}
+                  {{ usuario?.nombre }}
                   <br />
-                  {{ usuario.apellido }}
+                  {{ usuario?.apellido }}
                 </span>
                 <br />
                 <span class="user-role">
                   <span class="user-status">
                     <i class="fa fa-circle"></i>
                   </span>
-                  {{ usuario.roles.nombre }}
+                  {{ usuario?.roles?.nombre }}
                 </span>
               </div>
               <!-- sidebar-header  -->
@@ -259,25 +260,21 @@
                     type="button"
                     data-bs-dismiss="offcanvas"
                     aria-label="Close"
-                    [routerLink]="['/usuarios/ver-usuario', usuario.id]">
-                    <a>
+                    [routerLink]="['/usuarios/ver-usuario', usuario?.id]">
                       <span>
                         <i class="fa-solid fa-user-astronaut"></i>
                         Mi Perfil
                       </span>
-                    </a>
                   </li>
                   <li 
                     type="button"
                     data-bs-dismiss="offcanvas"
                     aria-label="Close"
                     [routerLink]="['/home']">
-                    <a>
                       <span>
                         <i class="fas fa-home"></i>
                         Solicitudes
                       </span>
-                    </a>
                   </li>
                 </ul>
                 <div
@@ -300,24 +297,20 @@
                     data-bs-dismiss="offcanvas"
                     aria-label="Close"
                     [routerLink]="['/usuarios/lista-usuarios']">
-                    <a>
                       <span>
                         <i class="fa-solid fa-users"></i>
                         Usuarios
                       </span>
-                    </a>
                   </li>
                   <li
                     type="button"
                     data-bs-dismiss="offcanvas"
                     aria-label="Close" 
                     [routerLink]="['/usuarios/registrar-usuarios']">
-                    <a>
                       <span>
                         <i class="fa-solid fa-user-group"></i>
                         Registrar Usuarios
                       </span>
-                    </a>
                   </li>
                 </ul>
               </div>

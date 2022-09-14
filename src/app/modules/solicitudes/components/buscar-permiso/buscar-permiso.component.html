@@ -11,10 +11,12 @@
     </div>
 
     <span class="col col-form-label" 
-      *ngIf="Buscarservice.loading$ | async">Loading...
+      *ngIf="Buscarservice.loading$ | async"
+      style="padding-left: 1em"
+      >Cargando...
     </span>
 
-    <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" 
+    <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
       (change)="changeOption($event)" style="width: auto">
       <option value="0">No archivados</option>
       <option value="1">Archivados</option>

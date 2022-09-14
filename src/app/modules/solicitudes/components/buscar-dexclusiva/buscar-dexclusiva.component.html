@@ -11,15 +11,16 @@
     </div>
   
       <span class="col col-form-label" 
-        *ngIf="Buscarservice.loading$ | async">Loading...
+        style="padding-left: 1em"
+        *ngIf="Buscarservice.loading$ | async">Cargando...
       </span>
       
-      <select class="form-select"  *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
+      <!-- <select class="form-select" 
         (change)="changeOption($event)" style="width: auto">
         <option value="0">No archivados</option>
         <option value="1">Archivados</option>
         <option value="2">Todos</option>
-      </select>
+      </select> -->
     </div>
 
     <hr/>
@@ -30,23 +31,37 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
+              <th scope="col" sortable="nombre" (sort)="onSort($event)">Descripción</th>
               <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event) " *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
+              <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
               <th scope="col" sortable="apellido" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
               <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th>
+              <!-- <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th> -->
               <th> </th>
             </tr>
           </thead>
   
           <tbody>
             <tr *ngFor="let dedicacion of dedicaciones$ | async"
-              [routerLink]="['/comisiones/ver-comision', dedicacion.id]"
+              [routerLink]="['/dedicaciones/ver-dedicacion', dedicacion.id]"
               class="click-table">
               
               <th scope="row">{{ dedicacion.id }}</th>
+              
+              <td>
+                <ngb-highlight 
+                  [result]="dedicacion.descripcion" 
+                  [term]="Buscarservice.searchTerm">
+                </ngb-highlight>
+              </td>
+
+              <td>
+                <ngb-highlight 
+                  [result]="(dedicacion.createdAt | date:'yyyy-MM-dd')?.toString()"
+                  [term]="Buscarservice.searchTerm">
+                </ngb-highlight>
+              </td>
               
              
   
@@ -78,10 +93,10 @@
                 </ngb-highlight>
               </td>
   
-              <td>
+              <!-- <td>
                 <button *ngIf="dedicacion.archivado == 0" type="button" (click)="archivarDedicacion(dedicacion.id);$event.stopPropagation()" class="btn btn-info">Archivar</button>
                 <button *ngIf="dedicacion.archivado == 1" type="button" (click)="desarchivarDedicacion(dedicacion.id);$event.stopPropagation()" class="btn btn-info">Desarchivar</button>
-              </td>
+              </td> -->
           </tbody>
         </table>
       </div>

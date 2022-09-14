@@ -1,14 +1,14 @@
 .containerInside {
-  margin-bottom: 10em;
-  width: 50%;
+  // margin-bottom: 10em;
+  width: 100%;
+  max-width: 700px;
   align-items: unset;
   min-height: 10vh;
-
 }
 
 
 @media (max-width: 576px) {
-  .container {
+  .containerInside {
       width: 95%;
   }
 }
@@ -16,6 +16,7 @@
 .btn-success {
   background-color: #43b649;
 }
+
 
 .ptitle{
   color: #ffffff;

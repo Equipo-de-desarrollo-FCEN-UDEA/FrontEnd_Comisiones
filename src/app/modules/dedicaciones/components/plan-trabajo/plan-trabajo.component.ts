@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { PlanTrabajoService } from '@services/dedicaciones/plan-trabajo.service';
@@ -7,6 +7,7 @@ import { empty, Subject } from 'rxjs';
 import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 import Swal from 'sweetalert2';
+import { AmazingTimePickerModule, AmazingTimePickerService } from 'amazing-time-picker';
 
 @Component({
   selector: 'app-plan-trabajo',
@@ -16,6 +17,8 @@ import Swal from 'sweetalert2';
 export class PlanTrabajoComponent implements OnInit {
 
   @Input() PlanEdit : PlanTrabajo | null = null;
+  @ViewChild('c1')
+  private c1!: ElementRef;
 
   isLoading: Subject<boolean> = this.loadingSvc.isLoading;
 
@@ -24,9 +27,11 @@ export class PlanTrabajoComponent implements OnInit {
     private usuarioSvc: UsuarioService,
     private planTrabajoSvc: PlanTrabajoService,
     private loadingSvc: LoaderService,
-    private comunicacionSvc: CrearComisionComponentsService
-  ) { }
-
+    private comunicacionSvc: CrearComisionComponentsService,
+    private atp: AmazingTimePickerService
+  ) {
+    
+   }
   public usuario = this.usuarioSvc.getActualUsuario();
   public semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
@@ -48,14 +53,24 @@ export class PlanTrabajoComponent implements OnInit {
 
 
   ngOnInit(): void {
-    for (let i=0; i<5; i++) {
+    for (let i=0; i<4; i++) {
     this.jornadaTrabajoArr.push(this.jornadaTrabajoGroup());
     }
+    this.jornadaTrabajoArr.push(this.fb.group(
+      {
+        mañana: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
+        mañana2: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
+        tarde: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
+        tarde2: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
+      }
+      
+    ))
 
     if (this.PlanEdit) {
       this.fPlanTrabajo.patchValue(this.PlanEdit);
     }
   }
+
 
 
   onSubmit() {
@@ -65,6 +80,7 @@ export class PlanTrabajoComponent implements OnInit {
     this.comunicacionSvc.id$.subscribe(id => {
       dedicacion_id = id;
     }).unsubscribe();
+
 
     const plan : PlanTrabajo = {
       ... this.fPlanTrabajo.value as PlanTrabajo,
@@ -130,7 +146,14 @@ export class PlanTrabajoComponent implements OnInit {
   }
 
   addActividadDocencia(){
-    this.actividadesDocenciaArr.push(this.actividadesDocenciaGroup());
+    let div = document.getElementById('c1') 
+    if (div) {
+      let height = div.clientHeight;
+      div.style.maxHeight = height + 'px';
+      this.actividadesDocenciaArr.push(this.actividadesDocenciaGroup());
+      setTimeout(() => div!.scrollTop=div!.scrollHeight, 100);
+    }
+
   }
 
 
@@ -153,7 +176,14 @@ export class PlanTrabajoComponent implements OnInit {
   }
 
   addActividadInvestigacion(){
-    this.actividadesInvestigacionArr.push(this.actividadesInvestigacionGroup());
+    let div = document.getElementById('c8') 
+    if (div) {
+      let height = div.clientHeight;
+      div.style.maxHeight = height + 'px';
+      this.actividadesInvestigacionArr.push(this.actividadesInvestigacionGroup());
+      setTimeout(() => div!.scrollTop=div!.scrollHeight, 100);
+    }
+    
   }
 
 
@@ -175,7 +205,13 @@ export class PlanTrabajoComponent implements OnInit {
   }
 
   addActividadExtension(){
-    this.actividadesExtensionArr.push(this.actividadesExtensionGroup());
+    let div = document.getElementById('c2') 
+    if (div) {
+      let height = div.clientHeight;
+      div.style.maxHeight = height + 'px';
+      this.actividadesExtensionArr.push(this.actividadesExtensionGroup());
+      setTimeout(() => div!.scrollTop=div!.scrollHeight, 100);
+    }
   }
 
   // Actividades de Administración Académica
@@ -193,7 +229,14 @@ export class PlanTrabajoComponent implements OnInit {
   }
 
   addActividadAdministracionAcademica(){
-    this.actividadesAdministracionAcademicaArr.push(this.actividadesAdministracionAcademicaGroup());
+    let div = document.getElementById('c3') 
+    if (div) {
+      let height = div.clientHeight;
+      div.style.maxHeight = height + 'px';
+      this.actividadesAdministracionAcademicaArr.push(this.actividadesAdministracionAcademicaGroup());
+      setTimeout(() => div!.scrollTop=div!.scrollHeight, 100);
+    }
+    
   }
 
   // Actividades de Otras Actividades
@@ -210,7 +253,14 @@ export class PlanTrabajoComponent implements OnInit {
   }
 
   addActividadOtrasActividades(){
-    this.actividadesOtrasActividadesArr.push(this.actividadesOtrasActividadesGroup());
+    let div = document.getElementById('c4') 
+    if (div) {
+      let height = div.clientHeight;
+      div.style.maxHeight = height + 'px';
+      this.actividadesOtrasActividadesArr.push(this.actividadesOtrasActividadesGroup());
+      setTimeout(() => div!.scrollTop=div!.scrollHeight, 100);
+    }
+    
   }
 
   // seguimiento actividaddes
@@ -229,15 +279,24 @@ export class PlanTrabajoComponent implements OnInit {
   
   }
   addSeguimientoActividades(){
-    this.seguimientoActividadesArr.push(this.seguimientoActividadesGroup());
+    let div = document.getElementById('c5') 
+    if (div) {
+      let height = div.clientHeight;
+      div.style.maxHeight = height + 'px';
+      this.seguimientoActividadesArr.push(this.seguimientoActividadesGroup());
+      setTimeout(() => div!.scrollTop=div!.scrollHeight, 100);
+    }
+    
   }
 
   // jornada de trabajo
 
   jornadaTrabajoGroup (){
     return this.fb.group({
-      mañana: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
-      tarde: ['', [Validators.required, Validators.maxLength(255), Validators.minLength(6)]],
+      mañana: ['07:00', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
+      mañana2: ['12:00', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
+      tarde: ['13:00', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
+      tarde2: ['17:00', [Validators.required, Validators.maxLength(255), Validators.minLength(2)]],
     });
   }
 
@@ -255,6 +314,7 @@ export class PlanTrabajoComponent implements OnInit {
     const control = this.fPlanTrabajo.get(controlName) as FormArray;
     control.removeAt(index);
   }
+
 
 
 }

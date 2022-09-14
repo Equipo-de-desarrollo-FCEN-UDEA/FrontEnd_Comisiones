@@ -1,7 +1,8 @@
-<div class="d-flex justify-content-center align-items-center mt-5">
-  <div class="card shadow p-3 pr-5" style="width: 35%;">
+<div class=" d-flex justify-content-center align-items-center mt-5">
+  <div class="containerInside card shadow p-3 pr-5" style="width: 35%;">
     <div class="card-body">
-      <p class="ptitle"> Recupera tu contraseña </p>
+      <p class="text-secondary"> Recupera tu contraseña </p>
+      <hr/>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label>Correo Institucional</label>
@@ -17,7 +18,7 @@
       <div class="footer-row d-md-flex justify-content-md-end mb-3">
 
         <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-          <a  class=" btn-canc"  href="../login" > Cancelar </a>
+          <a  class="btn-canc"  href="../login" > Cancelar </a>
         </div>
 
         <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
@@ -27,7 +28,7 @@
             [disabled]="loading"
             class="btn btn-dark btn-submit">
               <span
-                  *ngIf="isLoading"
+                  *ngIf="loading"
                   class="spinner-border spinner-border-sm"
                   role="status"
                   aria-hidden="true"

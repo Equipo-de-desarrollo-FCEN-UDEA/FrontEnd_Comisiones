@@ -31,6 +31,7 @@ export class VerPermisoComponent implements OnInit {
   documentosArray:any = [];
   fechaCreacion:any = '';
 
+
   // Estados 
   ultimoElemento = ultimoElement
   estadoActual:any = '';
@@ -58,22 +59,31 @@ export class VerPermisoComponent implements OnInit {
       next: (paramId) => {
          const id = paramId['id'];
           if (id) {
-            this.permisosSvc.getPermiso(id).subscribe((res) => {
-              this.permiso = res;
-              this.permiso?.documentos.forEach(documento => this.documentosArray.push(documento));
-              this.estados = this.permiso?.intermediate_permisos;
-              this.fechaCreacion = this.permiso?.intermediate_permisos[0].createdAt;
-              this.estadoActual = this.ultimoElemento(res.intermediate_permisos).intermediate_estados?.nombre;
-              console.log(this.permiso);
+            this.permisosSvc.getPermiso(id).subscribe({
+              next: (res)=> {
+                this.permiso = res;
+                this.permiso?.documentos.forEach(documento => this.documentosArray.push(documento));
+                this.estados = this.permiso?.intermediate_permisos;
+                this.fechaCreacion = this.permiso?.intermediate_permisos[0].createdAt;
+                this.estadoActual = this.ultimoElemento(res.intermediate_permisos).intermediate_estados?.nombre;
+                console.log(this.permiso)
+              },
+              error: (err) => {
+                if (err.status === 404 || err.status === 401) {
+                  this.error = err.error.msg; // mensaje desde el back
+                   this.router.navigate(['/'])
+                }
+              }
+
             });
           }
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg; // mensaje desde el back
-          //this.loading = false;
+           this.router.navigate(['/'])
         }
-      },
+      }
     });
   }
 

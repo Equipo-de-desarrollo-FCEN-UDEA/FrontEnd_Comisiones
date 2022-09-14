@@ -9,7 +9,7 @@
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Solicitante</div>
     <div class="col-xs-12 col-sm-6">
-      {{ comision.usuarios.nombre }} {{ comision.usuarios.apellido }}
+      {{ comision?.usuarios?.nombre }} {{ comision?.usuarios?.apellido }}
     </div>
   </div>
 
@@ -17,113 +17,121 @@
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Tipo de Comisión</div>
 
-    <div class="col-xs-12 col-sm-6">{{comision.tipos_comision.nombre}}</div>
-
+    <div class="col-xs-12 col-sm-6">{{ comision?.tipos_comision?.nombre }}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Fecha de Creación</div>
 
-    <div class="col-xs-12 col-sm-6">{{ fechaCreacion | date:'yyyy-MM-dd'}} </div>
-
+    <div class="col-xs-12 col-sm-6">
+      {{ fechaCreacion | date: "yyyy-MM-dd" }}
+    </div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Día que Inicia</div>
 
-    <div class="col-xs-12 col-sm-6">{{comision.fecha_inicio | date: "fullDate"}}</div>
-
+    <div class="col-xs-12 col-sm-6">
+      {{ comision.fecha_inicio | date: "fullDate" }}
+    </div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Día que Termina</div>
-
-    <div class="col-xs-12 col-sm-6">{{comision.fecha_fin | date: "fullDate"}}</div>
+    <div class="col-xs-12 col-sm-6">
+      {{ comision.fecha_fin | date: "fullDate" }}
+    </div>
+  </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Idioma</div>
-    <div class="col-xs-12 col-sm-6">{{comision.idioma}}</div>
+    <div class="col-xs-12 col-sm-6">{{ comision.idioma }}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Lugar</div>
-    <div class="col-xs-12 col-sm-6">{{comision.lugar}}</div>
+    <div class="col-xs-12 col-sm-6">{{ comision.lugar }}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Justificación</div>
-    <div class="col-xs-12 col-sm-6">{{comision.justificacion}}</div>
-  </div>
-
-
-  <div class="row regular-row mt-2">
-    <div class="col-xs-12 col-sm-6 label fw-bold">Estado Actual de la Comisión</div>
-      <div class="col-4">
-        <span 
-        class="badge badge-pill pill"
-        [ngClass]="{
-          'bg-solicitada':
-          estadoActual.nombre === 'SOLICITADA',
-          'bg-aprobada':
-            estadoActual.nombre === 'APROBADA',
-          'bg-visto-bueno':
-            estadoActual.nombre === 'VISTO BUENO',
-          'bg-finalizada':
-            estadoActual.nombre === 'FINALIZADA',
-          'bg-rechazada-decanato':
-            estadoActual.nombre === 'RECHAZADA DECANATO',
-          'bg-rechazada-coordinacion':
-            estadoActual.nombre === 'RECHAZADA COORDINACIÓN'
-        }"> 
-          {{estadoActual.nombre}}
-        </span>
-      </div>
+    <div class="col-xs-12 col-sm-6">{{ comision.justificacion }}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Resolución</div>
-    <div class="col-6">{{comision.resolucion}}</div>
+    <div class="col-6">{{ comision.resolucion }}</div>
   </div>
 
-
-  
   <!-- DOCUMENTOS -->
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Documentos</div>
-    <div class="col-xs-12 col-sm-6 ">
+    <div class="col-xs-12 col-sm-6">
       <ul>
-        <li *ngFor="let doc of documentosArray" >
-          <span class="link-success cursor" (click)="abrirDocumento(doc.id)">{{doc.nombre}}&nbsp;&nbsp;</span>&nbsp;
+        <li *ngFor="let doc of documentosArray">
+          <span class="link-success cursor" (click)="abrirDocumento(doc.id)"
+            >{{ doc.nombre }}&nbsp;&nbsp;</span
+          >&nbsp;
         </li>
       </ul>
     </div>
   </div>
 
-
   <!-- SI HAY UN CUMPLIDO -->
-  <div class="row regular-row" *ngIf="cumplidosArray.length >0">
+  <div class="row regular-row" *ngIf="cumplidosArray.length > 0">
     <div class="col-xs-12 col-sm-6 label mt-2 fw-bold">Cumplido</div>
     <div class="col-xs-12 col-sm-6 mt-2">
       <ul>
         <li *ngFor="let cumplido of cumplidosArray">
-          <span class="link-success cursor"  (click)="abrirCumplido(cumplido.id)">{{cumplido.nombre}}&nbsp;&nbsp;</span>&nbsp;</li>
+          <span class="link-success cursor" (click)="abrirCumplido(cumplido.id)"
+            >{{ cumplido.nombre }}&nbsp;&nbsp;</span
+          >&nbsp;
+        </li>
       </ul>
+    </div>
+  </div>
+
+  <div class="row regular-row mt-2">
+    <div class="col-xs-12 col-sm-6 label fw-bold">
+      Estado Actual de la Comisión
+    </div>
+    <div class="col-4">
+      <span
+        class="badge badge-pill pill"
+        [ngClass]="{
+          'bg-solicitada': estadoActual.nombre === 'SOLICITADA',
+          'bg-aprobada': estadoActual.nombre === 'APROBADA',
+          'bg-visto-bueno': estadoActual.nombre === 'VISTO BUENO',
+          'bg-finalizada': estadoActual.nombre === 'FINALIZADA',
+          'bg-rechazada-decanato': estadoActual.nombre === 'RECHAZADA DECANATO',
+          'bg-rechazada-coordinacion':
+            estadoActual.nombre === 'RECHAZADA COORDINACIÓN'
+        }"
+      >
+        {{ estadoActual.nombre }}
+      </span>
     </div>
   </div>
 
 
   <!-- VER HISTORIAL ESTADOS -->
-    <button
+  <button
     type="button"
-    class="btn btn-historial btn-green btn-block col-12 mt-3"
+    class="btn btn-success btn-block col-12 mt-3"
     (click)="open()"
-    >
+  >
     Ver Historial de estados
-    </button>
-
+  </button>
 
   <div class="row regular-row">
-    <app-historial-estados *ngIf="mostrarEstados" [estados] = "estados"></app-historial-estados>
+    <app-historial-estados
+      *ngIf="mostrarEstados"
+      [estados]="estados"
+    ></app-historial-estados>
+  </div>
+
+  <div *ngIf="(estadoActual.nombre === 'APROBADA') && (rol == 'PROFESOR' || rol == 'EMPLEADO') " class="alert alert-warning mt-3 mb-0">
+    Recuerda subir el cumplido
   </div>
 
 
@@ -131,50 +139,68 @@
     {{ error }}
   </div>
 
-  <hr />
+  <hr *ngIf="
+    (rol == 'PROFESOR' || rol == 'EMPLEADO') &&
+    (estadoActual.nombre == 'APROBADA' ||
+      estadoActual.nombre == 'FINALIZADA')"/>
 
- <div class="footer-row d-md-flex justify-content-md-end">
-  <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-    <button
-    type="button"
-    class="btn btn-warning"
-    [routerLink]="['/comisiones/asociar-estado', comision.id]"
-    *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
-    
-    >
-      Asociar nuevo Estado
-    </button>
+  <div class="footer-row d-md-flex justify-content-md-end">
+    <div 
+      *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
+      class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+        type="button"
+        class="btn btn-warning"
+        [routerLink]="['/comisiones/asociar-estado', comision.id]"
+      >
+        Asociar nuevo Estado
+      </button>
+    </div>
+    <div 
+      *ngIf="
+            (rol == 'PROFESOR' || rol == 'EMPLEADO') &&
+            (estadoActual.nombre == 'APROBADA' ||
+            estadoActual.nombre == 'FINALIZADA')
+            "
+      class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+        type="button"
+        class="btn btn-cumplido"
+        [routerLink]="['/comisiones/subir-cumplido', comision.id]"
+      >
+        Subir Cumplido
+      </button>
+    </div>
   </div>
-  <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2"
-    *ngIf="(estadoActual.nombre === 'APROBADA') || (estadoActual.nombre === 'FINALIZADA') ">
-    <button
-    type="button"
-    class="btn btn-light"
-    [routerLink]="['/comisiones/subir-cumplido', comision.id]"
-    
-    >
-      Subir Cumplido
-    </button>
-  </div>
-</div>
 
-<hr class="mt-3" />
+  <hr class="mt-3" />
   <!-- ELIMINAR O EDITAR -->
 
   <div class="footer-row d-md-flex justify-content-md-end">
-
-    <div *ngIf="(rol == 'PROFESOR' || rol == 'EMPLEADO')" class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+    <div
+      *ngIf="rol == 'PROFESOR' || rol == 'EMPLEADO'"
+      class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2"
+    >
       <button class="btn btn-danger" (click)="eliminarComision(comision.id)">
-        <span *ngIf="(isLoading | async)  && (isDelete)" class="spinner-border spinner-border-sm" 
+        <span
+          *ngIf="(isLoading | async) && isDelete"
+          class="spinner-border spinner-border-sm"
         ></span>
         Eliminar
       </button>
     </div>
 
-    <div  *ngIf="(rol == 'PROFESOR' || rol == 'EMPLEADO')" class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+    <div
+    *ngIf="
+          (rol == 'PROFESOR' || rol == 'EMPLEADO') &&
+          (estadoActual.nombre == 'RECHAZADA COORDINACIÓN' ||
+          estadoActual.nombre == 'SOLICITADA')
+          "
+      class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2"
+    >
       <button
         type="button"
-        class="btn btn-warning "
+        class="btn btn-warning"
         [routerLink]="['/comisiones/editar-comision', comision.id]"
       >
         Editar

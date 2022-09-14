@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   public isNavbarCollapsed=true;
   public currentURL: any;
-  public usuario!: Usuario; 
+  public usuario: Usuario | undefined; 
   public rol!: Rol
   public usuarioInside!: UsuarioInside;
   public admin: any = true;

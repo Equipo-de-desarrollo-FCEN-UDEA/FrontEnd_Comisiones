@@ -237,17 +237,28 @@ export class CrearComisionComponent implements OnInit {
 
     let provincia =  this.provincia.name ?  this.provincia.name : "";
     let ciudad = this.ciudades ?  this.ciudades : "";
+
+
+    // Convierte los strings a fechas en UTC, y se remueve GMT 
+    let fecha_inicio = new Date(this.creaComisionForm.value.fecha_inicio).toUTCString().slice(0, -4);
+    let fecha_fin = new Date(this.creaComisionForm.value.fecha_fin).toUTCString().slice(0, -4);
+    
+    
+    // Se agregan las horas de diferencia 
+    let fecha_inicio_utc  = new Date(fecha_inicio).toUTCString()
+    let fecha_fin_utc = new Date(fecha_fin).toUTCString()
     
     const body = {
-      fecha_inicio: this.creaComisionForm.value.fecha_inicio,
-      fecha_fin: this.creaComisionForm.value.fecha_fin,
-      fecha_resolucion: new Date(this.formatter.format(this.today)),
+      fecha_inicio: fecha_inicio_utc,
+      fecha_fin: fecha_fin_utc,
+      //fecha_resolucion: new Date(this.formatter.format(this.today)),
       justificacion: this.creaComisionForm.value.justificacion,
       idioma: this.creaComisionForm.value.idioma,
       lugar: this.pais.name +', '+ provincia,
       tipos_comision_id: this.creaComisionForm.value.tipos_comision_id
     }
 
+    console.log(body)
 
     const reqBody: FormData = new FormData();
     reqBody.append('tipos_comision_id', body.tipos_comision_id);

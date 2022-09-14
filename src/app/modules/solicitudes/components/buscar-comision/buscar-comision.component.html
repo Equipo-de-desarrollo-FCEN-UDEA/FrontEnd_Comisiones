@@ -11,10 +11,11 @@
     </div>
 
       <span class="col col-form-label" 
-        *ngIf="Buscarservice.loading$ | async">Loading...
+        style="padding-left: 1em"
+        *ngIf="Buscarservice.loading$ | async">Cargando...
       </span>
 
-      <select class="form-select"  *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
+      <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
         (change)="changeOption($event)" style="width: auto">
         <option value="0">No archivados</option>
         <option value="1">Archivados</option>
@@ -65,7 +66,7 @@
                     'bg-solicitada':
                       ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'SOLICITADA',
                     'bg-aprobada': 
-                      ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA',
+                      (ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA' || ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'APROBADA CONCEJO INSTITUTO'),
                     'bg-visto-bueno':
                       ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'VISTO BUENO',
                     'bg-finalizada':
@@ -80,7 +81,7 @@
   
               <td>
                 <ngb-highlight 
-                  [result]="ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd'"
+                  [result]="(ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd')?.toString()"
                   [term]="Buscarservice.searchTerm">
                 </ngb-highlight>
               </td>
@@ -113,13 +114,6 @@
                 </ngb-highlight>
               </td>
 
-              <td>
-                <ngb-highlight 
-                  [result]="comision.usuarios.departamentos.facultades.nombre"
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
               <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
                 <button *ngIf="comision.archivado == 0" type="button" (click)="archivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Archivar</button>
                 <button *ngIf="comision.archivado == 1" type="button" (click)="desarchivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Desarchivar</button>

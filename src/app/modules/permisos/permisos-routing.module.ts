@@ -5,6 +5,8 @@ import { VerPermisoComponent } from './pages/ver-permiso/ver-permiso.component';
 import { CrearPermisoComponent } from './pages/crear-permiso/crear-permiso.component';
 import { EditarPermisoComponent } from './pages/editar-permiso/editar-permiso.component';
 import { EstadosPermisoComponent } from './pages/ver-permiso/estados-permiso/estados-permiso.component';
+import { RolGuard } from '@guards/rol.guard';
+import { RoladminGuard } from '@guards/roladmin.guard';
 
 const routes: Routes = [
   {
@@ -14,11 +16,13 @@ const routes: Routes = [
 
   {
     path: 'crear-permiso',
-    component: CrearPermisoComponent
+    canActivate: [RoladminGuard],
+    component: CrearPermisoComponent,
   },
 
   {
     path: 'editar-permiso/:id',
+    canActivate: [RoladminGuard],
     component: EditarPermisoComponent
   },
 

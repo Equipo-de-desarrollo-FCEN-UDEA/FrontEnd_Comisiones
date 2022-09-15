@@ -1,10 +1,5 @@
-<form
-  need-validation
-  novalidate
-  [formGroup]="crearUsuarioForm"
-  (ngSubmit)="onSubmit()"
-  class="containerInside card shadow mt-5 bg-white rounded"
->
+<form need-validation novalidate [formGroup]="crearUsuarioForm" (ngSubmit)="onSubmit()"
+  class="containerInside card shadow mt-5 bg-white rounded">
   <div class="p-4">
     <div class="card-body">
       <div class="row header-row P-2">
@@ -15,260 +10,174 @@
       </div>
       <hr />
       <div class="form">
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <input
-              id="apellido"
-              type="text"
-              class="form-control"
-              placeholder=" "
-              formControlName="apellido"
-              [ngClass]="{
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input id="apellido" type="text" class="form-control" placeholder=" " formControlName="apellido" [ngClass]="{
                 'is-invalid': submitted && f['apellido'].errors
-              }"
-            />
-            </div>
-
+              }" />
           </div>
+
+        </div>
         <div class="row regular-row mt-4">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Nombre</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <input
-              id="nombre"
-              type="text"
-              class="form-control"
-              placeholder=""
-              formControlName="nombre"
-              [ngClass]="{
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input id="nombre" type="text" class="form-control" placeholder="" formControlName="nombre" [ngClass]="{
                 'is-invalid': submitted && f['nombre'].errors
-              }"
-            /></div>
+              }" />
           </div>
+        </div>
 
 
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Correo Institucional</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <div class="formfloatig ">
-                <input
-                  formControlName="correo"
-                  id="Correo-"
-                  type="text"
-                  class="form-control"
-                  placeholder="ejemplo@udea.edu.co"
-                  [ngClass]="{
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Correo Institucional</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig ">
+              <input formControlName="correo" id="Correo-" type="text" class="form-control"
+                placeholder="ejemplo@udea.edu.co" [ngClass]="{
                     'is-invalid': submitted && f['correo'].errors
-                  }"
-                />
-                <label for="Correo-" class="formLabel"
-                  ></label
-                >
-              </div>
+                  }" />
+              <label for="Correo-" class="formLabel"></label>
             </div>
           </div>
+        </div>
 
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Tipo de Identificación</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <div class="formfloatig">
-                <select
-                  class="form-select form-select-lg"
-                  id="tipo_identificacion"
-                  formControlName="tipo_identificacion"
-                  required
-                  placeholder=" "
-                  [ngClass]="{
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Tipo de Identificación</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <select class="form-select form-select-lg" id="tipo_identificacion" formControlName="tipo_identificacion"
+                required placeholder=" " [ngClass]="{
                     'is-invalid': submitted && f['tipo_identificacion'].errors
-                  }"
-                >
-                  <option [value]="tipo" *ngFor="let tipo of tiposId">
-                    {{ tipo | uppercase }}
-                  </option>
-                </select>
-                <label
-                  for="tipo_identificacion"
-                  class="selectLabel"
-                  [ngClass]="{ isFill: true }"
-                  >Tipo de Identificación</label
-                >
-              </div>
+                  }">
+                <option [value]="tipo" *ngFor="let tipo of tiposId">
+                  {{ tipo | uppercase }}
+                </option>
+              </select>
+              <label for="tipo_identificacion" class="selectLabel" [ngClass]="{ isFill: true }">Tipo de
+                Identificación</label>
             </div>
           </div>
+        </div>
 
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Numero de Identificación</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <div class="formfloatig">
-                <input
-                  id="identificacion"
-                  formControlName="identificacion"
-                  type="text"
-                  class="form-control"
-                  placeholder=" "
-                  [ngClass]="{
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Numero de Identificación</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <input id="identificacion" formControlName="identificacion" type="text" class="form-control"
+                placeholder=" " [ngClass]="{
                     'is-invalid': submitted && f['identificacion'].errors
-                  }"
-                />
-                <label for="identificacion" class="formLabel">
-                </label>
-              </div>
+                  }" />
+              <label for="identificacion" class="formLabel">
+              </label>
             </div>
           </div>
+        </div>
 
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Telefono</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <div class="formfloatig">
-                <input
-                  id="telefono"
-                  formControlName="telefono"
-                  type="number"
-                  class="form-control"
-                  placeholder=" "
-                  [ngClass]="{
-                    'is-invalid': submitted && f['telefono'].errors
-                  }"
-                />
-                <label for="telefono" class="formLabel">
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <div class="formfloatig">
-                <select
-                  class="form-select form-select-lg"
-                  id="roles_id"
-                  formControlName="roles_id"
-                  required
-                  placeholder=" "
-                  [ngClass]="{
-                    'is-invalid': submitted && f['roles_id'].errors
-                  }"
-                >
-                <option [value]="rol.id" *ngFor="let rol of roles$ | async">
-                    {{ rol.nombre| uppercase }}
-                </option>
-                </select>
-                <label
-                  for="roles_id"
-                  class="selectLabel"
-                  [ngClass]="{ isFill: true }"
-                  >Cargo</label
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Escalafón</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <div class="formfloatig">
-                <select
-                  class="form-select form-select-lg"
-                  id="escalafon"
-                  formControlName="escalafon"
-                  placeholder=" "
-                  [ngClass]="{
-                    'is-invalid': submitted && f['escalafon'].errors
-                  }"
-                >
-                  <option [value]="escala" *ngFor="let escala of escalafon">
-                    {{ escala | uppercase }}
-                  </option>
-                </select>
-                <label
-                  for="escalafon"
-                  class="selectLabel"
-                  [ngClass]="{ isFill: true }"
-                  >Escalafon</label
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento/Instituto</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <div class="formfloatig">
-                <select
-                  class="form-select form-select-lg"
-                  id="departamentos_id"
-                  formControlName="departamentos_id"
-                  required
-                  placeholder=" "
-                  [ngClass]="{
-                    'is-invalid': submitted && f['departamentos_id'].errors
-                  }"
-                >
-                <option
-                    *ngFor="let departamento of departamentos$ | async"
-                    [value]="departamento.id"
-                  >
-                    {{ departamento.nombre | uppercase }}
-                </option>
-                </select>
-                <label
-                  for="departamentos_id"
-                  class="selectLabel"
-                  [ngClass]="{ isFill: true }"
-                  >Departamento</label
-                >
-              </div>
-            </div>
-          </div>
-
-
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Oficina</div>
-              <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-                <input
-                id="oficina"
-                type="text"
-                class="form-control"
-                placeholder=""
-                formControlName="oficina"
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Telefono</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <input id="telefono" formControlName="telefono" type="number" class="form-control" placeholder=" "
                 [ngClass]="{
+                    'is-invalid': submitted && f['telefono'].errors
+                  }" />
+              <label for="telefono" class="formLabel">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <select class="form-select form-select-lg" id="roles_id" formControlName="roles_id" required
+                placeholder=" " [ngClass]="{
+                    'is-invalid': submitted && f['roles_id'].errors
+                  }">
+                <option [value]="rol.id" *ngFor="let rol of roles$ | async">
+                  {{ rol.nombre| uppercase }}
+                </option>
+              </select>
+              <label for="roles_id" class="selectLabel" [ngClass]="{ isFill: true }">Cargo</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Escalafón</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <select class="form-select form-select-lg" id="escalafon" formControlName="escalafon" placeholder=" "
+                [ngClass]="{
+                    'is-invalid': submitted && f['escalafon'].errors
+                  }">
+                <option [value]="escala" *ngFor="let escala of escalafon">
+                  {{ escala | uppercase }}
+                </option>
+              </select>
+              <label for="escalafon" class="selectLabel" [ngClass]="{ isFill: true }">Escalafon</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento/Instituto</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <select class="form-select form-select-lg" id="departamentos_id" formControlName="departamentos_id"
+                required placeholder=" " [ngClass]="{
+                    'is-invalid': submitted && f['departamentos_id'].errors
+                  }">
+                <option *ngFor="let departamento of departamentos$ | async" [value]="departamento.id">
+                  {{ departamento.nombre | uppercase }}
+                </option>
+              </select>
+              <label for="departamentos_id" class="selectLabel" [ngClass]="{ isFill: true }">Departamento</label>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Oficina</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input id="oficina" type="text" class="form-control" placeholder="" formControlName="oficina" [ngClass]="{
                   'is-invalid': submitted && f['oficina'].errors
-                }"
-              /></div>
-            </div>
+                }" />
+          </div>
+        </div>
 
-            <div class="row regular-row mt-4">
-              <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Tipo de Vinculacion</div>
-                <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-                  <input
-                  id="tipo_vinculacion"
-                  type="text"
-                  class="form-control"
-                  placeholder=""
-                  formControlName="tipo_vinculacion"
-                  [ngClass]="{
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Tipo de Vinculacion</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input id="tipo_vinculacion" type="text" class="form-control" placeholder=""
+              formControlName="tipo_vinculacion" [ngClass]="{
                     'is-invalid': submitted && f['tipo_vinculacion'].errors
-                  }"
-                /></div>
-            </div>
+                  }" />
+          </div>
+        </div>
 
-          <hr />
+        <hr />
 
-          <div class="row regular-row mt-4">
-            <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Contraseña</div>
-            <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-              <div class="formfloatig">
-                <input
-                  id="Contrasena"
-                  type="password"
-                  class="form-control"
-                  placeholder=" "
-                  [ngClass]="{
+        <div class="row regular-row mt-4">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Contraseña</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <input id="Contrasena" type="password" class="form-control" formControlName="contrasena" placeholder=" "
+                [ngClass]="{
                     'is-invalid': submitted && f['contrasena'].errors
-                  }"
-                />
-                <label for="Contrasena" class="formLabel"></label>
+                  }" />
+              <div *ngIf="submitted && f['contrasena'].errors" class="invalid-feedback">
+                <div *ngIf="f['contrasena'].errors['minLength']" class="alert alert-danger">
+                  La contraseña es requerida
+                </div>
+              </div>
+              <div *ngIf="submitted && f['contrasena'].errors" class="invalid-feedback">
+                <div *ngIf="f['contrasena'].errors['maxLength']" class="alert alert-danger">
+                  La contraseña es demasiado larga
+                </div>
               </div>
             </div>
           </div>
@@ -277,53 +186,36 @@
             <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Confirmar Contraseña</div>
             <div class="col-sm-12 col-xs-12 col-md-8 col-12">
               <div class="formfloatig">
-                <input
-                  id="Confirmar"
-                  type="password"
-                  class="form-control"
-                  formControlName="contrasena"
-                  placeholder=" "
-                  [ngClass]="{
+                <input id="Confirmar" type="password" class="form-control" formControlName="confirmarContrasena"
+                  placeholder=" " [ngClass]="{
                     'is-invalid': submitted && f['contrasena'].errors
-                  }"
-                />
-                <label for="Confirmar" class="formLabel"
-                  ></label
-                >
+                  }" />
+                <span style="color: red;" *ngIf="ValidatePasswords()">
+                  Las contraseñas no coinciden
+                </span>
               </div>
             </div>
           </div>
 
-        <div *ngIf="error" class="alert alert-danger">
-          {{error}}
-        </div>
-        <hr />
-
-        <div class="footer-row d-md-flex justify-content-md-end mb-3">
-          <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-            <button
-            class="btn btn-secondary"
-            [routerLink]="['/home']"
-            >
-              Cancelar
-            </button>
+          <div *ngIf="error" class="alert alert-danger">
+            {{error}}
           </div>
+          <hr />
+
+          <div class="footer-row d-md-flex justify-content-md-end mb-3">
+            <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+              <button class="btn btn-secondary" [routerLink]="['/home']">
+                Cancelar
+              </button>
+            </div>
 
 
-          <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-            <button
-            id="btn-sub"
-            (submit)="(true)"
-            class="btn btn-success"
-          >
-            <span
-              *ngIf="loading"
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Confirmar
-          </button>
+            <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+              <button id="btn-sub" (submit)="(true)" class="btn btn-success">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Confirmar
+              </button>
+            </div>
           </div>
         </div>
       </div>

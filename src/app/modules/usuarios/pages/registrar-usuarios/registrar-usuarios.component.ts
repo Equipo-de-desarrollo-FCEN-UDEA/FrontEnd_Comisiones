@@ -57,7 +57,7 @@ export class RegistrarUsuariosComponent implements OnInit {
       correo : ['', [Validators.required, 
         //Validators.pattern(this.isCorreoValid)
       ]],
-      contrasena : ['', Validators.required],
+      contrasena : ['', [Validators.required, Validators.minLength(8),Validators.maxLength(250)]],
       nombre : ['', Validators.required],
       apellido : ['', Validators.required],
       tipo_identificacion : ['', Validators.required],
@@ -67,7 +67,8 @@ export class RegistrarUsuariosComponent implements OnInit {
       escalafon: [''],
       oficina: [],
       tipo_vinculacion: [''],
-      roles_id : ['', Validators.required]
+      roles_id : ['', Validators.required],
+      confirmarContrasena: [],
     });
   }
 
@@ -79,6 +80,19 @@ export class RegistrarUsuariosComponent implements OnInit {
   get f() {
     return this.crearUsuarioForm.controls;
   }
+
+  ValidatePasswords() {
+    return (
+      this.crearUsuarioForm.get('contrasena')?.touched &&
+      this.crearUsuarioForm.get('contrasena')?.value !=  this.crearUsuarioForm.get('confirmarContrasena')?.value
+    );
+  }
+
+  // get passwordMatchError() {
+  //   return (
+  //     this.crearUsuarioForm.getError('mismatch') &&
+  //     this.crearUsuarioForm.get('contrasena')?.touched
+  //   )}
 
   onSubmit() {
     this.submitted = true;

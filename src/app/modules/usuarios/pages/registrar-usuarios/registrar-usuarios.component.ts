@@ -65,7 +65,7 @@ export class RegistrarUsuariosComponent implements OnInit {
       departamentos_id : ['', Validators.required],
       telefono: ['', Validators.required],
       escalafon: [''],
-      oficina: [0],
+      oficina: [],
       tipo_vinculacion: [''],
       roles_id : ['', Validators.required]
     });
@@ -106,6 +106,9 @@ export class RegistrarUsuariosComponent implements OnInit {
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg;
+        }
+        if (err.status === 400) {
+          this.error = err.error.message;
         }
       }
     });

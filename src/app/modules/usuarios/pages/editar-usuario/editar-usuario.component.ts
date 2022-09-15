@@ -98,11 +98,12 @@ export class EditarUsuarioComponent implements OnInit {
         })
       },
       error: (err: any) => {
-        Swal.fire({
-          title: 'Algo ocurrió mal vuelve a intentar',
-          text: err.msg,
-          confirmButtonText: 'Aceptar'
-        })
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+        if (err.status === 400) {
+          this.error = err.error.message;
+        }
       }
     }
     );

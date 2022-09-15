@@ -193,6 +193,17 @@ export class EditarPermisoComponent implements OnInit {
     return size < 2 * 1024 * 1024;
   }
 
+  validTipoArchivo() {
+    const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
+    
+    let flag; 
+    this.files.forEach((file) => {
+      flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
+    })
+    return flag;
+
+  }
+
   isInvalidForm(controlName: string) {
     return this.editarPermisoForm.get(controlName)?.invalid && this.editarPermisoForm.get(controlName)?.touched;
   }
@@ -266,6 +277,9 @@ export class EditarPermisoComponent implements OnInit {
         error: (err) => {
           if (err.status === 404 || err.status === 401) {
             this.error = err.error.msg;
+          }
+          if (err.status === 400) {
+            this.error = err.error.message;
           }
         },
       });

@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class EditarContrasenaComponent implements OnInit {
   public usuario!: Usuario;
-  public id: Number | string = 0;
+  public getId: Number | string = 0;
 
   public error: string = '';
   public loading: boolean = false;
@@ -31,15 +31,13 @@ export class EditarContrasenaComponent implements OnInit {
   ) {
     this.activateRoute.params
       .pipe(take(1))
-      .subscribe((params) => (this.id = params['id']));
+      .subscribe((params) => (this.getId = params['id']));
 
     this.editarContrasenaForm = this.formBuilder.group({
       contrasena_actual: [
         '',
         [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(250),
+          Validators.required
         ],
       ],
       contrasena_expected_1: [
@@ -111,7 +109,6 @@ export class EditarContrasenaComponent implements OnInit {
   }
 
   submit() {
-    console.log('asd');
     this.authSvc
       .cambiarContrasena(
         this.editarContrasenaForm.get('contrasena_actual')?.value,

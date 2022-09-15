@@ -1,4 +1,4 @@
-s<form
+<form
   need-validation
   novalidate
   [formGroup]="formUpdate"
@@ -10,7 +10,7 @@ s<form
       <div class="row header-row P-2">
         <div class="col">
           <!-- <p class="ptitle ">Editar mi perfil</p> -->
-          <span class="text-secondary"> EDITAR PERFIL</span>
+          <span class="text-secondary">EDITAR PERFIL</span>
         </div>
       </div>
       <hr />
@@ -84,6 +84,7 @@ s<form
             ></label>
           </div>
         </div>
+        
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
             Numero de Identificación
@@ -111,7 +112,7 @@ s<form
             <input
               id="telefono"
               formControlName="telefono"
-              type="number"
+              type="text"
               class="form-control"
               placeholder=" "
               [ngClass]="{
@@ -140,6 +141,51 @@ s<form
             <label for="telefono" class="formLabel"> </label>
           </div>
         </div>
+
+        <div class="row regular-row m-2 align-items-baseline">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Tipo de Vinculación
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input
+              id="tipo_vinculacion"
+              formControlName="tipo_vinculacion"
+              type="text"
+              class="form-control"
+              placeholder=" "
+              [ngClass]="{
+                'is-invalid': submitted && f['tipo_vinculacion'].errors
+              }"
+            />
+            <label for="tipo_vinculacion" class="formLabel"> </label>
+          </div>
+        </div>
+
+        <!--CREAR-->  
+
+        <!-- <div class="row regular-row m-2 align-items-baseline">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Estado
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <select
+              class="form-select form-select-lg"
+              id="estados"
+              formControlName="estados"
+              required
+            >
+              <option [value]="estado" *ngFor="let estado of estados">
+                {{ estado | uppercase }}
+              </option>
+            </select>
+            <label for="estado" class="formLabel"> </label>
+            <label
+            for="estados"
+            class="selectLabel"
+            [ngClass]="{ isFill: true }"
+          ></label>
+          </div>
+        </div> -->
 
         <div
           class="row regular-row m-2 align-items-baseline"

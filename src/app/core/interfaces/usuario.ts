@@ -34,7 +34,7 @@ export interface Usuario extends UsuarioBase{
     roles: RolResponse;
     escalafon: string;
     oficina?: string;
-    telefono?: number;
+    telefono?: string;
     estado?: string;
 }
 

@@ -1,4 +1,4 @@
-<div class="container shadow-sm pt-4 pl-4 pr-2 mb-5 bg-white rounded ">
+<div class="container-inside shadow-sm pt-4 pr-2 p-4 m-5 bg-white rounded">
     <form>
       <div class="mb-3 row">
         <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar Usuarios:</label>
@@ -79,27 +79,6 @@
 
               </ngb-highlight>
             </td>
-
-            <!-- <td>
-              <ngb-highlight
-                [result]="ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre"
-                [term]="service.searchTerm"
-                class="badge badgee-pill pill"
-                [ngClass]="{
-                  'bg-solicitada':
-                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'SOLICITADA',
-                  'bg-aprobada': ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'APROBADA',
-                  'bg-visto-bueno':
-                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'VISTO BUENO',
-                  'bg-finalizada':
-                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'FINALIZADA',
-                  'bg-rechazada-decanato':
-                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA DECANATO',
-                  'bg-rechazada-coordinacion':
-                  ultimoElemento(permiso.intermediate_permisos).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
-                }"
-              ></ngb-highlight>
-            </td> -->
 
             <td>
               <ngb-highlight

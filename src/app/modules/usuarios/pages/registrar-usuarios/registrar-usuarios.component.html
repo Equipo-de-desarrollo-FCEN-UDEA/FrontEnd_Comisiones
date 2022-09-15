@@ -14,6 +14,9 @@
         </div>
       </div>
       <hr />
+      <div class="alert alert-warning">
+        <strong>¡Importante!</strong> Antes de enviar, verifica que la información se ingresó correctamente.
+      </div>
       <div class="form">
         <div class="row regular-row mt-4">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
@@ -99,7 +102,7 @@
 
         <div class="row regular-row mt-4">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
-            Numero de Identificación
+            Número de Identificación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
@@ -119,7 +122,7 @@
         </div>
 
         <div class="row regular-row mt-4">
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Telefono</div>
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Teléfono</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
               <input
@@ -186,7 +189,7 @@
                 for="escalafon"
                 class="selectLabel"
                 [ngClass]="{ isFill: true }"
-                >Escalafon</label
+                >Escalafón</label
               >
             </div>
           </div>
@@ -243,7 +246,7 @@
 
         <div class="row regular-row mt-4">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
-            Tipo de Vinculacion
+            Tipo de Vinculación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input
@@ -322,9 +325,6 @@
               </span>
             </div>
           </div>
-        </div>
-        <div class="alert alert-warning">
-          Antes de enviar verifica que la información se ingresó correctamente
         </div>
         
         <div *ngIf="error" class="alert alert-danger">

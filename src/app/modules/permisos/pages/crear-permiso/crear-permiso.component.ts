@@ -171,6 +171,13 @@ export class CrearPermisoComponent implements OnInit {
     return this.formPermiso.controls;
   }
 
+  isInvalidForm(controlName: string) {
+    return (
+      this.formPermiso.get(controlName)?.invalid &&
+      this.formPermiso.get(controlName)?.touched
+    );
+  }
+
   // --------------------------------------
   // -------- ARCHIVOS - ANEXOS -----------
   // --------------------------------------
@@ -195,12 +202,18 @@ export class CrearPermisoComponent implements OnInit {
     return size < 2 * 1024 * 1024;
   }
 
-  isInvalidForm(controlName: string) {
-    return (
-      this.formPermiso.get(controlName)?.invalid &&
-      this.formPermiso.get(controlName)?.touched
-    );
+  validTipoArchivo() {
+    const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
+    
+    let flag; 
+    this.files.forEach((file) => {
+      flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
+    })
+    return flag;
+
   }
+
+
 
   // ----------------------------------------
   // ----------- CREAR PERMISO ------------
@@ -247,6 +260,9 @@ export class CrearPermisoComponent implements OnInit {
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg;
+        }
+        if (err.status === 400) {
+          this.error = err.error.message;
         }
       },
     });

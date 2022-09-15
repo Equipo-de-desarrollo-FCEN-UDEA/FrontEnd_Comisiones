@@ -102,6 +102,45 @@ s<form
             <label for="identificacion" class="formLabel"> </label>
           </div>
         </div>
+
+        <div class="row regular-row m-2 align-items-baseline">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Telefono
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input
+              id="telefono"
+              formControlName="telefono"
+              type="number"
+              class="form-control"
+              placeholder=" "
+              [ngClass]="{
+                'is-invalid': submitted && f['telefono'].errors
+              }"
+            />
+            <label for="telefono" class="formLabel"> </label>
+          </div>
+        </div>
+
+        <div class="row regular-row m-2 align-items-baseline">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+            Oficina
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <input
+              id="oficina"
+              formControlName="oficina"
+              type="text"
+              class="form-control"
+              placeholder=" "
+              [ngClass]="{
+                'is-invalid': submitted && f['oficina'].errors
+              }"
+            />
+            <label for="telefono" class="formLabel"> </label>
+          </div>
+        </div>
+
         <div
           class="row regular-row m-2 align-items-baseline"
           *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
@@ -165,7 +204,6 @@ s<form
               id="btn-sub"
               (submit)="(true)"
               class="btn btn-success"
-              [disabled]="formUpdate.invalid"
             >
               <span
                 *ngIf="isLoading | async"

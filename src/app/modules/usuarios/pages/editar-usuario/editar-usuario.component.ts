@@ -67,7 +67,9 @@ export class EditarUsuarioComponent implements OnInit {
     nombre: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     apellido: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     tipo_identificacion: ['', [Validators.maxLength(250)]],
-    identificacion: [0, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
+    identificacion: [' ', [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
+    telefono: [0, [Validators.required]],
+    oficina: ['', [Validators.required]],
     // departamentos_id : ['', Validators.required],
     // contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     // validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
@@ -98,16 +100,14 @@ export class EditarUsuarioComponent implements OnInit {
         })
       },
       error: (err: any) => {
-        Swal.fire({
-          title: 'Algo ocurrió mal vuelve a intentar',
-          text: err.msg,
-          confirmButtonText: 'Aceptar'
-        })
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+        if (err.status === 400) {
+          this.error = err.error.message;
+        }
       }
     }
     );
-
   }
-
-
 }

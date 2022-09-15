@@ -101,7 +101,7 @@
             class="form-select form-select-lg mb-3"
             id="floatingpais"
             formControlName="pais"
-            [ngClass]="{ 'is-invalid': isInvalidForm('pais') }"
+            [ngClass]="{ 'is-invalid':  f['pais'].errors }"
             (change)="onChangePais($event)"
           >
             <option [value]="i" *ngFor="let country of paises; let i = index">
@@ -306,8 +306,11 @@
     <h6>
       <span class="text-muted">Archivos adjuntos a la solicitud</span>
     </h6>
+    <div class="alert alert-danger" *ngIf="files.length > 0 && !validTipoArchivo()">
+      Ese tipo de archivo no es permitido.
+    </div>
     <div class="alert-danger alert" *ngIf="files.length > 0 && !validSize()">
-      <p>Los archivos no deben pesar más de 2 MB.</p>
+      Los archivos no deben pesar más de 2 MB.
     </div>
     <div class="formfloatig" style="display: flex; flex-direction: column">
       <div

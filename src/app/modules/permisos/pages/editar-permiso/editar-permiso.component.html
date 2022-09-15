@@ -196,8 +196,11 @@
       <h6 class="mt-4">
         <span class="text-muted">Archivos adjuntos a la solicitud</span>
       </h6>
+      <div class="alert alert-danger" *ngIf="files.length > 0 && !validTipoArchivo()">
+        Ese tipo de archivo no es permitido.
+      </div>
       <div class="alert alert-danger" *ngIf="files.length > 0 && !validSize()">
-        <p>Los archivos no deben pesar más de 2 MB.</p>
+        Los archivos no deben pesar más de 2 MB.
       </div>
       <div class="formfloatig" style="display: flex; flex-direction: column">
         <div

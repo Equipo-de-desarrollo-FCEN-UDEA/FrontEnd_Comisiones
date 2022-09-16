@@ -21,7 +21,6 @@ export class EditarUsuarioComponent implements OnInit {
   public usuario!: Usuario;
   public usuarioResponse : UsuarioResponse | undefined;
 
-  public id: Number | string = 0;
   public tiposId = tiposId;
   public isLoading = this.loadingSvc.isLoading;
   public error: string = "";
@@ -29,6 +28,7 @@ export class EditarUsuarioComponent implements OnInit {
   public rol: string = localStorage.getItem('rol') || '';
   public roles$: Observable<Rol[]>
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
+  public getId: Number | string = 0;
 
 
   constructor(
@@ -42,8 +42,8 @@ export class EditarUsuarioComponent implements OnInit {
     private rolesSvc: RolService
   ) {
     this.roles$ = this.rolesSvc.getRoles();
-    this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
-    this.usuarioSvc.getUsuariobyId(this.id as number).subscribe({
+    this.activateRoute.params.pipe(take(1)).subscribe(params => this.getId = params['id']);
+    this.usuarioSvc.getUsuariobyId(this.getId as number).subscribe({
       next: res => {
         this.usuarioResponse = res;
         this.formUpdate.patchValue(this.usuarioResponse);
@@ -71,7 +71,7 @@ export class EditarUsuarioComponent implements OnInit {
     telefono: ['', [Validators.required]],
     oficina: ['', [Validators.required]],
     tipo_vinculacion: ['', [Validators.required]],
-    // departamentos_id : ['', Validators.required],
+    departamentos_id : ['', Validators.required],
     // contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     // validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     roles_id: [NaN, Validators.required]
@@ -90,14 +90,14 @@ export class EditarUsuarioComponent implements OnInit {
     this.submitted = true;
     const usuario = this.formUpdate.value;
     console.log(this.formUpdate.value);
-    this.usuarioSvc.updateUsuario({ id: this.id, ...usuario }).subscribe({
+    this.usuarioSvc.updateUsuario({ id: this.getId, ...usuario }).subscribe({
       next: (res: any) => {
         Swal.fire({
           title: 'Usuario actualizado con éxito',
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['usuarios/ver-usuario', this.id])
+          this.router.navigate(['usuarios/ver-usuario', this.getId])
         })
       },
       error: (err: any) => {

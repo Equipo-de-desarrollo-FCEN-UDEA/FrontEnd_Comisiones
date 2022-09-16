@@ -16,19 +16,6 @@
       <hr />
       <div class="form">
         <div class="row regular-row m-2 align-items-baseline">
-          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
-            Nombre Completo
-          </div>
-          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="nombre"
-              type="text"
-              class="form-control"
-              placeholder=""
-              formControlName="nombre"
-            />
-          </div>
-        </div>
 
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
@@ -42,6 +29,20 @@
             />
           </div>
         </div>
+
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
+          Nombre
+        </div>
+        <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+          <input
+            id="nombre"
+            type="text"
+            class="form-control"
+            placeholder=""
+            formControlName="nombre"
+          />
+        </div>
+      </div>
 
         <!-- <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
@@ -64,7 +65,7 @@
 
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
-            Tipo de Identificacion
+            Tipo de Identificación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <select
@@ -87,7 +88,7 @@
         
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
-            Numero de Identificación
+            Número de Identificación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input
@@ -106,7 +107,7 @@
 
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
-            Telefono
+            Teléfono
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input
@@ -161,7 +162,6 @@
           </div>
         </div>
 
-        <!--CREAR-->  
 
         <!-- <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
@@ -237,14 +237,11 @@
         </div>
         <hr />
         <div class="footer-row d-md-flex justify-content-md-end mb-3">
-          <!-- <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-            <button
-            class="btn btn-secondary"
-            [routerLink]="['/usuarios/ver-usuario', usuario.id]"
-            >
+          <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+            <button class="btn btn-secondary" [routerLink]="['/usuarios/ver-usuario', getId]">
               Cancelar
             </button>
-          </div> -->
+          </div>
           <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
             <button
               id="btn-sub"

@@ -132,7 +132,7 @@
                 : null
             "
             [ngClass]="{
-              'is-invalid': (!fromDate || !toDate) && clicked !== 0
+              'is-invalid': ((!fromDate || !toDate) && clicked !== 0) || selectDias(fromDate, toDate)
             }"
             [attr.disabled]="formPermiso.get('tipos_permiso_id')?.invalid ? '':null"
           />

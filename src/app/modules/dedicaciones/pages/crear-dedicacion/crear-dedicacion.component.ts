@@ -70,9 +70,9 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
         })
         
       } 
-      // else {
-      //   this.router.navigate(['/'])
-      // }
+      else {
+        this.router.navigate(['/'])
+      }
     })
   }
 

@@ -73,7 +73,7 @@ export class CrearPermisoComponent implements OnInit {
           Validators.maxLength(350),
         ],
       ],
-      tipos_permiso_id: [0, [Validators.required, Validators.min(1)]],
+      tipos_permiso_id: [NaN, [Validators.required, Validators.min(1)]],
     });
 
     this.fromDate = null;

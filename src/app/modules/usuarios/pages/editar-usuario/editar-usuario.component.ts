@@ -7,6 +7,7 @@ import { DepartamentoService } from '@services/departamentos/departamento.servic
 import { LoaderService } from '@services/interceptors/loader.service';
 import { RolService } from '@services/roles/rol.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
+import { escalafon } from '@shared/data/escalafon';
 import { tiposId } from '@shared/data/tipos-id';
 import { Observable, take } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -21,6 +22,7 @@ export class EditarUsuarioComponent implements OnInit {
   public usuario!: Usuario;
   public usuarioResponse : UsuarioResponse | undefined;
 
+  public escalafon= escalafon
   public id: Number | string = 0;
   public tiposId = tiposId;
   public isLoading = this.loadingSvc.isLoading;
@@ -74,7 +76,8 @@ export class EditarUsuarioComponent implements OnInit {
     // departamentos_id : ['', Validators.required],
     // contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     // validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    roles_id: [NaN, Validators.required]
+    roles_id: [NaN, Validators.required],
+    escalafon: ['', Validators.required]
   });
 
   ngOnInit(): void {

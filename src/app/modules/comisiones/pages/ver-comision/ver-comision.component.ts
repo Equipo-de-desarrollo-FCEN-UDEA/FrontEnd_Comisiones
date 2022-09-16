@@ -26,7 +26,7 @@ export class VerComisionComponent {
   error:string = '';
   isDelete = false;
 
-  public comision!: Comision;
+  public comision: Comision | undefined;
 
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;

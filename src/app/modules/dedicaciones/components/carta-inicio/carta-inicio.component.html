@@ -79,7 +79,7 @@
         </div>
     </div>
     <div class="botones">
-        <button id="Generador-carta" class="btn btn-add btn-lg" [disabled]="FormCarta.controls['Cuerpo'].invalid" (click)="OnSubmit()" (submit)="true" >
+        <button id="Generador-carta" class="btn btn-add btn-lg" type="submit" [disabled]="FormCarta.controls['Cuerpo'].invalid" (click)="OnSubmit()" (submit)="true" >
             <span class="spinner" id="spinner" style="display: none;">
                 <span class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
                Cargando...

@@ -6,7 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { UsuarioService } from '@services/usuarios/usuario.service';
-import { Usuario } from '@interfaces/usuario';
+import { Usuario, UsuarioResponse } from '@interfaces/usuario';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
@@ -36,7 +36,9 @@ export class FDedicacionComponent implements OnInit {
     private loadingSvc: LoaderService,
     private comunicationSvc: CrearComisionComponentsService,
     private modalSvc: NgbModal
-  ) { }
+  ) {
+    this.usuarioSvc.getUsuario().subscribe(resp => this.Usuario = resp);
+   }
 
   public unidades = [
     'Instituto de Química, Facultad de Ciencias Exactas y Naturales',
@@ -49,7 +51,7 @@ export class FDedicacionComponent implements OnInit {
     'Administración'
   ]
 
-  public Usuario = this.usuarioSvc.getActualUsuario();
+  public Usuario : UsuarioResponse | undefined;
 
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
   private fExclusiva: FormatoVice = {
@@ -69,16 +71,9 @@ export class FDedicacionComponent implements OnInit {
     dedicaciones_id: 0
   };
 
-  fUser = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    identificacion: [NaN, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
-    correo: ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
-  });
+
 
   fBasicInfo = this.fb.group({
-    extension_oficina: ['', [Validators.minLength(3), Validators.maxLength(255)]],
-    celular: [NaN, [Validators.min(1000000000), Validators.max(9999999999)]],
     titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
     tiempo_solicitado: [NaN, [Validators.required, Validators.min(1), Validators.max(11)]],
     campo_modalidad: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50000)]],
@@ -93,12 +88,6 @@ export class FDedicacionComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.fUser.patchValue(this.Usuario);
-    this.fUser.controls['nombre'].disable();
-    this.fUser.controls['apellido'].disable();
-    this.fUser.controls['identificacion'].disable();
-    this.fUser.controls['correo'].disable();
-
     if (this.Dedicacion) {
       this.fBasicInfo.patchValue(this.Dedicacion);
     }
@@ -139,15 +128,12 @@ export class FDedicacionComponent implements OnInit {
     modalRef.result.then(
       (res: any) => {
         const steps = res.steps;
-        for (let i = 0; i < steps[3].indicador.length; i++)  {
-          this.addInputIndicador()
-        }
         const object = {
           tema_estrategico: [{tema:steps[0].temas}],
           objetivo_estrategico_desarrollo: [{objEstrategico:steps[1].objetivo}],
           objetivo_estrategico_institucional: [{objetivo:steps[1].objetivo}],
           acciones_estrategicas: [{accion:steps[2].accion}],
-          indicador: steps[3].indicador
+          indicador: [{indicador:steps[3].indicador}],
         }
         this.fBasicInfo.patchValue(object)
         console.log(this.fBasicInfo.value)

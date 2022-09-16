@@ -198,7 +198,7 @@
                 </span>
             </ng-template>
             <div class="container card shadow bg-white rounded">
-                <h3>Apoya al plan de desarrollo institucional en alguna de las siguientes acciones estratégicas</h3>
+                <h3>Apoya al plan de desarrollo institucional en alguno de los siguientes indicadores</h3>
                 <span class="m-2">A continuación puedes ingresar los indicadores que la dedicación exclusiva pretende
                     apoyar en el plan de acción institucional,
                     recuerda que también puedes consultar más información acerca de
@@ -208,32 +208,17 @@
                 <div class="indicadores row" style="width: 100%;">
                     <h6>Indicador(es):<span style="color:red">*</span></h6>
                     <hr>
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div style="width: 100%" formArrayName="indicador">
-                            <div *ngFor="let indicador of indicadorArr.controls; last as isLast; let i=index"
-                                class="arrayLike formfloatig" [formGroupName]="i">
-
-                                <textarea id="floatingindicador{{i}}" formControlName="indicador" rows="3"
-                                    class="form-control" type="text" placeholder=" "
-                                    [ngClass]="{'is-invalid': indicador.invalid && indicador.touched}">
-                            </textarea>
-                                <label for="floatingindicador{{i}}" class="formLabel">Indicador {{i+1}}</label>
-
-                                <div class="buttons" style="margin-left: 10px;">
-                                    <button class="btn btn-circle btn-danger btn-sm" type="button"
-                                        (click)="removeInput('indicador',i)" *ngIf="indicadorArr.length > 1">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                    <button class="btn btn-circle btn-add btn-sm" type="button"
-                                        (click)="addInputIndicador()" *ngIf="isLast">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
+                    <div class="indicadores row" *ngFor="let _objetivo of selectedObjetivos; let iO = index">
+                        <span><b>De acuerdo al objetivo:</b> {{_objetivo.descripcion}} las acciones que estratégicos que usted desarrollará serán:</span>
+                        <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
+                            *ngFor="let accion of _objetivo.indicadores; let i = index">
+                            <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedIndicadores.indexOf(i.toString()+iO) != -1}"
+                                (click)="selectIndicador(i.toString()+iO, accion);">
+                                <h6>{{"Indicador " + (i+1)}}</h6>
+                                <hr>
+                                <span class="spantext">{{accion}}</span>
                             </div>
-
-
                         </div>
-
                     </div>
                 </div>
                 <footer class="my-footer">
@@ -246,7 +231,7 @@
                         </button>
                         <button
                             [disabled]="formArray.get([2])!.invalid || formArray.get([0])!.invalid || formArray.get([1])!.invalid"
-                            class="btn btn-add" (submit)="true">
+                            class="btn btn-add" type="submit" (submit)="true">
                             <span> Finalizar </span>
                             <span class="icon medium">
                                 <i class="fas fa-solid fa-thin fa-check-circle"></i>

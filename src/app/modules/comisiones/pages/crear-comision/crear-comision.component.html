@@ -76,7 +76,7 @@
             class="form-control form-select-lg mb-3"
             (change)="onChangeSolicitud($event)"
             [ngClass]="{
-              'is-invalid': f['tipos_comision_id'].errors
+              'is-invalid': f['tipos_comision_id'].errors && f['tipos_comision_id'].touched
             }"
           >
             <option value="" disabled selected>tipo de comisión</option>

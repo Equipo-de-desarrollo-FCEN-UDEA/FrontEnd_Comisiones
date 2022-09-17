@@ -111,8 +111,7 @@ export class EditarContrasenaComponent implements OnInit {
     this.authSvc
       .cambiarContrasena(
         this.editarContrasenaForm.get('contrasena_actual')?.value,
-        this.editarContrasenaForm.get('contrasena_expected_2')?.value,
-        this.getId
+        this.editarContrasenaForm.get('contrasena_expected_2')?.value
       )
       .subscribe({
         next: (res: any) => {

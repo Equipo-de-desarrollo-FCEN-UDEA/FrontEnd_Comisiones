@@ -76,8 +76,8 @@ export class AuthService {
     });
   }
 
-  cambiarContrasena(contrasena: string, newcontrasena: string, id: number) {
-    return this.http.post(`${this.prefix}/cambiarcontrasena/${id}`, {contrasena : contrasena, newcontrasena: newcontrasena})
+  cambiarContrasena(contrasena: string, newcontrasena: string) {
+    return this.http.post(`${this.prefix}/cambiarcontrasena`, {contrasena : contrasena, newcontrasena: newcontrasena})
   }
 
   

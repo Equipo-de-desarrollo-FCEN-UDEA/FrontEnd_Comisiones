@@ -31,7 +31,6 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
   ) {
    }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('cambios')
     
   }
 

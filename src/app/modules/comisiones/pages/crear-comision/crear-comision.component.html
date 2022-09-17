@@ -76,7 +76,7 @@
             class="form-control form-select-lg mb-3"
             (change)="onChangeSolicitud($event)"
             [ngClass]="{
-              'is-invalid': f['tipos_comision_id'].errors
+              'is-invalid': f['tipos_comision_id'].errors && f['tipos_comision_id'].touched
             }"
           >
             <option value="" disabled selected>tipo de comisión</option>
@@ -87,8 +87,8 @@
               {{ tipo.nombre }}
             </option>
           </select>
-          <label for="floatingidioma" class="formLabel selectLabel"> </label>
-          <div *ngIf="f['tipos_comision_id'].errors" class="invalid-feedback">
+
+          <div *ngIf="f['tipos_comision_id'].errors && f['tipos_comision_id'].touched" class="invalid-feedback">
             <div *ngIf="f['tipos_comision_id'].errors['required']">
               Elige un tipo de comisión
             </div>
@@ -129,7 +129,7 @@
       </div>
 
       <div class="row regular-row mt-4 align-items-baseline">
-        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Provincia</div>
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento o Provincia</div>
         <div class="col-sm-12 col-xs-12 col-md-8 col-12">
           <div class="formfloatig">
             <select
@@ -365,7 +365,7 @@
           class="btn btn-add"
           (submit)="(true)"
           [disabled]="
-            creaComisionForm.invalid || !validSize() || (isLoading | async)
+            creaComisionForm.invalid || !validSize() || !validTipoArchivo() || (isLoading | async)
           "
         >
           <span

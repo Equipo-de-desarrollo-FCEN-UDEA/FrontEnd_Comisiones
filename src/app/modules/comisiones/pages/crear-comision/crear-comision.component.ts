@@ -201,7 +201,7 @@ export class CrearComisionComponent implements OnInit {
   validTipoArchivo() {
     const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
     
-    let flag; 
+    let flag = true; 
     this.files.forEach((file) => {
       flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
     })
@@ -295,7 +295,6 @@ export class CrearComisionComponent implements OnInit {
       },
       error: (err) => {
 
-        console.log(this.error = err.error);
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg;
         }

@@ -299,7 +299,6 @@ export class EditarComisionComponent implements OnInit {
 
     // Se detiene aqui si el formulario es invalido
     if (this.editarComisionForm.invalid) {
-      console.log('invalid form')
       return;
     }
 

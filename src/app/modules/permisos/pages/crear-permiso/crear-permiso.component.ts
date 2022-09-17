@@ -84,7 +84,7 @@ export class CrearPermisoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(DiasHabiles(new Date('2022-09-14'),new Date('2022-09-30')))
+    
   }
 
   selectDias(fromDate: NgbDate | null, toDate: NgbDate | null):boolean {
@@ -205,7 +205,7 @@ export class CrearPermisoComponent implements OnInit {
   validTipoArchivo() {
     const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
     
-    let flag; 
+    let flag = true; 
     this.files.forEach((file) => {
       flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
     })
@@ -234,7 +234,6 @@ export class CrearPermisoComponent implements OnInit {
     // Se agregan las horas de diferencia 
     let fecha_inicio_utc  = new Date(fecha_inicio).toUTCString()
     let fecha_fin_utc  = new Date(fecha_fin).toUTCString()
-
 
     const reqBody: FormData = new FormData();
     reqBody.append('tipos_permiso_id', this.formPermiso.value.tipos_permiso_id);

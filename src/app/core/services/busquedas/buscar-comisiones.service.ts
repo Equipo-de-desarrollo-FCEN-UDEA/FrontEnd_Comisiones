@@ -86,7 +86,6 @@ export class BuscarComisionesService {
         this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
         .subscribe(
           (resp: any ) => {
-            console.log(resp.comisiones)
             this.COMISIONES = resp.comisiones;
           })
       }

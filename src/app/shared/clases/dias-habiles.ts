@@ -1,6 +1,5 @@
 export  function DiasHabiles(startDate : Date, endDate : Date){
     var result = 0;
-    console.log(startDate.getDay() + 'Start date');
    var currentDate = startDate;
    while (currentDate <= endDate)  {  
 
@@ -16,6 +15,5 @@ export  function DiasHabiles(startDate : Date, endDate : Date){
 
          
    }
-   console.log(result);
    return result;
 }

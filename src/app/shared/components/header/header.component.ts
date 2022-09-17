@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit {
         this.currentURL = this.router.url;
       }
       );  
-      // console.log('ruta '+this.currentURL);
       
       this.usuarioService.getUsuario().subscribe((resUsuario) => {
         this.usuario = resUsuario;

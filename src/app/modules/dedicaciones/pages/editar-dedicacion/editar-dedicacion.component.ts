@@ -37,7 +37,6 @@ export class EditarDedicacionComponent implements OnInit {
       this.dedicacionSvc.getDedicacion(id).subscribe(
         (data: DedicacionDTO) => {
           dedicacion = data;
-          console.log(dedicacion);
         });
 
       

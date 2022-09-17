@@ -57,7 +57,6 @@ export class VerComisionComponent {
     this.activateRoute.params.subscribe({
         next: (paramId) => {
            const id = paramId['id'];
-           console.log(id)
             if (id) {
               this.comisionesSvc.getComision(id).subscribe({
                 next: (res) => {

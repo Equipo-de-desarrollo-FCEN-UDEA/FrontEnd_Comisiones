@@ -148,10 +148,6 @@ export class CumplidoComponent implements OnInit {
       reqBody.append('archivo', file, file.name) 
     }
 
-    console.log(reqBody.get('correos'));
-    console.log(body.correos);
-
-
     // Post cumplido
     Swal.fire({
       title: '¿Seguro que quieres enviar el cumplido?',
@@ -165,7 +161,6 @@ export class CumplidoComponent implements OnInit {
       if (result.isConfirmed) {
         this.cumplidoSvc.postCumplido(reqBody).subscribe({
           next: (response) => {
-            console.log(response);
             this.router.navigate(['/home']);
             Swal.fire({
               title: 'Creado!',

@@ -30,7 +30,6 @@ export class PlanTrabajoService {
     }).pipe(
       tap(
         (content:any) => {
-          console.log(content);
           const blob = new Blob([content.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
           saveAs(blob, 'plan-trabajo.xlsx');
         }

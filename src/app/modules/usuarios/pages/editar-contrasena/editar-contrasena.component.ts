@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class EditarContrasenaComponent implements OnInit {
   public usuario!: Usuario;
-  public getId: Number | string = 0;
+  public getId: number = 0;
 
   public error: string = '';
   public loading: boolean = false;
@@ -67,7 +67,6 @@ export class EditarContrasenaComponent implements OnInit {
         });
       },
       error: (err) => {
-        console.log(err.status);
         if (err.status == 401) {
           Swal.fire({
             title: 'No autorizado',
@@ -112,7 +111,8 @@ export class EditarContrasenaComponent implements OnInit {
     this.authSvc
       .cambiarContrasena(
         this.editarContrasenaForm.get('contrasena_actual')?.value,
-        this.editarContrasenaForm.get('contrasena_expected_2')?.value
+        this.editarContrasenaForm.get('contrasena_expected_2')?.value,
+        this.getId
       )
       .subscribe({
         next: (res: any) => {

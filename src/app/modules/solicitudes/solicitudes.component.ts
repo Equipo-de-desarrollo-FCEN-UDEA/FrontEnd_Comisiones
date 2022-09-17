@@ -13,7 +13,6 @@ export class SolicitudesComponent implements OnInit {
 
   changeParams(params:boolean[]){
     this.params=params
-    console.log(this.params)
     
   }
 

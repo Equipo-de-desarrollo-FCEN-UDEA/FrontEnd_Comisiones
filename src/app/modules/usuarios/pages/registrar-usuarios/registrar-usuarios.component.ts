@@ -86,13 +86,8 @@ export class RegistrarUsuariosComponent implements OnInit {
       this.crearUsuarioForm.get('contrasena')?.touched &&
       this.crearUsuarioForm.get('contrasena')?.value !=  this.crearUsuarioForm.get('confirmarContrasena')?.value
     );
+    
   }
-
-  // get passwordMatchError() {
-  //   return (
-  //     this.crearUsuarioForm.getError('mismatch') &&
-  //     this.crearUsuarioForm.get('contrasena')?.touched
-  // )}
 
   onSubmit() {
     this.submitted = true;

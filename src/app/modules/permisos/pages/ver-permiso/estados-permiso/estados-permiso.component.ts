@@ -66,9 +66,6 @@ export class EstadosPermisoComponent implements OnInit {
 
   asociarEstado(){
 
-    console.log(this.asociarEstadoForm.value)
-
-
     this.submitted = true;
 
     // stop here if form is invalid
@@ -79,7 +76,6 @@ export class EstadosPermisoComponent implements OnInit {
     this.permisoEstadoSvc.postPermisoxEstado(this.getId, this.asociarEstadoForm.value)
     .subscribe({
           next: (res) => {
-            console.log(this.asociarEstadoForm.value)
             this.ngZone.run(() => this.router.navigate(['/home']));
             Swal.fire({
               title: 'Creada',

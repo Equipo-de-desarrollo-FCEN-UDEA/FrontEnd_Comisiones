@@ -86,7 +86,6 @@ export class BuscarDedicacionService {
     .subscribe(
       (resp: any ) => {
         this.DEDICACIONES = resp;
-        console.log(this.DEDICACIONES)
       })
   }
 
@@ -98,7 +97,6 @@ export class BuscarDedicacionService {
   //   this.dedicacionesSvc.scopeGetDedicaciones()
   //   .subscribe(
   //     (resp: any) => {
-  //       console.log(resp+"respOnchange")
   //       this.DEDICACIONES = resp.dedicaciones;
   //       this._dedicaciones$.next(this.DEDICACIONES);
   //       this._search$.next();
@@ -131,8 +129,6 @@ export class BuscarDedicacionService {
 
     // 1. sort
     let dedicaciones = sort(this.DEDICACIONES, sortColumn, sortDirection);
-
-    console.log(dedicaciones + "oe");
     // 2. filter
     dedicaciones = dedicaciones.filter(dedicacion => matches(dedicacion, searchTerm, this.datepipe));
     const total = dedicaciones.length;

@@ -105,7 +105,6 @@ export class FDedicacionComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.fBasicInfo.value)
     let Dedicacion = this.fBasicInfo.value as FormatoVice;
 
     let dedicacion_id: number | string = 0;
@@ -150,7 +149,6 @@ export class FDedicacionComponent implements OnInit {
           indicador: steps[3].indicador
         }
         this.fBasicInfo.patchValue(object)
-        console.log(this.fBasicInfo.value)
       }
     ).catch(
       (err:any) => {

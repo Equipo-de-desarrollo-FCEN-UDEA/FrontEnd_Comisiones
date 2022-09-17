@@ -36,7 +36,6 @@ export class BuscarPermisoComponent {
     }
     
   changeOption(event:any){
-    console.log(event.target.value + "Primer console log");
     this.Buscarservice.archivados(event.target.value);
     this.Buscarservice.ngOnchanges();
   }

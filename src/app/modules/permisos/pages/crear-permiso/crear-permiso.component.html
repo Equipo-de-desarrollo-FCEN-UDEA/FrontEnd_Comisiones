@@ -253,7 +253,7 @@
 				<button
         class="btn btn-add"
         (submit)="(true)"
-        [disabled]="formPermiso.invalid || !validSize() || (selectDias(fromDate, toDate))"
+        [disabled]="formPermiso.invalid || !validSize() || !validTipoArchivo() || (selectDias(fromDate, toDate))"
       >
         <span
           class="spinner-border spinner-border-sm1"

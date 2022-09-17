@@ -1,10 +1,5 @@
-<form
-  need-validation
-  novalidate
-  [formGroup]="crearUsuarioForm"
-  (ngSubmit)="onSubmit()"
-  class="containerInside card shadow mt-5 bg-white rounded"
->
+<form need-validation novalidate [formGroup]="crearUsuarioForm" (ngSubmit)="onSubmit()"
+  class="containerInside card shadow mt-5 bg-white rounded">
   <div class="p-4">
     <div class="card-body">
       <div class="row header-row P-2">
@@ -21,31 +16,17 @@
         <div class="row regular-row mt-4">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="apellido"
-              type="text"
-              class="form-control"
-              placeholder=" "
-              formControlName="apellido"
-              [ngClass]="{
-                'is-invalid': submitted && f['apellido'].errors
-              }"
-            />
+            <input id="apellido" type="text" class="form-control" placeholder=" " formControlName="apellido" [ngClass]="{
+                'is-invalid': f['apellido'].errors && f['apellido'].touched
+              }" />
           </div>
         </div>
         <div class="row regular-row mt-4">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Nombre</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="nombre"
-              type="text"
-              class="form-control"
-              placeholder=""
-              formControlName="nombre"
-              [ngClass]="{
-                'is-invalid': submitted && f['nombre'].errors
-              }"
-            />
+            <input id="nombre" type="text" class="form-control" placeholder="" formControlName="nombre" [ngClass]="{
+                'is-invalid': f['nombre'].errors && f['nombre'].touched
+              }" />
           </div>
         </div>
 
@@ -55,16 +36,10 @@
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <input
-                formControlName="correo"
-                id="Correo-"
-                type="text"
-                class="form-control"
-                placeholder="ejemplo@udea.edu.co"
-                [ngClass]="{
-                  'is-invalid': submitted && f['correo'].errors
-                }"
-              />
+              <input formControlName="correo" id="Correo-" type="text" class="form-control"
+                placeholder="ejemplo@udea.edu.co" [ngClass]="{
+                  'is-invalid': f['correo'].errors && f['correo'].touched
+                }" />
               <label for="Correo-" class="formLabel"></label>
             </div>
           </div>
@@ -76,26 +51,16 @@
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <select
-                class="form-select form-select-lg"
-                id="tipo_identificacion"
-                formControlName="tipo_identificacion"
-                required
-                placeholder=" "
-                [ngClass]="{
-                  'is-invalid': submitted && f['tipo_identificacion'].errors
-                }"
-              >
+              <select class="form-select form-select-lg" id="tipo_identificacion" formControlName="tipo_identificacion"
+                required placeholder=" " [ngClass]="{
+                  'is-invalid':  f['tipo_identificacion'].errors && f['tipo_identificacion'].touched
+                }">
                 <option [value]="tipo" *ngFor="let tipo of tiposId">
                   {{ tipo | uppercase }}
                 </option>
               </select>
-              <label
-                for="tipo_identificacion"
-                class="selectLabel"
-                [ngClass]="{ isFill: true }"
-                >Tipo de Identificación</label
-              >
+              <label for="tipo_identificacion" class="selectLabel" [ngClass]="{ isFill: true }">Tipo de
+                Identificación</label>
             </div>
           </div>
         </div>
@@ -106,16 +71,10 @@
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <input
-                id="identificacion"
-                formControlName="identificacion"
-                type="text"
-                class="form-control"
-                placeholder=" "
-                [ngClass]="{
-                  'is-invalid': submitted && f['identificacion'].errors
-                }"
-              />
+              <input id="identificacion" formControlName="identificacion" type="text" class="form-control"
+                placeholder=" " [ngClass]="{
+                  'is-invalid': f['identificacion'].errors && f['identificacion'].touched
+                }" />
               <label for="identificacion" class="formLabel"> </label>
             </div>
           </div>
@@ -125,16 +84,10 @@
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Teléfono</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <input
-                id="telefono"
-                formControlName="telefono"
-                type="number"
-                class="form-control"
-                placeholder=" "
+              <input id="telefono" formControlName="telefono" type="number" class="form-control" placeholder=" "
                 [ngClass]="{
-                  'is-invalid': submitted && f['telefono'].errors
-                }"
-              />
+                  'is-invalid': f['telefono'].errors && f['telefono'].touched
+                }" />
               <label for="telefono" class="formLabel"> </label>
             </div>
           </div>
@@ -144,26 +97,15 @@
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <select
-                class="form-select form-select-lg"
-                id="roles_id"
-                formControlName="roles_id"
-                required
-                placeholder=" "
-                [ngClass]="{
-                  'is-invalid': submitted && f['roles_id'].errors
-                }"
-              >
+              <select class="form-select form-select-lg" id="roles_id" formControlName="roles_id" required
+                placeholder=" " [ngClass]="{
+                  'is-invalid': f['roles_id'].errors && f['roles_id'].touched
+                }">
                 <option [value]="rol.id" *ngFor="let rol of roles$ | async">
                   {{ rol.nombre | uppercase }}
                 </option>
               </select>
-              <label
-                for="roles_id"
-                class="selectLabel"
-                [ngClass]="{ isFill: true }"
-                >Cargo</label
-              >
+              <label for="roles_id" class="selectLabel" [ngClass]="{ isFill: true }">Cargo</label>
             </div>
           </div>
         </div>
@@ -172,25 +114,15 @@
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Escalafón</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <select
-                class="form-select form-select-lg"
-                id="escalafon"
-                formControlName="escalafon"
-                placeholder=" "
+              <select class="form-select form-select-lg" id="escalafon" formControlName="escalafon" placeholder=" "
                 [ngClass]="{
-                  'is-invalid': submitted && f['escalafon'].errors
-                }"
-              >
+                  'is-invalid':  f['escalafon'] .errors && f['departamentos_id'].touched
+                }">
                 <option [value]="escala" *ngFor="let escala of escalafon">
                   {{ escala | uppercase }}
                 </option>
               </select>
-              <label
-                for="escalafon"
-                class="selectLabel"
-                [ngClass]="{ isFill: true }"
-                >Escalafón</label
-              >
+              <label for="escalafon" class="selectLabel" [ngClass]="{ isFill: true }">Escalafón</label>
             </div>
           </div>
         </div>
@@ -201,29 +133,15 @@
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <select
-                class="form-select form-select-lg"
-                id="departamentos_id"
-                formControlName="departamentos_id"
-                required
-                placeholder=" "
-                [ngClass]="{
-                  'is-invalid': submitted && f['departamentos_id'].errors
-                }"
-              >
-                <option
-                  *ngFor="let departamento of departamentos$ | async"
-                  [value]="departamento.id"
-                >
+              <select class="form-select form-select-lg" id="departamentos_id" formControlName="departamentos_id"
+                required placeholder=" " [ngClass]="{
+                  'is-invalid': f['departamentos_id'].errors && f['departamentos_id'].touched
+                }">
+                <option *ngFor="let departamento of departamentos$ | async" [value]="departamento.id">
                   {{ departamento.nombre | uppercase }}
                 </option>
               </select>
-              <label
-                for="departamentos_id"
-                class="selectLabel"
-                [ngClass]="{ isFill: true }"
-                >Departamento</label
-              >
+              <label for="departamentos_id" class="selectLabel" [ngClass]="{ isFill: true }">Departamento</label>
             </div>
           </div>
         </div>
@@ -231,16 +149,9 @@
         <div class="row regular-row mt-4">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Oficina</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="oficina"
-              type="text"
-              class="form-control"
-              placeholder=""
-              formControlName="oficina"
-              [ngClass]="{
-                'is-invalid': submitted && f['oficina'].errors
-              }"
-            />
+            <input id="oficina" type="text" class="form-control" placeholder="" formControlName="oficina" [ngClass]="{
+                'is-invalid': f['oficina'].errors && f['oficina'].touched
+              }" />
           </div>
         </div>
 
@@ -249,16 +160,10 @@
             Tipo de Vinculación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="tipo_vinculacion"
-              type="text"
-              class="form-control"
-              placeholder=""
-              formControlName="tipo_vinculacion"
-              [ngClass]="{
-                'is-invalid': submitted && f['tipo_vinculacion'].errors
-              }"
-            />
+            <input id="tipo_vinculacion" type="text" class="form-control" placeholder=""
+              formControlName="tipo_vinculacion" [ngClass]="{
+                'is-invalid': f['tipo_vinculacion'].errors && f['tipo_vinculacion'].touched
+              }" />
           </div>
         </div>
 
@@ -268,35 +173,18 @@
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Contraseña</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <input
-                id="Contrasena"
-                type="password"
-                class="form-control"
-                formControlName="contrasena"
-                placeholder=" "
+              <input id="Contrasena" type="password" class="form-control" formControlName="contrasena" placeholder=" "
                 [ngClass]="{
-                  'is-invalid': submitted && f['contrasena'].errors
-                }"
-              />
-              <div
-                *ngIf="submitted && f['contrasena'].errors"
-                class="invalid-feedback"
-              >
-                <div
-                  *ngIf="f['contrasena'].errors['minLength']"
-                  class="alert alert-danger"
-                >
-                  La contraseña es requerida
+                  'is-invalid': f['contrasena'].errors && f['contrasena'].touched
+                }" />
+              <div *ngIf="f['contrasena'].errors && f['contrasena'].touched" class="invalid-feedback">
+                <div *ngIf="f['contrasena'].errors['minlength']" class="alert alert-danger">
+                  La contraseña debe contener mínimo 8 caracteres
+
                 </div>
               </div>
-              <div
-                *ngIf="submitted && f['contrasena'].errors"
-                class="invalid-feedback"
-              >
-                <div
-                  *ngIf="f['contrasena'].errors['maxLength']"
-                  class="alert alert-danger"
-                >
+              <div *ngIf=" f['contrasena'].errors && f['contrasena'].touched" class="invalid-feedback">
+                <div *ngIf="f['contrasena'].errors['maxlength']" class="alert alert-danger">
                   La contraseña es demasiado larga
                 </div>
               </div>
@@ -310,23 +198,17 @@
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <input
-                id="Confirmar"
-                type="password"
-                class="form-control"
-                formControlName="confirmarContrasena"
-                placeholder=" "
-                [ngClass]="{
-                  'is-invalid': submitted && f['contrasena'].errors
-                }"
-              />
+              <input id="Confirmar" type="password" class="form-control" formControlName="confirmarContrasena"
+                placeholder=" " [ngClass]="{
+                  'is-invalid': f['contrasena'].errors && f['contrasena'].touched
+                }" />
               <span style="color: red" *ngIf="ValidatePasswords()">
                 Las contraseñas no coinciden
               </span>
             </div>
           </div>
         </div>
-        
+
         <div *ngIf="error" class="alert alert-danger">
           {{ error }}
         </div>
@@ -340,13 +222,9 @@
           </div>
 
           <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-            <button id="btn-sub" (submit)="(true)" class="btn btn-success">
-              <span
-                *ngIf="loading"
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
+            <button id="btn-sub" (submit)="(true)" class="btn btn-success"
+              [disabled]="ValidatePasswords() || crearUsuarioForm.invalid">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               Confirmar
             </button>
           </div>

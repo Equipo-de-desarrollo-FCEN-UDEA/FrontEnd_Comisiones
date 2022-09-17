@@ -26,14 +26,12 @@ export class VerUsuarioComponent implements OnInit {
     this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
     this.activateRoute.params.subscribe({
       next: (params) => {
-      console.log(params)
       this.usuarioService.getUsuariobyId(this.id).subscribe(
         {
           next: (resUsuario) => {
           this.usuario = resUsuario;
           },
           error: (err) => {
-            console.log(err.status);
             if (err.status == 401){
             Swal.fire({
               title: 'No autorizado',

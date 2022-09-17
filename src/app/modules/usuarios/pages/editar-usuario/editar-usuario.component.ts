@@ -43,13 +43,13 @@ export class EditarUsuarioComponent implements OnInit {
   ) {
     this.roles$ = this.rolesSvc.getRoles();
     this.activateRoute.params.pipe(take(1)).subscribe(params => this.getId = params['id']);
+
     this.usuarioSvc.getUsuariobyId(this.getId as number).subscribe({
       next: res => {
         this.usuarioResponse = res;
         this.formUpdate.patchValue(this.usuarioResponse);
       },
       error: (err) => {
-        console.log(err.status);
         if (err.status == 401) {
           Swal.fire({
             title: 'No autorizado',
@@ -89,7 +89,6 @@ export class EditarUsuarioComponent implements OnInit {
   submitUpdate() {
     this.submitted = true;
     const usuario = this.formUpdate.value;
-    console.log(this.formUpdate.value);
     this.usuarioSvc.updateUsuario({ id: this.getId, ...usuario }).subscribe({
       next: (res: any) => {
         Swal.fire({

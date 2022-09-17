@@ -51,6 +51,7 @@ export class EditarPermisoComponent implements OnInit {
 
   // Tipos Permiso
   tiposPermiso$: Observable<TiposPermiso[]>;
+  diaHabil: number = 0;
 
   // Form permiso
   editarPermisoForm: FormGroup;
@@ -129,9 +130,6 @@ export class EditarPermisoComponent implements OnInit {
   inRange(fecha_1: any, fecha_2: any) {
     fecha_1 = new Date(this.formatter.format(fecha_1));
     fecha_2 = new Date(this.formatter.format(fecha_2));
-    console.log('paso')
-    console.log(fecha_1)
-    console.log(DiasHabiles(fecha_1, fecha_2), fecha_1, fecha_2)
     return DiasHabiles(fecha_1, fecha_2);
   }
 
@@ -177,7 +175,6 @@ export class EditarPermisoComponent implements OnInit {
     if (file) {
       this.files.splice(index, 1, file);
     }
-    console.log(this.files);
 
   }
 
@@ -220,6 +217,19 @@ export class EditarPermisoComponent implements OnInit {
     this.docsBorrar.push(idDoc);
   }
 
+    // ----------- TIPOS DE PERMISOS ------------
+
+    onTipoDePermiso(event: any) {
+      const idTipoPermiso = event;
+  
+      this.tiposPermisoSvc.getTipoPermisoId(idTipoPermiso).subscribe({
+        next: (res) => {
+          this.diaHabil = res.dias;
+        },
+      });
+    }
+  
+
 
   // ----------------------------------------
   // ----------- EDITAR PERMISO ------------
@@ -232,7 +242,6 @@ export class EditarPermisoComponent implements OnInit {
 
     // Se detiene aqui si el formulario es invalido
     if (this.editarPermisoForm.invalid) {
-      console.log('invalid form')
       return;
     }
 

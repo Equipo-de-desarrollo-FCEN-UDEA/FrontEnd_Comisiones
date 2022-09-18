@@ -88,6 +88,7 @@ export class BuscarPermisosService {
       .subscribe(
         (resp: any) => {
           this.PERMISOS = resp.permisos;
+          console.log(this.PERMISOS)
         })
     }
 

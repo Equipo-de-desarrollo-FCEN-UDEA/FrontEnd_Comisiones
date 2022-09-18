@@ -52,7 +52,6 @@ export class EditarPermisoComponent implements OnInit {
 
   // Tipos Permiso
   tiposPermiso$: Observable<TiposPermiso[]>;
-  diaHabil: number = 0;
 
   // Form permiso
   editarPermisoForm: FormGroup;

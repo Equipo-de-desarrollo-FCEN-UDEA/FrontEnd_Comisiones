@@ -72,10 +72,10 @@
           <span
             class="custom-day"
             [class.focused]="focused"
-            [class.range]="isRange(date) && !(selectDias(fromDate, toDate))"
+            [class.range]="isRange(date) "
             [class.faded]="isHovered(date) || isInside(date)"
-            [class.invalidRange]="isInside(date) && (selectDias(fromDate, toDate)) && isRange(date)"
-            [class.invalidRange]=" isHoveredInvalid(date)"
+            [class.invalidChoosen]="isInside(date) && selectDias(fromDate, toDate) && isRange(date)"
+            [class.invalidRange]="isHoveredInvalid(date) || isInside(date)"
             (mouseenter)="hoveredDate = date"
             (mouseleave)="hoveredDate = null"
           >
@@ -132,12 +132,15 @@
                 : null
             "
             [ngClass]="{
-              'is-invalid': (!fromDate || !toDate) && clicked !== 0
+              'is-invalid': ((!fromDate || !toDate) && clicked !== 0) || selectDias(fromDate, toDate)
             }"
+            [attr.disabled]="formPermiso.get('tipos_permiso_id')?.invalid ? '':null"
           />
+          
           <button
             #buttonEl
             class="btn btn-outline-secondary"
+            [disabled]="formPermiso.get('tipos_permiso_id')?.invalid!"
             (click)="datepicker.toggle(); clicked = clicked + 1"
           >
             <i class="fa fa-calendar"> </i>

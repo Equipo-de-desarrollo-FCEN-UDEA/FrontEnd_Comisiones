@@ -1,10 +1,5 @@
-<form
-  need-validation
-  novalidate
-  [formGroup]="formUpdate"
-  (ngSubmit)="submitUpdate()"
-  class="containerInside card shadow mt-5 bg-white rounded"
->
+<form need-validation novalidate [formGroup]="formUpdate" (ngSubmit)="submitUpdate()"
+  class="containerInside card shadow mt-5 bg-white rounded">
   <div class="p-4">
     <div class="card-body">
       <div class="row header-row P-2">
@@ -18,13 +13,7 @@
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="apellido"
-              type="text"
-              class="form-control"
-              placeholder=" "
-              formControlName="apellido"
-            />
+            <input id="apellido" type="text" class="form-control" placeholder=" " formControlName="apellido" />
           </div>
 
         <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
@@ -65,39 +54,25 @@
             Tipo de Identificación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <select
-              class="form-select form-select-lg"
-              id="floatingcampo_modalidad"
-              formControlName="tipo_identificacion"
-              required
-            >
+            <select class="form-select form-select-lg" id="floatingcampo_modalidad"
+              formControlName="tipo_identificacion" required>
               <option [value]="tipo" *ngFor="let tipo of tiposId">
                 {{ tipo | uppercase }}
               </option>
             </select>
-            <label
-              for="floatingcampo_modalidad"
-              class="selectLabel"
-              [ngClass]="{ isFill: true }"
-            ></label>
+            <label for="floatingcampo_modalidad" class="selectLabel" [ngClass]="{ isFill: true }"></label>
           </div>
         </div>
-        
+
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
             Número de Identificación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="identificacion"
-              formControlName="identificacion"
-              type="text"
-              class="form-control"
-              placeholder=" "
+            <input id="identificacion" formControlName="identificacion" type="text" class="form-control" placeholder=" "
               [ngClass]="{
                 'is-invalid': submitted && f['identificacion'].errors
-              }"
-            />
+              }" />
             <label for="identificacion" class="formLabel"> </label>
           </div>
         </div>
@@ -107,16 +82,9 @@
             Teléfono
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="telefono"
-              formControlName="telefono"
-              type="text"
-              class="form-control"
-              placeholder=" "
-              [ngClass]="{
+            <input id="telefono" formControlName="telefono" type="text" class="form-control" placeholder=" " [ngClass]="{
                 'is-invalid': submitted && f['telefono'].errors
-              }"
-            />
+              }" />
             <label for="telefono" class="formLabel"> </label>
           </div>
         </div>
@@ -126,39 +94,30 @@
             Oficina
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="oficina"
-              formControlName="oficina"
-              type="text"
-              class="form-control"
-              placeholder=" "
-              [ngClass]="{
+            <input id="oficina" formControlName="oficina" type="text" class="form-control" placeholder=" " [ngClass]="{
                 'is-invalid': submitted && f['oficina'].errors
-              }"
-            />
+              }" />
             <label for="telefono" class="formLabel"> </label>
           </div>
         </div>
 
-        <div class="row regular-row m-2 align-items-baseline">
+        <div *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
             Tipo de Vinculación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input
-              id="tipo_vinculacion"
-              formControlName="tipo_vinculacion"
-              type="text"
-              class="form-control"
-              placeholder=" "
-              [ngClass]="{
+            <input id="tipo_vinculacion" formControlName="tipo_vinculacion" type="text" class="form-control"
+              placeholder=" " [ngClass]="{
                 'is-invalid': submitted && f['tipo_vinculacion'].errors
-              }"
-            />
+              }" />
             <label for="tipo_vinculacion" class="formLabel"> </label>
           </div>
         </div>
 
+<<<<<<< HEAD
+=======
+        <!--CREAR-->
+>>>>>>> main
 
         <!-- <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
@@ -184,36 +143,39 @@
           </div>
         </div> -->
 
-        <div
-          class="row regular-row m-2 align-items-baseline"
-          *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
-        >
+        <div class="row regular-row m-2 align-items-baseline" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Cargo</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <div class="formfloatig">
-              <select
-                class="form-select form-select-lg"
-                id="roles_id"
-                formControlName="roles_id"
-                required
-                placeholder=" "
-                [ngClass]="{
+              <select class="form-select form-select-lg" id="roles_id" formControlName="roles_id" required
+                placeholder=" " [ngClass]="{
                   'is-invalid': submitted && f['roles_id'].errors
-                }"
-              >
+                }">
                 <option [value]="rol.id" *ngFor="let rol of roles$ | async">
                   {{ rol.nombre | uppercase }}
                 </option>
               </select>
-              <label
-                for="roles_id"
-                class="selectLabel"
-                [ngClass]="{ isFill: true }"
-                >Cargo</label
-              >
+              <label for="roles_id" class="selectLabel" [ngClass]="{ isFill: true }">Cargo</label>
             </div>
           </div>
         </div>
+        <div class="row regular-row m-2 align-items-baseline" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
+          <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Escalafón</div>
+          <div class="col-sm-12 col-xs-12 col-md-8 col-12">
+            <div class="formfloatig">
+              <select class="form-select form-select-lg" id="escalafon" formControlName="escalafon" required
+                placeholder=" " [ngClass]="{
+                  'is-invalid': submitted && f['escalafon'].errors
+                }">
+                <option [value]="escala" *ngFor="let escala of escalafon">
+                  {{ escala | uppercase }}
+                </option>
+              </select>
+              <label for="escalafon" class="selectLabel" [ngClass]="{ isFill: true }">Escalafón</label>
+            </div>
+          </div>
+        </div>
+
         <!-- <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Contraseña <span style="color:red">*</span></div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
@@ -240,17 +202,9 @@
             </button>
           </div>
           <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
-            <button
-              id="btn-sub"
-              (submit)="(true)"
-              class="btn btn-success"
-            >
-              <span
-                *ngIf="isLoading | async"
-                class="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
+            <button id="btn-sub" (submit)="(true)" class="btn btn-success">
+              <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
               Confirmar
             </button>
           </div>
@@ -259,4 +213,3 @@
     </div>
   </div>
 </form>
-

@@ -79,7 +79,7 @@ export class EstadosComisionComponent {
           next: (res) => {
             this.ngZone.run(() => this.router.navigate(['/home']));
             Swal.fire({
-              title: 'Creada',
+              title: 'Estado actualizado',
               text: '¡Se asoció el estado a la comisión con éxito!',
               icon: 'success',
               confirmButtonColor: '#3AB795',

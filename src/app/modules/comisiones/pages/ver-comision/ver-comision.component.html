@@ -32,35 +32,35 @@
     <div class="col-xs-12 col-sm-6 label fw-bold">Día que Inicia</div>
 
     <div class="col-xs-12 col-sm-6">
-      {{ comision.fecha_inicio | date: "fullDate" }}
+      {{ comision?.fecha_inicio | date: "fullDate" }}
     </div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Día que Termina</div>
     <div class="col-xs-12 col-sm-6">
-      {{ comision.fecha_fin | date: "fullDate" }}
+      {{ comision?.fecha_fin | date: "fullDate" }}
     </div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Idioma</div>
-    <div class="col-xs-12 col-sm-6">{{ comision.idioma }}</div>
+    <div class="col-xs-12 col-sm-6">{{ comision?.idioma }}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Lugar</div>
-    <div class="col-xs-12 col-sm-6">{{ comision.lugar }}</div>
+    <div class="col-xs-12 col-sm-6">{{ comision?.lugar }}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Justificación</div>
-    <div class="col-xs-12 col-sm-6">{{ comision.justificacion }}</div>
+    <div class="col-xs-12 col-sm-6">{{ comision?.justificacion }}</div>
   </div>
 
   <div class="row regular-row mt-2">
     <div class="col-xs-12 col-sm-6 label fw-bold">Resolución</div>
-    <div class="col-6">{{ comision.resolucion }}</div>
+    <div class="col-6">{{ comision?.resolucion }}</div>
   </div>
 
   <!-- DOCUMENTOS -->
@@ -79,10 +79,14 @@
 
   <!-- SI HAY UN CUMPLIDO -->
   <div class="row regular-row" *ngIf="cumplidosArray.length > 0">
-    <div class="col-xs-12 col-sm-6 label mt-2 fw-bold">Cumplido</div>
+    <div class="col-xs-12 col-sm-6 label mt-2 fw-bold">Cumplido  </div>
     <div class="col-xs-12 col-sm-6 mt-2">
       <ul>
         <li *ngFor="let cumplido of cumplidosArray">
+          <span
+      *ngIf="(isLoading | async)"
+      class="spinner-border spinner-border-sm"
+    ></span>
           <span class="link-success cursor" (click)="abrirCumplido(cumplido.id)"
             >{{ cumplido.nombre }}&nbsp;&nbsp;</span
           >&nbsp;
@@ -151,7 +155,7 @@
       <button
         type="button"
         class="btn btn-warning"
-        [routerLink]="['/comisiones/asociar-estado', comision.id]"
+        [routerLink]="['/comisiones/asociar-estado', comision?.id]"
       >
         Asociar nuevo Estado
       </button>
@@ -166,7 +170,7 @@
       <button
         type="button"
         class="btn btn-cumplido"
-        [routerLink]="['/comisiones/subir-cumplido', comision.id]"
+        [routerLink]="['/comisiones/subir-cumplido', comision?.id]"
       >
         Subir Cumplido
       </button>
@@ -181,7 +185,9 @@
       *ngIf="rol == 'PROFESOR' || rol == 'EMPLEADO'"
       class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2"
     >
-      <button class="btn btn-danger" (click)="eliminarComision(comision.id)">
+      <button class="btn btn-danger"
+      type="button"
+      (click)="eliminarComision(comision?.id)">
         <span
           *ngIf="(isLoading | async) && isDelete"
           class="spinner-border spinner-border-sm"
@@ -202,7 +208,7 @@
       <button
         type="button"
         class="btn btn-warning"
-        [routerLink]="['/comisiones/editar-comision', comision.id]"
+        [routerLink]="['/comisiones/editar-comision', comision?.id]"
       >
         Editar
       </button>

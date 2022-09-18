@@ -364,6 +364,7 @@
         <button
           class="btn btn-add"
           (submit)="(true)"
+          type="submit"
           [disabled]="
             creaComisionForm.invalid || !validSize() || !validTipoArchivo() || (isLoading | async)
           "

@@ -100,7 +100,7 @@ export class CartaInicioComponent implements OnInit {
       this.cartaSvc.postCarta(this.carta).subscribe(
         (data:any) => {
             Swal.fire({
-              // title: 'Carta de Inicio',
+              title: 'Carta de iniciación generada con éxito',
               text: data.message,
               icon: 'success',
              confirmButtonText: 'Aceptar'

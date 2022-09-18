@@ -118,6 +118,17 @@ export class CumplidoComponent implements OnInit {
     return this.cumplidoForm.get(controlName)?.invalid && this.cumplidoForm.get(controlName)?.touched;
   }
 
+  validTipoArchivo() {
+    const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
+    
+    let flag; 
+    this.files.forEach((file) => {
+      flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
+    })
+    return flag;
+
+  }
+
 
  // ----------------------------------------
  // ----------- SUBIR CUMPLIDO ------------

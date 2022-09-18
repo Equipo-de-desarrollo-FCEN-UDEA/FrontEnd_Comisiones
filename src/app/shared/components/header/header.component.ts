@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
       this.usuarioService.getUsuario().subscribe((resUsuario) => {
         this.usuario = resUsuario;
       });
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
 

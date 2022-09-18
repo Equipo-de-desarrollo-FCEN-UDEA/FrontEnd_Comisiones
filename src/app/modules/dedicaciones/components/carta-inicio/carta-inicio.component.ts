@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {  FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '@services/usuarios/usuario.service';
@@ -15,7 +15,7 @@ import { prefix } from '@shared/data/ruta-api';
   templateUrl: './carta-inicio.component.html',
   styleUrls: ['./carta-inicio.component.css']
 })
-export class CartaInicioComponent implements OnInit {
+export class CartaInicioComponent implements OnInit, AfterViewInit {
   fecha = new Date();
   usuario : any;
   @ViewChild('carta', {static:false}) el!: ElementRef;
@@ -51,6 +51,9 @@ export class CartaInicioComponent implements OnInit {
         this.usuario = usuario;
       }
     )
+
+    
+
    }
 
 
@@ -62,6 +65,17 @@ export class CartaInicioComponent implements OnInit {
    );
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    let carta = document.getElementById('carta')
+
+    if (carta) {
+      let deviceWidth = window.screen.width
+      if (deviceWidth < 574) {
+        carta.style.fontSize = `${deviceWidth/60}px`
+      }
+    }
   }
     
   makePdf(): any {

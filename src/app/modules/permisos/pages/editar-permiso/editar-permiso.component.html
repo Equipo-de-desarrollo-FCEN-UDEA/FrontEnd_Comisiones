@@ -54,14 +54,14 @@
         />
         <ng-template #t let-date let-focused="focused">
           <span
-            class="custom-day"
-            [class.focused]="focused"
-            [class.range]="isRange(date)"
-            [class.faded]="isHovered(date) || isInside(date)"
-            [class.invalidRange]="isInside(date) && (selectDias(fromDate, toDate)) && isRange(date)"
-            [class.invalidRange]=" isHoveredInvalid(date)"
-            (mouseenter)="hoveredDate = date"
-            (mouseleave)="hoveredDate = null"
+          class="custom-day"
+          [class.focused]="focused"
+          [class.range]="isRange(date) "
+          [class.faded]="isHovered(date) || isInside(date)"
+          [class.invalidChoosen]="isInside(date) && selectDias(fromDate, toDate) && isRange(date)"
+          [class.invalidRange]="isHoveredInvalid(date)"
+          (mouseenter)="hoveredDate = date"
+          (mouseleave)="hoveredDate = null"
           >
             {{ date.day }}
           </span>

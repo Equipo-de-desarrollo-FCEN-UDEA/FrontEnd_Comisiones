@@ -88,12 +88,12 @@ export class BuscarPermisosService {
       .subscribe(
         (resp: any) => {
           this.PERMISOS = resp.permisos;
-          console.log(this.PERMISOS)
         })
     }
 
   archivados(archivado: number){
     this.archivado$.next(archivado);
+    this.ngOnchanges();
   }
 
    ngOnchanges(){

@@ -50,12 +50,12 @@ h5{
     background-color: #fff;
     width: 100%;
     aspect-ratio: 420/594;
-    font-size: 0.9em;
+    font-size: 0.7em;
 }
 
 @media screen and (max-width: 768px){
     .carta{
-        font-size: 0.9em;
+        font-size: 0.6em;
     }
 
 }

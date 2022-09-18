@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class VerUsuarioComponent implements OnInit {
   public rol : string = localStorage.getItem('rol') || '';
   public usuario: Usuario | undefined;
+  public actualUsuario: Usuario | undefined;
   public usuarioResponse!: UsuarioResponse;
   public id : number | string = 0;
   constructor(
@@ -46,6 +47,7 @@ export class VerUsuarioComponent implements OnInit {
         );
       }
     });
+    this.actualUsuario = this.usuarioService.getActualUsuario()
    }
 
   ngOnInit(): void {

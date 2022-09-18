@@ -45,7 +45,7 @@ export class FormatoViceService {
       tap(
         (content: any) => {
           const blob = new Blob([content.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-          saveAs(blob, 'dexclusiva.xlsx');
+          saveAs(blob, 'formato-dedicacion-exclusiva.xlsx');
         }
       ),
       map(

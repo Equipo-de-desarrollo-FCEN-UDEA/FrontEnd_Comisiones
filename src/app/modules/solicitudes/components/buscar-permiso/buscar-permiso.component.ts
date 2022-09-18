@@ -37,19 +37,24 @@ export class BuscarPermisoComponent {
     
   changeOption(event:any){
     this.Buscarservice.archivados(event.target.value);
-    this.Buscarservice.ngOnchanges();
   }
 
   archivarPermiso(id:number){
-    this.permisoService.Archivado(id).subscribe()
-    this.Buscarservice.ngOnchanges()
-    console.log("archivado")
+    this.permisoService.Archivado(id).subscribe({
+      next: () => this.Buscarservice.ngOnchanges()
+    })
+    
+    // console.log("archivado")
   }
   
   desarchivarPermiso(id:number){
-    this.permisoService.NoArchivado(id).subscribe()
-    this.Buscarservice.ngOnchanges()
-    console.log("desarchivado")
+    this.permisoService.NoArchivado(id).subscribe(
+      {
+        next: () => this.Buscarservice.ngOnchanges()
+      }
+    )
+    
+    // console.log("desarchivado")
   }
   
   onSort({ column, direction}: SortEvent) {

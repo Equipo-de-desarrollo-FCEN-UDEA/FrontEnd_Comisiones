@@ -57,7 +57,7 @@
                 <div class="formfloatig">
                     <input id="floatingTiempo" formControlName="tiempo_solicitado" class="form-control" type="number"
                         placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('tiempo_solicitado')}" required>
-                    <label for="floatingTiempo" class="formLabel">Tiempo solicitado<span style="color:red">*</span>
+                    <label for="floatingTiempo" class="formLabel">Tiempo solicitado (meses)<span style="color:red">*</span>
                     </label>
                 </div>
             </div>
@@ -76,14 +76,14 @@
             </div>
         </div>
 
-        <h5>Documento comprobante de inscripción en el Sistema Universitario de Investigación (acta, contrato u otro):
+        <h5>Descripción del documento comprobante de inscripción en el Sistema Universitario de Investigación (acta, contrato u otro):
         </h5>
 
         <div class="formfloatig">
             <textarea id="floatingComprobante" formControlName="descripcion_comprobante" class="form-control"
                 placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('descripcion_comprobante')}" rows="2">
             </textarea>
-            <label for="floatingComprobante" class="formLabel">Comprobante de inscripción<span
+            <label for="floatingComprobante" class="formLabel">Descripción<span
                     style="color:red">*</span>
             </label>
         </div>

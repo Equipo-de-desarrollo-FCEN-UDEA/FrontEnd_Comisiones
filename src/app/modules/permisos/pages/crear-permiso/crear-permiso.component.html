@@ -34,7 +34,7 @@
       *ngIf="(selectDias(fromDate, toDate))"
       style="color:red"
       >
-        La cantidad de días permitidos sobrepasa {{diaHabil}} día(s)
+        La cantidad de días permitidos sobrepasa {{diaHabil}} día(s) hábiles
       </p>
       <button
         class="btn btn-primary btn-sm m-2 float-start"
@@ -75,7 +75,7 @@
             [class.range]="isRange(date) "
             [class.faded]="isHovered(date) || isInside(date)"
             [class.invalidChoosen]="isInside(date) && selectDias(fromDate, toDate) && isRange(date)"
-            [class.invalidRange]="isHoveredInvalid(date) || isInside(date)"
+            [class.invalidRange]="isHoveredInvalid(date)"
             (mouseenter)="hoveredDate = date"
             (mouseleave)="hoveredDate = null"
           >

@@ -92,6 +92,7 @@ export class BuscarComisionesService {
 
   archivados(archivado: number){
     this.archivado$.next(archivado);
+    this.ngOnchanges();
   }
 
   ngOnchanges(){

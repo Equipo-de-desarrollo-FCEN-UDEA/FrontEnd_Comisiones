@@ -17,9 +17,10 @@
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
             <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
             <th scope="col" sortable="rol" (sort)="onSort($event)">Rol</th>
+            <th scope="col" sortable="createdAt" (sort)="onSort($event)" >Documento</th>
             <th scope="col" sortable="departamento" (sort)="onSort($event)" >Departamento</th>
             <th scope="col" sortable="facultad" (sort)="onSort($event)" >Facultad</th>
-            <th scope="col" sortable="createdAt" (sort)="onSort($event)" >Creado</th>
+            
             <th> </th>
           </tr>
           </thead>
@@ -71,12 +72,14 @@
                   usuario.roles.nombre === 'SECRETARIA DECANATURA'
                 }">
               }"
-
-
-
-
               >
 
+              </ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight
+              [result]="usuario.identificacion"
+              [term]="service.searchTerm">
               </ngb-highlight>
             </td>
 
@@ -92,12 +95,7 @@
               </ngb-highlight>
             </td>
 
-            <td>
-              <ngb-highlight
-              [result]="usuario.createdAt | date:'yyyy-MM-dd'"
-              [term]="service.searchTerm">
-              </ngb-highlight>
-            </td>
+            
 
 
 

@@ -1,36 +1,22 @@
-
 <div class="">
-    
-    <div class="row">
-
-        <div class="col-md-12 col-xs-12 col-lg-2">
-            <app-menu-lateral (paramsEmiter)="changeParams($event)"></app-menu-lateral>
-        </div>
-        
-        <div class="col-12 col-lg-10" *ngIf="params[0]">
-        <app-buscar-permiso ></app-buscar-permiso>
-        </div>
-        
-        <div class="col-12 col-lg-10" *ngIf="params[1]" >
-            <app-buscar-comision ></app-buscar-comision>
-        
-        </div>
-        
-        <div class="col-12 col-lg-10" *ngIf="params[2]">
-            <app-buscar-dexclusiva ></app-buscar-dexclusiva>
-        
-        </div>
-
+  <div class="row">
+    <div class="col-md-12 col-xs-12 col-lg-2">
+      <app-menu-lateral
+        (paramsEmiter)="changeParams($event)"
+      ></app-menu-lateral>
     </div>
 
-    
+    <div class="col-12 col-lg-10" *ngIf="params[0]">
+      <app-buscar-permiso></app-buscar-permiso>
+    </div>
+
+    <div class="col-12 col-lg-10" *ngIf="params[1]">
+      <app-buscar-comision></app-buscar-comision>
+    </div>
+
+    <div class="col-12 col-lg-10" *ngIf="params[2]">
+      <app-buscar-dexclusiva></app-buscar-dexclusiva>
+    </div>
+  </div>
 </div>
 
-
-
-
-<!-- <div class="shadow p-3 m-4 w-75 col-xs-12 col-md-12" style="height: 75%;">
-      
-    <app-buscar-comision></app-buscar-comision>
-    <router-outlet></router-outlet>
-</div>  -->

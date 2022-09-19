@@ -130,7 +130,7 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
     let indicadores =''
     for (let i = 0; i < this.selectedIndicadores.length; i++) {
-      indicadores+= ' | ' + this.indicadores[i]
+      indicadores+= ' ' + this.indicadores[i]
     }
     this.getSteps.patchValue([null,null,null,{indicador:indicadores}]);
   }

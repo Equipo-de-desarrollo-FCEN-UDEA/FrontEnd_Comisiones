@@ -56,6 +56,10 @@ export class BuscarPermisoComponent {
     
     // console.log("desarchivado")
   }
+
+  refresh(){
+    this.Buscarservice.ngOnchanges();
+  }
   
   onSort({ column, direction}: SortEvent) {
       // resetting other headers

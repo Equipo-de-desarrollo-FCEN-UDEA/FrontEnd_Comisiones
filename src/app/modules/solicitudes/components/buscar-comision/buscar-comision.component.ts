@@ -47,6 +47,10 @@ export class BuscarComisionComponent {
         () => this.Buscarservice.ngOnchanges()
       )
     }
+
+    refresh(){
+      this.Buscarservice.ngOnchanges();
+    }
     
     onSort({column, direction}: SortEvent) {
       // resetting other headers

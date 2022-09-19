@@ -1,5 +1,5 @@
 <div class="container  bt-white rounded">
-    <div class="row">
+    <div class="row" style="max-width: 100% !important;">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ladoizquierdo">
             <!-- <p class="ptitle">
                 Carta de iniciación
@@ -7,14 +7,14 @@
             <span class="text-secondary spantext">CARTA INICIACIÓN</span>
             <form [formGroup]="FormCarta" (submit)="OnSubmit()">
                 <div class="form-group">
-                    <quill-editor #disciplineQE id="discipline-qe" [placeholder]="'Ingrese aquí el cuerpo de la carta'"
+                    <quill-editor #disciplineQE id="discipline-qe" style="max-width: 100% !important;" [styles]="{height:'250px'}" [placeholder]="'Ingrese aquí el cuerpo de la carta'"
                         formControlName="Cuerpo"></quill-editor>
 
                 </div>
             </form>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-            <div class="visual">
+            <div class="visual" style="max-width: 100% !important;">
                 <h5>Previsualización</h5>
                 <div class="carta" id="carta" #carta>
                     <div class="cabecera">
@@ -28,10 +28,10 @@
                         </div>
                     </div>
                     <div class="cuerpo">
-                        <p> Señores</p>
+                        <p> Señores</p> <br>
                         <p> <b> CONSEJO DE {{usuario?.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
                                 usuario?.departamentos.nombre | uppercase) : usuario?.departamentos.nombre | uppercase}}
-                            </b></p>
+                            </b></p> <br>
                         <p>{{
                             usuario?.departamentos.facultades.descripcion | titlecase}}</p>
                         <p>Universidad de Antioquia</p>

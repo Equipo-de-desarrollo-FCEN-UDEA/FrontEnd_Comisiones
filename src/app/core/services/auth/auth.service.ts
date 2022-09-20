@@ -58,8 +58,8 @@ export class AuthService {
 
     this.cookieService.delete('token');
     this.cookieService.delete('usuario');
-    this.cookieService.deleteAll();
-    this.router.navigate(['/login']);
+    this.cookieService.deleteAll('/');
+    this.router.navigate(['/login']); 
   }
 
   isLoggedIn(): boolean {

@@ -54,6 +54,8 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
 
     
 
+    
+
    }
 
 
@@ -76,6 +78,17 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
         carta.style.fontSize = `${deviceWidth/60}px`
       }
     }
+
+
+    // Mala practica, debe corregirse
+    setTimeout(() => {
+      let container = document.getElementById("clientCont")
+    if (container){
+      container.style.maxWidth = container.clientWidth + "px";
+      console.log(container.clientWidth)
+    }
+    }, 2000);
+    
   }
     
   makePdf(): any {

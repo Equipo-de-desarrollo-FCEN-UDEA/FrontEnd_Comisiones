@@ -3,9 +3,13 @@
     <div class="col">
       <span class="text-secondary">COMISIÓN</span>
     </div>
+    <div *ngIf="(estadoActual.nombre === 'APROBADA') && (rol == 'PROFESOR' || rol == 'EMPLEADO') " class="alert alert-warning mt-3 mb-0">
+      <strong>¡Importante!</strong> Recuerde subir el cumplido
+    </div>
   </div>
 
   <hr />
+  
   <div class="row regular-row">
     <div class="col-xs-12 col-sm-6 label fw-bold">Solicitante</div>
     <div class="col-xs-12 col-sm-6">
@@ -132,10 +136,6 @@
       *ngIf="mostrarEstados"
       [estados]="estados"
     ></app-historial-estados>
-  </div>
-
-  <div *ngIf="(estadoActual.nombre === 'APROBADA') && (rol == 'PROFESOR' || rol == 'EMPLEADO') " class="alert alert-warning mt-3 mb-0">
-    Recuerda subir el cumplido
   </div>
 
 

@@ -243,6 +243,7 @@
                       type="button"
                       data-bs-dismiss="offcanvas"
                       aria-label="Close"
+                      *ngIf="usuario?.roles?.nombre == 'PROFESOR'"
                       [routerLink]="['/dedicaciones/crear-dedicacion']"
                       >Dedicación Exclusiva</a
                     >

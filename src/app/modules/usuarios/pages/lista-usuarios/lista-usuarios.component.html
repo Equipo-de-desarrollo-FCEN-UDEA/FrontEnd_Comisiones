@@ -1,132 +1,137 @@
-<div class="container-inside shadow-sm pt-4 pr-2 p-4 m-5 bg-white rounded">
-    <form>
-      <div class="mb-3 row">
-        <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar Usuarios:</label>
-        <div class="col-xs-3 col-sm-auto">
-          <input id="table-complete-search" type="text" class="form-control" name="searchTerm" [(ngModel)]="service.searchTerm">
-        </div>
-        <span class="col col-form-label" *ngIf="service.loading$ | async">Loading...</span>
-      </div>
+<div class="container-inside shadow-sm pt-4 pl-4 pr-2 mb-5 p-4 m-3 mt-5 bg-white rounded">
+  <div class="mb-3 row">
+    <label
+      for="table-complete-search"
+      class="col-xs-3 col-sm-auto col-form-label"
+      >Buscar Usuarios:</label
+    >
+    <div class="col-xs-3 col-sm-auto">
+      <input
+        id="table-complete-search"
+        type="text"
+        class="form-control"
+        name="searchTerm"
+        [(ngModel)]="service.searchTerm"
+      />
+    </div>
+    <span class="col col-form-label" *ngIf="service.loading$ | async"
+      >Loading...</span
+    >
+  </div>
 
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-          <tr>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
+          <th scope="col" sortable="apellido" (sort)="onSort($event)">
+            Apellido
+          </th>
+          <th scope="col" sortable="rol" (sort)="onSort($event)">Rol</th>
+          <th scope="col" sortable="createdAt" (sort)="onSort($event)">
+            Documento
+          </th>
+          <th scope="col" sortable="departamento" (sort)="onSort($event)">
+            Departamento
+          </th>
+          <th scope="col" sortable="facultad" (sort)="onSort($event)">
+            Facultad
+          </th>
 
-            <th scope="col">#</th>
-            <th scope="col" sortable="nombre" (sort)="onSort($event)">Nombre</th>
-            <th scope="col" sortable="apellido" (sort)="onSort($event)">Apellido</th>
-            <th scope="col" sortable="rol" (sort)="onSort($event)">Rol</th>
-            <th scope="col" sortable="documento" (sort)="onSort($event)" >Documento</th>
-            <th scope="col" sortable="departamento" (sort)="onSort($event)" >Departamento</th>
-            <th scope="col" sortable="facultad" (sort)="onSort($event)" >Facultad</th>
-            
-            <th> </th>
-          </tr>
-          </thead>
-          <tbody>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let usuario of usuarios$ | async"
+          [routerLink]="['/usuarios/ver-usuario', usuario.id]"
+          class="click-table"
+        >
+          <th scope="row">{{ usuario.id }}</th>
 
-            <tr *ngFor="let usuario of usuarios$ | async"
-            [routerLink]="['/usuarios/ver-usuario', usuario.id]"
-            class="click-table"
+          <td>
+            <ngb-highlight
+              [result]="usuario?.nombre"
+              [term]="service.searchTerm"
             >
+            </ngb-highlight>
+          </td>
 
-            <th scope="row">{{ usuario.id }}</th>
+          <td>
+            <ngb-highlight
+              [result]="usuario?.apellido"
+              [term]="service.searchTerm"
+            >
+            </ngb-highlight>
+          </td>
 
-
-
-            <td>
-              <ngb-highlight
-              [result]="usuario?.nombre" [term]="service.searchTerm">
-              </ngb-highlight>
-            </td>
-
-            <td>
-              <ngb-highlight
-              [result]="usuario?.apellido" [term]="service.searchTerm">
-              </ngb-highlight>
-            </td>
-
-
-            <td>
-              <ngb-highlight
+          <td>
+            <ngb-highlight
               [result]="usuario.roles.nombre"
               class="badge badge-pill pill"
               [term]="service.searchTerm"
               [ngClass]="{
-                'bg-solicitada':
-                  usuario.roles.nombre === 'ADMIN',
-                'bg-aprobada':
-                  usuario.roles.nombre === 'VICERRECTORIA',
-                'bg-visto-bueno':
-                  usuario.roles.nombre === 'DECANATURA',
-                'bg-finalizada':
-                  usuario.roles.nombre === 'COORDINACION',
-                'bg-empleado':
-                  usuario.roles.nombre === 'EMPLEADO',
-                'bg-profesor':
-                usuario.roles.nombre === 'PROFESOR',
+                'bg-solicitada': usuario.roles.nombre === 'ADMIN',
+                'bg-aprobada': usuario.roles.nombre === 'VICERRECTORIA',
+                'bg-visto-bueno': usuario.roles.nombre === 'DECANATURA',
+                'bg-finalizada': usuario.roles.nombre === 'COORDINACION',
+                'bg-empleado': usuario.roles.nombre === 'EMPLEADO',
+                'bg-profesor': usuario.roles.nombre === 'PROFESOR',
                 'bg-secretariacoor':
                   usuario.roles.nombre === 'SECRETARIA COORDINACION',
                 'bg-secretarideca':
                   usuario.roles.nombre === 'SECRETARIA DECANATURA'
-                }">
               }"
-              >
-
-              </ngb-highlight>
-            </td>
-            <td>
-              <ngb-highlight
+            >
+              }" >
+            </ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
               [result]="usuario.identificacion"
-              [term]="service.searchTerm">
-              </ngb-highlight>
-            </td>
+              [term]="service.searchTerm"
+            >
+            </ngb-highlight>
+          </td>
 
-            <td>
-              <ngb-highlight
-              [result]="usuario.departamentos.nombre" [term]="service.searchTerm">
-              </ngb-highlight>
-            </td>
+          <td>
+            <ngb-highlight
+              [result]="usuario.departamentos.nombre"
+              [term]="service.searchTerm"
+            >
+            </ngb-highlight>
+          </td>
 
-            <td>
-              <ngb-highlight
-              [result]="usuario.departamentos.facultades.nombre"  [term]="service.searchTerm">
-              </ngb-highlight>
-            </td>
+          <td>
+            <ngb-highlight
+              [result]="usuario.departamentos.facultades.nombre"
+              [term]="service.searchTerm"
+            >
+            </ngb-highlight>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-          </tbody>
-        </table>
-      </div>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="(total$ | async)!"
+      [(page)]="service.page"
+      [pageSize]="service.pageSize"
+    >
+    </ngb-pagination>
 
-
-      <div class="d-flex justify-content-between p-2">
-        <ngb-pagination
-          [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
-        </ngb-pagination>
-
-        <!-- <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
-          <option [ngValue]="2">2 items por pag.</option>
-          <option [ngValue]="4">4 items por pag.</option>
-          <option [ngValue]="6">6 items por pag.</option>
-        </select> -->
-      </div>
-
-    </form>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!-- <select
+      class="form-select"
+      style="width: auto"
+      name="pageSize"
+      [(ngModel)]="service.pageSize"
+    >
+      <option [ngValue]="2">2 items por pag.</option>
+      <option [ngValue]="4">4 items por pag.</option>
+      <option [ngValue]="6">6 items por pag.</option>
+    </select> -->
+  </div>
+</div>

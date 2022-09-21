@@ -85,7 +85,6 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
       let container = document.getElementById("clientCont")
     if (container){
       container.style.maxWidth = container.clientWidth + "px";
-      console.log(container.clientWidth)
     }
     }, 2000);
     

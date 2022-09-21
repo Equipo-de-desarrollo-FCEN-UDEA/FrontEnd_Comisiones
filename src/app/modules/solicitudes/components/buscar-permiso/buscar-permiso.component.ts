@@ -53,8 +53,7 @@ export class BuscarPermisoComponent {
         next: () => this.Buscarservice.ngOnchanges()
       }
     )
-    
-    // console.log("desarchivado")
+
   }
 
   refresh(){

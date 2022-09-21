@@ -26,7 +26,8 @@ const compare = (v1: string | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ?
 function sort(dedicaciones: Dedicacion[], column: SortColumn, direction: string): Dedicacion[] {
   if (direction === '' || column === '') {
     return dedicaciones;
-  } else {
+  } 
+  else {
     return [...dedicaciones].sort((a, b) => {
       const res = compare(a[column], b[column]);
       return direction === 'asc' ? res : -res;
@@ -38,7 +39,7 @@ function matches(dedicaciones: Dedicacion, term: string, datepipe: DatePipe) {
   term = term.toLowerCase();
   return (
     dedicaciones.descripcion.toLowerCase().includes(term) ||
-    datepipe.transform(dedicaciones.createdAt)?.toString().includes(term)||
+    datepipe.transform(dedicaciones.createdAt, 'yyyy-MM-dd')?.toString().includes(term)||
     dedicaciones.usuarios.nombre.toLowerCase().includes(term) ||
     dedicaciones.usuarios.apellido.toLowerCase().includes(term) ||
     dedicaciones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
@@ -93,16 +94,16 @@ export class BuscarDedicacionService {
   //   this.archivado$.next(archivado);
   // }
 
-  // ngOnchanges(){
-  //   this.dedicacionesSvc.scopeGetDedicaciones()
-  //   .subscribe(
-  //     (resp: any) => {
-  //       this.DEDICACIONES = resp.dedicaciones;
-  //       this._dedicaciones$.next(this.DEDICACIONES);
-  //       this._search$.next();
-  //     }
-  //   )
-  //  }
+  ngOnchanges(){
+    this.dedicacionesSvc.getDedicaciones()
+    .subscribe(
+      (resp: any) => {
+        this.DEDICACIONES = resp;
+        this._dedicaciones$.next(this.DEDICACIONES);
+        this._search$.next();
+      }
+    )
+   }
    
   get dedicaciones$() { return this._dedicaciones$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
@@ -124,15 +125,17 @@ export class BuscarDedicacionService {
     this._search$.next();
   }
 
+
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
     // 1. sort
-    let dedicaciones = sort(this.DEDICACIONES, sortColumn, sortDirection);
+    let dedicaciones = sort(this.DEDICACIONES as Dedicacion[], sortColumn, sortDirection);
+
     // 2. filter
+
     dedicaciones = dedicaciones.filter(dedicacion => matches(dedicacion, searchTerm, this.datepipe));
     const total = dedicaciones.length;
-
 
     // 3. paginate
     dedicaciones = dedicaciones.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);

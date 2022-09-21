@@ -19,12 +19,12 @@
     </span>
     </div>
 
-    <select class="form-select" *ngIf="(rol == 'SECRETARIA DECANATURA' || rol == 'DECANATURA')"
+    <!-- <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
       (change)="changeOption($event)" style="width: auto">
       <option value="0">No archivados</option>
       <option value="1">Archivados</option>
       <option value="2">Todos</option>
-    </select>
+    </select> -->
   </div>
 
   <hr/>
@@ -136,6 +136,14 @@
         [pageSize]="Buscarservice.pageSize">
         
       </ngb-pagination> 
+      <div class="d-flex justify-content-end">
+        <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" (change)="changeOption($event)"
+        style="width: auto">
+        <option value="0">No archivados</option>
+        <option value="1">Archivados</option>
+        <option value="2">Todos</option>
+        </select>
+      </div>
     </div>
 
   </form>

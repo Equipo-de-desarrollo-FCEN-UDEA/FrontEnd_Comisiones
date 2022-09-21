@@ -95,10 +95,6 @@
               </ngb-highlight>
             </td>
 
-            
-
-
-
           </tbody>
         </table>
       </div>
@@ -109,11 +105,11 @@
           [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
         </ngb-pagination>
 
-        <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+        <!-- <select class="form-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
           <option [ngValue]="2">2 items por pag.</option>
           <option [ngValue]="4">4 items por pag.</option>
           <option [ngValue]="6">6 items por pag.</option>
-        </select>
+        </select> -->
       </div>
 
     </form>

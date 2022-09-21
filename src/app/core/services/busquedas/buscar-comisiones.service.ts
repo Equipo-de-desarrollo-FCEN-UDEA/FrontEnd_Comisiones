@@ -87,6 +87,8 @@ export class BuscarComisionesService {
         .subscribe(
           (resp: any ) => {
             this.COMISIONES = resp.comisiones;
+            this._comisiones$.next(this.COMISIONES);
+            this._search$.next();
           })
       }
 

@@ -88,6 +88,8 @@ export class BuscarPermisosService {
       .subscribe(
         (resp: any) => {
           this.PERMISOS = resp.permisos;
+          this._permisos$.next(this.PERMISOS);
+          this._search$.next();
         })
     }
 

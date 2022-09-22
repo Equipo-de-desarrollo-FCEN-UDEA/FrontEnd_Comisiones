@@ -87,6 +87,8 @@ export class BuscarDedicacionService {
     .subscribe(
       (resp: any ) => {
         this.DEDICACIONES = resp;
+        this._dedicaciones$.next(this.DEDICACIONES);
+        this._search$.next();
       })
   }
 

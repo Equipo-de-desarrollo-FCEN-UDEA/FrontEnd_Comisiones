@@ -42,6 +42,7 @@ function matches(usuarios: Usuario, term: string, datepipe: DatePipe) {
     usuarios.apellido.toLowerCase().includes(term) ||
     usuarios.departamentos.nombre.toLowerCase().includes(term) ||
     usuarios.identificacion.toLowerCase().includes(term) ||
+    usuarios.correo.toLowerCase().includes(term) || 
     usuarios.departamentos.facultades.nombre.toLowerCase().includes(term) ||
     datepipe.transform(usuarios.createdAt, 'yyyy-MM-dd')?.toString()?.includes(term) 
   );

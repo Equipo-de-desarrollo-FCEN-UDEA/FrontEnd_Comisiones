@@ -79,7 +79,7 @@
               'is-invalid': f['tipos_comision_id'].errors && f['tipos_comision_id'].touched
             }"
           >
-            <option value="" disabled selected>tipo de comisión</option>
+            <option value="" disabled selected>Tipo de comisión</option>
             <option
               [value]="tipo.id | number"
               *ngFor="let tipo of tiposComision$ | async"
@@ -151,7 +151,7 @@
               for="floatingestado"
               class="selectLabel"
               [ngClass]="{
-                isFill: creaComisionForm.controls['provincia'].valid
+                isFill: creaComisionForm.controls['provincia'].touched
               }"
             >
               <span
@@ -186,7 +186,7 @@
             <label
               for="floatingpais"
               class="selectLabel"
-              [ngClass]="{ isFill: creaComisionForm.controls['ciudad'].valid }"
+              [ngClass]="{ isFill: creaComisionForm.controls['ciudad'].touched }"
             >
               <span
                 *ngIf="isLoading | async"

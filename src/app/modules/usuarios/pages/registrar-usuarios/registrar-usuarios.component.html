@@ -59,7 +59,7 @@
                   {{ tipo | uppercase }}
                 </option>
               </select>
-              <label for="tipo_identificacion" class="selectLabel" [ngClass]="{ isFill: true }">Tipo de
+              <label for="tipo_identificacion" class="selectLabel" [ngClass]="{ isFill: f['tipo_identificacion'].valid }">Tipo de
                 Identificación</label>
             </div>
           </div>
@@ -105,7 +105,7 @@
                   {{ rol.nombre | uppercase }}
                 </option>
               </select>
-              <label for="roles_id" class="selectLabel" [ngClass]="{ isFill: true }">Cargo</label>
+              <label for="roles_id" class="selectLabel" [ngClass]="{ isFill: f['roles_id'].valid }">Cargo</label>
             </div>
           </div>
         </div>
@@ -116,13 +116,13 @@
             <div class="formfloatig">
               <select class="form-select form-select-lg" id="escalafon" formControlName="escalafon" placeholder=" "
                 [ngClass]="{
-                  'is-invalid':  f['escalafon'] .errors && f['departamentos_id'].touched
+                  'is-invalid':  f['escalafon'].errors && f['escalafon'].touched
                 }">
                 <option [value]="escala" *ngFor="let escala of escalafon">
                   {{ escala | uppercase }}
                 </option>
               </select>
-              <label for="escalafon" class="selectLabel" [ngClass]="{ isFill: true }">Escalafón</label>
+              <label for="escalafon" class="selectLabel" [ngClass]="{ isFill: f['escalafon'].valid }">Escalafón</label>
             </div>
           </div>
         </div>
@@ -141,7 +141,7 @@
                   {{ departamento.nombre | uppercase }}
                 </option>
               </select>
-              <label for="departamentos_id" class="selectLabel" [ngClass]="{ isFill: true }">Departamento</label>
+              <label for="departamentos_id" class="selectLabel" [ngClass]="{ isFill: f['departamentos_id'].valid}">Departamento/Instituto</label>
             </div>
           </div>
         </div>

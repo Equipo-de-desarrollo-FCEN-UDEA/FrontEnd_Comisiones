@@ -32,13 +32,16 @@
           <th scope="col" sortable="createdAt" (sort)="onSort($event)">
             Documento
           </th>
+          <th scope="col" sortable="facultad" (sort)="onSort($event)">
+            Correo
+          </th>
           <th scope="col" sortable="departamento" (sort)="onSort($event)">
             Departamento
           </th>
           <th scope="col" sortable="facultad" (sort)="onSort($event)">
             Facultad
           </th>
-
+          
           <th></th>
         </tr>
       </thead>
@@ -90,6 +93,13 @@
           <td>
             <ngb-highlight
               [result]="usuario.identificacion"
+              [term]="service.searchTerm"
+            >
+            </ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="usuario.correo"
               [term]="service.searchTerm"
             >
             </ngb-highlight>

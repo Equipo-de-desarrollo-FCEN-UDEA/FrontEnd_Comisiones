@@ -118,6 +118,17 @@ export class CumplidoComponent implements OnInit {
     return this.cumplidoForm.get(controlName)?.invalid && this.cumplidoForm.get(controlName)?.touched;
   }
 
+  validTipoArchivo() {
+    const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
+    
+    let flag; 
+    this.files.forEach((file) => {
+      flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
+    })
+    return flag;
+
+  }
+
 
  // ----------------------------------------
  // ----------- SUBIR CUMPLIDO ------------
@@ -148,10 +159,6 @@ export class CumplidoComponent implements OnInit {
       reqBody.append('archivo', file, file.name) 
     }
 
-    console.log(reqBody.get('correos'));
-    console.log(body.correos);
-
-
     // Post cumplido
     Swal.fire({
       title: '¿Seguro que quieres enviar el cumplido?',
@@ -165,7 +172,6 @@ export class CumplidoComponent implements OnInit {
       if (result.isConfirmed) {
         this.cumplidoSvc.postCumplido(reqBody).subscribe({
           next: (response) => {
-            console.log(response);
             this.router.navigate(['/home']);
             Swal.fire({
               title: 'Creado!',

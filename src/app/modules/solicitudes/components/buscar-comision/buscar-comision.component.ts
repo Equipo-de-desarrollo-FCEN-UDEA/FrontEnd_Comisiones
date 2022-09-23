@@ -34,17 +34,22 @@ export class BuscarComisionComponent {
 
     changeOption(event:any){
       this.Buscarservice.archivados(event.target.value);
-      this.Buscarservice.ngOnchanges();
     }
 
     archivarComision(id:number){
-      this.comisionService.Archivado(id).subscribe()
-      this.Buscarservice.ngOnchanges()
+      this.comisionService.Archivado(id).subscribe(
+       () => this.Buscarservice.ngOnchanges()
+      )
     }
 
     desarchivarComision(id:number){
-      this.comisionService.NoArchivado(id).subscribe()
-      this.Buscarservice.ngOnchanges()
+      this.comisionService.NoArchivado(id).subscribe(
+        () => this.Buscarservice.ngOnchanges()
+      )
+    }
+
+    refresh(){
+      this.Buscarservice.ngOnchanges();
     }
     
     onSort({column, direction}: SortEvent) {

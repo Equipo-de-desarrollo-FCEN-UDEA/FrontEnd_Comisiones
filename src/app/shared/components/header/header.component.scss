@@ -16,6 +16,16 @@
   }
 }
 
+.header-btn{
+  text-align: center;
+  margin-right: 1em;
+}.header-btn:hover{
+  background-color: #065f37;
+  border-radius: 1em;
+  transition: all .3s linear;
+  
+}
+
 .fa-user {
   color: var(--349c);
 }

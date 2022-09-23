@@ -28,7 +28,8 @@ export class EditarPermisoComponent implements OnInit {
   error = '';
   clicked = 0;
   submitted = false;
-
+  
+  diaHabil: number = 0;
   // Datepicker
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
@@ -86,9 +87,7 @@ export class EditarPermisoComponent implements OnInit {
     });
 
     this.fromDate = null;
-  }
 
-  ngOnInit(): void {
     this.permisoSvc.getPermiso(this.getId).subscribe({
       next: (res) => {
         this.editarPermisoForm.setValue({
@@ -96,6 +95,12 @@ export class EditarPermisoComponent implements OnInit {
           justificacion: res.justificacion,
           fecha_inicio: this.datepipe.transform(res.fecha_inicio, 'YYYY-MM-dd'),
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
+        });
+
+        this.tiposPermisoSvc.getTipoPermisoId(res.tipo_permiso_id.id).subscribe({
+          next: (res) => {
+            this.diaHabil = res.dias;
+          },
         });
 
         res.documentos.forEach((documento: any) => this.documentosArray.push(documento))
@@ -108,6 +113,11 @@ export class EditarPermisoComponent implements OnInit {
         }
       },
     });
+
+  }
+
+  ngOnInit(): void {
+    
   }
 
 
@@ -129,9 +139,6 @@ export class EditarPermisoComponent implements OnInit {
   inRange(fecha_1: any, fecha_2: any) {
     fecha_1 = new Date(this.formatter.format(fecha_1));
     fecha_2 = new Date(this.formatter.format(fecha_2));
-    console.log('paso')
-    console.log(fecha_1)
-    console.log(DiasHabiles(fecha_1, fecha_2), fecha_1, fecha_2)
     return DiasHabiles(fecha_1, fecha_2);
   }
 
@@ -153,6 +160,25 @@ export class EditarPermisoComponent implements OnInit {
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) &&
       date.before(this.hoveredDate);
+  }
+
+  selectDias(fromDate: NgbDate | null, toDate: NgbDate | null):boolean {
+    if (fromDate || toDate) {
+      return DiasHabiles(new Date(this.formatter.format(fromDate)),new Date( this.formatter.format(toDate))) > this.diaHabil
+    } else {
+      return false
+    }
+  }
+
+  isHoveredInvalid(date: NgbDate) {
+    return (
+      this.fromDate &&
+      !this.toDate &&
+      this.hoveredDate &&
+      this.selectDias(this.fromDate, this.hoveredDate) &&
+      date.after(this.fromDate) &&
+      date.before(this.hoveredDate)
+    );
   }
 
   isInside(date: NgbDate) { return this.toDate && date.after(this.fromDate) && date.before(this.toDate); }
@@ -177,7 +203,6 @@ export class EditarPermisoComponent implements OnInit {
     if (file) {
       this.files.splice(index, 1, file);
     }
-    console.log(this.files);
 
   }
 
@@ -191,6 +216,17 @@ export class EditarPermisoComponent implements OnInit {
   validSize() {
     const size = this.files.map(a => a.size).reduce((a, b) => a + b, 0);
     return size < 2 * 1024 * 1024;
+  }
+
+  validTipoArchivo() {
+    const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
+    
+    let flag; 
+    this.files.forEach((file) => {
+      flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
+    })
+    return flag;
+
   }
 
   isInvalidForm(controlName: string) {
@@ -209,6 +245,19 @@ export class EditarPermisoComponent implements OnInit {
     this.docsBorrar.push(idDoc);
   }
 
+    // ----------- TIPOS DE PERMISOS ------------
+
+    onTipoDePermiso(event: any) {
+      const idTipoPermiso = event;
+  
+      this.tiposPermisoSvc.getTipoPermisoId(idTipoPermiso).subscribe({
+        next: (res) => {
+          this.diaHabil = res.dias;
+        },
+      });
+    }
+  
+
 
   // ----------------------------------------
   // ----------- EDITAR PERMISO ------------
@@ -221,7 +270,6 @@ export class EditarPermisoComponent implements OnInit {
 
     // Se detiene aqui si el formulario es invalido
     if (this.editarPermisoForm.invalid) {
-      console.log('invalid form')
       return;
     }
 
@@ -266,6 +314,9 @@ export class EditarPermisoComponent implements OnInit {
         error: (err) => {
           if (err.status === 404 || err.status === 401) {
             this.error = err.error.msg;
+          }
+          if (err.status === 400) {
+            this.error = err.error.message;
           }
         },
       });

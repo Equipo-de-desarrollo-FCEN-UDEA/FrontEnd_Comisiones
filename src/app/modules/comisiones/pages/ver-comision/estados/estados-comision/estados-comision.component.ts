@@ -49,8 +49,6 @@ export class EstadosComisionComponent {
     this.getId = this.activateRoute.snapshot.paramMap.get('id');
     this.nuevoEstado$ = this.estadosSvc.getEstados();
 
-    console.log('id en child ',this.getId);
-
     this.asociarEstadoForm = this.formBuilder.group({
       estados_id: ['', [Validators.required, Validators.nullValidator]],
       observacion : ['']
@@ -79,10 +77,9 @@ export class EstadosComisionComponent {
     this.comisionxEstadoSvc.postComisionxEstado(this.getId, this.asociarEstadoForm.value)
     .subscribe({
           next: (res) => {
-            console.log(this.asociarEstadoForm.value)
             this.ngZone.run(() => this.router.navigate(['/home']));
             Swal.fire({
-              title: 'Creada',
+              title: 'Estado actualizado',
               text: '¡Se asoció el estado a la comisión con éxito!',
               icon: 'success',
               confirmButtonColor: '#3AB795',

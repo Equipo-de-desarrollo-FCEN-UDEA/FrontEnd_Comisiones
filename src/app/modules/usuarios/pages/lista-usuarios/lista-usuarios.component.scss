@@ -1,0 +1,10 @@
+.container-inside {
+  margin-bottom: 10em!important;
+}
+
+
+@media screen and (max-width: 920px) {
+  .container-inside {
+      width: 95%!important;
+  }
+}

@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class VerUsuarioComponent implements OnInit {
   public rol : string = localStorage.getItem('rol') || '';
   public usuario: Usuario | undefined;
+  public actualUsuario: Usuario | undefined;
   public usuarioResponse!: UsuarioResponse;
   public id : number | string = 0;
   constructor(
@@ -26,14 +27,12 @@ export class VerUsuarioComponent implements OnInit {
     this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
     this.activateRoute.params.subscribe({
       next: (params) => {
-      console.log(params)
       this.usuarioService.getUsuariobyId(this.id).subscribe(
         {
           next: (resUsuario) => {
           this.usuario = resUsuario;
           },
           error: (err) => {
-            console.log(err.status);
             if (err.status == 401){
             Swal.fire({
               title: 'No autorizado',
@@ -48,6 +47,7 @@ export class VerUsuarioComponent implements OnInit {
         );
       }
     });
+    this.actualUsuario = this.usuarioService.getActualUsuario()
    }
 
   ngOnInit(): void {

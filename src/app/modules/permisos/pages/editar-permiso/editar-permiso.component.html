@@ -14,6 +14,12 @@
       <hr class="my-0" />
       <p *ngIf="fromDate && !toDate">Elige la segunda fecha</p>
       <p *ngIf="!fromDate">Elige la primera fecha</p>
+      <p
+      *ngIf="(selectDias(fromDate, toDate))"
+      style="color:red"
+      >
+        La cantidad de días permitidos sobrepasa {{diaHabil}} día(s)
+      </p>
       <button
         class="btn btn-primary btn-sm m-2 float-start"
         (click)="model = today; datepicker.close()"
@@ -48,12 +54,14 @@
         />
         <ng-template #t let-date let-focused="focused">
           <span
-            class="custom-day"
-            [class.focused]="focused"
-            [class.range]="isRange(date)"
-            [class.faded]="isHovered(date) || isInside(date)"
-            (mouseenter)="hoveredDate = date"
-            (mouseleave)="hoveredDate = null"
+          class="custom-day"
+          [class.focused]="focused"
+          [class.range]="isRange(date) "
+          [class.faded]="isHovered(date) || isInside(date)"
+          [class.invalidChoosen]="isInside(date) && selectDias(fromDate, toDate) && isRange(date)"
+          [class.invalidRange]="isHoveredInvalid(date)"
+          (mouseenter)="hoveredDate = date"
+          (mouseleave)="hoveredDate = null"
           >
             {{ date.day }}
           </span>
@@ -68,6 +76,7 @@
         formControlName="tipos_permiso_id"
         required
         [ngClass]="{ 'is-invalid': isInvalidForm('tipos_permiso_id') }"
+        ngModel (ngModelChange)="onTipoDePermiso($event)"
         placeholder=" "
       >
         <option [value]="tipo.id" *ngFor="let tipo of tiposPermiso$ | async">
@@ -85,6 +94,10 @@
     </div>
 
     <hr />
+    <div class="alert alert-warning mt-3 mb-0" *ngIf="diaHabil > 0">
+      <strong>¡Importante!</strong> Para este tipo de permiso solo puedes elegir hasta {{ diaHabil }} días hábiles
+    </div>
+
 
       <div class="row regular-row mt-4">
         <div class="col-md-4 col-xs-12 col-sm-12 label">Justificación *</div>
@@ -196,8 +209,11 @@
       <h6 class="mt-4">
         <span class="text-muted">Archivos adjuntos a la solicitud</span>
       </h6>
+      <div class="alert alert-danger" *ngIf="files.length > 0 && !validTipoArchivo()">
+        Ese tipo de archivo no es permitido.
+      </div>
       <div class="alert alert-danger" *ngIf="files.length > 0 && !validSize()">
-        <p>Los archivos no deben pesar más de 2 MB.</p>
+        Los archivos no deben pesar más de 2 MB.
       </div>
       <div class="formfloatig" style="display: flex; flex-direction: column">
         <div

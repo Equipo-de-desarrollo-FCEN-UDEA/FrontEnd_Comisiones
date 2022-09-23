@@ -44,10 +44,8 @@ export class VerDedicacionComponent implements OnInit {
       });
 
       this.dedicacion$.subscribe(dedicacion => {
-        console.log(dedicacion)
         this.fechaCreacion = dedicacion.intermediate_dedicaciones[0]? new Date(dedicacion.intermediate_dedicaciones[0].createdAt) : null;
         this.estadoActual = ultimoElement(dedicacion.intermediate_dedicaciones)?.intermediate_estados?.nombre ? ultimoElement(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre : 'EN CREACIÓN';
-        console.log(this.estadoActual)
       });
 
     }
@@ -69,7 +67,6 @@ export class VerDedicacionComponent implements OnInit {
       if (result.isConfirmed) {
         this.dedicacionSvc.deleteDedicacion(id).subscribe({
           next: (response : any) => {
-            console.log(response);
             this.router.navigate(['/home']);
             Swal.fire({
               title: 'Eliminada!',

@@ -24,7 +24,7 @@ export interface UsuarioInside extends UsuarioBase {
 
 export interface Usuario extends UsuarioBase{
     tipo_identificacion?: string;
-    identificacion?: number;
+    identificacion: string;
     correo: string;
     tipo_vinculacion: string;
     createdAt: Date;
@@ -34,7 +34,7 @@ export interface Usuario extends UsuarioBase{
     roles: RolResponse;
     escalafon: string;
     oficina?: string;
-    telefono?: number;
+    telefono?: string;
     estado?: string;
 }
 

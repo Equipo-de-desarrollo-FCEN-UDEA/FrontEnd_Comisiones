@@ -6,7 +6,7 @@
     </div>
   </div>
 
-	<hr />
+  <hr />
 
   <form
     class="need-validation"
@@ -18,17 +18,9 @@
     <!-- DATEPICKER -->
 
     <ng-template #footerTemplate>
-     <hr class="my-0" />
-      <p
-        *ngIf="fromDate && !toDate"
-        >
-        Elige la segunda fecha
-      </p>
-      <p
-        *ngIf="!fromDate"
-        >
-        Elige la primera fecha
-      </p>
+      <hr class="my-0" />
+      <p *ngIf="fromDate && !toDate">Elige la segunda fecha</p>
+      <p *ngIf="!fromDate">Elige la primera fecha</p>
       <button
         class="btn btn-primary btn-sm m-2 float-start"
         (click)="model = today; datepicker.close()"
@@ -77,20 +69,17 @@
     </div>
 
     <div class="row">
-
       <div class="row">
         <div class="formfloatig">
           <select
             formControlName="tipos_comision_id"
-            class="form-control  form-select-lg mb-3"
+            class="form-control form-select-lg mb-3"
             (change)="onChangeSolicitud($event)"
             [ngClass]="{
-              'is-invalid': f['tipos_comision_id'].errors
+              'is-invalid': f['tipos_comision_id'].errors && f['tipos_comision_id'].touched
             }"
           >
-            <option value="" disabled selected>
-              tipo de comisión
-            </option>
+            <option value="" disabled selected>Tipo de comisión</option>
             <option
               [value]="tipo.id | number"
               *ngFor="let tipo of tiposComision$ | async"
@@ -98,13 +87,8 @@
               {{ tipo.nombre }}
             </option>
           </select>
-          <label for="floatingidioma" class="formLabel selectLabel">
-            </label
-          >
-          <div
-            *ngIf="f['tipos_comision_id'].errors"
-            class="invalid-feedback"
-          >
+
+          <div *ngIf="f['tipos_comision_id'].errors && f['tipos_comision_id'].touched" class="invalid-feedback">
             <div *ngIf="f['tipos_comision_id'].errors['required']">
               Elige un tipo de comisión
             </div>
@@ -114,7 +98,9 @@
 
       <hr />
 
-      <div class="row regular-row mt-4 align-items-baseline align-items-baseline">
+      <div
+        class="row regular-row mt-4 align-items-baseline align-items-baseline"
+      >
         <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Pais *</div>
         <div class="col-sm-12 col-xs-12 col-md-8 col-12">
           <div class="formfloatig">
@@ -135,16 +121,15 @@
               for="floatingpais"
               class="selectLabel"
               [ngClass]="{ isFill: creaComisionForm.controls['pais'].valid }"
-              >
-              País de la comisión
-              </label
             >
+              País de la comisión
+            </label>
           </div>
         </div>
       </div>
 
       <div class="row regular-row mt-4 align-items-baseline">
-        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Provincia</div>
+        <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Departamento o Provincia</div>
         <div class="col-sm-12 col-xs-12 col-md-8 col-12">
           <div class="formfloatig">
             <select
@@ -165,7 +150,9 @@
             <label
               for="floatingestado"
               class="selectLabel"
-              [ngClass]="{ isFill: creaComisionForm.controls['provincia'].valid }"
+              [ngClass]="{
+                isFill: creaComisionForm.controls['provincia'].touched
+              }"
             >
               <span
                 *ngIf="isLoading | async"
@@ -199,7 +186,7 @@
             <label
               for="floatingpais"
               class="selectLabel"
-              [ngClass]="{ isFill: creaComisionForm.controls['ciudad'].valid }"
+              [ngClass]="{ isFill: creaComisionForm.controls['ciudad'].touched }"
             >
               <span
                 *ngIf="isLoading | async"
@@ -309,13 +296,18 @@
         500 caracteres.
       </div>
 
-
       <!-- ARCHIVOS - DOCUMENTOS -->
       <h6 class="mt-3">
         <span class="text-muted">Archivos adjuntos a la solicitud</span>
       </h6>
+      <div
+        class="alert alert-danger"
+        *ngIf="files.length > 0 && !validTipoArchivo()"
+      >
+        Ese tipo de archivo no es permitido.
+      </div>
       <div class="alert alert-danger" *ngIf="files.length > 0 && !validSize()">
-        <p>Los archivos no deben pesar más de 2 MB.</p>
+        Los archivos no deben pesar más de 2 MB.
       </div>
       <div class="formfloatig" style="display: flex; flex-direction: column">
         <div
@@ -372,8 +364,9 @@
         <button
           class="btn btn-add"
           (submit)="(true)"
+          type="submit"
           [disabled]="
-            creaComisionForm.invalid || !validSize() || (isLoading | async)
+            creaComisionForm.invalid || !validSize() || !validTipoArchivo() || (isLoading | async)
           "
         >
           <span

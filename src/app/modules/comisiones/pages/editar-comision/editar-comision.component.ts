@@ -121,11 +121,15 @@ export class EditarComisionComponent implements OnInit {
           tipos_comision_id: Number(res.tipos_comision.id),
           justificacion: res.justificacion,
           idioma: res.idioma,
-          pais: res.lugar?.split(",")[0],
-          provincia: res.lugar?.split(",")[1] ? res.lugar?.split(",")[1] : "",
-          ciudad: res.lugar?.split(",")[2] ? res.lugar?.split(",")[2] : "",
+          pais: '',
+          provincia: '',
+          ciudad:'',
+          // pais: res.lugar?.split(",")[0],
+          // provincia: res.lugar?.split(",")[1] ? res.lugar?.split(",")[1] : "",
+          // ciudad: res.lugar?.split(",")[2] ? res.lugar?.split(",")[2] : "",
           fecha_inicio: this.datepipe.transform(res.fecha_inicio, 'YYYY-MM-dd'),
           fecha_fin: this.datepipe.transform(res.fecha_fin, 'YYYY-MM-dd')
+
         });
 
         res.documentos.forEach((documento: any) => this.documentosArray.push(documento))
@@ -133,7 +137,6 @@ export class EditarComisionComponent implements OnInit {
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg; // mensaje desde el back
-          //this.loading = false;
         }
       },
     });
@@ -169,7 +172,6 @@ export class EditarComisionComponent implements OnInit {
     fecha_1 = new Date(this.formatter.format(fecha_1));
     fecha_2 = new Date(this.formatter.format(fecha_2));
     return DiasHabiles(fecha_1, fecha_2);
-
   }
 
   onDateSelection(date: NgbDate) {
@@ -186,7 +188,6 @@ export class EditarComisionComponent implements OnInit {
     this.editarComisionForm.patchValue({
       fecha_inicio: this.formatter.format(this.fromDate),
       fecha_fin: this.formatter.format(this.toDate)
-
     });
   }
 
@@ -200,7 +201,6 @@ export class EditarComisionComponent implements OnInit {
   isRange(date: NgbDate) {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
       this.isHovered(date);
-
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
@@ -219,7 +219,6 @@ export class EditarComisionComponent implements OnInit {
     if (file) {
       this.files.splice(index, 1, file);
     }
-    console.log(this.files);
   }
 
 
@@ -235,6 +234,16 @@ export class EditarComisionComponent implements OnInit {
     return size < 2 * 1024 * 1024;
   }
 
+  validTipoArchivo() {
+    const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
+    
+    let flag; 
+    this.files.forEach((file) => {
+      flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
+    })
+    return flag;
+
+  }
 
 
   isInvalidForm(controlName: string) {
@@ -290,9 +299,10 @@ export class EditarComisionComponent implements OnInit {
 
     // Se detiene aqui si el formulario es invalido
     if (this.editarComisionForm.invalid) {
-      console.log('invalid form')
       return;
     }
+
+    let provincia =  this.provincia.name ?  this.provincia.name : "";
 
     // Convierte los strings a fechas en UTC, y se remueve GMT 
     let fecha_inicio = new Date(this.editarComisionForm.value.fecha_inicio).toUTCString().slice(0, -4);
@@ -309,7 +319,7 @@ export class EditarComisionComponent implements OnInit {
       fecha_resolucion: new Date(this.formatter.format(this.today)),
       justificacion: this.editarComisionForm.value.justificacion,
       idioma: this.editarComisionForm.value.idioma,
-      lugar: this.pais.name + ', ' + this.provincia.name,
+      lugar: this.pais.name +', '+ provincia + ',' + this.editarComisionForm.value.ciudad,
       tipos_comision_id: this.editarComisionForm.value.tipos_comision_id
     }
 
@@ -346,6 +356,9 @@ export class EditarComisionComponent implements OnInit {
         error: (err) => {
           if (err.status === 404 || err.status === 401) {
             this.error = err.error.msg;
+          }
+          if (err.status === 400) {
+            this.error = err.error.message;
           }
         },
       });

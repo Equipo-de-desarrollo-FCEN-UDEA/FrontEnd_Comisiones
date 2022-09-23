@@ -25,8 +25,6 @@ export class ComisionesService {
     params = params.append('offset', 0);
     params = params.append('limit', 100);
 
-    console.log(params+"  parametros")
-
     return this.http.get<Comision[]>(`${this.urlEndPoint}`, {
       params:params
     })

@@ -88,19 +88,20 @@ export class BuscarPermisosService {
       .subscribe(
         (resp: any) => {
           this.PERMISOS = resp.permisos;
-          console.log(resp)
+          this._permisos$.next(this.PERMISOS);
+          this._search$.next();
         })
     }
 
   archivados(archivado: number){
     this.archivado$.next(archivado);
+    this.ngOnchanges();
   }
 
    ngOnchanges(){
     this.permisosSvc.scopeGetPermisos(this.archivado$.getValue())
     .subscribe(
       (resp: any) => {
-        console.log(resp+"respOnchange")
         this.PERMISOS = resp.permisos;
         this._permisos$.next(this.PERMISOS);
         this._search$.next();
@@ -134,7 +135,6 @@ export class BuscarPermisosService {
     // 1. sort
     let permisos = sort(this.PERMISOS, sortColumn, sortDirection);
     
-    console.log(permisos)
     // 2. filter
     permisos = permisos.filter(permisos => matches(permisos, searchTerm, this.datepipe));
     const total = permisos.length;

@@ -57,17 +57,18 @@ export class RegistrarUsuariosComponent implements OnInit {
       correo : ['', [Validators.required, 
         //Validators.pattern(this.isCorreoValid)
       ]],
-      contrasena : ['', Validators.required],
+      contrasena : ['', [Validators.required, Validators.minLength(8),Validators.maxLength(250)]],
       nombre : ['', Validators.required],
       apellido : ['', Validators.required],
       tipo_identificacion : ['', Validators.required],
       identificacion : ['', Validators.required],
       departamentos_id : ['', Validators.required],
       telefono: ['', Validators.required],
-      escalafon: [''],
-      oficina: [''],
+      escalafon: ['', Validators.required],
+      oficina: [],
       tipo_vinculacion: [''],
-      roles_id : ['', Validators.required]
+      roles_id : ['', Validators.required],
+      confirmarContrasena: [],
     });
   }
 
@@ -78,6 +79,14 @@ export class RegistrarUsuariosComponent implements OnInit {
 
   get f() {
     return this.crearUsuarioForm.controls;
+  }
+
+  ValidatePasswords() {
+    return (
+      this.crearUsuarioForm.get('contrasena')?.touched &&
+      this.crearUsuarioForm.get('contrasena')?.value !=  this.crearUsuarioForm.get('confirmarContrasena')?.value
+    );
+    
   }
 
   onSubmit() {
@@ -106,6 +115,9 @@ export class RegistrarUsuariosComponent implements OnInit {
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg;
+        }
+        if (err.status === 400) {
+          this.error = err.error.message;
         }
       }
     });

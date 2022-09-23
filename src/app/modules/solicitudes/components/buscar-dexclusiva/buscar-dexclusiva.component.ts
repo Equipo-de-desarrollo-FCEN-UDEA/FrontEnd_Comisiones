@@ -13,27 +13,27 @@ import { Observable } from 'rxjs';
 })
 export class BuscarDexclusivaComponent {
   dedicaciones$: Observable<Dedicacion[]>;
-  total$:Observable<number>;
+  total$: Observable<number>;
   ultimoElemento = ultimoElement
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
-  public rol : string = localStorage.getItem('rol') || '';
+  public rol: string = localStorage.getItem('rol') || '';
 
   constructor(
     public Buscarservice: BuscarDedicacionService,
     public dedicacionService: DedicacionService
-  ) { 
+  ) {
     this.dedicaciones$ = Buscarservice.dedicaciones$,
-    this.total$ = Buscarservice.total$,
-    this.ultimoElemento = ultimoElement
+      this.total$ = Buscarservice.total$,
+      this.ultimoElemento = ultimoElement
   }
 
   // changeOption(event:any){
   //   this.Buscarservice.archivados(event.target.value);
   //   this.Buscarservice.ngOnchanges();
   // }
-  
+
   // archivarDedicacion(id:number){
   //   this.dedicacionService.Archivado(id).subscribe()
   //   this.Buscarservice.ngOnchanges()
@@ -44,7 +44,11 @@ export class BuscarDexclusivaComponent {
   //   this.Buscarservice.ngOnchanges()
   // }
 
-  onSort({column, direction}: SortEvent) {
+  refresh() {
+    this.Buscarservice.ngOnchanges();
+  }
+
+  onSort({ column, direction }: SortEvent) {
     // resetting other headers
     this.headers.forEach(header => {
       if (header.sortable !== column) {

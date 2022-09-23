@@ -26,7 +26,7 @@ export class VerComisionComponent {
   error:string = '';
   isDelete = false;
 
-  public comision!: Comision;
+  public comision: Comision | undefined;
 
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
@@ -57,7 +57,6 @@ export class VerComisionComponent {
     this.activateRoute.params.subscribe({
         next: (paramId) => {
            const id = paramId['id'];
-           console.log(id)
             if (id) {
               this.comisionesSvc.getComision(id).subscribe({
                 next: (res) => {

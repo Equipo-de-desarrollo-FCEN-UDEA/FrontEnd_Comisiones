@@ -1,112 +1,104 @@
 <div class="container-inside shadow-sm pt-4 pl-4 pr-2 mb-5 p-4 m-3 mt-5 bg-white rounded">
   <div class="mb-3 d-flex justify-content-between p-2">
     <div class="d-flex">
-      <label 
-        for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
+      <label for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
       </label>
-  
-      <input id="table-complete-search" type="text" 
-        class="form-control" name="searchTerm"
+
+      <input id="table-complete-search" type="text" class="form-control" name="searchTerm"
         [(ngModel)]="Buscarservice.searchTerm">
-    </div>
-  
-      <span class="col col-form-label" 
-        style="padding-left: 1em"
-        *ngIf="Buscarservice.loading$ | async">Cargando...
+      <button class="btn btn-info" type="button" (click)="refresh()"> <i class="fas fa-refresh"></i> </button>
+
+      <span class="col-form-label " style="padding-left: 1em" *ngIf="Buscarservice.loading$ | async">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
       </span>
-      
-      <!-- <select class="form-select" 
+    </div>
+
+
+
+
+    <!-- <select class="form-select" 
         (change)="changeOption($event)" style="width: auto">
         <option value="0">No archivados</option>
         <option value="1">Archivados</option>
         <option value="2">Todos</option>
       </select> -->
-    </div>
+  </div>
 
-    <hr/>
+  <hr />
 
-    <form class="table-responsive">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Descripción</th>
-              <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
-              <th scope="col" sortable="apellido" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
-              <!-- <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th> -->
-              <th> </th>
-            </tr>
-          </thead>
-  
-          <tbody>
-            <tr *ngFor="let dedicacion of dedicaciones$ | async"
-              [routerLink]="['/dedicaciones/ver-dedicacion', dedicacion.id]"
-              class="click-table">
-              
-              <th scope="row">{{ dedicacion.id }}</th>
-              
-              <td>
-                <ngb-highlight 
-                  [result]="dedicacion.descripcion" 
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
+  <form class="table-responsive">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Descripción</th>
+            <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
+              Nombre</th>
+            <th scope="col" sortable="apellido" (sort)="onSort($event)"
+              *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
+            <!-- <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th> -->
+            <th> </th>
+          </tr>
+        </thead>
 
-              <td>
-                <ngb-highlight 
-                  [result]="(dedicacion.createdAt | date:'yyyy-MM-dd')?.toString()"
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-              
-             
-  
-              <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
-                <ngb-highlight 
-                  [result]="dedicacion.usuarios.nombre" 
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
-                <ngb-highlight 
-                  [result]="dedicacion.usuarios.apellido" 
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <td>
-                <ngb-highlight 
-                  [result]="dedicacion.usuarios.departamentos.nombre" 
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <td>
-                <ngb-highlight 
-                  [result]="dedicacion.usuarios.departamentos.facultades.nombre"
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <!-- <td>
+        <tbody>
+          <tr *ngFor="let dedicacion of dedicaciones$ | async"
+            [routerLink]="['/dedicaciones/ver-dedicacion', dedicacion.id]" class="click-table">
+
+            <th scope="row">{{ dedicacion.id }}</th>
+
+            <td>
+              <ngb-highlight [result]="dedicacion.descripcion" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight [result]="(dedicacion.createdAt | date:'yyyy-MM-dd')?.toString()"
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+
+
+            <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
+              <ngb-highlight [result]="dedicacion.usuarios.nombre" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
+              <ngb-highlight [result]="dedicacion.usuarios.apellido" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight [result]="dedicacion.usuarios.departamentos.nombre" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight [result]="dedicacion.usuarios.departamentos.facultades.nombre"
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <!-- <td>
                 <button *ngIf="dedicacion.archivado == 0" type="button" (click)="archivarDedicacion(dedicacion.id);$event.stopPropagation()" class="btn btn-info">Archivar</button>
                 <button *ngIf="dedicacion.archivado == 1" type="button" (click)="desarchivarDedicacion(dedicacion.id);$event.stopPropagation()" class="btn btn-info">Desarchivar</button>
               </td> -->
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
+    </div>
 
-      <hr/>
-      
+    <hr />
+
     <div class="d-flex justify-content-between p-2">
-      <ngb-pagination 
-        [collectionSize]="(total$ | async)!" 
-        [(page)]="Buscarservice.page"
+      <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="Buscarservice.page"
         [pageSize]="Buscarservice.pageSize">
       </ngb-pagination>
     </div>

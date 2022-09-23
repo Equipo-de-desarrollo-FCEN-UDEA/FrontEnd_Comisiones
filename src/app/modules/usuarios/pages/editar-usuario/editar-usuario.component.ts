@@ -7,6 +7,7 @@ import { DepartamentoService } from '@services/departamentos/departamento.servic
 import { LoaderService } from '@services/interceptors/loader.service';
 import { RolService } from '@services/roles/rol.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
+import { escalafon } from '@shared/data/escalafon';
 import { tiposId } from '@shared/data/tipos-id';
 import { Observable, take } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -21,6 +22,7 @@ export class EditarUsuarioComponent implements OnInit {
   public usuario!: Usuario;
   public usuarioResponse : UsuarioResponse | undefined;
 
+  public escalafon= escalafon
   public id: Number | string = 0;
   public tiposId = tiposId;
   public isLoading = this.loadingSvc.isLoading;
@@ -29,6 +31,7 @@ export class EditarUsuarioComponent implements OnInit {
   public rol: string = localStorage.getItem('rol') || '';
   public roles$: Observable<Rol[]>
   private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
+  public getId: Number | string = 0;
 
 
   constructor(
@@ -42,14 +45,14 @@ export class EditarUsuarioComponent implements OnInit {
     private rolesSvc: RolService
   ) {
     this.roles$ = this.rolesSvc.getRoles();
-    this.activateRoute.params.pipe(take(1)).subscribe(params => this.id = params['id']);
-    this.usuarioSvc.getUsuariobyId(this.id as number).subscribe({
+    this.activateRoute.params.pipe(take(1)).subscribe(params => this.getId = params['id']);
+
+    this.usuarioSvc.getUsuariobyId(this.getId as number).subscribe({
       next: res => {
         this.usuarioResponse = res;
         this.formUpdate.patchValue(this.usuarioResponse);
       },
       error: (err) => {
-        console.log(err.status);
         if (err.status == 401) {
           Swal.fire({
             title: 'No autorizado',
@@ -67,11 +70,15 @@ export class EditarUsuarioComponent implements OnInit {
     nombre: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     apellido: ['', [Validators.minLength(3), Validators.maxLength(250)]],
     tipo_identificacion: ['', [Validators.maxLength(250)]],
-    identificacion: [0, [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
-    // departamentos_id : ['', Validators.required],
+    identificacion: [' ', [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
+    telefono: ['', [Validators.required]],
+    oficina: ['', [Validators.required]],
+    tipo_vinculacion: ['', [Validators.required]],
+    departamentos_id : ['', Validators.required],
     // contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
     // validarcontrasena: ['',[Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
-    roles_id: [NaN, Validators.required]
+    roles_id: [NaN, Validators.required],
+    escalafon: ['', Validators.required]
   });
 
   ngOnInit(): void {
@@ -86,28 +93,25 @@ export class EditarUsuarioComponent implements OnInit {
   submitUpdate() {
     this.submitted = true;
     const usuario = this.formUpdate.value;
-    console.log(this.formUpdate.value);
-    this.usuarioSvc.updateUsuario({ id: this.id, ...usuario }).subscribe({
+    this.usuarioSvc.updateUsuario({ id: this.getId, ...usuario }).subscribe({
       next: (res: any) => {
         Swal.fire({
           title: 'Usuario actualizado con éxito',
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['usuarios/ver-usuario', this.id])
+          this.router.navigate(['usuarios/ver-usuario', this.getId])
         })
       },
       error: (err: any) => {
-        Swal.fire({
-          title: 'Algo ocurrió mal vuelve a intentar',
-          text: err.msg,
-          confirmButtonText: 'Aceptar'
-        })
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+        if (err.status === 400) {
+          this.error = err.error.message;
+        }
       }
     }
     );
-
   }
-
-
 }

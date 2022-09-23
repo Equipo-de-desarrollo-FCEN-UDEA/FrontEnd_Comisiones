@@ -24,8 +24,6 @@ export class PermisoService {
     params = params.append('offset', offset? offset : 0);
     params = params.append('limit', limit? limit: 100);
 
-    console.log(params+" parametros")
-
     return this.http.get<Permiso[]>(`${this.urlEndPoint}`, {
       params:params
     })

@@ -5,8 +5,6 @@
         <h2 class="formTitle text-center m-2 mb-4">
             FORMATO DE EVALUACIÓN DE PROPUESTA O PROYECTO DE DEDICACIÓN EXCLUSIVA
         </h2>
-
-        <h5>Datos del profesor solicitante</h5>
         <!-- <div class="alert alert-info">
             <p>
                 Por favor cerciorese que los datos a continuación sean correctos.
@@ -36,23 +34,6 @@
             <label for="floatingdId" class="formLabel">Número de identificación</label>
         </div> -->
 
-        <div class="row">
-            <div class="col-lg-6 formfloatig">
-                <input id="floatingExt" placeholder=" " formControlName="extension_oficina" class="form-control">
-                <label for="floatingExt" class="formLabel" style="padding-left:1em;"> Número de extención
-                    oficina</label>
-            </div>
-
-            <div class="col-lg-6 formfloatig">
-
-                <input id="floatingcelular" formControlName="celular" class="form-control" type="number" placeholder=" "
-                    [ngClass]="{'is-invalid': fBasicInfo.controls['celular'].invalid }">
-                <label style="padding-left:1em;" for="floatingcelular" class="formLabel"> Número de teléfono
-                    celular</label>
-
-            </div>
-        </div>
-
 
 
         <!-- <div class="formfloatig">
@@ -76,7 +57,7 @@
                 <div class="formfloatig">
                     <input id="floatingTiempo" formControlName="tiempo_solicitado" class="form-control" type="number"
                         placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('tiempo_solicitado')}" required>
-                    <label for="floatingTiempo" class="formLabel">Tiempo solicitado<span style="color:red">*</span>
+                    <label for="floatingTiempo" class="formLabel">Tiempo solicitado (meses)<span style="color:red">*</span>
                     </label>
                 </div>
             </div>
@@ -95,14 +76,14 @@
             </div>
         </div>
 
-        <h5>Documento comprobante de inscripción en el Sistema Universitario de Investigación (acta, contrato u otro):
+        <h5>Descripción del documento comprobante de inscripción en el Sistema Universitario de Investigación (acta, contrato u otro):
         </h5>
 
         <div class="formfloatig">
             <textarea id="floatingComprobante" formControlName="descripcion_comprobante" class="form-control"
                 placeholder=" " [ngClass]="{'is-invalid': isInvalidForm('descripcion_comprobante')}" rows="2">
             </textarea>
-            <label for="floatingComprobante" class="formLabel">Comprobante de inscripción<span
+            <label for="floatingComprobante" class="formLabel">Descripción<span
                     style="color:red">*</span>
             </label>
         </div>
@@ -336,7 +317,7 @@
         </div>
 
         <div class="d-grid gap-2 m-3">
-            <button class="btn btn-add" id="Enviar" (submit)="true"
+            <button class="btn btn-add" id="Enviar" type="submit" (submit)="true"
             [disabled]="fBasicInfo.invalid || (isLoading|async)">
             <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
                 aria-hidden="true"></span>

@@ -1,68 +1,60 @@
 <div class="container-inside shadow-sm pt-4 pl-4 pr-2 mb-5 p-4 m-3 mt-5 bg-white rounded">
-  <div class="mb-3 d-flex justify-content-between p-2">
+  <div class="mb-3 p-2 d-flex justify-content-between">
     <div class="d-flex">
-      <label 
-        for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
+      <label for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
       </label>
+        <input id="table-complete-search" type="text" class="form-control" name="searchTerm"
+        [(ngModel)]="Buscarservice.searchTerm">
 
-        <input id="table-complete-search" type="text" 
-          class="form-control" name="searchTerm"
-          [(ngModel)]="Buscarservice.searchTerm">
+        <button class="btn btn-info" type="button" (click)="refresh()"> <i class="fas fa-refresh"></i> </button>
+
+          <span class="col-form-label " style="padding-left: 1em" *ngIf="Buscarservice.loading$ | async"> <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          </span>
+  
+          
     </div>
-
-      <span class="col col-form-label" 
-        style="padding-left: 1em"
-        *ngIf="Buscarservice.loading$ | async">Cargando...
-      </span>
-
-      <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')"
-        (change)="changeOption($event)" style="width: auto">
-        <option value="0">No archivados</option>
-        <option value="1">Archivados</option>
-        <option value="2">Todos</option>
-      </select>
+    
   </div>
 
-    <hr/>
+  <hr />
 
-    <form class="table-responsive">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead class="">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Estado</th>
-              <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Nombre</th>
-              <th scope="col" sortable="apellido" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
-              <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Descargas</th>
-              <th> </th>
-            </tr>
-          </thead>
-  
-          <tbody>
-            <tr *ngFor="let comision of comisiones$ | async"
-              [routerLink]="['/comisiones/ver-comision', comision.id]"
-              class="click-table">
-              
-              <th scope="row">{{ comision.id }}</th>
-              
-              <td>
-                <ngb-highlight 
-                  [result]="comision.tipos_comision.nombre" 
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <td>
-                <ngb-highlight 
-                  [result]="ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre"
-                  [term]="Buscarservice.searchTerm" 
-                  class="badge badge-pill pill" 
-                  [ngClass]="{
+  <form class="table-responsive">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Tipo</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Estado</th>
+            <th scope="col" sortable="createdAt" (sort)="onSort($event)">Fecha</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
+              Nombre</th>
+            <th scope="col" sortable="apellido" (sort)="onSort($event)"
+              *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="(rol == 'SECRETARIA DECANATURA' || rol == 'DECANATURA')">
+              Estado</th>
+            <th> </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let comision of comisiones$ | async" [routerLink]="['/comisiones/ver-comision', comision.id]"
+            class="click-table">
+
+            <th scope="row">{{ comision.id }}</th>
+
+            <td>
+              <ngb-highlight [result]="comision.tipos_comision.nombre" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight [result]="ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre"
+                [term]="Buscarservice.searchTerm" class="badge badge-pill pill" [ngClass]="{
                     'bg-solicitada':
                       ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'SOLICITADA',
                     'bg-aprobada': 
@@ -76,62 +68,64 @@
                     'bg-rechazada-coordinacion':
                       ultimoElemento(comision.intermediate_comisiones).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN'
                     }">
-                </ngb-highlight>
-              </td>
-  
-              <td>
-                <ngb-highlight 
-                  [result]="(ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd')?.toString()"
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
-                <ngb-highlight 
-                  [result]="comision.usuarios.nombre" 
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
-                <ngb-highlight 
-                  [result]="comision.usuarios.apellido" 
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <td>
-                <ngb-highlight 
-                  [result]="comision.usuarios.departamentos.nombre" 
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
-  
-              <td>
-                <ngb-highlight 
-                  [result]="comision.usuarios.departamentos.facultades.nombre"
-                  [term]="Buscarservice.searchTerm">
-                </ngb-highlight>
-              </td>
+              </ngb-highlight>
+            </td>
 
-              <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
-                <button *ngIf="comision.archivado == 0" type="button" (click)="archivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Archivar</button>
-                <button *ngIf="comision.archivado == 1" type="button" (click)="desarchivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Desarchivar</button>
-              </td>
-          </tbody>
-        </table>
-        
+            <td>
+              <ngb-highlight
+                [result]="(ultimoElemento(comision.intermediate_comisiones).createdAt | date:'yyyy-MM-dd')?.toString()"
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
+              <ngb-highlight [result]="comision.usuarios.nombre" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
+              <ngb-highlight [result]="comision.usuarios.apellido" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight [result]="comision.usuarios.departamentos.nombre" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td>
+              <ngb-highlight [result]="comision.usuarios.departamentos.facultades.nombre"
+                [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+
+            <td *ngIf="(rol == 'SECRETARIA DECANATURA' || rol == 'DECANATURA')">
+              <button *ngIf="comision.archivado == 0" type="button"
+                (click)="archivarComision(comision.id);$event.stopPropagation()" class="btn btn-info">Archivar</button>
+              <button *ngIf="comision.archivado == 1" type="button"
+                (click)="desarchivarComision(comision.id);$event.stopPropagation()"
+                class="btn btn-info">Desarchivar</button>
+            </td>
+        </tbody>
+      </table>
+
+    </div>
+
+    <hr />
+
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="Buscarservice.page"
+        [pageSize]="Buscarservice.pageSize">
+      </ngb-pagination>
+      <div class="d-flex justify-content-end">
+        <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" (change)="changeOption($event)"
+        style="width: auto">
+        <option value="0">No archivados</option>
+        <option value="1">Archivados</option>
+        <option value="2">Todos</option>
+        </select>
       </div>
+    </div>
 
-      <hr />
-
-      <div class="d-flex justify-content-between p-2">
-        <ngb-pagination 
-          [collectionSize]="(total$ | async)!" 
-          [(page)]="Buscarservice.page"
-          [pageSize]="Buscarservice.pageSize">
-        </ngb-pagination>
-      </div>
-
-    </form>
+  </form>
 </div>

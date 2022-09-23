@@ -29,12 +29,18 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
   selectedAccion : string[] = [];
 
+
   acciones : any[] = [];
+
+  selectedIndicadores : string[] = [];
+
+  indicadores: any[] = [];
 
   logosurl = prefix + 'logos/';
 
   objetivos$: Subject<any[] | undefined> = new Subject();
   acciones$: Subject<any[] | undefined> = new Subject();
+  inidcadores$: Subject<any[] | undefined> = new Subject();
 
   constructor(
     private fb: FormBuilder,
@@ -56,7 +62,7 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
           accion: ['', Validators.required]
         }),
         this.fb.group({
-          indicador: this.fb.array([this.indicadorgroup()], [Validators.required])
+          indicador: ['', Validators.required]
         })
       ])}
     );
@@ -73,7 +79,7 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
     }
     let temas = ''
     for (let i = 0; i < this.selectedTemas.length; i++) {
-      temas += ' | ' + this.selectedTemas[i].titulo 
+      temas += ' ' + this.selectedTemas[i].titulo 
     }
     this.getSteps.patchValue([{temas: temas}])
   }
@@ -90,7 +96,7 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
     
     let objetivos = ''
     for (let i = 0; i < this.selectedObjetivos.length; i++) {
-      objetivos+= ' | ' + this.selectedObjetivos[i].descripcion;
+      objetivos+= ' ' + this.selectedObjetivos[i].descripcion;
     }
     this.getSteps.patchValue([null, {objetivo: objetivos}]);
   }
@@ -107,41 +113,41 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
     let acciones =''
     for (let i = 0; i < this.selectedAccion.length; i++) {
-      acciones+= ' | ' + this.acciones[i]
+      acciones+= ' ' + this.acciones[i]
     }
     this.getSteps.patchValue([null,null,{accion:acciones}]);
   }
+
+  selectIndicador(io:string, value: string) {
+    let index = this.selectedIndicadores.indexOf(io);
+    if (index != -1) {
+      this.selectedIndicadores.splice(index, 1);
+      this.indicadores.slice(index, 1);
+    } else {
+      this.selectedIndicadores.push(io)
+      this.indicadores.push(value);
+    }
+
+    let indicadores =''
+    for (let i = 0; i < this.selectedIndicadores.length; i++) {
+      indicadores+= ' ' + this.indicadores[i]
+    }
+    this.getSteps.patchValue([null,null,null,{indicador:indicadores}]);
+  }
+
 
   get getSteps() : FormArray {
     return this.FormPlan.get('steps') as FormArray;
   }
 
+
   get formArray(): AbstractControl {
     return this.FormPlan.get('steps') as AbstractControl;
   }
 
+
   submit() {
     this.activeModal.close(this.FormPlan.value);
-  }
-
-    indicadorgroup() {
-    return this.fb.group({
-      indicador: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    });
-  }
-
-  get indicadorArr(): FormArray {
-    const array = this.formArray
-    return array.get('3')?.get('indicador') as FormArray;
-  }
-
-  addInputIndicador() {
-    this.indicadorArr.push(this.indicadorgroup());
-  }
-
-  removeInput(controlName: string, index: number) {
-    const control = this.indicadorArr;
-    control.removeAt(index);
   }
 
 }

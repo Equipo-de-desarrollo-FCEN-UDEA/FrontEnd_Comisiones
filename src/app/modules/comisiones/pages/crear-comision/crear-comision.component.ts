@@ -171,6 +171,9 @@ export class CrearComisionComponent implements OnInit {
     return this.creaComisionForm.controls;
   }
 
+  isInvalidForm(controlName: string) {
+    return this.creaComisionForm.get(controlName)?.invalid && this.creaComisionForm.get(controlName)?.touched;
+  }
 
   // --------------------------------------
   // -------- ARCHIVOS - ANEXOS -----------
@@ -195,9 +198,18 @@ export class CrearComisionComponent implements OnInit {
     return size < 2 * 1024 * 1024;
   }
 
-  isInvalidForm(controlName: string) {
-    return this.creaComisionForm.get(controlName)?.invalid && this.creaComisionForm.get(controlName)?.touched;
+  validTipoArchivo() {
+    const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
+    
+    let flag = true; 
+    this.files.forEach((file) => {
+      flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
+    })
+    return flag;
+
   }
+
+
 
   // --------------------------------------
   // -------- LUGAR - PAISES - CIUDAD -----
@@ -236,8 +248,6 @@ export class CrearComisionComponent implements OnInit {
     }
 
     let provincia =  this.provincia.name ?  this.provincia.name : "";
-    let ciudad = this.ciudades ?  this.ciudades : "";
-
 
     // Convierte los strings a fechas en UTC, y se remueve GMT 
     let fecha_inicio = new Date(this.creaComisionForm.value.fecha_inicio).toUTCString().slice(0, -4);
@@ -251,14 +261,12 @@ export class CrearComisionComponent implements OnInit {
     const body = {
       fecha_inicio: fecha_inicio_utc,
       fecha_fin: fecha_fin_utc,
-      //fecha_resolucion: new Date(this.formatter.format(this.today)),
       justificacion: this.creaComisionForm.value.justificacion,
       idioma: this.creaComisionForm.value.idioma,
-      lugar: this.pais.name +', '+ provincia,
+      lugar: this.pais.name +', '+ provincia + ',' + this.creaComisionForm.value.ciudad,
       tipos_comision_id: this.creaComisionForm.value.tipos_comision_id
     }
 
-    console.log(body)
 
     const reqBody: FormData = new FormData();
     reqBody.append('tipos_comision_id', body.tipos_comision_id);
@@ -271,7 +279,7 @@ export class CrearComisionComponent implements OnInit {
     for (const file of this.files) {
       reqBody.append('archivo', file, file.name) 
     }
-    
+
     this.comisionesSvc.postComision(reqBody).subscribe({
       next: (res) => { 
         Swal.fire({
@@ -286,8 +294,12 @@ export class CrearComisionComponent implements OnInit {
         );
       },
       error: (err) => {
+
         if (err.status === 404 || err.status === 401) {
           this.error = err.error.msg;
+        }
+        if (err.status === 400) {
+          this.error = err.error.message;
         }
       }
     });

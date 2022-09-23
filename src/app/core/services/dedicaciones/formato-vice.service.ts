@@ -36,8 +36,7 @@ export class FormatoViceService {
     &productos=${JSON.stringify(dexclusiva.productos.map((x: any) => x.producto))}
     &dedicaciones_id=${id}
     `;
-    console.log(body);
-    console.log(prefix);
+
     return this.http.post(`${prefix}`+'formatovice', body, {
       observe: 'response',
       responseType: 'blob',
@@ -45,9 +44,8 @@ export class FormatoViceService {
     }).pipe(
       tap(
         (content: any) => {
-          console.log(content.body);
           const blob = new Blob([content.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-          saveAs(blob, 'dexclusiva.xlsx');
+          saveAs(blob, 'formato-dedicacion-exclusiva.xlsx');
         }
       ),
       map(

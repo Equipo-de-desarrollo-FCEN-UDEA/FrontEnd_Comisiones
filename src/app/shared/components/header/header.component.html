@@ -9,7 +9,7 @@
     <i class="fa fa-bars" style="color: rgb(255, 255, 255)"></i>
   </button>
   <div class="logo">
-    <a routerLink="home">
+    <a routerLink="/home">
       <img [src]="prefix+'logos/'+'Logo+Facultad+de+Ciencias+Exactas+y+Naturales-blanco.png'" alt="Logo udea" width="180px" >
     </a>
   </div>
@@ -46,7 +46,7 @@
   >
     <div class="navbar-brand d-flex">
       <li
-        class="nav-item dropdown"
+        class="nav-item dropdown header-btn"
         *ngIf="
           !(
             usuario?.roles?.nombre != 'EMPLEADO' &&
@@ -88,7 +88,7 @@
           </li>
         </ul>
       </li>
-      <li class="nav-item">
+      <li class="nav-item header-btn">
         <a
           style="color: #fff"
           class="nav-link active"
@@ -98,7 +98,7 @@
         >
       </li>
       <li
-        class="nav-item"
+        class="nav-item header-btn"
         *ngIf="
           usuario?.roles?.nombre != 'EMPLEADO' &&
           usuario?.roles?.nombre != 'PROFESOR'
@@ -113,7 +113,7 @@
         >
       </li>
       <li
-        class="nav-item"
+        class="nav-item header-btn"
         *ngIf="
           usuario?.roles?.nombre != 'EMPLEADO' &&
           usuario?.roles?.nombre != 'PROFESOR'
@@ -243,6 +243,7 @@
                       type="button"
                       data-bs-dismiss="offcanvas"
                       aria-label="Close"
+                      *ngIf="usuario?.roles?.nombre == 'PROFESOR'"
                       [routerLink]="['/dedicaciones/crear-dedicacion']"
                       >Dedicación Exclusiva</a
                     >

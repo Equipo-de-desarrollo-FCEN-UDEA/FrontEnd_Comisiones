@@ -108,7 +108,6 @@ export class LoginComponent implements OnInit {
 
   // click(){
   //   this.isCollapsed = !this.isCollapsed;
-  //   console.log(this.isCollapsed)
   // }
 
   get f() {
@@ -125,7 +124,6 @@ export class LoginComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.formLogin.invalid) {
-      console.log('invalido login')
       return;
     }
 

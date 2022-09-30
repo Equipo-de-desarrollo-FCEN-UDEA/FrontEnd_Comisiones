@@ -15,6 +15,7 @@ import { EditarDedicacionComponent } from './pages/editar-dedicacion/editar-dedi
 import { VerDedicacionComponent } from './pages/ver-dedicacion/ver-dedicacion.component';
 import { SharedModule } from '@shared/shared.module';
 import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
+import { EstadosDedicacionComponent } from './pages/estados/estados.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrol
     CrearDedicacionComponent,
     EditarDedicacionComponent,
     VerDedicacionComponent,
-    PlanDesarrolloInstitucionalComponent
+    PlanDesarrolloInstitucionalComponent,
+    EstadosDedicacionComponent
   ],
   imports: [
     CommonModule,

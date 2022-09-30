@@ -40,4 +40,8 @@ export class PlanTrabajoService {
       )
     );
   }
+
+  getPlanTrabajo(id:number) {
+    return this.http.get<any>(this.prefix+`/${id}`)
+  }
 }

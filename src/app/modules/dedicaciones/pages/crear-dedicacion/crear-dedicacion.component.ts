@@ -31,7 +31,7 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
   ) {
    }
   ngOnChanges(changes: SimpleChanges): void {
-    
+    console.log(this.cartaSuccess$.observed)
   }
 
   ngOnInit(): void {

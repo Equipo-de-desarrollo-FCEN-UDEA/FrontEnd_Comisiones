@@ -10,6 +10,8 @@ import { tap, map } from 'rxjs';
 })
 export class FormatoViceService {
 
+  private prefix = prefix + 'formatosvice'
+
   constructor(
     private http: HttpClient
   ) { }
@@ -37,7 +39,7 @@ export class FormatoViceService {
     &dedicaciones_id=${id}
     `;
 
-    return this.http.post(`${prefix}`+'formatovice', body, {
+    return this.http.post(this.prefix, body, {
       observe: 'response',
       responseType: 'blob',
       headers: headers
@@ -52,5 +54,9 @@ export class FormatoViceService {
         () => true
       )
     );
+  }
+
+  getFormatoVice(id:number) {
+   return this.http.get<any>(this.prefix+`/${id}`)
   }
 }

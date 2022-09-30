@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { BehaviorSubject } from 'rxjs';
+import { PlanTrabajoComponent } from '../../components/plan-trabajo/plan-trabajo.component';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 
 @Component({
@@ -12,15 +13,21 @@ import { CrearComisionComponentsService } from '../../services/crear-comision-co
 })
 export class EditarDedicacionComponent implements OnInit {
 
+  @ViewChild(PlanTrabajoComponent) child!: PlanTrabajoComponent;
+
   @Input()
   isLinear = false;
 
   @Input()
   isEditable = true;
 
-  public text = 'Hello world!';
+  oneClick = 0
+
+  public text : string = '';
 
   id$ : BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
+
+  public dedicacion: any;
 
   constructor(
     private dedicacionSvc : DedicacionService,
@@ -37,6 +44,11 @@ export class EditarDedicacionComponent implements OnInit {
       this.dedicacionSvc.getDedicacion(id).subscribe(
         (data: DedicacionDTO) => {
           dedicacion = data;
+          this.dedicacion = dedicacion
+          this.text = data.cartas?.body || '';
+          this.comunicacionSvc.editCarta(data.cartas);
+          this.comunicacionSvc.editFormato(data.formatosvice)
+          this.comunicacionSvc.editPlan(data.plantrabajo)
         });
 
       
@@ -44,6 +56,15 @@ export class EditarDedicacionComponent implements OnInit {
 
     
   }
+
+
+  planTrabajo(){
+    if(this.oneClick==0){
+      this.child.fillPlan()
+      this.oneClick+=1;
+    } 
+  }
+
 
   ngOnInit(): void {
   

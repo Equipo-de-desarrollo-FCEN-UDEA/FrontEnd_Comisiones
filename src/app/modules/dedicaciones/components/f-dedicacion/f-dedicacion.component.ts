@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Dexclusiva, FormatoVice } from '@interfaces/dedicaciones/formatovice';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Dexclusiva, FormatosviceInside, FormatoVice } from '@interfaces/dedicaciones/formatovice';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -23,9 +23,13 @@ import { PlanDesarrolloInstitucionalComponent } from '../plan-desarrollo-institu
   templateUrl: './f-dedicacion.component.html',
   styleUrls: ['./f-dedicacion.component.scss']
 })
-export class FDedicacionComponent implements OnInit {
+export class FDedicacionComponent implements OnInit, AfterViewInit {
 
-  @Input() Dedicacion: Dexclusiva | null = null;
+  private _editing : boolean = false;
+
+  @Input() set editing(value: boolean){
+    this._editing = value
+  }
 
 
   isLoading: Subject<boolean> = this.loadingSvc.isLoading;
@@ -88,9 +92,23 @@ export class FDedicacionComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    if (this.Dedicacion) {
-      this.fBasicInfo.patchValue(this.Dedicacion);
-    }
+  }
+
+  ngAfterViewInit(): void {
+    this.comunicationSvc.editFormato$.subscribe(
+      (formato: FormatosviceInside | null) => {
+        if (formato){
+          this.formatoSvc.getFormatoVice(formato.id).subscribe(
+            (formato : any) =>{
+              console.log(formato)
+              // this.fBasicInfo.patchValue(formato)
+              //Discutir backend
+              
+            }
+          )
+        }
+      }
+    )
   }
 
   onSubmit() {

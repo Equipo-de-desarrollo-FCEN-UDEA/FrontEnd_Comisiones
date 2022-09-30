@@ -3,19 +3,20 @@
     <div class="d-flex">
       <label for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
       </label>
-        <input id="table-complete-search" type="text" class="form-control" name="searchTerm"
+      <input id="table-complete-search" type="text" class="form-control" name="searchTerm"
         [(ngModel)]="Buscarservice.searchTerm">
 
-        <button class="btn btn-info" type="button" (click)="refresh()"> <i class="fas fa-refresh"></i> </button>
+      <button class="btn btn-info" type="button" (click)="refresh()"> <i class="fas fa-refresh"></i> </button>
 
-          <span class="col-form-label " style="padding-left: 1em" *ngIf="Buscarservice.loading$ | async"> <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-          </span>
-  
-          
+      <span class="col-form-label " style="padding-left: 1em" *ngIf="Buscarservice.loading$ | async">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </span>
+
+
     </div>
-    
+
   </div>
 
   <hr />
@@ -35,7 +36,8 @@
               *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
-            <th scope="col" sortable="nombre" (sort)="onSort($event)" *ngIf="(rol == 'SECRETARIA DECANATURA' || rol == 'DECANATURA')">
+            <th scope="col" sortable="nombre" (sort)="onSort($event)"
+              *ngIf="(rol == 'SECRETARIA DECANATURA' || rol == 'DECANATURA')">
               Estado</th>
             <th> </th>
           </tr>
@@ -119,10 +121,10 @@
       </ngb-pagination>
       <div class="d-flex justify-content-end">
         <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" (change)="changeOption($event)"
-        style="width: auto">
-        <option value="0">No archivados</option>
-        <option value="1">Archivados</option>
-        <option value="2">Todos</option>
+          style="width: auto">
+          <option value="0">No archivados</option>
+          <option value="1">Archivados</option>
+          <option value="2">Todos</option>
         </select>
       </div>
     </div>

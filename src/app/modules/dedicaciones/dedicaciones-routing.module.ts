@@ -4,6 +4,7 @@ import { RolGuard } from '@guards/rol.guard';
 import { RoladminGuard } from '@guards/roladmin.guard';
 import { CrearDedicacionComponent } from './pages/crear-dedicacion/crear-dedicacion.component';
 import { EditarDedicacionComponent } from './pages/editar-dedicacion/editar-dedicacion.component';
+import { EstadosDedicacionComponent } from './pages/estados/estados.component';
 import { VerDedicacionComponent } from './pages/ver-dedicacion/ver-dedicacion.component';
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'ver-dedicacion/:id',
     component: VerDedicacionComponent
+  },
+  {
+    path: 'asociar-estado/:id',
+    component: EstadosDedicacionComponent
   }
 ];
 

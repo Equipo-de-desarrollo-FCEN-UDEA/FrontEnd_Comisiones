@@ -1,22 +1,30 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { PlanTrabajoService } from '@services/dedicaciones/plan-trabajo.service';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { empty, Subject } from 'rxjs';
-import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
+import { PlanTrabajo, PlanTrabajoInside } from '@interfaces/dedicaciones/plantrabajo';
 import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
 import Swal from 'sweetalert2';
 import { AmazingTimePickerModule, AmazingTimePickerService } from 'amazing-time-picker';
+
 
 @Component({
   selector: 'app-plan-trabajo',
   templateUrl: './plan-trabajo.component.html',
   styleUrls: ['./plan-trabajo.component.scss']
 })
-export class PlanTrabajoComponent implements OnInit {
 
-  @Input() PlanEdit : PlanTrabajo | null = null;
+
+export class PlanTrabajoComponent implements OnInit {
+  private _editing: boolean = false;
+
+  @Input() set editing(value : boolean) {
+    this._editing = value
+  }
+  
+
   @ViewChild('c1')
   private c1!: ElementRef;
 
@@ -30,7 +38,6 @@ export class PlanTrabajoComponent implements OnInit {
     private comunicacionSvc: CrearComisionComponentsService,
     private atp: AmazingTimePickerService
   ) {
-    
    }
   public usuario = this.usuarioSvc.getActualUsuario();
   public semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -66,9 +73,24 @@ export class PlanTrabajoComponent implements OnInit {
       
     ))
 
-    if (this.PlanEdit) {
-      this.fPlanTrabajo.patchValue(this.PlanEdit);
-    }
+   
+  }
+
+  fillPlan():void {
+    console.log('Content en vista')
+    this.comunicacionSvc.editPlan$.subscribe(
+      (planInside: PlanTrabajoInside | null) => {
+        console.log('planinside')
+        if (planInside) {
+          this.planTrabajoSvc.getPlanTrabajo(planInside.id).subscribe(
+            (planTrabajo : PlanTrabajo) => {
+          
+              this.fPlanTrabajo.patchValue(planTrabajo)
+            }
+          )
+        }
+      }
+    )
   }
 
 

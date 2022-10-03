@@ -5,22 +5,27 @@
                 <i class="fas fa-duotone fa-envelopes-bulk"></i>
             </span>
         </ng-template>
-        <app-carta-inicio [Body]="text"></app-carta-inicio>
+        <app-carta-inicio [editing]="true"></app-carta-inicio>
     </cdk-step>
     <cdk-step label="Formulario" [editable]="isEditable" [optional]="false">
         <ng-template cdkStepLabel>
             <span class="icon is-medium">
                 <i class="fas fa-duotone fa-rectangle-list"></i>
             </span>
-    </ng-template>
+        </ng-template>
         <app-f-dedicacion (dedicacion_id)="id$"></app-f-dedicacion>
     </cdk-step>
     <cdk-step label="Personal Details" [editable]="isEditable" [optional]="false">
-        <ng-template cdkStepLabel>
-            <span class="icon is-medium">
-                <i class="fas fa-user"></i>
-            </span>
-    </ng-template>
+        <a type="button" (click)="planTrabajo()">
+            <ng-template cdkStepLabel>
+
+                <span class="icon is-medium">
+                    <i class="fas fa-user"></i>
+                </span>
+
+
+            </ng-template>
+        </a>
         <app-plan-trabajo></app-plan-trabajo>
     </cdk-step>
 </app-stepper>

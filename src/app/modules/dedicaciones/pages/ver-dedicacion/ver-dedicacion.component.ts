@@ -17,11 +17,11 @@ export class VerDedicacionComponent implements OnInit {
 
   public dedicacion$!: Observable<DedicacionDTO>;
 
+  public rol : string = localStorage.getItem('rol') || '';
 
-  public documentosArray = [];
+  public documentosArray : any[] = [];
 
   public estadoActual : string = '';
-  public rol : string = localStorage.getItem('rol') || '';
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
@@ -80,5 +80,9 @@ export class VerDedicacionComponent implements OnInit {
       }
     });
     
+  }
+
+  abrirDocumento(id: number | string) {
+
   }
 }

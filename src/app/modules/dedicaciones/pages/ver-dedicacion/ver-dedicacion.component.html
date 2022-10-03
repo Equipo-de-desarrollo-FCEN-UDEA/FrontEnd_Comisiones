@@ -1,92 +1,94 @@
-<div class="container shadow pt-4 pl-4 pr-4 mb-5 mt-5 bg-white rounded" *ngIf="dedicacion$ | async as dedicacion" style="align-items: unset;">
-    <div class="row header-row">
-      <div class="col">
-        <span class="text-secondary">DEDICACIÓN</span>
-      </div>
-    </div>
-  
-    <hr />
-    <div class="row regular-row">
-      <div class="col-6 label">Solicitante</div>
-      <div class="col-sm-6">
-        {{ dedicacion?.usuarios?.nombre }} {{ dedicacion?.usuarios?.apellido }}
-      </div>
-    </div>
-  
-    <hr />
-
-    <div class="row regular-row">
-        <div class="col-6 label">Fecha de Creación</div>
-        <div class="col-sm-6">{{ dedicacion?.createdAt| date:'yyyy-MM-dd'}} </div>
-      </div>
-
-  
-
-  
-  
-    <div class="row regular-row">
-      <div class="col-6 label">Estado actual de la dedicación</div>
-        <div class="col-4">
-          <span 
-          class="badge badge-pill pill"
-          [ngClass]="{
-            'bg-solicitada':
-            estadoActual === 'SOLICITADA',
-            'bg-aprobada':
-              estadoActual === 'APROBADA',
-            'bg-visto-bueno':
-              estadoActual === 'VISTO BUENO',
-            'bg-finalizada':
-              estadoActual === 'FINALIZADA',
-            'bg-rechazada-decanato':
-              estadoActual === 'RECHAZADA DECANATO',
-            'bg-rechazada-coordinacion':
-              estadoActual === 'RECHAZADA COORDINACIÓN',
-            'bg-en-creacion':
-                estadoActual === 'EN CREACIÓN'
-          }"> 
-            {{estadoActual}} 
-          </span>
-        </div>
-    </div>
-  
-    
-    <!-- DOCUMENTOS -->
-    <div class="row regular-row">
-      <div class="col-4 label">Documentos</div>
-      <div class="col-sm-8">
-        <ul *ngFor="let doc of documentosArray; let i=index " class="list-group">
-          <li [id]="i" class="list-group-item" > 
-            <!-- <button class="btn btn-circle" type="button" (click)="abrirDocumento(doc.id)"> -->
-              <!-- {{doc.nombre}} -->
-            <!-- </button> -->
-          </li>
-        </ul>
-      </div>
-    </div>
-  
-  
-
-    <!-- ELIMINAR O EDITAR -->
-    <hr />
-    <div class="footer-row d-md-flex justify-content-md-end">
-        <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-            <button class="btn btn-danger" 
-            (click)="delete(dedicacion.id)">
-              <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" ></span>
-              Eliminar
-            </button>
-          </div>
-
-      <!-- <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
-        <button
-          type="button"
-          class="btn btn-warning "
-          [routerLink]="['/dedicaciones/editar-dedicacion', dedicacion?.id]"
-        >
-          Editar
-        </button>
-      </div> -->
+<div
+  class="containerInside card shadow mt-5 bg-white rounded p-5"
+  *ngIf="dedicacion$ | async as dedicacion"
+  style="align-items: unset"
+>
+  <div class="row header-row">
+    <div class="col">
+      <span class="text-secondary">DEDICACIÓN</span>
     </div>
   </div>
-  
+
+  <hr />
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bold">Solicitante</div>
+    <div class="col-xs-12 col-sm-6">
+      {{ dedicacion?.usuarios?.nombre }} {{ dedicacion?.usuarios?.apellido }}
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bold">Fecha de Creación</div>
+    <div class="col-xs-12 col-sm-6">
+      {{ dedicacion?.createdAt | date: "yyyy-MM-dd" }}
+    </div>
+  </div>
+
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bold">
+      Estado actual de la dedicación
+    </div>
+    <div class="col-4">
+      <span
+        class="badge badge-pill pill"
+        [ngClass]="{
+          'bg-solicitada': estadoActual === 'SOLICITADA',
+          'bg-aprobada': estadoActual === 'APROBADA',
+          'bg-visto-bueno': estadoActual === 'VISTO BUENO',
+          'bg-finalizada': estadoActual === 'FINALIZADA',
+          'bg-rechazada-decanato': estadoActual === 'RECHAZADA DECANATO',
+          'bg-rechazada-coordinacion':
+            estadoActual === 'RECHAZADA COORDINACIÓN',
+          'bg-en-creacion': estadoActual === 'EN CREACIÓN'
+        }"
+      >
+        {{ estadoActual }}
+      </span>
+    </div>
+  </div>
+
+  <!-- DOCUMENTOS -->
+  <div class="row regular-row">
+    <div class="col-xs-12 col-sm-6 label fw-bold">Documentos</div>
+    <div class="col-sm-8">
+      <ul *ngFor="let doc of documentosArray; let i = index" class="list-group">
+        <li [id]="i" class="list-group-item">
+          <!-- <button class="btn btn-circle" type="button" (click)="abrirDocumento(doc.id)"> -->
+          <!-- {{doc.nombre}} -->
+          <!-- </button> -->
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ELIMINAR O EDITAR -->
+  <hr />
+  <div
+    class="footer-row d-md-flex justify-content-md-end"
+    *ngIf="rol == 'PROFESOR' &&
+          (estadoActual == 'EN CREACIÓN' ||
+          estadoActual == 'SOLICITADA')"
+  >
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button class="btn btn-danger" (click)="delete(dedicacion.id)">
+        <span
+          *ngIf="isLoading | async"
+          class="spinner-border spinner-border-sm"
+        ></span>
+        Eliminar
+      </button>
+    </div>
+
+    <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">
+      <button
+        type="button"
+        class="btn btn-warning"
+        [routerLink]="['/dedicaciones/editar-dedicacion', dedicacion?.id]"
+      >
+        Editar
+      </button>
+    </div>
+  </div>
+</div>

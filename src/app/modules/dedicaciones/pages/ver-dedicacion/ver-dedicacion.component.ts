@@ -21,6 +21,7 @@ export class VerDedicacionComponent implements OnInit {
   public documentosArray = [];
 
   public estadoActual : string = '';
+  public rol : string = localStorage.getItem('rol') || '';
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 

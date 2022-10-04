@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Tema, temas, Objetivo } from '@shared/data/plan-desarrollo';
+import { Tema, Objetivo } from '@shared/data/plan-desarrollo';
 import { prefix } from '@shared/data/ruta-api';
 import { Observable, Subject, switchMap } from 'rxjs';
 
@@ -15,7 +16,8 @@ import { Observable, Subject, switchMap } from 'rxjs';
 
 export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
-  temas : Tema[] = temas;
+  @Input() planTrabajo!: PlanTrabajo;
+
 
   FormPlan: FormGroup = this.fb.group({});
 
@@ -46,7 +48,11 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
     private fb: FormBuilder,
     public activeModal: NgbActiveModal
   ) {
-    
+
+
+    if (this.planTrabajo) {
+
+    }
   }
 
   ngOnInit(): void {

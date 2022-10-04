@@ -48,9 +48,6 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     private modalSvc: NgbModal
   ) {
     this.usuarioSvc.getUsuario().subscribe(resp => this.Usuario = resp);
-    if (this._editing){
-      7
-    }
    }
 
 
@@ -130,18 +127,12 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
 
   open() {
     const modalRef = this.modalSvc.open(PlanDesarrolloInstitucionalComponent, { size: 'xl' })
+    modalRef.componentInstance.planDesarrollo = this.PlanDesarrollo
     modalRef.result.then(
       (res: any) => {
-        const steps = res.steps;
-        const object = {
-          tema_estrategico: [{tema:steps[0].temas}],
-          objetivo_estrategico_desarrollo: [{objEstrategico:steps[1].objetivo}],
-          objetivo_estrategico_institucional: [{objetivo:steps[1].objetivo}],
-          acciones_estrategicas: [{accion:steps[2].accion}],
-          indicador: [{indicador:steps[3].indicador}],
-        }
-        this.fBasicInfo.patchValue(object)
-        this.PlanDesarrolloFirstTake += 1
+        this.PlanDesarrollo = res;
+        console.log(this.PlanDesarrollo);
+        this.PlanDesarrolloFirstTake++;
       }
     ).catch(
       (err:any) => {

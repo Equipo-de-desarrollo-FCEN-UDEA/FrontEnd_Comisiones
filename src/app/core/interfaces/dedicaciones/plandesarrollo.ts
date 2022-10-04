@@ -10,7 +10,7 @@ export interface objetivo {
     id: number;
     descripcion: string;
     acciones: accion[];
-    indicadores?: indicador[];
+    indicadores: indicador[];
 }
 
 
@@ -28,3 +28,7 @@ export interface indicador {
 export interface plandesarrollo {
     temas: tema[]
 }
+
+export interface ObjetivoTemaId extends objetivo {
+    idTema : number
+  }

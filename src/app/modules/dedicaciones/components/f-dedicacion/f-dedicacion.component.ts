@@ -17,8 +17,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 import { PlanDesarrolloInstitucionalComponent } from '../plan-desarrollo-institucional/plan-desarrollo-institucional.component';
-import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
 import { planDesarrolloFormat } from '@shared/data/plan-desarrollo';
+import { plandesarrollo } from '@interfaces/dedicaciones/plandesarrollo';
 
 @Component({
   selector: 'app-f-dedicacion',
@@ -33,9 +33,9 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     this._editing = value
   }
 
-  private planTrabajo!: PlanTrabajo;
+  private PlanDesarrollo!: plandesarrollo;
 
-  private planTrabajoFirstTake: number = 0;
+  private PlanDesarrolloFirstTake: number = 0;
 
 
   isLoading: Subject<boolean> = this.loadingSvc.isLoading;
@@ -48,7 +48,6 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     private modalSvc: NgbModal
   ) {
     this.usuarioSvc.getUsuario().subscribe(resp => this.Usuario = resp);
-    console.log(planDesarrolloFormat)
    }
 
 
@@ -139,7 +138,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
           indicador: [{indicador:steps[3].indicador}],
         }
         this.fBasicInfo.patchValue(object)
-        this.planTrabajoFirstTake += 1
+        this.PlanDesarrolloFirstTake += 1
       }
     ).catch(
       (err:any) => {

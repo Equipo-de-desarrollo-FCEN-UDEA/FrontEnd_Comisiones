@@ -64,7 +64,7 @@
                 <hr>
                 <div class="temas row">
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
-                        *ngFor="let tema of temas; let i = index">
+                        *ngFor="let tema of temas.temas; let i = index">
                         <div class="tema card shadow rounded p-2"
                             [ngClass]="{'selected': selectedTema.indexOf(i) != -1}" (click)="selectTema(i)">
                             <h6>{{tema.titulo}}</h6>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { plandesarrollo, tema, objetivo, accion, indicador } from '@interfaces/dedicaciones/plandesarrollo';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Tema, temas, Objetivo } from '@shared/data/plan-desarrollo';
+import { planDesarrolloFormat } from '@shared/data/plan-desarrollo';
 import { prefix } from '@shared/data/ruta-api';
 import { Observable, Subject, switchMap } from 'rxjs';
 
@@ -15,17 +16,23 @@ import { Observable, Subject, switchMap } from 'rxjs';
 
 export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
-  temas : Tema[] = temas;
+  @Input() planDesarrollo!: plandesarrollo;
+
+  temas : tema[] = planDesarrolloFormat.temas;
+
+  selectedPlanDesarrollo: plandesarrollo = {
+    temas: []
+  }
 
   FormPlan: FormGroup = this.fb.group({});
 
   selectedTema : number[]  = [];
 
-  selectedTemas : Tema[] = [];
+  selectedTemas : tema[] = [];
 
-  selectedObjetivo : string[]  = [];
+  selectedObjetivo : number[]  = [];
 
-  selectedObjetivos : Objetivo[] = [];
+  selectedObjetivos : objetivo[] = [];
 
   selectedAccion : string[] = [];
 
@@ -46,7 +53,11 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
     private fb: FormBuilder,
     public activeModal: NgbActiveModal
   ) {
-    
+
+
+    if (this.planDesarrollo) {
+
+    }
   }
 
   ngOnInit(): void {
@@ -72,25 +83,25 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
     if (this.selectedTema.indexOf(value) != -1) {
       let index = this.selectedTema.indexOf(value);
       this.selectedTema.splice(index, 1);
-      this.selectedTemas.splice(index, 1);
+      this.selectedPlanDesarrollo.temas.splice(index, 1)
     } else {
       this.selectedTema.push(value);
-      this.selectedTemas.push(this.temas[value]);
+      this.selectedPlanDesarrollo.temas.push({
+        id: value,
+        titulo: this.temas[value].titulo,
+        subtitulo: this.temas[value].subtitulo,
+        objetivos: []
+      })
     }
-    let temas = ''
-    for (let i = 0; i < this.selectedTemas.length; i++) {
-      temas += ' ' + this.selectedTemas[i].titulo 
-    }
-    this.getSteps.patchValue([{temas: temas}])
   }
 
-  selectObjetivo(iO: string, iT: string, objetivo: Objetivo) {
-    let index = this.selectedObjetivo.indexOf(iO + iT);
+  selectObjetivo(idObjetivo: number) {
+    let index = this.selectedObjetivo.indexOf(idObjetivo);
     if (index != -1){
       this.selectedObjetivo.splice(index, 1);
       this.selectedObjetivos.splice(index, 1);
     } else {
-      this.selectedObjetivo.push(iO + iT);
+      this.selectedObjetivo.push(idObjetivo);
       this.selectedObjetivos.push(objetivo);
     }
     

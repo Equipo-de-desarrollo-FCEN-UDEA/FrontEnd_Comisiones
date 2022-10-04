@@ -17,6 +17,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas);
 import { PlanDesarrolloInstitucionalComponent } from '../plan-desarrollo-institucional/plan-desarrollo-institucional.component';
+import { PlanTrabajo } from '@interfaces/dedicaciones/plantrabajo';
+import { planDesarrolloFormat } from '@shared/data/plan-desarrollo';
 
 @Component({
   selector: 'app-f-dedicacion',
@@ -31,6 +33,10 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     this._editing = value
   }
 
+  private planTrabajo!: PlanTrabajo;
+
+  private planTrabajoFirstTake: number = 0;
+
 
   isLoading: Subject<boolean> = this.loadingSvc.isLoading;
   constructor(
@@ -42,11 +48,9 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     private modalSvc: NgbModal
   ) {
     this.usuarioSvc.getUsuario().subscribe(resp => this.Usuario = resp);
+    console.log(planDesarrolloFormat)
    }
 
-  public unidades = [
-    'Instituto de Química, Facultad de Ciencias Exactas y Naturales',
-  ]
 
   public campos = [
     'Docencia',
@@ -57,29 +61,11 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
 
   public Usuario : UsuarioResponse | undefined;
 
-  private isCorreoValid = /^[a-zA-Z0-9._%+-]+@udea.edu.co$/;
-  private fExclusiva: FormatoVice = {
-    titulo: '',
-    tiempo_solicitado: 0,
-    campo_modalidad: '',
-    descripcion_comprobante: '',
-    tema_estrategico: [],
-    objetivo_estrategico_desarrollo: [],
-    metas: [],
-    indicador: [],
-    acciones_estrategicas: [],
-    objetivo_estrategico_institucional: [],
-    productos: [],
-    extension_oficina: '',
-    celular: 0,
-    dedicaciones_id: 0
-  };
-
 
 
   fBasicInfo = this.fb.group({
     titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    tiempo_solicitado: [NaN, [Validators.required, Validators.min(1), Validators.max(11)]],
+    tiempo_solicitado: [NaN, [Validators.required, Validators.min(1), Validators.max(12)]],
     campo_modalidad: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50000)]],
     descripcion_comprobante: ['', [Validators.minLength(3), Validators.maxLength(255)]],
     tema_estrategico: this.fb.array([this.temasgroup()], [Validators.required]),
@@ -153,6 +139,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
           indicador: [{indicador:steps[3].indicador}],
         }
         this.fBasicInfo.patchValue(object)
+        this.planTrabajoFirstTake += 1
       }
     ).catch(
       (err:any) => {

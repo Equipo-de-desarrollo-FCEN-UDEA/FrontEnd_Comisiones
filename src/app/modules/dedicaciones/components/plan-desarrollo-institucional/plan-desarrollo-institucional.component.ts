@@ -63,17 +63,8 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
     if (this.planDesarrollo) {
       this.selectedPlanDesarrollo = this.planDesarrollo
       this.selectedTema = this.selectedPlanDesarrollo.temas.map(tema => tema.id)
-      // this.selectedTemas = this.temas.map(tema => {
-      //   if (tema.id in this.selectedTema){
-      //     return tema
-      //   } else {
-      //     return NONE_TYPE
-      //   }
-      // })
-      console.log(this.selectedTema);
       this.temas.forEach(tema => {
         if (this.selectedTema.indexOf(tema.id)!=-1){
-          console.log(tema.titulo)
           this.selectedTemas.push(tema)
         } 
       })
@@ -90,9 +81,6 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
           }
         })
       })
-      console.log(this.selectedObjetivos)
-
-
       this.selectedAccion = _selectedObjetivos.map(objetivo =>{
         return objetivo.acciones.map(accion => accion.id)
       }).flat()

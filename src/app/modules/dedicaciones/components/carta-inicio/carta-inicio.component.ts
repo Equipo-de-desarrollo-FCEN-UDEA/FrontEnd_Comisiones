@@ -24,7 +24,6 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   carta: Carta = {
     body: '',
     dedicaciones_id: 0,
-    archivo: '',
   }
 
   prefix = prefix
@@ -32,7 +31,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   carta_id = 0
 
   archivo: any;
-  private _editing : boolean = false
+  private _editing: boolean = false
 
   @Input() set editing(value: boolean) {
     this._editing = value
@@ -53,7 +52,6 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
       }
     )
 
-    
   }
 
 
@@ -79,14 +77,14 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
 
     this.comunicationSvc.editCarta$.subscribe(
       (carta: CartaInside | null) => {
-        if (carta?.body){
+        if (carta?.body) {
           this.FormCarta.controls.Cuerpo.setValue(carta.body);
           this.carta_id = carta?.id
         }
       }
     )
 
-    
+
 
 
     // Mala practica, debe corregirse
@@ -100,74 +98,53 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   }
 
   makePdf(): any {
-    let DATA: any = document.getElementById('carta');
     const boton = document.getElementById('Generador-carta') as HTMLButtonElement;
     const spinner = document.getElementById('spinner') as HTMLDivElement;
     const btntext = document.getElementById('btn-text') as HTMLDivElement;
     spinner.style.display = 'block';
     boton.disabled = true;
     btntext.style.display = 'none';
-    html2canvas(DATA, { scale: 2 }).then((canvas) => {
-      let fileWidth = 208;
-      let fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL('image/png');
-      let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save('acta-de-inicio.pdf');
-      this.archivo = new Blob([PDF.output('blob')], { type: 'application/pdf' });
-      this.archivo.lastModified = new Date();
-      this.archivo.name = 'Acta de Inicio.pdf';
-      this.archivo = <File>this.archivo
-      let dedicacion_id: number | string = 0;
-      this.comunicationSvc.id$.subscribe(
-        (id: string | number) => {
-          dedicacion_id = id;
-        }
-      ).unsubscribe();
-
-
-      this.carta = {
-        body: this.FormCarta.value.Cuerpo || '',
-        dedicaciones_id: dedicacion_id,
-        archivo: this.archivo
+    let dedicacion_id: number | string = 0;
+    this.comunicationSvc.id$.subscribe(
+      (id: string | number) => {
+        dedicacion_id = id;
       }
-      if (this._editing) {
-        this.cartaSvc.updateCarta(this.carta, this.carta_id).subscribe(
-          (data: any) => {
-            Swal.fire({
-              title: 'Carta de iniciación actualizada con éxito',
-              text: data.message,
-              icon: 'success',
-              confirmButtonText: 'Aceptar'
-            })
-            this.comunicationSvc.setCartaSuccess(true);
-          });
-      } else {
-        this.cartaSvc.postCarta(this.carta).subscribe(
-          (data: any) => {
-            Swal.fire({
-              title: 'Carta de iniciación generada con éxito',
-              text: data.message,
-              icon: 'success',
-              confirmButtonText: 'Aceptar'
-            })
-            this.comunicationSvc.setCartaSuccess(true);
-          });
-      }
-      
+    ).unsubscribe();
 
 
-    }).then(() => {
-      spinner.style.display = 'none';
-      boton.disabled = false;
-      btntext.style.display = 'block';
-      });
+    this.carta = {
+      body: this.FormCarta.value.Cuerpo || '',
+      dedicaciones_id: dedicacion_id
+    }
+    if (this._editing) {
+      this.cartaSvc.updateCarta(this.carta, this.carta_id).subscribe(
+        (data: any) => {
+          Swal.fire({
+            title: 'Carta de iniciación actualizada con éxito',
+            text: data.message,
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+          this.comunicationSvc.setCartaSuccess(true);
+        });
+    } else {
+      this.cartaSvc.postCarta(this.carta).subscribe(
+        (data: any) => {
+          Swal.fire({
+            title: 'Carta de iniciación generada con éxito',
+            text: data.message,
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+          this.comunicationSvc.setCartaSuccess(true);
+        });
+    }
 
 
   }
 
   OnSubmit() {
+    console.log('submit')
     this.makePdf()
   }
 

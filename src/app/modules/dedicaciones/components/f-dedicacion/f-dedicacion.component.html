@@ -318,7 +318,7 @@
 
         <div class="d-grid gap-2 m-3">
             <button class="btn btn-add" id="Enviar" type="submit" (submit)="true"
-            [disabled]="fBasicInfo.invalid || (isLoading|async)">
+            [disabled]="fBasicInfo.invalid || (isLoading|async) || PlanDesarrolloFirstTake==0">
             <span *ngIf="isLoading | async" class="spinner-border spinner-border-sm" role="status"
                 aria-hidden="true"></span>
             Enviar

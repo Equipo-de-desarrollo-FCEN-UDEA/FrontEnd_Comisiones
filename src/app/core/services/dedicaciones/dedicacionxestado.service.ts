@@ -7,13 +7,14 @@ import { prefix } from '@shared/data/ruta-api';
 })
 export class DedicacionxestadoService {
 
-  private urlEndPoint : string = prefix + 'dedicaciones-estados' 
+  private urlEndPoint : string = prefix + 'solicitar-dedicacion' 
 
   constructor(
     private http: HttpClient
   ) { }
 
-  postDedicacionxEstado(id: string, estado: any){
-    return this.http.post<any>(`${this.urlEndPoint}/${id}`, estado)
+  postDedicacionxEstado(id: string | number){
+    return this.http.post<any>(`${this.urlEndPoint}/${id}`,null)
   }
+
 }

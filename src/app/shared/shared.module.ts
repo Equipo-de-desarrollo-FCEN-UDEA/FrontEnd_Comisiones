@@ -39,7 +39,8 @@ import { HistorialEstadosComponent } from './components/historial-estados/histor
     NgbdSortableHeader,
     StepperComponent,
     CdkStepperModule,
-    HistorialEstadosComponent
+    HistorialEstadosComponent,
+    NgbModule
   ],
   providers:[
     // NgbdSortableHeader

@@ -36,7 +36,7 @@
         [ngClass]="{
           'bg-solicitada': estadoActual === 'SOLICITADA',
           'bg-aprobada': estadoActual === 'APROBADA',
-          'bg-visto-bueno': estadoActual === 'VISTO BUENO',
+          'bg-visto-bueno': estadoActual === 'VISTO BUENO' || 'EN CURSO',
           'bg-finalizada': estadoActual === 'FINALIZADA',
           'bg-rechazada-decanato': estadoActual === 'RECHAZADA DECANATO',
           'bg-rechazada-coordinacion':
@@ -69,7 +69,7 @@
     class="footer-row d-md-flex justify-content-md-end"
     *ngIf="
       rol == 'PROFESOR' &&
-      (estadoActual == 'EN CREACIÓN' || estadoActual == 'SOLICITADA')
+      (estadoActual == 'EN CREACIÓN')
     "
   >
     <div class="d-grid gap-2 col-sm-12 col-md-4 col-lg-4 col-xl-3 p-2">

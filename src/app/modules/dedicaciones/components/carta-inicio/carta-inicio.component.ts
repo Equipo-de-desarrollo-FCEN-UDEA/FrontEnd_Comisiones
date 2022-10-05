@@ -116,7 +116,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
       body: this.FormCarta.value.Cuerpo || '',
       dedicaciones_id: dedicacion_id
     }
-    if (this._editing) {
+    if (this._editing && this.carta_id) {
       this.cartaSvc.updateCarta(this.carta, this.carta_id).subscribe(
         (data: any) => {
           Swal.fire({

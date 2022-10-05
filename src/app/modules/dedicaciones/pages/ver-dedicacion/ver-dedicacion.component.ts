@@ -45,8 +45,9 @@ export class VerDedicacionComponent implements OnInit {
       });
 
       this.dedicacion$.subscribe(dedicacion => {
+        console.log(dedicacion);
         this.fechaCreacion = dedicacion.intermediate_dedicaciones[0]? new Date(dedicacion.intermediate_dedicaciones[0].createdAt) : null;
-        this.estadoActual = ultimoElement(dedicacion.intermediate_dedicaciones)?.intermediate_estados?.nombre ? ultimoElement(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre : 'EN CREACIÓN';
+        this.estadoActual = ultimoElement(dedicacion.intermediate_dedicaciones)?.intermediate_estados?.nombre;
       });
 
     }

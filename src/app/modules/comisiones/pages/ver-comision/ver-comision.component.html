@@ -109,7 +109,7 @@
         [ngClass]="{
           'bg-solicitada': estadoActual.nombre === 'SOLICITADA',
           'bg-aprobada': estadoActual.nombre === 'APROBADA',
-          'bg-visto-bueno': estadoActual.nombre === 'VISTO BUENO',
+          'bg-visto-bueno': estadoActual.nombre === 'VISTO BUENO' || 'EN CURSO',
           'bg-finalizada': estadoActual.nombre === 'FINALIZADA',
           'bg-rechazada-decanato': estadoActual.nombre === 'RECHAZADA DECANATO',
           'bg-rechazada-coordinacion':

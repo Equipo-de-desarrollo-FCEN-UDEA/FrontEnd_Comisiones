@@ -113,7 +113,9 @@ export class EstadosDedicacionComponent {
         Swal.fire({
           text: 'La dedicación se actualizó con éxito',
           icon: 'success'
-        })
+        }).then(
+          () => this.router.navigate(['../'])
+        )
       },
       error: res => {
         Swal.fire({

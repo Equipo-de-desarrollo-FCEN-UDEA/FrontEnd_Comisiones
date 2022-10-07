@@ -57,7 +57,7 @@ export class VerDedicacionComponent implements OnInit {
         this.estadoActual = ultimoElement(dedicacion.intermediate_dedicaciones)?.intermediate_estados?.nombre;
         this.documentosArray.push(dedicacion.cartas?.documentos);
         this.documentosArray.push(dedicacion.plantrabajo?.documentos);
-        this.documentosArray.push(dedicacion.formatosvice?.documentos[0]);
+        this.documentosArray.push(dedicacion.formatosvice?.documentos);
       });
 
     }

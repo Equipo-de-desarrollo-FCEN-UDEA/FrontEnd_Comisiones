@@ -128,14 +128,19 @@
     
     
     <hr/>
-    
+
+
+    <!-- [(page)]="Buscarservice.page" 
+        [pageSize]="Buscarservice.pageSize" -->
     <div class="d-flex justify-content-between p-2">
       <ngb-pagination
         [collectionSize]="(total$ | async)!" 
-        [(page)]="Buscarservice.page" 
-        [pageSize]="Buscarservice.pageSize">
+        
+        
+        >
         
       </ngb-pagination> 
+      
       <div class="d-flex justify-content-end">
         <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" (change)="changeOption($event)"
         style="width: auto">

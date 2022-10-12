@@ -6,6 +6,7 @@ import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from "@shared/directivas/sortable.directive";
 import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { PermisoService } from '../permisos/permiso.service';
+import { offset } from '@popperjs/core';
 
 export type SortColumn = keyof Permiso | "";
 
@@ -15,8 +16,8 @@ interface SearchResult {
 }
 
 interface State {
-  page: number;
-  pageSize: number;
+  // page: number;
+  // pageSize: number;
   searchTerm: string;
   sortColumn: SortColumn;
   sortDirection: SortDirection;
@@ -57,8 +58,9 @@ export class BuscarPermisosService {
   private _permisos$ = new BehaviorSubject<Permiso[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
   private _state: State = {
-    page: 1,
-    pageSize: 10,
+    
+    // page: 3,
+    // pageSize: 5,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -67,6 +69,8 @@ export class BuscarPermisosService {
   PERMISOS : Permiso[] = [];
   
   archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  
+
   
   constructor(
     private permisosSvc: PermisoService,
@@ -84,7 +88,8 @@ export class BuscarPermisosService {
         });
 
       this._search$.next();
-      this.permisosSvc.scopeGetPermisos(this.archivado$.getValue())
+      this.permisosSvc.scopeGetPermisos(
+      this.archivado$.getValue())
       .subscribe(
         (resp: any) => {
           this.PERMISOS = resp.permisos;
@@ -112,13 +117,14 @@ export class BuscarPermisosService {
    get permisos$() { return this._permisos$.asObservable(); }
    get total$() { return this._total$.asObservable(); }
    get loading$() { return this._loading$.asObservable(); }
-   get page() { return this._state.page; }
-   get pageSize() { return this._state.pageSize; }
+  //  get page() { return this._state.page; }
+  //  get next() { return this._state.page; }
+  //  get pageSize() { return this._state.pageSize; }
    get searchTerm() { return this._state.searchTerm; }
 
 
-   set page(page: number) { this._set({page}); }
-   set pageSize(pageSize: number) { this._set({pageSize}); }
+  //  set page(page: number) { this._set({page}); }
+  //  set pageSize(pageSize: number) { this._set({pageSize}); }
    set searchTerm(searchTerm: string) { this._set({searchTerm}); }
    set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
    set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
@@ -130,7 +136,7 @@ export class BuscarPermisosService {
   }
   
   private _search(): Observable<SearchResult> {
-    const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
+    const { sortColumn, sortDirection, searchTerm} = this._state;
 
     // 1. sort
     let permisos = sort(this.PERMISOS, sortColumn, sortDirection);
@@ -141,7 +147,7 @@ export class BuscarPermisosService {
 
 
     // 3. paginate
-    permisos = permisos.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+    // permisos = permisos.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({permisos, total});
   }
 }

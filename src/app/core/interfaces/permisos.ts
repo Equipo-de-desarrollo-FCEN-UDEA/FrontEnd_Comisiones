@@ -29,5 +29,8 @@ export interface Permiso extends PermisosInDB {
     intermediate_permisos: PermisosxestadoInside[];
     tipos_permiso_id: number;
     archivado:number;
+    next: string;
+    previous:string
+
 }
 

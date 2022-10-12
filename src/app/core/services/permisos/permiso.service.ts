@@ -21,12 +21,23 @@ export class PermisoService {
       params = params.append('archivado', archivado);
     }
     
-    params = params.append('offset', offset? offset : 0);
-    params = params.append('limit', limit? limit: 100);
+    // params = params.append('offset', offset? offset : 0);
+    // params = params.append('limit', limit? limit: 10);
 
+    console.log(params+" parametros")
+    
     return this.http.get<Permiso[]>(`${this.urlEndPoint}`, {
       params:params
+      
     })
+  }
+
+  getNextPermiso(){
+
+  }
+
+  getPreviousPermiso(){
+
   }
  
  getPermiso(id: string | number): Observable<any> {

@@ -114,8 +114,9 @@ export class VerComisionComponent {
         }
       }
     });
-    //Abrir el cumplido
+    
     this.abrirDocumento(this.documentCumplido.id)
+    
   }
 
   

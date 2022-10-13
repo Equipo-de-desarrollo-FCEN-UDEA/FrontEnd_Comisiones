@@ -107,6 +107,7 @@ export class VerComisionComponent {
     this.cumplidosSvc.getCumplido(id).subscribe({
       next: (res)=> {
         this.documentCumplido = res;
+        this.abrirDocumento(this.documentCumplido.id)
       },
       error: (err) => {
         if (err.status === 404 || err.status === 401) {
@@ -114,8 +115,7 @@ export class VerComisionComponent {
         }
       }
     });
-    
-    this.abrirDocumento(this.documentCumplido.id)
+    //Abrir el cumplido
     
   }
 

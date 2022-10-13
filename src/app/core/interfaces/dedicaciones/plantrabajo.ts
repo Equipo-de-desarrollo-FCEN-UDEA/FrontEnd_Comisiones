@@ -88,4 +88,5 @@ export interface SeguimientoActividade {
 export interface PlanTrabajoInside {
     id: number;
     fecha_diligenciamiento: Date;
+    documentos: any;
 }

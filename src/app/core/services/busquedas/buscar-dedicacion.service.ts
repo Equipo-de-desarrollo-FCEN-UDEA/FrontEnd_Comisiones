@@ -1,15 +1,15 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Dedicacion } from '@interfaces/dedicaciones/dedicaciones';
+import { DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
 import {SortDirection} from '@shared/directivas/sortable.directive';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
-export type SortColumn = keyof Dedicacion | "";
+export type SortColumn = keyof DedicacionDTO | "";
 
 interface SearchResult {
-  dedicaciones: Dedicacion[];
+  dedicaciones: DedicacionDTO[];
   total: number;
 }
 
@@ -23,7 +23,7 @@ interface State {
 
 const compare = (v1: string | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-function sort(dedicaciones: Dedicacion[], column: SortColumn, direction: string): Dedicacion[] {
+function sort(dedicaciones: DedicacionDTO[], column: SortColumn, direction: string): DedicacionDTO[] {
   if (direction === '' || column === '') {
     return dedicaciones;
   } 
@@ -35,7 +35,7 @@ function sort(dedicaciones: Dedicacion[], column: SortColumn, direction: string)
   }
 }
 
-function matches(dedicaciones: Dedicacion, term: string, datepipe: DatePipe) {
+function matches(dedicaciones: DedicacionDTO, term: string, datepipe: DatePipe) {
   term = term.toLowerCase();
   return (
     dedicaciones.descripcion.toLowerCase().includes(term) ||
@@ -53,7 +53,7 @@ export class BuscarDedicacionService {
 
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _dedicaciones$ = new BehaviorSubject<Dedicacion[]>([]);
+  private _dedicaciones$ = new BehaviorSubject<DedicacionDTO[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
   private _state: State = {
     page: 1,
@@ -132,7 +132,7 @@ export class BuscarDedicacionService {
     const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
 
     // 1. sort
-    let dedicaciones = sort(this.DEDICACIONES as Dedicacion[], sortColumn, sortDirection);
+    let dedicaciones = sort(this.DEDICACIONES as DedicacionDTO[], sortColumn, sortDirection);
 
     // 2. filter
 

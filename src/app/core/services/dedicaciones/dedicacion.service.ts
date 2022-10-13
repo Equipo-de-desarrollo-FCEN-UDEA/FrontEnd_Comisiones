@@ -13,46 +13,52 @@ import { Observable } from 'rxjs';
 })
 export class DedicacionService {
 
- private urlEndPoint:string= prefix + 'dedicaciones';
- private urlEndPointArch:string = prefix +'archivardedicacion';
+  private urlEndPoint: string = prefix + 'dedicaciones';
+  private urlEndPointArch: string = prefix + 'archivardedicacion';
 
   constructor(
     private http: HttpClient,
     private cookie: CookieService
-  ) {}
+  ) { }
 
-  getDedicaciones(){
+  getDedicaciones() {
     // let params = new HttpParams()
     // if (archivado != 2 ){
     //   params = params.append('archivado', archivado);
     // }
-    
+
     // params = params.append('offset', 0);
     // params = params.append('limit', 100);
     return this.http.get(this.urlEndPoint)
   }
 
-  
 
-  Archivado(id:number): Observable<any>{
-    return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:1})
+
+  Archivado(id: number): Observable<any> {
+    return this.http.patch(`${this.urlEndPointArch}/${id}`, { archivado: 1 })
   }
 
-  NoArchivado(id:number): Observable<any>{
-    return this.http.patch(`${this.urlEndPointArch}/${id}`, {archivado:0})
+  NoArchivado(id: number): Observable<any> {
+    return this.http.patch(`${this.urlEndPointArch}/${id}`, { archivado: 0 })
   }
 
   postDedicacion(description: string) {
-    return this.http.post(`${this.urlEndPoint}`, { descripcion:description })
+    return this.http.post(`${this.urlEndPoint}`, { descripcion: description })
   }
 
   getDedicacion(id: number | string) {
     return this.http.get<DedicacionDTO>(`${this.urlEndPoint}/${id}`)
   }
 
-  deleteDedicacion(id:number) {
+  deleteDedicacion(id: number) {
     return this.http.delete(`${this.urlEndPoint}/${id}`)
   }
+
+  patchDedicacion(id: number, body: any) {
+    return this.http.patch(`${this.urlEndPoint}/${id}`, body)
+  }
+
+
 
 
 }

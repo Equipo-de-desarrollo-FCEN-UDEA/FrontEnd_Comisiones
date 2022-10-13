@@ -15,7 +15,6 @@ import { LoaderService } from '@services/interceptors/loader.service';
 import { PermisoService } from '@services/permisos/permiso.service';
 import { TiposPermiso } from '@interfaces/tipos_permiso';
 import { TipoPermisoService } from '@services/permisos/tipo-permiso.service';
-import { DatePipe } from '@angular/common';
 
 import { DiasHabiles } from '@shared/clases/dias-habiles';
 
@@ -52,7 +51,6 @@ export class CrearPermisoComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
     private ngZone: NgZone,
     private router: Router,
-    private datepipe: DatePipe,
 
     private loaderService: LoaderService,
     private permisosSvc: PermisoService,
@@ -123,6 +121,8 @@ export class CrearPermisoComponent implements OnInit {
       date.before(this.hoveredDate)
     );
   }
+
+
   isHoveredInvalid(date: NgbDate) {
     return (
       this.fromDate &&
@@ -148,18 +148,17 @@ export class CrearPermisoComponent implements OnInit {
   }
 
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
-    const parsed = this.formatter.parse(input);
-    return parsed && this.calendar.isValid(NgbDate.from(parsed))
-      ? NgbDate.from(parsed)
+    const PARSED = this.formatter.parse(input);
+    return PARSED && this.calendar.isValid(NgbDate.from(PARSED))
+      ? NgbDate.from(PARSED)
       : currentValue;
   }
 
   // ----------- TIPOS DE PERMISOS ------------
 
   onTipoDePermiso(event: any) {
-    const idTipoPermiso = event;
-
-    this.tiposPermisoSvc.getTipoPermisoId(idTipoPermiso).subscribe({
+    const ID_TIPO_PERMISO = event;
+    this.tiposPermisoSvc.getTipoPermisoId(ID_TIPO_PERMISO).subscribe({
       next: (res) => {
         this.diaHabil = res.dias;
       },
@@ -167,8 +166,9 @@ export class CrearPermisoComponent implements OnInit {
   }
 
   // ----------- MANEJO DE ERRORES EN EL FORM ------------
+
   get f() {
-    return this.formPermiso.controls;
+    return this.formPermiso.controls; //acceder a los form 
   }
 
   isInvalidForm(controlName: string) {
@@ -182,14 +182,16 @@ export class CrearPermisoComponent implements OnInit {
   // -------- ARCHIVOS - ANEXOS -----------
   // --------------------------------------
 
+  //subir un archivo
   onUpload(event: Event, index: number) {
-    const element = event.target as HTMLInputElement;
-    const file = element.files?.item(0);
-    if (file) {
-      this.files.splice(index, 1, file);
+    const ELEMENT = event.target as HTMLInputElement;
+    const FILE = ELEMENT.files?.item(0);
+    if (FILE) {
+      this.files.splice(index, 1, FILE);
     }
   }
 
+  //eliminar achivos
   removeFile(index: number) {
     if (this.archivos.length > 1) {
       this.archivos.splice(index, 1);
@@ -197,17 +199,19 @@ export class CrearPermisoComponent implements OnInit {
     this.files.splice(index, 1);
   }
 
+  //verifica el tamaño de los archivos que se van a adjuntar al permiso, max:2MB
   validSize() {
-    const size = this.files.map((a) => a.size).reduce((a, b) => a + b, 0);
-    return size < 2 * 1024 * 1024;
+    const SIZE = this.files.map((a) => a.SIZE).reduce((a, b) => a + b, 0);
+    return SIZE < 2 * 1024 * 1024;
   }
 
+  //verifica que el archivo a adjuntar sea de un tipo valido
   validTipoArchivo() {
-    const extensionesValidas = ["png", "jpg", "gif", "jpeg", "pdf"];
+    const EXTENSIONES_VALIDAS = ["png", "jpg", "gif", "jpeg", "pdf"];
     
     let flag = true; 
     this.files.forEach((file) => {
-      flag = extensionesValidas.includes(file.name.split(".")[file.name.split(".").length - 1]);
+      flag = EXTENSIONES_VALIDAS.includes(file.name.split(".")[file.name.split(".").length - 1]); //separa el ultimo punto del nombre del archivo para verificar su tipo
     })
     return flag;
 
@@ -235,17 +239,17 @@ export class CrearPermisoComponent implements OnInit {
     let fecha_inicio_utc  = new Date(fecha_inicio).toUTCString()
     let fecha_fin_utc  = new Date(fecha_fin).toUTCString()
 
-    const reqBody: FormData = new FormData();
-    reqBody.append('tipos_permiso_id', this.formPermiso.value.tipos_permiso_id);
-    reqBody.append('fecha_inicio', fecha_inicio_utc);
-    reqBody.append('fecha_fin', fecha_fin_utc);
-    reqBody.append('justificacion', this.formPermiso.value.justificacion);
+    const REQ_BODY: FormData = new FormData();
+    REQ_BODY.append('tipos_permiso_id', this.formPermiso.value.tipos_permiso_id);
+    REQ_BODY.append('fecha_inicio', fecha_inicio_utc);
+    REQ_BODY.append('fecha_fin', fecha_fin_utc);
+    REQ_BODY.append('justificacion', this.formPermiso.value.justificacion);
 
-    for (const file of this.files) {
-      reqBody.append('archivo', file, file.name);
+    for (const FILE of this.files) {
+      REQ_BODY.append('archivo', FILE, FILE.name);
     }
 
-    this.permisosSvc.postPermiso(reqBody).subscribe({
+    this.permisosSvc.postPermiso(REQ_BODY).subscribe({
       next: (res) => {
         Swal.fire({
           title: 'Creada',

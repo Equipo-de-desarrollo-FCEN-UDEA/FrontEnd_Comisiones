@@ -9,7 +9,7 @@ import { UsuarioService } from '@services/usuarios/usuario.service';
 import { Usuario, UsuarioResponse } from '@interfaces/usuario';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
+import { CrearDedicacionComponentsService } from '../../services/crear-dedicacion-components.service';
 import Swal from 'sweetalert2';
 
 import { FormatoViceService } from '@services/dedicaciones/formato-vice.service';
@@ -44,7 +44,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     private formatoSvc: FormatoViceService,
     private usuarioSvc: UsuarioService,
     private loadingSvc: LoaderService,
-    private comunicationSvc: CrearComisionComponentsService,
+    private comunicationSvc: CrearDedicacionComponentsService,
     private modalSvc: NgbModal
   ) {
     this.usuarioSvc.getUsuario().subscribe(resp => this.Usuario = resp);
@@ -82,8 +82,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
             (formato : FormatoVice) =>{
                 this.fBasicInfo.patchValue(formato)
                 this.PlanDesarrollo = formato.plan_desarrollo
-            }
-          )
+            })
         }
       }
     )

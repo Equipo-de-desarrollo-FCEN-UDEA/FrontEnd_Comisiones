@@ -12,6 +12,7 @@ export class HistorialEstadosComponent implements OnInit {
 
 
   ngOnInit(): void {
+
   }
 
 }

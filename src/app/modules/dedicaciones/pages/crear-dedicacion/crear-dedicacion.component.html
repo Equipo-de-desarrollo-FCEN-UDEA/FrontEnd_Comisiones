@@ -1,7 +1,8 @@
 <app-stepper #cdkStepper [linear]="isLinear">
-    <cdk-step label="Carta de iniciación"  [optional]="false">
+    <!-- CARTA INICIO  -->
+    <cdk-step label="Carta de iniciación" [optional]="false">
         <ng-template cdkStepLabel>
-            <span *ngIf="!(cartaSuccess$ | async) "class="icon is-medium" title="Plantilla para carta de iniciación">
+            <span *ngIf="!(cartaSuccess$ | async) " class="icon is-medium" title="Plantilla para carta de iniciación">
                 <i class="fas fa-duotone fa-envelopes-bulk"></i>
             </span>
             <span *ngIf="cartaSuccess$| async" class="icon is-medium">
@@ -10,6 +11,7 @@
         </ng-template>
         <app-carta-inicio></app-carta-inicio>
     </cdk-step>
+    <!-- FORMATO VICE -->
     <cdk-step label="Formulario" [optional]="false">
         <ng-template cdkStepLabel>
             <span *ngIf="!(formatoSuccess$ | async)" class="icon is-medium" title="Formato de evaluación">
@@ -18,19 +20,19 @@
             <span *ngIf="formatoSuccess$ | async" class="icon is-medium">
                 <i class="fas fa-duotone fa-lg fa-check-circle"></i>
             </span>
-    </ng-template>
+        </ng-template>
         <app-f-dedicacion (dedicacion_id)="id$"></app-f-dedicacion>
     </cdk-step>
-    <cdk-step label="Personal Details" title="Texto flotante" [optional]="false" >
+    <!-- PLAN TRABAJO -->
+    <cdk-step label="Personal Details" title="Texto flotante" [optional]="false">
         <ng-template cdkStepLabel>
-            <span *ngIf="!(planSuccess$|async)"class="icon is-medium" title="Formato de detalles personales">
+            <span *ngIf="!(planSuccess$ | async)" class="icon is-medium" title="Formato de detalles personales">
                 <i class="fas fa-user"></i>
             </span>
             <span *ngIf="planSuccess$ | async" class="icon is-medium">
                 <i class="fas fa-duotone fa-lg fa-check-circle"></i>
             </span>
-    </ng-template>
+        </ng-template>
         <app-plan-trabajo></app-plan-trabajo>
     </cdk-step>
 </app-stepper>
-

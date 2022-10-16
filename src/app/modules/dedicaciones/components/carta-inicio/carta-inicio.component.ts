@@ -5,7 +5,7 @@ import { UsuarioService } from '@services/usuarios/usuario.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { CartaInicioService } from '@services/dedicaciones/carta-inicio.service';
-import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
+import { CrearDedicacionComponentsService } from '../../services/crear-dedicacion-components.service';
 import { Carta, CartaInside } from '@interfaces/dedicaciones/carta';
 import Swal from 'sweetalert2';
 import { prefix } from '@shared/data/ruta-api';
@@ -43,7 +43,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
     private usuarioSvc: UsuarioService,
     private router: Router,
     private cartaSvc: CartaInicioService,
-    private comunicationSvc: CrearComisionComponentsService
+    private comunicationSvc: CrearDedicacionComponentsService
   ) {
 
     this.usuarioSvc.getUsuario().subscribe(
@@ -63,6 +63,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   );
 
   ngOnInit(): void {
+    console.log('EN CARTA')
   }
 
   ngAfterViewInit(): void {

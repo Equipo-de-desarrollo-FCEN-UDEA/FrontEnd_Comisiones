@@ -5,7 +5,7 @@ import { FormatosviceInside } from "./formatovice";
 import { PlanTrabajoInside } from "./plantrabajo";
 
 export interface DedicacionBase {
-    descripcion: string;
+    titulo: string;
 }
 
 export interface Dedicacion extends DedicacionBase {

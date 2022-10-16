@@ -4,7 +4,7 @@ import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
+import { CrearDedicacionComponentsService } from '../../services/crear-dedicacion-components.service';
 
 @Component({
   selector: 'app-crear-dedicacion',
@@ -16,8 +16,8 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
   @Input()
   isLinear = false;
 
-  @Input()
-  isEditable = true;
+  // @Input()
+  // isEditable = true;
 
   id$ : BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
   cartaSuccess$ = this.comunicacionSvc.cartaSuccess$;
@@ -26,10 +26,14 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
 
   constructor(
     private dexclusivaSvc: DedicacionService,
-    private comunicacionSvc : CrearComisionComponentsService,
+    private comunicacionSvc : CrearDedicacionComponentsService,
     private router: Router
   ) {
+
+
    }
+
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.cartaSuccess$.observed)
   }
@@ -38,16 +42,16 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
     Swal.fire({
       allowOutsideClick: false,
       title: '¡Bienvenido!',
-      text: 'Para crear una nueva dedicación escribe una corta descripción solo como referencia para la aplicación.',
+      text: 'Para crear una nueva dedicación escribe un título solo como referencia para la aplicación.',
       input: 'text',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Continuar',
       reverseButtons: true,
       
-      preConfirm: (description) => {
-        if (!description) {
-          return Swal.showValidationMessage('Debes escribir una descripción');
+      preConfirm: (titulo) => {
+        if (!titulo) {
+          return Swal.showValidationMessage('Debes escribir un título');
         }
       }
     }).then((result) => {

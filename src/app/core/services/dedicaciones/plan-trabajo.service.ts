@@ -20,25 +20,26 @@ export class PlanTrabajoService {
     const headers = new HttpHeaders(
       {
         'Content-Type': 'application/json',
-        'Response-Type': 'blob'
+        //'Response-Type': 'blob'
       }
     )
     return this.http.post(this.prefix, planTrabajo,{
       observe: 'response',
-      responseType: 'blob',
+      //responseType: 'blob',
       headers: headers
-    }).pipe(
-      tap(
-        (content:any) => {
-          const blob = new Blob([content.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-          saveAs(blob, 'plan-trabajo.xlsx');
-        }
+    })
+    // .pipe(
+    //   tap(
+    //     (content:any) => {
+    //       const blob = new Blob([content.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    //       saveAs(blob, 'plan-trabajo.xlsx');
+    //     }
 
-      ),
-      map(
-        () => true
-      )
-    );
+    //   ),
+    //   map(
+    //     () => true
+    //   )
+    // );
   }
 
   getPlanTrabajo(id:number) {

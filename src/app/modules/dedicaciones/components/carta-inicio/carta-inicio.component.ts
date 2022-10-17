@@ -70,11 +70,11 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     if (this.editable) {
-      this.activatedRoute.params.subscribe({
-        next: (paramId) => {
-          this.idDedicacion = paramId['id'];
-        }
-      })
+      // this.activatedRoute.params.subscribe({
+      //   next: (paramId) => {
+      //     this.idDedicacion = paramId['id'];
+      //   }
+      // })
       console.log('es editable', this.idDedicacion)
 
 

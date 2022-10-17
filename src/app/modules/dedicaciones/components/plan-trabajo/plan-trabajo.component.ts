@@ -101,11 +101,11 @@ export class PlanTrabajoComponent implements OnInit {
 
     if (this.editable) {
 
-      this.activatedRoute.params.subscribe({
-        next: (paramId) => {
-          this.idDedicacion = paramId['id'];
-        }
-      })
+      // this.activatedRoute.params.subscribe({
+      //   next: (paramId) => {
+      //     this.idDedicacion = paramId['id'];
+      //   }
+      // })
       console.log('es editable', this.idDedicacion)
   
      
@@ -115,6 +115,7 @@ export class PlanTrabajoComponent implements OnInit {
           this.planTrabajo = res.plantrabajo;
 
           if(this.planTrabajo){
+
             this.planTrabajo_id = this.planTrabajo.id;
             this.fPlanTrabajo.patchValue({
               semestre: this.planTrabajo.semestre,

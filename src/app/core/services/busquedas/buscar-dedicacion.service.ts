@@ -2,8 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
-import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
-import {SortDirection} from '@shared/directivas/sortable.directive';
+import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
+import { SortDirection } from '@shared/directivas/sortable.directive';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 export type SortColumn = keyof DedicacionDTO | "";
@@ -26,7 +26,7 @@ const compare = (v1: string | any, v2: string | any) => v1 < v2 ? -1 : v1 > v2 ?
 function sort(dedicaciones: DedicacionDTO[], column: SortColumn, direction: string): DedicacionDTO[] {
   if (direction === '' || column === '') {
     return dedicaciones;
-  } 
+  }
   else {
     return [...dedicaciones].sort((a, b) => {
       const res = compare(a[column], b[column]);
@@ -38,16 +38,16 @@ function sort(dedicaciones: DedicacionDTO[], column: SortColumn, direction: stri
 function matches(dedicaciones: DedicacionDTO, term: string, datepipe: DatePipe) {
   term = term.toLowerCase();
   return (
-    dedicaciones.descripcion.toLowerCase().includes(term) ||
-    datepipe.transform(dedicaciones.createdAt, 'yyyy-MM-dd')?.toString().includes(term)||
+    dedicaciones.titulo.toLowerCase().includes(term) ||
+    datepipe.transform(dedicaciones.createdAt, 'yyyy-MM-dd')?.toString().includes(term) ||
     dedicaciones.usuarios.nombre.toLowerCase().includes(term) ||
     dedicaciones.usuarios.apellido.toLowerCase().includes(term) ||
     dedicaciones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
-    dedicaciones.usuarios.departamentos.facultades.nombre.toLowerCase().includes(term) 
+    dedicaciones.usuarios.departamentos.facultades.nombre.toLowerCase().includes(term)
   );
-} 
+}
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 
 export class BuscarDedicacionService {
 
@@ -63,14 +63,14 @@ export class BuscarDedicacionService {
     sortDirection: 'asc'
   };
 
-  DEDICACIONES : any[] = [];
+  DEDICACIONES: any[] = [];
 
   // archivado$ : BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(
     private dedicacionesSvc: DedicacionService,
     private datepipe: DatePipe
-  ){
+  ) {
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -78,35 +78,35 @@ export class BuscarDedicacionService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
-        this._dedicaciones$.next(result.dedicaciones);
-        this._total$.next(result.total);
-      });
+      this._dedicaciones$.next(result.dedicaciones);
+      this._total$.next(result.total);
+    });
 
     this._search$.next();
     this.dedicacionesSvc.getDedicaciones()
-    .subscribe(
-      (resp: any ) => {
-        this.DEDICACIONES = resp;
-        this._dedicaciones$.next(this.DEDICACIONES);
-        this._search$.next();
-      })
+      .subscribe(
+        (resp: any) => {
+          this.DEDICACIONES = resp;
+          this._dedicaciones$.next(this.DEDICACIONES);
+          this._search$.next();
+        })
   }
 
   // archivados(archivado:number){
   //   this.archivado$.next(archivado);
   // }
 
-  ngOnchanges(){
+  ngOnchanges() {
     this.dedicacionesSvc.getDedicaciones()
-    .subscribe(
-      (resp: any) => {
-        this.DEDICACIONES = resp;
-        this._dedicaciones$.next(this.DEDICACIONES);
-        this._search$.next();
-      }
-    )
-   }
-   
+      .subscribe(
+        (resp: any) => {
+          this.DEDICACIONES = resp;
+          this._dedicaciones$.next(this.DEDICACIONES);
+          this._search$.next();
+        }
+      )
+  }
+
   get dedicaciones$() { return this._dedicaciones$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
@@ -115,11 +115,11 @@ export class BuscarDedicacionService {
   get searchTerm() { return this._state.searchTerm; }
 
 
-  set page(page: number) { this._set({page}); }
-  set pageSize(pageSize: number) { this._set({pageSize}); }
-  set searchTerm(searchTerm: string) { this._set({searchTerm}); }
-  set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
-  set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
+  set page(page: number) { this._set({ page }); }
+  set pageSize(pageSize: number) { this._set({ pageSize }); }
+  set searchTerm(searchTerm: string) { this._set({ searchTerm }); }
+  set sortColumn(sortColumn: SortColumn) { this._set({ sortColumn }); }
+  set sortDirection(sortDirection: SortDirection) { this._set({ sortDirection }); }
 
 
   private _set(patch: Partial<State>) {
@@ -129,7 +129,7 @@ export class BuscarDedicacionService {
 
 
   private _search(): Observable<SearchResult> {
-    const { sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
+    const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
     // 1. sort
     let dedicaciones = sort(this.DEDICACIONES as DedicacionDTO[], sortColumn, sortDirection);
@@ -141,6 +141,6 @@ export class BuscarDedicacionService {
 
     // 3. paginate
     dedicaciones = dedicaciones.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({dedicaciones, total});
+    return of({ dedicaciones, total });
   }
 }

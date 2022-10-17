@@ -16,6 +16,8 @@ import { VerDedicacionComponent } from './pages/ver-dedicacion/ver-dedicacion.co
 import { SharedModule } from '@shared/shared.module';
 import { PlanDesarrolloInstitucionalComponent } from './components/plan-desarrollo-institucional/plan-desarrollo-institucional.component';
 import { EstadosDedicacionComponent } from './pages/estados/estados.component';
+import { MenuLateralDedicacionComponent } from './components/menu-lateral-dedicacion/menu-lateral-dedicacion.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { EstadosDedicacionComponent } from './pages/estados/estados.component';
     EditarDedicacionComponent,
     VerDedicacionComponent,
     PlanDesarrolloInstitucionalComponent,
-    EstadosDedicacionComponent
+    EstadosDedicacionComponent,
+    MenuLateralDedicacionComponent
   ],
   imports: [
     CommonModule,

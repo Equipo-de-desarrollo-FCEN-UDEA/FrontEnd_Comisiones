@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CrearComisionComponentsService {
+export class CrearDedicacionComponentsService {
 
   id$ : Observable<number | string> = new Observable();
   cartaSuccess$ : Subject<boolean> = new Subject();

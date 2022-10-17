@@ -23,14 +23,13 @@ import { DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
 
 export class PlanTrabajoComponent implements OnInit {
 
-  @Input() planTrabjo: any;
+  planTrabajo: any;
+  planTrabajo_id: number | string = 0;
   @Input() editable: any;
   @Input() idDedicacion: number | string = 0;
 
   public dedicacion: any;
   error: any = '';
-
-  //dedicacion$: Observable<DedicacionDTO>;
 
 
   private _editing: boolean = false;
@@ -58,11 +57,9 @@ export class PlanTrabajoComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
 
-    this.activatedRoute.params.subscribe({
-      next: (paramId) => {
-        this.idDedicacion = paramId['id'];
-      }
-    })
+    // this.comunicacionSvc.id$.subscribe(id => {
+    //   console.log('id en plan', id)
+    // }).unsubscribe();
 
     for (let i = 0; i < 4; i++) {
       this.jornadaTrabajoArr.push(this.jornadaTrabajoGroup());
@@ -99,31 +96,45 @@ export class PlanTrabajoComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.idDedicacion)
+
 
     if (this.editable) {
 
+      this.activatedRoute.params.subscribe({
+        next: (paramId) => {
+          this.idDedicacion = paramId['id'];
+        }
+      })
+      console.log('es editable', this.idDedicacion)
+  
+     
       this.dedicacionSvc.getDedicacion(this.idDedicacion).subscribe({
         next: (res: DedicacionDTO) => {
 
-          this.planTrabjo = res.plantrabajo;
+          this.planTrabajo = res.plantrabajo;
 
-          this.fPlanTrabajo.patchValue({
-            semestre: this.planTrabjo.semestre,
-            registro: this.planTrabjo.registro,
-            tiempo_parcial: this.planTrabjo.tiempo_parcial,
-            observaciones_generales: this.planTrabjo.observaciones_generales
-          });
+          if(this.planTrabajo){
+            this.planTrabajo_id = this.planTrabajo.id;
+            this.fPlanTrabajo.patchValue({
+              semestre: this.planTrabajo.semestre,
+              registro: this.planTrabajo.registro,
+              tiempo_parcial: this.planTrabajo.tiempo_parcial,
+              observaciones_generales: this.planTrabajo.observaciones_generales
+            });
+  
+            console.log(this.planTrabajo)
+  
+            this.patchActividadesDocencia(this.planTrabajo.actividades_docencia)
+            this.patchActividadesInvestigacion(this.planTrabajo.actividades_investigacion)
+            this.patchActividadesExtension(this.planTrabajo.actividades_extension)
+            this.patchActividadesAdministracionAcademica(this.planTrabajo.administracion_academica)
+            this.patchActividadesOtrasActividades(this.planTrabajo.otras_actividades)
+            this.patchSeguimientoActividades(this.planTrabajo.seguimiento_actividades)
+            this.patchJornadaTrabajo(this.planTrabajo.jornada_trabajo)
+          }
 
-          this.patchActividadesDocencia(this.planTrabjo.actividades_docencia)
-          this.patchActividadesInvestigacion(this.planTrabjo.actividades_investigacion)
-          this.patchActividadesExtension(this.planTrabjo.actividades_extension)
-          this.patchActividadesAdministracionAcademica(this.planTrabjo.administracion_academica)
-          this.patchActividadesOtrasActividades(this.planTrabjo.otras_actividades)
-          this.patchSeguimientoActividades(this.planTrabjo.seguimiento_actividades)
-          this.patchJornadaTrabajo(this.planTrabjo.jornada_trabajo)
-
-
-
+          
         }, error: (err) => {
           if (err.status === 404 || err.status === 401) {
             this.error = err.error.msg; // mensaje desde el back
@@ -156,44 +167,44 @@ export class PlanTrabajoComponent implements OnInit {
   patchActividadesDocencia(actividad: any) {
     for (let i = 0; i < actividad.length - 1; i++) {
       this.addActividadDocencia();
-      this.actividadesDocenciaArr.patchValue(actividad);
     }
+    this.actividadesDocenciaArr.patchValue(actividad);
 
   }
 
   patchActividadesInvestigacion(actividad: any) {
-    for (let i = 0; i < actividad.length - 1; i++) {
+    for (let i = 0; i < actividad.length -1; i++) {
       this.addActividadInvestigacion();
-      this.actividadesInvestigacionArr.patchValue(actividad);
     }
+    this.actividadesInvestigacionArr.patchValue(actividad);
   }
 
   patchActividadesExtension(actividad: any) {
-    for (let i = 0; i < actividad.length - 1; i++) {
+    for (let i = 0; i < actividad.length -1 ; i++) {
       this.addActividadExtension();
-      this.actividadesExtensionArr.patchValue(actividad);
     }
+    this.actividadesExtensionArr.patchValue(actividad);
   }
 
   patchActividadesAdministracionAcademica(actividad: any) {
-    for (let i = 0; i < actividad.length - 1; i++) {
+    for (let i = 0; i < actividad.length -1 ; i++) {
       this.addActividadAdministracionAcademica();
-      this.actividadesAdministracionAcademicaArr.patchValue(actividad);
     }
+    this.actividadesAdministracionAcademicaArr.patchValue(actividad);
   }
 
   patchActividadesOtrasActividades(actividad: any) {
-    for (let i = 0; i < actividad.length - 1; i++) {
+    for (let i = 0; i < actividad.length -1 ; i++) {
       this.addActividadOtrasActividades();
-      this.actividadesOtrasActividadesArr.patchValue(actividad);
     }
+    this.actividadesOtrasActividadesArr.patchValue(actividad);
   }
 
   patchSeguimientoActividades(actividad: any) {
     for (let i = 0; i < actividad.length - 1; i++) {
       this.addSeguimientoActividades();
-      this.seguimientoActividadesArr.patchValue(actividad);
     }
+    this.seguimientoActividadesArr.patchValue(actividad);
   }
 
   patchJornadaTrabajo(actividad: any) {
@@ -440,6 +451,7 @@ export class PlanTrabajoComponent implements OnInit {
     // let dedicacion_id: number | string = 0;
 
     // this.comunicacionSvc.id$.subscribe(id => {
+    //   console.log('id', id)
     //   dedicacion_id = id;
     // }).unsubscribe();
 
@@ -452,21 +464,40 @@ export class PlanTrabajoComponent implements OnInit {
 
 
     this.loadingSvc.show();
-    this.planTrabajoSvc.postPlanTrabajo(plan).subscribe(
-      (res: any) => {
-        if (res) {
-          Swal.fire(
-            {
-              title: 'Plan de trabajo creado',
-              icon: 'success',
-              confirmButtonText: 'Aceptar'
-            }
-          )
-          this.comunicacionSvc.setPlanSuccess(true);
-          this.loadingSvc.hide();
-        }
-      }
-    );
+
+    if (this.editable && this.planTrabajo_id) {
+      this.planTrabajoSvc.updatePlanTrabajo(this.planTrabajo_id, plan).subscribe(
+        (res: any) => {
+          if (res) {
+            Swal.fire(
+              {
+                title: 'El Plan de trabajo se ha actualizado con éxito',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+              }
+            )
+            this.comunicacionSvc.setPlanSuccess(true);
+            this.loadingSvc.hide();
+          }
+        });
+    }
+    else{
+      this.planTrabajoSvc.postPlanTrabajo(plan).subscribe(
+        (res: any) => {
+          if (res) {
+            Swal.fire(
+              {
+                title: 'El Plan de trabajo se ha guardado con éxito',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+              }
+            )
+            this.comunicacionSvc.setPlanSuccess(true);
+            this.loadingSvc.hide();
+          }
+        });
+    }
+    
   }
 
 

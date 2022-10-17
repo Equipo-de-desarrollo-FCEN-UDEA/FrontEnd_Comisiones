@@ -45,4 +45,8 @@ export class PlanTrabajoService {
   getPlanTrabajo(id:number) {
     return this.http.get<any>(this.prefix+`/${id}`)
   }
+
+  updatePlanTrabajo(id:number|string, planTrabajo:any){
+    return this.http.patch<any>(`${this.prefix}/${id}`, planTrabajo)
+  }
 }

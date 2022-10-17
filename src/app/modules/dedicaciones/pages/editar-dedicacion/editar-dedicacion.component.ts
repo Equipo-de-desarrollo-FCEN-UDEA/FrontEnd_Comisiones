@@ -40,7 +40,7 @@ export class EditarDedicacionComponent implements OnInit {
   editarFormatoVice: boolean = false; 
 
   carta:any;
-  editarCarta: boolean = false; 
+  editarCarta: boolean = true; 
 
 
   
@@ -68,10 +68,8 @@ export class EditarDedicacionComponent implements OnInit {
               this.formatoVice = res.formatosvice;
               this.carta = res.cartas;
               
-              console.log('en editar dedicacion', this.plantrabajo)
               this.editarPlanTrabajo = true;
               this.editarFormatoVice = true;
-              this.editarCarta = true;
               
 
           }, error: (err) => {

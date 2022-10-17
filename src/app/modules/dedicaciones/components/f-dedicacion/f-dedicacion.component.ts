@@ -27,6 +27,8 @@ import { plandesarrollo } from '@interfaces/dedicaciones/plandesarrollo';
 })
 export class FDedicacionComponent implements OnInit, AfterViewInit {
 
+  @Input() idDedicacion: number | string = 0;
+
   private _editing : boolean = false;
 
   @Input() set editing(value: boolean){

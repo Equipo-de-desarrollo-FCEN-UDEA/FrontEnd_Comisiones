@@ -1,5 +1,5 @@
-<app-stepper #cdkStepper [linear]="isLinear">
-    <!-- CARTA INICIO  -->
+<!-- <app-stepper #cdkStepper [linear]="isLinear">
+
     <cdk-step label="Carta de iniciación" [optional]="false">
         <ng-template cdkStepLabel>
             <span *ngIf="!(cartaSuccess$ | async) " class="icon is-medium" title="Plantilla para carta de iniciación">
@@ -11,7 +11,7 @@
         </ng-template>
         <app-carta-inicio></app-carta-inicio>
     </cdk-step>
-    <!-- FORMATO VICE -->
+
     <cdk-step label="Formulario" [optional]="false">
         <ng-template cdkStepLabel>
             <span *ngIf="!(formatoSuccess$ | async)" class="icon is-medium" title="Formato de evaluación">
@@ -23,7 +23,7 @@
         </ng-template>
         <app-f-dedicacion (dedicacion_id)="id$"></app-f-dedicacion>
     </cdk-step>
-    <!-- PLAN TRABAJO -->
+
     <cdk-step label="Personal Details" title="Texto flotante" [optional]="false">
         <ng-template cdkStepLabel>
             <span *ngIf="!(planSuccess$ | async)" class="icon is-medium" title="Formato de detalles personales">
@@ -35,4 +35,27 @@
         </ng-template>
         <app-plan-trabajo></app-plan-trabajo>
     </cdk-step>
-</app-stepper>
+</app-stepper> -->
+
+<div class="">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 col-lg-2">
+        <app-menu-lateral-dedicacion
+          (paramsEmiter)="changeParams($event)"
+        ></app-menu-lateral-dedicacion>
+      </div>
+  
+      <div class="col-12 col-lg-10" *ngIf="params[0]">
+        <app-carta-inicio [idDedicacion]="idDedicacion"></app-carta-inicio>
+      </div>
+  
+      <div class="col-12 col-lg-10" *ngIf="params[1]">
+        <app-f-dedicacion [idDedicacion]="idDedicacion" (dedicacion_id)="id$"></app-f-dedicacion>
+      </div>
+  
+      <div class="col-12 col-lg-10" *ngIf="params[2]">
+        <app-plan-trabajo [idDedicacion]="idDedicacion" ></app-plan-trabajo>
+      </div>
+    </div>
+  </div>
+  

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -9,6 +9,8 @@ import { CrearDedicacionComponentsService } from '../../services/crear-dedicacio
 import { Carta, CartaInside } from '@interfaces/dedicaciones/carta';
 import Swal from 'sweetalert2';
 import { prefix } from '@shared/data/ruta-api';
+import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
+import { DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
 
 @Component({
   selector: 'app-carta-inicio',
@@ -16,6 +18,12 @@ import { prefix } from '@shared/data/ruta-api';
   styleUrls: ['./carta-inicio.component.css']
 })
 export class CartaInicioComponent implements OnInit, AfterViewInit {
+
+  @Input() idDedicacion: number | string = 0;
+  @Input() editable: any;
+
+  cartaInicio: any;
+
   fecha = new Date();
   usuario: any;
   @ViewChild('carta', { static: false }) el!: ElementRef;
@@ -28,7 +36,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
 
   prefix = prefix
 
-  carta_id = 0
+  carta_id: number | undefined = 0
 
   archivo: any;
   private _editing: boolean = false
@@ -37,13 +45,18 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
     this._editing = value
   }
 
+  error: any = '';
+
 
   constructor(
     private fb: FormBuilder,
     private usuarioSvc: UsuarioService,
-    private router: Router,
     private cartaSvc: CartaInicioService,
-    private comunicationSvc: CrearDedicacionComponentsService
+    private comunicationSvc: CrearDedicacionComponentsService,
+
+    private dedicacionSvc: DedicacionService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
 
     this.usuarioSvc.getUsuario().subscribe(
@@ -54,6 +67,41 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
 
   }
 
+  ngOnInit(): void {
+
+    if (this.editable) {
+      this.activatedRoute.params.subscribe({
+        next: (paramId) => {
+          this.idDedicacion = paramId['id'];
+        }
+      })
+      console.log('es editable', this.idDedicacion)
+
+
+      this.dedicacionSvc.getDedicacion(this.idDedicacion).subscribe({
+        next: (res: DedicacionDTO) => {
+          this.cartaInicio = res.cartas;
+
+          if(this.cartaInicio){
+            this.carta_id = res.cartas?.id;
+            this.FormCarta.patchValue({
+              Cuerpo: this.cartaInicio.body
+            });
+          }
+          
+
+        }, error: (err) => {
+          if (err.status === 404 || err.status === 401) {
+            this.error = err.error.msg; // mensaje desde el back
+            this.router.navigate(['/'])
+          }
+        }
+      });
+    }
+
+
+
+  }
 
 
 
@@ -62,39 +110,36 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   }
   );
 
-  ngOnInit(): void {
-    console.log('EN CARTA')
-  }
 
   ngAfterViewInit(): void {
-    let carta = document.getElementById('carta')
+    // let carta = document.getElementById('carta')
 
-    if (carta) {
-      let deviceWidth = window.screen.width
-      if (deviceWidth < 574) {
-        carta.style.fontSize = `${deviceWidth / 60}px`
-      }
-    }
+    // if (carta) {
+    //   let deviceWidth = window.screen.width
+    //   if (deviceWidth < 574) {
+    //     carta.style.fontSize = `${deviceWidth / 60}px`
+    //   }
+    // }
 
-    this.comunicationSvc.editCarta$.subscribe(
-      (carta: CartaInside | null) => {
-        if (carta?.body) {
-          this.FormCarta.controls.Cuerpo.setValue(carta.body);
-          this.carta_id = carta?.id
-        }
-      }
-    )
+    // this.comunicationSvc.editCarta$.subscribe(
+    //   (carta: CartaInside | null) => {
+    //     if (carta?.body) {
+    //       this.FormCarta.controls.Cuerpo.setValue(carta.body);
+    //       this.carta_id = carta?.id
+    //     }
+    //   }
+    // )
 
 
 
 
     // Mala practica, debe corregirse
-    setTimeout(() => {
-      let container = document.getElementById("clientCont")
-      if (container) {
-        container.style.maxWidth = container.clientWidth + "px";
-      }
-    }, 2000);
+    // setTimeout(() => {
+    //   let container = document.getElementById("clientCont")
+    //   if (container) {
+    //     container.style.maxWidth = container.clientWidth + "px";
+    //   }
+    // }, 2000);
 
   }
 
@@ -105,19 +150,21 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
     spinner.style.display = 'block';
     boton.disabled = true;
     btntext.style.display = 'none';
-    let dedicacion_id: number | string = 0;
-    this.comunicationSvc.id$.subscribe(
-      (id: string | number) => {
-        dedicacion_id = id;
-      }
-    ).unsubscribe();
+
+    // let dedicacion_id: number | string = 0;
+    // this.comunicationSvc.id$.subscribe(
+    //   (id: string | number) => {
+    //     dedicacion_id = id;
+    //   }
+    // ).unsubscribe();
 
 
     this.carta = {
       body: this.FormCarta.value.Cuerpo || '',
-      dedicaciones_id: dedicacion_id
+      dedicaciones_id: this.idDedicacion
     }
-    if (this._editing && this.carta_id) {
+    if (this.editable && this.carta_id) {
+      console.log('es editable la carta')
       this.cartaSvc.updateCarta(this.carta, this.carta_id).subscribe(
         (data: any) => {
           Swal.fire({
@@ -132,7 +179,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
       this.cartaSvc.postCarta(this.carta).subscribe(
         (data: any) => {
           Swal.fire({
-            title: 'Carta de iniciación generada con éxito',
+            title: 'La carta de iniciación se ha guardado con éxito',
             text: data.message,
             icon: 'success',
             confirmButtonText: 'Aceptar'

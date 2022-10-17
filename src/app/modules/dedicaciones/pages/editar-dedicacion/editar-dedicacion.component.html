@@ -45,7 +45,7 @@
       </div>
   
       <div class="col-12 col-lg-10" *ngIf="params[0]">
-        <app-carta-inicio [editing]="true"></app-carta-inicio>
+        <app-carta-inicio [editable]="editarCarta" [editing]="true"></app-carta-inicio>
       </div>
   
       <div class="col-12 col-lg-10" *ngIf="params[1]">
@@ -53,7 +53,7 @@
       </div>
   
       <div class="col-12 col-lg-10" *ngIf="params[2]">
-        <app-plan-trabajo [planTrabjo]="plantrabajo" [editable]="editarPlanTrabajo" [idDedicacion]="idDedicacion" ></app-plan-trabajo>
+        <app-plan-trabajo  [editable]="editarPlanTrabajo" [idDedicacion]="idDedicacion" ></app-plan-trabajo>
       </div>
     </div>
   </div>

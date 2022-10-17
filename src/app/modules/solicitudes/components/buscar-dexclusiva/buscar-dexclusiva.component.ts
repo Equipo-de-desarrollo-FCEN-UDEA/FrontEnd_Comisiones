@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Dedicacion } from '@interfaces/dedicaciones/dedicaciones';
+import { Dedicacion, DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
 import { BuscarDedicacionService } from '@services/busquedas/buscar-dedicacion.service';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./buscar-dexclusiva.component.scss']
 })
 export class BuscarDexclusivaComponent {
-  dedicaciones$: Observable<Dedicacion[]>;
+  dedicaciones$: Observable<DedicacionDTO[]>;
   total$: Observable<number>;
   ultimoElemento = ultimoElement
 
@@ -24,9 +24,10 @@ export class BuscarDexclusivaComponent {
     public Buscarservice: BuscarDedicacionService,
     public dedicacionService: DedicacionService
   ) {
-    this.dedicaciones$ = Buscarservice.dedicaciones$,
-      this.total$ = Buscarservice.total$,
-      this.ultimoElemento = ultimoElement
+    this.dedicaciones$ = Buscarservice.dedicaciones$
+    this.total$ = Buscarservice.total$
+    this.ultimoElemento = ultimoElement
+    this.dedicaciones$.subscribe(dedicacion => console.log(dedicacion))
   }
 
   // changeOption(event:any){

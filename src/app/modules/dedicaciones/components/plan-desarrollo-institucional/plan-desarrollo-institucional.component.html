@@ -65,7 +65,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let tema of temas; let i = index">
                         <div class="tema card shadow rounded p-2"
-                            [ngClass]="{'selected': selectedTema.indexOf(i) != -1}" (click)="selectTema(i, tema)">
+                            [ngClass]="{'selected': selectedTema.indexOf(tema.id) != -1}" (click)="selectTema(tema.id, tema)">
                             <h6>{{tema.titulo}}</h6>
                             <hr>
                             <span class="spantext">{{tema.subtitulo}}</span>
@@ -160,7 +160,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                         *ngFor="let accion of _objetivo.acciones; let i = index">
                         <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedAccion.indexOf(accion.id) != -1}"
-                            (click)="selectAccion(accion, _objetivo.idTema, _objetivo.id);">
+                            (click)="selectAccion(accion, _objetivo);">
                             <h6>{{"Acción estratégica " + (i+1)}}</h6>
                             <hr>
                             <span class="spantext">{{accion.descripcion}}</span>
@@ -212,7 +212,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
                             *ngFor="let indicador of _objetivo.indicadores; let i = index">
                             <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedIndicadores.indexOf(indicador.id) != -1}"
-                                (click)="selectIndicador(indicador, _objetivo.idTema, _objetivo.id);">
+                                (click)="selectIndicador(indicador, _objetivo);">
                                 <h6>{{"Indicador " + (i+1)}}</h6>
                                 <hr>
                                 <span class="spantext">{{indicador.descripcion}}</span>

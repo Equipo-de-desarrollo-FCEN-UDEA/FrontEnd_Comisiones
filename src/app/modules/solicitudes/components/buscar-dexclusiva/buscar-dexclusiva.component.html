@@ -40,10 +40,13 @@
               Nombre</th>
             <th scope="col" sortable="apellido" (sort)="onSort($event)"
               *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">Apellido</th>
+            <th scope="col" sortable="nombre" (sort)="onSort($event)"
+              >
+              Estado</th>
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Departamentos</th>
             <th scope="col" sortable="nombre" (sort)="onSort($event)">Facultad</th>
             <!-- <th scope="col" sortable="nombre" (sort)="onSort($event)">Descargas</th> -->
-            <th> </th>
+
           </tr>
         </thead>
 
@@ -73,6 +76,26 @@
 
             <td *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')">
               <ngb-highlight [result]="dedicacion.usuarios.apellido" [term]="Buscarservice.searchTerm">
+              </ngb-highlight>
+            </td>
+            <td>
+              <ngb-highlight [result]="ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre"
+                [term]="Buscarservice.searchTerm" class="badge badge-pill pill" [ngClass]="{
+                    'bg-solicitada':
+                      ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre === 'SOLICITADA',
+                    'bg-aprobada': 
+                      (ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre === 'APROBADA' || ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre === 'APROBADA CONCEJO INSTITUTO'),
+                    'bg-visto-bueno':
+                      ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre === 'EN CURSO',
+                    'bg-finalizada':
+                      ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre === 'FINALIZADA',
+                    'bg-rechazada-decanato':
+                      ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre === 'RECHAZADA DECANATO',
+                    'bg-rechazada-coordinacion':
+                      ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre === 'RECHAZADA COORDINACIÓN',
+                      'bg-en-creacion':
+                      ultimoElemento(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre === 'EN CREACIÓN'
+                    }">
               </ngb-highlight>
             </td>
 

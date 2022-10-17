@@ -1,0 +1,17 @@
+.containerInside { 
+  width: 75%;
+  margin-bottom: 10em;
+  align-items: unset;
+  min-height: 50vh;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 576px){
+  .containerInside {
+    width: 95%!important;
+   
+   }
+  }

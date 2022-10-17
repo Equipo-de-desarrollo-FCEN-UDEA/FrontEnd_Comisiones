@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
+import { DedicacionxestadoService } from '@services/dedicaciones/dedicacionxestado.service';
+import { DescargarDocumentosService } from '@services/descargar-documentos.service';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -21,7 +23,11 @@ export class VerDedicacionComponent implements OnInit {
 
   public documentosArray : any[] = [];
 
-  public estadoActual : any = '';
+  public id: string | number = 0
+
+  error:string = '';
+
+  public estadoActual : string = '';
 
   isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
@@ -33,20 +39,25 @@ export class VerDedicacionComponent implements OnInit {
     private activatedRoute : ActivatedRoute,
     private comunicacionSvc : CrearComisionComponentsService,
     private router : Router,
-    private loaderSvc : LoaderService
+    private loaderSvc : LoaderService,
+    private descargarDocumentoSvc: DescargarDocumentosService,
+    private dedicacionEstadosSvc: DedicacionxestadoService
 
   ) {
         
-      let id : number;
       this.activatedRoute.params.subscribe(params => {
-        id = params['id'];
-        this.comunicacionSvc.setId(id); 
-        this.dedicacion$ = this.dedicacionSvc.getDedicacion(id)
+        this.id = params['id'];
+        this.comunicacionSvc.setId(this.id); 
+        this.dedicacion$ = this.dedicacionSvc.getDedicacion(this.id)
       });
 
       this.dedicacion$.subscribe(dedicacion => {
+        console.log(dedicacion);
         this.fechaCreacion = dedicacion.intermediate_dedicaciones[0]? new Date(dedicacion.intermediate_dedicaciones[0].createdAt) : null;
-        this.estadoActual = ultimoElement(dedicacion.intermediate_dedicaciones)?.intermediate_estados?.nombre ? ultimoElement(dedicacion.intermediate_dedicaciones).intermediate_estados.nombre : 'EN CREACIÓN';
+        this.estadoActual = ultimoElement(dedicacion.intermediate_dedicaciones)?.intermediate_estados?.nombre;
+        this.documentosArray.push(dedicacion.cartas?.documentos);
+        this.documentosArray.push(dedicacion.plantrabajo?.documentos);
+        this.documentosArray.push(dedicacion.formatosvice?.documentos);
       });
 
     }
@@ -83,6 +94,36 @@ export class VerDedicacionComponent implements OnInit {
   }
 
   abrirDocumento(id: number | string) {
+    this.descargarDocumentoSvc.downloadDocumento(id).subscribe({
+      next: (res) => {
+        window.open(window.URL.createObjectURL(res))
+      },
+      error: (err) => {
+        if (err.status === 404 || err.status === 401) {
+          this.error = err.error.msg;
+        }
+      },
+    });
+  }
 
+  solicitarDedicacion(){
+    this.dedicacionEstadosSvc.postDedicacionxEstado(this.id).subscribe({
+      next: res => {
+        Swal.fire({
+          title: 'Solicitada!',
+          text: '¡la dedicación ha sido solicitada!',
+          icon: 'success',
+          confirmButtonColor: '#3AB795',
+        });
+      },
+      error: res =>{
+        Swal.fire({
+          title: 'Error!',
+          text: res.error.msg,//'Asegurate de que todos los documentos se encuentren diligenciados',
+          icon: 'error',
+          confirmButtonColor: '#3AB795',
+        });
+      }
+    })
   }
 }

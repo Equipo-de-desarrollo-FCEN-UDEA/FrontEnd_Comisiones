@@ -27,9 +27,9 @@ import { plandesarrollo } from '@interfaces/dedicaciones/plandesarrollo';
 })
 export class FDedicacionComponent implements OnInit, AfterViewInit {
 
-  private _editing : boolean = false;
+  private _editing: boolean = false;
 
-  @Input() set editing(value: boolean){
+  @Input() set editing(value: boolean) {
     this._editing = value
   }
 
@@ -48,7 +48,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     private modalSvc: NgbModal
   ) {
     this.usuarioSvc.getUsuario().subscribe(resp => this.Usuario = resp);
-   }
+  }
 
 
   public campos = [
@@ -58,7 +58,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     'Administración'
   ]
 
-  public Usuario : UsuarioResponse | undefined;
+  public Usuario: UsuarioResponse | undefined;
 
 
 
@@ -82,12 +82,12 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.comunicationSvc.editFormato$.subscribe(
       (formato: FormatosviceInside | null) => {
-        if (formato){
+        if (formato) {
           this.formatoSvc.getFormatoVice(formato.id).subscribe(
-            (formato : any) =>{
-              console.log(formato)
+            (formato: any) => {
+            console.log(formato)
               // this.fBasicInfo.patchValue(formato)
-              //Discutir backend
+            //Discutir backend
               
             }
           )
@@ -97,7 +97,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    let Dedicacion = this.fBasicInfo.value as FormatoVice;
+let Dedicacion = this.fBasicInfo.value as FormatoVice;
 
     let dedicacion_id: number | string = 0;
 
@@ -141,7 +141,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
         this.PlanDesarrolloFirstTake += 1
       }
     ).catch(
-      (err:any) => {
+      (err: any) => {
         Swal.fire({
           icon: 'error',
           text: 'Algo ocurrió mal, vuelve a seleccional tu plan de desarrollo institucional',

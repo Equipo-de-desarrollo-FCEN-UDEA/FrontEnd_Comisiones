@@ -1,92 +1,127 @@
-<div id="clientCont" class="container  bt-white rounded">
-    <div class="row" style="max-width: 100% !important;">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ladoizquierdo">
-            <!-- <p class="ptitle">
-                Carta de iniciación
-            </p> -->
-            <span class="text-secondary spantext">CARTA INICIACIÓN</span>
-            <form [formGroup]="FormCarta" (submit)="OnSubmit()">
-                <div class="form-group">
-                    <quill-editor #disciplineQE id="discipline-qe" style="max-width: 100% !important;" [styles]="{height:'250px'}" [placeholder]="'Ingrese aquí el cuerpo de la carta'"
-                        formControlName="Cuerpo"></quill-editor>
-
-                </div>
-            </form>
+<div id="clientCont" class="container bt-white rounded">
+  <div class="row p-4 container-inside shadow rounded" style="max-width: 100% !important">
+    <div class="col-12 spantext">
+        <h4 class="text-secondary">CARTA INICIACIÓN</h4>
+    </div>
+    <hr/>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ladoizquierdo">
+      <form [formGroup]="FormCarta" (submit)="OnSubmit()">
+        <div class="form-group">
+          <quill-editor
+            #disciplineQE
+            id="discipline-qe"
+            style="max-width: 100% !important"
+            [styles]="{ height: '250px' }"
+            [placeholder]="'Ingrese aquí el cuerpo de la carta'"
+            formControlName="Cuerpo"
+          ></quill-editor>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-            <div class="visual" style="max-width: 100% !important;">
-                <h5>Previsualización</h5>
-                <div class="carta" id="carta" #carta>
-                    <div class="cabecera">
-                        <div class="logo">
-                            <img [src]="prefix+'logos' +'/logosimbolo-horizontal.png'" width="280px">
-                        </div>
-                        <div class="fecha">
-                            <p style="margin:0;">
-                                Medellín, {{fecha | date: 'longDate' }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="cuerpo">
-                        <p> Señores</p> <br>
-                        <p> <b> CONSEJO DE {{usuario?.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
-                                usuario?.departamentos.nombre | uppercase) : usuario?.departamentos.nombre | uppercase}}
-                            </b></p> <br>
-                        <p>{{
-                            usuario?.departamentos.facultades.descripcion | titlecase}}</p>
-                        <p>Universidad de Antioquia</p>
-                        <br>
-                        <p>Respetados miembros del consejo:</p>
-                        <br>
-                        <div class="cuerpo-texto ql-editor" id="cuerpo" [innerHTML]="FormCarta.value.Cuerpo">
-                        </div>
-                    </div>
-                    <div class="footer">
-                        <div class="informacion-usuario">
-                            <div class="nombre-usuario">
-                                <p style="margin:0;">
-                                    {{usuario?.nombre + ' ' + usuario?.apellido | titlecase }}
-                                </p>
-                            </div>
-                            <div class="cargo-usuario">
-                                <p style="margin:0;">
-                                    <!-- {{usuario?.roles.nombre | titlecase }} -->
-                                </p>
-                            </div>
-                            <div class="departamento">
-                                <p style="margin:0;">
-                                    {{usuario?.departamentos.descripcion == 'Instituto' ? ('Instituto de ' +
-                                    usuario?.departamentos.nombre | titlecase) : usuario?.departamentos.nombre |
-                                    titlecase}}
-                                </p>
-                            </div>
-                            <div class="facultad">
-                                <p style="margin:0;">
-                                    {{
-                                    usuario?.departamentos.facultades.descripcion | titlecase}}
-                                </p>
-                            </div>
-                            <div class="mail">
-                                <a href="mailto:{{usuario?.correo}}" style="margin:0;">
-                                    {{usuario?.correo}}
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+      </form>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+      <div class="visual" style="max-width: 100% !important">
+        <h5 class="text-secondary">Previsualización</h5>
+        <div class="carta" id="carta" #carta>
+          <div class="cabecera">
+            <div class="logo">
+              <img
+                [src]="prefix + 'logos' + '/logosimbolo-horizontal.png'"
+                width="280px"
+              />
             </div>
+            <div class="fecha">
+              <p style="margin: 0">Medellín, {{ fecha | date: "longDate" }}</p>
+            </div>
+          </div>
+          <div class="cuerpo">
+            <p>Señores</p>
+            <br />
+            <p>
+              <b>
+                CONSEJO DE
+                {{
+                  usuario?.departamentos.descripcion == "Instituto"
+                    ? ("Instituto de " + usuario?.departamentos.nombre
+                      | uppercase)
+                    : (usuario?.departamentos.nombre | uppercase)
+                }}
+              </b>
+            </p>
+            <br />
+            <p>
+              {{ usuario?.departamentos.facultades.descripcion | titlecase }}
+            </p>
+            <p>Universidad de Antioquia</p>
+            <br />
+            <p>Respetados miembros del consejo:</p>
+            <br />
+            <div
+              class="cuerpo-texto ql-editor"
+              id="cuerpo"
+              [innerHTML]="FormCarta.value.Cuerpo"
+            ></div>
+          </div>
+          <div class="footer">
+            <div class="informacion-usuario">
+              <div class="nombre-usuario">
+                <p style="margin: 0">
+                  {{ usuario?.nombre + " " + usuario?.apellido | titlecase }}
+                </p>
+              </div>
+              <div class="cargo-usuario">
+                <p style="margin: 0">
+                  <!-- {{usuario?.roles.nombre | titlecase }} -->
+                </p>
+              </div>
+              <div class="departamento">
+                <p style="margin: 0">
+                  {{
+                    usuario?.departamentos.descripcion == "Instituto"
+                      ? ("Instituto de " + usuario?.departamentos.nombre
+                        | titlecase)
+                      : (usuario?.departamentos.nombre | titlecase)
+                  }}
+                </p>
+              </div>
+              <div class="facultad">
+                <p style="margin: 0">
+                  {{
+                    usuario?.departamentos.facultades.descripcion | titlecase
+                  }}
+                </p>
+              </div>
+              <div class="mail">
+                <a href="mailto:{{ usuario?.correo }}" style="margin: 0">
+                  {{ usuario?.correo }}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+    <hr class="hr"/>
     <div class="botones">
-        <button id="Generador-carta" class="btn btn-add btn-lg" type="submit" [disabled]="FormCarta.controls['Cuerpo'].invalid" (click)="OnSubmit()" (submit)="true">
-            <span class="spinner" id="spinner" style="display: none;">
-                <span class="spinner-border spinner-border-sm"  role="status" aria-hidden="true" ></span>
-               Cargando...
-           </span>
-           <span id="btn-text">Guardar <span><i class="fas fa-save"></i></span> </span>
-            </button>
-        <!-- <button class="btn btn-success btn-lg" (click)="OnSubmit()"  (submit)="true">Continuar <span><i class="fas fa-angle-right"></i></span></button> -->
-    </div>
-
+        <button
+          id="Generador-carta"
+          class="btn btn-add btn-lg"
+          type="submit"
+          [disabled]="FormCarta.controls['Cuerpo'].invalid"
+          (click)="OnSubmit()"
+          (submit)="(true)"
+        >
+          <span class="spinner" id="spinner" style="display: none">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Cargando...
+          </span>
+          <span id="btn-text"
+            >Guardar <span><i class="fas fa-save"></i></span>
+          </span>
+        </button>
+      </div>
+  </div>
 </div>

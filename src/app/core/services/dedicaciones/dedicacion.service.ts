@@ -42,8 +42,8 @@ export class DedicacionService {
     return this.http.patch(`${this.urlEndPointArch}/${id}`, { archivado: 0 })
   }
 
-  postDedicacion(description: string) {
-    return this.http.post(`${this.urlEndPoint}`, { descripcion: description })
+  postDedicacion(titulo: string) {
+    return this.http.post(`${this.urlEndPoint}`, { titulo: titulo })
   }
 
   getDedicacion(id: number | string) {

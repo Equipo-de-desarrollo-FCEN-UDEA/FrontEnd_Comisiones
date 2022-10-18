@@ -3,9 +3,9 @@
     <div class="d-flex">
       <label for="table-complete-search" class="col-sm-auto col-form-label">Buscar:
       </label>
-
       <input id="table-complete-search" type="text" class="form-control" name="searchTerm"
         [(ngModel)]="Buscarservice.searchTerm">
+        
       <button class="btn btn-info" type="button" (click)="refresh()"> <i class="fas fa-refresh"></i> </button>
 
       <span class="col-form-label " style="padding-left: 1em" *ngIf="Buscarservice.loading$ | async">
@@ -57,7 +57,7 @@
             <th scope="row">{{ dedicacion.id }}</th>
 
             <td>
-              <ngb-highlight [result]="dedicacion.descripcion" [term]="Buscarservice.searchTerm">
+              <ngb-highlight [result]="dedicacion.titulo" [term]="Buscarservice.searchTerm">
               </ngb-highlight>
             </td>
 

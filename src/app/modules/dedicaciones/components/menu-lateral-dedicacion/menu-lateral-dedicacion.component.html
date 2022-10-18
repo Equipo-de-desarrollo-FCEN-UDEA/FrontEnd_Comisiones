@@ -1,0 +1,28 @@
+<ul class="list-group m-3 mb-3">
+  
+    <li
+      class="list-group-item"
+      (click)="toggleCarta()"
+      [ngClass]="{ active: params[0] }"
+    >
+      Carta
+    </li>
+  
+    <li
+      class="list-group-item"
+      (click)="toggleFormatoVice()"
+      [ngClass]="{ active: params[1] }"
+    >
+      Formato de Vicerrectoría
+    </li>
+  
+    <li
+      class="list-group-item"
+      (click)="togglePlanTrabajo()"
+      [ngClass]="{ active: params[2] }"
+    >
+      Plan de Trabajo
+    </li>
+    
+  </ul>
+  

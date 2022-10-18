@@ -8,7 +8,7 @@ import { LoaderService } from '@services/interceptors/loader.service';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
-import { CrearComisionComponentsService } from '../../services/crear-comision-components.service';
+import { CrearDedicacionComponentsService } from '../../services/crear-dedicacion-components.service';
 
 @Component({
   selector: 'app-ver-dedicacion',
@@ -37,14 +37,13 @@ export class VerDedicacionComponent implements OnInit {
 
     private dedicacionSvc : DedicacionService,
     private activatedRoute : ActivatedRoute,
-    private comunicacionSvc : CrearComisionComponentsService,
+    private comunicacionSvc : CrearDedicacionComponentsService,
     private router : Router,
     private loaderSvc : LoaderService,
     private descargarDocumentoSvc: DescargarDocumentosService,
     private dedicacionEstadosSvc: DedicacionxestadoService
 
   ) {
-        
       this.activatedRoute.params.subscribe(params => {
         this.id = params['id'];
         this.comunicacionSvc.setId(this.id); 

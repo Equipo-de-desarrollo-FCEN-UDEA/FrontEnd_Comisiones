@@ -58,6 +58,9 @@ export class DedicacionService {
     return this.http.patch(`${this.urlEndPoint}/${id}`, body)
   }
 
+  clonarDedicacion(id: number) {
+    return this.http.get(`${this.urlEndPoint}/clonardedicacion/${id}`)
+  }
 
 
 

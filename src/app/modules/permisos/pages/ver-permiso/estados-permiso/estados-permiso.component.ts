@@ -15,20 +15,20 @@ import Swal from 'sweetalert2';
 })
 export class EstadosPermisoComponent implements OnInit {
 
-  asociarEstadoForm: FormGroup;
+  public asociarEstadoForm: FormGroup;
 
   // ID de la comsision a editar
-  getId: any;
-  urlId: any;
+  public getId: any;
+  public urlId: any;
 
-  submitted = false;
-  error = ''
+  public submitted = false;
+  public error = ''
 
   // Loader
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   // Estados
-  nuevoEstado$: Observable<Estado[]>;
+  public nuevoEstado$: Observable<Estado[]>;
 
   constructor(
     private formBuilder: FormBuilder, 

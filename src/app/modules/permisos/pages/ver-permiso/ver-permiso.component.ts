@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 
-import { Permiso, PermisosInside } from '@interfaces/permisos';
+import { Permiso} from '@interfaces/permisos';
 import { LoaderService } from '@services/interceptors/loader.service';
 import { ultimoElement } from '@shared/clases/ultimo-estado';
 import { DescargarDocumentosService } from '@services/descargar-documentos.service';
@@ -19,24 +19,24 @@ import { PermisoService } from '@services/permisos/permiso.service';
 export class VerPermisoComponent implements OnInit {
 
   public rol : string = localStorage.getItem('rol') || '';
-  loading:boolean = false;
-  isDelete:boolean = false;
-  error:string = '';
-  permiso: Permiso| undefined;
+  public loading:boolean = false;
+  public isDelete:boolean = false;
+  public error:string = '';
+  public permiso: Permiso| undefined;
 
   // Loader
-  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+  public isLoading: Subject<boolean> = this.loaderSvc.isLoading;
 
   // Documentos 
-  documentosArray:any = [];
-  fechaCreacion:any = '';
+  public documentosArray:any = [];
+  public fechaCreacion:any = '';
 
 
   // Estados 
   ultimoElemento = ultimoElement
-  estadoActual:any = '';
-  estados:any = [];
-  mostrarEstados = false;
+  public estadoActual:any = '';
+  public estados:any = [];
+  public mostrarEstados = false;
 
 
   constructor(
@@ -57,9 +57,9 @@ export class VerPermisoComponent implements OnInit {
   ngOnInit(): void {
     this.activateRoute.params.subscribe({
       next: (paramId) => {
-         const id = paramId['id'];
-          if (id) {
-            this.permisosSvc.getPermiso(id).subscribe({
+         const ID = paramId['id'];
+          if (ID) {
+            this.permisosSvc.getPermiso(ID).subscribe({
               next: (res)=> {
                 this.permiso = res;
                 this.permiso?.documentos.forEach(documento => this.documentosArray.push(documento));
@@ -96,7 +96,6 @@ export class VerPermisoComponent implements OnInit {
   // -------- VER DOCUMENTOS ADJUNTOS --------
   // -----------------------------------------
   abrirDocumento(id:number){
-    const reader = new FileReader();
     this.descargarDocumentoSvc.downloadDocumento(id).subscribe({
       next: (res) => {
         window.open(window.URL.createObjectURL(res))
@@ -127,7 +126,7 @@ export class VerPermisoComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.permisosSvc.deletePermiso(id).subscribe({
-          next: (response) => {
+          next: () => {
             this.router.navigate(['/home']);
             Swal.fire({
               title: 'Eliminada!',

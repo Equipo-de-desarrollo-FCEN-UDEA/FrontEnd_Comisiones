@@ -64,6 +64,20 @@ export class VerDedicacionComponent implements OnInit {
   ngOnInit(): void{
   }
 
+  clonarDedicacion(id: number){
+    this.dedicacionSvc.clonarDedicacion(id).subscribe({
+      next: (response : any) => {
+        this.router.navigate(['/home']);
+        Swal.fire({
+          title: 'Creada!',
+          text: '¡La dedicación ha sido clonada!',
+          icon: 'success',
+          confirmButtonColor: '#3AB795',
+        });
+      }
+    });
+  }
+
   delete(id: number) : void{
 
     Swal.fire({

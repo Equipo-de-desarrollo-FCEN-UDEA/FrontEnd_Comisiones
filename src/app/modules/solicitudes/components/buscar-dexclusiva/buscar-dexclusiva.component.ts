@@ -22,7 +22,7 @@ export class BuscarDexclusivaComponent {
 
   constructor(
     public Buscarservice: BuscarDedicacionService,
-    public dedicacionService: DedicacionService
+    public dedicacionSvc: DedicacionService,
   ) {
     this.dedicaciones$ = Buscarservice.dedicaciones$
     this.total$ = Buscarservice.total$
@@ -35,15 +35,6 @@ export class BuscarDexclusivaComponent {
   //   this.Buscarservice.ngOnchanges();
   // }
 
-  // archivarDedicacion(id:number){
-  //   this.dedicacionService.Archivado(id).subscribe()
-  //   this.Buscarservice.ngOnchanges()
-  // }
-
-  // desarchivarDedicacion(id:number){
-  //   this.dedicacionService.NoArchivado(id).subscribe()
-  //   this.Buscarservice.ngOnchanges()
-  // }
 
   refresh() {
     this.Buscarservice.ngOnchanges();

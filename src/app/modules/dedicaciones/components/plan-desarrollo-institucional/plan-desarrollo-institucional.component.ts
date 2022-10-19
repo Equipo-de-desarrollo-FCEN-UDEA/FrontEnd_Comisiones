@@ -133,7 +133,6 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit, AfterViewCh
   }
 
   selectObjetivo(objetivo: Objetivo, idTema: number) {
-    console.log(objetivo)
     let index = this.selectedObjetivo.indexOf(objetivo.id);
     let indexOfTema = this.selectedTema.indexOf(idTema)
     if (index != -1) {
@@ -187,6 +186,7 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit, AfterViewCh
 
 
   submit() {
+    console.log({acciones: this.selectedAccion, objetivos_has_indicador: this.selectedIndicadores})
     this.activeModal.close({acciones: this.selectedAccion, objetivos_has_indicador: this.selectedIndicadores})
   }
 

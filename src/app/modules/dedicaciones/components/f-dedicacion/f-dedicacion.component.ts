@@ -3,7 +3,7 @@ import { Dexclusiva, FormatosviceInside, FormatoVice, FormatoVicedocencia } from
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { CookieService } from 'ngx-cookie-service';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { icon, library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { UsuarioService } from '@services/usuarios/usuario.service';
 import { Usuario, UsuarioResponse } from '@interfaces/usuario';
@@ -33,7 +33,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
   @Input() editable: any;
   @Input() idDedicacion: number | string = 0;
 
-  private _editing : boolean = false;
+  private _editing: boolean = false;
 
   private error: any = '';
 
@@ -82,10 +82,10 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
   })
 
   ngOnInit(): void {
-  
-    if(this.editable){
+
+    if (this.editable) {
       this.PlanDesarrolloFirstTake++;
-      let formato$=this.dedicacionSvc.getDedicacion(this.idDedicacion).pipe(
+      let formato$ = this.dedicacionSvc.getDedicacion(this.idDedicacion).pipe(
         switchMap(
           data => this.formatoSvc.getFormatoVice(data.formatosvice!.id)
         )
@@ -97,12 +97,12 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
           let metas = this.formatoVice.intermediate_metas_productos.filter(
             objeto => objeto.tipo == 'meta'
           ).map(meta => {
-            return {meta: meta.descripcion}
+            return { meta: meta.descripcion }
           })
           let productos = this.formatoVice.intermediate_metas_productos.filter(
             objeto => objeto.tipo == 'producto'
           ).map(producto => {
-            return {producto: producto.descripcion}
+            return { producto: producto.descripcion }
           })
           this.patchMeta(metas);
           this.patchProducto(productos);
@@ -117,73 +117,91 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
       )
     }
 
-    
+
 
   }
 
   ngAfterViewInit(): void {
-    
+
   }
 
   onSubmit() {
     // let Dedicacion = this.fBasicInfo.value as FormatoVice;
 
-    let dedicacion_id: number | string = 0;
-
-    this.comunicationSvc.id$.subscribe(
-      (id: string | number) => {
-        dedicacion_id = id;
-      }
-    );
 
     let metas = this.fBasicInfo.value.metas?.map(meta => {
-      return {"metaproducto":meta.meta, "tipo":"meta"}
+      return { "metaproducto": meta.meta, "tipo": "meta" }
     })
 
     let productos = this.fBasicInfo.value.productos?.map(producto => {
-      return {"metaproducto": producto.producto, "tipo":"producto"}
+      return { "metaproducto": producto.producto, "tipo": "producto" }
     })
 
     let metas_productos = metas?.concat(productos!)
 
-    let Dedicacion = {
+    let FormatoVice = {
       tiempo_solicitado: this.fBasicInfo.value.tiempo_solicitado,
       campo_modalidad: this.fBasicInfo.value.campo_modalidad,
       descripcion_comprobante: this.fBasicInfo.value.descripcion_comprobante,
       metas_productos: metas_productos,
       acciones: this.acciones,
       objetivos_has_indicador: this.objetivos_has_indicador,
-      dedicacion_id: this.idDedicacion
+      dedicaciones_id: this.idDedicacion
     };
 
-    console.log(Dedicacion)
-
-    this.formatoSvc.postFormulario(Dedicacion).subscribe(
-      (res: any) => {
-        if (res) {
-          Swal.fire({
-            text: 'Formato generado con éxito',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
+    if (this.formatoVice) {
+      let pathAcciones = this.formatoVice.intermediate_formatos_accion.map(intermediate => intermediate.id)
+      let pathIndicadores = this.formatoVice.intermediate_formatos.map(intermadiate => intermadiate.id)
+      let pathMetasProductos = this.formatoVice.intermediate_metas_productos.map(intermediate => intermediate.id)
+      this.formatoSvc.patchFotmato(this.formatoVice.id, FormatoVice, pathAcciones, pathIndicadores, pathMetasProductos).subscribe(
+        (res: any) => {
+          if (res) {
+            Swal.fire(
+              {
+                text: 'Formato actualizado con éxito',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+              }
+            )
           }
-          )
-          this.comunicationSvc.setFormatoSuccess(true);
+        }, error => {
+          Swal.fire({
+            text: 'Algo malo pasó vuelve a intentar',
+            icon:'error',
+            confirmButtonText: 'Aceptar'
+          })
         }
-      }
-    );
+      )
+    } else {
+      this.formatoSvc.postFormulario(FormatoVice).subscribe(
+        (res: any) => {
+          if (res) {
+            Swal.fire({
+              text: 'Formato generado con éxito',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            }
+            )
+            this.comunicationSvc.setFormatoSuccess(true);
+          }
+        }
+      );
+    }
 
 
   }
 
   open() {
     const modalRef = this.modalSvc.open(PlanDesarrolloInstitucionalComponent, { size: 'xl' })
-    modalRef.componentInstance.intermadiateFormatosIn = this.formatoVice.intermediate_formatos
-    modalRef.componentInstance.intermediateFormatosAccion = this.formatoVice.intermediate_formatos_accion
+    if (this.editable) {
+      modalRef.componentInstance.intermadiateFormatosIn = this.formatoVice.intermediate_formatos
+      modalRef.componentInstance.intermediateFormatosAccion = this.formatoVice.intermediate_formatos_accion
+    }
     modalRef.result.then(
       (res: any) => {
         this.acciones = res.acciones;
         this.objetivos_has_indicador = res.objetivos_has_indicador;
-        console.log(this.acciones, this.objetivos_has_indicador)
+        console.log(this.acciones, this.objetivos_has_indicador);
         this.PlanDesarrolloFirstTake++;
       }
     ).catch(
@@ -217,8 +235,8 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
   }
 
   patchMeta(metas: any[]) {
-    for(let [i,meta] of metas.entries()){
-      if (i!=0){
+    for (let [i, meta] of metas.entries()) {
+      if (i != 0) {
         this.addInputMetas();
       }
     }
@@ -242,8 +260,8 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
   }
 
   patchProducto(productos: any) {
-    for (let [i,producto] of productos.entries()){
-     if(i!=0){this.addInputProductos();}
+    for (let [i, producto] of productos.entries()) {
+      if (i != 0) { this.addInputProductos(); }
     }
     this.productosArr.patchValue(productos);
   }

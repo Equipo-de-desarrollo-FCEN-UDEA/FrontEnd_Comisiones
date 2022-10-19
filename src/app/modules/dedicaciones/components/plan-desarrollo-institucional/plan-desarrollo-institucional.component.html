@@ -210,12 +210,12 @@
                     <div class="indicadores row" *ngFor="let _objetivo of selectedObjetivos; let iO = index">
                         <span><b>De acuerdo al objetivo:</b> {{_objetivo.descripcion}} las acciones que estratégicos que usted desarrollará serán:</span>
                         <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 1.5em;"
-                            *ngFor="let indicador of _objetivo.indicadores; let i = index">
+                            *ngFor="let indicador of _objetivo.intermediate_objetivos_indicadores; let i = index">
                             <div class="tema card shadow rounded p-2" [ngClass]="{'selected': selectedIndicadores.indexOf(indicador.id) != -1}"
                                 (click)="selectIndicador(indicador, _objetivo);">
                                 <h6>{{"Indicador " + (i+1)}}</h6>
                                 <hr>
-                                <span class="spantext">{{indicador.descripcion}}</span>
+                                <span class="spantext">{{indicador.indicadores.descripcion}}</span>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { prefix } from '@shared/data/ruta-api';
-import { FormatoVice } from '@interfaces/dedicaciones/formatovice';
+import { FormatoVice, FormatoVicedocencia } from '@interfaces/dedicaciones/formatovice';
 import * as saveAs from 'file-saver';
 import { tap, map } from 'rxjs';
 
@@ -16,16 +16,14 @@ export class FormatoViceService {
     private http: HttpClient
   ) { }
 
-  postFormulario(dexclusiva: FormatoVice) {
+  postFormulario(dexclusiva: any) {
 
     var body = dexclusiva
-
-    console.log(body)
 
     return this.http.post(this.prefix, body);
   }
 
   getFormatoVice(id:number) {
-   return this.http.get<any>(this.prefix+`/${id}`)
+   return this.http.get<FormatoVicedocencia>(this.prefix+`/${id}`)
   }
 }

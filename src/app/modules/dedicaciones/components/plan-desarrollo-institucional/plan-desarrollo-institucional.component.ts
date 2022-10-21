@@ -39,6 +39,7 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit, AfterViewCh
 
   selectedAccion: number[] = [];
 
+  objetivos_has_indicador: number[] = [];
 
   acciones: any[] = [];
 
@@ -73,8 +74,11 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit, AfterViewCh
           ))]
 
           this.selectedIndicadores = [... new Set(this.intermadiateFormatosIn.map(
-            intermediate => intermediate.intermediate_objetivos_indicadores.indicadores_id
+            intermediate => {
+              this.objetivos_has_indicador.push(intermediate.intermediate_objetivos_indicadores.id)
+              return intermediate.intermediate_objetivos_indicadores.indicadores_id}
           ))]
+
 
           this.selectedAccion = [... new Set(this.intermediateFormatosAccion.map(
             intermediate => intermediate.acciones_id
@@ -168,16 +172,18 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit, AfterViewCh
   }
 
   selectIndicador(indicador: IntermediateObjetivosIndicadores, objetivo: ObjetivoTemaId) {
-    let index = this.selectedIndicadores.indexOf(indicador.id);
+    let index = this.selectedIndicadores.indexOf(indicador.indicadores_id);
     let indexOfTema = this.selectedTema.indexOf(objetivo.idTema)
     let indexObjetivo = this.selectedPlanDesarrollo.temas[indexOfTema].objetivos.map(objetivo => objetivo.id).indexOf(objetivo.id)
     if (index != -1) {
       this.selectedIndicadores.splice(index, 1);
       this.indicadores.slice(index, 1);
+      this.objetivos_has_indicador.splice(index, 1)
       let indexIndicador = this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].intermediate_objetivos_indicadores.indexOf(indicador);
       // this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].intermediate_objetivos_indicadores.splice(indexIndicador, 1);
     } else {
-      this.selectedIndicadores.push(indicador.id);
+      this.objetivos_has_indicador.push(indicador.id)
+      this.selectedIndicadores.push(indicador.indicadores_id);
       // this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].intermediate_objetivos_indicadores.push(indicador);
     }
 
@@ -186,8 +192,9 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit, AfterViewCh
 
 
   submit() {
-    console.log({acciones: this.selectedAccion, objetivos_has_indicador: this.selectedIndicadores})
-    this.activeModal.close({acciones: this.selectedAccion, objetivos_has_indicador: this.selectedIndicadores})
+    console.log(this.objetivos_has_indicador)
+    console.log(this.selectedAccion)
+    this.activeModal.close({acciones: this.selectedAccion, objetivos_has_indicador: this.objetivos_has_indicador})
   }
 
 }

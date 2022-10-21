@@ -106,8 +106,8 @@ export class EstadosDedicacionComponent {
     fecha_inicio = new Date(fecha_inicio.year, fecha_inicio.month, fecha_inicio.day)
     let fecha_informe = this.asociarEstadoForm.value.fecha_informe
     fecha_informe = new Date(fecha_informe.year, fecha_informe.month, fecha_informe.day)
-    console.log(this.asociarEstadoForm.value)
-    console.log(fecha_fin, fecha_informe, fecha_inicio)
+    // console.log(this.asociarEstadoForm.value)
+    // console.log(fecha_fin, fecha_informe, fecha_inicio)
     this.dedicacionSvc.patchDedicacion(this.getId, { fecha_inicio: fecha_inicio, fecha_fin: fecha_fin, fecha_informe: fecha_informe }).subscribe({
       next: res => {
         Swal.fire({

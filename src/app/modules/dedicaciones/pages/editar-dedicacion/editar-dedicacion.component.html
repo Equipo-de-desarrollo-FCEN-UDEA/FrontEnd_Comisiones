@@ -49,7 +49,7 @@
       </div>
   
       <div class="col-12 col-lg-10" *ngIf="params[1]">
-        <app-f-dedicacion (dedicacion_id)="id$"></app-f-dedicacion>
+        <app-f-dedicacion [editable]="editarFormatoVice" [idDedicacion]="idDedicacion"></app-f-dedicacion>
       </div>
   
       <div class="col-12 col-lg-10" *ngIf="params[2]">

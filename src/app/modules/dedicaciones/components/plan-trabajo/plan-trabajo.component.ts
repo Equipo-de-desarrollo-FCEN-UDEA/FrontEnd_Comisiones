@@ -96,7 +96,7 @@ export class PlanTrabajoComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.idDedicacion)
+    // console.log(this.idDedicacion)
 
 
     if (this.editable) {
@@ -106,7 +106,7 @@ export class PlanTrabajoComponent implements OnInit {
       //     this.idDedicacion = paramId['id'];
       //   }
       // })
-      console.log('es editable', this.idDedicacion)
+      // console.log('es editable', this.idDedicacion)
   
      
       this.dedicacionSvc.getDedicacion(this.idDedicacion).subscribe({
@@ -124,7 +124,7 @@ export class PlanTrabajoComponent implements OnInit {
               observaciones_generales: this.planTrabajo.observaciones_generales
             });
   
-            console.log(this.planTrabajo)
+            // console.log(this.planTrabajo)
   
             this.patchActividadesDocencia(this.planTrabajo.actividades_docencia)
             this.patchActividadesInvestigacion(this.planTrabajo.actividades_investigacion)

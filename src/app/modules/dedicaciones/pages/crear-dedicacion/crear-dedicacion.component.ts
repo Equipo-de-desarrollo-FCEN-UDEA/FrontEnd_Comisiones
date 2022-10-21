@@ -46,7 +46,7 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.cartaSuccess$.observed)
+    // console.log(this.cartaSuccess$.observed)
   }
 
   ngOnInit(): void {
@@ -70,7 +70,7 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
         this.dexclusivaSvc.postDedicacion(result.value).subscribe({
           next: (data: any) => {
             //this.comunicacionSvc.setId(data.dedicaciones_id);
-            console.log('en crear dedicacion', data.dedicaciones_id)
+            // console.log('en crear dedicacion', data.dedicaciones_id)
             this.idDedicacion = data.dedicaciones_id;
             Swal.fire({
               title: '¡Tu dedicación inició!',

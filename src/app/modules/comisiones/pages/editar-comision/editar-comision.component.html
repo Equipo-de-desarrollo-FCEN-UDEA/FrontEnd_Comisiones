@@ -318,7 +318,7 @@
         class="arrayLike formfloatig"
       >
         <div class="archivos" style="width: auto; margin-left: 10px">
-          <label class="btn-btn-default">
+          <label class="btn-btn-default is-hoverable">
             <div class="fa fa-upload fa-2x"></div>
             <input
               [id]="i"
@@ -326,7 +326,7 @@
               type="file"
               (change)="onUpload($event, i)"
             />
-            <label [for]="i" style="margin-left: 10px">{{
+            <label [for]="i" class="is-hoverable" style="margin-left: 10px">{{
               files[i] ? files[i].name : "Subir archivo"
             }}</label>
           </label>

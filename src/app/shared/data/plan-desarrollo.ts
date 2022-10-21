@@ -1152,5 +1152,3 @@ let plandeDesarrollo = {temas:[{
       }
     ]
   }] }
-
-export let planDesarrolloFormat = plandeDesarrollo as plandesarrollo;

@@ -17,10 +17,10 @@
             id="apellido" 
             type="text" 
             class="form-control" 
-            placeholder=" " 
+            placeholder="" 
             formControlName="apellido" 
             [ngClass]="{
-              'is-invalid': submitted && f['apellido'].errors
+              'is-invalid': f['apellido'].errors
             }" />
           </div>
 
@@ -35,7 +35,7 @@
             placeholder=""
             formControlName="nombre"
             [ngClass]="{
-              'is-invalid': submitted && f['nombre'].errors
+              'is-invalid': f['nombre'].errors
             }"
           />
         </div>
@@ -53,7 +53,7 @@
               class="form-control"
               placeholder="ejemplo@udea.edu.co"
               [ngClass]="{
-                'is-invalid': submitted && f['correo'].errors
+                'is-invalid': f['correo'].errors
               }"
             />
             <label for="Correo-" class="formLabel"></label>
@@ -85,7 +85,7 @@
             type="text" class="form-control" 
             placeholder=" "
               [ngClass]="{
-                'is-invalid': submitted && f['identificacion'].errors
+                'is-invalid': f['identificacion'].errors
               }" />
             <label for="identificacion" class="formLabel"> </label>
           </div>
@@ -97,7 +97,7 @@
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input id="telefono" formControlName="telefono" type="text" class="form-control" placeholder=" " [ngClass]="{
-                'is-invalid': submitted && f['telefono'].errors
+                'is-invalid': f['telefono'].errors
               }" />
             <label for="telefono" class="formLabel"> </label>
           </div>
@@ -109,7 +109,7 @@
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input id="oficina" formControlName="oficina" type="text" class="form-control" placeholder=" " [ngClass]="{
-                'is-invalid': submitted && f['oficina'].errors
+                'is-invalid': f['oficina'].errors
               }" />
             <label for="telefono" class="formLabel"> </label>
           </div>
@@ -122,7 +122,7 @@
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
             <input id="tipo_vinculacion" formControlName="tipo_vinculacion" type="text" class="form-control"
               placeholder=" " [ngClass]="{
-                'is-invalid': submitted && f['tipo_vinculacion'].errors
+                'is-invalid': f['tipo_vinculacion'].errors
               }" />
             <label for="tipo_vinculacion" class="formLabel"> </label>
           </div>
@@ -160,7 +160,7 @@
             <div class="formfloatig">
               <select class="form-select form-select-lg" id="roles_id" formControlName="roles_id" required
                 placeholder=" " [ngClass]="{
-                  'is-invalid': submitted && f['roles_id'].errors
+                  'is-invalid': f['roles_id'].errors
                 }">
                 <option [value]="rol.id" *ngFor="let rol of roles$ | async">
                   {{ rol.nombre | uppercase }}
@@ -176,7 +176,7 @@
             <div class="formfloatig">
               <select class="form-select form-select-lg" id="escalafon" formControlName="escalafon" required
                 placeholder=" " [ngClass]="{
-                  'is-invalid': submitted && f['escalafon'].errors
+                  'is-invalid': f['escalafon'].errors
                 }">
                 <option [value]="escala" *ngFor="let escala of escalafon">
                   {{ escala | uppercase }}
@@ -197,7 +197,7 @@
             placeholder=" "
             formControlName="contrasena"
             [ngClass]="{
-              'is-invalid': submitted && f['contrasena'].errors
+              'is-invalid': f['contrasena'].errors
             }"
           />
           </div>

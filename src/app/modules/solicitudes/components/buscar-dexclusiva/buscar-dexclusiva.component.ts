@@ -27,7 +27,7 @@ export class BuscarDexclusivaComponent {
     this.dedicaciones$ = Buscarservice.dedicaciones$
     this.total$ = Buscarservice.total$
     this.ultimoElemento = ultimoElement
-    //this.dedicaciones$.subscribe(dedicacion => console.log(dedicacion))
+    // this.dedicaciones$.subscribe(dedicacion => console.log(dedicacion))
   }
 
   // changeOption(event:any){

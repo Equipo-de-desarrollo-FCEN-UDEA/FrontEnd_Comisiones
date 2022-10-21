@@ -1,8 +1,9 @@
 import { NONE_TYPE } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
-import { plandesarrollo, tema, objetivo, accion, indicador, ObjetivoTemaId } from '@interfaces/dedicaciones/plandesarrollo';
+import { AfterContentInit, AfterViewChecked, Component, Input, OnInit } from '@angular/core';
+import { IntermediateDedicaciones, IntermediateFormatos, IntermediateFormatosAccion } from '@interfaces/dedicaciones/formatovice';
+import { plandesarrollo, Objetivo, Acciones, IntermediateObjetivosIndicadores, ObjetivoTemaId, Tema } from '@interfaces/dedicaciones/plandesarrollo';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { planDesarrolloFormat } from '@shared/data/plan-desarrollo';
+import { PlanDesarrolloService } from '@services/dedicaciones/plan-desarrollo.service';
 import { prefix } from '@shared/data/ruta-api';
 import { Subject } from 'rxjs';
 
@@ -15,22 +16,21 @@ import { Subject } from 'rxjs';
 
 
 
-export class PlanDesarrolloInstitucionalComponent implements OnInit {
+export class PlanDesarrolloInstitucionalComponent implements OnInit, AfterViewChecked {
 
-  @Input() planDesarrollo!: plandesarrollo;
+  @Input() intermadiateFormatosIn: IntermediateFormatos[] = [];
+  @Input() intermediateFormatosAccion: IntermediateFormatosAccion[] = [];
 
 
 
-  temas: tema[] = planDesarrolloFormat.temas;
+  temas: Tema[] = [];
 
-  selectedPlanDesarrollo: plandesarrollo = {
-    temas: []
-  }
 
+  selectedPlanDesarrollo: plandesarrollo = { temas: [] };
 
   selectedTema: number[] = [];
 
-  selectedTemas: tema[] = [];
+  selectedTemas: Tema[] = [];
 
   selectedObjetivo: number[] = [];
 
@@ -39,6 +39,7 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
   selectedAccion: number[] = [];
 
+  objetivos_has_indicador: number[] = [];
 
   acciones: any[] = [];
 
@@ -53,44 +54,71 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
   inidcadores$: Subject<any[] | undefined> = new Subject();
 
   constructor(
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    private planDesarrolloSvc: PlanDesarrolloService
   ) {
-    
-    
+
   }
 
   ngOnInit(): void {
-    if (this.planDesarrollo) {
-      this.selectedPlanDesarrollo = this.planDesarrollo
-      this.selectedTema = this.selectedPlanDesarrollo.temas.map(tema => tema.id)
-      this.temas.forEach(tema => {
-        if (this.selectedTema.indexOf(tema.id)!=-1){
-          this.selectedTemas.push(tema)
-        } 
-      })
-      this.selectedObjetivo = this.selectedPlanDesarrollo.temas.map(tema => {
-        return tema.objetivos.map(objetivo => objetivo.id)
-      }).flat()
-      let _selectedObjetivos = this.selectedPlanDesarrollo.temas.map(tema => {
-        return tema.objetivos.map(objetivo => { return { ...objetivo, idTema: tema.id }})
-      }).flat()
-      this.temas.forEach(tema =>{
-        tema.objetivos.forEach(objetivo =>{
-          if (this.selectedObjetivo.indexOf(objetivo.id)!=-1){
-            this.selectedObjetivos.push({...objetivo, idTema:tema.id})
-          }
-        })
-      })
-      this.selectedAccion = _selectedObjetivos.map(objetivo =>{
-        return objetivo.acciones.map(accion => accion.id)
-      }).flat()
-      this.selectedIndicadores = _selectedObjetivos.map(objetivo =>{
-        return objetivo.indicadores.map(indicador => indicador.id)
-      }).flat()
-    }
+    this.planDesarrolloSvc.getPlanDesarrollo().subscribe(
+      data => {
+        this.temas = data
+        if (this.intermadiateFormatosIn) {
+          this.selectedTema = [... new Set(this.intermadiateFormatosIn.map(
+            intermediate => intermediate.intermediate_objetivos_indicadores.objetivos.temas_id
+          ))]
+
+          this.selectedObjetivo = [... new Set(this.intermadiateFormatosIn.map(
+            intermadiate => intermadiate.intermediate_objetivos_indicadores.objetivos_id
+          ))]
+
+          this.selectedIndicadores = [... new Set(this.intermadiateFormatosIn.map(
+            intermediate => {
+              this.objetivos_has_indicador.push(intermediate.intermediate_objetivos_indicadores.id)
+              return intermediate.intermediate_objetivos_indicadores.indicadores_id}
+          ))]
+
+
+          this.selectedAccion = [... new Set(this.intermediateFormatosAccion.map(
+            intermediate => intermediate.acciones_id
+          ))]
+
+
+          this.temas.forEach(tema => {
+            if (this.selectedTema.indexOf(tema.id) != -1) {
+              this.selectedTemas.push(tema)
+              this.selectedPlanDesarrollo.temas.push({
+                id: tema.id,
+                titulo: tema.titulo,
+                subtitulo: tema.subtitulo,
+                objetivos: tema.objetivos.filter(objetivo => this.selectedObjetivo.indexOf(objetivo.id) != -1)
+              })
+              const objetivos = tema.objetivos.filter(objetivo => this.selectedObjetivo.indexOf(objetivo.id) != -1)
+              objetivos.forEach(objetivo => {
+                this.selectedObjetivos.push({
+                  ...objetivo,
+                  idTema: tema.id
+                })
+              })
+              // tema.objetivos.forEach(objetivo => {
+              //   if (this.selectedObjetivo.indexOf(objetivo.id) != -1) {
+
+              //   }
+              // })
+            }
+          })
+
+        }
+      }
+    )
   }
 
-  selectTema(value: number, tema: tema) {
+  ngAfterViewChecked(): void {
+
+  }
+
+  selectTema(value: number, tema: Tema) {
     if (this.selectedTema.indexOf(value) != -1) {
       let index = this.selectedTema.indexOf(value);
       this.selectedTema.splice(index, 1);
@@ -101,14 +129,14 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
       this.selectedTemas.push(tema)
       this.selectedPlanDesarrollo.temas.push({
         id: value,
-        titulo: this.temas[value].titulo,
-        subtitulo: this.temas[value].subtitulo,
+        titulo: tema.titulo,
+        subtitulo: tema.subtitulo,
         objetivos: []
       })
     }
   }
 
-  selectObjetivo(objetivo: objetivo, idTema: number) {
+  selectObjetivo(objetivo: Objetivo, idTema: number) {
     let index = this.selectedObjetivo.indexOf(objetivo.id);
     let indexOfTema = this.selectedTema.indexOf(idTema)
     if (index != -1) {
@@ -123,12 +151,12 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
         id: objetivo.id,
         descripcion: objetivo.descripcion,
         acciones: [],
-        indicadores: []
+        intermediate_objetivos_indicadores: []
       })
     }
   }
 
-  selectAccion(accion: accion, objetivo: ObjetivoTemaId) {
+  selectAccion(accion: Acciones, objetivo: ObjetivoTemaId) {
     let index = this.selectedAccion.indexOf(accion.id);
     let indexOfTema = this.selectedTema.indexOf(objetivo.idTema)
     let indexObjetivo = this.selectedPlanDesarrollo.temas[indexOfTema].objetivos.map(objetivo => objetivo.id).indexOf(objetivo.id)
@@ -136,25 +164,27 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
       this.selectedAccion.splice(index, 1);
       this.acciones.splice(index, 1);
       let indexAccion = this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].acciones.indexOf(accion)
-      this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].acciones.splice(indexAccion, 1)
+      // this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].acciones.splice(indexAccion, 1)
     } else {
       this.selectedAccion.push(accion.id)
-      this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].acciones.push(accion)
+      // this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].acciones.push(accion)
     }
   }
 
-  selectIndicador(indicador: indicador, objetivo: ObjetivoTemaId) {
-    let index = this.selectedIndicadores.indexOf(indicador.id);
+  selectIndicador(indicador: IntermediateObjetivosIndicadores, objetivo: ObjetivoTemaId) {
+    let index = this.selectedIndicadores.indexOf(indicador.indicadores_id);
     let indexOfTema = this.selectedTema.indexOf(objetivo.idTema)
     let indexObjetivo = this.selectedPlanDesarrollo.temas[indexOfTema].objetivos.map(objetivo => objetivo.id).indexOf(objetivo.id)
     if (index != -1) {
       this.selectedIndicadores.splice(index, 1);
       this.indicadores.slice(index, 1);
-      let indexIndicador = this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].indicadores.indexOf(indicador);
-      this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].indicadores.splice(indexIndicador, 1);
+      this.objetivos_has_indicador.splice(index, 1)
+      let indexIndicador = this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].intermediate_objetivos_indicadores.indexOf(indicador);
+      // this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].intermediate_objetivos_indicadores.splice(indexIndicador, 1);
     } else {
-      this.selectedIndicadores.push(indicador.id);
-      this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].indicadores.push(indicador);
+      this.objetivos_has_indicador.push(indicador.id)
+      this.selectedIndicadores.push(indicador.indicadores_id);
+      // this.selectedPlanDesarrollo.temas[indexOfTema].objetivos[indexObjetivo].intermediate_objetivos_indicadores.push(indicador);
     }
 
   }
@@ -162,7 +192,9 @@ export class PlanDesarrolloInstitucionalComponent implements OnInit {
 
 
   submit() {
-    this.activeModal.close(this.selectedPlanDesarrollo)
+    console.log(this.objetivos_has_indicador)
+    console.log(this.selectedAccion)
+    this.activeModal.close({acciones: this.selectedAccion, objetivos_has_indicador: this.objetivos_has_indicador})
   }
 
 }

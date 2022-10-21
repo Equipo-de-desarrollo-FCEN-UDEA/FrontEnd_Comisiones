@@ -104,7 +104,7 @@ export class EditarPermisoComponent implements OnInit {
         });
 
         this.tiposPermisoSvc
-          .getTipoPermisoId(res.tipo_permiso_id.id)
+          .getTipoPermisoId(res.tipo_permiso_id)
           .subscribe({
             next: (res) => {
               this.diaHabil = res.dias;

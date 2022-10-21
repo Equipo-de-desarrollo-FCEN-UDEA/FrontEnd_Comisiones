@@ -75,7 +75,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
       //     this.idDedicacion = paramId['id'];
       //   }
       // })
-      console.log('es editable', this.idDedicacion)
+      // console.log('es editable', this.idDedicacion)
 
 
       this.dedicacionSvc.getDedicacion(this.idDedicacion).subscribe({
@@ -164,7 +164,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
       dedicaciones_id: this.idDedicacion
     }
     if (this.editable && this.carta_id) {
-      console.log('es editable la carta')
+      // console.log('es editable la carta')
       this.cartaSvc.updateCarta(this.carta, this.carta_id).subscribe(
         (data: any) => {
           Swal.fire({
@@ -192,7 +192,7 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   }
 
   OnSubmit() {
-    console.log('submit')
+    // console.log('submit')
     this.makePdf()
   }
 

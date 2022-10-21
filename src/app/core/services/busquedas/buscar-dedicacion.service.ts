@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
+import { ultimoElement } from "@shared/clases/ultimo-estado";
 import { SortDirection } from '@shared/directivas/sortable.directive';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
@@ -40,6 +41,7 @@ function matches(dedicaciones: DedicacionDTO, term: string, datepipe: DatePipe) 
   return (
     dedicaciones.titulo.toLowerCase().includes(term) ||
     datepipe.transform(dedicaciones.createdAt, 'yyyy-MM-dd')?.toString().includes(term) ||
+    ultimoElement(dedicaciones.intermediate_dedicaciones)?.intermediate_estados.nombre.toLowerCase().includes(term)||
     dedicaciones.usuarios.nombre.toLowerCase().includes(term) ||
     dedicaciones.usuarios.apellido.toLowerCase().includes(term) ||
     dedicaciones.usuarios.departamentos.nombre.toLowerCase().includes(term) ||

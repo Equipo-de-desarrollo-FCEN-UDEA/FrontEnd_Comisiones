@@ -128,6 +128,7 @@ export class VerDedicacionComponent implements OnInit {
           icon: 'success',
           confirmButtonColor: '#3AB795',
         });
+        this.router.navigate(['/home']);
       },
       error: res =>{
         Swal.fire({

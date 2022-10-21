@@ -1,22 +1,33 @@
 <div class="container-inside shadow-sm pt-4 pl-4 pr-2 mb-5 p-4 m-3 mt-5 bg-white rounded">
-  <div class="mb-3 row">
-    <label
+  <div class="mb-3 d-flex justify-content-between p-2 ">
+
+    <div class="d-flex">
+      <label
       for="table-complete-search"
-      class="col-xs-3 col-sm-auto col-form-label"
+      class="col-sm-auto col-form-label"
       >Buscar Usuarios:</label
     >
-    <div class="col-xs-3 col-sm-auto">
       <input
         id="table-complete-search"
         type="text"
         class="form-control"
         name="searchTerm"
-        [(ngModel)]="service.searchTerm"
+        [(ngModel)]="BuscarService.searchTerm"
       />
     </div>
-    <span class="col col-form-label" *ngIf="service.loading$ | async"
+    <button  class="btn btn-info" type="button" (click)="refresh()"> <i class="fas fa-refresh"></i> </button>
+    <div class="col">
+      <span class="col-form-label " 
+      style="padding-left: 1em"
+      *ngIf="BuscarService.loading$ | async"> <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </span>
+    </div>
+<!-- 
+    <span class="col col-form-label" *ngIf="BuscarService.loading$ | async"
       >Loading...</span
-    >
+    > -->
   </div>
 
   <div class="table-responsive">
@@ -56,7 +67,7 @@
           <td>
             <ngb-highlight
               [result]="usuario?.nombre"
-              [term]="service.searchTerm"
+              [term]="BuscarService.searchTerm"
             >
             </ngb-highlight>
           </td>
@@ -64,7 +75,7 @@
           <td>
             <ngb-highlight
               [result]="usuario?.apellido"
-              [term]="service.searchTerm"
+              [term]="BuscarService.searchTerm"
             >
             </ngb-highlight>
           </td>
@@ -73,7 +84,7 @@
             <ngb-highlight
               [result]="usuario.roles.nombre"
               class="badge badge-pill pill"
-              [term]="service.searchTerm"
+              [term]="BuscarService.searchTerm"
               [ngClass]="{
                 'bg-solicitada': usuario.roles.nombre === 'ADMIN',
                 'bg-aprobada': usuario.roles.nombre === 'VICERRECTORIA',
@@ -93,14 +104,14 @@
           <td>
             <ngb-highlight
               [result]="usuario.identificacion"
-              [term]="service.searchTerm"
+              [term]="BuscarService.searchTerm"
             >
             </ngb-highlight>
           </td>
           <td>
             <ngb-highlight
               [result]="usuario.correo"
-              [term]="service.searchTerm"
+              [term]="BuscarService.searchTerm"
             >
             </ngb-highlight>
           </td>
@@ -108,7 +119,7 @@
           <td>
             <ngb-highlight
               [result]="usuario.departamentos.nombre"
-              [term]="service.searchTerm"
+              [term]="BuscarService.searchTerm"
             >
             </ngb-highlight>
           </td>
@@ -116,7 +127,7 @@
           <td>
             <ngb-highlight
               [result]="usuario.departamentos.facultades.nombre"
-              [term]="service.searchTerm"
+              [term]="BuscarService.searchTerm"
             >
             </ngb-highlight>
           </td>
@@ -128,8 +139,8 @@
   <div class="d-flex justify-content-between p-2">
     <ngb-pagination
       [collectionSize]="(total$ | async)!"
-      [(page)]="service.page"
-      [pageSize]="service.pageSize"
+      [(page)]="BuscarService.page"
+      [pageSize]="BuscarService.pageSize"
     >
     </ngb-pagination>
 
@@ -137,7 +148,7 @@
       class="form-select"
       style="width: auto"
       name="pageSize"
-      [(ngModel)]="service.pageSize"
+      [(ngModel)]="BuscarService.pageSize"
     >
       <option [ngValue]="2">2 items por pag.</option>
       <option [ngValue]="4">4 items por pag.</option>

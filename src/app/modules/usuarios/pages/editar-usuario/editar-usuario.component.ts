@@ -93,7 +93,8 @@ export class EditarUsuarioComponent implements OnInit {
   submitUpdate() {
     this.submitted = true;
     const usuario = this.formUpdate.value;
-    this.usuarioSvc.updateUsuario({ id: this.getId, ...usuario }).subscribe({
+    this.usuarioSvc.updateUsuario({ id: this.getId, ...usuario })
+    .subscribe({
       next: (res: any) => {
         Swal.fire({
           title: 'Usuario actualizado con éxito',

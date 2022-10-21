@@ -236,7 +236,7 @@ export class EditarPermisoComponent implements OnInit {
 
   //verifica el tamaño de los archivos que se van a adjuntar al permiso, max:2MB
   validSize() {
-    const SIZE = this.files.map((a) => a.SIZE).reduce((a, b) => a + b, 0);
+    const SIZE = this.files.map((a) => a.size).reduce((a, b) => a + b, 0);
     return SIZE < 2 * 1024 * 1024;
   }
 

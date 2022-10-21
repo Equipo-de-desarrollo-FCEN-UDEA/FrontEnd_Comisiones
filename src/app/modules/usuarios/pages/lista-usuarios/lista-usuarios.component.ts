@@ -17,10 +17,10 @@ export class ListaUsuariosComponent {
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
   constructor(
-    public service: BuscarUsuariosService,
+    public BuscarService: BuscarUsuariosService,
     ) { 
-      this.usuarios$=service.usuarios$;
-      this.total$=service.total$;
+      this.usuarios$=BuscarService.usuarios$;
+      this.total$=BuscarService.total$;
     }
 
     onSort({column, direction}: SortEvent) {
@@ -31,7 +31,11 @@ export class ListaUsuariosComponent {
         }
       });
 
-      this.service.sortColumn = "";
-      this.service.sortDirection = direction
+      this.BuscarService.sortColumn = "";
+      this.BuscarService.sortDirection = direction
+    }
+
+    refresh(){
+      this.BuscarService.ngOnchanges();
     }
   }

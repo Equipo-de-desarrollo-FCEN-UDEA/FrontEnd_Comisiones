@@ -41,7 +41,6 @@ function matches(permisos: Permiso, term: string, datepipe: DatePipe) {
     permisos.tipos_permiso.nombre.toLowerCase().includes(term.toLowerCase()) ||
     ultimoElement(permisos.intermediate_permisos)?.intermediate_estados.nombre.toLowerCase().includes(term)||
     datepipe.transform(ultimoElement(permisos.intermediate_permisos)?.createdAt, 'yyyy-MM-dd')?.toString()?.includes(term)  ||
-    // ultimoElement(permisos.intermediate_permisos)?.createdAt?.includes(term)||
     permisos.usuarios.nombre.toLowerCase().includes(term) ||
     permisos.usuarios.apellido.toLowerCase().includes(term) ||
     permisos.usuarios.departamentos.nombre.toLowerCase().includes(term) ||
@@ -84,7 +83,7 @@ export class BuscarPermisosService {
         });
 
       this._search$.next();
-      this.permisosSvc.scopeGetPermisos(this.archivado$.getValue())
+      this.permisosSvc.scopeGetPermisos(/*this.archivado$.getValue()*/0)
       .subscribe(
         (resp: any) => {
           this.PERMISOS = resp.permisos;
@@ -134,6 +133,7 @@ export class BuscarPermisosService {
 
     // 1. sort
     let permisos = sort(this.PERMISOS, sortColumn, sortDirection);
+
     
     // 2. filter
     permisos = permisos.filter(permisos => matches(permisos, searchTerm, this.datepipe));

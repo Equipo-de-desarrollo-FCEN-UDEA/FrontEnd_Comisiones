@@ -137,7 +137,7 @@
         
       </ngb-pagination> 
       <div class="d-flex justify-content-end">
-        <select class="form-select" *ngIf="!(rol == 'PROFESOR' || rol == 'EMPLEADO')" (change)="changeOption($event)"
+        <select class="form-select" *ngIf="(rol == 'DECANATURA' || rol == 'SECRETARIA DECANATURA')" (change)="changeOption($event)"
         style="width: auto">
         <option value="0">No archivados</option>
         <option value="1">Archivados</option>

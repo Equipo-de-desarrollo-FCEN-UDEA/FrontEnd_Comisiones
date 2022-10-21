@@ -13,7 +13,15 @@
         <div class="row regular-row m-2 align-items-baseline">
           <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">Apellidos</div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input id="apellido" type="text" class="form-control" placeholder=" " formControlName="apellido" />
+            <input 
+            id="apellido" 
+            type="text" 
+            class="form-control" 
+            placeholder=" " 
+            formControlName="apellido" 
+            [ngClass]="{
+              'is-invalid': submitted && f['apellido'].errors
+            }" />
           </div>
 
         <div class="col-md-4 col-xs-12 col-sm-6 label mb-2">
@@ -26,6 +34,9 @@
             class="form-control"
             placeholder=""
             formControlName="nombre"
+            [ngClass]="{
+              'is-invalid': submitted && f['nombre'].errors
+            }"
           />
         </div>
       </div>
@@ -69,7 +80,10 @@
             Número de Identificación
           </div>
           <div class="col-sm-12 col-xs-12 col-md-8 col-12">
-            <input id="identificacion" formControlName="identificacion" type="text" class="form-control" placeholder=" "
+            <input id="identificacion" 
+            formControlName="identificacion" 
+            type="text" class="form-control" 
+            placeholder=" "
               [ngClass]="{
                 'is-invalid': submitted && f['identificacion'].errors
               }" />

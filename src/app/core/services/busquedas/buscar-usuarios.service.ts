@@ -40,6 +40,7 @@ function matches(usuarios: Usuario, term: string, datepipe: DatePipe) {
   return (
     usuarios.nombre.toLowerCase().includes(term) || 
     usuarios.apellido.toLowerCase().includes(term) ||
+    usuarios.roles.nombre.toLowerCase().includes(term) ||
     usuarios.departamentos.nombre.toLowerCase().includes(term) ||
     usuarios.identificacion.toLowerCase().includes(term) ||
     usuarios.correo.toLowerCase().includes(term) || 
@@ -91,6 +92,17 @@ export class BuscarUsuariosService {
       }
     )
   }
+
+  ngOnchanges(){
+    this.usuariosSvc.getAllUsuarios()
+    .subscribe(
+      (resp: any) => {
+        this.USUARIOS =  resp;
+        this._usuarios$.next(this.USUARIOS);
+        this._search$.next();
+      }
+    )
+   }
 
   get usuarios$() { return this._usuarios$.asObservable(); }
   get total$() { return this._total$.asObservable(); }

@@ -83,7 +83,7 @@ export class BuscarComisionesService {
           });
 
         this._search$.next();
-        this.comisionesSvc.scopeGetComisiones(this.archivado$.getValue())
+        this.comisionesSvc.scopeGetComisiones(/*this.archivado$.getValue()*/ 0)
         .subscribe(
           (resp: any ) => {
             this.COMISIONES = resp.comisiones;

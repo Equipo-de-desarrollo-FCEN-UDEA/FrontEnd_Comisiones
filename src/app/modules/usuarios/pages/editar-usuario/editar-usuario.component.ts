@@ -50,7 +50,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.usuarioSvc.getUsuariobyId(this.getId as number).subscribe({
       next: res => {
         this.usuarioResponse = res;
-        this.formUpdate.patchValue(this.usuarioResponse);
+        this.updateUsuario.patchValue(this.usuarioResponse);
       },
       error: (err) => {
         if (err.status == 401) {
@@ -65,14 +65,14 @@ export class EditarUsuarioComponent implements OnInit {
     }
     );
   }
-  formUpdate = this.fb.group({
+  updateUsuario = this.fb.group({
     correo: ['', [Validators.required, Validators.pattern(this.isCorreoValid)]],
-    nombre: ['', [Validators.minLength(3), Validators.maxLength(250)]],
-    apellido: ['', [Validators.minLength(3), Validators.maxLength(250)]],
-    tipo_identificacion: ['', [Validators.maxLength(250)]],
+    nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
+    apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
+    tipo_identificacion: ['', [Validators.required, Validators.maxLength(250)]],
     identificacion: [' ', [Validators.required, Validators.min(1000), Validators.max(999999999999)]],
     telefono: ['', [Validators.required]],
-    oficina: ['', [Validators.required]],
+    oficina: [''],
     tipo_vinculacion: ['', [Validators.required]],
     departamentos_id : ['', Validators.required],
     // contrasena: ['', [Validators.required,Validators.minLength(8), Validators.maxLength(250)]],
@@ -87,12 +87,16 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   get f() {
-    return this.formUpdate.controls;
+    return this.updateUsuario.controls;
   }
 
   submitUpdate() {
-    this.submitted = true;
-    const usuario = this.formUpdate.value;
+
+    // verificacion de errores
+    if (this.updateUsuario.invalid) {
+      return;
+    }
+    const usuario = this.updateUsuario.value;
     this.usuarioSvc.updateUsuario({ id: this.getId, ...usuario })
     .subscribe({
       next: (res: any) => {

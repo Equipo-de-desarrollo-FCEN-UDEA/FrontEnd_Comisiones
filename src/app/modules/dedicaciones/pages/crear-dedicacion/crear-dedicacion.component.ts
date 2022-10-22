@@ -74,7 +74,7 @@ export class CrearDedicacionComponent implements OnInit, OnChanges {
             this.idDedicacion = data.dedicaciones_id;
             Swal.fire({
               title: '¡Tu dedicación inició!',
-              text: 'Ahora puedes empezar a crearla, el proceso es sencillo, en la parte izquierda verás un menú con 3 elementos que debes llenar para poder hacer la dedicación'
+              text: 'El proceso es sencillo: en la parte izquierda verás un menú con 3 elementos que debes llenar y guardar para poder solicitar la dedicación'
             });
           },
           error: (err: any) => {

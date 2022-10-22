@@ -57,7 +57,7 @@ export class FDedicacionComponent implements OnInit, AfterViewInit {
     private modalSvc: NgbModal,
     private router: Router
   ) {
-    this.usuarioSvc.getUsuario().subscribe(resp => this.Usuario = resp);
+    //this.usuarioSvc.getUsuario().subscribe(resp => this.Usuario = resp);
   }
 
 

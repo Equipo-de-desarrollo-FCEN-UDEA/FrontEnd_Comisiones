@@ -2,7 +2,10 @@
   style="align-items: unset">
   <div class="row header-row">
     <div class="col">
-      <span class="text-secondary">DEDICACIÓN</span>
+      <span class="text-secondary">DEDICACIÓN EXCLUSIVA</span>
+    </div>
+    <div *ngIf="(rol == 'PROFESOR') " class="alert alert-warning mt-3 mb-0">
+      <strong>¡Importante!</strong> Una vez termine de crear la dedicación, debe dar clic en "Enviar solicitud" para poder descargar los archivos
     </div>
   </div>
 

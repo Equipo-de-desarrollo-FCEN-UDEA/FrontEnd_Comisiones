@@ -1,7 +1,7 @@
 <div id="clientCont" class="container bt-white rounded">
   <div class="row p-4 container-inside shadow rounded" style="max-width: 100% !important">
     <div class="col-12 spantext">
-        <h4 class="text-secondary">CARTA INICIACIÓN</h4>
+        <h4 class="text-secondary">CARTA DE INICIACIÓN</h4>
     </div>
     <hr/>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ladoizquierdo">
@@ -110,18 +110,27 @@
           (click)="OnSubmit()"
           (submit)="(true)"
         >
-          <span class="spinner" id="spinner" style="display: none">
+          <!-- <span class="spinner" id="spinner" style="display: none">
             <span
               class="spinner-border spinner-border-sm"
               role="status"
               aria-hidden="true"
             ></span>
             Cargando...
-          </span>
-          <span id="btn-text"
-            >Guardar <span><i class="fas fa-save"></i></span>
-          </span>
+          </span> -->
+          <!-- <span id="btn-text">Guardar <span><i class="fas fa-save"></i></span></span> -->
+          <span
+            class="spinner-border spinner-border-sm1"
+            role="status"
+            aria-hidden="true"
+            *ngIf="isLoading | async"
+          ></span
+          >Guardar 
+          <i class="fas fa-save"></i>
         </button>
+      </div>
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+        {{ error }}
       </div>
   </div>
 </div>

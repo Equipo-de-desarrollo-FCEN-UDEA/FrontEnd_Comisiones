@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 import { prefix } from '@shared/data/ruta-api';
 import { DedicacionService } from '@services/dedicaciones/dedicacion.service';
 import { DedicacionDTO } from '@interfaces/dedicaciones/dedicaciones';
+import { Subject } from 'rxjs';
+import { LoaderService } from '@services/interceptors/loader.service';
 
 @Component({
   selector: 'app-carta-inicio',
@@ -47,16 +49,19 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
 
   error: any = '';
 
+  // Loader
+  isLoading: Subject<boolean> = this.loaderSvc.isLoading;
+
 
   constructor(
     private fb: FormBuilder,
     private usuarioSvc: UsuarioService,
     private cartaSvc: CartaInicioService,
     private comunicationSvc: CrearDedicacionComponentsService,
+    private loaderSvc: LoaderService,
 
     private dedicacionSvc: DedicacionService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) {
 
     this.usuarioSvc.getUsuario().subscribe(
@@ -70,25 +75,17 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     if (this.editable) {
-      // this.activatedRoute.params.subscribe({
-      //   next: (paramId) => {
-      //     this.idDedicacion = paramId['id'];
-      //   }
-      // })
-      // console.log('es editable', this.idDedicacion)
-
 
       this.dedicacionSvc.getDedicacion(this.idDedicacion).subscribe({
         next: (res: DedicacionDTO) => {
           this.cartaInicio = res.cartas;
 
-          if(this.cartaInicio){
+          if (this.cartaInicio) {
             this.carta_id = res.cartas?.id;
             this.FormCarta.patchValue({
               Cuerpo: this.cartaInicio.body
             });
           }
-          
 
         }, error: (err) => {
           if (err.status === 404 || err.status === 401) {
@@ -98,8 +95,6 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
         }
       });
     }
-
-
 
   }
 
@@ -131,8 +126,6 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
     // )
 
 
-
-
     // Mala practica, debe corregirse
     // setTimeout(() => {
     //   let container = document.getElementById("clientCont")
@@ -144,12 +137,12 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
   }
 
   makePdf(): any {
-    const boton = document.getElementById('Generador-carta') as HTMLButtonElement;
-    const spinner = document.getElementById('spinner') as HTMLDivElement;
-    const btntext = document.getElementById('btn-text') as HTMLDivElement;
-    spinner.style.display = 'block';
-    boton.disabled = true;
-    btntext.style.display = 'none';
+    //const boton = document.getElementById('Generador-carta') as HTMLButtonElement;
+    //const spinner = document.getElementById('spinner') as HTMLDivElement;
+    //const btntext = document.getElementById('btn-text') as HTMLDivElement;
+    //spinner.style.display = 'block';
+    //boton.disabled = true;
+    //btntext.style.display = 'none';
 
     // let dedicacion_id: number | string = 0;
     // this.comunicationSvc.id$.subscribe(
@@ -164,31 +157,46 @@ export class CartaInicioComponent implements OnInit, AfterViewInit {
       dedicaciones_id: this.idDedicacion
     }
     if (this.editable && this.carta_id) {
-      // console.log('es editable la carta')
-      this.cartaSvc.updateCarta(this.carta, this.carta_id).subscribe(
-        (data: any) => {
+      this.cartaSvc.updateCarta(this.carta, this.carta_id).subscribe({
+        next: (data: any) => {
           Swal.fire({
             title: 'Carta de iniciación actualizada con éxito',
             text: data.message,
             icon: 'success',
             confirmButtonText: 'Aceptar'
           })
-          this.comunicationSvc.setCartaSuccess(true);
-        });
+          //this.comunicationSvc.setCartaSuccess(true);
+        },
+        error: (err) => {
+          if (err.status === 404 || err.status === 401) {
+            this.error = err.error.msg;
+          }
+          if (err.status === 400) {
+            this.error = err.error.message;
+          }
+        }
+      });
     } else {
-      this.cartaSvc.postCarta(this.carta).subscribe(
-        (data: any) => {
+      this.cartaSvc.postCarta(this.carta).subscribe({
+        next: (data: any) => {
           Swal.fire({
             title: 'La carta de iniciación se ha guardado con éxito',
             text: data.message,
             icon: 'success',
             confirmButtonText: 'Aceptar'
           })
-          this.comunicationSvc.setCartaSuccess(true);
-        });
+          //this.comunicationSvc.setCartaSuccess(true);
+        },
+        error: (err) => {
+          if (err.status === 404 || err.status === 401) {
+            this.error = err.error.msg;
+          }
+          if (err.status === 400) {
+            this.error = err.error.message;
+          }
+        }
+      });
     }
-
-
   }
 
   OnSubmit() {
